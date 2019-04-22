@@ -1,0 +1,2 @@
+# lamakaha
+my first repository
