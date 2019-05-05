@@ -12,7 +12,7 @@ if nuke.NUKE_VERSION_MAJOR > 10:
 nuke.tprint("_"*100);nuke.tprint("now loading my user");nuke.tprint("_"*100)
 
 
-import KnobScripter
+import knob_scripter
 import mps3
 
 
@@ -52,7 +52,7 @@ except:
 n = nuke.menu( 'Nuke' ).addMenu("HOME",icon = "nuke.png")
 t=n.addMenu("tmp")
 t.addCommand( 'show review notes', 'reviews.reviews()')
-#FIX  t.addCommand("Copy file to the clipboard! ", "copyFileName.copyFileName()","Ctrl+Alt+Shift+c",icon="ColorWheel.png")
+t.addCommand("Copy file to the clipboard! ", "copyFileName.copyFileName()","Ctrl+Alt+Shift+c",icon="ColorWheel.png")
 
 
 m = nuke.menu('Viewer')

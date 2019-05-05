@@ -57,6 +57,8 @@ class KnobScripter(QtWidgets.QWidget):
             self.node = nuke.toNode("root")
         else:
             self.node = node
+
+        self.isPane = False
         self.knob = knob
         self.unsavedKnobs = {}
         self.modifiedKnobs = set()
@@ -96,11 +98,11 @@ class KnobScripter(QtWidgets.QWidget):
                 self.tabSpaces = self.loadedPrefs['tab_spaces']
                 self.pinned = self.loadedPrefs['pin_default']
             except TypeError:
-                logging.warning("KnobScripter: Failed to load preferences.")
+                log("KnobScripter: Failed to load preferences.")
 
         # Load snippets
         self.snippets_txt_path = os.path.expandvars(os.path.expanduser("~/.nuke/KnobScripter_Snippets.txt"))
-        self.snippets = self.loadSnippets()
+        self.snippets = self.loadSnippets(maxDepth=5)
 
         # Current state of script (loaded when exiting node mode)
         self.state_txt_path = os.path.expandvars(os.path.expanduser("~/.nuke/KnobScripter_State.txt"))
@@ -125,7 +127,6 @@ class KnobScripter(QtWidgets.QWidget):
         #---------------------
         # 2. TOP BAR
         #---------------------
-        #TODO: only one preferences panel maximum...
         # ---
         # 2.1. Left buttons
         self.change_btn = QtWidgets.QToolButton()
@@ -145,7 +146,7 @@ class KnobScripter(QtWidgets.QWidget):
         self.exit_node_btn.setToolTip("Exit the node, and change to Script Mode.")
         self.exit_node_btn.clicked.connect(self.exitNodeMode)
         self.current_node_label_node = QtWidgets.QLabel(" Node:")
-        self.current_node_label_name = QtWidgets.QLabel(self.node.fullName()) #TODO: This will accept click, to change the name of the node on a floating lineedit.
+        self.current_node_label_name = QtWidgets.QLabel(self.node.fullName())
         self.current_node_label_name.setStyleSheet("font-weight:bold;")
         self.current_knob_label = QtWidgets.QLabel("Knob: ")
         self.current_knob_dropdown = QtWidgets.QComboBox()
@@ -204,7 +205,7 @@ class KnobScripter(QtWidgets.QWidget):
         self.refresh_btn.setFixedSize(self.qt_btn_size)
         self.refresh_btn.setToolTip("Refresh the dropdowns.\nShortcut: F5")
         self.refresh_btn.setShortcut('F5')
-        ##self.refresh_btn.clicked.connect(self.refreshClicked)
+        self.refresh_btn.clicked.connect(self.refreshClicked)
 
         # Reload script
         self.reload_btn = QtWidgets.QToolButton()
@@ -236,9 +237,9 @@ class KnobScripter(QtWidgets.QWidget):
         # 2.4. Right Side buttons
 
         # Run script
-        self.run_script_button = QtWidgets.QPushButton("R")
-        #self.run_script_button.setIcon(QtGui.QIcon(icons_path+"icon_clearConsole.png"))
-        #self.run_script_button.setIconSize(QtCore.QSize(50,50))
+        self.run_script_button = QtWidgets.QToolButton()
+        self.run_script_button.setIcon(QtGui.QIcon(icons_path+"icon_run.png"))
+        self.run_script_button.setIconSize(self.qt_icon_size)
         #self.run_script_button.setIconSize(self.qt_icon_size)
         self.run_script_button.setFixedSize(self.qt_btn_size)
         self.run_script_button.setToolTip("Execute the current selection on the KnobScripter, or the whole script if no selection.\nShortcut: Ctrl+Enter")
@@ -467,7 +468,11 @@ class KnobScripter(QtWidgets.QWidget):
         counter = 0
         for i in self.node.knobs():
             if i not in defaultKnobs and self.node.knob(i).Class() in permittedKnobClasses:
-                self.current_knob_dropdown.addItem(i, i)# + " (" + self.node.knob(i).name()+")")
+                if i in self.unsavedKnobs.keys():
+                    self.current_knob_dropdown.addItem(i+"(*)", i)
+                else:
+                    self.current_knob_dropdown.addItem(i, i)
+
                 counter += 1
         if counter > 0:
             self.current_knob_dropdown.insertSeparator(counter)
@@ -476,15 +481,18 @@ class KnobScripter(QtWidgets.QWidget):
             counter += 1
         for i in self.node.knobs():
             if i in defaultKnobs:
-                self.current_knob_dropdown.addItem(i, i)
+                if i in self.unsavedKnobs.keys():
+                    self.current_knob_dropdown.addItem(i+"(*)", i)
+                else:
+                    self.current_knob_dropdown.addItem(i, i)
                 counter += 1
         return
 
     def loadKnobValue(self, check=True, updateDict=False):
-        ''' Get the content of the knob knobChanged and populate the editor '''
+        ''' Get the content of the knob value and populate the editor '''
         if self.toLoadKnob == False:
             return
-        dropdown_value = self.current_knob_dropdown.itemData(self.current_knob_dropdown.currentIndex())
+        dropdown_value = self.current_knob_dropdown.itemData(self.current_knob_dropdown.currentIndex()) # knobChanged...
         try:
             obtained_knobValue = str(self.node[dropdown_value].value())
             obtained_scrollValue = 0
@@ -498,10 +506,10 @@ class KnobScripter(QtWidgets.QWidget):
         if updateDict==True:
             self.unsavedKnobs[self.knob] = edited_knobValue
             self.scrollPos[self.knob] = self.script_editor.verticalScrollBar().value()
-        prev_knob = self.knob
+        prev_knob = self.knob # knobChanged...
 
-        self.knob = self.current_knob_dropdown.itemData(self.current_knob_dropdown.currentIndex())
-        #self.knob = self.current_knob_dropdown.currentText().split(" (")[0]
+        self.knob = self.current_knob_dropdown.itemData(self.current_knob_dropdown.currentIndex()) # knobChanged...
+
         if check and obtained_knobValue != edited_knobValue:
             msgBox = QtWidgets.QMessageBox()
             msgBox.setText("The Script Editor has been modified.")
@@ -515,21 +523,29 @@ class KnobScripter(QtWidgets.QWidget):
                 self.setCurrentKnob(prev_knob)
                 return
         # If order comes from a dropdown update, update value from dictionary if possible, otherwise update normally
+        self.setWindowTitle("KnobScripter - %s %s" % (self.node.name(), self.knob))
         if updateDict:
             if self.knob in self.unsavedKnobs:
-                obtained_knobValue = self.unsavedKnobs[self.knob]
+                if self.unsavedKnobs[self.knob] == obtained_knobValue:
+                    self.script_editor.setPlainText(obtained_knobValue)
+                    self.setKnobModified(False)
+                else:
+                    obtained_knobValue = self.unsavedKnobs[self.knob]
+                    self.script_editor.setPlainText(obtained_knobValue)
+                    self.setKnobModified(True)
+            else:
+                self.script_editor.setPlainText(obtained_knobValue)
+                self.setKnobModified(False)
+
             if self.knob in self.scrollPos:
                 obtained_scrollValue = self.scrollPos[self.knob]
-        self.script_editor.setPlainText(obtained_knobValue)
+        else:
+            self.script_editor.setPlainText(obtained_knobValue)
+
         cursor = self.script_editor.textCursor()
         self.script_editor.setTextCursor(cursor)
-        self.setScriptModified(False)
         self.script_editor.verticalScrollBar().setValue(obtained_scrollValue)
-        self.setWindowTitle("KnobScripter - %s %s" % (self.node.name(), self.knob))
         return
-        #TODO IMPORTANT ON change from node to script, reload the contents of the autosave.
-        #TODO IMPORTANT on change to node, autosave too.
-        #TODO IMPORTANT store the current open script on close...
 
     def loadAllKnobValues(self):
         ''' Load all knobs button's function '''
@@ -604,19 +620,24 @@ class KnobScripter(QtWidgets.QWidget):
             errorBox.setDefaultButton(QtWidgets.QMessageBox.Yes)
             reply = errorBox.exec_()
         else:
-            logging.info("KnobScripter: %s knobs saved" % str(savedCount))
+            log("KnobScripter: %s knobs saved" % str(savedCount))
         return
 
     def setCurrentKnob(self, knobToSet):
         ''' Set current knob '''
-        KnobDropdownItems = [self.current_knob_dropdown.itemText(i).split(" (")[0] for i in range(self.current_knob_dropdown.count())]
+        KnobDropdownItems = []
+        for i in range(self.current_knob_dropdown.count()):
+            if self.current_knob_dropdown.itemData(i) is not None:
+                KnobDropdownItems.append(self.current_knob_dropdown.itemData(i))
+            else:
+                KnobDropdownItems.append("---")
         if knobToSet in KnobDropdownItems:
-            knobIndex = self.current_knob_dropdown.findText(knobToSet, QtCore.Qt.MatchFixedString)
-            if knobIndex >= 0:
-                self.current_knob_dropdown.setCurrentIndex(knobIndex)
+            index = KnobDropdownItems.index(knobToSet)
+            self.current_knob_dropdown.setCurrentIndex(index)
         return
+        #TODO IMPORTANT on changing node, reload the contents of scripteditor!!!!!!
 
-    def updateUnsavedKnobs(self):
+    def updateUnsavedKnobs(self, first_time=False):
         ''' Clear unchanged knobs from the dict and return the number of unsaved knobs '''
         edited_knobValue = self.script_editor.toPlainText()
         self.unsavedKnobs[self.knob] = edited_knobValue
@@ -680,9 +701,9 @@ class KnobScripter(QtWidgets.QWidget):
             counter += 1
 
         try:
-            scriptFolders = [x[0] for x in os.walk(self.scripts_dir)][1:]
+            scriptFolders = sorted([f for f in os.listdir(self.scripts_dir) if os.path.isdir(os.path.join(self.scripts_dir, f))]) # Accepts symlinks!!!
         except:
-            logging.warning("Couldn't read any script folders.")
+            log("Couldn't read any script folders.")
 
         for f in scriptFolders:
             fname = f.split("/")[-1]
@@ -698,17 +719,18 @@ class KnobScripter(QtWidgets.QWidget):
             #self.current_folder_dropdown.insertSeparator(counter)
             #counter += 1
         self.current_folder_dropdown.addItem("New", "create new")
-        self.current_folder_dropdown.addItem("Browse...", "open in browser")
+        self.current_folder_dropdown.addItem("Open...", "open in browser")
+        self.current_folder_dropdown.addItem("Add custom", "add custom path")
         self.folder_index = self.current_folder_dropdown.currentIndex()
         self.current_folder = self.current_folder_dropdown.itemData(self.folder_index)
         self.current_folder_dropdown.blockSignals(False)
-        #TODO: remember last opened folder... in a prefs file or sth
         return
 
     def updateScriptsDropdown(self):
         ''' Populate py scripts dropdown list '''
         self.current_script_dropdown.blockSignals(True)
         self.current_script_dropdown.clear() # First remove all items
+        QtWidgets.QApplication.processEvents()
         log("# Updating scripts dropdown...")
         log("scripts dir:"+self.scripts_dir)
         log("current folder:"+self.current_folder)
@@ -723,8 +745,7 @@ class KnobScripter(QtWidgets.QWidget):
             found_scripts = sorted([f for f in dir_list if f.endswith(".py")])
             found_temp_scripts = [f for f in dir_list if f.endswith(".py.autosave")]
         except:
-            logging.warning("Couldn't find any scripts in the selected folder.")
-        #TODO: Check which ones have been modified (thus a modified script also exists)
+            log("Couldn't find any scripts in the selected folder.")
         if not len(found_scripts):
             for s in defaultScripts:
                 if s+".autosave" in found_temp_scripts:
@@ -737,6 +758,8 @@ class KnobScripter(QtWidgets.QWidget):
                 if s+".autosave" in found_temp_scripts:
                     self.current_script_dropdown.addItem(s+"(*)",s)
             for s in found_scripts:
+                if s in defaultScripts:
+                    continue
                 sname = s.split("/")[-1]
                 if s+".autosave" in found_temp_scripts:
                     self.current_script_dropdown.addItem(sname+"(*)", sname)
@@ -745,10 +768,10 @@ class KnobScripter(QtWidgets.QWidget):
                 counter += 1
         ##else: #Add the found scripts to the dropdown
         if counter > 0:
-            self.current_script_dropdown.insertSeparator(counter)
             counter += 1
             self.current_script_dropdown.insertSeparator(counter)
             counter += 1
+            self.current_script_dropdown.insertSeparator(counter)
         self.current_script_dropdown.addItem("New", "create new")
         self.current_script_dropdown.addItem("Duplicate", "create duplicate")
         self.current_script_dropdown.addItem("Delete", "delete script")
@@ -832,8 +855,6 @@ class KnobScripter(QtWidgets.QWidget):
             with open(script_path, 'r') as script:
                 content = script.read()
             current_text = self.script_editor.toPlainText()
-            print current_text
-            print content
             if check and current_text != content and current_text.strip() != "":
                 msgBox = QtWidgets.QMessageBox()
                 msgBox.setText("The script has been modified.")
@@ -885,14 +906,13 @@ class KnobScripter(QtWidgets.QWidget):
             content = ""
             self.script_editor.setPlainText(content)
             self.setScriptModified(False)
-            del self.scrollPos[self.current_folder+"/"+self.current_script]
-            del self.cursorPos[self.current_folder+"/"+self.current_script]
+            if self.current_folder+"/"+self.current_script in self.scrollPos:
+                del self.scrollPos[self.current_folder+"/"+self.current_script]
+            if self.current_folder+"/"+self.current_script in self.cursorPos:
+                del self.cursorPos[self.current_folder+"/"+self.current_script]
 
         self.setWindowTitle("KnobScripter - %s/%s" % (self.current_folder, self.current_script))
-        #log("loaded "+script_path+"\n---")
         return
-        # TODO: When opening ks, open last opened script (saving it somewhere)
-        # TODO: Make 'run script' and pin buttons
 
     def saveScriptContents(self, temp = True):
         ''' Save the current contents of the editor into the python file. If temp == True, saves a .py.autosave file '''
@@ -916,9 +936,10 @@ class KnobScripter(QtWidgets.QWidget):
                 with open(script_path_temp, 'w') as script:
                     script.write(content)
             else:
+                if os.path.isfile(script_path_temp):
+                    os.remove(script_path_temp)
                 log("Nothing to save")
                 return
-            #self.setScriptModified(True)
         else:
             with open(script_path, 'w') as script:
                 script.write(self.script_editor.toPlainText())
@@ -1007,6 +1028,31 @@ class KnobScripter(QtWidgets.QWidget):
             self.current_folder_dropdown.blockSignals(False)
             return
 
+        elif fd_data == "add custom path":
+            folder_path = nuke.getFilename('Select custom folder.')
+            if folder_path is not None:
+                if folder_path.endswith("/"):
+                    aliasName = folder_path.split("/")[-2]
+                else:
+                    aliasName = folder_path.split("/")[-1]
+                if not os.path.isdir(folder_path):
+                    self.messageBox("Folder not found. Please try again with the full path to a folder.")
+                elif not len(aliasName):
+                    self.messageBox("Folder with the same name already exists. Please delete or rename it first.")
+                else:
+                    # All good
+                    os.symlink(folder_path, os.path.join(self.scripts_dir,aliasName))
+                    self.saveScriptContents(temp=True)
+                    self.current_folder = aliasName
+                    self.updateFoldersDropdown()
+                    self.setCurrentFolder(aliasName)
+                    self.updateScriptsDropdown()
+                    self.loadScriptContents(check=False)
+                    self.script_editor.setFocus()
+                    return
+            self.current_folder_dropdown.blockSignals(True)
+            self.current_folder_dropdown.setCurrentIndex(self.folder_index)
+            self.current_folder_dropdown.blockSignals(False)
         else:
             # 1: Save current script as temp if needed
             self.saveScriptContents(temp = True)
@@ -1021,7 +1067,6 @@ class KnobScripter(QtWidgets.QWidget):
 
             self.loadScriptState()
             self.setScriptState()
-            # TODO IMPORTANT REFRESH BUTTON TO WORK. RUN SCRIPT BUTTON.
 
         return
 
@@ -1048,9 +1093,11 @@ class KnobScripter(QtWidgets.QWidget):
                     # Success creating the folder
                     self.saveScriptContents(temp = True)
                     self.updateScriptsDropdown()
-                    self.script_editor.setPlainText("")
+                    if self.current_script != "Untitled.py":
+                        self.script_editor.setPlainText("")
                     self.current_script = script_name
                     self.setCurrentScript(script_name)
+                    self.saveScriptContents(temp=False)
                     #self.loadScriptContents()
                 else:
                     self.messageBox("There was a problem creating the script.")
@@ -1180,19 +1227,19 @@ class KnobScripter(QtWidgets.QWidget):
         '''
         script_fullname = self.current_folder+"/"+self.current_script
 
-        if script_fullname in self.state_dict["scroll_pos"]:
-            self.script_editor.verticalScrollBar().setValue(int(self.state_dict["scroll_pos"][script_fullname]))
+        if "scroll_pos" in self.state_dict:
+            if script_fullname in self.state_dict["scroll_pos"]:
+                self.script_editor.verticalScrollBar().setValue(int(self.state_dict["scroll_pos"][script_fullname]))
 
-        if script_fullname in self.state_dict["cursor_pos"]:
-            cursor = self.script_editor.textCursor()
-            cursor.setPosition(int(self.state_dict["cursor_pos"][script_fullname][1]), QtGui.QTextCursor.MoveAnchor)
-            cursor.setPosition(int(self.state_dict["cursor_pos"][script_fullname][0]), QtGui.QTextCursor.KeepAnchor)
-            self.script_editor.setTextCursor(cursor)
+        if "cursor_pos" in self.state_dict:
+            if script_fullname in self.state_dict["cursor_pos"]:
+                cursor = self.script_editor.textCursor()
+                cursor.setPosition(int(self.state_dict["cursor_pos"][script_fullname][1]), QtGui.QTextCursor.MoveAnchor)
+                cursor.setPosition(int(self.state_dict["cursor_pos"][script_fullname][0]), QtGui.QTextCursor.KeepAnchor)
+                self.script_editor.setTextCursor(cursor)
 
         if 'splitter_sizes' in self.state_dict:
             self.splitter.setSizes(self.state_dict['splitter_sizes'])
-
-        print self.state_dict['splitter_sizes'] #TODO IMPORTANT SHIFT + UP GOES TO TOP WTF
 
     def setLastScript(self):
         if 'last_folder' in self.state_dict and 'last_script' in self.state_dict:
@@ -1262,57 +1309,69 @@ class KnobScripter(QtWidgets.QWidget):
         ''' Change node '''
         nuke.menu("Nuke").findItem("Edit/Node/Update KnobScripter Context").invoke()
         selection = knobScripterSelectedNodes
-        updatedCount = self.updateUnsavedKnobs()
-        if not len(selection):
-            self.messageBox("Please select one or more nodes!")
+        if self.nodeMode: # Only update the number of unsaved knobs if we were already in node mode
+            updatedCount = self.updateUnsavedKnobs()
         else:
-            # Change to node mode...
-            self.node_mode_bar.setVisible(True)
-            self.script_mode_bar.setVisible(False)
-            if not self.nodeMode:
-                self.saveScriptContents()
-                self.toAutosave = False
-                self.saveScriptState()
-                self.splitter.setSizes([0,1])
-            self.nodeMode = True
-
-            # If already selected, pass
-            if selection[0].fullName() == self.node.fullName():
-                self.messageBox("Please select a different node first!")
+            updatedCount = 0
+            self.autosave()
+        if newNode != "" and nuke.exists(newNode):
+            selection = [newNode]
+        elif not len(selection):
+            node_dialog = ChooseNodeDialog(self)
+            if node_dialog.exec_():
+                # Accepted
+                selection = [nuke.toNode(node_dialog.name)]
+            else:
                 return
-            elif updatedCount > 0:
-                msgBox = QtWidgets.QMessageBox()
-                msgBox.setText(
-                    "Save changes to %s knob%s before changing the node?" % (str(updatedCount), int(updatedCount > 1) * "s"))
-                msgBox.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Cancel)
-                msgBox.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-                msgBox.setDefaultButton(QtWidgets.QMessageBox.Yes)
-                reply = msgBox.exec_()
-                if reply == QtWidgets.QMessageBox.Yes:
-                    self.saveAllKnobValues(check=False)
-                    print self.unsavedKnobs
-                elif reply == QtWidgets.QMessageBox.Cancel:
-                    return
-            if len(selection) > 1:
-                self.messageBox("More than one node selected.\nChanging knobChanged editor to %s" % selection[0].fullName())
-            # Reinitialise everything, wooo!
-            self.node = selection[0]
-            self.script_editor.setPlainText("")
-            self.unsavedKnobs = {}
-            self.scrollPos = {}
-            self.setWindowTitle("KnobScripter - %s %s" % (self.node.fullName(), self.knob))
-            self.current_node_label_name.setText(self.node.fullName())
 
-            ########TODO: REMOVE AND RE-ADD THE KNOB DROPDOWN
-            self.toLoadKnob = False
-            self.updateKnobDropdown()
-            #self.current_knob_dropdown.repaint()
-            ###self.current_knob_dropdown.setMinimumWidth(self.current_knob_dropdown.minimumSizeHint().width())
-            self.toLoadKnob = True
-            self.setCurrentKnob(self.knob)
-            self.loadKnobValue(False)
-            self.script_editor.setFocus()
-            #self.current_knob_dropdown.setMinimumContentsLength(80)
+        # Change to node mode...
+        self.node_mode_bar.setVisible(True)
+        self.script_mode_bar.setVisible(False)
+        if not self.nodeMode:
+            self.saveScriptContents()
+            self.toAutosave = False
+            self.saveScriptState()
+            self.splitter.setSizes([0,1])
+        self.nodeMode = True
+
+        # If already selected, pass
+        if selection[0].fullName() == self.node.fullName():
+            self.messageBox("Please select a different node first!")
+            return
+        elif updatedCount > 0:
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setText(
+                "Save changes to %s knob%s before changing the node?" % (str(updatedCount), int(updatedCount > 1) * "s"))
+            msgBox.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Cancel)
+            msgBox.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+            msgBox.setDefaultButton(QtWidgets.QMessageBox.Yes)
+            reply = msgBox.exec_()
+            if reply == QtWidgets.QMessageBox.Yes:
+                self.saveAllKnobValues(check=False)
+            elif reply == QtWidgets.QMessageBox.Cancel:
+                return
+        if len(selection) > 1:
+            self.messageBox("More than one node selected.\nChanging knobChanged editor to %s" % selection[0].fullName())
+        # Reinitialise everything, wooo!
+        self.current_knob_dropdown.blockSignals(True)
+        self.node = selection[0]
+        self.script_editor.setPlainText("")
+        self.unsavedKnobs = {}
+        self.scrollPos = {}
+        self.setWindowTitle("KnobScripter - %s %s" % (self.node.fullName(), self.knob))
+        self.current_node_label_name.setText(self.node.fullName())
+
+        self.toLoadKnob = False
+        self.updateKnobDropdown() #onee
+        #self.current_knob_dropdown.repaint()
+        ###self.current_knob_dropdown.setMinimumWidth(self.current_knob_dropdown.minimumSizeHint().width())
+        self.toLoadKnob = True
+        self.setCurrentKnob(self.knob)
+        self.loadKnobValue(False)
+        self.script_editor.setFocus()
+        self.setKnobModified(False)
+        self.current_knob_dropdown.blockSignals(False)
+        #self.current_knob_dropdown.setMinimumContentsLength(80)
         return
     
     def exitNodeMode(self):
@@ -1350,22 +1409,42 @@ class KnobScripter(QtWidgets.QWidget):
         if SnippetEditPanel == "":
             SnippetEditPanel = SnippetsPanel(self)
 
+        if not SnippetEditPanel.isVisible():
+            SnippetEditPanel.reload()
+
         if SnippetEditPanel.show():
-            self.loadSnippets()
+            self.snippets = self.loadSnippets(maxDepth=5)
             SnippetEditPanel = ""
 
-    def loadSnippets(self):
-        ''' Load prefs '''
-        if not os.path.isfile(self.snippets_txt_path):
+    def loadSnippets(self, path="", maxDepth=5, depth=0):
+        '''
+        Load prefs recursive. When maximum recursion depth, ignores paths.
+        '''
+        max_depth = maxDepth
+        cur_depth = depth
+        if path == "":
+            path = self.snippets_txt_path
+        if not os.path.isfile(path):
             return {}
         else:
-            with open(self.snippets_txt_path, "r") as f:
-                self.snippets = json.load(f)
-                return self.snippets
+            loaded_snippets = {}
+            with open(path, "r") as f:
+                file = json.load(f)
+                for i, (key, val) in enumerate(file.items()):
+                    if re.match(r"\[custom-path-[0-9]+\]$",key):
+                        if cur_depth < max_depth:
+                            new_dict = self.loadSnippets(path = val, maxDepth=max_depth, depth = cur_depth+1)
+                            loaded_snippets.update(new_dict)
+                    else:
+                        loaded_snippets[key] = val
+                return loaded_snippets
 
     def messageBox(self, the_text=""):
         ''' Just a simple message box '''
-        msgBox = QtWidgets.QMessageBox(self)
+        if self.isPane:
+            msgBox = QtWidgets.QMessageBox()
+        else:
+            msgBox = QtWidgets.QMessageBox(self)
         msgBox.setText(the_text)
         msgBox.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
         msgBox.exec_()
@@ -1423,7 +1502,6 @@ class KnobScripter(QtWidgets.QWidget):
             else:
                 close_event.accept()
         else:
-            #TODO: add tprint on open
             self.autosave()
             if self in AllKnobScripters:
                 AllKnobScripters.remove(self)
@@ -1434,13 +1512,22 @@ class KnobScripter(QtWidgets.QWidget):
     def refreshClicked(self):
         ''' Function to refresh the dropdowns '''
         if self.nodeMode:
+            knob = self.current_knob_dropdown.itemData(self.current_knob_dropdown.currentIndex()).encode('UTF8')
+            self.current_knob_dropdown.blockSignals(True)
+            self.current_knob_dropdown.clear() # First remove all items
             self.updateKnobDropdown()
+            availableKnobs = [self.current_knob_dropdown.itemData(i).encode('UTF8') for i in range(self.current_knob_dropdown.count())]
+            if knob in availableKnobs:
+                self.setCurrentKnob(knob)
+            self.current_knob_dropdown.blockSignals(False)
         else:
+            folder = self.current_folder
+            script = self.current_script
             self.autosave()
             self.updateFoldersDropdown()
-            self.setCurrentFolder(self.current_folder)
+            self.setCurrentFolder(folder)
             self.updateScriptsDropdown()
-            self.setCurrentScript(self.current_script)
+            self.setCurrentScript(script)
             self.script_editor.setFocus()
 
     def reloadClicked(self):
@@ -1455,7 +1542,6 @@ class KnobScripter(QtWidgets.QWidget):
             self.saveKnobValue(False)
         else:
             self.saveScriptContents(temp = False)
-        #TODO: If script mode...
 
     def setModified(self):
         if self.nodeMode:
@@ -1514,6 +1600,7 @@ class KnobScripter(QtWidgets.QWidget):
 class KnobScripterPane(KnobScripter):
     def __init__(self, node = "", knob="knobChanged"):
         super(KnobScripterPane, self).__init__()
+        self.isPane = True
 
     def showEvent(self, the_event):
         try:
@@ -1528,6 +1615,7 @@ class KnobScripterPane(KnobScripter):
         return KnobScripter.hideEvent(self,the_event)
 
 #TODO VERTICAL SEPARATOR NEXT TO SAVE BUTTON
+
 def consoleChanged(self, ks):
     ''' This will be called every time the ScriptEditor Output text is changed '''
     try:
@@ -1544,8 +1632,6 @@ def consoleChanged(self, ks):
     except:
         pass
     
-#nuke.tprint("Couldn't autosave???")
-
 def killPaneMargins(widget_object):
     if widget_object:
         target_widgets = set()
@@ -1577,14 +1663,18 @@ def log(text):
 
 
 #---------------------------------------------------------------------
-# Dialog for creating new... (folder, script or knob)
+# Dialogs
 #---------------------------------------------------------------------
 class FileNameDialog(QtWidgets.QDialog):
     '''
     Dialog for creating new... (mode = "folder", "script" or "knob").
     '''
     def __init__(self, parent = None, mode = "folder", text = ""):
-        super(FileNameDialog, self).__init__(parent)
+        if parent.isPane:
+            super(FileNameDialog, self).__init__()
+        else:
+            super(FileNameDialog, self).__init__(parent)
+            #self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
         self.mode = mode
         self.text = text
 
@@ -1640,6 +1730,127 @@ class FileNameDialog(QtWidgets.QDialog):
     def clickedCancel(self):
         self.reject()
         return
+
+class TextInputDialog(QtWidgets.QDialog):
+    '''
+    Simple dialog for a text input.
+    '''
+    def __init__(self, parent = None, name = "", text = "", title=""):
+        if parent.isPane:
+            super(TextInputDialog, self).__init__()
+        else:
+            super(TextInputDialog, self).__init__(parent)
+            #self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
+
+        self.name = name #title of textinput
+        self.text = text #default content of textinput
+
+        self.setWindowTitle(title)
+
+        self.initUI()
+
+    def initUI(self):
+        # Widgets
+        self.name_label = QtWidgets.QLabel(self.name+": ")
+        self.name_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        self.name_lineEdit = QtWidgets.QLineEdit()
+        self.name_lineEdit.setText(self.text)
+        self.name_lineEdit.textChanged.connect(self.nameChanged)
+
+        # Buttons
+        self.button_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel)
+        #self.button_box.button(QtWidgets.QDialogButtonBox.Ok).setEnabled(self.text != "")
+        self.button_box.accepted.connect(self.clickedOk)
+        self.button_box.rejected.connect(self.clickedCancel)
+
+        # Layout
+        self.master_layout = QtWidgets.QVBoxLayout()
+        self.name_layout = QtWidgets.QHBoxLayout()
+        self.name_layout.addWidget(self.name_label)
+        self.name_layout.addWidget(self.name_lineEdit)
+        self.master_layout.addLayout(self.name_layout)
+        self.master_layout.addWidget(self.button_box)
+        self.setLayout(self.master_layout)
+
+        self.name_lineEdit.setFocus()
+        self.setMinimumWidth(250)
+
+    def nameChanged(self):
+        self.text = self.name_lineEdit.text()
+
+    def clickedOk(self):
+        self.accept()
+        return
+
+    def clickedCancel(self):
+        self.reject()
+        return
+
+class ChooseNodeDialog(QtWidgets.QDialog):
+    '''
+    Dialog for selecting a node by its name. Only admits nodes that exist (including root, preferences...)
+    '''
+    def __init__(self, parent = None, name = ""):
+        if parent.isPane:
+            super(ChooseNodeDialog, self).__init__()
+        else:
+            super(ChooseNodeDialog, self).__init__(parent)
+
+        self.name = name # Name of node (will be "" by default)
+        self.allNodes = []
+
+        self.setWindowTitle("Enter the node's name...")
+
+        self.initUI()
+
+    def initUI(self):
+        # Widgets
+        self.name_label = QtWidgets.QLabel("Name: ")
+        self.name_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        self.name_lineEdit = QtWidgets.QLineEdit()
+        self.name_lineEdit.setText(self.name)
+        self.name_lineEdit.textChanged.connect(self.nameChanged)
+
+        self.allNodes = self.getAllNodes()
+        completer = QtWidgets.QCompleter(self.allNodes, self)
+        completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
+        self.name_lineEdit.setCompleter(completer)
+
+        # Buttons
+        self.button_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel)
+        self.button_box.button(QtWidgets.QDialogButtonBox.Ok).setEnabled(nuke.exists(self.name))
+        self.button_box.accepted.connect(self.clickedOk)
+        self.button_box.rejected.connect(self.clickedCancel)
+
+        # Layout
+        self.master_layout = QtWidgets.QVBoxLayout()
+        self.name_layout = QtWidgets.QHBoxLayout()
+        self.name_layout.addWidget(self.name_label)
+        self.name_layout.addWidget(self.name_lineEdit)
+        self.master_layout.addLayout(self.name_layout)
+        self.master_layout.addWidget(self.button_box)
+        self.setLayout(self.master_layout)
+
+        self.name_lineEdit.setFocus()
+        self.setMinimumWidth(250)
+
+    def getAllNodes(self):
+        self.allNodes = [n.fullName() for n in nuke.allNodes(recurseGroups=True)] #if parent is in current context??
+        self.allNodes.extend(["root","preferences"])
+        return self.allNodes
+
+    def nameChanged(self):
+        self.name = self.name_lineEdit.text()
+        self.button_box.button(QtWidgets.QDialogButtonBox.Ok).setEnabled(self.name in self.allNodes)
+
+    def clickedOk(self):
+        self.accept()
+        return
+
+    def clickedCancel(self):
+        self.reject()
+        return
+
 
 #------------------------------------------------------------------------------------------------------
 # Script Editor Widget
@@ -1757,6 +1968,17 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
         Custom actions for specific keystrokes
         '''
         key = event.key()
+        ctrl = bool(event.modifiers() & Qt.ControlModifier)
+        alt = bool(event.modifiers() & Qt.AltModifier)
+        shift = bool(event.modifiers() & Qt.ShiftModifier)
+        #modifiers = QtWidgets.QApplication.keyboardModifiers()
+        #ctrl = (modifiers == Qt.ControlModifier)
+        #shift = (modifiers == Qt.ShiftModifier)
+
+        up_arrow = 16777235
+        down_arrow = 16777237
+
+
         #if Tab convert to Space
         if key == 16777217:
             self.indentation('indent')
@@ -1769,16 +1991,33 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
         elif key == 16777219:
             if not self.unindentBackspace():
                 QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
-        #if enter or return, match indent level
-        elif key in [16777220 ,16777221]:
-            self.indentNewLine()
         else:
             ### COOL BEHAVIORS SIMILAR TO SUBLIME GO NEXT!
+            #print key
             cursor = self.textCursor()
             cpos = cursor.position()
             apos = cursor.anchor()
             text_before_cursor = self.toPlainText()[:min(cpos,apos)]
             text_after_cursor = self.toPlainText()[max(cpos,apos):]
+            text_all = self.toPlainText()
+            to_line_start = text_before_cursor[::-1].find("\n")
+            if to_line_start == -1:
+                linestart_pos = 0 # Position of the start of the line that includes the cursor selection start
+            else:
+                linestart_pos = len(text_before_cursor)-to_line_start
+
+            to_line_end = text_after_cursor.find("\n")
+            if to_line_end == -1:
+                lineend_pos = len(text_all) # Position of the end of the line that includes the cursor selection end
+            else:
+                lineend_pos = max(cpos,apos)+to_line_end
+
+            text_before_lines = text_all[:linestart_pos]
+            text_after_lines = text_all[lineend_pos:]
+            if len(text_after_lines) and text_after_lines.startswith("\n"):
+                text_after_lines = text_after_lines[1:]
+            text_lines = text_all[linestart_pos:lineend_pos]
+
             if cursor.hasSelection():
                 selection = cursor.selection().toPlainText()
             else:
@@ -1803,10 +2042,8 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
                 if text_after_cursor.startswith('"') and '"' in text_before_cursor.split("\n")[-1]:# and not re.search(r"(?:[\s)\]]+|$)",text_before_cursor):
                     cursor.movePosition(QtGui.QTextCursor.NextCharacter)
                 elif not re.match(r"(?:[\s)\]]+|$)",text_after_cursor): # If chars after cursor, act normal
-                    print text_before_cursor
                     QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
                 elif not re.search(r"[\s.({\[,]$", text_before_cursor) and text_before_cursor != "": # If chars before cursor, act normal
-                    print text_before_cursor
                     QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
                 else:
                     cursor.insertText('"'+selection+'"')
@@ -1817,36 +2054,115 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
                 if text_after_cursor.startswith("'") and "'" in text_before_cursor.split("\n")[-1]:# and not re.search(r"(?:[\s)\]]+|$)",text_before_cursor):
                     cursor.movePosition(QtGui.QTextCursor.NextCharacter)
                 elif not re.match(r"(?:[\s)\]]+|$)",text_after_cursor): # If chars after cursor, act normal
-                    print text_before_cursor
                     QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
                 elif not re.search(r"[\s.({\[,]$", text_before_cursor) and text_before_cursor != "": # If chars before cursor, act normal
-                    print text_before_cursor
                     QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
                 else:
                     cursor.insertText("'"+selection+"'")
                     cursor.setPosition(apos+1, QtGui.QTextCursor.MoveAnchor)
                     cursor.setPosition(cpos+1, QtGui.QTextCursor.KeepAnchor)
                 self.setTextCursor(cursor)
-                '''
-            elif key == Qt.Key_Up: # If up key and nothing happens, go to start
-                QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
-                QtWidgets.QApplication.processEvents()
-                new_pos = cursor.position()
-                print new_pos, cpos
-                if new_pos == cpos:
-                    cursor.setPosition(0)
+            elif key == 35 and len(selection): # # (yes, a hash)
+                # If there's a selection, insert a hash at the start of each line.. how the fuck?
+                if selection != "":
+                    #TODO Implement an "iscommented" function somewhere? or better, find a way to differentiate the line from the newline character. not sure how but whatever
+                    selection_split = selection.split("\n")
+                    if all(i.startswith("#") for i in selection_split):
+                        selection_commented = "\n".join([s[1:] for s in selection_split]) # Uncommented
+                    else:
+                        selection_commented = "#"+"\n#".join(selection_split)
+                    cursor.insertText(selection_commented)
+                    if apos > cpos:
+                        cursor.setPosition(apos+len(selection_commented)-len(selection), QtGui.QTextCursor.MoveAnchor)
+                        cursor.setPosition(cpos, QtGui.QTextCursor.KeepAnchor)
+                    else:
+                        cursor.setPosition(apos, QtGui.QTextCursor.MoveAnchor)
+                        cursor.setPosition(cpos+len(selection_commented)-len(selection), QtGui.QTextCursor.KeepAnchor)
                     self.setTextCursor(cursor)
-            elif key == Qt.Key_Down: # Opposite happens, go to end
-                QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
-                new_pos = cursor.position()
-                if new_pos == cpos:
-                    cursor.movePosition(QtGui.QTextCursor.End)
+
+            elif key == 68 and ctrl and shift: #Ctrl+Shift+D, to duplicate text or line/s
+
+                if not len(selection):
+                    self.setPlainText(text_before_lines + text_lines+"\n"+text_lines+"\n" + text_after_lines)
+                    cursor.setPosition(apos+len(text_lines)+1, QtGui.QTextCursor.MoveAnchor)
+                    cursor.setPosition(cpos+len(text_lines)+1, QtGui.QTextCursor.KeepAnchor)
                     self.setTextCursor(cursor)
-                '''
+                else:
+                    if text_before_cursor.endswith("\n") and not selection.startswith("\n"):
+                        cursor.insertText(selection+"\n"+selection)
+                        cursor.setPosition(apos+len(selection)+1, QtGui.QTextCursor.MoveAnchor)
+                        cursor.setPosition(cpos+len(selection)+1, QtGui.QTextCursor.KeepAnchor)
+                    else:
+                        cursor.insertText(selection+selection)
+                        cursor.setPosition(apos+len(selection), QtGui.QTextCursor.MoveAnchor)
+                        cursor.setPosition(cpos+len(selection), QtGui.QTextCursor.KeepAnchor)
+                    self.setTextCursor(cursor)
+
+            elif key == up_arrow and ctrl and shift and len(text_before_lines): #Ctrl+Shift+Up, to move the selected line/s up
+                prev_line_start_distance = text_before_lines[:-1][::-1].find("\n")
+                if prev_line_start_distance == -1:
+                    prev_line_start_pos = 0 #Position of the start of the previous line
+                else:
+                    prev_line_start_pos = len(text_before_lines)-1 - prev_line_start_distance
+                prev_line = text_before_lines[prev_line_start_pos:]
+
+                text_before_prev_line = text_before_lines[:prev_line_start_pos]
+
+                if prev_line.endswith("\n"):
+                    prev_line = prev_line[:-1]
+
+                if len(text_after_lines):
+                    text_after_lines = "\n"+text_after_lines
+
+                self.setPlainText(text_before_prev_line + text_lines + "\n" + prev_line + text_after_lines)
+                cursor.setPosition(apos-len(prev_line)-1, QtGui.QTextCursor.MoveAnchor)
+                cursor.setPosition(cpos-len(prev_line)-1, QtGui.QTextCursor.KeepAnchor)
+                self.setTextCursor(cursor)
+                return
+
+            elif key == down_arrow and ctrl and shift: #Ctrl+Shift+Up, to move the selected line/s up
+                if not len(text_after_lines):
+                    text_after_lines = ""
+                next_line_end_distance = text_after_lines.find("\n")
+                if next_line_end_distance == -1:
+                    next_line_end_pos = len(text_all)
+                else:
+                    next_line_end_pos = next_line_end_distance
+                next_line = text_after_lines[:next_line_end_pos]
+                text_after_next_line = text_after_lines[next_line_end_pos:]
+
+                self.setPlainText(text_before_lines + next_line + "\n" + text_lines + text_after_next_line)
+                cursor.setPosition(apos+len(next_line)+1, QtGui.QTextCursor.MoveAnchor)
+                cursor.setPosition(cpos+len(next_line)+1, QtGui.QTextCursor.KeepAnchor)
+                self.setTextCursor(cursor)
+                return
+
+            elif key == up_arrow and not len(text_before_lines): # If up key and nothing happens, go to start
+                if not shift:
+                    cursor.setPosition(0, QtGui.QTextCursor.MoveAnchor)
+                    self.setTextCursor(cursor)
+                else:
+                    cursor.setPosition(0, QtGui.QTextCursor.KeepAnchor)
+                    self.setTextCursor(cursor)
+
+            elif key == down_arrow and not len(text_after_lines): # If up key and nothing happens, go to start
+                if not shift:
+                    cursor.setPosition(len(text_all), QtGui.QTextCursor.MoveAnchor)
+                    self.setTextCursor(cursor)
+                else:
+                    cursor.setPosition(len(text_all), QtGui.QTextCursor.KeepAnchor)
+                    self.setTextCursor(cursor)
+
+            #if enter or return, match indent level
+            elif key in [16777220 ,16777221]:
+                self.indentNewLine()
             else:
                 QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
-            
-            #print key
+
+            #TODO IMPORTANT: click on new script when on Untitled, create the new script with the current text instead of blank
+            #TODO IMPORTANT: If state txt has scripts that don't exist, don't crash (lol)
+            #TODO: Change node + selection panel -> GRAB THE PROPER NAME!!!! Fot nuke.root for example it's not working properly.
+
 
             
         self.scrollToCursor()
@@ -2261,26 +2577,64 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
 
     def placeholderToEnd(self,text,placeholder):
         '''Returns distance (int) from the first ocurrence of the placeholder, to the end of the string with placeholders removed'''
-        from_start = text.find(placeholder)
-        if from_start < 0:
+        search = re.search(placeholder, text)
+        if not search:
             return -1
+        from_start = search.start()
         #print("from_start="+str(from_start))
-        total = len(text.replace(placeholder,""))
+        total = len(re.sub(placeholder, "", text))
         #print("total="+str(total))
         to_end = total-from_start
         #print("to_end="+str(to_end))
         return to_end
 
+    def addSnippetText(self, snippet_text):
+        ''' Adds the selected text as a snippet (taking care of $$, $name$ etc) to the script editor '''
+        
+        cursor_placeholder_find = r"(?<=[^\\])(\$\$)" # Matches $$
+        variables_placeholder_find = r"[^\\](\$[\w]*[^\t\n\r\f\v\$\\]+\$)" # Matches $thing$
+        text = snippet_text
+        while True:
+            placeholder_variable = re.search(variables_placeholder_find, text)
+            if not placeholder_variable:
+                break
+            word = placeholder_variable.groups()[0]
+            word_bare = word[1:-1]
+            panel = TextInputDialog(self.knobScripter,name = word_bare, text = "", title= "Set text for "+word_bare)
+            if panel.exec_():
+            #    # Accepted
+                text = text.replace(word,panel.text)
+            else:
+                text = text.replace(word,"")
+                
+        placeholder_to_end = self.placeholderToEnd(text,cursor_placeholder_find)
+
+        text = re.sub(cursor_placeholder_find, "", text)
+        self.cursor.insertText(text)
+        if placeholder_to_end >= 0:
+            for i in range(placeholder_to_end):
+                self.cursor.movePosition(QtGui.QTextCursor.PreviousCharacter)
+            self.setTextCursor(self.cursor)
+
     def keyPressEvent(self,event):
 
         # ADAPTED FROM NUKE's SCRIPT EDITOR
-        ctrl = ((event.modifiers() and (Qt.ControlModifier)) != 0)
-        alt = ((event.modifiers() and (Qt.AltModifier)) != 0)
-        shift = ((event.modifiers() and (Qt.ShiftModifier)) != 0)
+        
+        ctrl = bool(event.modifiers() & Qt.ControlModifier)
+        alt = bool(event.modifiers() & Qt.AltModifier)
+        shift = bool(event.modifiers() & Qt.ShiftModifier)
         key = event.key()
+
 
         #Get completer state
         self._completerShowing = self._completer.popup().isVisible()
+
+        #BEFORE ANYTHING ELSE, IF SPECIAL MODIFIERS SIMPLY IGNORE THE REST
+        if not self._completerShowing and (ctrl or shift or alt):
+            #Bypassed!
+            if key not in [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Tab]:
+                KnobScripterTextEdit.keyPressEvent(self,event)
+                return
         
         #If the completer is showing
         if self._completerShowing :
@@ -2346,12 +2700,7 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
                     match_key, match_snippet = self.findLongestEndingMatch(line_before_cursor, self.knobScripter.snippets)
                     for i in range(len(match_key)):
                         self.cursor.deletePreviousChar()
-                    placeholder_to_end = self.placeholderToEnd(match_snippet,self.placeholder)
-                    self.cursor.insertText(match_snippet.replace(self.placeholder,""))
-                    if placeholder_to_end >= 0:
-                        for i in range(placeholder_to_end):
-                            self.cursor.movePosition(QtGui.QTextCursor.PreviousCharacter)
-                        self.setTextCursor(self.cursor)
+                    self.addSnippetText(match_snippet) # This function takes care of adding the appropriate snippet and moving the cursor...
                 except: # Meaning snippet not found...
                     # FROM NUKE's SCRIPT EDITOR START
                     tc = self.textCursor()
@@ -2960,7 +3309,7 @@ class SnippetsPanel(QtWidgets.QDialog):
         self.setWindowTitle("Snippet editor")
 
         self.snippets_txt_path = self.mainWidget.snippets_txt_path
-        self.snippets_dict = self.mainWidget.loadSnippets()
+        self.snippets_dict = self.loadSnippetsDict(path = self.snippets_txt_path)
         #self.snippets_dict = snippets_dic
 
         #self.saveSnippets(snippets_dic)
@@ -2984,9 +3333,7 @@ class SnippetsPanel(QtWidgets.QDialog):
         self.scroll_content = QtWidgets.QWidget()
         self.scroll_layout = QtWidgets.QVBoxLayout()
 
-        for i, (key, val) in enumerate(self.snippets_dict.items()):
-            snippet_edit = SnippetEdit(key, val)
-            self.scroll_layout.insertWidget(-1, snippet_edit)
+        self.buildSnippetWidgets()
 
         self.scroll_content.setLayout(self.scroll_layout)
 
@@ -2999,6 +3346,11 @@ class SnippetsPanel(QtWidgets.QDialog):
 
         self.layout.addWidget(self.scroll)
 
+        # File knob test
+        #self.filePath_lineEdit = SnippetFilePath(self)
+        #self.filePath_lineEdit
+        #self.layout.addWidget(self.filePath_lineEdit)
+
         # Lower buttons
         self.bottom_layout = QtWidgets.QHBoxLayout()
 
@@ -3006,6 +3358,11 @@ class SnippetsPanel(QtWidgets.QDialog):
         self.add_btn.setToolTip("Create empty fields for an extra snippet.")
         self.add_btn.clicked.connect(self.addSnippet)
         self.bottom_layout.addWidget(self.add_btn)
+
+        self.addPath_btn = QtWidgets.QPushButton("Add custom path")
+        self.addPath_btn.setToolTip("Add a custom path to an external snippets .txt file.")
+        self.addPath_btn.clicked.connect(self.addCustomPath)
+        self.bottom_layout.addWidget(self.addPath_btn)
 
         self.bottom_layout.addStretch()
 
@@ -3035,15 +3392,54 @@ class SnippetsPanel(QtWidgets.QDialog):
 
         self.setLayout(self.layout)
 
+    def reload(self):
+        '''
+        Clears everything without saving and redoes the widgets etc.
+        Only to be called if the panel isn't shown meaning it's closed.
+        '''
+        for i in reversed(range(self.scroll_layout.count())): 
+            self.scroll_layout.itemAt(i).widget().deleteLater()
+
+        self.snippets_dict = self.loadSnippetsDict(path = self.snippets_txt_path)
+
+        self.buildSnippetWidgets()
+
+    def buildSnippetWidgets(self):
+        for i, (key, val) in enumerate(self.snippets_dict.items()):
+            if re.match(r"\[custom-path-[0-9]+\]$",key):
+                file_edit = SnippetFilePath(val)
+                self.scroll_layout.insertWidget(-1, file_edit)
+            else:
+                snippet_edit = SnippetEdit(key, val)
+                self.scroll_layout.insertWidget(-1, snippet_edit)
+
+    def loadSnippetsDict(self, path=""):
+        ''' Load prefs. TO REMOVE '''
+        if path == "":
+            path = self.mainWidget.snippets_txt_path
+        if not os.path.isfile(self.snippets_txt_path):
+            return {}
+        else:
+            with open(self.snippets_txt_path, "r") as f:
+                self.snippets = json.load(f)
+                return self.snippets
+
     def getSnippetsAsDict(self):
         dic = {}
         num_snippets = self.scroll_layout.count()
+        path_i = 1
         for s in range(num_snippets):
             se = self.scroll_layout.itemAt(s).widget()
-            key = se.shortcut_editor.text()
-            val = se.snippet_editor.toPlainText()
-            if key != "":
-                dic[key] = val
+            if se.__class__.__name__ == "SnippetEdit":
+                key = se.shortcut_editor.text()
+                val = se.snippet_editor.toPlainText()
+                if key != "":
+                    dic[key] = val
+            else:
+                path = se.filepath_lineEdit.text()
+                if path != "":
+                    dic["[custom-path-{}]".format(str(path_i))] = path
+                    path_i += 1
         return dic
 
     def saveSnippets(self,snippets = ""):
@@ -3055,6 +3451,7 @@ class SnippetsPanel(QtWidgets.QDialog):
 
     def okPressed(self):
         self.saveSnippets()
+        self.mainWidget.snippets = self.mainWidget.loadSnippets(maxDepth=5)
         self.mainWidget.loadSnippets()
         self.accept()
 
@@ -3063,6 +3460,13 @@ class SnippetsPanel(QtWidgets.QDialog):
         self.scroll_layout.insertWidget(0, se)
         self.show()
         return se
+
+    def addCustomPath(self,path=""):
+        cpe = SnippetFilePath(path)
+        self.scroll_layout.insertWidget(0, cpe)
+        self.show()
+        cpe.browseSnippets()
+        return cpe
 
     def showHelp(self):
         ''' Create a new snippet, auto-completed with the help '''
@@ -3107,6 +3511,52 @@ class SnippetEdit(QtWidgets.QWidget):
 
 
         self.setLayout(self.layout)
+
+class SnippetFilePath(QtWidgets.QWidget):
+    ''' Simple widget containing a filepath lineEdit and a button to open the file browser '''
+    def __init__(self, path="", parent=None):
+        super(SnippetFilePath,self).__init__(parent)
+
+        self.layout = QtWidgets.QHBoxLayout()
+
+        self.custompath_label = QtWidgets.QLabel(self)
+        self.custompath_label.setText("Custom path: ")
+
+        self.filepath_lineEdit = QtWidgets.QLineEdit(self)
+        self.filepath_lineEdit.setText(str(path))
+        #self.snippet_editor = QtWidgets.QTextEdit(self)
+        self.filepath_lineEdit.setStyleSheet('background:#282828;color:#EEE;') # Main Colors
+        self.script_editor_font = QtGui.QFont()
+        self.script_editor_font.setFamily("Courier")
+        self.script_editor_font.setStyleHint(QtGui.QFont.Monospace)
+        self.script_editor_font.setFixedPitch(True)
+        self.script_editor_font.setPointSize(11)
+        self.filepath_lineEdit.setFont(self.script_editor_font)
+
+        self.file_button = QtWidgets.QPushButton(self)
+        self.file_button.setText("Browse...")
+        self.file_button.clicked.connect(self.browseSnippets)
+
+        self.layout.addWidget(self.custompath_label)
+        self.layout.addWidget(self.filepath_lineEdit)
+        self.layout.addWidget(self.file_button)
+        self.layout.setContentsMargins(0,10,0,10)
+
+
+        self.setLayout(self.layout)
+
+    def browseSnippets(self):
+        ''' Opens file panel for ...snippets.txt '''
+        browseLocation = nuke.getFilename('Select snippets file', '*.txt')
+
+        if not browseLocation:
+            return
+
+        self.filepath_lineEdit.setText(browseLocation)
+        return
+
+
+
 
 #--------------------------------
 # Implementation

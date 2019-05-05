@@ -3,6 +3,7 @@ import nuke
 try:
     from PySide import QtCore, QtGui
 except:
+    import PySide2
     from PySide2 import QtCore, QtGui
 
 def copyFileName():
@@ -18,6 +19,13 @@ def copyFileName():
                 first=one['range_first'].value()
             l=l+t+" "+str(first)+"-"+str(last)+"\n"
             print l
-    qclip = QtGui.QApplication.clipboard() 
+    try:
+        qclip = QtGui.QApplication.clipboard()
+    except:
+        PySide2.QtWidgets.QApplication.clipboard() 
     qclip.clear() 
     qclip.setText(l)
+
+
+
+
