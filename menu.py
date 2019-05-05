@@ -2,8 +2,12 @@ import nuke
 import nukescripts
 import os
 
+UserDir = "/home/alexey/Dropbox/users/underUserAlexey/"
+n11,n10 = False,True
+if nuke.NUKE_VERSION_MAJOR > 10:
+    n11 = True;n10 = False
 
-nMajor = nuke.NUKE_VERSION_MAJOR
+    
 
 nuke.tprint("_"*100);nuke.tprint("now loading my user");nuke.tprint("_"*100)
 
@@ -24,8 +28,9 @@ import autoSticky
 import myTransform
 import myCC
 import myMerge
-
-
+import saveImage
+import reviews
+import copyFileName
 ########animated snap########################################################
 import animatedSnap3D
 from animatedSnap3D import *
@@ -40,6 +45,21 @@ except:
     pass
 
 
+
+
+#nuke.menu( 'Node Graph' ).addCommand( 'localize Threaded', 'LocaliseThreaded.locCode()')
+
+n = nuke.menu( 'Nuke' ).addMenu("HOME",icon = "nuke.png")
+t=n.addMenu("tmp")
+t.addCommand( 'show review notes', 'reviews.reviews()')
+#FIX  t.addCommand("Copy file to the clipboard! ", "copyFileName.copyFileName()","Ctrl+Alt+Shift+c",icon="ColorWheel.png")
+
+
+m = nuke.menu('Viewer')
+m.addCommand("saveImage", "saveImage.saveImage()")
+
+a = nuke.menu('Animation')
+a.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()','',icon='ParticleBounce.png')
 
 
 
