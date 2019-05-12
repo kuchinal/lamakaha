@@ -61,7 +61,7 @@ m.addCommand("saveImage", "saveImage.saveImage()")
 a = nuke.menu('Animation')
 a.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()','',icon='ParticleBounce.png')
 
-
+nuke.tprint("_"*100);nuke.tprint("my user is loaded");nuke.tprint("_"*100)
 
 
 
