@@ -32,6 +32,26 @@ import myMerge
 import saveImage
 import reviews
 import copyFileName
+
+
+#temporary
+def RotoFromTrack():
+    try:
+        a = nuke.selectedNode()
+        if "Tracker" in a.Class():
+            TrackToRoto.TrackToRoto()
+        elif "CornerPin" in a.Class() or "CornerPin" in a['name'].value():
+            getTheCornerpinAsMatrix.getTheCornerpinAsMatrix();cornerMatrixToPaint.cornerMatrixToPaint()
+        else:
+            nuke.createNode("Roto")
+    except:
+        import traceback; traceback.print_exc()
+        nuke.createNode("Roto") 
+
+
+
+
+
 ########animated snap########################################################
 import animatedSnap3D
 from animatedSnap3D import *
@@ -62,6 +82,7 @@ animationMenu.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()',''
 
 nodegraphMenu = nuke.menu('Node Graph')
 nodegraphMenu.addCommand('TrackToRoto','RotoFromTrack()',"Shift+p",icon="Tracker.png")
+nodegraphMenu.addCommand('Auto Backdrop', 'autoBackdropp.autoBackdrop()', 'alt+b',icon = "Backdrop.png")
 
 
 
