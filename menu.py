@@ -34,6 +34,8 @@ import reviews
 import copyFileName
 
 
+
+
 #temporary
 def RotoFromTrack():
     try:
@@ -70,7 +72,7 @@ except:
 
 
 nukeMenu = nuke.menu( 'Nuke' ).addMenu("HOME",icon = "nuke.png")
-t=n.addMenu("tmp")
+t=nukeMenu.addMenu("tmp")
 t.addCommand( 'show review notes', 'reviews.reviews()')
 t.addCommand("Copy file to the clipboard! ", "copyFileName.copyFileName()","Ctrl+Alt+Shift+c",icon="ColorWheel.png")
 
@@ -81,6 +83,7 @@ animationMenu = nuke.menu('Animation')
 animationMenu.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()','',icon='ParticleBounce.png')
 
 nodegraphMenu = nuke.menu('Node Graph')
+t=nukeMenu.addMenu("shortcuted")
 nodegraphMenu.addCommand('TrackToRoto','RotoFromTrack()',"Shift+p",icon="Tracker.png")
 nodegraphMenu.addCommand('Auto Backdrop', 'autoBackdropp.autoBackdrop()', 'alt+b',icon = "Backdrop.png")
 
