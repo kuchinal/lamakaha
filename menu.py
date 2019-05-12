@@ -48,19 +48,27 @@ except:
 
 
 
-#nuke.menu( 'Node Graph' ).addCommand( 'localize Threaded', 'LocaliseThreaded.locCode()')
 
-n = nuke.menu( 'Nuke' ).addMenu("HOME",icon = "nuke.png")
+nukeMenu = nuke.menu( 'Nuke' ).addMenu("HOME",icon = "nuke.png")
 t=n.addMenu("tmp")
 t.addCommand( 'show review notes', 'reviews.reviews()')
 t.addCommand("Copy file to the clipboard! ", "copyFileName.copyFileName()","Ctrl+Alt+Shift+c",icon="ColorWheel.png")
 
+viewerMenu = nuke.menu('Viewer')
+viewerMenu.addCommand("saveImage", "saveImage.saveImage()")
 
-m = nuke.menu('Viewer')
-m.addCommand("saveImage", "saveImage.saveImage()")
+animationMenu = nuke.menu('Animation')
+animationMenu.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()','',icon='ParticleBounce.png')
 
-a = nuke.menu('Animation')
-a.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()','',icon='ParticleBounce.png')
+nodegraphMenu = nuke.menu('Node Graph')
+nodegraphMenu.addCommand('TrackToRoto','RotoFromTrack()',"Shift+p",icon="Tracker.png")
+
+
+
+
+
+
+
 
 nuke.tprint("_"*100);nuke.tprint("my user is loaded");nuke.tprint("_"*100)
 
