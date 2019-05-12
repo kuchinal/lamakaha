@@ -1,8 +1,12 @@
 
-nuke.pluginAddPath(UserDir+"Folders/Python/")
-nuke.pluginAddPath(UserDir+"Folders/Icons/")
-nuke.pluginAddPath(UserDir+"Folders/Gizmos/")
-nuke.pluginAddPath(UserDir+"Folders/Plugins/")
-nuke.pluginAddPath(UserDir+"Folders/NukeScripts/")
-#test
+nuke.pluginAddPath("Folders/Python/")
+nuke.pluginAddPath("Folders/Icons/")
+nuke.pluginAddPath("Folders/Gizmos/")
+nuke.pluginAddPath("Folders/Plugins/")
+nuke.pluginAddPath("Folders/NukeScripts/")
+
+
+
+nuke.pluginAddPath("Folders/Python/KnobScripter/")
+nuke.pluginAddPath("Folders/Python/MassivePanel/")
 
