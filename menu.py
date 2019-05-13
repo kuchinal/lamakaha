@@ -1,7 +1,10 @@
 import nuke
 import nukescripts
 import os
+#
 
+
+#######
 UserDir = "/home/alexey/Dropbox/users/underUserAlexey/"
 n11,n10 = False,True
 if nuke.NUKE_VERSION_MAJOR > 10:
