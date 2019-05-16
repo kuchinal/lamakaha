@@ -9,3 +9,4 @@ push files to github: 		"git push -u https://github.com/kuchinal/lamakaha home" 
 pull files from github : 	"git pull https://github.com/kuchinal/lamakaha home"
 push files to github: 		"git push https://github.com/kuchinal/lamakaha home"
 
+#
