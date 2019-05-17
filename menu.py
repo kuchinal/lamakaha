@@ -139,6 +139,8 @@ nuke.addOnCreate(lambda: WildCardButton() , nodeClass="Cryptomatte")
 nuke.tprint("_"*100);nuke.tprint("my user is loaded");nuke.tprint("_"*100)
 
 #finished to bring stuff from underuser, have to start to dig into my trx user
+# have to deal with nuke files in the folder to see what i wanna use
+same with gizmos!!!
 
 
 
