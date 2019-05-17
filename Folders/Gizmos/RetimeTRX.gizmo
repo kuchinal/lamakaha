@@ -1,0 +1,59 @@
+Group {
+ name RetimeTRX
+ label "\[value rname]"
+ addUserKnob {20 tab1 l retime}
+ addUserKnob {7 retimeframe l frame R 0 1000}
+ addUserKnob {41 method l Method T OFlow1.method}
+ addUserKnob {7 fcurve l INVISIBLE +INVISIBLE R 0 1000}
+ fcurve {{"method > 0? retimeframe : rint(retimeframe)"}}
+ addUserKnob {26 div1 l "" +STARTLINE}
+ addUserKnob {1 sequence}
+ sequence "\[value TrixterShotData.sequence]"
+ addUserKnob {1 shot -STARTLINE}
+ shot "\[value TrixterShotData.shot]"
+ addUserKnob {1 rname l name}
+ rname master
+ addUserKnob {3 startf l "frame range"}
+ startf {{first_frame}}
+ addUserKnob {3 endf l "" -STARTLINE}
+ endf {{last_frame}}
+ addUserKnob {22 publish T "from Qt import QtWidgets\nimport tx_nuke.nuketools as nt\nfrom tx_compositing.retime import tx_retime\nfrom tx_compositing.project import thisProject\nfrom tx.path import Path\n\n\ndef all_frames(node):\n    from_f = node\['startf'].value()\n    to_f = node\['endf'].value()\n    return xrange(int(from_f), int(to_f) + 1)\n\n\ndef check_keys(knob, first, last):\n    errors = \[]\n    acurve = knob.animation(0)\n    if not acurve:\n        return 'No Retime defined'\n    \n    if not acurve.noExpression():\n        return 'Retime is expression linked, no checks possible'\n    else:\n        if acurve.constant():\n            return 'Retime curve is constant'\n        \n        keys = acurve.keys()\n        if len(keys) == 0:\n            return 'Retime does not have any keys'\n        else:\n            fkey = keys\[0]\n            if fkey.x not in first:\n                errors.append('No key on first frame or work_in of shot')\n            if fkey.lslope != fkey.rslope:\n                errors.append('Slopes/Interpolation on first keyframe are not linear')\n                \n            lkey = keys\[-1]\n            if lkey.x not in last:\n                errors.append('No key on last frame or work_out of shot')\n            if lkey.lslope != lkey.rslope:\n                errors.append('Slopes/Interpolation on last keyframe are not linear')\n            \n            if len(errors) > 0:\n                return '\\n'.join(\['- '+x for x in errors])\n            else:\n                return ''\n            \n\ndef publish_retime(node):\n    sequence = node.knob('sequence').evaluate()\n    shot = node.knob('shot').evaluate()\n    shot_obj = thisProject.sequence(sequence).shot(shot)\n    sfirst = shot_obj.work_in - shot_obj.handle_in\n    slast = shot_obj.work_out + shot_obj.handle_out\n    \n    errors = check_keys(node\['retimeframe'], \[sfirst, shot_obj.work_in], \[slast, shot_obj.work_out])\n    if len(errors) > 0:\n        msgBox = QtWidgets.QMessageBox(QtWidgets.QApplication.instance().activeWindow())\n        msgBox.setWindowTitle('Publish Retime')\n        msgBox.setText('<b>Potential problems found:</b><br><br><i>%s</i><br><br>Do you really like to continue publishing?' % errors.replace('\\n', '<br>'))\n        msgBox.setIcon(QtWidgets.QMessageBox.Warning)\n        msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)\n        msgBox.setDefaultButton(QtWidgets.QMessageBox.Cancel)\n        ret = msgBox.exec_()\n        if ret != QtWidgets.QMessageBox.Ok:\n            return\n    \n    name = node.knob('rname').evaluate()\n\n    retime = tx_retime(sequence, shot, name)\n    tknob = node.knob('fcurve')\n\n    for frame in all_frames(node):\n        retime.append_key(frame, tknob.getValueAt(frame))\n\n    folder = retime.publish_new_version()\n    shot_obj.add_comment('compositing', 'retime %s' % folder.basename(), 'new retime exported to %s' % folder)\n    nuke.message('new retime exported to %s' % folder)\n\n\npublish_retime(nuke.thisNode())" +STARTLINE}
+ addUserKnob {22 load l "  load current  " -STARTLINE T "from tx_compositing.retime import tx_retime\nfrom fcnuke import load_curve_into_knob\n\nnode = nuke.thisNode()\nsequence = node.knob('sequence').evaluate()\nshot = node.knob('shot').evaluate()\nname = node.knob('rname').evaluate()\n\nretime = tx_retime(sequence, shot, name)\nretime.load_current_version()\n\nload_curve_into_knob(retime.curve, node.knob('retimeframe'))"}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -40
+  ypos 110
+ }
+ OFXuk.co.thefoundry.time.oflow_v100 {
+  method Motion
+  timing "Source Frame"
+  timingFrame {{parent.fcurve}}
+  timingSpeed 0.5
+  filtering Normal
+  warpMode Normal
+  correctLuminance false
+  automaticShutterTime false
+  shutterTime 0
+  shutterSamples 1
+  vectorDetail 0.2
+  smoothness 0.5
+  blockSize 6
+  Tolerances 0
+  weightRed 0.3
+  weightGreen 0.6
+  weightBlue 0.1
+  showVectors false
+  cacheBreaker false
+  name OFlow1
+  selected true
+  xpos -40
+  ypos 200
+ }
+ Output {
+  name Output1
+  xpos -40
+  ypos 290
+ }
+end_group
