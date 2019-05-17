@@ -15,10 +15,25 @@ if nuke.NUKE_VERSION_MAJOR < 11:
     from PySide import QtCore, QtGui, QtUiTools, QtGui as QtWidgets
     from PySide.QtCore import Qt
     from PySide.QtGui import QCompleter
+    
 else:
     from PySide2 import QtGui, QtUiTools, QtCore, QtWidgets# Import the PyQt4 module we'll need
     from PySide2.QtCore import Qt
     from PySide2.QtWidgets import QCompleter
+
+
+
+def killPaneMargins(widget_object):
+    if widget_object:
+        target_widgets = set()
+        target_widgets.add(widget_object.parentWidget().parentWidget())
+        target_widgets.add(widget_object.parentWidget().parentWidget().parentWidget().parentWidget())
+
+        for widget_layout in target_widgets:
+            try:
+                widget_layout.layout().setContentsMargins(0, 0, 0, 0)
+            except:
+                pass
 
 
 
@@ -45,17 +60,17 @@ class MassivePanelPySide(QtWidgets.QWidget):
 
 
 
-#class MassivePanelPySide(QtGui.QMainWindow, mdev.Ui_widget):
+        #class MassivePanelPySide(QtGui.QMainWindow, mdev.Ui_widget):
 
-# class MassivePanelPySide(QtGui.QMainWindow, mdev.Ui_widget):
-#     def __init__(self):
-#         super(self.__class__, self).__init__()
-#         self.setupUi(self) 
-
-
+        # class MassivePanelPySide(QtGui.QMainWindow, mdev.Ui_widget):
+        #     def __init__(self):
+        #         super(self.__class__, self).__init__()
+        #         self.setupUi(self) 
 
 
-####### connecting buttons
+
+
+        ####### connecting buttons
 
         #assign takes to selected nodes
         self.ui.take1.clicked.connect(lambda: self.setTake(self.ui.take1,self.ui.resetTake1,self.ui.disableTake1,self.ui.take1Low,self.ui.take1High,self.ui.selectTake1,self.ui.icons))
@@ -232,15 +247,19 @@ class MassivePanelPySide(QtWidgets.QWidget):
         #self.ui.dummy1_7.clicked
 
         
-        #self.ui.dummy1_7.setEnabled(True)
-        #self.ui.dummy1_7.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
-        self.ui.dummy1_4.setText("4")
-        #self.ui.dummy1_7.clicked
+        self.ui.dummy1_4.setEnabled(True)
+        self.ui.dummy1_4.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'cmpElem.png'))))
+        self.ui.dummy1_4.setText("Elem")
+        self.ui.dummy1_4.clicked.connect(lambda: self.compElemCreate())
+        self.ui.dummy1_4.setToolTip("Create a comp element script from selected nodes")
 
-        #self.ui.dummy1_7.setEnabled(True)
-        #self.ui.dummy1_7.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
-        self.ui.dummy1_5.setText("5")
-        #self.ui.dummy1_7.clicked
+        self.ui.dummy1_5.setEnabled(True)
+        self.ui.dummy1_5.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'Time1.png'))))
+        self.ui.dummy1_5.setText("share")
+        self.ui.dummy1_5.clicked.connect(lambda: self.shareNodes())
+        self.ui.dummy1_5.setToolTip("share Nodes Instantly")
+
+
 
         self.ui.dummy1_6.setEnabled(True)
         self.ui.dummy1_6.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
@@ -255,10 +274,10 @@ class MassivePanelPySide(QtWidgets.QWidget):
         self.ui.dummy1_10.clicked.connect(lambda: self.tRend())
         self.ui.dummy1_10.setToolTip("render selected nodes on the render farm")
 
-        #self.ui.dummy1_5.setEnabled(True)
-        #self.ui.dummy1_7.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
-        self.ui.dummy1_8.setText("8")
-        #self.ui.dummy1_7.clicked
+        # self.ui.dummy1_8.setEnabled(True)
+        # self.ui.dummy1_8.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
+        # self.ui.dummy1_8.setText("8")
+        # self.ui.dummy1_10.setToolTip("render selected nodes on the render farm")
 
         
         self.ui.dummy1_9.setEnabled(True)
@@ -279,14 +298,15 @@ class MassivePanelPySide(QtWidgets.QWidget):
         self.ui.dummy1_11.setText("Load")
         self.ui.dummy1_11.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'cap.png'))))
         self.ui.dummy1_11.clicked.connect(lambda: self.createAssetLoader())
-        self.ui.dummy1_11.setToolTip("Beta version of the Asset Loader by Ernest Dios")
+        self.ui.dummy1_11.setToolTip("Beta version of the Asset Loader by Ernest Dios/Adrian Pueyo")
         
-        # self.ui.dummy1_12.setEnabled(True)
+        self.ui.dummy1_12.setEnabled(True)
         # self.ui.dummy1_12.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'nuke.png'))))
-        self.ui.dummy1_12.setText("12")
-        # self.ui.dummy1_12.clicked.connect(lambda: self.lRend())
+        self.ui.dummy1_12.setText("")
+        self.ui.dummy1_12.clicked.connect(lambda: self.openInNautilus())
+        self.ui.dummy1_12.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'Explorer.png'))))
         # self.ui.dummy1_12.setStyleSheet("Text-align:left")
-        # self.ui.dummy1_12.setToolTip("render selected nodes locally")
+        self.ui.dummy1_12.setToolTip("open location of selected Read node in Finder")
 
         self.ui.dummy1_13.setEnabled(True)
         self.ui.dummy1_13.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'balance.png'))))
@@ -295,39 +315,72 @@ class MassivePanelPySide(QtWidgets.QWidget):
 
 
 
+    # def killTMPs(self):
+    #     import os
+    #     a = nuke.selectedNodes()
+    #     for n in a:
+    #         file = n['file'].value().rpartition("/")[0]+"/"
+    #         print file
+    #         all = os.listdir(file)
+    #         for one in all:
+    #             if "tmp" in one:
+    #                 os.remove(file+ one)
+    def event(self, the_event):
+        if the_event.type() == QtCore.QEvent.Type.Show:
+            try:
+                killPaneMargins(self)
+            except:
+                pass
+        return super(MassivePanelPySide, self).event(the_event)
+    def shareNodes(self):
+        import tempShare
+        tempShare.tempShare()
+
+    def compElemCreate(self):
+        from saveCompElements import saveCompElements 
+        saveCompElements.showDialog()
+
+    def openInNautilus(self):
+        import Explorer
+        Explorer.ExplorerJPEG()
+
     def verSubmit(self):
-        import Submitversion as sv; sv.submitversion(nuke.selectedNode());nuke.selectedNode()["tile_color"].setValue(681683711)
+        import publisher
+        publisher.publisher()
 
     def med(self):
         import subprocess
         subprocess.Popen(["/usr/bin/vlc","/corky/projects/Library/Tutorials/UnderUserStuff/AfterReview.mp4"])
 
     def sScript(self):
-        from menu import scriptStart
-        scriptStart()
+        import scriptStart
+        scriptStart.scriptStart()
 
     def layerset(self):
-        from menu import LayersetArnold
-        LayersetArnold()
+        #import LayersetArnold as la
+        #la.layersetArnold()
+        #la.cryptoUpdate()
+        import arnoldLayerSetTemplates;a=arnoldLayerSetTemplates.TemplateSelector();a.show()
 
     def tRend(self):
-        from menu import TrixterRender
-        TrixterRender()
+        import TrixterRender
+        #TrixterRender()
+        TrixterRender.trixterRender(0)
 
     def lRend(self):
         from menu import localRenderTRX
         localRenderTRX()
 
     def RVtrix(self):
-        from menu import RVTrixter
-        RVTrixter()
+        import rvPlay
+        rvPlay.rvTrixter()
 
     def RVtrixAdd(self):
-        from menu import RVPushTrixter
-        RVPushTrixter()
+        import rvPlay
+        rvPlay.rvPushTrixter()
 
     #trixter loader by ernest dios
-    def createAssetLoader(self):
+    def createAssetLoaderOld(self):
         import ED_AssetLoader_Beta
         # declare the global
         global AssetLoaderPanel
@@ -337,6 +390,18 @@ class MassivePanelPySide(QtWidgets.QWidget):
         def updateAssetLoader():
             AssetLoaderPanel.retrieveShotData()     
         nuke.addOnScriptSave(updateAssetLoader) #EVERY TIME WE SAVE WE UPDATE THE ASSET LOADER FOR EXEMPLE WHEN WE SET THE TRIXTER SHOT DATA
+
+
+    def createAssetLoader(self):
+        import ED_AssetLoader_BetaB
+        ED_AssetLoader_BetaB.makeAssetLoader(autoGather=True)
+
+
+
+
+
+
+
     #comment backdrop
     def commentLead(self):
         import getpass 
@@ -533,7 +598,12 @@ class MassivePanelPySide(QtWidgets.QWidget):
     def selectedNodesInContext(self):
         # iterates through all widgets to get the currently visible DAG to get selected Nodes within a group
         currentDAG = ''
-        allWidgets = QtGui.QApplication.instance().allWidgets()
+
+        if nuke.NUKE_VERSION_MAJOR < 11:
+            allWidgets = QtGui.QApplication.instance().allWidgets()
+        else:
+            allWidgets = QtWidgets.QApplication.instance().allWidgets()
+        
         for w in allWidgets:
             if 'DAG' in w.objectName() and w.isVisible():
                 currentDAG = w.windowTitle()
@@ -548,7 +618,10 @@ class MassivePanelPySide(QtWidgets.QWidget):
     def allNodesInContext(self):
         # iterates through all widgets to get the currently visible DAG to get selected Nodes within a group
         currentDAG = ''
-        allWidgets = QtGui.QApplication.instance().allWidgets()
+        if nuke.NUKE_VERSION_MAJOR < 11:
+            allWidgets = QtGui.QApplication.instance().allWidgets()
+        else:
+            allWidgets = QtWidgets.QApplication.instance().allWidgets()
         for w in allWidgets:
             if 'DAG' in w.objectName() and w.isVisible():
                 currentDAG = w.windowTitle()
