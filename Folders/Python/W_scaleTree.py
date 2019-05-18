@@ -8,7 +8,7 @@
 import nuke
 import os
 from nukescripts import panels
-
+from menu import UserDir
 #Choose between PySide and PySide2 based on Nuke version
 if nuke.NUKE_VERSION_MAJOR < 11:
 	from PySide import QtCore, QtGui, QtGui as QtWidgets
@@ -25,7 +25,7 @@ nukeMenu.addCommand('Edit/Node/W_scaleTree', 'W_scaleTree.scaleTreeFloatingPanel
 #----------------------------------------------------------------------------------------------------------
 
 #Location of the icons
-iconFolder = "/home/alexey/Dropbox/users/localRepo/Folders/Icons"
+iconFolder = UserDir+"/Folders/Icons"
 
 #----------------------------------------------------------------------------------------------------------
 

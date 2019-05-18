@@ -5,7 +5,8 @@ import os
 
 
 #######
-UserDir = "/home/alexey/Dropbox/users/underUserAlexey/"
+UserDir = os.path.dirname(__file__)
+
 n11,n10 = False,True
 if nuke.NUKE_VERSION_MAJOR > 10:
     n11 = True;n10 = False
@@ -91,6 +92,18 @@ nodegraphMenu.addCommand("MyCC", "myCC.myCC()","c")
 nodegraphMenu.addCommand('Paste To Selected', 'pasteToSelected.pasteToSelected()',"Alt+f5", index=10,icon="my.png")
 nodegraphMenu.addCommand('Stamp', 'stamps.goStamp()', "F8",icon = "PostageStamp.png")
 
+nodegraphMenu.addCommand("Filter/Channel Blur","nuke.createNode(\'ChannelBlur\')",icon = "Blur.png")
+nodegraphMenu.addCommand("Filter/Lens Kernel","nuke.createNode(\'LensKernel\')",icon = "Blur.png")
+nodegraphMenu.addCommand("Filter/Filler","nuke.createNode(\'Filler\')",icon = "Blur.png")
+nodegraphMenu.addCommand('Filter/EdgeScatter', "nuke.createNode(\"EdgeScatter\")",icon = "Defocus.png")
+nodegraphMenu.addCommand("Filter/VoronoiGradient","nuke.createNode(\'VoronoiGradient\')",icon = "Ramp.png")
+nodegraphMenu.addCommand('Transform/CardToTrack', "nuke.createNode(\"CardToTrack\")",icon = "Card.png")
+nodegraphMenu.addCommand("ErodeMini", "nuke.createNode(\'ErodeMini\')", "e", icon="Erode.png")
+nodegraphMenu.addCommand("Exponential Glow My", "nuke.createNode(\'Eglow\')","Shift+g",icon="Glow.png")
+nodegraphMenu.addCommand("Fresnel ", "nuke.createNode(\'Fresnel\')", icon="Wireframe.png")
+nodegraphMenu.addCommand("MotionBlurCurved ", "nuke.createNode(\'MotionBlurCurved\')",icon ="MotionBlur2D.png")
+nodegraphMenu.addCommand("PerspectiveGuide", "nuke.createNode('BB_PerspectiveGuide_1_1_0')", icon="BB_icon.png")
+nodegraphMenu.addCommand("Rough Edge-", "nuke.createNode(\'RoughEdgeMy\')")
 
 
 #on create stuff
@@ -133,14 +146,11 @@ def WildCardButton():
 nuke.addOnCreate(lambda: WildCardButton() , nodeClass="Cryptomatte")
 
 
-
-
-
 nuke.tprint("_"*100);nuke.tprint("my user is loaded");nuke.tprint("_"*100)
 
 #finished to bring stuff from underuser, have to start to dig into my trx user
 # have to deal with nuke files in the folder to see what i wanna use
-same with gizmos!!!
+#same with gizmos!!!
 
 
 

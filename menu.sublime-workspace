@@ -1,0 +1,350 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"dot",
+				"dotListX"
+			],
+			[
+				"dotLi",
+				"dotList"
+			],
+			[
+				"dotL",
+				"dotList"
+			],
+			[
+				"scree",
+				"screenHeight"
+			],
+			[
+				"selecte",
+				"selectedH"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"git commit",
+				"git: commit"
+			],
+			[
+				"git checkout h",
+				"git: checkout new branch"
+			],
+			[
+				"git branch",
+				"git: branch"
+			],
+			[
+				"git push",
+				"git: push"
+			],
+			[
+				"git pull",
+				"git: pull from branch"
+			],
+			[
+				"git add remote",
+				"git: remote add"
+			],
+			[
+				"git init",
+				"git: init"
+			],
+			[
+				"git status",
+				"git: status"
+			],
+			[
+				"git log",
+				"git: log"
+			],
+			[
+				"git checkout ho",
+				"git: checkout"
+			],
+			[
+				"git ",
+				"git: checkout"
+			],
+			[
+				"commi",
+				"git: commit including unstaged files"
+			],
+			[
+				"branch",
+				"git: branch"
+			],
+			[
+				"repo",
+				"github: open repo"
+			],
+			[
+				"add repo",
+				"Package Control: Add Repository"
+			],
+			[
+				"git add repo",
+				"Package Control: Add Repository"
+			],
+			[
+				"git repo",
+				"github: open repo"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"add rep",
+				"Package Control: Add Repository"
+			],
+			[
+				"mer",
+				"git: merge"
+			],
+			[
+				"git",
+				"git: commit"
+			],
+			[
+				"savv",
+				"Preferences: GitSavvy Settings"
+			],
+			[
+				"bra",
+				"git: push to branch name"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: In",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/alexey/.bashrc",
+		"/home/alexey/Dropbox/users/localRepo/.gitignore",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/soldiers.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/WildCard.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/Tracker_to_Pins.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/tempShare.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/templateShare.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/inverter.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/scriptStart.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/pasteToSelected.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/W_scaleTree.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/knobDefaults.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/Hidden.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/TrackToRoto.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/cornerMatrixToPaint.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/getTheCornerpinAsMatrix.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/channelHotbox.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/collectReads.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/KnobScripter/knob_scripter.py",
+		"/home/alexey/Dropbox/users/underUserAlexey/menu.py",
+		"/home/alexey/Dropbox/users/localRepo/init.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/copyFileName.py",
+		"/home/alexey/Dropbox/users/localRepo/some_hints.py",
+		"/home/alexey/Dropbox/users/localRepo/t",
+		"/home/alexey/.ssh/id_rsa.pub",
+		"/home/alexey/Dropbox/users/current/menu.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/KnobScripter-master/README.md",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/reviews.py",
+		"/home/alexey/Dropbox/users/localRepo/Folders/Python/saveImage.py",
+		"/home/alexey/Dropbox/users/current/createABC.py",
+		"/home/alexey/Dropbox/users/current/init.py",
+		"/home/alexey/Dropbox/users/underUserAlexey/Python/WildCard.py",
+		"/home/alexey/.nuke/KnobScripter_Snippets.txt",
+		"/home/alexey/Dropbox/users/current/Python/C2T.py",
+		"/home/alexey/.nuke/init.py",
+		"/home/alexey/Downloads/WriteNodeTRX (1).py",
+		"/home/alexey/Downloads/magicCarpet_v1.0/magicCarpet.gizmo",
+		"/home/alexey/Dropbox/users/current/precompDialog.py",
+		"/home/alexey/Dropbox/users/current/serverInstall.txt",
+		"/etc/X11/Xwrapper.config",
+		"/etc/X11/default-display-manager",
+		"/usr/sbin/lightdm-session",
+		"/home/alexey/Dropbox/users/current/testPanel.py",
+		"/home/alexey/Downloads/WriteNodeTRXCleaning.py",
+		"/home/alexey/Dropbox/users/current/writeCreateTest/WriteNodeTest.py",
+		"/home/alexey/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/alexey/Downloads/KnobScripter-develop/README.md",
+		"/home/alexey/.config/sublime-text-3/Packages/User/default_file_type.sublime-settings",
+		"/etc/X11/xorg.conf",
+		"/etc/X11/xinit/xinitrc",
+		"/usr/sbin/lightdm",
+		"/home/alexey/Dropbox/users/current/viewerButtons.py",
+		"/home/alexey/Downloads/deepC/menu.py",
+		"/home/alexey/Downloads/bbox.py",
+		"/home/alexey/Dropbox/users/current/Python/ED_Postage_v02_adrianTest2.py",
+		"/home/alexey/Dropbox/users/current/testTest.py",
+		"/home/alexey/Downloads/old/tempShare.py",
+		"/home/alexey/Dropbox/users/current/PostageTRX.py",
+		"/home/alexey/Dropbox/users/current/Mdev/mps2.py",
+		"/home/alexey/Dropbox/users/current/Ui_widget.py",
+		"/mnt/Work/PySideTutorial/01_Projects/LabelMeB.py",
+		"/home/alexey/Dropbox/users/current/Python/Dots.py",
+		"/home/alexey/Downloads/Spectrum_v2.0.gizmo",
+		"/usr/share/applications/mrViewer-v4.3.2.desktop",
+		"/home/alexey/Dropbox/users/current/Python/shuffle_Smart.py",
+		"/home/alexey/%F"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "menu.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
