@@ -1,0 +1,39 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Group {
+name Group3
+autolabel "nuke.thisNode()\['label'].value()"
+label "WorldP "
+note_font_size 20
+selected true
+xpos 6362
+ypos -2079
+}
+Input {
+inputs 0
+name Input1
+xpos -918
+ypos 450
+}
+Shuffle {
+green blue
+blue green
+alpha white
+name Flip_GB1
+label "\[value in] to \[value out]"
+xpos -918
+ypos 528
+}
+Expression {
+expr2 -b
+name Expression1
+xpos -918
+ypos 596
+}
+Output {
+name Output1
+xpos -918
+ypos 662
+}
+end_group

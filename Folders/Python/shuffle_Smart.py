@@ -302,8 +302,6 @@ def shuffleBlue():
         nuke.createNode("Blur")
 
 
-
-
 def shuffleNormal():
     import nuke
     import nukescripts

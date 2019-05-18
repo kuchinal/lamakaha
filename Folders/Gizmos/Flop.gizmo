@@ -1,0 +1,90 @@
+#! C:/Program Files/Nuke7.0v8/Nuke7.0.exe -nx
+version 7.0 v8
+Group {
+}
+Input {
+inputs 0
+name Input1
+xpos -198
+ypos -70
+}
+Mirror {
+Vertical true
+name Mirror1
+xpos -198
+ypos -46
+}
+Colorspace {
+colorspace_out sRGB
+name Colorspace1
+xpos -198
+ypos -22
+}
+Text {
+message FLOP
+font "\[python nuke.defaultFontPathname()]"
+yjustify top
+Transform 1
+box {0 0 {width} {height}}
+center {1024 584}
+color {1 0 0 1}
+name Text1
+selected true
+xpos -198
+ypos 2
+addUserKnob {20 User}
+addUserKnob {52 fontKnob T "### Font paths\n \nArialMac = '/Library/Fonts/Arial.ttf'\nArialBoldMac = '/Library/Fonts/Arial Bold.ttf'\nArialWin = 'C:/Windows/Fonts/arial.ttf'\nArialBoldWin = 'C:/Windows/Fonts/arialbd.ttf'\nArialLinux = '/usr/share/fonts/default/Type1/n019003l.pfb'\nArialBoldLinux = '/usr/share/fonts/default/Type1/n019004l.pfb'\n \nfontPaths = \[ArialMac, ArialBoldMac, ArialWin, ArialBoldWin, ArialLinux, ArialBoldLinux]\n \n### Collect information about your OS and set the right path for every font\n \nif sys.platform == 'darwin':\n    OS = 'Mac'\n    ArialPath = ArialMac\n    ArialBoldPath = ArialBoldMac\nelif sys.platform == 'win32':\n    OS = 'Windows'\n    ArialPath = ArialWin\n    ArialBoldPath = ArialBoldWin\nelse:\n    OS = 'Linux'\n    ArialPath = ArialLinux\n    ArialBoldPath = ArialBoldLinux\n \n \n### OS and font path check\n \n#print 'Current OS: '+OS\n#print 'Arial: '+ArialPath\n#print 'Arial Bold: '+ArialBoldPath\n \n \n### Functions\n \ndef setArial():\n    nuke.thisNode().knob(fontKnob).setValue(ArialPath)\ndef setArialBold():\n    nuke.thisNode().knob(fontKnob).setValue(ArialBoldPath)\n \n \n### Application\n \ncurrentFontKnob = nuke.thisNode().knob(fontKnob).value()\n \nif currentFontKnob in fontPaths or currentFontKnob is '':\n    if fontType == 'Arial':\n        setArial()\n    elif fontType == 'ArialBold':\n        setArialBold()\n    else:\n        nuke.message('Please check \"fontType\" variable')\nelse:\n    pass\n \n''')\n" +STARTLINE}
+}
+Text {
+message FLOP
+font "\[python nuke.defaultFontPathname()]"
+yjustify bottom
+Transform 1
+box {0 0 {width} {height}}
+center {1024 584}
+color {1 0 0 1}
+name Text2
+selected true
+xpos -198
+ypos 26
+addUserKnob {20 User}
+addUserKnob {52 fontKnob T "### Font paths\n \nArialMac = '/Library/Fonts/Arial.ttf'\nArialBoldMac = '/Library/Fonts/Arial Bold.ttf'\nArialWin = 'C:/Windows/Fonts/arial.ttf'\nArialBoldWin = 'C:/Windows/Fonts/arialbd.ttf'\nArialLinux = '/usr/share/fonts/default/Type1/n019003l.pfb'\nArialBoldLinux = '/usr/share/fonts/default/Type1/n019004l.pfb'\n \nfontPaths = \[ArialMac, ArialBoldMac, ArialWin, ArialBoldWin, ArialLinux, ArialBoldLinux]\n \n### Collect information about your OS and set the right path for every font\n \nif sys.platform == 'darwin':\n    OS = 'Mac'\n    ArialPath = ArialMac\n    ArialBoldPath = ArialBoldMac\nelif sys.platform == 'win32':\n    OS = 'Windows'\n    ArialPath = ArialWin\n    ArialBoldPath = ArialBoldWin\nelse:\n    OS = 'Linux'\n    ArialPath = ArialLinux\n    ArialBoldPath = ArialBoldLinux\n \n \n### OS and font path check\n \n#print 'Current OS: '+OS\n#print 'Arial: '+ArialPath\n#print 'Arial Bold: '+ArialBoldPath\n \n \n### Functions\n \ndef setArial():\n    nuke.thisNode().knob(fontKnob).setValue(ArialPath)\ndef setArialBold():\n    nuke.thisNode().knob(fontKnob).setValue(ArialBoldPath)\n \n \n### Application\n \ncurrentFontKnob = nuke.thisNode().knob(fontKnob).value()\n \nif currentFontKnob in fontPaths or currentFontKnob is '':\n    if fontType == 'Arial':\n        setArial()\n    elif fontType == 'ArialBold':\n        setArialBold()\n    else:\n        nuke.message('Please check \"fontType\" variable')\nelse:\n    pass\n \n''')\n" +STARTLINE}
+}
+Text {
+message FLOP
+font "\[python nuke.defaultFontPathname()]"
+xjustify right
+yjustify top
+Transform 1
+box {0 0 {width} {height}}
+center {1024 584}
+color {1 0 0 1}
+name Text3
+selected true
+xpos -198
+ypos 50
+addUserKnob {20 User}
+addUserKnob {52 fontKnob T "### Font paths\n \nArialMac = '/Library/Fonts/Arial.ttf'\nArialBoldMac = '/Library/Fonts/Arial Bold.ttf'\nArialWin = 'C:/Windows/Fonts/arial.ttf'\nArialBoldWin = 'C:/Windows/Fonts/arialbd.ttf'\nArialLinux = '/usr/share/fonts/default/Type1/n019003l.pfb'\nArialBoldLinux = '/usr/share/fonts/default/Type1/n019004l.pfb'\n \nfontPaths = \[ArialMac, ArialBoldMac, ArialWin, ArialBoldWin, ArialLinux, ArialBoldLinux]\n \n### Collect information about your OS and set the right path for every font\n \nif sys.platform == 'darwin':\n    OS = 'Mac'\n    ArialPath = ArialMac\n    ArialBoldPath = ArialBoldMac\nelif sys.platform == 'win32':\n    OS = 'Windows'\n    ArialPath = ArialWin\n    ArialBoldPath = ArialBoldWin\nelse:\n    OS = 'Linux'\n    ArialPath = ArialLinux\n    ArialBoldPath = ArialBoldLinux\n \n \n### OS and font path check\n \n#print 'Current OS: '+OS\n#print 'Arial: '+ArialPath\n#print 'Arial Bold: '+ArialBoldPath\n \n \n### Functions\n \ndef setArial():\n    nuke.thisNode().knob(fontKnob).setValue(ArialPath)\ndef setArialBold():\n    nuke.thisNode().knob(fontKnob).setValue(ArialBoldPath)\n \n \n### Application\n \ncurrentFontKnob = nuke.thisNode().knob(fontKnob).value()\n \nif currentFontKnob in fontPaths or currentFontKnob is '':\n    if fontType == 'Arial':\n        setArial()\n    elif fontType == 'ArialBold':\n        setArialBold()\n    else:\n        nuke.message('Please check \"fontType\" variable')\nelse:\n    pass\n \n''')\n" +STARTLINE}
+}
+Text {
+message FLOP
+font "\[python nuke.defaultFontPathname()]"
+xjustify right
+yjustify bottom
+Transform 1
+box {0 0 {width} {height}}
+center {1024 584}
+color {1 0 0 1}
+name Text4
+selected true
+xpos -198
+ypos 74
+addUserKnob {20 User}
+addUserKnob {52 fontKnob T "### Font paths\n \nArialMac = '/Library/Fonts/Arial.ttf'\nArialBoldMac = '/Library/Fonts/Arial Bold.ttf'\nArialWin = 'C:/Windows/Fonts/arial.ttf'\nArialBoldWin = 'C:/Windows/Fonts/arialbd.ttf'\nArialLinux = '/usr/share/fonts/default/Type1/n019003l.pfb'\nArialBoldLinux = '/usr/share/fonts/default/Type1/n019004l.pfb'\n \nfontPaths = \[ArialMac, ArialBoldMac, ArialWin, ArialBoldWin, ArialLinux, ArialBoldLinux]\n \n### Collect information about your OS and set the right path for every font\n \nif sys.platform == 'darwin':\n    OS = 'Mac'\n    ArialPath = ArialMac\n    ArialBoldPath = ArialBoldMac\nelif sys.platform == 'win32':\n    OS = 'Windows'\n    ArialPath = ArialWin\n    ArialBoldPath = ArialBoldWin\nelse:\n    OS = 'Linux'\n    ArialPath = ArialLinux\n    ArialBoldPath = ArialBoldLinux\n \n \n### OS and font path check\n \n#print 'Current OS: '+OS\n#print 'Arial: '+ArialPath\n#print 'Arial Bold: '+ArialBoldPath\n \n \n### Functions\n \ndef setArial():\n    nuke.thisNode().knob(fontKnob).setValue(ArialPath)\ndef setArialBold():\n    nuke.thisNode().knob(fontKnob).setValue(ArialBoldPath)\n \n \n### Application\n \ncurrentFontKnob = nuke.thisNode().knob(fontKnob).value()\n \nif currentFontKnob in fontPaths or currentFontKnob is '':\n    if fontType == 'Arial':\n        setArial()\n    elif fontType == 'ArialBold':\n        setArialBold()\n    else:\n        nuke.message('Please check \"fontType\" variable')\nelse:\n    pass\n \n''')\n" +STARTLINE}
+}
+Output {
+name Output1
+xpos -197
+ypos 140
+}
+end_group

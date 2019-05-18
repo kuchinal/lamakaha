@@ -1,9 +1,0 @@
-set cut_paste_input [stack 0]
-version 10.5 v5
-push $cut_paste_input
-LUTInvert {
- name LUTInvert1
- selected true
- xpos 186
- ypos 267
-}

@@ -1,0 +1,63 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Reformat {
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat10
+selected true
+xpos -4614
+ypos -1436
+}
+Reformat {
+type scale
+name Reformat11
+selected true
+xpos -4614
+ypos -1376
+}
+NoOp {
+name tile2
+selected true
+xpos -4614
+ypos -1321
+addUserKnob {20 User}
+addUserKnob {3 x}
+x 8
+addUserKnob {3 y}
+y 8
+}
+Reformat {
+type scale
+scale {{1/tile2.x} {1/tile2.y}}
+name Reformat12
+selected true
+xpos -4614
+ypos -1230
+}
+ScanlineRender {
+conservative_shader_sampling false
+projection_mode uv
+overscan {{tile2.width*(tile2.x-1)} {tile2.height*(tile2.y-1)}}
+motion_vectors_type distance
+name ScanlineRender3
+selected true
+xpos -4777
+ypos -1230
+}
+Crop {
+box {0 0 {width*tile2.x} {height*tile2.y}}
+reformat true
+crop false
+name Crop9
+selected true
+xpos -4777
+ypos -1181
+}
+Grid {
+number {{tile2.x} {tile2.y}}
+size 4
+name Grid1
+selected true
+xpos -4777
+ypos -1129
+}

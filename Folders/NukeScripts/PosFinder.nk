@@ -1,0 +1,706 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name PosFinder1
+ tile_color 0x5236ff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -578
+ ypos 105
+ addUserKnob {20 User l "Position Finder"}
+ addUserKnob {41 picker l "" +STARTLINE T NoOp1.picker}
+ addUserKnob {22 REF l "Set ref frame" T "nuke.toNode(\"Switch1\")\['disable'].setValue(0)\nn = nuke.thisNode()\ncam=n.input(1)\nclas = cam.Class()\nif \"Camera\" in clas:\n\tnuke.toNode(\"NoOp1\")\['pick'].execute()\n\tn\['refFrame'].setValue(nuke.frame())\n\t#look=nuke.toNode('look_at_Axis')\n\t#nuke.show((look),True)\n\t#look.setSelected(True)\n\tnuke.toNode(\"Switch\")\['which'].setValue(0)\n\tr=nuke.toNode(\"Perspective\")\n\tr.setSelected(False)\n\tr.hideControlPanel()\n\tr\['rotate'].setValue(0)\n\tr\['translate'].setValue(0)\n\tr\['scaling'].setValue(1)\n\tr\['uniform_scale'].setValue(1)\n\nelse:\n\tnuke.message(\"please connect Camera node straight to the node, do not use nodes in between, thank you for your collaboration\")" +STARTLINE}
+ addUserKnob {3 refFrame l "<font color=\"Gray\">reference frame" -STARTLINE}
+ refFrame 1001
+ addUserKnob {26 ""}
+ addUserKnob {7 Zfind l "Find Z" R -100 100}
+ Zfind 1
+ addUserKnob {26 ""}
+ addUserKnob {22 Adjust l "Happy with position" T "def consolidateAnimatedNodeTransforms():\n    # This is based on Ivan B's consolidateNodeTransforms().\n    # Added support for animated Axis/Camera nodes. Also, if it's\n    # a Camera being concatenated, then projection settings get copied.\n    # -Ean C 24/Feb/2011\n    import math\n    import nuke\n    axisNode = nuke.toNode('Z_finder')\n    m = nuke.math.Matrix4()\n\n    nuke.toNode(\"Switch\")\['which'].setValue(1)\n    n = nuke.toNode('Perspective')\n    n\['scaling'].setExpression('curve')\n    n\['rotate'].setExpression('curve')\n    n\['translate'].setExpression('curve')\n\n    if axisNode.Class() == 'Camera2':\n        # If this is a Camera node, copy over important Projection settings.\n        camNode = axisNode\n\n        # Get the current values\n        focal_v = camNode\['focal'].toScript()\n        haperture_v = camNode\['haperture'].toScript()\n        vaperture_v = camNode\['vaperture'].toScript()\n        near_v = camNode\['near'].toScript()\n        far_v = camNode\['far'].toScript()\n        win_translate_v = camNode\['win_translate'].toScript()\n        win_scale_v = camNode\['win_scale'].toScript()\n        winroll_v = camNode\['winroll'].toScript()\n        focal_point_v = camNode\['focal_point'].toScript()\n\n        # Copy them over to new Camera\n        n\['focal'].fromScript(focal_v)\n        n\['haperture'].fromScript(haperture_v)\n        n\['vaperture'].fromScript(vaperture_v)\n        n\['near'].fromScript(near_v)\n        n\['far'].fromScript(far_v)\n        n\['win_translate'].fromScript(win_translate_v)\n        n\['win_scale'].fromScript(win_scale_v)\n        n\['winroll'].fromScript(winroll_v)\n        n\['focal_point'].fromScript(focal_point_v)\n\n    first_frame_v = nuke.root()\['first_frame'].value()\n    last_frame_v = nuke.root()\['last_frame'].value()\n\n    scale_anim = n\['scaling'].animations()\n    rotate_anim = n\['rotate'].animations()\n    translate_anim = n\['translate'].animations()\n\n    for i in range(int(first_frame_v), int(last_frame_v+1)):\n\n        k = axisNode\['world_matrix']\n        k_time_aware = axisNode\['world_matrix'].getValueAt(i)\n\n\n        for y in range(k.height()):\n            for x in range(k.width()):\n                m\[x+(y*k.width())] = k_time_aware\[y + k.width()*x]\n\n\n            transM =nuke.math.Matrix4(m)\n            transM.translationOnly()\n            rotM = nuke.math.Matrix4(m)\n            rotM.rotationOnly()\n            scaleM = nuke.math.Matrix4(m)\n            scaleM.scaleOnly()\n\n            scale = (scaleM.xAxis().x, scaleM.yAxis().y, scaleM.zAxis().z)\n\n            rot = rotM.rotationsZXY()\n            rotDegrees = ( math.degrees(rot\[0]), math.degrees(rot\[1]), math.degrees(rot\[2]) )\n\n\n            trans = (transM\[12], transM\[13], transM\[14])\n\n            for s in range(3):\n                scale_anim\[s].setKey(i, scale\[s])\n                rotate_anim\[s].setKey(i, rotDegrees\[s])\n                translate_anim\[s].setKey(i, trans\[s])\n    n\['translate'].clearAnimated()\n    n\['rotate'].clearAnimated()\n    n\['scaling'].clearAnimated()\n    n\['uniform_scale'].setValue(nuke.toNode(\"Card1\")\['uniform_scale'].value()/10)\n    #nuke.show((n), True)\n    n.setSelected(True)\n    r=nuke.toNode(\"look_at_Axis\")\n    r.setSelected(False)\n    r.hideControlPanel()\t\t\t\nconsolidateAnimatedNodeTransforms()\n" +STARTLINE}
+ addUserKnob {41 rotate l "Adjust rotate" T Perspective.rotate}
+ addUserKnob {41 scaling l "Adjust scale" T Perspective.scaling}
+ addUserKnob {41 uniform_scale l scale -STARTLINE T Perspective.uniform_scale}
+ addUserKnob {41 translate l "Adjust translate" T Perspective.translate}
+ addUserKnob {26 ""}
+ addUserKnob {22 C2T l "<b>Card to Track me baby!" T "a=nuke.thisNode()\na.begin()\n\nx=int(a\['xpos'].value())\ny=int(a\['ypos'].value())\np = nuke.toNode(\"Perspective\")\nt=p\['translate'].value()\nprint t\nr=p\['rotate'].value()\ns=p\['scaling'].value()\nus=p\['uniform_scale'].value()\n\na.end()\nn = nuke.nodes.Card2()\nn.setXYpos(x,y+100)\nn\['translate'].setValue(t)\nn\['rotate'].setValue(r)\nn\['scaling'].setValue(s)\nn\['uniform_scale'].setValue(us)\n\n\nfor node in nuke.allNodes():\n    node.setSelected(False)\na.input(1).setSelected(True)\na.input(0).setSelected(True)\nn.setSelected(True)\n\nwith nuke.Root(): \n    C2T.C2T(True)\n\n" +STARTLINE}
+ addUserKnob {20 Help}
+ addUserKnob {20 Credits -STARTLINE}
+}
+ Input {
+  inputs 0
+  name Camera
+  xpos -626
+  ypos 384
+  number 1
+ }
+ Dot {
+  name Dot2
+  xpos -592
+  ypos 911
+ }
+set Nc542b30 [stack 0]
+ Axis {
+  inputs 0
+  name Perspective
+  selected true
+  xpos -530
+  ypos 537
+ }
+ Axis {
+  inputs 0
+  translate {3349.243896 -551.4370117 -2575.087646}
+  rotate {{degrees(atan((parent.input1.translate.y(ref)-translate.y)/sqrt(pow2(sqrt(pow2(parent.input1.translate.x(ref)-translate.x)+pow2(parent.input1.translate.z(ref)-translate.z))))))} {"parent.input1.translate.x(ref)-translate.x >= 0 ? 270-degrees(atan((parent.input1.translate.z(ref)-translate.z)/(parent.input1.translate.x(ref)-translate.x))): -degrees(atan((parent.input1.translate.z(ref)-translate.z)/(parent.input1.translate.x(ref)-translate.x)))-270"} {curve}}
+  name look_at_Axis
+  xpos -417
+  ypos 430
+  addUserKnob {20 User}
+  addUserKnob {3 ref}
+  ref {{parent.refFrame}}
+ }
+ Axis {
+  display solid+wireframe
+  translate {0 0 {parent.Zfind}}
+  name Z_finder
+  xpos -417
+  ypos 496
+ }
+ Switch {
+  inputs 2
+  which 1
+  name Switch
+  label "\[value which]"
+  xpos -427
+  ypos 627
+ }
+ Dot {
+  name Dot1
+  xpos -393
+  ypos 694
+ }
+ Constant {
+  inputs 0
+  format "512 512 0 0 512 512 1 square_512"
+  name Constant2
+  tile_color 0xff
+  xpos -229
+  ypos 478
+  postage_stamp false
+ }
+ Grid {
+  name Grid1
+  xpos -229
+  ypos 515
+ }
+ Roto {
+  cliptype none
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t 0 0 0
+     {=input0.width/2 0}
+     {=input0.height/2 0}    0 0 0 0 x3ecccccd x3ecccccd}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse2 512 bezier
+     {{cc
+       {f 8192}
+       {px x447b4000
+        {xc004a501 0}
+        {xbb8c0001 xc0712e01}
+        {x4004a401 0}
+        {0 xc0054201}
+        {x406fe301 x3ae00001}
+        {0 x40054601}
+        {x4004a401 0}
+        {xbb8c0001 x40716a01}
+        {xc004a501 0}
+        {0 x40054601}
+        {xc0707201 x3ae00001}
+        {0 xc0054201}}}
+      {cc
+       {f 8192}
+       {px x447b4000
+        {xc004a501 0}
+        {0 0}
+        {x4004a401 0}
+        {0 xc0054201}
+        {0 0}
+        {0 x40054601}
+        {x4004a401 0}
+        {0 0}
+        {xc004a501 0}
+        {0 x40054601}
+        {0 0}
+        {0 xc0054201}}}}
+     {tx x447b4000 x437feb84 x437ff333}
+     {a osw 1 osf 0 str 1 spx x44968000 spy x4461c000 sb 1 ltn x447b4000 ltm x447b4000 tt x40e00000}}
+    {curvegroup RectangleCusped10 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43cdd400 x441f47e2}
+        {}
+        {}
+        {x43cdd4b4 x442016b4}
+        {}
+        {}
+        {x44586a4c x441fe4ea}
+        {}
+        {}
+        {x445869f2 x441f1615}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped9 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x441f3342 x44585663}
+        {}
+        {}
+        {x44200218 x44585663}
+        {}
+        {}
+        {x44200218 x43cdacc8}
+        {}
+        {}
+        {x441f3342 x43cdacc8}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped8 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x441f08c9 xc3cda4ff}
+        {}
+        {}
+        {x441fd79d xc3cda4ff}
+        {}
+        {}
+        {x441fd79d xc458527f}
+        {}
+        {}
+        {x441f08c9 xc458527f}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped7 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43cd7f0a xc41fe101}
+        {}
+        {}
+        {x43cd7fc1 xc41f122f}
+        {}
+        {}
+        {x44583fd4 xc41f43f9}
+        {}
+        {}
+        {x44583f78 xc42012cd}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped6 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {xc45835ce xc41fd3ac}
+        {}
+        {}
+        {xc4583572 xc41f04da}
+        {}
+        {}
+        {xc3cd6afe xc41f36a4}
+        {}
+        {}
+        {xc3cd6bb5 xc4200578}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped5 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {xc41fec8a xc3cd8a54}
+        {}
+        {}
+        {xc41f1db6 xc3cd8a54}
+        {}
+        {}
+        {xc41f1db6 xc458452a}
+        {}
+        {}
+        {xc41fec8a xc458452a}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped4 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {xc41fd736 x4458402b}
+        {}
+        {}
+        {xc41f0862 x4458402b}
+        {}
+        {}
+        {xc41f0862 x43cd8056}
+        {}
+        {}
+        {xc41fd736 x43cd8056}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped3 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {xc458207a x441f31a9}
+        {}
+        {}
+        {xc458201e x4420007d}
+        {}
+        {}
+        {xc3cd4056 x441fceb1}
+        {}
+        {}
+        {xc3cd410c x441effdd}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc0b24061}
+        {xbec00000 xc12df851}
+        {x40b24021}
+        {0 xc0bcd941}
+        {x411b6051 xbe400800}
+        {0 x40bcd921}
+        {x40b24021}
+        {xbec00000 x4127f851}
+        {xc0b24061}
+        {0 x40bcd921}
+        {xc1276031 xbe400800}
+        {0 xc0bcd941}}}
+      {cc
+       {f 8192}
+       {p
+        {xc0b24061}
+        {}
+        {x40b24021}
+        {0 xc0bcd941}
+        {}
+        {0 x40bcd921}
+        {x40b24021}
+        {}
+        {xc0b24061}
+        {0 x40bcd921}
+        {}
+        {0 xc0bcd941}}}}
+     {t x437fd999 x437feccc}
+     {a r 0 g 0 b 0 a 0 ao 1 osw 1 osf 0 str 1 spx x44968000 spy x4461c000 sb 1 ltn x447cc000 ltm x447cc000 tt x40e00000}}
+    {curvegroup RectangleCusped2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {xc36301e0 xbf9cb000}
+        {}
+        {}
+        {xc3630070 x40007c00}
+        {}
+        {}
+        {x4362ff60 x3f9d6000}
+        {}
+        {}
+        {x4362fdf0 xc0002400}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {xbfee6800 x436300a8}
+        {}
+        {}
+        {x3faf4000 x436300a8}
+        {}
+        {}
+        {x3faf4000 xc362ff58}
+        {}
+        {}
+        {xbfee6800 xc362ff58}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t 0}
+     {a g 0 b 0 osw 1 osf 0 str 1 spx x4506f000 spy x448e0000 sb 1 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_autokey false
+  toolbar_brush_hardness 0.200000003
+  toolbar_openspline_width 1
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1204 903}
+  colorOverlay {0 0 0 0}
+  lifetime_type "all frames"
+  lifetime_start 1005
+  lifetime_end 1005
+  motionblur_shutter_offset_type centred
+  openspline_width 1
+  source_black_outside true
+  name Roto1
+  gl_color 0x666363ff
+  xpos -229
+  ypos 549
+ }
+ Crop {
+  box {0 0 512 512}
+  name Crop1
+  xpos -229
+  ypos 575
+ }
+ Card2 {
+  image_aspect false
+  rows 4
+  columns 4
+  uniform_scale {{parent.Perspective.uniform_scale}}
+  control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+  name Card1
+  xpos -229
+  ypos 599
+  addUserKnob {20 User}
+  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ }
+push 0
+ Switch {
+  inputs 2
+  which 1
+  name Switch1
+  label "\[value which]"
+  xpos -229
+  ypos 639
+ }
+ TransformGeo {
+  inputs 2
+  name TransformGeo1
+  xpos -229
+  ypos 690
+ }
+ Input {
+  inputs 0
+  name BG
+  xpos -83
+  ypos 175
+ }
+ Dot {
+  name Dot4
+  xpos -49
+  ypos 245
+ }
+set N9952860 [stack 0]
+ Dot {
+  name Dot3
+  xpos -49
+  ypos 911
+ }
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type distance
+  name ScanlineRender1
+  xpos -229
+  ypos 907
+ }
+ Output {
+  name Output1
+  xpos -229
+  ypos 1004
+ }
+push $Nc542b30
+ Axis {
+  inputs 0
+  translate {{parent.input1.translate} {parent.input1.translate} {parent.input1.translate}}
+  rotate {{parent.input1.rotate} {parent.input1.rotate} {parent.input1.rotate}}
+  name Axis1
+  xpos -842
+  ypos 810
+ }
+ ColorBars {
+  inputs 0
+  name ColorBars1
+  xpos -973
+  ypos 595
+ }
+ Card2 {
+  rows 4
+  columns 4
+  z 100
+  lens_in_focal {{parent.input1.focal}}
+  lens_in_haperture {{parent.input1.haperture}}
+  control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+  name Card2
+  xpos -973
+  ypos 774
+  addUserKnob {20 User}
+  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ }
+ TransformGeo {
+  inputs 2
+  name TransformGeo2
+  xpos -973
+  ypos 830
+ }
+push $N9952860
+ Dot {
+  name Dot5
+  xpos -1119
+  ypos 245
+ }
+ Dot {
+  name Dot6
+  xpos -1119
+  ypos 911
+ }
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type distance
+  output_shader_vectors true
+  P_channel rgb
+  name ScanlineRender2
+  xpos -973
+  ypos 907
+ }
+set Nc5bffd0 [stack 0]
+ NoOp {
+  name NoOp1
+  gl_color 0xffff
+  xpos -973
+  ypos 982
+  addUserKnob {20 User}
+  addUserKnob {22 pick T "a=nuke.toNode(\"NoOp1\")\nr=nuke.sample(a,\"red\",a\['picker'].value(0),a\['picker'].value(1),1,1)\ng=nuke.sample(a,\"green\",a\['picker'].value(0),a\['picker'].value(1),1,1)\nb=nuke.sample(a,\"blue\",a\['picker'].value(0),a\['picker'].value(1),1,1)\n#nuke.tprint(r)\nnuke.toNode('look_at_Axis')\['translate'].setValue(\[r,g,b])" +STARTLINE}
+  addUserKnob {12 picker}
+ }
+push $Nc5bffd0
+ Viewer {
+  frame_range 1027-1037
+  viewerProcess "sRGB (default)"
+  input_process false
+  name Viewer1
+  xpos -150
+  ypos -9
+  hide_input true
+ }
+end_group

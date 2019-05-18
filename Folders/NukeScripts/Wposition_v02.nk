@@ -1,0 +1,52 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Group {
+name Group3
+autolabel "nuke.thisNode()\['label'].value()"
+label "WorldP "
+note_font_size 20
+selected true
+xpos -7766
+ypos -3390
+}
+Input {
+inputs 0
+name Input1
+xpos -918
+ypos 450
+}
+add_layer {pntWorldNoMB pntWorldNoMB.red pntWorldNoMB.green pntWorldNoMB.blue pntWorldNoMB.alpha}
+Shuffle {
+in pntWorldNoMB
+name WorldP1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0xff
+label vrayWorldP
+note_font_size 20
+xpos -918
+ypos 490
+disable true
+}
+Shuffle {
+green blue
+blue green
+alpha white
+name Flip_GB1
+label "\[value in] to \[value out]"
+xpos -918
+ypos 526
+}
+Expression {
+expr2 -b
+name Expression1
+xpos -918
+ypos 560
+}
+Output {
+name Output1
+selected true
+xpos -918
+ypos 604
+}
+end_group

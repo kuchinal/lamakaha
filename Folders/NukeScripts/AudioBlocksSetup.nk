@@ -1,0 +1,1103 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Transform {
+translate {{audio.translate.x(frame-(audio.delay+(0+14.0)*1.0))/(1+14.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+14.0)*1.0))/(1+14.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform15
+selected true
+xpos 13246
+ypos 1200
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+3.0)*1.0))/(1+3.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+3.0)*1.0))/(1+3.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform26
+selected true
+xpos 14456
+ypos 1205
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+2.0)*1.0))/(1+2.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+2.0)*1.0))/(1+2.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform27
+selected true
+xpos 14566
+ypos 1205
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+1)*1))/(1+1)*1} {audio.translate.x(frame-(audio.delay+(0+1)*1))/(1+1)*1}}
+center {1075 567}
+shutteroffset centred
+name Transform28
+selected true
+xpos 14676
+ypos 1205
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+2.0)*1.0))/(1+0.2)*1.0} {audio.translate.x(frame-(audio.delay+(0+2.0)*1.0))/(1+0.2)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform30
+selected true
+xpos 15361
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+3.0)*1.0))/(1+0.3)*1.0} {audio.translate.x(frame-(audio.delay+(0+3.0)*1.0))/(1+0.3)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform31
+selected true
+xpos 15471
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+4.0)*1.0))/(1+0.4)*1.0} {audio.translate.x(frame-(audio.delay+(0+4.0)*1.0))/(1+0.4)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform32
+selected true
+xpos 15581
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+5.0)*1.0))/(1+0.5)*1.0} {audio.translate.x(frame-(audio.delay+(0+5.0)*1.0))/(1+0.5)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform33
+selected true
+xpos 15691
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+6.0)*1.0))/(1+0.6)*1.0} {audio.translate.x(frame-(audio.delay+(0+6.0)*1.0))/(1+0.6)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform34
+selected true
+xpos 15801
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+7.0)*1.0))/(1+0.7)*1.0} {audio.translate.x(frame-(audio.delay+(0+7.0)*1.0))/(1+0.7)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform35
+selected true
+xpos 15911
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+8.0)*1.0))/(1+0.8)*1.0} {audio.translate.x(frame-(audio.delay+(0+8.0)*1.0))/(1+0.8)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform36
+selected true
+xpos 16021
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+9.0)*1.0))/(1+0.9)*1.0} {audio.translate.x(frame-(audio.delay+(0+9.0)*1.0))/(1+0.9)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform37
+selected true
+xpos 16131
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+10.0)*1.0))/(1+1.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+10.0)*1.0))/(1+1.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform38
+selected true
+xpos 16241
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+11.0)*1.0))/(1+1.1)*1.0} {audio.translate.x(frame-(audio.delay+(0+11.0)*1.0))/(1+1.1)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform39
+selected true
+xpos 16371
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+12.0)*1.0))/(1+1.2)*1.0} {audio.translate.x(frame-(audio.delay+(0+12.0)*1.0))/(1+1.2)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform40
+selected true
+xpos 16481
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+13.0)*1.0))/(1+1.3)*1.0} {audio.translate.x(frame-(audio.delay+(0+13.0)*1.0))/(1+1.3)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform41
+selected true
+xpos 16591
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+14.0)*1.0))/(1+1.4)*1.0} {audio.translate.x(frame-(audio.delay+(0+14.0)*1.0))/(1+1.4)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform42
+selected true
+xpos 16701
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+15.0)*1.0))/(1+1.5)*1.0} {audio.translate.x(frame-(audio.delay+(0+15.0)*1.0))/(1+1.5)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform43
+selected true
+xpos 16811
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+16.0)*1.0))/(1+1.6)*1.0} {audio.translate.x(frame-(audio.delay+(0+16.0)*1.0))/(1+1.6)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform44
+selected true
+xpos 16921
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+17.0)*1.0))/(1+1.7)*1.0} {audio.translate.x(frame-(audio.delay+(0+17.0)*1.0))/(1+1.7)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform45
+selected true
+xpos 17031
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+18.0)*1.0))/(1+1.8)*1.0} {audio.translate.x(frame-(audio.delay+(0+18.0)*1.0))/(1+1.8)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform46
+selected true
+xpos 17141
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+19.0)*1.0))/(1+1.9)*1.0} {audio.translate.x(frame-(audio.delay+(0+19.0)*1.0))/(1+1.9)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform47
+selected true
+xpos 17251
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+21.0)*1.0))/(1+2.1)*1.0} {audio.translate.x(frame-(audio.delay+(0+21.0)*1.0))/(1+2.1)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform49
+selected true
+xpos 17459
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+22.0)*1.0))/(1+2.2)*1.0} {audio.translate.x(frame-(audio.delay+(0+22.0)*1.0))/(1+2.2)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform50
+selected true
+xpos 17557
+ypos 1208
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+23.0)*1.0))/(1+2.3)*1.0} {audio.translate.x(frame-(audio.delay+(0+23.0)*1.0))/(1+2.3)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform51
+selected true
+xpos 17663
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+24.0)*1.0))/(1+2.4)*1.0} {audio.translate.x(frame-(audio.delay+(0+24.0)*1.0))/(1+2.4)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform52
+selected true
+xpos 17763
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+21.0)*1.0))/(1+21.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+21.0)*1.0))/(1+21.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform8
+selected true
+xpos 12460
+ypos 1196
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+20.0)*1.0))/(1+20.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+20.0)*1.0))/(1+20.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform9
+selected true
+xpos 12571
+ypos 1195
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+19.0)*1.0))/(1+19.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+19.0)*1.0))/(1+19.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform10
+selected true
+xpos 12699
+ypos 1195
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+17.0)*1.0))/(1+17.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+17.0)*1.0))/(1+17.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform11
+selected true
+xpos 12800
+ypos 1199
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+18.0)*1.0))/(1+18.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+18.0)*1.0))/(1+18.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform12
+selected true
+xpos 12917
+ypos 1200
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+16.0)*1.0))/(1+16.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+16.0)*1.0))/(1+16.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform13
+selected true
+xpos 13027
+ypos 1200
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+15.0)*1.0))/(1+15.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+15.0)*1.0))/(1+15.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform14
+selected true
+xpos 13140
+ypos 1199
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+13.0)*1.0))/(1+13.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+13.0)*1.0))/(1+13.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform16
+selected true
+xpos 13363
+ypos 1200
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+12.0)*1.0))/(1+12.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+12.0)*1.0))/(1+12.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform17
+selected true
+xpos 13465
+ypos 1204
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+11.0)*1.0))/(1+11.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+11.0)*1.0))/(1+11.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform18
+selected true
+xpos 13582
+ypos 1202
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+10.0)*1.0))/(1+10.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+10.0)*1.0))/(1+10.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform19
+selected true
+xpos 13690
+ypos 1204
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+9.0)*1.0))/(1+9.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+9.0)*1.0))/(1+9.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform20
+selected true
+xpos 13795
+ypos 1205
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+7.0)*1.0))/(1+7.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+7.0)*1.0))/(1+7.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform21
+selected true
+xpos 13904
+ypos 1204
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+8.0)*1.0))/(1+8.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+8.0)*1.0))/(1+8.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform22
+selected true
+xpos 14022
+ypos 1205
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+6.0)*1.0))/(1+6.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+6.0)*1.0))/(1+6.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform23
+selected true
+xpos 14129
+ypos 1205
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+5.0)*1.0))/(1+5.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+5.0)*1.0))/(1+5.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform24
+selected true
+xpos 14238
+ypos 1204
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+20.0)*1.0))/(1+2.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+20.0)*1.0))/(1+2.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform48
+selected true
+xpos 17362
+ypos 1209
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+4.0)*1.0))/(1+4.0)*1.0} {audio.translate.x(frame-(audio.delay+(0+4.0)*1.0))/(1+4.0)*1.0}}
+center {1075 567}
+shutteroffset centred
+name Transform25
+selected true
+xpos 14353
+ypos 1205
+}
+Transform {
+inputs 0
+translate {{audio.translate.x(frame-(audio.delay+(0+1)*1))/(1+.1)*1} {audio.translate.x(frame-(audio.delay+(0+1)*1))/(1+.1)*1}}
+center {1075 567}
+shutteroffset centred
+name Transform29
+selected true
+xpos 15251
+ypos 1206
+}
+Transform {
+inputs 0
+translate {{curve K l x877 -374.6544373 x878.0002441 -513.4552427 x879.0005493 -220.4924174 x880.0007935 -536.9765008 x881.0010986 -240.3338002 x882.0013428 -556.3519256 x883.0016479 -500.0447412 x884.0018921 -471.6161703 x885.0021973 -468.6971652 x886.0024414 -553.4329205 x887.0027466 -186.0978696 x888.0029907 -578.1387024 x889.0032959 -555.3789239 x890.00354 -588.3340679 -526.1042645 x892.0040894 -555.590446 x893.0043335 -771.5122109 x894.0046387 -207.1238175 x895.0048828 -600.8138721 x896.005188 -163.7181492 x897.0054321 -525.9773513 x898.0057373 -536.9765008 x899.0059814 -546.3680822 x900.0062866 -632.75371 x901.0065308 -601.3215251 -610.0785403 x903.0070801 -557.6633626 x904.0073242 -567.0126397 x905.0076294 -565.5319849 x906.0078735 -514.1321134 x907.0081787 -547.8910414 x908.0084229 -556.8172742 x909.008728 -200.1433712 x910.0089722 -547.0872574 x911.0092773 -156.1877351 x912.0095215 -556.6057521 x913.0098267 -633.1344497 x914.0100708 -543.7875125 -544.4220789 x916.0106201 -178.525151 x917.0108643 -220.9154822 x918.0111694 -271.80925 x919.0114136 -272.4015325 x920.0117188 -254.0408561 x921.0119629 -514.2590267 x922.0122681 -586.8534131 x923.0125122 -163.591236 x924.0128174 -543.1106418 x925.0130615 -601.9983959 -502.9214418 x927.0136108 -513.4552427 x928.013855 -186.4363256 x929.0141602 -623.4467373 x930.0144043 -537.0611096 x931.0147095 -199.8895446 x932.0149536 -558.0864068 x933.0152588 -515.401246 x934.0155029 -741.7298985 x935.0158081 -207.0815131 x936.0160522 -153.6917122 x937.0163574 -568.958643 x938.0166016 -514.8089841 -565.8704203 x940.0171509 -523.8621302 x941.017395 -250.4025623 x942.0177002 -525.850438 x943.0179443 -545.5219938 x944.0182495 -229.7150703 x945.0184937 -293.4697745 x946.0187988 -535.6650637 x947.019043 -479.8655324 x948.0193481 -630.7654022 x949.0195923 -252.390932 -481.7692313 x951.0201416 -478.7656174 x952.0203857 -576.5734388 x953.0206909 -240.2491914 x954.0209351 -287.6738933 x955.0212402 -558.5094511 x956.0214844 -493.5298604 x957.0217896 -208.0122414 x958.0220337 -231.2803752 x959.0223389 -568.2394679 x960.022583 -489.4263315 x961.0228882 -514.5128532 x962.0231323 -282.6818167 -460.1516722 x964.0236816 -438.9994617 x965.0239258 -132.0311877 x966.024231 -283.9509906 x967.0244751 -264.9557272 x968.0247803 -504.4020966 x969.0250244 -448.0103033 x970.0253296 -467.5549458 x971.0255737 -482.3614932 x972.0258789 -251.5448126 x973.026123 -482.5307109 -461.2938915 x975.0266724 -231.0688531 x976.0269165 -543.7029037 x977.0272217 -511.9322835 x978.0274658 -250.4025623 x979.027771 -525.9773513 x980.0280151 -207.3776544 x981.0283203 -523.735217 x982.0285645 -542.7722064 x983.0288696 -112.3590122 x984.0291138 -500.8908296 -536.2150212 x986.0296631 -536.8918919 x987.0299072 -208.9429593 x988.0302124 -261.3597378 x989.0304565 -554.9558797 x990.0307617 -143.5383413 x991.0310059 -553.8559647 x992.031311 -601.2792207 x993.0315552 -652.4252657 x994.0318604 -218.5040579 x995.0321045 -536.7226742 x996.0324097 -500.5946987 x997.0326538 -556.9441875 -250.741008 x999.0332031 -547.3833883 x1000.033447 -252.856291 x1001.033752 -586.8534131 x1002.033997 -152.7609737 x1003.034302 -103.7709669 x1004.034546 -502.7099197 x1005.034851 -525.9350469 x1006.035095 -544.0836435 x1007.0354 -263.0942707 x1008.035645 -212.0735897 x1009.03595 -460.4054987 x1010.036194 -200.1856756 -98.82118434 x1012.036743 -102.9671622 x1013.036987 -143.4114074 x1014.037292 -136.0502109 x1015.037537 -165.410388 x1016.037842 -219.4770803 x1017.038086 -536.6380654 x1018.038391 -282.9356535 x1019.038635 -536.5111521 x1020.03894 -255.0138784 x1021.039185 -272.8668915 -482.6999286 x1023.039734 -468.9509917 -500.9754385 x1025.040283 -515.4435504 -131.1850579 73.23614272 x1028.041138 147.7365004 x1029.041382 461.5602801 451.2376709 384.4792289 x1032.042236 399.1170543 x1033.04248 -903.7981355 17.13874529 -167.821802 -240.4607135 x1037.043579 -168.160258 x1038.043823 -535.5804549 -209.7044698 -239.3607675 x1041.044678 -240.9683872 x1042.044922 -513.5398515 -239.6569088 -564.9397231 x1045.045776 -631.8230127 x1046.046021 -76.86452882 52.50635672 39.47618192 83.64336079 x1050.047119 72.60153509 x1051.047363 139.0638049 -881.9267498 27.63057221 x1054.048218 -654.8789222 x1055.048462 -654.7097045 -558.6363643 -264.5326727 -488.6225475 x1059.049561 -576.3196123 x1060.049805 -546.8757353 -556.3519256 -557.7902759 x1063.050659 -229.9688969 x1064.050903 -598.9524776 -143.4537118 -601.0253942 x1067.051758 -577.5887449 x1068.052002 -555.7596637 -565.1089407 -535.6650637 -611.8976304 x1072.053101 -501.7792225 x1073.053345 -142.6499072 -143.1575809 -135.5425579 x1076.054199 -588.6725032 x1077.054443 -564.8551142 -577.5887449 -132.1581009 x1080.055298 -566.9280308 x1081.055542 -198.6203707 -240.7568547 -654.6250956 179.7196342 x1085.056641 483.5169357 x1086.056885 507.8427214 -1161.939713 182.554113 x1089.057739 267.419343 x1090.057983 181.2426346 -4.521779279 39.89922613 x1093.058838 -610.8823243 x1094.059082 -27.36682764 -675.7773061 -55.33091751 -174.7176498 x1098.060181 -699.2139554 x1099.060425 -265.7595319 -545.0566452 -232.3803315 x1102.061279 -482.5307109 x1103.061523 -222.100037 -502.7099197 -511.8899791 x1106.062378 -580.0000969 x1107.062622 -599.9677837 -206.8276763 -177.0867594 -612.6168055 x1111.063721 -557.7479715 x1112.063965 -578.0117891 -501.7792225 -503.7675302 x1115.064819 -533.0421896 x1116.065063 -565.9550292 -230.053516 -252.4755409 -557.7479715 x1120.066162 -239.7415177 x1121.066406 -217.700243 -210.0429155 -482.6576242 x1124.067261 -480.838534 x1125.067505 -557.4518405 -284.4163496 -467.6395547 -501.3561782 x1129.068604 -534.9458885 x1130.068848 -229.5035379 -145.2305595 -656.1903592 x1133.069702 -742.8298135 x1134.069946 -12.64447599 -699.5523908 -687.1571954 x1137.070801 -142.9883632 x1138.071045 -577.0387875 -554.4482266 -547.2564751 -545.7335159 x1142.072144 -155.5954525 x1143.072388 -533.3383205 -588.8417209 -142.734516 x1146.073242 -198.5780663 x1147.073486 -536.3842389 -175.0983896 -532.28071 x1150.074341 -208.2660679 x1151.074585 -228.9112554 -558.5517555 -185.632521 -77.7106379 x1155.075684 579.2547323 x1156.075928 -1370.923552 105.769234 -805.2711389 x1159.076782 -665.116592 x1160.077026 -705.9403583 -946.5256007 -915.4741557 x1163.077881 192.9189853 x1164.078125 232.6863805 213.014205 343.738832 536.9913763 x1168.079224 420.8621877 x1169.079468 623.7180835 702.7451381 776.4839749 x1172.080322 775.9340174 x1173.080566 679.688485 665.6006997 654.5589153 x1176.081421 763.6653222 x1177.081665 -1564.466279 732.1476196 754.5696238 623.9296056 x1181.082764 547.017772 x1182.083008 -1301.290475 -1399.055992 493.247283 x1185.083862 507.8850258 x1186.084106 -1292.025807 559.667207 -1217.866157 784.9028025 x1190.085205 680.830787 x1191.085449 352.4115688 -815.4665044 9.608351787 x1194.086304 -49.06967729 x1195.086548 -250.5294755 -13.10982462 -23.05165276 x1198.087402 -99.0327271 x1199.087646 -493.5721648 -273.1630328 -479.5694014 -232.9726037 x1203.088745 -499.4947837 x1204.088989 -199.0011105 -240.4607135 -479.2732705 x1207.089844 -250.3602578 x1208.090088 -515.3589416 -144.4267548 191.5228981 x1211.090942 -1369.950551 x1212.091187 -1693.66398 -374.6544373} 0}
+center {1075 567}
+shutteroffset centred
+name audio
+selected true
+xpos 11990
+ypos 808
+addUserKnob {20 User}
+addUserKnob {7 delay R 0 10}
+}
+Roto {
+inputs 0
+cliptype none
+curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44866000 x440dc000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Rectangle1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {0 xc310aaac}
+        {xc42b4000 x448e0000}
+        {x44506aab}
+        {xc4506aab}
+        {x44e30000 x448e0000}
+        {0 xc310aaac}
+        {0 x4310aaac}
+        {x44e30000 x442f8000}
+        {xc4506aab}
+        {x44506aab}
+        {xc42b4000 x442f8000}
+        {0 x4310aaac}}}
+      {cc
+       {f 8192}
+       {p
+        {0 xc310aaac}
+        {}
+        {x44506aab}
+        {xc4506aab}
+        {}
+        {0 xc310aaac}
+        {0 x4310aaac}
+        {}
+        {xc4506aab}
+        {x44506aab}
+        {}
+        {0 x4310aaac}}}}
+     {t x440d6000 x4465c000}
+     {a osw 1 osf 0 str 1 spx x44866000 spy x440dc000 sb 1 ltn x44816000 ltm x44816000 tt x41000000}}}}}}
+toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 tt 8 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+toolbar_brush_hardness 0.200000003
+toolbar_openspline_width 1
+toolbar_source_transform_scale {1 1}
+toolbar_source_transform_center {1075 567}
+colorOverlay {0 0 0 0}
+lifetime_type "all frames"
+lifetime_start 1035
+lifetime_end 1035
+motionblur_shutter_offset_type centred
+openspline_width 1
+source_black_outside true
+name Roto5
+selected true
+xpos 14340
+ypos 1730
+hide_input true
+}
+set N8b33780 [stack 0]
+push $N8b33780
+Constant {
+inputs 0
+format "1024 1024 0 0 1024 1024 1 square_1K"
+name Constant5
+tile_color 0xff
+selected true
+xpos 14564
+ypos 1575
+postage_stamp false
+}
+Roto {
+cliptype none
+curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x44000000 x44000000 0 0 x43fa0000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup OpenSpline1 1049088 bezier
+     {{cc
+       {f 1056800}
+       {p
+        {}
+        {{a osw x3f858bd4 osf 0}	xc23c6661
+	 {=audio.translate.x x435d1d80}}
+        {x41162fc4 xc237f200}
+        {xbff169bc x40b2a780}
+        {{a osw x3f858bd4 osf 0}	xbe2ab000
+	 {=Transform9.translate.x xc10d1060}}
+        {x3ff169c2 xc0b2a780}
+        {xc0ac9848 xbfc92200}
+        {{a osw x3f858bd4 osf 0}	x41d00000
+	 {=Transform10.translate.x x40975040}}
+        {x40ac9848 x3fc92100}
+        {xc0999ca0 xbe0ca000}
+        {{a osw x3f858bd4 osf 0}	x42580000
+	 {=Transform11.translate.x x40dedac0}}
+        {x40999ca0 x3e0c9800}
+        {xc0935700 x3faeac00}
+        {{a osw x3f858bd4 osf x3d4cad89}     x429c0000
+	 {=Transform13.translate.x x40c6e980}}
+        {x409356e0 xbfaead00}
+        {xc0944200 x3fa11e00}
+        {{a osw x3f858bd4 osf 0}     x42d00000
+	 {=Transform14.translate.x xc0fb5b00}}
+        {x409441e0 xbfa11d00}
+        {xc0996c20 x3e805000}
+        {{a osw x3f858bd4 osf 0}     x43000000
+	 {=Transform15.translate.x xc0ebc600}}
+        {x40996c20 xbe805000}
+        {xc0a06c20 x3efa9400}
+        {{a osw x3f858bd4 osf 0}     x43190000
+	 {=Transform16.translate.x xc126a8c0}}
+        {x40a06c20 xbefa9800}
+        {xc0947940 xc032b480}
+        {{a osw x3f858bd4 osf 0}     x43340000
+	 {=Transform17.translate.x xc1471cc0}}
+        {x40947940 x4032b480}
+        {xc08e02a0 xc09dff00}
+        {{a osw x3f858bd4 osf 0}     x434e9248
+	 {=Transform18.translate.x x41ae9680}}
+        {x408e02a0 x409dff00}
+        {xc097d7c0 xc0537a00}
+        {{a osw x3f858bd4 osf 0}     x43670000
+	 {=Transform19.translate.x x42312fe0}}
+        {x4097d7c0 x40537b00}
+        {xc05c91c0 xc0949300}
+        {{a osw x3f858bd4 osf 0}     x43808000
+	 {=Transform20.translate.x x4263c300}}
+        {x405c9180 x40949300}
+        {xc07dbf80 xc0668100}
+        {{a osw x3f858bd4 osf 0}     x438d0000
+	 {=Transform21.translate.x x42e201b0}}
+        {x407dbf80 x40668200}
+        {xc0aa3d80 xbf1fb400}
+        {{a osw x3f858bd4 osf 0}     x43992492
+	 {=Transform22.translate.x x42cb6c88}}
+        {x40aa3d80 x3f1fb400}
+        {xc09341c0 xc064b400}
+        {{a osw x3f858bd4 osf 0}     x43a50000
+	 {=Transform23.translate.x x42ed4380}}
+        {x409341c0 x4064b300}
+        {xbfd39000 x40da7780}
+        {{a osw x3f858bd4 osf 0}     x43b28000
+	 {=Transform24.translate.x x430d17f4}}
+        {x3fd39000 xc0da7780}
+        {xc215eef0 x41c85540}
+        {{a osw x3f858bd4 osf 0}     x43c1a493
+	 {=Transform25.translate.x xc2ebfb6c}}
+        {x4215eef0 xc1c85550}
+        {xbff87d00 xc0ff1600}
+        {{a osw x3f858bd4 osf 0}     x43cc8000
+	 {=Transform26.translate.x x42d4b518}}
+        {x3ff87d00 x40ff1680}
+        {xc0959d00 x40494a00}
+        {{a osw x3f858bd4 osf 0}     x43d90000
+	 {=Transform27.translate.x x4293a8b0}}
+        {x40959d00 xc0494a00}
+        {xc07ae880 xc0818480}
+        {{a osw x3f858bd4 osf 0}     x43e70000
+	 {=Transform28.translate.x x428d66a8}}
+        {x407ae880 x40818500}
+        {xc0a19400 xc1346300}
+        {{a osw x3f858bd4 osf 0}     x43f38000
+	 {=Transform29.translate.x x43008be0}}
+        {x40a19400 x41346300}
+        {xc040ef00 xc13fad40}
+        {{a osw x3f858bd4 osf 0}     x44004000
+	 {=Transform30.translate.x x433892dc}}
+        {x4040ef00 x413fad00}
+        {xc01b4e00 x41e6a980}
+        {{a osw x3f858bd4 osf 0}     x44064000
+	 {=Transform31.translate.x x43a39f00}}
+        {x401b4e00 xc1e6a940}
+        {xc1fc0560 xc31279cc}
+        {{a osw x3f858bd4 osf 0}     x440d0000
+	 {=Transform32.translate.x xc3d2b2c6}}
+        {x41fc0540 x431279cc}
+        {xbf0e2000 xc1271200}
+        {{a osw x3f858bd4 osf 0}     x44130000
+	 {=Transform33.translate.x x440d17f4}}
+        {x3f0e2000 x41271200}
+        {xc0a89d00 x404b8c00}
+        {{a osw x3f858bd4 osf 0}     x44198000
+	 {=Transform34.translate.x x4401c0e8}}
+        {x40a89d00 xc04b8c00}
+        {xc0c0ef80 x3f9e3400}
+        {{a osw x3f858bd4 osf 0}     x44208000
+	 {=Transform35.translate.x x4404f1f0}}
+        {x40c0ef80 xbf9e3000}
+        {xbfb39200 x40cc4c00}
+        {{a osw x3f858bd4 osf 0}     x44264000
+	 {=Transform36.translate.x x43fe47a8}}
+        {x3fb39200 xc0cc4d00}
+        {xc00ef200 x413d5a00}
+        {{a osw x3f858bd4 osf 0}     x442d4000
+	 {=Transform37.translate.x x4395d7dc}}
+        {x400ef200 xc13d59c0}
+        {xc04fd800 x41398e40}
+        {{a osw x3f858bd4 osf 0}     x4432c000
+	 {=Transform38.translate.x x4373a1dc}}
+        {x404fd800 xc1398e40}
+        {xc080a400 x41c074c0}
+        {{a osw x3f858bd4 osf 0}     x44398000
+	 {=Transform39.translate.x x42f96950}}
+        {x4080a400 xc1c074e0}
+        {xbfbe5600 x40ac2280}
+        {{a osw x3f858bd4 osf 0}     x443ffffe
+	 {=Transform40.translate.x xc2931250}}
+        {x3fbe5600 xc0ac2280}
+        {xc09c8080 xc02c1100}
+        {{a osw x3f858bd4 osf 0}     x44468000
+	 {=Transform41.translate.x xc27d9cb8}}
+        {x409c8080 x402c1100}
+        {xc0afb580 xbfb17f00}
+        {{a osw x3f858bd4 osf 0}     x444c8000
+	 {=Transform42.translate.x xc23832a8}}
+        {x40afb580 x3fb17e00}
+        {xc03d0e00 xc09a9e80}
+        {{a osw x3f858bd4 osf 0}     x44538000
+	 {=Transform43.translate.x xc2491580}}
+        {x403d0e00 x409a9e80}
+        {xc0276500 xc09ba500}
+        {{a osw x3f858bd4 osf 0}     x4459c000
+	 {=Transform44.translate.x x42229280}}
+        {x40276500 x409ba500}
+        {xc0152f00 x40a03580}
+        {{a osw x3f858bd4 osf 0}     x44608000
+	 {=Transform45.translate.x x4239b640}}
+        {x40152f00 xc0a03500}
+        {xc19f2d80 x40a93ec0}
+        {{a osw x3f858bd4 osf 0}     x44662bf6
+	 {=Transform46.translate.x xc28425c4}}
+        {x419f2d80 xc0a93f00}
+        {xc19ba3c0 xbfc7d400}
+        {{a osw x3f858bd4 osf 0}     x446d7ed5
+	 {=Transform47.translate.x x42027140}}
+        {x419ba3c0 x3fc7d400}
+        {xc1349080 x40e6d4c0}
+        {{a osw x3f858bd4 osf 0}     x4473c000
+	 {=Transform48.translate.x xc276dca8}}
+        {x41349080 xc0e6d500}
+        {xc02ce200 xc05e4880}
+        {{a osw x3f858bd4 osf 0}     x447a4000}
+        {x402ce200 x405e4880}
+        {xc08ccd00}
+        {{a osw x3f858bd4 osf 0}     x447fc000}
+        {x408ccd00}
+        {xbf199800}
+        {{a osw x3f858bd4 osf 0}     x4489dfff}
+        {x3f199800}
+        {xbf199800}
+        {{a osw x3f858bd4 osf 0}     x448a3fff}
+        {}}}
+      {cc
+       {f 1056800}
+       {p
+        {}
+        {{a osw 1 osf 0}}
+        {x41162fc4 xc237f200}
+        {xbff169bc x40b2a780}
+        {{a osw 1 osf 0}}
+        {x3ff169c2 xc0b2a780}
+        {xc0ac9848 xbfc92200}
+        {{a osw 1 osf 0}}
+        {x40ac9848 x3fc92100}
+        {xc0999ca0 xbe0ca000}
+        {{a osw 1 osf 0}}
+        {x40999ca0 x3e0c9800}
+        {xc0935700 x3faeac00}
+        {{a osw 1 osf x3d4cad89}}
+        {x409356e0 xbfaead00}
+        {xc0944200 x3fa11e00}
+        {{a osw 1 osf 0}}
+        {x409441e0 xbfa11d00}
+        {xc0996c20 x3e805000}
+        {{a osw 1 osf 0}}
+        {x40996c20 xbe805000}
+        {xc0a06c20 x3efa9400}
+        {{a osw 1 osf 0}}
+        {x40a06c20 xbefa9800}
+        {xc0947940 xc032b480}
+        {{a osw 1 osf 0}}
+        {x40947940 x4032b480}
+        {xc08e02a0 xc09dff00}
+        {{a osw 1 osf 0}}
+        {x408e02a0 x409dff00}
+        {xc097d7c0 xc0537a00}
+        {{a osw 1 osf 0}}
+        {x4097d7c0 x40537b00}
+        {xc05c91c0 xc0949300}
+        {{a osw 1 osf 0}}
+        {x405c9180 x40949300}
+        {xc07dbf80 xc0668100}
+        {{a osw 1 osf 0}}
+        {x407dbf80 x40668200}
+        {xc0aa3d80 xbf1fb400}
+        {{a osw 1 osf 0}}
+        {x40aa3d80 x3f1fb400}
+        {xc09341c0 xc064b400}
+        {{a osw 1 osf 0}}
+        {x409341c0 x4064b300}
+        {xbfd39000 x40da7780}
+        {{a osw 1 osf 0}}
+        {x3fd39000 xc0da7780}
+        {xc215eef0 x41c85540}
+        {{a osw 1 osf 0}}
+        {x4215eef0 xc1c85550}
+        {xbff87d00 xc0ff1600}
+        {{a osw 1 osf 0}}
+        {x3ff87d00 x40ff1680}
+        {xc0959d00 x40494a00}
+        {{a osw 1 osf 0}}
+        {x40959d00 xc0494a00}
+        {xc07ae880 xc0818480}
+        {{a osw 1 osf 0}}
+        {x407ae880 x40818500}
+        {xc0a19400 xc1346300}
+        {{a osw 1 osf 0}}
+        {x40a19400 x41346300}
+        {xc040ef00 xc13fad40}
+        {{a osw 1 osf 0}}
+        {x4040ef00 x413fad00}
+        {xc01b4e00 x41e6a980}
+        {{a osw 1 osf 0}}
+        {x401b4e00 xc1e6a940}
+        {xc1fc0560 xc31279cc}
+        {{a osw 1 osf 0}}
+        {x41fc0540 x431279cc}
+        {xbf0e2000 xc1271200}
+        {{a osw 1 osf 0}}
+        {x3f0e2000 x41271200}
+        {xc0a89d00 x404b8c00}
+        {{a osw 1 osf 0}}
+        {x40a89d00 xc04b8c00}
+        {xc0c0ef80 x3f9e3400}
+        {{a osw 1 osf 0}}
+        {x40c0ef80 xbf9e3000}
+        {xbfb39200 x40cc4c00}
+        {{a osw 1 osf 0}}
+        {x3fb39200 xc0cc4d00}
+        {xc00ef200 x413d5a00}
+        {{a osw 1 osf 0}}
+        {x400ef200 xc13d59c0}
+        {xc04fd800 x41398e40}
+        {{a osw 1 osf 0}}
+        {x404fd800 xc1398e40}
+        {xc080a400 x41c074c0}
+        {{a osw 1 osf 0}}
+        {x4080a400 xc1c074e0}
+        {xbfbe5600 x40ac2280}
+        {{a osw 1 osf 0}}
+        {x3fbe5600 xc0ac2280}
+        {xc09c8080 xc02c1100}
+        {{a osw 1 osf 0}}
+        {x409c8080 x402c1100}
+        {xc0afb580 xbfb17f00}
+        {{a osw 1 osf 0}}
+        {x40afb580 x3fb17e00}
+        {xc03d0e00 xc09a9e80}
+        {{a osw 1 osf 0}}
+        {x403d0e00 x409a9e80}
+        {xc0276500 xc09ba500}
+        {{a osw 1 osf 0}}
+        {x40276500 x409ba500}
+        {xc0152f00 x40a03580}
+        {{a osw 1 osf 0}}
+        {x40152f00 xc0a03500}
+        {xc19f2d80 x40a93ec0}
+        {{a osw 1 osf 0}}
+        {x419f2d80 xc0a93f00}
+        {xc19ba3c0 xbfc7d400}
+        {{a osw 1 osf 0}}
+        {x419ba3c0 x3fc7d400}
+        {xc1349080 x40e6d4c0}
+        {{a osw 1 osf 0}}
+        {x41349080 xc0e6d500}
+        {xc02ce200 xc05e4880}
+        {{a osw 1 osf 0}}
+        {x402ce200 x405e4880}
+        {xc08ccd00}
+        {{a osw 1 osf 0}}
+        {x408ccd00}
+        {xbf199800}
+        {{a osw 1 osf 0}}
+        {x3f199800}
+        {xbf199800}
+        {{a osw 1 osf 0}}
+        {}}}}
+     {tx x44810000 x43f20d9e x44010fa9}
+     {a osbe 1 osee 1 osw x41200000 osf 0 str 1 ltn x44810000 ltm x44810000 tt x41200000}}}}}}
+toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createOpenSpline str 1 ssx 1 ssy 1 sf 1 tt 10 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+toolbar_autokey true
+toolbar_brush_hardness 0.200000003
+toolbar_source_transform_scale {1 1}
+toolbar_source_transform_center {320 240}
+colorOverlay {0 0 0 0}
+lifetime_type "all frames"
+lifetime_start 1032
+lifetime_end 1032
+motionblur_shutter_offset_type centred
+openspline_start_end_type square
+openspline_last_end_type square
+name Roto4
+selected true
+xpos 14564
+ypos 1660
+}
+set N115306b0 [stack 0]
+Dot {
+name Dot121
+selected true
+xpos 14264
+ypos 1712
+}
+Grade {
+inputs 1+1
+multiply {1 0 0 1}
+name Grade18
+selected true
+xpos 14230
+ypos 1730
+}
+Merge2 {
+inputs 2
+operation mask
+bbox B
+name Merge35
+selected true
+xpos 14230
+ypos 1756
+}
+Reformat {
+type "to box"
+box_width 25
+box_height {{box_width}}
+box_fixed true
+scale 100
+filter Impulse
+name Reformat15
+selected true
+xpos 14230
+ypos 1799
+}
+Blur {
+channels rgba
+name Blur8
+label "\[value size]"
+selected true
+xpos 14230
+ypos 1838
+}
+Reformat {
+type scale
+scale 40
+filter Impulse
+name Reformat16
+selected true
+xpos 14230
+ypos 1876
+}
+push $N115306b0
+Reformat {
+type "to box"
+box_width 25
+box_height {{box_width}}
+box_fixed true
+scale 100
+filter Impulse
+name Reformat13
+selected true
+xpos 14437
+ypos 1745
+}
+Blur {
+channels rgba
+name Blur7
+label "\[value size]"
+selected true
+xpos 14437
+ypos 1783
+}
+Reformat {
+type scale
+scale 40
+filter Impulse
+name Reformat14
+selected true
+xpos 14437
+ypos 1821
+}
+push $N115306b0
+GodRays {
+channels rgba
+translate {0 -954}
+center {534 830}
+steps 12
+name GodRays1
+selected true
+xpos 14564
+ypos 1733
+}
+Reformat {
+type "to box"
+box_width 25
+box_height {{box_width}}
+box_fixed true
+scale 100
+filter Impulse
+name Reformat11
+selected true
+xpos 14564
+ypos 1759
+}
+Blur {
+channels rgba
+name Blur6
+label "\[value size]"
+selected true
+xpos 14564
+ypos 1797
+}
+Reformat {
+type scale
+scale 40
+filter Impulse
+name Reformat12
+selected true
+xpos 14564
+ypos 1835
+}
+Grade {
+inputs 1+1
+white 10
+multiply {0 0 2 1}
+name Grade17
+selected true
+xpos 14564
+ypos 1878
+}
+Merge2 {
+inputs 2
+name Merge36
+selected true
+xpos 14564
+ypos 1920
+}
+Dot {
+name Dot120
+selected true
+xpos 14598
+ypos 1963
+}
+set N92e6a310 [stack 0]
+Grid {
+replace true
+number 25
+size 10
+name Grid2
+selected true
+xpos 14410
+ypos 2013
+}
+push $N92e6a310
+TimeEcho {
+mode Average
+framesbehind 5
+name TimeEcho1
+selected true
+xpos 14750
+ypos 2012
+}
+push $N92e6a310
+Merge2 {
+inputs 2
+operation from
+bbox B
+name Merge34
+selected true
+xpos 14697
+ypos 2100
+}
+push $N92e6a310
+Grade {
+inputs 1+1
+add {0 1 0 0}
+name Grade16
+selected true
+xpos 14564
+ypos 2123
+}
+Merge2 {
+inputs 2
+operation stencil
+bbox B
+name Merge33
+selected true
+xpos 14564
+ypos 2189
+}

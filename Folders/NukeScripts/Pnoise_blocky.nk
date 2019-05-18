@@ -1,0 +1,77 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+name Pnoise_Blocky
+help "Apply noise on your UV/Normal/WorldPosPass\nexpecting RGB"
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x695287ff
+note_font "Bitstream Vera Sans Bold"
+note_font_size 20
+selected true
+xpos 5316
+ypos 796
+addUserKnob {20 User}
+addUserKnob {7 scale_1 l scale R 0 10}
+scale_1 1
+addUserKnob {6 scale_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {7 ratio R -10 10}
+ratio 1
+addUserKnob {7 scaleX l "scale X" R 1 100}
+scaleX 1
+addUserKnob {7 scaleY l "scale Y" R 1 100}
+scaleY 1
+addUserKnob {26 "" +STARTLINE}
+addUserKnob {7 blackpoint R -1 1}
+addUserKnob {7 whitepoint R 0 2}
+whitepoint 1
+}
+Input {
+inputs 0
+name WorldP
+xpos -918
+ypos 363
+}
+Grade {
+white {{1/parent.scale_1/100}}
+black_clamp false
+name Grade231
+xpos -918
+ypos 445
+}
+Expression {
+temp_name0 xScale
+temp_expr0 scaleX
+temp_name1 yScale
+temp_expr1 scaleY
+temp_name2 rati
+temp_expr2 ratio/100
+expr0 fBm(trunc(r*yScale),trunc(g*xScale),trunc(b*rati),2,0.5,0.5)
+name Expression12
+xpos -918
+ypos 538
+}
+Shuffle {
+green red
+blue red
+alpha red
+name Shuffle1
+label "\[value in] to \[value out]"
+xpos -918
+ypos 564
+}
+Grade {
+channels rgba
+blackpoint {{parent.blackpoint}}
+whitepoint {{parent.whitepoint}}
+white_clamp true
+name Grade1
+xpos -918
+ypos 602
+}
+Output {
+name Output1
+xpos -918
+ypos 673
+}
+end_group

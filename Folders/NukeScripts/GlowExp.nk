@@ -1,0 +1,842 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name EGlow2
+ help "This gizmo is a port of Stuart Lashley's popular Exponential Glow macro from Shake. Will glow the highs on the input and create a nice falloff. Main dependency with Viewer has been removed so should be ok in stereo/mono views."
+ tile_color 0xa36100ff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -8687
+ ypos 10646
+ mapsize {0.15 0.15}
+ addUserKnob {20 User l "Exponential Glow"}
+ addUserKnob {41 falloff l Falloff T ExpoGlow.falloff}
+ addUserKnob {7 intensity l Intensity R 0 10}
+ intensity 1
+ addUserKnob {41 blur_amount l Size T ExpoGlow.blur_amount}
+ addUserKnob {41 numpixels l "Add Pixels" T AdjBBox1.numpixels}
+ addUserKnob {4 type M {"BG spills + FG" "BG spill only" "Glow + BG" "Glow of BG only (no fg)" "" ""}}
+ addUserKnob {26 help_1 l "" +STARTLINE T "Expecting premultiplied FG"}
+ addUserKnob {20 range_1 l range}
+ addUserKnob {26 bgA l "" +STARTLINE T "bg adjustment"}
+ addUserKnob {6 Preview +STARTLINE}
+ addUserKnob {41 range T Keyer2.range}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 fgA l "" t "crank semitransparent areas if needed" +STARTLINE T "fg adjustment"}
+ addUserKnob {41 whitepoint T Grade2.whitepoint}
+ addUserKnob {41 blackpoint T Grade2.blackpoint}
+ addUserKnob {41 gamma T Grade2.gamma}
+}
+ Input {
+  inputs 0
+  name FG
+  xpos -1800
+  ypos -1207
+ }
+ Dot {
+  name Dot22
+  xpos -1766
+  ypos -1116
+ }
+set N19267bb0 [stack 0]
+ Dot {
+  name Dot23
+  xpos -1766
+  ypos 848
+ }
+set N19263120 [stack 0]
+ Dot {
+  name Dot24
+  xpos -1765
+  ypos 1011
+ }
+set N19263c30 [stack 0]
+ AdjBBox {
+  numpixels {{parent.AdjBBox1.numpixels}}
+  name AdjBBox2
+  xpos -1799
+  ypos 1372
+ }
+ Dot {
+  name Dot37
+  xpos -1765
+  ypos 1484
+ }
+ Input {
+  inputs 0
+  name BG
+  xpos -233
+  ypos -1242
+  number 1
+ }
+set N1b8380c0 [stack 0]
+ Dot {
+  name Dot27
+  xpos -421
+  ypos -1238
+ }
+set N1b83c820 [stack 0]
+ Dot {
+  name Dot26
+  xpos -421
+  ypos -858
+ }
+push $N19267bb0
+ Grade {
+  channels rgba
+  white_clamp true
+  name Grade2
+  label rgba
+  selected true
+  xpos -1575
+  ypos -1126
+ }
+set N229f90d0 [stack 0]
+push $N1b8380c0
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge10
+  xpos -233
+  ypos -1120
+  disable {{parent.type==2?1:0 i}}
+ }
+ Dot {
+  name Dot21
+  xpos -199
+  ypos -1021
+ }
+set N1924c2f0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox B
+  name Merge13
+  xpos -233
+  ypos -862
+  disable {{parent.type==3?0:1 i}}
+ }
+ NoOp {
+  name ExpoGlow
+  xpos -233
+  ypos -600
+  addUserKnob {20 User}
+  addUserKnob {7 falloff l Falloff R 0 2}
+  falloff 1
+  addUserKnob {7 intensity l Intensity R 0 5}
+  intensity {{parent.intensity*10 i}}
+  addUserKnob {7 blur_amount l Size R 0 5}
+  blur_amount 0.1
+  addUserKnob {6 add_source l "Add Source" +STARTLINE}
+  addUserKnob {6 add_bbox l "Add original bbox" +STARTLINE}
+ }
+set N1943f0c0 [stack 0]
+ Keyer {
+  operation "luminance key"
+  range {0.1727049822 0.5697916905 1 1}
+  name Keyer2
+  xpos -233
+  ypos -535
+ }
+ Premult {
+  name Premult1
+  xpos -233
+  ypos -413
+ }
+set N1944f430 [stack 0]
+ Dot {
+  name Dot36
+  xpos -4
+  ypos -409
+ }
+ Dot {
+  name Dot35
+  xpos -4
+  ypos 1361
+ }
+push $N19267bb0
+ Dot {
+  name Dot33
+  xpos -2239
+  ypos -1116
+ }
+ Dot {
+  name Dot34
+  xpos -2239
+  ypos 1268
+ }
+push $N1b83c820
+ Dot {
+  name Dot31
+  xpos -2013
+  ypos -1238
+ }
+ Dot {
+  name Dot32
+  xpos -2013
+  ypos 1194
+ }
+push $N1924c2f0
+ Dot {
+  name Dot20
+  xpos -1598
+  ypos -1021
+ }
+ Crop {
+  box {0 0 1920 1080}
+  name Crop2
+  xpos -1632
+  ypos -980
+ }
+ Crop {
+  box {0 0 {width i} {height i}}
+  name Crop1
+  xpos -1623
+  ypos 667
+ }
+ AdjBBox {
+  numpixels 0
+  name AdjBBox1
+  xpos -1623
+  ypos 709
+ }
+ Dot {
+  name Dot12
+  xpos -1589
+  ypos 749
+ }
+push $N1944f430
+ Remove {
+  operation keep
+  channels rgb
+  name Remove1
+  xpos -233
+  ypos -363
+ }
+ Grade {
+  white {{ExpoGlow.intensity/100 i}}
+  name Grade1
+  xpos -233
+  ypos -318
+ }
+ Dot {
+  name Dot3
+  xpos -199
+  ypos -198
+ }
+set N19eb5ef0 [stack 0]
+ Dot {
+  name Dot2
+  xpos -450
+  ypos -198
+ }
+set N19eba940 [stack 0]
+ Dot {
+  name Dot4
+  xpos -560
+  ypos -198
+ }
+set N19ebf3a0 [stack 0]
+ Dot {
+  name Dot5
+  xpos -670
+  ypos -198
+ }
+set N19ec3c50 [stack 0]
+ Dot {
+  name Dot6
+  xpos -780
+  ypos -198
+ }
+set N19ec89e0 [stack 0]
+ Dot {
+  name Dot7
+  xpos -908
+  ypos -198
+ }
+set N19ecd5b0 [stack 0]
+ Dot {
+  name Dot8
+  xpos -1034
+  ypos -198
+ }
+set N19ed1f30 [stack 0]
+ Dot {
+  name Dot9
+  xpos -1144
+  ypos -198
+ }
+set N19ed6ab0 [stack 0]
+ Dot {
+  name Dot10
+  xpos -1276
+  ypos -198
+ }
+ Group {
+  name ShakePercentBlur8
+  xpos -1310
+  ypos -139
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+   crop false
+   name Blur120
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur7.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply8.value/ExpoGlow.falloff i}}
+  name Multiply9
+  xpos -1310
+  ypos -113
+ }
+ Dot {
+  name Dot1
+  xpos -1276
+  ypos 654
+ }
+push $N19ed6ab0
+ Group {
+  name ShakePercentBlur7
+  xpos -1178
+  ypos -136
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+   crop false
+   name Blur120
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur6.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply7.value/ExpoGlow.falloff i}}
+  name Multiply8
+  xpos -1178
+  ypos -110
+ }
+ Dot {
+  name Dot13
+  xpos -1144
+  ypos 593
+ }
+push $N19ed1f30
+ Group {
+  name ShakePercentBlur6
+  xpos -1068
+  ypos -139
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+   crop false
+   name Blur120
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur5.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply6.value/ExpoGlow.falloff i}}
+  name Multiply7
+  xpos -1068
+  ypos -113
+ }
+ Dot {
+  name Dot14
+  xpos -1034
+  ypos 497
+ }
+push $N19ecd5b0
+ Group {
+  name ShakePercentBlur5
+  xpos -942
+  ypos -146
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+   crop false
+   name Blur120
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur4.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply5.value/ExpoGlow.falloff i}}
+  name Multiply6
+  xpos -942
+  ypos -112
+ }
+ Dot {
+  name Dot15
+  xpos -908
+  ypos 404
+ }
+push $N19ec89e0
+ Group {
+  name ShakePercentBlur4
+  xpos -814
+  ypos -144
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+   crop false
+   name Blur120
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur3.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply4.value/ExpoGlow.falloff i}}
+  name Multiply5
+  xpos -814
+  ypos -118
+ }
+ Dot {
+  name Dot16
+  xpos -780
+  ypos 339
+ }
+push $N19ec3c50
+ Group {
+  name ShakePercentBlur3
+  xpos -704
+  ypos -140
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+   crop false
+   name Blur120
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur2.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply3.value/ExpoGlow.falloff i}}
+  name Multiply4
+  xpos -704
+  ypos -104
+ }
+ Dot {
+  name Dot17
+  xpos -670
+  ypos 270
+ }
+push $N19ebf3a0
+ Group {
+  name ShakePercentBlur2
+  xpos -594
+  ypos -144
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) i x1001 6.826666667e+10} {height/3*(ypercent/100) i}}
+   crop false
+   name Blur120
+   selected true
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur1.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width i}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply2.value/ExpoGlow.falloff i}}
+  name Multiply3
+  xpos -594
+  ypos -105
+ }
+ Dot {
+  name Dot18
+  xpos -560
+  ypos 186
+ }
+push $N19eba940
+ Group {
+  name ShakePercentBlur1
+  xpos -484
+  ypos -151
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+   crop false
+   name Blur120
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ShakePercentBlur.xpercent*2 i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  value {{Multiply1.value/ExpoGlow.falloff i}}
+  name Multiply2
+  xpos -484
+  ypos -110
+ }
+ Dot {
+  name Dot19
+  xpos -450
+  ypos 119
+ }
+push $N1943f0c0
+ Dot {
+  name Dot11
+  xpos -343
+  ypos -596
+ }
+ Dot {
+  name Dot25
+  xpos -343
+  ypos 16
+ }
+push $N19eb5ef0
+ Group {
+  name ShakePercentBlur
+  xpos -233
+  ypos -158
+  addUserKnob {20 percentBlur l "Percent Blur"}
+  addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+  addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 514
+   ypos -229
+  }
+  Blur {
+   size {{width/3*(xpercent/100) i x1001 6.826666667e+10} {height/3*(ypercent/100) i}}
+   crop false
+   name Blur120
+   selected true
+   xpos 514
+   ypos -189
+   addUserKnob {20 User}
+   addUserKnob {7 xpercent l xPercent R 0 100}
+   xpercent {{ExpoGlow.blur_amount i}}
+   addUserKnob {7 ypercent l yPercent R 0 100}
+   ypercent {{xpercent/format.pixel_aspect/height*width i}}
+  }
+  Output {
+   name Output1
+   xpos 514
+   ypos -89
+  }
+ end_group
+ Multiply {
+  name Multiply1
+  xpos -233
+  ypos -117
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge1
+  xpos -233
+  ypos 12
+  disable {{parent.type==2?0:1 i}}
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge2
+  xpos -233
+  ypos 115
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge3
+  xpos -233
+  ypos 182
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge4
+  xpos -233
+  ypos 266
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge5
+  xpos -233
+  ypos 335
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge6
+  xpos -233
+  ypos 400
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge7
+  xpos -233
+  ypos 493
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge8
+  xpos -233
+  ypos 589
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge9
+  xpos -233
+  ypos 650
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -232
+  ypos 745
+ }
+ Dot {
+  name Dot30
+  xpos -198
+  ypos 796
+ }
+set N153b4f70 [stack 0]
+ Dot {
+  name Dot28
+  xpos -379
+  ypos 796
+ }
+ Dot {
+  name Dot29
+  xpos -379
+  ypos 1094
+ }
+push $N19263c30
+push $N19263120
+push $N153b4f70
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge11
+  xpos -232
+  ypos 844
+  disable {{parent.type==2?1:0 x1 1}}
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  bbox B
+  name Merge12
+  xpos -232
+  ypos 1007
+  disable {{parent.type i}}
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox B
+  name Merge14
+  xpos -232
+  ypos 1090
+  disable {{parent.type==3?0:1}}
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox B
+  name Merge15
+  xpos -232
+  ypos 1190
+  disable {{parent.type>1&&parent.disable==1?0:1 i}}
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox B
+  name Merge16
+  xpos -232
+  ypos 1264
+  disable {{parent.type<2&&parent.disable==1?0:1 i}}
+ }
+ Switch {
+  inputs 2
+  which {{"\[value Preview]" i}}
+  name Switch1
+  xpos -232
+  ypos 1357
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox2
+  xpos -232
+  ypos 1480
+  disable {{parent.type==2?1:0}}
+ }
+ Output {
+  name Output1
+  xpos -232
+  ypos 1558
+ }
+push $N229f90d0
+ Viewer {
+  frame_range 1001-1039
+  input_process false
+  name Viewer1
+  xpos 3040
+  ypos -10
+  hide_input true
+ }
+end_group

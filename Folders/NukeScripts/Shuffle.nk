@@ -1,0 +1,14 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Shuffle {
+ name Shuffle1
+ selected true
+ xpos -64
+ ypos 81
+ addUserKnob {20 User}
+ addUserKnob {22 Red l "<font color=\"Red\">R" T "nuke.thisNode()\['label'].setValue(\"red to alpha\")\nnuke.thisNode()\['red'].setValue(1)\nnuke.thisNode()\['green'].setValue(1)\nnuke.thisNode()\['blue'].setValue(1)\nnuke.thisNode()\['alpha'].setValue(1)" +STARTLINE}
+ addUserKnob {22 Green l "<font color=\"Green\">G" -STARTLINE T "nuke.thisNode()\['label'].setValue(\"green to alpha\")\nnuke.thisNode()\['red'].setValue(2)\nnuke.thisNode()\['green'].setValue(2)\nnuke.thisNode()\['blue'].setValue(2)\nnuke.thisNode()\['alpha'].setValue(2)"}
+ addUserKnob {22 Blue l "<font color=\"Blue\">B" -STARTLINE T "nuke.thisNode()\['label'].setValue(\"blue to alpha\")\nnuke.thisNode()\['red'].setValue(3)\nnuke.thisNode()\['green'].setValue(3)\nnuke.thisNode()\['blue'].setValue(3)\nnuke.thisNode()\['alpha'].setValue(3)"}
+ addUserKnob {22 Alpha l "<font color=\"White\">A" -STARTLINE T "nuke.thisNode()\['label'].setValue(\"full alpha\")\nnuke.thisNode()\['red'].setValue(4)\nnuke.thisNode()\['green'].setValue(4)\nnuke.thisNode()\['blue'].setValue(4)\nnuke.thisNode()\['alpha'].setValue(4)"}
+}

@@ -1,0 +1,99 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+Camera2 {
+ inputs 0
+ translate {21.1135006 15.64957809 -16.6635437}
+ rotate {-17.67800831 128.5999765 0}
+ name Camera1
+ selected true
+ xpos -109
+ ypos -37
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $cut_paste_input
+Card2 {
+ orientation ZX
+ control_points {3 3 3 6 
+
+1 {-0.5 0 -0.5} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 
+1 {0 0 -0.5} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 0 -0.5} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {1 0.5 0} 
+1 {-0.5 0 0.5} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 1 0} 
+1 {0 0 0.5} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0.5 1 0} 
+1 {0.5 0 0.5} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {1 1 0} }
+ name Card1
+ selected true
+ xpos 21
+ ypos -264
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push 0
+ParticleEmitter {
+ inputs 2
+ rate 5
+ lifetime 20
+ velocity 0.4
+ name ParticleEmitter1
+ selected true
+ xpos 21
+ ypos -166
+}
+ParticleTurbulence {
+ strength {1 1 1}
+ name ParticleTurbulence1
+ selected true
+ xpos 21
+ ypos -95
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos 20
+ ypos 52
+}
+set Nffa93b0 [stack 0]
+TimeBlur {
+ divisions 30
+ shutter 2
+ shutteroffset start
+ shuttercustomoffset 0
+ name TimeBlur1
+ selected true
+ xpos -103
+ ypos 170
+}
+push $Nffa93b0
+Retime {
+ input.first_lock true
+ input.last 1056
+ output.first_lock true
+ output.last 21120
+ speed 0.05
+ filter none
+ time ""
+ name Retime1
+ selected true
+ xpos 20
+ ypos 129
+}
+TimeWarp {
+ lookup {{frame*(1/parent.Retime1.speed)}}
+ length {{1/parent.Retime1.speed}}
+ time ""
+ name TimeWarp1
+ selected true
+ xpos 21
+ ypos 163
+}

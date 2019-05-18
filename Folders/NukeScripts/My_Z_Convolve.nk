@@ -1,0 +1,3064 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name Z_Convolve
+ tile_color 0x2251ff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 15
+ selected true
+ xpos -2314
+ ypos 1181
+ addUserKnob {20 Defocus}
+ addUserKnob {7 scale l size t "Increase or decrease Defocus" R 0 10}
+ scale 0.01
+ addUserKnob {7 multiplyer t "This one increase or decrease difference between steps in defocus values"}
+ multiplyer 0.1
+ addUserKnob {7 StepsBlur l Soften R 0 50}
+ addUserKnob {26 ""}
+ addUserKnob {6 test +STARTLINE}
+ addUserKnob {6 EnableFocus l "Enable focus Change             " -STARTLINE}
+ addUserKnob {6 Mask l "Enable Mask" -STARTLINE}
+ addUserKnob {7 focus}
+ focus 0.1
+ addUserKnob {7 DOF R 0.1 10}
+ DOF 1
+ addUserKnob {7 out1 l INVISIBLE +INVISIBLE}
+ out1 {{focus+0.5/DOF}}
+ addUserKnob {7 out2 l INVISIBLE +INVISIBLE}
+ out2 {{focus-0.5/DOF/2}}
+ addUserKnob {20 Shape_1 l Shape}
+ addUserKnob {1 Custom l "Iris Path" t "put here a path to your iris images"}
+ Custom Y:/derturm_tur-2565/laub/010/elements/2d/comp-pre/v001/iris/iris/
+ addUserKnob {4 Iris M {"Plain Shape" 1 2 3 4 5 6 7 8 910 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25}}
+ Iris 22
+ addUserKnob {6 Preview -STARTLINE}
+ addUserKnob {4 Shape l "        Plain shape" -STARTLINE M {1 2 3 4 5 6 7 8 "" "" "" ""}}
+ Shape 5
+ addUserKnob {6 BreakShape l "Break Shape" -STARTLINE}
+ BreakShape true
+ addUserKnob {6 Preview2 l Preview -STARTLINE}
+ addUserKnob {7 Rotate R 0 45}
+ Rotate 25
+ addUserKnob {7 Inner l "Inner Hole"}
+ addUserKnob {7 Erode}
+ addUserKnob {20 BlowHighlights}
+ addUserKnob {7 LumaKey}
+ addUserKnob {7 Gain}
+ addUserKnob {20 Abberation}
+ addUserKnob {18 abberation}
+ abberation {0 0 0}
+ addUserKnob {18 transl l abberationB}
+ transl {0 0 0}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x8018b354
+  label Shape
+  note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+  note_font_size 100
+  xpos -2929
+  ypos -531
+  bdwidth 1636
+  bdheight 1194
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x87cb9720
+  label "Focus plane"
+  note_font "Helvetica bold Bold Bold Bold Bold"
+  note_font_size 100
+  xpos -201
+  ypos -2075
+  bdwidth 845
+  bdheight 616
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x85f1c959
+  label iris
+  note_font "Helvetica bold Bold Bold"
+  note_font_size 100
+  xpos -4110
+  ypos -624
+  bdwidth 623
+  bdheight 607
+ }
+add_layer {rgb rgb.UV}
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant2
+  xpos -6866
+ }
+ Input {
+  inputs 0
+  name Depth
+  label "\n"
+  note_font_size 20
+  xpos -109
+  ypos -2367
+  number 2
+ }
+ Dot {
+  name Dot92
+  xpos -75
+  ypos -1937
+ }
+set Ndda430c0 [stack 0]
+add_layer {rgba rgba.water redguard1.glow rgba.beta}
+add_layer {shadow}
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha white
+  name Shuffle2
+  label "\[value in] to \[value out]"
+  xpos -109
+  ypos -1633
+ }
+ Dot {
+  name Dot4
+  xpos -75
+  ypos -1524
+ }
+push $Ndda430c0
+ Dot {
+  name Dot95
+  xpos 125
+  ypos -1937
+ }
+set Ndda43a50 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint {{parent.out1 i}}
+  whitepoint {{parent.focus i}}
+  gamma 0.7
+  black_clamp false
+  name Grade1
+  xpos 41
+  ypos -1895
+ }
+push $Ndda43a50
+ Grade {
+  channels rgba
+  blackpoint {{parent.out2 i}}
+  whitepoint {{parent.focus i}}
+  gamma 0.7
+  black_clamp false
+  name Grade2
+  xpos 147
+  ypos -1893
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  name Merge16
+  xpos 92
+  ypos -1810
+ }
+ Invert {
+  name Invert2
+  xpos 92
+  ypos -1784
+ }
+ Clamp {
+  name Clamp1
+  xpos 92
+  ypos -1728
+ }
+ Grade {
+  channels rgba
+  blackpoint 0.12
+  black_clamp false
+  name Grade3
+  xpos 92
+  ypos -1666
+ }
+ Clamp {
+  name Clamp2
+  xpos 92
+  ypos -1640
+ }
+ Switch {
+  inputs 2
+  which {{!parent.EnableFocus}}
+  name Switch3
+  xpos 92
+  ypos -1528
+ }
+ Dot {
+  name Dot55
+  xpos 126
+  ypos -1383
+ }
+set Ndda453d0 [stack 0]
+ Dot {
+  name Dot56
+  xpos 295
+  ypos -1383
+ }
+ Dot {
+  name Dot3
+  xpos 295
+  ypos -434
+ }
+set Ndffc4870 [stack 0]
+ Dot {
+  name Dot22
+  xpos 178
+  ypos -434
+ }
+set Ndffc4ba0 [stack 0]
+ Dot {
+  name Dot21
+  xpos 49
+  ypos -434
+ }
+set Ndffc4ed0 [stack 0]
+ Dot {
+  name Dot20
+  xpos -95
+  ypos -434
+ }
+set Ndffc5200 [stack 0]
+ Dot {
+  name Dot19
+  xpos -216
+  ypos -434
+ }
+set Ndffc5530 [stack 0]
+ Dot {
+  name Dot17
+  xpos -369
+  ypos -434
+ }
+set Ndffc5860 [stack 0]
+ Dot {
+  name Dot27
+  xpos -498
+  ypos -431
+ }
+set Ndffc5b90 [stack 0]
+ Dot {
+  name Dot26
+  xpos -685
+  ypos -431
+ }
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha white
+  name Shuffle1
+  tile_color 0xffffffff
+  label "White Alpha"
+  xpos -719
+  ypos -333
+ }
+ Dot {
+  name Dot36
+  xpos -685
+  ypos 108
+ }
+push 0
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -719
+  ypos 181
+ }
+ Premult {
+  name Premult1
+  xpos -719
+  ypos 219
+ }
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width 100
+  box_height 100
+  box_fixed true
+  filter Impulse
+  name Reformat1
+  xpos -2149
+  ypos -492
+ }
+set Ncf5e8ad0 [stack 0]
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Zwelf_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 48.9833 S 0 48.8833 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 36
+      0 S 0 0 S 0 0 0 0 S 0 -36.0753 S 0 137.292 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 17.8737 S 0 169.148 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 86.209 S 0 170.176 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 137.589 S 0 138.32 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 167.389 S 0 86.94 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 167.39 S 0 18.0909 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 136.562 S 0 -33.2891 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 86.2091 S 0 -62.5757 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 17.3599 S 0 -62.5757 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -34.0201 S 0 -32.2615 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -65.3619 S 0 19.6323 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -66.3895 S 0 83.8572 0 0 S 0 0 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 36
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint4
+  label "12 \n"
+  note_font_size 20
+  xpos -1574
+  ypos -413
+ }
+ Dot {
+  name Dot5
+  xpos -1540
+  ypos -97
+ }
+push 0
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "ten_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 49.46 S 0 48.8 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 30
+      0 S 0 0 S 0 0 0 0 S 0 12.25 S 0 160.65 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 86.2499 S 0 159.65 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 145.25 S 0 116.65 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 167.75 S 0 49.65 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 143.75 S 0 -21.35 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 87.25 S 0 -62.85 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 10.75 S 0 -60.85 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -44.75 S 0 -20.85 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -68.75 S 0 48.15 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -45.75 S 0 117.65 0 0 S 0 0 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 30
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint5
+  label "10 \n"
+  note_font_size 20
+  xpos -1722
+  ypos -381
+ }
+ Dot {
+  name Dot14
+  xpos -1665
+  ypos -166
+ }
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Nein_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 49.6 S 0 48.6667 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 27
+      0 S 0 0 S 0 0 0 0 S 0 -29.869 S 0 141.294 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 49.4474 S 0 171.101 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 1.01038 0 0 S 0 128.259 S 0 142.305 0 0 S 0 0 S 0 -1.01041 0 0 S 0 0 S 0 0 0 0 S 0 168.675 S 0 71.0716 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 154.024 S 0 -8.24475 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 91.8842 S 0 -62.3011 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 6.00024 S 0 -62.3011 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -54.1186 S 0 -10.2655 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -69.2746 S 0 72.0821 0 0 S 0 0 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 27
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 1.01038 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 -1.01041 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint6
+  label "9 \n"
+  note_font_size 20
+  xpos -1828
+  ypos -381
+ }
+ Dot {
+  name Dot24
+  xpos -1794
+  ypos -226
+ }
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Eght_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 49.3 S 0 48.75 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 24
+      0 S 0 0 S 0 0 0 0 S 0 0.769012 S 0 160.956 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 98.6505 S 0 160.956 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 161.356 S 0 96.7211 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 160.846 S 0 -0.140808 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 96.6114 S 0 -63.356 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 1.7886 S 0 -62.8462 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -61.4266 S 0 1.38861 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -62.956 S 0 95.7016 0 0 S 0 0 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 24
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint7
+  label "8 \n"
+  note_font_size 20
+  xpos -1926
+  ypos -396
+ }
+ Dot {
+  name Dot37
+  xpos -1874
+  ypos -247
+ }
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "seven_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 50.2571 S 0 49.1143 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 21
+      0 S 0 0 S 0 0 0 0 S 0 49.0307 S 0 161.204 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 142.074 S 0 117.105 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 163.881 S 0 21.1548 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 102.337 S 0 -58.8042 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -0.398483 S 0 -57.8351 0 0 S 0 0 S 0 0 0 0 S 0 0.969208 S 0 0 0 0 S 0 -62.9119 S 0 21.1548 0 0 S 0 -0.969177 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -39.6511 S 0 119.044 0 0 S 0 0 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 21
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0.969208 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -0.969177 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint8
+  label "7 \n"
+  note_font_size 20
+  xpos -2040
+  ypos -385
+ }
+ Dot {
+  name Dot38
+  xpos -1964
+  ypos -253
+ }
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "six_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 50.1333 S 0 50.4 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 18
+      0 S 0 0 S 0 0 0 0 S 0 -67.2848 S 0 52.1927 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -9.46402 S 0 154.647 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 111.25 S 0 153.633 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 170.085 S 0 51.1783 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 112.264 S 0 -49.2473 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -9.46402 S 0 -49.2473 0 0 S 0 0 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 18
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint9
+  label "6 \n"
+  note_font_size 20
+  xpos -2149
+  ypos -389
+ }
+ Dot {
+  name Dot39
+  xpos -2115
+  ypos -192
+ }
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 10
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "five_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 49.92 S 0 46.12 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 15
+      0 S 0 0 S 0 0 0 0 S 0 -63.3582 S 0 81.62 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 51.6913 S 0 166.525 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 165.108 S 0 81.3687 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 123.032 S 0 -53.5256 0 0 S 0 0 S 0 0 0 0 S 0 1.00481 S 0 0 0 0 S 0 -19.6494 S 0 -52.5208 0 0 S 0 -1.00479 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 15
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 1.00481 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -1.00479 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint10
+  label "5 \n"
+  note_font_size 20
+  xpos -2246
+  ypos -374
+ }
+ Dot {
+  name Dot40
+  xpos -2222
+  ypos -181
+ }
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Rectangle1" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 36.35 S 0 55.8 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 0 0 S 0 -65.8745 0 1 S 0 -60.351 S 0 155.24 0 1 S 0 74.0352 S 0 0 0 1 S 0 -74.0352 S 0 0 0 1 S 0 161.755 S 0 155.24 0 1 S 0 0 S 0 -65.8745 0 1 S 0 0 S 0 65.8745 0 1 S 0 161.755 S 0 -42.3833 0 1 S 0 -74.0352 S 0 0 0 1 S 0 74.0352 S 0 0 0 1 S 0 -60.351 S 0 -42.3833 0 1 S 0 0 S 0 65.8745 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 12
+      1 S 0 0 S 0 -65.8745 0 1 S 0 0 S 0 0 0 1 S 0 74.0352 S 0 0 0 1 S 0 -74.0352 S 0 0 0 1 S 0 0 S 0 0 0 1 S 0 0 S 0 -65.8745 0 1 S 0 0 S 0 65.8745 0 1 S 0 0 S 0 0 0 1 S 0 -74.0352 S 0 0 0 1 S 0 74.0352 S 0 0 0 1 S 0 0 S 0 0 0 1 S 0 0 S 0 65.8745 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 0 "spy" S 0 0 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 1 "ltm" S 0 1 "ltt" S 0 0 "tt" S 0 7 "pt" S 0 0 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint1
+  label "4\n"
+  note_font_size 20
+  xpos -2355
+  ypos -382
+ }
+ Dot {
+  name Dot104
+  xpos -2287
+  ypos -254
+ }
+push $Ncf5e8ad0
+ RotoPaint {
+  format "100 100 0 0 100 100 1 Defocus"
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 0.4 S 0 0.4 S 0 0 S 0 48.9 S 0 46.7 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Three_angle" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 49.1333 S 0 37.8 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 9
+      0 S 0 0 S 0 0 0 0 S 0 54.2664 S 0 166.214 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 169.21 S 0 -38.7513 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 -61.1857 S 0 -37.7341 0 0 S 0 0 S 0 0 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 9
+      0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 0 S 0 0 S 0 0 0 
+     }
+     NumOfAttributes: 43
+     "vis" S 0 1 "r" S 0 1 "g" S 0 1 "b" S 0 1 "a" S 0 1 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 0 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 960 "spy" S 0 540 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 89 "ltm" S 0 89 "ltt" S 0 0 "tt" S 0 4 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll ssx 1 ssy 1 sf 1 }
+  { createBezier ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 89
+  lifetime_end 89
+  motionblur_shutter_offset_type centred
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint3
+  label "3 \n"
+  note_font_size 20
+  xpos -2487
+  ypos -387
+ }
+ Dot {
+  name Dot41
+  xpos -2453
+  ypos -141
+ }
+push $Ncf5e8ad0
+ Dot {
+  name Dot94
+  xpos -2554
+  ypos -416
+ }
+set Ndd2afca0 [stack 0]
+ Dot {
+  name Dot103
+  xpos -2582
+  ypos -47
+ }
+push $Ndd2afca0
+ Dot {
+  name Dot102
+  xpos -2497
+  ypos -119
+ }
+push $Ndd2afca0
+ Dot {
+  name Dot98
+  xpos -2534
+  ypos -85
+ }
+ Switch {
+  inputs 13
+  which {{"\[value Shape]" i x101 0}}
+  name Switch1
+  xpos -2072
+  ypos -101
+ }
+set N914e3cc0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Wood.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read27
+  xpos -3592
+  ypos -512
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne07f2500 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Spotty.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read24
+  xpos -3718
+  ypos -517
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne07f2830 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Wave.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read25
+  xpos -3858
+  ypos -518
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Na1569d10 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Spots.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read23
+  xpos -3979
+  ypos -519
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Na1569380 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Soft.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read21
+  xpos -4095
+  ypos -517
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09b9840 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Specks.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read22
+  xpos -3590
+  ypos -382
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09b9b70 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Silk.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read20
+  xpos -3716
+  ypos -388
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09b9ea0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Refractive.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read19
+  xpos -3833
+  ypos -388
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09ba1d0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Plain.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read18
+  xpos -3956
+  ypos -395
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09ba500 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Petagon.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read17
+  xpos -4086
+  ypos -396
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09ba830 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Orb.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read16
+  xpos -3598
+  ypos -294
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09bab60 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Octogon.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read15
+  xpos -3719
+  ypos -295
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09bae90 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Obscured.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read14
+  xpos -3839
+  ypos -301
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne09bb1c0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Moon.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read13
+  xpos -3937
+  ypos -301
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a0f960 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Messy.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read12
+  xpos -4056
+  ypos -296
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a0fc90 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Ghost.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read9
+  xpos -3620
+  ypos -200
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a0ffc0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Grainy.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read10
+  xpos -3746
+  ypos -197
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a102f0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Disc.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read8
+  xpos -3844
+  ypos -194
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a10620 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Clean.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read6
+  xpos -3937
+  ypos -196
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a10950 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Confusion.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read7
+  xpos -4039
+  ypos -197
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a10c80 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Blurry.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read4
+  xpos -3628
+  ypos -92
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a10fb0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Brown.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read5
+  xpos -3764
+  ypos -96
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a112e0 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Blades.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read3
+  xpos -3871
+  ypos -97
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a11940 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Big-Spots.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read2
+  xpos -3985
+  ypos -93
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a11610 [stack 0]
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Backlight.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read1
+  xpos -4094
+  ypos -99
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+set Ne0a11c70 [stack 0]
+ ContactSheet {
+  inputs 25
+  width 1000
+  height 1000
+  rows 5
+  columns 5
+  startframe 1
+  endframe 1
+  name ContactSheet1
+  xpos -3230
+  ypos -218
+  hide_input true
+ }
+ Text {
+  message "01           02           03          04           05\n06           07           08          09           10\n11           12           13          14           15\n16           17           18          19           20 \n21           22           23           24          25"
+  font C:/Windows/Fonts/arial.ttf
+  leading 3
+  yjustify top
+  box {768 512 1772 1510}
+  translate {-770 -512}
+  center {770 1511}
+  name Text2
+  xpos -3230
+  ypos -181
+ }
+ Grid {
+  number 5
+  name Grid1
+  xpos -3230
+  ypos -155
+ }
+set Ne0a12600 [stack 0]
+ Dot {
+  name Dot110
+  xpos -3196
+  ypos 3194
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos -821
+  ypos -874
+ }
+set Ne0a12c60 [stack 0]
+ Dot {
+  name Dot79
+  xpos 1283
+  ypos -870
+ }
+ Dot {
+  name Dot93
+  xpos 1283
+  ypos 2845
+ }
+ AdjBBox {
+  numpixels {{parent.scale<1?parent.scale*10:parent.scale*3 i}}
+  name AdjBBox1
+  xpos 925
+  ypos 2841
+ }
+set Ne0a135f0 [stack 0]
+push $Ndda453d0
+ Dot {
+  name Dot97
+  xpos -3067
+  ypos -1383
+ }
+ Dot {
+  name Dot96
+  xpos -3067
+  ypos 2698
+ }
+push $Ne0a10fb0
+push $Ne0a112e0
+push $Ne0a11940
+push $Ne0a11610
+push $Ne0a11c70
+push $Ne0a0ffc0
+push $Ne0a102f0
+push $Ne0a10620
+push $Ne0a10950
+push $Ne0a10c80
+push $Ne09bab60
+push $Ne09bae90
+push $Ne09bb1c0
+push $Ne0a0f960
+push $Ne0a0fc90
+push $Ne09b9b70
+push $Ne09b9ea0
+push $Ne09ba1d0
+push $Ne09ba500
+push $Ne09ba830
+push $Ne07f2500
+push $Ne07f2830
+push $Na1569d10
+push $Na1569380
+push $Ne09b9840
+push $N914e3cc0
+ Dot {
+  name Dot109
+  xpos -2801
+  ypos 51
+ }
+ Switch {
+  inputs 26
+  which {{Iris i}}
+  name iris
+  xpos -2835
+  ypos 107
+  hide_input true
+ }
+ Dot {
+  name Dot108
+  xpos -2050
+  ypos 55
+ }
+ TransformMasked {
+  rotate {{parent.Rotate i}}
+  center {50 50}
+  name Transform11
+  xpos -2084
+  ypos 117
+ }
+set Ndda8e400 [stack 0]
+ Dot {
+  name Dot42
+  xpos -2154
+  ypos 127
+ }
+ FilterErode {
+  channels all
+  size {{parent.Erode i}}
+  filter gaussian
+  name FilterErode1
+  xpos -2188
+  ypos 158
+ }
+ Dot {
+  name Dot43
+  xpos -2154
+  ypos 207
+ }
+push $Ndda8e400
+ Merge2 {
+  inputs 2
+  operation stencil
+  mix {{parent.Inner i}}
+  name Merge7
+  xpos -2084
+  ypos 203
+ }
+ RotoPaint {
+  curves {AnimTree: "" {
+ Version: 1.2
+ Flag: 0
+ RootNode: 1
+ Node: {
+  NodeName: "Root" {
+   Flag: 512
+   NodeType: 1
+   Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 21 S 0 20.5 
+   NumOfAttributes: 11
+   "vis" S 0 1 "opc" S 0 1 "mbo" S 0 1 "mb" S 0 1 "mbs" S 0 0.5 "fo" S 0 1 "fx" S 0 0 "fy" S 0 0 "ff" S 0 1 "ft" S 0 0 "pt" S 0 0 
+  }
+  NumOfChildren: 1
+  Node: {
+   NodeName: "Bezier1" {
+    Flag: 576
+    NodeType: 3
+    CurveGroup: "" {
+     Transform: 0 0 S 0 0 S 0 0 S 0 0 S 0 1 S 0 1 S 0 0 S 0 31.8 S 0 35.3 
+     Flag: 0
+     NumOfCubicCurves: 2
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 15
+      0 S 0 -0.2 S 0 0 0 0 S 0 -2.7 S 0 41.5 0 0 S 0 0.108 S 0 0 0 0 S 0 -13.3116 S 0 5.60222 0 0 S 0 34.1 S 0 43.1 0 0 S 0 11.3396 S 0 -4.77226 0 0 S 0 -0.184002 S 0 -0.0919991 0 0 S 0 47.2 S 0 20.7 0 0 S 0 0.399998 S 0 0.199999 0 0 S 0 0.200001 S 0 -0.200001 0 0 S 0 59.6 S 0 38.7 0 0 S 0 -0.200001 S 0 0.200001 0 0 S 0 1.2 S 0 0.0999985 0 0 S 0 25.2 S 0 52 0 0 S 0 -1.2 S 0 -0.0999985 0 
+     }
+     CubicCurve: "" {
+      Type: 0 Flag: 8192 Dim: 2
+      NumOfPoints: 15
+      0 S 0 -0.200001 S 0 0 0 0 S 0 -46.3 S 0 -11.9 0 0 S 0 0.108002 S 0 0 0 0 S 0 -29.3543 S 0 9.46533 0 0 S 0 -21.7744 S 0 -33.288 0 0 S 0 25.0055 S 0 -8.06306 0 0 S 0 -0.184002 S 0 -0.0919991 0 0 S 0 13.5 S 0 -26.3 0 0 S 0 0.399998 S 0 0.199999 0 0 S 0 0.200001 S 0 -0.200001 0 0 S 0 0 S 0 0 0 0 S 0 -0.200001 S 0 0.200001 0 0 S 0 1.2 S 0 0.0999985 0 0 S 0 0 S 0 0 0 0 S 0 -1.2 S 0 -0.0999985 0 
+     }
+     NumOfAttributes: 44
+     "vis" S 0 1 "r" S 0 0 "g" S 0 0 "b" S 0 0 "a" S 0 0 "ro" S 0 0 "go" S 0 0 "bo" S 0 0 "ao" S 0 0 "opc" S 0 1 "bm" S 0 0 "inv" S 0 0 "mbo" S 0 0 "mb" S 0 1 "mbs" S 0 0.5 "mbsot" S 0 0 "mbso" S 0 0 "fo" S 0 1 "fx" S 0 74 "fy" S 0 74 "ff" S 0 1.8 "ft" S 0 0 "src" S 0 0 "stx" S 0 0 "sty" S 0 0 "str" S 0 1 "sr" S 0 0 "ssx" S 0 1 "ssy" S 0 1 "ss" S 0 0 "spx" S 0 21 "spy" S 0 20.5 "stot" S 0 0 "sto" S 0 0 "sv" S 0 0 "sf" S 0 1 "sb" S 0 1 "nv" S 0 1 "view1" S 0 1 "ltn" S 0 101 "ltm" S 0 101 "ltt" S 0 0 "tt" S 0 4 "pt" S 0 0 
+    }
+   }
+   NumOfChildren: 0
+  }
+ }
+}
+}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBSpline ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle ssx 1 ssy 1 sf 1 sb 1 }
+  { brush ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_lifetime_type all
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {320 240}
+  toolbar_source_translate_round true
+  color 0
+  colorOverlay 0
+  lifetime_type "all frames"
+  lifetime_start 101
+  lifetime_end 101
+  feather 74
+  feather_falloff 1.799999952
+  motionblur_shutter_offset_type centred
+  source_translate_round true
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name RotoPaint2
+  xpos -2084
+  ypos 238
+  disable {{!parent.BreakShape i}}
+ }
+ Dot {
+  name Dot89
+  xpos -2050
+  ypos 282
+ }
+set Ndda8f720 [stack 0]
+ Dot {
+  name Dot90
+  xpos -2178
+  ypos 282
+ }
+set Ndda8fa50 [stack 0]
+ Dot {
+  name Dot91
+  xpos -2338
+  ypos 282
+ }
+ Shuffle {
+  red black
+  green black
+  alpha blue
+  name BLUE
+  xpos -2370
+  ypos 328
+ }
+ Transform {
+  scale {{(parent.transl.b/100)+1 i}}
+  skew {{parent.abberation.b/100 i}}
+  center {960 540}
+  name T_BLUE
+  xpos -2370
+  ypos 375
+ }
+ Dot {
+  name Dot100
+  xpos -2336
+  ypos 520
+ }
+push $Ndda8fa50
+ Shuffle {
+  red black
+  blue black
+  alpha black
+  name GREEN
+  xpos -2212
+  ypos 325
+ }
+ Transform {
+  scale {{(parent.transl.g/100)+1 i}}
+  skew {{parent.abberation.g/100 i}}
+  center {960 540}
+  name T_GREEN
+  xpos -2212
+  ypos 370
+ }
+ Dot {
+  name Dot99
+  xpos -2178
+  ypos 430
+ }
+push $Ndda8f720
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name RED
+  xpos -2084
+  ypos 322
+ }
+ Transform {
+  scale {{parent.transl.r/100+1 i}}
+  skew {{parent.abberation.r/100 i}}
+  center {960 540}
+  name T_red
+  xpos -2084
+  ypos 375
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  Bchannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name Merge1
+  xpos -2084
+  ypos 426
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+  Bchannels {rgba.red rgba.green -rgba.blue rgba.alpha}
+  name Merge14
+  xpos -2084
+  ypos 516
+ }
+ Dot {
+  name Dot44
+  xpos -2050
+  ypos 550
+ }
+ Dot {
+  name Dot58
+  xpos -628
+  ypos 550
+ }
+set Ndffc3bb0 [stack 0]
+ TransformMasked {
+  scale {{parent.scale i}}
+  center {50 50}
+  name Transform10
+  selected true
+  xpos -662
+  ypos 585
+ }
+ Dot {
+  name Dot66
+  xpos -628
+  ypos 719
+ }
+push $Ne0a12c60
+ Keyer {
+  operation "luminance key"
+  range {{parent.LumaKey i} 1 1 1}
+  name Keyer1
+  xpos -681
+  ypos -776
+ }
+ Dot {
+  name Dot101
+  xpos -647
+  ypos -621
+ }
+push $Ne0a12c60
+ Multiply {
+  inputs 1+1
+  value {{parent.Gain+1 i}}
+  name Multiply1
+  label FADE
+  xpos -821
+  ypos -638
+ }
+ Dot {
+  name Dot54
+  xpos -787
+  ypos 57
+ }
+ Dot {
+  name Dot57
+  xpos -571
+  ypos 57
+ }
+set Ndfff3550 [stack 0]
+ Convolve {
+  inputs 2
+  name Convolve17
+  xpos -607
+  ypos 709
+ }
+ Dot {
+  name Dot88
+  xpos -573
+  ypos 1975
+ }
+push $Ndffc3bb0
+ Dot {
+  name Dot45
+  xpos -518
+  ypos 550
+ }
+set Ndfff4540 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.9*multiplyer+.1 i}}
+  center {50 50}
+  name Transform1
+  xpos -547
+  ypos 582
+ }
+ Dot {
+  name Dot67
+  xpos -513
+  ypos 720
+ }
+push $Ndffc5b90
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.9?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression8
+  label "0.9 \n"
+  note_font_size 20
+  xpos -532
+  ypos -337
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur8
+  xpos -532
+  ypos -214
+ }
+ Dot {
+  name Dot28
+  xpos -498
+  ypos 105
+ }
+push $Ndfff3550
+ Dot {
+  name Dot29
+  xpos -430
+  ypos 57
+ }
+set Ndfff5860 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy2
+  xpos -465
+  ypos 127
+ }
+ Premult {
+  name Premult2
+  xpos -465
+  ypos 165
+ }
+ Convolve {
+  inputs 2
+  name Convolve4
+  xpos -465
+  ypos 710
+ }
+ Dot {
+  name Dot87
+  xpos -431
+  ypos 1856
+ }
+push $Ndfff4540
+ Dot {
+  name Dot46
+  xpos -364
+  ypos 550
+ }
+set Ndfff6850 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.8*multiplyer+.1 i}}
+  center {50 50}
+  name Transform2
+  xpos -398
+  ypos 583
+ }
+ Dot {
+  name Dot68
+  xpos -364
+  ypos 714
+ }
+push $Ndffc5860
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.8?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression1
+  label "0.8 \n"
+  note_font_size 20
+  xpos -403
+  ypos -338
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur2
+  xpos -403
+  ypos -217
+ }
+ Dot {
+  name Dot10
+  xpos -369
+  ypos -47
+ }
+ Dot {
+  name Dot59
+  xpos -369
+  ypos 103
+ }
+push $Ndfff5860
+ Dot {
+  name Dot6
+  xpos -301
+  ypos 54
+ }
+set Ne0b2cd90 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy3
+  xpos -335
+  ypos 125
+ }
+ Premult {
+  name Premult3
+  xpos -335
+  ypos 163
+ }
+ Convolve {
+  inputs 2
+  name Convolve6
+  xpos -335
+  ypos 710
+ }
+ Dot {
+  name Dot86
+  xpos -301
+  ypos 1709
+ }
+push $Ndfff6850
+ Dot {
+  name Dot47
+  xpos -223
+  ypos 550
+ }
+set Ne0b2dd80 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.7*multiplyer+.1 i}}
+  center {50 50}
+  name Transform3
+  xpos -257
+  ypos 584
+ }
+ Dot {
+  name Dot69
+  xpos -223
+  ypos 717
+ }
+push $Ndffc5530
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.7?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression7
+  label "0.7 \n\n"
+  note_font_size 20
+  xpos -250
+  ypos -330
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur1
+  xpos -250
+  ypos -216
+ }
+ Dot {
+  name Dot1
+  xpos -208
+  ypos -52
+ }
+ Dot {
+  name Dot60
+  xpos -208
+  ypos 102
+ }
+push $Ne0b2cd90
+ Dot {
+  name Dot2
+  xpos -160
+  ypos 51
+ }
+set Ne0b2f3d0 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy4
+  xpos -194
+  ypos 124
+ }
+ Premult {
+  name Premult4
+  xpos -194
+  ypos 162
+ }
+ Convolve {
+  inputs 2
+  name Convolve10
+  xpos -194
+  ypos 713
+ }
+ Dot {
+  name Dot85
+  xpos -160
+  ypos 1560
+ }
+push $Ne0b2dd80
+ Dot {
+  name Dot48
+  xpos -108
+  ypos 550
+ }
+set Ne0b36400 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.6*multiplyer+.1 i}}
+  center {50 50}
+  name Transform4
+  xpos -142
+  ypos 580
+ }
+ Dot {
+  name Dot70
+  xpos -108
+  ypos 717
+ }
+push $Ndffc5200
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.6?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression2
+  label "0.6 \n\n"
+  note_font_size 20
+  xpos -129
+  ypos -335
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur3
+  xpos -129
+  ypos -219
+ }
+ Dot {
+  name Dot11
+  xpos -98
+  ypos -55
+ }
+ Dot {
+  name Dot61
+  xpos -98
+  ypos 98
+ }
+push $Ne0b2f3d0
+ Dot {
+  name Dot7
+  xpos -50
+  ypos 51
+ }
+set Ne0b37a50 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy5
+  xpos -84
+  ypos 120
+ }
+ Premult {
+  name Premult5
+  xpos -84
+  ypos 158
+ }
+ Convolve {
+  inputs 2
+  name Convolve11
+  xpos -84
+  ypos 713
+ }
+ Dot {
+  name Dot84
+  xpos -50
+  ypos 1467
+ }
+push $Ne0b36400
+ Dot {
+  name Dot49
+  xpos 24
+  ypos 550
+ }
+set Ne0b38a40 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.5*multiplyer+.1 i}}
+  center {50 50}
+  name Transform5
+  xpos -10
+  ypos 579
+ }
+ Dot {
+  name Dot71
+  xpos 24
+  ypos 707
+ }
+push $Ndffc4ed0
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.5?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression9
+  label "0.5\n\n"
+  note_font_size 20
+  xpos 15
+  ypos -333
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur9
+  xpos 15
+  ypos -224
+ }
+ Dot {
+  name Dot30
+  xpos 49
+  ypos -55
+ }
+ Dot {
+  name Dot62
+  xpos 49
+  ypos 96
+ }
+push $Ne0b37a50
+ Dot {
+  name Dot31
+  xpos 94
+  ypos 51
+ }
+set Ne0b3a090 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy6
+  xpos 60
+  ypos 118
+ }
+ Premult {
+  name Premult6
+  xpos 60
+  ypos 156
+ }
+ Convolve {
+  inputs 2
+  name Convolve12
+  xpos 60
+  ypos 703
+ }
+ Dot {
+  name Dot83
+  xpos 94
+  ypos 1334
+ }
+push $Ne0b38a40
+ Dot {
+  name Dot50
+  xpos 166
+  ypos 550
+ }
+set Ne0b5f0c0 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.4*multiplyer+.1 i}}
+  center {50 50}
+  name Transform6
+  xpos 132
+  ypos 579
+ }
+ Dot {
+  name Dot72
+  xpos 166
+  ypos 711
+ }
+push $Ndffc4ba0
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.4?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression3
+  label "0.4 \n\n"
+  note_font_size 20
+  xpos 144
+  ypos -328
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur4
+  xpos 144
+  ypos -220
+ }
+ Dot {
+  name Dot12
+  xpos 178
+  ypos -55
+ }
+ Dot {
+  name Dot63
+  xpos 178
+  ypos 94
+ }
+push $Ne0b3a090
+ Dot {
+  name Dot8
+  xpos 223
+  ypos 51
+ }
+set Ne0b60710 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy7
+  xpos 189
+  ypos 116
+ }
+ Premult {
+  name Premult7
+  xpos 189
+  ypos 154
+ }
+ Convolve {
+  inputs 2
+  name Convolve13
+  xpos 189
+  ypos 707
+ }
+ Dot {
+  name Dot82
+  xpos 223
+  ypos 1205
+ }
+push $Ne0b5f0c0
+ Dot {
+  name Dot51
+  xpos 291
+  ypos 550
+ }
+set Ne0b61700 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.3*multiplyer+.1 i}}
+  center {50 50}
+  name Transform7
+  xpos 257
+  ypos 577
+ }
+ Dot {
+  name Dot73
+  xpos 291
+  ypos 704
+ }
+push $Ndffc4870
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.3?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression10
+  label "0.3\n\n\n"
+  note_font_size 20
+  xpos 261
+  ypos -333
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur10
+  xpos 260
+  ypos -220
+ }
+ Dot {
+  name Dot32
+  xpos 294
+  ypos -57
+ }
+ Dot {
+  name Dot64
+  xpos 294
+  ypos 93
+ }
+push $Ne0b60710
+ Dot {
+  name Dot33
+  xpos 358
+  ypos 51
+ }
+set Ne035d070 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy8
+  xpos 324
+  ypos 115
+ }
+ Premult {
+  name Premult8
+  xpos 324
+  ypos 153
+ }
+ Convolve {
+  inputs 2
+  name Convolve14
+  xpos 324
+  ypos 700
+ }
+ Dot {
+  name Dot81
+  xpos 358
+  ypos 1096
+ }
+push $Ne0b61700
+ Dot {
+  name Dot52
+  xpos 434
+  ypos 550
+ }
+set Ne035e060 [stack 0]
+ TransformMasked {
+  scale {{parent.scale*.2*multiplyer+.1 i}}
+  center {50 50}
+  name Transform8
+  xpos 400
+  ypos 575
+ }
+ Dot {
+  name Dot74
+  xpos 434
+  ypos 707
+ }
+push $Ndffc4870
+ Dot {
+  name Dot23
+  xpos 443
+  ypos -434
+ }
+set Ne035e9f0 [stack 0]
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.2?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression4
+  label "0.2\n\n\n"
+  note_font_size 20
+  xpos 409
+  ypos -329
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur5
+  xpos 408
+  ypos -220
+ }
+ Dot {
+  name Dot13
+  xpos 442
+  ypos -71
+ }
+ Dot {
+  name Dot65
+  xpos 442
+  ypos 91
+ }
+push $Ne035d070
+ Dot {
+  name Dot9
+  xpos 506
+  ypos 51
+ }
+set Ne035f9e0 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy9
+  xpos 472
+  ypos 113
+ }
+ Premult {
+  name Premult9
+  xpos 472
+  ypos 151
+ }
+ Convolve {
+  inputs 2
+  name Convolve15
+  xpos 472
+  ypos 703
+ }
+ Dot {
+  name Dot80
+  xpos 506
+  ypos 993
+ }
+push $Ne035e060
+ Dot {
+  name Dot53
+  xpos 574
+  ypos 550
+ }
+ TransformMasked {
+  scale {{parent.scale*.1*multiplyer+.1 i}}
+  center {50 50}
+  name Transform9
+  xpos 540
+  ypos 568
+ }
+ Dot {
+  name Dot75
+  xpos 574
+  ypos 708
+ }
+push $Ne035e9f0
+ Dot {
+  name Dot25
+  xpos 604
+  ypos -434
+ }
+set Nd9c876c0 [stack 0]
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a<0.1?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression11
+  label "1\n\n\n\n"
+  note_font_size 20
+  xpos 566
+  ypos -326
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur11
+  xpos 566
+  ypos -221
+ }
+ Dot {
+  name Dot34
+  xpos 600
+  ypos -74
+ }
+ Dot {
+  name Dot77
+  xpos 600
+  ypos 98
+ }
+push $Ne035f9e0
+ Dot {
+  name Dot35
+  xpos 652
+  ypos 51
+ }
+set Nd9c886b0 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy10
+  xpos 618
+  ypos 120
+ }
+ Premult {
+  name Premult10
+  xpos 618
+  ypos 158
+ }
+ Convolve {
+  inputs 2
+  name Convolve16
+  xpos 618
+  ypos 698
+ }
+ Dot {
+  name Dot76
+  xpos 652
+  ypos 916
+ }
+push $Nd9c876c0
+ Dot {
+  name Dot18
+  xpos 764
+  ypos -437
+ }
+ Expression {
+  temp_name0 treshhold
+  temp_expr0 a==0?1:0
+  expr0 treshhold
+  expr1 treshhold
+  expr2 treshhold
+  expr3 treshhold
+  name Expression6
+  label "0\n\n\n\n"
+  note_font_size 20
+  xpos 730
+  ypos -324
+ }
+ Blur {
+  size {{parent.StepsBlur i}}
+  name Blur7
+  xpos 730
+  ypos -216
+ }
+ Dot {
+  name Dot16
+  xpos 764
+  ypos -59
+ }
+ Dot {
+  name Dot78
+  xpos 765
+  ypos 99
+ }
+push $Nd9c886b0
+ Dot {
+  name Dot15
+  xpos 833
+  ypos 51
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy11
+  xpos 799
+  ypos 121
+ }
+ Premult {
+  name Premult11
+  xpos 799
+  ypos 159
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge2
+  xpos 799
+  ypos 912
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge4
+  xpos 799
+  ypos 989
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge5
+  xpos 799
+  ypos 1092
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge6
+  xpos 799
+  ypos 1201
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge8
+  xpos 799
+  ypos 1330
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge9
+  xpos 799
+  ypos 1463
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge10
+  xpos 799
+  ypos 1556
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge11
+  xpos 799
+  ypos 1705
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge12
+  xpos 799
+  ypos 1852
+ }
+ Merge2 {
+  inputs 2
+  operation under
+  name Merge13
+  xpos 799
+  ypos 1971
+ }
+set Nd9c8ccd0 [stack 0]
+ Switch {
+  inputs 2
+  which {{parent.test i}}
+  name Switch2
+  xpos 799
+  ypos 2694
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos 799
+  ypos 2841
+ }
+ Dot {
+  name Dot107
+  xpos 833
+  ypos 3091
+ }
+ Switch {
+  inputs 2
+  which {{parent.Preview i}}
+  name Switch5
+  xpos 1249
+  ypos 3190
+ }
+ Switch {
+  inputs 2
+  which {{parent.Preview2 i}}
+  name Switch6
+  xpos 1244
+  ypos 3265
+ }
+ Output {
+  name Output1
+  xpos 1244
+  ypos 3338
+ }
+ Text {
+  inputs 0
+  font C:/Windows/Fonts/arial.ttf
+  yjustify center
+  box {512 389 1536 1167}
+  center {1024 778}
+  name Text1
+  xpos -4314
+  ypos -263
+ }
+ Read {
+  inputs 0
+  file "\[value Custom]Iris_Soft.jpg"
+  format "100 100 0 0 100 100 1 Defocus"
+  origset true
+  name Read11
+  xpos -4270
+  ypos -437
+  postage_stamp false
+  addUserKnob {20 localize l Localize}
+  addUserKnob {3 proxy_first l "Proxy Range: "}
+  addUserKnob {3 proxy_last l "" -STARTLINE}
+  proxy_last 1
+  addUserKnob {22 setFR l "Frame Range" -STARTLINE T setProxyToRange(nuke.thisNode())}
+  addUserKnob {22 setCR l "Comp Range" -STARTLINE T "setProxyToRange(nuke.thisNode(), fr = False)"}
+  addUserKnob {26 absatz l "  " T "  "}
+  addUserKnob {22 lcl l Localize t "localize actual Read." T "startLocalizing(\[nuke.thisNode()],button = True)" +STARTLINE}
+  addUserKnob {22 rmv l Remove t "remove files from local disk.\nonly active if proxy available." -STARTLINE T "startRemoving(\[nuke.thisNode()],button = True)"}
+  addUserKnob {26 dvd l "" +STARTLINE}
+  addUserKnob {26 fSize l "File Size: "}
+  addUserKnob {26 dsk l "Free Disk Space: " T "218.9 GB"}
+  addUserKnob {22 upd l Update t "get file size information of actual Read." T "updateSizeInfo(\[nuke.thisNode()])" +STARTLINE}
+  addUserKnob {22 updAll l "Update All" t "get file size information of all Reads.\nNOTE: Nuke will not run smoothly while update is in progress." -STARTLINE T "updateSizeInfo(\[read for read in getReads() if read\[\"fSize\"].value() == \"\"])"}
+ }
+push $Ne0a12600
+push $Nd9c8ccd0
+ Viewer {
+  inputs 2
+  viewerProcess None
+  input_process false
+  translate {-0.7860000134 -0.8439999819}
+  rotate 49.93920511
+  name Viewer1
+  xpos -1788
+  ypos -173
+  hide_input true
+ }
+push $Ne0a135f0
+ Dot {
+  name Dot106
+  xpos 959
+  ypos 2995
+ }
+ Constant {
+  inputs 0
+  channels rgba
+  color 1
+  name Constant1
+  xpos 1404
+  ypos 2878
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox2
+  xpos 1404
+  ypos 2991
+ }
+ Input {
+  inputs 0
+  name Mask
+  xpos 1538
+  ypos 2790
+  number 1
+ }
+ Switch {
+  inputs 2
+  which {{!parent.Mask i}}
+  name Switch4
+  xpos 1538
+  ypos 2991
+ }
+ Dot {
+  name Dot105
+  xpos 1572
+  ypos 3091
+ }
+push 0
+push 0
+ Merge2 {
+  inputs 2+1
+  name Merge3
+  xpos 1249
+  ypos 3087
+ }
+ Shuffle {
+  inputs 0
+  red black
+  green black
+  blue black
+  alpha black
+  name Shuffle3
+  tile_color 1
+  label "Black Alpha"
+  xpos 914
+  ypos 1884
+ }
+end_group

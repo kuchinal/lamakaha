@@ -1,0 +1,180 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name sharpen1
+ selected true
+ xpos 35
+ ypos 17889
+ addUserKnob {20 User}
+ addUserKnob {41 size l Size T Blur1.size}
+ addUserKnob {7 ammount R 1 10}
+ ammount 1
+ addUserKnob {41 mix_1 l Mix T Merge2.mix}
+ addUserKnob {41 filter T Blur1.filter}
+ addUserKnob {6 HighPassMaP l "High Pass Map" -STARTLINE}
+ addUserKnob {6 mask l "use mask" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos 593
+  ypos 74
+  number 1
+ }
+ Dot {
+  name Dot9
+  xpos 627
+  ypos 257
+ }
+ Input {
+  inputs 0
+  name Src
+  xpos 379
+  ypos -433
+ }
+set Nd6efa0b0 [stack 0]
+ Colorspace {
+  colorspace_out Cineon
+  name Colorspace1
+  xpos 269
+  ypos -385
+ }
+ Dot {
+  name Dot1
+  xpos 303
+  ypos -318
+ }
+set Nd6efa790 [stack 0]
+ Dot {
+  name Dot2
+  xpos 7
+  ypos -318
+ }
+set Nd6efab00 [stack 0]
+ Dot {
+  name Dot3
+  xpos -209
+  ypos -318
+ }
+ Invert {
+  name Invert1
+  xpos -243
+  ypos -281
+ }
+ Blur {
+  size 3
+  name Blur1
+  xpos -243
+  ypos -245
+ }
+ Dot {
+  name Dot4
+  xpos -209
+  ypos -117
+ }
+push $Nd6efab00
+ Merge2 {
+  inputs 2
+  operation average
+  name Merge1
+  xpos -27
+  ypos -121
+ }
+set Nd6efbc30 [stack 0]
+ Dot {
+  name Dot5
+  xpos 7
+  ypos 121
+ }
+push $Nd6efbc30
+ Dot {
+  name Dot6
+  xpos 163
+  ypos -74
+ }
+ ColorLookup {
+  lut {master {curve C x0.4499999881 0 x0.5500000119 1}
+    red {}
+    green {}
+    blue {}
+    alpha {}}
+  mix {{(parent.ammount-1)/10}}
+  name ColorLookup1
+  xpos 129
+  ypos -15
+ }
+ Dot {
+  name Dot7
+  xpos 163
+  ypos 65
+ }
+push $Nd6efa790
+ Merge2 {
+  inputs 2
+  operation overlay
+  name Merge2
+  xpos 269
+  ypos 62
+ }
+ Switch {
+  inputs 2
+  which {{HighPassMaP}}
+  name Switch1
+  xpos 269
+  ypos 118
+ }
+ Colorspace {
+  colorspace_in Cineon
+  name Colorspace2
+  xpos 269
+  ypos 142
+ }
+ Dot {
+  name Dot8
+  xpos 303
+  ypos 258
+ }
+set Nd6efd440 [stack 0]
+push $Nd6efa0b0
+ Dot {
+  name Dot10
+  xpos 413
+  ypos 115
+ }
+ Merge2 {
+  inputs 2+1
+  operation copy
+  name Merge3
+  xpos 379
+  ypos 254
+ }
+push $Nd6efd440
+ Dot {
+  name Dot11
+  xpos 303
+  ypos 337
+ }
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1]"}}
+  name Switch2
+  selected true
+  xpos 379
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos 379
+  ypos 412
+ }
+ Viewer {
+  viewerProcess None
+  name Viewer1
+  xpos 950
+  ypos -9
+  hide_input true
+ }
+end_group

@@ -1,0 +1,218 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+push $cut_paste_input
+Dot {
+ name Dot34
+ label "smoke in"
+ selected true
+ xpos 1000
+ ypos 1499
+}
+Dot {
+ name Dot33
+ selected true
+ xpos 1000
+ ypos 1578
+}
+set N126fed70 [stack 0]
+Dot {
+ name Dot35
+ selected true
+ xpos 789
+ ypos 1578
+}
+set N16edfc40 [stack 0]
+Dot {
+ name Dot29
+ selected true
+ xpos 645
+ ypos 1578
+}
+set N89f4850 [stack 0]
+Dot {
+ name Dot31
+ selected true
+ xpos 497
+ ypos 1578
+}
+Grade {
+ add -0.1
+ gamma 0.61
+ name Grade9
+ label "core structure"
+ note_font_size 14
+ selected true
+ xpos 463
+ ypos 1666
+}
+Shuffle {
+ red green
+ blue green
+ alpha green
+ name Shuffle15
+ label green
+ selected true
+ xpos 463
+ ypos 1749
+}
+Dot {
+ name Dot32
+ selected true
+ xpos 497
+ ypos 1939
+}
+push $N89f4850
+Grade {
+ blackpoint 0.5
+ whitepoint 0.62
+ name Grade8
+ label cole
+ note_font_size 14
+ selected true
+ xpos 611
+ ypos 1667
+}
+Shuffle {
+ red green
+ blue green
+ alpha green
+ name Shuffle14
+ label green
+ selected true
+ xpos 611
+ ypos 1723
+}
+Clamp {
+ channels rgba
+ name Clamp1
+ selected true
+ xpos 611
+ ypos 1761
+}
+Blur {
+ channels rgba
+ size 24
+ name Blur1
+ selected true
+ xpos 611
+ ypos 1787
+}
+Dot {
+ name Dot30
+ selected true
+ xpos 645
+ ypos 1876
+}
+push $N16edfc40
+Grade {
+ multiply 1.78
+ gamma 2.45
+ name Grade10
+ label "bright matte"
+ note_font_size 14
+ selected true
+ xpos 755
+ ypos 1666
+}
+Shuffle {
+ red green
+ blue green
+ alpha green
+ name Shuffle3
+ label green
+ selected true
+ xpos 755
+ ypos 1776
+}
+set N89db360 [stack 0]
+Merge2 {
+ inputs 2
+ operation stencil
+ name Merge16
+ selected true
+ xpos 755
+ ypos 1872
+}
+Merge2 {
+ inputs 2
+ name Merge17
+ selected true
+ xpos 755
+ ypos 1935
+}
+Dot {
+ name Dot28
+ selected true
+ xpos 789
+ ypos 1981
+}
+push $N126fed70
+push $N89db360
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge18
+ label unpremult
+ note_font_size 14
+ selected true
+ xpos 966
+ ypos 1773
+}
+Grade {
+ white {1.56 1 0.35 1}
+ name Grade7
+ label "smoke CC"
+ note_font_size 14
+ selected true
+ xpos 966
+ ypos 1847
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy1
+ selected true
+ xpos 966
+ ypos 1971
+}
+Premult {
+ name Premult1
+ selected true
+ xpos 966
+ ypos 2022
+}
+Reformat {
+ name Reformat2
+ selected true
+ xpos 966
+ ypos 2058
+}
+Dot {
+ name Dot27
+ selected true
+ xpos 1000
+ ypos 2117
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard2
+ selected true
+ xpos 1143
+ ypos 1889
+ postage_stamp false
+}
+Grade {
+ multiply 0.08
+ name Grade6
+ selected true
+ xpos 1143
+ ypos 1915
+}
+Merge2 {
+ inputs 2
+ name Merge15
+ selected true
+ xpos 1143
+ ypos 2113
+}

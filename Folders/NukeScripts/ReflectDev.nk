@@ -1,0 +1,5071 @@
+#! /mnt/repository/software/nuke/9.0v7/centos-6_x86-64/libnuke-9.0.7.so -nx
+version 9.0 v7
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="2560" h="1440" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="630"/>
+            <splitter orientation="2">
+                <split size="957"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                    <page id="de.trixter.trixtershotdata"/>
+                </dock>
+                <split size="428"/>
+                <dock id="" activePageId="DopeSheet.1">
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                    <page id="uk.co.thefoundry.scripteditor.1"/>
+                    <page id="com.ohufx.MassivePanel"/>
+                </dock>
+            </splitter>
+            <split size="1926"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+                <page id="DAG.2"/>
+            </dock>
+        </splitter>
+    </window>
+    <window x="0" y="1" w="1920" h="1174" screen="0">
+        <splitter orientation="1">
+            <split size="1916"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+                <page id="Viewer.2"/>
+                <page id="Viewer.3"/>
+                <page id="Viewer.4"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /home/kuchinal/.nuke/user_Alexey/GeneralSetups/ReflectDev.nk
+ frame 1114
+ first_frame 1001
+ last_frame 1150
+ lock_range true
+ format "1280 720 0 0 1280 720 1 HD_720"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ defaultViewerLUT "OCIO LUTs"
+ OCIOConfigPath /corky/projects//Sputnik_343196/etc/ocio/nuke.ocio
+ free_type_system_fonts false
+ addUserKnob {20 trixter_tab l Trixter}
+ addUserKnob {6 tx_clearmemory l "clear memory before each rendered frame" -STARTLINE}
+ addUserKnob {6 tx_threadsone l "set threads to 1 before rendering" +STARTLINE}
+ addUserKnob {1 massivePanel}
+ addUserKnob {43 massivePanelHistory}
+ massivePanelHistory "s   look_axis   All   +Z   \ns   look_axis   All   +Z   \ns   look_axis   All   +Z   \ns   look_axis   All   +Z   \ns   look_axis   All   +Z   \ns   look_axis   All   +Z   \ns   look_axis   All   -Z   \ns   look_axis   All   -X   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \ns   look_axis   All   Z   \n"
+ addUserKnob {1 viewer_process l "viewer process"}
+ addUserKnob {20 OCIOViewerContext}
+ addUserKnob {26 ocioVCinfo l "" +STARTLINE T "set the context for OCIO in the viewers here (expressions don't work)"}
+ addUserKnob {26 ocioVCdiv l "" +STARTLINE T " "}
+ addUserKnob {1 ocioVCkey1 l key1}
+ addUserKnob {1 ocioVCvalue1 l value1 -STARTLINE}
+ addUserKnob {1 ocioVCkey2 l key2}
+ addUserKnob {1 ocioVCvalue2 l value2 -STARTLINE}
+ addUserKnob {1 ocioVCkey3 l key3}
+ addUserKnob {1 ocioVCvalue3 l value3 -STARTLINE}
+ addUserKnob {1 ocioVCkey4 l key4}
+ addUserKnob {1 ocioVCvalue4 l value4 -STARTLINE}
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x60709601
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ xpos -788
+ ypos -1114
+ bookmark false
+ bdwidth 807
+ bdheight 677
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode12
+ tile_color 0xd29082ff
+ label "generic Tunnel v3 orange"
+ note_font_size 42
+ note_font_color 0x96b8d200
+ xpos -3432
+ ypos -1124
+ bdwidth 474
+ bdheight 540
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x4f289901
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ xpos -2287
+ ypos -1119
+ bookmark false
+ bdwidth 690
+ bdheight 685
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x4c2b7f01
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ xpos -1571
+ ypos -1118
+ bookmark false
+ bdwidth 769
+ bdheight 676
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x60709601
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ xpos -3823
+ ypos 538
+ bookmark false
+ bdwidth 807
+ bdheight 677
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x4f289901
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ xpos -5322
+ ypos 533
+ bookmark false
+ bdwidth 690
+ bdheight 685
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x4c2b7f01
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ xpos -4606
+ ypos 534
+ bookmark false
+ bdwidth 769
+ bdheight 676
+}
+Roto {
+ inputs 0
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44968000 x4461c000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Bezier1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {x3f8a3800 x3f8a4000}
+        {x4545e000 x4573e000}
+        {xc0000000 xc0000000}
+        {0 x40000000}
+        {x454a0000 x4573c000}
+        {0 xc0000000}
+        {x40000000}
+        {x4549e000 x450a4000}
+        {xc0000000}
+        {x40000000 xc0800000}
+        {x4546a000 x450a4000}
+        {xbf6b8000 x3feb8000}
+        {x4012a800 xc3c10c70}
+        {x4545a99a x4539c000}
+        {xc02c2000 x43e29f50}}}
+      {cc
+       {f 8192}
+       {p
+        {x3f8a3800 x3f8a4000}
+        {}
+        {xc0000000 xc0000000}
+        {0 x40000000}
+        {}
+        {0 xc0000000}
+        {x40000000}
+        {}
+        {xc0000000}
+        {x40000000 xc0800000}
+        {}
+        {xbf6b8000 x3feb8000}
+        {x4012a800 xc3c10c70}
+        {xc164cd00 xc0266400}
+        {xc02c2000 x43e29f50}}}}
+     {t x45481800 x453f0800}
+     {a osw 1 osf 0 str 1 spx x44968000 spy x4461c000 sb 1 ltn x44806000 ltm x44806000 tt x40800000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 1
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1204 903}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1027
+ lifetime_end 1027
+ motionblur_shutter_offset_type centred
+ openspline_width 1
+ source_black_outside true
+ name Roto63
+ xpos -3479
+ ypos -1271
+ hide_input true
+}
+push 0
+Group {
+ inputs 2
+ name Patcher9
+ tile_color 0x411557ff
+ gl_color 0x339bffff
+ label "\[value from_frame]-\[value to_frame]\n\n"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 10
+ note_font_color 0xffffffff
+ xpos -3447
+ ypos -1275
+ addUserKnob {20 User}
+ addUserKnob {3 cloneframe l "clone frame" -STARTLINE}
+ cloneframe 1027
+ addUserKnob {3 from_frame l "from frame"}
+ from_frame 1001
+ addUserKnob {3 to_frame l "to frame" -STARTLINE}
+ to_frame 1035
+ addUserKnob {22 grab l "grab reference pattern" T "\nn = nuke.thisNode()\nn\['copy_from_to_1'].execute()\nn\['disableCP'].setValue(0)\nn\['to1'].setExpression('parent.point1')\nn\['to2'].setExpression('parent.point2')\nn\['to3'].setExpression('parent.point3')\nn\['to4'].setExpression('parent.point4')\n\nn\['from1'].clearAnimated()\nn\['from2'].clearAnimated()\nn\['from3'].clearAnimated()\nn\['from4'].clearAnimated()\nn\['gl_color'].setValue(4279121151)\n" +STARTLINE}
+ addUserKnob {6 allignview l allign_view -STARTLINE}
+ addUserKnob {6 patch_only l "show reference only" -STARTLINE}
+ addUserKnob {22 externalMask l INVISIBLE +INVISIBLE T "d = nuke.toNode(\"maskDot\")\na = nuke.nodes.Input(name = \"mask\")\nd.setInput(0,a)" +STARTLINE}
+ addUserKnob {22 cutOut l INVISIBLE -STARTLINE +INVISIBLE T "d = nuke.toNode(\"maskDotB\")\na = nuke.nodes.Input(name = \"cutout\")\nnuke.toNode(\"Mcutout\")\['disable'].setValue(0)\nd.setInput(0,a)"}
+ addUserKnob {6 ExportPatchOnly l "export patch only" -STARTLINE}
+ addUserKnob {41 translate T Transform8.translate}
+ addUserKnob {20 from l "Additional transforms" n 1}
+ from 0
+ addUserKnob {6 disableCP l "disable corner pin" +STARTLINE}
+ addUserKnob {41 copy_from_to_1 l "Copy 'to'" T CornerPin2D1.copy_from_to}
+ addUserKnob {41 from1 T CornerPin2D1.from1}
+ addUserKnob {41 from2 -STARTLINE T CornerPin2D1.from2}
+ addUserKnob {41 from3 T CornerPin2D1.from3}
+ addUserKnob {41 from4 -STARTLINE T CornerPin2D1.from4}
+ addUserKnob {41 to1 T CornerPin2D1.to1}
+ addUserKnob {41 to2 -STARTLINE T CornerPin2D1.to2}
+ addUserKnob {41 to3 T CornerPin2D1.to3}
+ addUserKnob {41 to4 -STARTLINE T CornerPin2D1.to4}
+ addUserKnob {41 rotate T Transform8.rotate}
+ addUserKnob {41 scale T Transform8.scale}
+ addUserKnob {41 center T Transform8.center}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 CC}
+ addUserKnob {41 multiply T Grade6.multiply}
+ addUserKnob {41 gamma T Grade6.gamma}
+ addUserKnob {41 add l offset T Grade6.add}
+ addUserKnob {26 Points}
+ addUserKnob {12 point4}
+ point4 {{curve x1027 100} {curve x1027 200}}
+ addUserKnob {12 point3 -STARTLINE}
+ point3 {{curve x1027 200} {curve x1027 200}}
+ addUserKnob {12 point1}
+ point1 {{curve x1027 100} {curve x1027 100}}
+ addUserKnob {12 point2 -STARTLINE}
+ point2 {{curve x1027 200} {curve x1027 100}}
+ addUserKnob {26 ""}
+ addUserKnob {41 size l "Blur roto" T Blur9.size}
+ addUserKnob {41 mix T Merge15.mix}
+}
+ Input {
+  inputs 0
+  name mask
+  selected true
+  xpos -6
+  ypos 467
+  number 1
+ }
+ Dot {
+  name maskDot
+  tile_color 0xff
+  xpos 291
+  ypos 471
+ }
+set N80a1200 [stack 0]
+ Input {
+  inputs 0
+  name Image
+  xpos 843
+  ypos -41
+ }
+ Dot {
+  name Dot22
+  xpos 877
+  ypos 84
+ }
+set N8e63340 [stack 0]
+ Dot {
+  name Dot23
+  xpos 475
+  ypos 84
+ }
+set N80a6a70 [stack 0]
+ Shuffle {
+  alpha white
+  name Shuffle5
+  tile_color 0xffffffff
+  label "White Alpha"
+  xpos 441
+  ypos 175
+ }
+ FrameHold {
+  first_frame {{parent.cloneframe}}
+  name FrameHold6
+  xpos 441
+  ypos 213
+ }
+ Grade {
+  name Grade6
+  xpos 441
+  ypos 251
+ }
+ CornerPin2D {
+  to1 {{parent.point1} {parent.point1}}
+  to2 {{parent.point2} {parent.point2}}
+  to3 {{parent.point3} {parent.point3}}
+  to4 {{parent.point4} {parent.point4}}
+  invert false
+  from1 {{parent.point1} {parent.point1}}
+  from2 {{parent.point2} {parent.point2}}
+  from3 {{parent.point3} {parent.point3}}
+  from4 {{parent.point4} {parent.point4}}
+  name CornerPin2D1
+  xpos 441
+  ypos 277
+  disable {{parent.disableCP}}
+ }
+ Transform {
+  translate {50 20}
+  center {960 540}
+  name Transform8
+  xpos 441
+  ypos 325
+ }
+ Dot {
+  name Dot2
+  xpos 475
+  ypos 387
+ }
+set N81839a0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge13
+  xpos 441
+  ypos 467
+ }
+ Dot {
+  name Dot24
+  xpos 475
+  ypos 527
+ }
+set N7d266f0 [stack 0]
+ Dot {
+  name Dot8
+  xpos 475
+  ypos 892
+ }
+push $N80a1200
+ Grade {
+  multiply {1 0.6 0.6 1}
+  name Grade2
+  xpos 257
+  ypos 554
+ }
+ Dot {
+  name Dot7
+  xpos 291
+  ypos 651
+ }
+push $N81839a0
+ Dot {
+  name Dot5
+  xpos 391
+  ypos 387
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix 0.5
+  name Merge1
+  xpos 357
+  ypos 647
+ }
+ Dot {
+  name Dot4
+  xpos 391
+  ypos 808
+ }
+push $N81839a0
+ EdgeDetectWrapper {
+  name EdgeDetect2
+  xpos 1043
+  ypos 377
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle7
+  tile_color 0xffffffff
+  xpos 1043
+  ypos 415
+ }
+ Invert {
+  channels rgba
+  name Invert4
+  xpos 1043
+  ypos 441
+ }
+ Dot {
+  name Dot26
+  xpos 1077
+  ypos 529
+ }
+push $N8e63340
+ Dot {
+  name Dot25
+  xpos 1264
+  ypos 84
+ }
+set N8348810 [stack 0]
+ EdgeDetectWrapper {
+  name EdgeDetect1
+  xpos 1230
+  ypos 274
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle6
+  tile_color 0xffffffff
+  xpos 1230
+  ypos 312
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox A
+  mix 0.5
+  name Merge14
+  xpos 1230
+  ypos 525
+ }
+ Grade {
+  blackpoint 0.4
+  whitepoint 0.6
+  name Grade1
+  xpos 1230
+  ypos 564
+ }
+push $N7d266f0
+push $N8e63340
+ Merge2 {
+  inputs 2
+  name Merge15
+  xpos 843
+  ypos 523
+ }
+ Dot {
+  name Dot28
+  xpos 877
+  ypos 682
+ }
+ Dot {
+  name Dot3
+  xpos 877
+  ypos 682
+ }
+ Switch {
+  inputs 2
+  which {{parent.allignview}}
+  name Switch2
+  label "\[value which]"
+  xpos 1230
+  ypos 672
+ }
+push $N8348810
+ Dot {
+  name Dot27
+  xpos 1521
+  ypos 84
+ }
+ Switch {
+  inputs 2
+  which {{parent.from_frame<=frame&&frame<=parent.to_frame?1:0}}
+  name Switch1
+  label "\[value which]\ndisabler"
+  xpos 1487
+  ypos 666
+  addUserKnob {20 User}
+  addUserKnob {68 a M {disabled enabled}}
+ }
+ Switch {
+  inputs 2
+  which {{parent.patch_only}}
+  name Switch3
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 792
+ }
+ Switch {
+  inputs 2
+  which {{parent.ExportPatchOnly}}
+  name Switch4
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 876
+ }
+ Output {
+  name Output1
+  xpos 1487
+  ypos 989
+ }
+ Dot {
+  inputs 0
+  name maskDotB
+  xpos 191
+  ypos 398
+ }
+ Dot {
+  name Dot6
+  xpos 191
+  ypos 436
+ }
+push $N80a6a70
+ Dot {
+  name Dot1
+  xpos 291
+  ypos 84
+ }
+ Bezier {
+  replace true
+  blur_type smooth
+  points {{
+{411 212.6 35.6 0 37}
+{474.4 149 33.8 -1.58 35}
+{410.6 84 38.4 -3.14 35.6}
+{345.4 148.6 29.4 1.54 29.6}
+}}
+  shape {}
+  center {1024 778}
+  name Bezier1
+  xpos 257
+  ypos 333
+ }
+ Blur {
+  channels rgba
+  name Blur9
+  xpos 257
+  ypos 371
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  bbox B
+  name Mcutout
+  xpos 257
+  ypos 432
+  disable true
+ }
+end_group
+RotoPaint {
+ inputs 0
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x45800000 x45800000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {cubiccurve Clone86 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45491000 x452ef333 x3ed20000}
+       {x45492000 x452ebccd x3ee28000}
+       {x45493333 x452e2333 x3f07a000}
+       {x4549199a x452daccd x3f12e000}
+       {x45494333 x452e3666 x3f006000}
+       {x45494ccd x452ea333 x3ef38000}
+       {x4549499a x452ed000 x3ef90000}
+       {x45490ccd x452e1ccd x3f0a6000}
+       {x4548bccd x452d999a x3ef08000}}}
+     {t x45492001 x452e51c7}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx xbf333000 sty xc2140000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone85 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x454a0666 x452f0000 x3eee0000}
+       {x454a2333 x452e999a x3ef18000}
+       {x454a2666 x452e0ccd x3f006000}
+       {x454a1ccd x452de000 x3f0c6000}
+       {x454a099a x452d7333 x3f0d2000}
+       {x454a0000 x452d599a x3f0da000}
+       {x454a2666 x452ddccd x3f012000}
+       {x454a5000 x452e8666 x3ed68000}
+       {x454a7333 x452ebccd x3ee28000}
+       {x454a699a x452e399a x3f06e000}
+       {x454a3333 x452dd666 x3f0d6000}
+       {x454a1000 x452dc333 x3eea0000}}}
+     {t x454a2bbc x452e1b34}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx xbf333000 sty xc2140000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone84 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x454a0666 x452f4666 x3eb10000}
+       {x4549f333 x452f099a x3ec60000}
+       {x4549dccd x452eb333 x3eed0000}
+       {x4549cccd x452e8000 x3f012000}
+       {x4549d333 x452e9000 x3efb0000}
+       {x4549e000 x452ecccd x3edc0000}
+       {x4549e000 x452f1ccd x3ed20000}
+       {x4549e333 x452f3333 x3ed80000}
+       {x4549eccd x452ee333 x3eed0000}
+       {x4549e333 x452e7ccd x3ef90000}
+       {x4549d333 x452e399a x3f01e000}}}
+     {t x4549e29d x452ecc82}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx xbf333000 sty xc2140000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone83 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x454ab800 x45505000 x3d900000}
+       {x454aa800 x45501800 x3ef68000}
+       {x454a7000 x454f4800 x3ef18000}
+       {x4549f000 x454e3000 x3efa0000}
+       {x4549d800 x454e0800}}}
+     {t x454a519a x454f2e66}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx xbf333000 sty xc2140000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone82 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x454a0800 x45508000 x3ea98000}
+       {x454a1800 x45501800 x3eb18000}
+       {x454a2800 x454f7800 x3ec98000}
+       {x454a1800 x454f0000 x3ee10000}
+       {x454a0000 x454ed000 x3ee40000}
+       {x454a0800 x454f0000 x3ec18000}
+       {x454a1800 x454f7000 x3e8e8000}
+       {x454a2800 x45500000 x3e888000}
+       {x454a4000 x45506000 x3e908000}
+       {x454a4000 x45504000 x3ebb8000}
+       {x454a4000 x454fb800 x3edc0000}
+       {x454a1000 x454f0000 x3eee0000}
+       {x454a0000 x454ec000 x3efb8000}
+       {x454a1800 x454ee800 x3eee8000}
+       {x454a5800 x454fb800 x3ea18000}}}
+     {t x454a2089 x454f8911}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx xbf333000 sty xc2140000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone81 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548a000 x455a4800 x3f006000}
+       {x4548b000 x4559b800 x3f042000}
+       {x4548c000 x45585000 x3f17e000}
+       {x45488000 x45570000 x3f236000}
+       {x45487800 x45569800 x3f246000}
+       {x4548c000 x45578000 x3f0f2000}
+       {x4548c000 x4558f000 x3f036000}
+       {x4548c800 x45599000 x3f036000}
+       {x4548c800 x4558a800 x3f0b2000}
+       {x45489000 x4557b000 x3f156000}
+       {x4548a000 x4557a000 x3f192000}
+       {x45490800 x45586800 x3f106000}
+       {x45495000 x45599000 x3f0e2000}
+       {x45496000 x45594800 x3f132000}
+       {x4548f800 x4557c800 x3f196000}
+       {x45483800 x45567000 x3f172000}
+       {x4547e000 x4555e000 x3d640000}}}
+     {t x4548b5a6 x45583078}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone80 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45478000 x455b2800 x3f03a000}
+       {x45478000 x455af800 x3f072000}
+       {x45476000 x4558f000 x3f08e000}
+       {x45473800 x45576800 x3f216000}
+       {x45475000 x45573800 x3f22e000}
+       {x45477000 x45584000 x3f1da000}
+       {x45474000 x4559d800 x3f10e000}
+       {x45470800 x455ad000 x3f106000}
+       {x45475000 x4559a000 x3f12a000}
+       {x45476000 x45585000 x3f19a000}
+       {x45477000 x4557c800 x3f1f2000}
+       {x4547c800 x4558a800 x3f1da000}
+       {x4547a800 x455a0000 x3f10e000}
+       {x45478000 x455ae800 x3f0fe000}
+       {x4547e000 x45596000 x3f142000}
+       {x4547c800 x45582000 x3f1ce000}
+       {x4547e000 x4557f800 x3f1f2000}
+       {x45487800 x45594800 x3f18a000}
+       {x45484800 x455ac000 x3f102000}
+       {x45482000 x455ae800 x3f14a000}
+       {x45481000 x4558c000 x3f1b6000}
+       {x4547c800 x45578000 x3f1ce000}
+       {x4547a800 x45572800 x3eff0000}}}
+     {t x4547a26f x45591dea}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone79 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45469800 x45599000 x3ed18000}
+       {x45468800 x45598000 x3ed68000}
+       {x45465800 x4558b800 x3ed58000}
+       {x45463000 x4557a000 x3ee70000}
+       {x45461000 x45572000 x3efc0000}
+       {x45464800 x4557b000 x3ef30000}
+       {x45464800 x45590000 x3edd8000}
+       {x45463000 x45599000 x3edd8000}
+       {x4545d800 x455ac000 x3edf8000}
+       {x45460000 x455a4800 x3ef40000}
+       {x45465800 x4558a800 x3efd8000}
+       {x45465800 x45582000 x3f0e2000}
+       {x45463000 x45572800 x3f12a000}
+       {x45465800 x45576800 x3f126000}
+       {x4546b000 x45592800 x3f0ba000}
+       {x4546a000 x4559d800 x3f09e000}
+       {x4546b000 x4558c000 x3f0a2000}
+       {x45469800 x45578000 x3ec00000}}}
+     {t x4546571c x4558b072}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone78 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548e800 x45613800 x3ee28000}
+       {x4548c800 x4560b800 x3ee78000}
+       {x4548b000 x455fa000 x3f01e000}
+       {x4548c000 x455ef800 x3f136000}
+       {x4548c800 x455f1000 x3f13e000}
+       {x4548e800 x455fd000 x3f0e2000}
+       {x4548e800 x4560d800 x3f072000}
+       {x4548c800 x45612800 x3f072000}
+       {x4548c000 x45609800 x3f09a000}
+       {x4548c000 x455fe800 x3f0c2000}
+       {x4548c000 x455fb000 x3f0de000}
+       {x4548e800 x45600800 x3f0c2000}
+       {x45491800 x4560a800 x3f04e000}
+       {x45490800 x45612000 x3f02a000}
+       {x4548f800 x45607000 x3f066000}
+       {x4548f800 x455fa000 x3f082000}
+       {x45491800 x455f7800 x3f0a2000}
+       {x45494000 x455fe000 x3f08a000}
+       {x45493000 x45609800 x3f00a000}
+       {x45491800 x4560f000 x3f006000}
+       {x45491800 x45602800 x3f046000}
+       {x45490800 x455f8800 x3f08a000}
+       {x45492000 x455f9800 x3f0aa000}
+       {x45496000 x45602800 x3f04e000}
+       {x45494000 x4560e000 x3efd8000}
+       {x45491800 x4560a800 x3f012000}
+       {x45492000 x455fe000 x3f072000}
+       {x45495000 x455fa000 x3f0a2000}
+       {x45497800 x45603800 x3f07a000}
+       {x45493000 x4560a800 x3ef88000}
+       {x4548f800 x45608800 x3e4a0000}}}
+     {t x45490319 x4560335b}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone77 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45493000 x45604000 x3ecc0000}
+       {x4548d800 x455f9800 x3eef8000}
+       {x45486800 x455eb800 x3f10a000}
+       {x45486800 x455ea800 x3f12a000}
+       {x4548e800 x455f6800 x3f092000}
+       {x45492000 x45606000 x3ef48000}
+       {x4548c800 x45605000 x3ef90000}
+       {x45485800 x455f6800 x3f09a000}
+       {x45482000 x455ef800 x3f17a000}
+       {x45489000 x455fa000 x3f162000}
+       {x4548b000 x45604000 x3e430000}}}
+     {t x4548aba3 x455f98ba}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone76 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548e800 x4564e000 x3eec8000}
+       {x4548d800 x4564a000 x3ef18000}
+       {x45486800 x45636000 x3ef48000}
+       {x4547d800 x45625000 x3f0ee000}
+       {x4548c000 x45630000 x3f13e000}
+       {x45494000 x45645800 x3efb0000}
+       {x4548e800 x4564e800 x3efe0000}
+       {x4547a800 x4562b800 x3f0fe000}
+       {x4546d000 x45607000 x3f132000}
+       {x4546e800 x455f5800 x3ee78000}}}
+     {t x45483a66 x4562fe66}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone75 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547e000 x45607000 x3ee40000}
+       {x4547e000 x45603800 x3edf0000}
+       {x4547b800 x455ea000 x3eee0000}
+       {x45470800 x455cd800 x3f10a000}
+       {x45473800 x455d0800 x3f10e000}
+       {x4547d800 x455e4800 x3ef88000}
+       {x4547f000 x45607000 x3ed50000}
+       {x4547b800 x45611000 x3ee10000}
+       {x45479800 x455fe000 x3f01e000}
+       {x4547b800 x455e4800 x3f0f6000}
+       {x45486800 x455ea800 x3f116000}
+       {x45491800 x455fe000 x3f002000}
+       {x4548f800 x45614800 x3ee70000}
+       {x4548c800 x45608000 x3f02e000}
+       {x45488000 x455f2000 x3f106000}
+       {x4548d800 x455f0000 x3f1a2000}
+       {x45497800 x45600800 x3f0b6000}
+       {x45494000 x45614800 x3f026000}
+       {x45491800 x45619000 x3f0ca000}
+       {x45486800 x45612800 x3f106000}
+       {x45476000 x455f7800 x3f19e000}
+       {x4546b000 x455df000 x3f1b2000}
+       {x4546e800 x455df000 x3d700000}}}
+     {t x454819bd x455f8486}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone74 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547e000 x455d8800 x3eef8000}
+       {x4547c800 x455ce800 x3ef68000}
+       {x4547b800 x455b4000 x3f0c2000}
+       {x4547e000 x455b2800 x3f13e000}
+       {x45484800 x455c5800 x3f082000}
+       {x45482800 x455d7800 x3ef48000}
+       {x45481000 x455dc000 x3ef98000}
+       {x45480000 x455c7800 x3f042000}
+       {x4547e000 x455ba800 x3f126000}
+       {x45481000 x455bb800 x3f132000}
+       {x45489000 x455d1800 x3f04e000}
+       {x45488000 x455df000 x3efa0000}
+       {x45489000 x455d9800 x3f03e000}
+       {x45482800 x455c4800 x3f0de000}
+       {x4547d800 x455bf000 x3f176000}
+       {x4547d800 x455c5800 x3eed8000}}}
+     {t x45481280 x455c9700}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone73 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45464000 x455c2000 x3e580000}
+       {x45464800 x455c1000 x3e8a0000}
+       {x45464000 x455c0000 x3e9d8000}
+       {x45463000 x455b9800 x3ee00000}
+       {x45461000 x455ab000 x3ef10000}
+       {x45460000 x455a8800 x3ef60000}
+       {x45464000 x455b0800 x3ede0000}
+       {x45464800 x455c1000 x3ea20000}
+       {x45462000 x455c9000 x3ea80000}
+       {x45462000 x455c2800 x3ecc0000}
+       {x45463000 x455b4000 x3ee50000}
+       {x45461000 x455a7800 x3efc0000}
+       {x45463000 x455aa000 x3f00e000}
+       {x45468800 x455be000 x3ee70000}
+       {x45467800 x455ce800 x3ece0000}
+       {x45466800 x455cf800 x3ee30000}
+       {x45467800 x455c0000 x3efa8000}
+       {x45466800 x455ae000 x3f08a000}
+       {x4546b000 x455b2800 x3f0d2000}
+       {x45472800 x455c4800 x3ef68000}
+       {x45473800 x455d9800 x3eec8000}
+       {x45471800 x455d1800 x3efd0000}
+       {x45470800 x455c1000 x3ef60000}
+       {x45470800 x455bc800}}}
+     {t x454672ab x455bd2ab}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41fa6680 sty x41780000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone72 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548c000 x4556a800 x3e960000}
+       {x4548d800 x4556e000 x3ea98000}
+       {x4548c800 x45570000 x3eda0000}
+       {x4548e800 x45569800 x3f026000}
+       {x45490800 x4555c000 x3f042000}
+       {x45491800 x45553000 x3f05a000}
+       {x45490800 x45554000 x3f05a000}
+       {x4548f800 x4555e800 x3f02a000}
+       {x4548c800 x45569800 x3f01a000}
+       {x4548c800 x45568000 x3f032000}
+       {x4548e800 x45557800 x3f05e000}
+       {x4548c800 x4554a000 x3f0ce000}
+       {x4548b000 x45544800 x3f13e000}
+       {x4548f800 x45551000 x3f0da000}
+       {x4548e800 x4555f800 x3f096000}
+       {x4548e800 x45553000 x3f0b2000}
+       {x4548c800 x4553c000 x3f142000}
+       {x45484800 x45528000 x3f1ee000}
+       {x45475000 x45510800 x3f232000}
+       {x4546e000 x45508800 x3ef60000}}}
+     {t x4548ab33 x45550933}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone71 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45448800 x457ee000 x3efc8000}
+       {x4544e800 x457ea000 x3ef80000}
+       {x45456800 x457e2800 x3efd0000}
+       {x4545b800 x457e2000 x3f02a000}
+       {x45460000 x457e6800 x3f04e000}
+       {x45461800 x457e5800 x3f06a000}
+       {x4545e800 x457d9800 x3f0fe000}
+       {x45458800 x457c3800 x3f12a000}
+       {x45458800 x457b7800 x3f0b2000}
+       {x45458000 x457b4800}}}
+     {t x45458333 x457d8266}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone70 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45492800 x457ba000 x3eea8000}
+       {x45495800 x457be000 x3ee10000}
+       {x45499800 x457aa000 x3ef50000}
+       {x45494000 x45789800 x3efc8000}
+       {x4548a800 x4577e000 x3ef20000}}}
+     {t x45493333 x457a1e66}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone69 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45452000 x457a0800 x3efa8000}
+       {x45455800 x4579b800 x3f00a000}
+       {x45458800 x4578b800 x3f05a000}
+       {x45457800 x45775800 x3f112000}
+       {x4545a000 x45772800 x3f0de000}
+       {x4545e000 x45780800 x3f012000}
+       {x4545e000 x45793800 x3f01e000}
+       {x4545a000 x4578f800 x3f04e000}
+       {x45455800 x45784000 x3eff8000}
+       {x45454000 x45780800}}}
+     {t x4545819a x45788c00}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone68 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45472800 x457c4000 x3ee28000}
+       {x45472800 x457c6000 x3ef58000}
+       {x45473800 x457bc800 x3efc8000}
+       {x45473800 x457ad800 x3f036000}
+       {x45472000 x457a5800 x3f0aa000}
+       {x45478000 x457af800 x3f066000}
+       {x4547c800 x457be800 x3f006000}
+       {x4547e000 x457c2000 x3f012000}
+       {x4547d800 x457b2000 x3f096000}
+       {x4547a000 x457a9800 x3f196000}
+       {x4547c000 x457ad800 x3f182000}
+       {x45480000 x457be000 x3f13e000}
+       {x45480000 x457c0000 x3f146000}
+       {x4547b800 x457b4000 x3f17a000}
+       {x4546e800 x457a3800 x3f102000}}}
+     {t x45478666 x457b5dde}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone67 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45463800 x457d2800 x3ee00000}
+       {x45463800 x457d1800 x3eee0000}
+       {x45461800 x457c4000 x3ef50000}
+       {x45459800 x457b1800 x3f0c2000}
+       {x45452000 x4579e800 x3f1fe000}
+       {x45450800 x45794800 x3f23a000}
+       {x45452000 x45796000 x3f16a000}
+       {x4545a800 x457a8000 x3f122000}
+       {x45461800 x457bf800 x3f05e000}
+       {x45462000 x457c4800 x3f01e000}
+       {x4545c800 x457b9800 x3f0a2000}
+       {x45456800 x457ae000 x3f172000}
+       {x4545c800 x457b5800 x3f1ae000}
+       {x45463800 x457c2000 x3efa0000}
+       {x45464800 x457c4800}}}
+     {t x4545c889 x457b6889}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone66 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4549fccd x4580e333 x3ed00000}
+       {x4549c333 x4580b4cd x3efc8000}
+       {x45498000 x45802333 x3f102000}
+       {x45492333 x457ec99a x3f166000}
+       {x4548d000 x457d2666 x3f176000}
+       {x4548accd x457c799a x3f142000}
+       {x4548accd x457cb000 x3f086000}
+       {x4548b666 x457e3000 x3f012000}
+       {x4549299a x457faccd x3f02a000}
+       {x4549999a x45804000 x3f02a000}
+       {x45498ccd x458004cd x3f06a000}
+       {x45494666 x457eb333 x3f0c6000}
+       {x4548f333 x457d3ccd x3f10a000}
+       {x4548d666 x457c2000 x3f12a000}
+       {x4548d666 x457c6333 x3f072000}
+       {x4548e666 x457d9ccd x3ef78000}
+       {x45498ccd x457f3666 x3eff8000}
+       {x4549e000 x457f2333 x3f016000}
+       {x4549bccd x457e4333 x3f056000}
+       {x4549099a x457cd99a x3f0a2000}
+       {x4548b666 x457c0333 x3f0ae000}
+       {x45488333 x457bb666 x3f022000}
+       {x45487000 x457bc99a}}}
+     {t x45492408 x457e2c88}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone65 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45495ccd x4580c000 x3ef98000}
+       {x4549299a x4580a800 x3f05a000}
+       {x45491666 x45803800 x3f12e000}
+       {x4549099a x45800000 x3f166000}
+       {x4548c99a x457eb333 x3f16a000}
+       {x4548accd x457e0000 x3f16e000}
+       {x4548c99a x457ea666 x3f0d2000}
+       {x4548d000 x457fe000 x3f026000}
+       {x4548c99a x45808800 x3f00a000}
+       {x4548d666 x4580e333 x3f00a000}
+       {x4549099a x4580bccd x3f086000}
+       {x45493333 x45803b33 x3f0d6000}
+       {x4548f99a x457f4666 x3f0f2000}
+       {x45491ccd x457ff333 x3f066000}
+       {x45493333 x458054cd x3f02a000}
+       {x45494666 x4580cb33 x3f002000}
+       {x45494ccd x4580e99a x3f00e000}
+       {x45494000 x45809ccd x3f0c2000}
+       {x45494ccd x45805800 x3f16e000}
+       {x45498000 x458054cd x3f16e000}
+       {x4549e000 x4580999a x3f146000}
+       {x4549bccd x4580e000 x3f10e000}
+       {x45497666 x4580ce66 x3f12e000}
+       {x45493333 x45800800 x3f132000}
+       {x45491000 x457edccd x3f0c6000}
+       {x4548f333 x457e0000 x3edd0000}}}
+     {t x4549252b x4580343f}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone64 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45484666 x4580b4cd x3ecf0000}
+       {x45483666 x4580a800 x3edb0000}
+       {x45483666 x45804333 x3f016000}
+       {x45484000 x457f3666 x3f13e000}
+       {x4548599a x457d7333 x3f166000}
+       {x45486000 x457ccccd x3f13e000}
+       {x45484666 x457d3ccd x3f012000}
+       {x45484ccd x457f4ccd x3edc8000}
+       {x4548b666 x45806ccd x3ede8000}
+       {x4548c99a x4580b4cd x3ee98000}
+       {x4548accd x45803800 x3f072000}
+       {x4548899a x457ed666 x3f16a000}
+       {x4548599a x457d6ccd x3f202000}
+       {x45483000 x457c4000 x3f1be000}}}
+     {t x45486493 x457f2d08}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone63 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547f99a x4580e99a x3ef00000}
+       {x45480666 x4580f4cd x3eeb8000}
+       {x45480ccd x4580ce66 x3eed0000}
+       {x4547d666 x4580499a x3efc8000}
+       {x45473ccd x457ec000 x3f0ea000}
+       {x45470000 x457d6ccd x3f11a000}
+       {x4547199a x457cb000 x3f0ce000}
+       {x45476ccd x457da99a x3ee18000}
+       {x4547d000 x457f7666 x3eb10000}
+       {x45481666 x45808800 x3eb20000}
+       {x4547e333 x45809333 x3eda8000}
+       {x4547899a x457fc333 x3f096000}
+       {x45472000 x457e199a x3f112000}
+       {x45470000 x457c8666 x3f0da000}
+       {x45470000 x457c5000 x3ed90000}}}
+     {t x45478a3e x457f4147}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone62 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45480666 x45813ccd x3ee98000}
+       {x4547d000 x45813666 x3efe0000}
+       {x45485333 x45811333 x3f046000}
+       {x4548f99a x45810ccd x3efa8000}
+       {x4549399a x45810ccd x3ef88000}
+       {x45487666 x4581099a x3f00e000}
+       {x45470ccd x4580fb33 x3f14e000}
+       {x4545fccd x4580e000 x3f262000}
+       {x4546c000 x4580cb33 x3f252000}
+       {x45482333 x4580eccd x3f1ce000}
+       {x4548d000 x45811333 x3f09e000}
+       {x45482333 x45810ccd x3f0a2000}
+       {x45473666 x4580d19a x3f11e000}
+       {x4546cccd x458084cd x3f0da000}
+       {x4546c666 x45806ccd}}}
+     {t x4547c40d x4580f112}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone61 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547c99a x45819000 x3eef8000}
+       {x4547a000 x45819000 x3eed8000}
+       {x45483666 x45818666 x3eff0000}
+       {x4549099a x4581899a x3f046000}
+       {x45497000 x45819000 x3f04a000}
+       {x45493333 x45819000 x3f08e000}
+       {x45487ccd x45818ccd x3f0de000}
+       {x4547accd x45818ccd x3f13e000}
+       {x4547a000 x45818666 x3f162000}
+       {x45487666 x45817b33 x3f146000}
+       {x45494000 x45818333 x3f13a000}
+       {x45498ccd x45818ccd x3f11a000}
+       {x45491ccd x458194cd x3f13e000}
+       {x45484ccd x45818ccd x3f156000}
+       {x4547b99a x45817b33 x3f182000}
+       {x45484000 x45816b33 x3f1aa000}
+       {x45491ccd x45816e66 x3f19a000}
+       {x45498666 x45817800 x3ebc0000}}}
+     {t x4548938f x458185dd}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone60 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45473666 x4581accd x3ebf8000}
+       {x45476666 x4581a4cd x3ed28000}
+       {x4547f99a x45819e66 x3ee58000}
+       {x45487ccd x45819e66 x3ef30000}
+       {x45486000 x4581a19a x3ef70000}
+       {x4547d666 x4581a99a x3efc0000}
+       {x45470ccd x4581a99a x3f02a000}
+       {x4547899a x4581a4cd x3f036000}
+       {x4547dccd x4581a99a x3f02a000}
+       {x45481ccd x4581a99a x3f01e000}
+       {x45480666 x4581a99a x3f03e000}
+       {x4547a666 x4581a99a x3f04e000}
+       {x4547599a x4581a19a x3f076000}
+       {x4547a666 x458194cd x3f096000}
+       {x4548299a x4581899a x3edf8000}}}
+     {t x4547c777 x4581a317}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41ce6680 sty xbfc00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone59 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548bccd x457d5666 x3ef60000}
+       {x4548c99a x457c1666 x3eff0000}
+       {x4548bccd x457ad000 x3f066000}
+       {x4548c333 x45797666 x3f0ba000}
+       {x4548d000 x45793ccd x3f08e000}
+       {x4548eccd x4579f99a x3ee10000}
+       {x4548f333 x457ba99a x3ec70000}
+       {x4548eccd x457cb000 x3ecd0000}
+       {x4548e000 x457cd333 x3ef28000}
+       {x45490000 x457be666 x3f086000}
+       {x45490000 x457a4ccd x3f0c6000}
+       {x45490000 x4579f99a x3f11a000}
+       {x45491ccd x457a7000 x3eff0000}
+       {x45494000 x457bd333 x3efa0000}
+       {x45496333 x457c8000 x3efc8000}
+       {x45498666 x457c0333 x3f0ba000}
+       {x45497000 x457a7ccd x3f112000}
+       {x4549399a x45799000 x3f126000}
+       {x45491000 x4579299a x3f0ae000}
+       {x4548f99a x45793666}}}
+     {t x4549063e x457af91e}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone58 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547899a x457de333 x3f04a000}
+       {x4547a666 x457c8ccd x3f05e000}
+       {x4547499a x457b399a x3efe8000}
+       {x45470ccd x457a599a x3f06a000}
+       {x45470ccd x457a999a x3f032000}
+       {x4547199a x457ba000 x3ef18000}
+       {x4547299a x457cc666 x3eee8000}
+       {x4547599a x457d3666 x3ef18000}
+       {x4547a000 x457c5666 x3f096000}
+       {x4547accd x457b2333 x3f0b6000}
+       {x4547a000 x457a699a x3f0ea000}
+       {x4547accd x457abccd x3f092000}
+       {x4547d000 x457bc333 x3f04e000}
+       {x4547dccd x457d3666 x3f042000}
+       {x4547c99a x457d1333 x3f09a000}
+       {x4547b333 x457bd333 x3f0ca000}
+       {x4547a666 x457a599a x3f07e000}
+       {x4547b333 x457a0666 x3e360000}}}
+     {t x45478444 x457bba4e}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone57 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45490000 x457a7ccd x3f00e000}
+       {x4549099a x457a699a x3f04e000}
+       {x45491ccd x45790000 x3f102000}
+       {x4548e666 x45772666 x3f1c2000}
+       {x4548f99a x45764ccd x3f1e6000}
+       {x45491ccd x45764ccd x3f162000}
+       {x45494666 x45772666 x3f102000}
+       {x45495666 x4578d666 x3f096000}
+       {x4549299a x4579a666 x3f082000}
+       {x45492333 x4579899a x3f0fa000}
+       {x4549299a x4578b333 x3f162000}
+       {x45497666 x4578199a x3f1ce000}
+       {x4549b666 x4577499a x3f1d2000}
+       {x45498ccd x45768666 x3f1b6000}}}
+     {t x454935b7 x45783edd}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone56 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547accd x45792000 x3ef80000}
+       {x4547d000 x4578e99a x3f01e000}
+       {x4547e333 x4577d99a x3f0ae000}
+       {x4547accd x4576c333 x3f18e000}
+       {x4547accd x45764ccd x3f1b6000}
+       {x4547e333 x4577099a x3f0fe000}
+       {x45481ccd x45786666 x3f0ae000}
+       {x4547f99a x4579e333 x3f052000}
+       {x4547e333 x4579a666 x3f11e000}
+       {x4547e99a x45783666 x3f19e000}
+       {x4547e333 x4576a000 x3f20a000}
+       {x4547f333 x4576299a x3f186000}
+       {x45480666 x45763333 x3e160000}}}
+     {t x4547dfc0 x4577c762}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone55 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45494000 x45769333 x3f0a6000}
+       {x45492333 x45762333 x3f102000}
+       {x45493333 x45754666 x3f126000}
+       {x45495666 x45747666 x3f242000}
+       {x45498666 x4574a666 x3f1a2000}
+       {x45498666 x4574dccd}}}
+     {t x45495445 x457553bc}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone54 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548accd x45772666 x3eb88000}
+       {x4548d000 x45770333 x3efe8000}
+       {x4548eccd x4575d666 x3f032000}
+       {x4548c99a x4574dccd x3f102000}
+       {x4548a666 x45744333 x3f132000}
+       {x4548accd x45749000 x3f0f6000}
+       {x4548c333 x45757666 x3f036000}
+       {x4548d000 x4576299a x3f026000}
+       {x4548f333 x4575f99a x3f06e000}
+       {x4548f99a x45755333 x3f0de000}
+       {x4548e000 x4574dccd x3f18a000}
+       {x4548f333 x4575299a x3f13e000}
+       {x45490000 x4575c99a x3f042000}
+       {x45491ccd x4575f99a x3f036000}
+       {x45495666 x45753666 x3f0c6000}
+       {x45494666 x4574b99a x3f19e000}
+       {x45494000 x45749000 x3f1ca000}
+       {x45494ccd x4575299a x3f09a000}
+       {x45494ccd x4575699a}}}
+     {t x4548f840 x45757233}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone53 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547899a x45775666 x3ee00000}
+       {x45479666 x4576fccd x3eeb8000}
+       {x4547b333 x45760000 x3f0ba000}
+       {x4547c99a x45750000 x3f19e000}
+       {x4547d000 x4574499a x3f1ca000}
+       {x4547e333 x45747666 x3f16e000}
+       {x4547e333 x45757ccd x3f002000}
+       {x4547c99a x4576b666 x3eec0000}
+       {x4547d666 x45776333 x3eef0000}
+       {x4547f99a x4576c99a x3f076000}
+       {x45481666 x4575a666 x3f0de000}
+       {x4548299a x4574f99a x3f192000}
+       {x45484ccd x45754666 x3f0d2000}
+       {x45486000 x45761000 x3f076000}
+       {x4548599a x45766333 x3f08a000}
+       {x45484ccd x4576d99a x3f0a2000}
+       {x45486000 x45764ccd x3f166000}
+       {x45484ccd x4575299a x3f15a000}
+       {x45484ccd x4574d000 x3ede8000}}}
+     {t x454804b8 x4575e40c}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone52 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45467333 x45764000 x3ecb0000}
+       {x45469666 x45761ccd x3ed98000}
+       {x4546b99a x45754666 x3ee00000}
+       {x45469ccd x4574c000 x3efe8000}
+       {x45469ccd x45754ccd x3eeb8000}
+       {x4546a333 x4575e000 x3eda0000}
+       {x4546c000 x4576b000 x3edb0000}
+       {x45470000 x4576399a x3ef18000}
+       {x4547299a x45757000 x3ef90000}
+       {x45472000 x4574dccd x3f092000}
+       {x45471333 x4574f333 x3f066000}
+       {x45470000 x45754ccd x3d7c0000}}}
+     {t x4546cfbb x457595df}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone51 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548c333 x4572c666 x3efc0000}
+       {x4548bccd x45728000 x3eec8000}
+       {x45487666 x45716333 x3f0ba000}
+       {x4548599a x45701666 x3f17a000}
+       {x45486000 x456f9000 x3f16e000}
+       {x45488333 x456fe99a x3f082000}
+       {x4548c333 x45714ccd x3ee88000}
+       {x4549099a x45725666 x3eee8000}
+       {x45491ccd x45729ccd x3efc8000}
+       {x45491000 x4571a99a x3f14a000}
+       {x4548e666 x4570bccd x3f23a000}
+       {x4548e666 x4570599a x3f26e000}
+       {x45492333 x45711666 x3f1b6000}
+       {x45494000 x4571f666 x3f162000}
+       {x45494666 x4572399a x3f16a000}
+       {x45492333 x4571999a x3f1d6000}
+       {x45489333 x4570599a x3f1e6000}
+       {x45484666 x456fb333 x3f14e000}
+       {x45481666 x456fa000 x3e5e0000}}}
+     {t x4548c639 x45712565}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone50 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45480ccd x45730333 x3ed50000}
+       {x45481ccd x45730333 x3ed78000}
+       {x45485333 x4573099a x3edb8000}
+       {x4548299a x4572e000 x3f0c2000}
+       {x4547f333 x4572c000 x3f10a000}
+       {x4547accd x45727333 x3f14e000}
+       {x4547c99a x45725000 x3f10a000}
+       {x4548299a x45728666 x3f066000}
+       {x45486000 x4572d99a x3ef88000}
+       {x45485333 x4572fccd x3efe8000}
+       {x45484000 x4572c000 x3f08a000}
+       {x45483666 x45721666 x3f0ea000}
+       {x45483000 x4571399a x3f112000}
+       {x45481666 x4570699a x3f142000}
+       {x45480666 x4570899a x3f026000}
+       {x45480000 x4570bccd}}}
+     {t x45481afe x45723901}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone49 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4545cccd x45729666 x3eeb8000}
+       {x4545c000 x4572a99a x3ef20000}
+       {x4545a333 x4572b666 x3ef68000}
+       {x4545c666 x4572699a x3f066000}
+       {x4546199a x4571e666 x3f076000}
+       {x45463ccd x45718ccd x3f07a000}
+       {x45462ccd x45721666 x3efa0000}
+       {x45461333 x45728666 x3ef30000}
+       {x45460333 x4572e99a x3ef58000}
+       {x45463ccd x45729666 x3f012000}
+       {x45466666 x4571a99a x3f06a000}
+       {x45465000 x45711666 x3f0de000}
+       {x45465000 x4570f333 x3f132000}
+       {x45466ccd x4571c333 x3f08e000}
+       {x45466ccd x45728666 x3f06a000}
+       {x45466666 x45717000 x3f122000}
+       {x45463666 x4570d666 x3f14e000}
+       {x4545f666 x45700000 x3f132000}
+       {x4545f666 x456f7666 x3ef50000}
+       {x4545fccd x456f6666}}}
+     {t x45461c28 x4571a732}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone48 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45470000 x4573d666 x3ed88000}
+       {x4547499a x4573cccd x3ee58000}
+       {x45480666 x4573cccd x3ef58000}
+       {x45484000 x4573cccd x3ef88000}
+       {x45480ccd x4573cccd x3ef98000}
+       {x45473666 x4573d666 x3efb0000}
+       {x45466666 x4573d666 x3f08a000}
+       {x45462666 x4573cccd x3f0fe000}
+       {x4546e333 x4573a99a x3f0f6000}
+       {x45479666 x4573a99a x3f10a000}
+       {x4547c99a x4573b333 x3f002000}
+       {x4547b333 x4573b333}}}
+     {t x45475c88 x4573c511}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone47 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45463ccd x45740ccd x3cf00000}
+       {x45466666 x4573f666 x3ecc0000}
+       {x45469000 x4573f666 x3ed50000}
+       {x45468000 x45740000 x3edb0000}
+       {x45462666 x45740ccd x3edd8000}
+       {x45461333 x45740ccd x3ee58000}
+       {x45465000 x4573f000 x3ee38000}
+       {x4546799a x4573f000 x3ee18000}
+       {x4546a333 x4573f000 x3ee18000}
+       {x4546799a x45740000 x3ee38000}
+       {x45465000 x45740666 x3ee58000}
+       {x45462000 x45740ccd x3ee70000}
+       {x45462ccd x45740000 x3ee58000}
+       {x4546b333 x4573e333 x3ee60000}
+       {x45470666 x4573e99a x3ee50000}
+       {x4546c000 x4573f666 x3ee90000}
+       {x4546a333 x4573f666 x3eef8000}
+       {x45465000 x4573f666 x3ef20000}
+       {x4546cccd x4573dccd x3f01e000}
+       {x45471333 x4573dccd x3f026000}
+       {x4547499a x4573e99a x3eff8000}}}
+     {t x45468665 x4573f74f}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41d80000 sty xc0900000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone46 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45479800 x45720000 x3eca0000}
+       {x45478800 x4571e000 x3ecd8000}
+       {x45473800 x45705800 x3ecf8000}
+       {x4546e000 x456ee800 x3eda8000}
+       {x4546e000 x456e7800 x3edd0000}
+       {x45477000 x456fa800 x3ed08000}
+       {x45478000 x45714000 x3ea08000}
+       {x45477000 x4572d800 x3e988000}
+       {x45479800 x45733000 x3eaf0000}
+       {x4547f000 x4571f000 x3ee28000}
+       {x45481000 x45702800 x3ef60000}
+       {x4547e000 x456f0800 x3f02e000}
+       {x45482000 x456f4000 x3f012000}
+       {x45486800 x4570a000 x3ef68000}
+       {x45483800 x45721800 x3eed8000}
+       {x45485800 x45711800 x3ef80000}
+       {x45484800 x456f4000 x3efe0000}
+       {x45481000 x456e3000 x3efa8000}
+       {x45480000 x456e0000 x3ba00000}}}
+     {t x4547c1af x45706de5}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone45 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45482800 x456ee800 x3edb0000}
+       {x45481000 x456dc800 x3ed80000}
+       {x4547f000 x456b6800 x3eee0000}
+       {x4547b800 x45694800 x3efc0000}
+       {x4547e000 x4568e800 x3efa8000}
+       {x45485800 x456a1800 x3ece8000}
+       {x45486800 x456c3000 x3e890000}
+       {x4547b800 x456e5800 x3e810000}
+       {x45478000 x456e6800 x3ead0000}
+       {x4547a800 x456da000 x3ed80000}
+       {x45482000 x456c7800 x3eea0000}
+       {x45483800 x456c1800 x3eee8000}
+       {x45488000 x456c7800 x3eed0000}
+       {x4548b000 x456e1000 x3ee58000}
+       {x45485800 x456ed000 x3ee18000}
+       {x45483800 x456e2000 x3eeb8000}
+       {x4548d800 x456c7800 x3ef48000}
+       {x45493000 x456b8000 x3ef78000}
+       {x45491800 x456b0000 x3ef80000}
+       {x45497800 x456bd800 x3ef20000}
+       {x45497800 x456d9000 x3ed98000}
+       {x45490800 x456e4800 x3ed88000}
+       {x45487800 x456c8800 x3ee70000}
+       {x45481000 x456b6800 x3ec58000}}}
+     {t x45486100 x456c90ab}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone44 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45477000 x45702800 x3eae0000}
+       {x45475000 x456fb800 x3eb00000}
+       {x4546f800 x456df800 x3ed58000}
+       {x4546b000 x456a2800 x3ef20000}
+       {x4546c000 x4568c800 x3f00a000}
+       {x45471800 x4568f800 x3ef48000}
+       {x45478800 x456b2800 x3edf8000}
+       {x45477000 x456db800 x3ea48000}
+       {x45477000 x456f9800 x3ea50000}
+       {x45470800 x456f6000 x3ebb0000}
+       {x4546e800 x456d2800 x3eed8000}
+       {x4546e000 x456a8000 x3ef78000}
+       {x45473800 x4569c000 x3eff8000}
+       {x4547e000 x456b1000 x3eea0000}
+       {x45482800 x456d5800 x3ebc8000}
+       {x45480000 x456f8800 x3eb28000}
+       {x4547e000 x456ed000 x3ee40000}
+       {x4547d800 x456c1800 x3efd8000}
+       {x4547c800 x456b2000 x3f02a000}
+       {x45475000 x45693000 x3f02e000}
+       {x45472800 x45689000 x3ee80000}}}
+     {t x45475db7 x456c51e8}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone43 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45469800 x456e6800 x3ea80000}
+       {x45468800 x456e7800 x3eb00000}
+       {x45464800 x456e2000 x3eb90000}
+       {x45465800 x456da800 x3eed8000}
+       {x4546e000 x456b7800 x3ef20000}
+       {x4546f800 x45694000 x3ef68000}
+       {x4546f800 x45688000 x3ef60000}
+       {x45471800 x4569e800 x3ee28000}
+       {x4546b000 x456c4000 x3e7b0000}
+       {x45464800 x456e8800 x3e4c0000}
+       {x45464800 x456fe000 x3e560000}
+       {x45464000 x456f6000 x3ebe8000}
+       {x45465800 x456d6000 x3eea8000}
+       {x45464800 x456a8000 x3ef30000}
+       {x45465800 x4569f800 x3ef90000}
+       {x4546c000 x456b2800 x3eef8000}
+       {x4546d000 x456e5800 x3ecd8000}
+       {x4546b000 x45701000 x3ebc8000}
+       {x45469800 x456f2800 x3ee28000}
+       {x45465800 x456b7800 x3ef48000}
+       {x45464000 x4569c000 x3ef48000}
+       {x45466800 x4569b000 x3e880000}}}
+     {t x45468b46 x456c8346}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone42 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45484800 x456b2000 x3ed18000}
+       {x45486800 x45699800 x3eda8000}
+       {x45484800 x45672000 x3ef90000}
+       {x4547c800 x4564f800 x3f042000}
+       {x45475000 x4563a000 x3f036000}
+       {x45477000 x45649800 x3ee60000}
+       {x4547c800 x45671800 x3ec00000}
+       {x45482000 x45699800 x3ec10000}
+       {x45483800 x45694000 x3edb8000}
+       {x4547c800 x45669000 x3eee8000}
+       {x45471800 x4564c000 x3ef30000}
+       {x4546f800 x45649800 x3eee8000}}}
+     {t x4547ca00 x4566e800}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone41 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45478000 x456bd800 x3e828000}
+       {x45477000 x456bf800 x3e8e8000}
+       {x45476000 x456bd800 x3ea50000}
+       {x4547d800 x456a5000 x3edf0000}
+       {x4547f000 x45674000 x3ee78000}
+       {x45478800 x45656000 x3eea8000}
+       {x45474000 x45644800 x3eea0000}
+       {x45475000 x45652800 x3edb0000}
+       {x4547a800 x45676000 x3ec10000}
+       {x45480000 x4569e800 x3ea60000}
+       {x45482000 x456b8000 x3ea78000}
+       {x45480000 x456a8000 x3ed38000}
+       {x45482000 x45680800 x3edf0000}
+       {x4547e000 x45651800 x3eeb8000}
+       {x4547b800 x45642000 x3ef90000}
+       {x4547d800 x4564f800 x3ee78000}
+       {x4547f000 x45680800 x3ed18000}
+       {x4547e000 x4569c000 x3ed48000}
+       {x45481000 x4568d800 x3eeb8000}
+       {x45481000 x4565f000 x3eec8000}
+       {x4547b800 x45647800 x3eed0000}
+       {x45476000 x4563f800 x3ee10000}
+       {x45475000 x45642000}}}
+     {t x4547bbd3 x45679800}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone40 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45461000 x4569f800 x3ed20000}
+       {x4545f800 x456af000 x3ec60000}
+       {x4545b800 x456ab800 x3ed08000}
+       {x45460000 x45680000 x3ee88000}
+       {x45462000 x45659800 x3eeb0000}
+       {x45461000 x4563f800 x3eec8000}
+       {x45460000 x45635800 x3eea8000}
+       {x45463000 x4564c000 x3ed08000}
+       {x4546a000 x45676000 x3ec80000}
+       {x45471800 x456ae000 x3eca0000}
+       {x4546f800 x456c1800 x3ed20000}
+       {x4546c000 x456b2000 x3ee80000}
+       {x4546b000 x4566f800 x3ef00000}
+       {x4546a000 x4564b000 x3ef30000}
+       {x45468800 x45636000 x3eec0000}
+       {x45467800 x45632800 x3e460000}}}
+     {t x45465e00 x45674f00}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone39 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45470800 x45659800 x3e978000}
+       {x45470800 x4565a800 x3ea50000}
+       {x45471800 x45651800 x3ec20000}
+       {x45478800 x4562a800 x3ee78000}
+       {x45478800 x4560e000 x3efe8000}
+       {x45478000 x455fe800 x3f01e000}
+       {x45479800 x4560b800 x3ef90000}
+       {x45478800 x4562a800 x3ed28000}
+       {x45474000 x4564c000 x3eb60000}
+       {x45474000 x4565f000 x3eb80000}
+       {x45474000 x45652800 x3ede0000}
+       {x45478000 x45630800 x3ef10000}
+       {x45476000 x4560e000 x3efa8000}
+       {x45479800 x4560f000 x3efd0000}
+       {x45482000 x45625000 x3eeb0000}
+       {x45480000 x4563c800 x3ee88000}
+       {x4547e000 x4562f000 x3eed8000}
+       {x45478800 x45619000 x3ed98000}}}
+     {t x45477a39 x45630639}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone38 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45460000 x45644800 x3e9a0000}
+       {x45463000 x45634800 x3ea60000}
+       {x45465800 x4561b000 x3ecb0000}
+       {x45464800 x45600800 x3ef00000}
+       {x45464000 x455ee800 x3ef48000}
+       {x45464800 x455f8800 x3ee58000}
+       {x45464000 x45613800 x3edf8000}
+       {x4545e800 x45644800 x3ed68000}
+       {x4545d800 x45661000 x3ed18000}
+       {x4545c800 x45666800 x3ed98000}
+       {x45462000 x45646800 x3eed8000}
+       {x45466800 x4561e800 x3ef78000}
+       {x45464800 x45600800 x3efc0000}
+       {x45463000 x455f6800 x3ef60000}}}
+     {t x454626db x45623edb}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone37 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45484800 x45478800 x3ea18000}
+       {x45486800 x45475000 x3ea70000}
+       {x45489000 x45464000 x3ea88000}
+       {x45489000 x4545b800 x3eb50000}
+       {x45485800 x4543e800 x3ec40000}
+       {x4547e000 x45420800 x3ed98000}
+       {x45478800 x4540d800 x3edc8000}
+       {x45478800 x45408000 x3ecd8000}
+       {x4547c800 x45412000 x3e910000}
+       {x4547f000 x45426000 x3e820000}
+       {x45481000 x45443000 x3e930000}
+       {x45482000 x45444000 x3eb40000}
+       {x45482800 x45432800 x3ec00000}
+       {x45481000 x45411000 x3ec40000}
+       {x45481000 x453fb800 x3ed08000}
+       {x45481000 x453ee800 x3ed50000}
+       {x45486800 x45401800 x3eba0000}
+       {x45489000 x4541c000 x3e948000}
+       {x4548b000 x45429800 x3eaa8000}
+       {x4548f800 x45414000 x3ec98000}
+       {x4548b000 x453fa800 x3ee68000}
+       {x45480000 x453e4800 x3ee50000}
+       {x45479800 x453db800 x3e9d0000}}}
+     {t x45482f4e x45422ef5}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone36 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45481800 x454c3800 x3ea60000}
+       {x45483800 x454b4800 x3eb30000}
+       {x45484000 x45499000 x3ed98000}
+       {x45481800 x45479800 x3ef48000}
+       {x4547f000 x45459800 x3efa8000}
+       {x4547d800 x4544f800 x3ef48000}
+       {x4547c800 x45456800 x3ed20000}
+       {x4547c000 x45475000 x3eb30000}
+       {x4547d800 x45496800 x3eb98000}
+       {x45481000 x454af800 x3ebe8000}
+       {x45481800 x454b3000 x3ed00000}
+       {x45481800 x454af800 x3ed70000}
+       {x45481800 x4549c800 x3ee40000}
+       {x45483800 x45474800 x3ee78000}
+       {x45482800 x4545a800 x3eee8000}
+       {x45482800 x4544b800 x3eed0000}
+       {x45484000 x45451800 x3edb0000}
+       {x45484000 x45469800 x3ec98000}
+       {x45486000 x4548d800 x3ecd8000}
+       {x45486800 x454af800 x3ed10000}
+       {x45485000 x454ad000 x3ee30000}
+       {x45486000 x45495800 x3eed0000}
+       {x45486000 x4546c000 x3eef0000}
+       {x45484000 x45454000 x3ef40000}
+       {x45484000 x45449000 x3ef40000}
+       {x45487800 x4545e000 x3ee58000}
+       {x45489000 x45481000 x3edc8000}
+       {x4548b000 x454a2000 x3ee08000}
+       {x45489000 x454b1000 x3ee40000}
+       {x45489000 x4549f800 x3ef98000}
+       {x4548b800 x45481000 x3efd8000}
+       {x45488800 x45464800 x3efe0000}
+       {x45481000 x45446800 x3ef80000}
+       {x4547e800 x4543c800 x3e7f0000}}}
+     {t x4548392d x4547ef0f}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone35 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45485000 x4551e800 x3eb60000}
+       {x45485000 x45500800 x3ebb8000}
+       {x4547d800 x454dd800 x3eda8000}
+       {x45476000 x454be800 x3eea8000}
+       {x45473800 x454b0800 x3eef0000}
+       {x45477800 x454c2000 x3ed88000}
+       {x4547b000 x454e3000 x3ec70000}
+       {x4547c000 x45513800 x3ea30000}
+       {x4547d800 x45528800 x3eab0000}
+       {x4547b000 x45528800 x3ecc0000}
+       {x45476000 x45509800 x3ee90000}
+       {x45477000 x454df000 x3ef60000}
+       {x45473800 x454bc000 x3eee0000}
+       {x45470000 x4549f800 x3e8f8000}}}
+     {t x45479c00 x454e8a49}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone34 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547b000 x45587800 x3eda0000}
+       {x45477000 x45582800 x3ee38000}
+       {x45473800 x4556b000 x3efb8000}
+       {x45477000 x4553d000 x3f07a000}
+       {x45478800 x4550c000 x3f0ba000}
+       {x4547c000 x45507000 x3f04a000}
+       {x45480000 x4551c000 x3efa8000}
+       {x45481000 x45550800 x3ecd8000}
+       {x4547d800 x45575000 x3e940000}
+       {x4547c000 x45580800 x3eb28000}
+       {x45476000 x45569800 x3ee88000}
+       {x45476000 x4553b800 x3f086000}
+       {x45476000 x4551a000 x3f0ba000}
+       {x4547c800 x4551b000 x3f0ba000}
+       {x45484000 x45536800 x3f04a000}
+       {x45485000 x4555d000 x3ef58000}
+       {x45484000 x45572800 x3eef0000}
+       {x45480000 x4555c000 x3f062000}
+       {x4547d800 x45530800 x3f0e2000}
+       {x4547b000 x4550a800 x3f10e000}
+       {x4547a000 x454fc000 x3f092000}
+       {x45479800 x454f9800}}}
+     {t x4547bc5d x45540e2f}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone33 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4545d000 x4556c800 x3eba0000}
+       {x4545c000 x4555f800 x3ecc8000}
+       {x45463000 x45528800 x3ef30000}
+       {x45465800 x45500800 x3f016000}
+       {x45465800 x454ef000 x3f036000}
+       {x45467000 x454fe000 x3ef90000}
+       {x45466000 x45523800 x3ee18000}
+       {x45463000 x45552000 x3ec88000}
+       {x45461000 x45573800 x3ec18000}
+       {x4545e800 x45571000 x3ede8000}
+       {x4545e000 x45559800 x3f016000}
+       {x45467000 x45515000 x3f096000}
+       {x45467000 x454f2000 x3f082000}
+       {x45469800 x454ef000 x3f006000}
+       {x4546c000 x45506000 x3ee20000}}}
+     {t x45463bbc x4552bd55}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone32 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45459800 x45544800 x3ee38000}
+       {x45457000 x45536800 x3ee88000}
+       {x4545b800 x45514800 x3eec8000}
+       {x45459000 x454f1800 x3eef8000}
+       {x45457000 x454d2800 x3ef60000}
+       {x45459000 x454d9000 x3eed0000}
+       {x4545e000 x454f9000 x3eda0000}
+       {x45463000 x45533000 x3ecf0000}
+       {x45460800 x4554e800 x3ecb8000}
+       {x45458000 x4554b800 x3ee58000}
+       {x45454800 x45514800 x3efd0000}
+       {x45458000 x454e6800 x3eff8000}
+       {x4545b800 x454d2800 x3ef78000}
+       {x4545c000 x454d1800 x3b800000}}}
+     {t x4545a76e x4550a649}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone31 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45483800 x4553b800 x3eb88000}
+       {x45482800 x4553a000 x3ebe0000}
+       {x45481000 x4552b000 x3ec78000}
+       {x45485000 x454f9000 x3ee98000}
+       {x45484000 x454cf000 x3f01e000}
+       {x45481000 x454af800 x3f042000}
+       {x4547e800 x454a2000 x3f02a000}
+       {x4547d800 x454ad000 x3eee0000}
+       {x4547d800 x454cc800 x3edd0000}
+       {x45480000 x45508800 x3eb50000}
+       {x45482800 x4552b800 x3eb10000}
+       {x45481000 x45535000 x3ebb8000}
+       {x45480000 x45514800 x3eda0000}
+       {x45483800 x454e2800 x3eec0000}
+       {x45483800 x454bd000 x3ef30000}
+       {x45483800 x454a8000 x3ef78000}
+       {x45487800 x454b8000 x3eee8000}
+       {x4548c800 x454df000 x3ec08000}
+       {x4548e000 x45512800 x3eb28000}
+       {x4548a000 x45515000 x3eca0000}
+       {x4548a000 x454ef000 x3eeb8000}
+       {x45487800 x454b8800 x3eee8000}
+       {x45485000 x454a4800 x3ef18000}
+       {x45482800 x454a2000 x3eb18000}}}
+     {t x45483e55 x454e6e00}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone30 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45476000 x4552c800 x3eb98000}
+       {x45470000 x4552d800 x3ec18000}
+       {x4546c000 x45508800 x3ed98000}
+       {x4546e800 x454e0000 x3ee20000}
+       {x45472000 x454b9800 x3ee80000}
+       {x45472800 x454a1800 x3eea0000}
+       {x45472800 x454ad000 x3ed90000}
+       {x45472800 x454d1000 x3ebf0000}
+       {x45478800 x4550e800 x3eb48000}
+       {x45480000 x4552a000 x3eba0000}
+       {x4547d800 x45523800 x3ed20000}
+       {x45478800 x454eb800 x3ee98000}
+       {x45473800 x454be800 x3eeb0000}
+       {x45470000 x4549f800 x3eec8000}
+       {x4546e800 x45497800 x3ee78000}
+       {x4546e800 x4549b800}}}
+     {t x45473900 x454df400}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone29 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547a000 x454e8000 x3e770000}
+       {x45476000 x454d0000 x3ecf0000}
+       {x45478800 x454ad000 x3eec8000}
+       {x4547e800 x45478800 x3f03a000}
+       {x4547f000 x4545e800 x3f07a000}
+       {x4547e800 x45458000 x3f03e000}
+       {x4547a000 x4546c000 x3ee18000}
+       {x45477000 x45492800 x3e980000}
+       {x45477000 x454bc000 x3e870000}
+       {x4547a000 x454d6800 x3e900000}
+       {x45478800 x454cd800 x3ec00000}
+       {x4547a000 x454ab800 x3ede0000}
+       {x4547a000 x45477800 x3ee38000}
+       {x4547a000 x45460800 x3eed0000}
+       {x4547a000 x45455800 x3eed0000}
+       {x45479800 x45464800 x3edd8000}
+       {x4547a000 x45487800 x3ec40000}
+       {x4547c800 x454a9000 x3ec38000}
+       {x4547f000 x454a7000 x3eca0000}
+       {x45480000 x45486800 x3ee00000}
+       {x4547c800 x45463800 x3eed8000}
+       {x45477800 x4544a000 x3efc0000}
+       {x45477800 x45436800 x3efb8000}
+       {x45477800 x4543f000 x3ec28000}}}
+     {t x4547a600 x45487600}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone28 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45462000 x454e2800 x3ecc8000}
+       {x4545f800 x454da000 x3ed28000}
+       {x45466000 x454b8800 x3edf8000}
+       {x4546a800 x45494000 x3ee28000}
+       {x4546a800 x45469800 x3ee98000}
+       {x45468000 x45457000 x3eea8000}
+       {x45467000 x4545c000 x3ed48000}
+       {x45468000 x4547c000 x3eac8000}
+       {x45469800 x454bc000 x3e8d0000}
+       {x45469800 x454db000 x3e900000}
+       {x45467000 x454d9000 x3ec18000}
+       {x45465800 x454a9800 x3eea8000}
+       {x45465800 x4547b000 x3ef30000}
+       {x45468000 x45459000 x3ef50000}
+       {x45469800 x4544b800 x3eee8000}
+       {x45469800 x4544f000}}}
+     {t x45467380 x45492980}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone27 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45455800 x454ae000 x3ce00000}
+       {x45459000 x454aa800 x3ed58000}
+       {x45456800 x4548e000 x3ee38000}
+       {x45454800 x45450800 x3efd0000}
+       {x45456800 x4542c000 x3f07e000}
+       {x45458000 x4541d000 x3f096000}
+       {x4545e000 x45434000 x3f042000}
+       {x4545e000 x4545e000 x3ee18000}
+       {x45459000 x4548a000 x3ecb8000}
+       {x45456800 x454a8000 x3ed18000}
+       {x45456800 x45495800 x3eee0000}
+       {x45459800 x45463800 x3f012000}
+       {x45458000 x45431800 x3efd8000}
+       {x45458000 x4542c800}}}
+     {t x45458400 x45466800}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone26 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45489000 x4543d800 x3ed50000}
+       {x45487800 x45436800 x3eda8000}
+       {x45487800 x4541d800 x3ee18000}
+       {x45486000 x453f8000 x3ee98000}
+       {x45485000 x453eb000 x3efc8000}
+       {x45483800 x453c6000 x3f00a000}
+       {x45482800 x453ad000 x3f01e000}
+       {x45481800 x453a6800 x3efd8000}
+       {x45481000 x453a8000 x3ee30000}
+       {x4547f000 x453b9800 x3ede0000}
+       {x4547e800 x453e0000 x3ecc8000}
+       {x4547d800 x4541b000 x3ec18000}
+       {x4547a000 x45436000 x3ea08000}
+       {x45476000 x45436800 x3ec48000}
+       {x4547c000 x4540c000 x3ee28000}
+       {x45481000 x453dd800 x3eeb0000}
+       {x45482800 x453ba800 x3eee0000}
+       {x45481000 x4539f000 x3eed0000}
+       {x4547f000 x4539d800 x3eac8000}}}
+     {t x45481287 x453e7f94}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone25 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45481000 x4545a800 x3efd0000}
+       {x45479800 x45450800 x3f006000}
+       {x45471000 x4542c800 x3f026000}
+       {x4546e800 x453f7800 x3f02a000}
+       {x45471000 x453bf800 x3f042000}
+       {x45471000 x453aa800 x3f012000}
+       {x45474800 x453cc000 x3ed28000}
+       {x45477000 x453ea000 x3eb88000}
+       {x45478800 x45418800 x3ebb8000}
+       {x45476000 x45437800 x3ec00000}
+       {x45470000 x45437800 x3ede0000}
+       {x4546e800 x45417000 x3ef80000}
+       {x45471000 x453e4000 x3efd8000}
+       {x45474800 x453b8000 x3efd8000}
+       {x45475000 x453a8000 x3efa8000}
+       {x45473800 x453a8000 x3ee90000}
+       {x45470000 x453bf800 x3ee40000}
+       {x45472000 x453d2800 x3eda8000}
+       {x45472800 x453d5000 x3e390000}}}
+     {t x45473bca x453f0de5}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone24 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4545b800 x4545f800 x3eb90000}
+       {x45452000 x45452000 x3ebd0000}
+       {x45454800 x4542f000 x3ec60000}
+       {x4545e000 x453f1800 x3eca0000}
+       {x45462000 x453ce800 x3ece0000}
+       {x45461000 x453bd000 x3ecd8000}
+       {x45462000 x453c8800 x3ec10000}
+       {x45461000 x453eb800 x3ebc8000}
+       {x45462000 x4541c000 x3eac0000}
+       {x4546d000 x4544e000 x3e948000}
+       {x4546d000 x45453000 x3ea88000}
+       {x45467000 x4543e000 x3ec98000}
+       {x45463000 x453fa800 x3edb0000}
+       {x45462000 x453d0000 x3edc8000}
+       {x45464800 x453b4800 x3edc8000}
+       {x45464800 x453a7800 x3ed78000}
+       {x45463000 x453b4000 x3ebd0000}
+       {x45461000 x453c7000 x3dcc0000}}}
+     {t x45461800 x453fb71c}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone23 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45475000 x453af000 x3ec30000}
+       {x45475000 x453ad000 x3ec88000}
+       {x45477800 x4539f000 x3ed30000}
+       {x4547c000 x45373000 x3ef08000}
+       {x4547c800 x4534c800 x3f022000}
+       {x4547b000 x45332000 x3f02a000}
+       {x45479800 x4532b000 x3eff0000}
+       {x4547c000 x45342800 x3ee78000}
+       {x4547d800 x4536d000 x3eba0000}
+       {x45478800 x4539e000 x3ea38000}
+       {x45473800 x453aa000 x3ec30000}
+       {x45472000 x453a0000 x3ee10000}
+       {x4547a000 x4536d000 x3efa8000}
+       {x4547a000 x45347800 x3efa0000}
+       {x45477000 x45332800 x3efc0000}
+       {x45478800 x4533c800 x3eef8000}
+       {x4547e800 x45364800 x3ec78000}
+       {x45484000 x45387000 x3ebb8000}
+       {x45483800 x45372000 x3ebe0000}
+       {x45481000 x45368000}}}
+     {t x4547a6cd x4536e000}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone22 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4546e800 x453b4800 x3ed08000}
+       {x4546b000 x453ab800 x3ed20000}
+       {x45468000 x45383800 x3edc0000}
+       {x45466000 x4535c800 x3ef30000}
+       {x45466000 x4533c000 x3ef70000}
+       {x45467000 x4532d000 x3ef00000}
+       {x4546a800 x4533a000 x3eca8000}
+       {x4546c000 x45359000 x3ebc0000}
+       {x45468000 x4538c000 x3ebb8000}
+       {x45465800 x453a5800 x3eae8000}
+       {x45464800 x453a9000 x3ec90000}
+       {x45467000 x45389800 x3ee08000}
+       {x4546b000 x45360800 x3eec8000}
+       {x4546d800 x45341800 x3eee8000}
+       {x45470000 x45336000 x3eef8000}
+       {x45475000 x4534b000 x3ed58000}
+       {x45476000 x45372000 x3eb70000}
+       {x45470000 x45397800 x3ea80000}
+       {x4546e800 x4538a000 x3ed20000}
+       {x45470000 x45362000 x3ee38000}
+       {x45470000 x45333800 x3ede8000}
+       {x45470000 x45322000 x3e9e0000}}}
+     {t x4546be8c x453695d1}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone21 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45458000 x453a2800 x3ed50000}
+       {x45459000 x453a5800 x3ed38000}
+       {x45459000 x4539f000 x3ed40000}
+       {x45459000 x45377000 x3ed90000}
+       {x45455800 x45355000 x3ed98000}
+       {x45453000 x45338800 x3edc8000}
+       {x45453000 x45330000 x3ede0000}
+       {x45457000 x45346800 x3ebf8000}
+       {x45454000 x45370800 x3e870000}
+       {x45450800 x4539e000 x3e720000}
+       {x45459000 x453be000 x3e830000}
+       {x4545a800 x453b8000 x3eb40000}
+       {x45459800 x45398800 x3edb8000}
+       {x45459000 x45360800 x3ee58000}
+       {x45458000 x45341800 x3ee98000}
+       {x45457000 x4532d800 x3ee40000}}}
+     {t x45456f00 x45374e80}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone20 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45477000 x4530b800 x3eb20000}
+       {x45475000 x4531e000 x3eb88000}
+       {x45476000 x4532e800 x3ebd8000}
+       {x45476000 x45332000 x3eca8000}
+       {x45476000 x45330000 x3ed30000}
+       {x45478800 x4531e000 x3ee10000}
+       {x4547b000 x452fc800 x3ee40000}
+       {x4547b000 x452ed800 x3ee78000}
+       {x4547c000 x452ec000 x3ee68000}
+       {x4547d800 x45302800 x3ee60000}
+       {x4547b000 x45320800 x3ed68000}
+       {x45477000 x4533a000 x3ecf8000}
+       {x45474800 x4533a000 x3ed50000}
+       {x45477000 x45328000 x3ee70000}
+       {x4547d800 x4530e000 x3eee8000}
+       {x4547f000 x452f7800 x3ef20000}
+       {x45484000 x452fc800 x3eee8000}
+       {x45489000 x45314000 x3ee40000}
+       {x45486800 x45339800 x3ecb8000}
+       {x45485000 x45339800 x3ed48000}
+       {x45482800 x4531e000 x3ee18000}
+       {x4547c800 x45302800 x3ee20000}
+       {x4547c000 x45300800}}}
+     {t x4547bfa7 x4531742d}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone19 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45484000 x450d7800 x3eb70000}
+       {x45485000 x450d6800 x3ebf0000}
+       {x45486000 x450ce000 x3ec00000}
+       {x45486800 x450c2800 x3ec10000}
+       {x45486800 x450bc000 x3eca8000}
+       {x45486800 x450c1800 x3ebe0000}
+       {x45485000 x450cb800 x3eb80000}
+       {x45486800 x450cc800 x3eb58000}
+       {x45487800 x450c6000 x3ec50000}
+       {x45486000 x450c0000 x3ed50000}
+       {x45484000 x450bf000 x3ee18000}
+       {x45485000 x450c4000 x3ed60000}
+       {x45486800 x450c8800 x3eca8000}
+       {x45487800 x450c2800 x3ece0000}
+       {x45487800 x450bd800 x3ed68000}
+       {x45487800 x450bc800 x3eda0000}
+       {x45487800 x450c1000 x3ed38000}
+       {x45487800 x450c3800 x3eca8000}
+       {x45487800 x450c6000 x3ec98000}
+       {x45487800 x450c2800 x3ecd0000}
+       {x45487800 x450bd800 x3ed58000}
+       {x45487800 x450bc800 x3edd0000}
+       {x45486800 x450bc800 x3edb8000}
+       {x45486800 x450c1000 x3ed70000}
+       {x45487800 x450c1800 x3ed18000}
+       {x45488800 x450bc800 x3ed50000}
+       {x45487800 x450ba000 x3edc8000}
+       {x45488800 x450ba000 x3eda8000}
+       {x45487800 x450bb000 x3edd0000}
+       {x45483800 x450bc000 x3edf0000}
+       {x4547c000 x450bd800 x3ee00000}
+       {x45477800 x450bd800 x3ee38000}
+       {x4547c800 x450ba000 x3ee80000}
+       {x45480000 x450b9800 x3ee58000}
+       {x45483800 x450b8800 x3ee40000}
+       {x4548e000 x450b8800 x3ee20000}
+       {x45490000 x450b9800 x3edc0000}
+       {x4548c800 x450b9800 x3eda8000}
+       {x45480000 x450b9800 x3ede8000}
+       {x45479800 x450b9800 x3eeb8000}
+       {x4547e800 x450bc000 x3ee98000}
+       {x45482800 x450bc000 x3eeb8000}
+       {x45482800 x450b9800 x3ef68000}
+       {x45483800 x450bc000 x3eee0000}}}
+     {t x45485346 x450c00e9}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone18 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45488800 x4512f800 x3eb38000}
+       {x45487800 x45128000 x3ebe8000}
+       {x45486800 x4510d800 x3ee80000}
+       {x45485000 x450eb800 x3ef10000}
+       {x45483800 x450cd800 x3f006000}
+       {x45482800 x450ce000 x3ef18000}
+       {x45481800 x450e3000 x3ed78000}
+       {x45483800 x4510a000 x3ed28000}
+       {x45485000 x4511a000 x3ed28000}
+       {x45484000 x45117800 x3ee40000}
+       {x45486000 x450f5800 x3eed0000}
+       {x45484000 x450d8000 x3eef0000}
+       {x45484000 x450cf000 x3ef40000}
+       {x45486800 x450e1800 x3ede8000}
+       {x45487800 x450e9800 x3e9b8000}}}
+     {t x45485089 x450f6889}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone17 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45483800 x4519d000 x3e050000}
+       {x45482800 x4519e800 x3e470000}
+       {x45480000 x45185800 x3eb10000}
+       {x45481800 x4515f000 x3eca8000}
+       {x45481000 x4513d000 x3ecf0000}
+       {x4547f000 x45128000 x3ee70000}
+       {x45480000 x4512f000 x3ee28000}
+       {x45481800 x45148000 x3ed10000}
+       {x45483800 x4517c800 x3ea60000}
+       {x45488800 x45197000 x3e990000}
+       {x45487800 x4519a800 x3eae8000}
+       {x45481800 x4517d000 x3ed38000}
+       {x45480000 x4514d800 x3ee68000}
+       {x45480000 x45126800 x3eeb8000}
+       {x45481000 x4510f000 x3ef98000}
+       {x45482800 x45117800 x3ef38000}
+       {x45486000 x45138000 x3eda8000}
+       {x45486800 x4515c800 x3ed30000}
+       {x45488800 x4514d000 x3eed0000}
+       {x45486000 x4512a000 x3eea8000}
+       {x4547c800 x45107000 x3ede8000}}}
+     {t x45482b6e x451533cf}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone16 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548a000 x451f2000 x3ece0000}
+       {x45488800 x451e3000 x3ed38000}
+       {x45485000 x451c5800 x3ed98000}
+       {x45482800 x451ba000 x3eef8000}
+       {x4547c000 x45198800 x3ef38000}
+       {x45479800 x45187000 x3efc0000}
+       {x4547c800 x4518b800 x3ef00000}
+       {x45481000 x4519d000 x3ee40000}
+       {x45482800 x451bb800 x3ecb8000}
+       {x4547f000 x451e5800 x3eb18000}
+       {x4547d800 x451f1000 x3ec40000}
+       {x4547b000 x451ed000 x3ee20000}
+       {x4547c800 x451c5800 x3efb8000}
+       {x45480000 x4519c000 x3efa8000}
+       {x4547f000 x4517c800 x3ef80000}
+       {x4547c800 x45168800 x3ed88000}
+       {x4547b000 x45163800}}}
+     {t x4547fa5a x451b143c}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone15 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4547e800 x45204000 x3ece0000}
+       {x4547d800 x45201000 x3ed00000}
+       {x45479800 x451e9800 x3ecf8000}
+       {x45474800 x451c2800 x3ec90000}
+       {x45472000 x45193000 x3ed98000}
+       {x45473800 x45181800 x3edc8000}
+       {x45475000 x45183000 x3ec90000}
+       {x45477000 x451a3800 x3e968000}
+       {x45476000 x451cd000 x3e1c0000}
+       {x45478800 x451f4800 x3e1d0000}
+       {x4547c000 x45206000 x3e4c0000}
+       {x45477800 x451fc800 x3eb00000}
+       {x45477800 x451dc000 x3edc8000}
+       {x4547c000 x451a2800 x3ee20000}
+       {x4547e800 x45181800 x3ef18000}
+       {x4547d800 x4516c800 x3ef20000}
+       {x4547c000 x45168800 x3ee10000}}}
+     {t x45479000 x451bc878}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone14 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45490000 x4527d000 x3eb78000}
+       {x45491800 x4526f000 x3ebb8000}
+       {x4548f000 x45248800 x3ebe8000}
+       {x4548b000 x45228000 x3ee08000}
+       {x45486000 x4520e000 x3eeb8000}
+       {x45481800 x451fe800 x3eeb8000}
+       {x45482800 x45204000 x3ed20000}
+       {x45485000 x45219000 x3eb08000}
+       {x45486000 x45242800 x3e990000}
+       {x45486000 x4525a000 x3e960000}
+       {x45486800 x45260000 x3ea88000}
+       {x45481800 x45251000 x3ec10000}
+       {x45482800 x4522e000 x3ed08000}
+       {x45482800 x4520a000 x3ed20000}
+       {x45482800 x451f0000 x3ed00000}
+       {x45480000 x451e0800 x3e9b0000}}}
+     {t x45486600 x4522dc00}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone13 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45491800 x452bf800 x3ebb8000}
+       {x45490000 x452b7800 x3ec30000}
+       {x4548d800 x45293800 x3ecf8000}
+       {x45487800 x45277000 x3ee98000}
+       {x45484000 x45265000 x3ef70000}
+       {x45483800 x45263000 x3ef48000}
+       {x45485000 x45274000 x3eeb8000}
+       {x45486800 x4528c000 x3edb0000}
+       {x45489000 x452a8800 x3ec38000}
+       {x4548a000 x452ba000 x3ec30000}
+       {x45486800 x452b8000 x3ed20000}
+       {x45484000 x452a8800 x3ee68000}
+       {x45487800 x4527a800 x3eed0000}
+       {x45488800 x45258800 x3eef0000}
+       {x45485000 x45240000 x3ef00000}
+       {x4547e800 x4522c000 x3eea0000}
+       {x4547c000 x45229800}}}
+     {t x45486f88 x4527f5a6}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone12 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4548c800 x452db000 x3ed88000}
+       {x4548b800 x452d9800 x3edb0000}
+       {x45488800 x452c6800 x3edb8000}
+       {x45480000 x45295000 x3edc0000}
+       {x4547c000 x45274800 x3ee80000}
+       {x4547a000 x45266800 x3eed0000}
+       {x4547f000 x45273000 x3edb0000}
+       {x45481800 x4528f800 x3ea78000}
+       {x45481800 x452b5800 x3e840000}
+       {x45483800 x452db000 x3e840000}
+       {x45481800 x452de800 x3eb70000}
+       {x45481000 x452d0800 x3ed10000}
+       {x45484000 x452a0000 x3ee38000}
+       {x45483800 x4527b800 x3ee58000}
+       {x4547e800 x4525f000 x3ef18000}
+       {x45477000 x45249800 x3ef08000}
+       {x45476000 x45248800}}}
+     {t x45481078 x45299f88}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone11 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45481000 x45309000 x3e7f0000}
+       {x45480000 x45302800 x3e960000}
+       {x4547f000 x452ec000 x3edc8000}
+       {x4547d800 x452ce800 x3eef8000}
+       {x4547a000 x452b0000 x3eff0000}
+       {x4547a000 x452ab800 x3f036000}
+       {x4547c800 x452b9000 x3ef60000}
+       {x4547c000 x452e2000 x3eda8000}
+       {x45476000 x45301800 x3ec40000}
+       {x45473800 x4530f800 x3ecd8000}
+       {x4546f800 x45304000 x3ee28000}
+       {x45471000 x452e2800 x3efc0000}
+       {x45475000 x452bd000 x3efe8000}
+       {x45475000 x4529b000 x3f062000}
+       {x45471000 x4528d000 x3f072000}
+       {x4546d000 x45288000 x3eac0000}}}
+     {t x45477c00 x452d2100}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone10 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4545a800 x45331000 x3eb30000}
+       {x4545c000 x45330000 x3eb50000}
+       {x45460800 x45328800 x3eba0000}
+       {x45465800 x45310800 x3ecf0000}
+       {x45463800 x452f2800 x3edf8000}
+       {x45461000 x452e9800 x3ef88000}
+       {x4545a800 x452d9800 x3efe8000}
+       {x4545e000 x452df800 x3efb0000}
+       {x45463800 x452fb800 x3ee38000}
+       {x45463800 x45309000 x3ecc0000}
+       {x45460800 x45332000 x3ec88000}
+       {x4545e800 x4534f000 x3ec40000}
+       {x4545e800 x45355800 x3ed38000}
+       {x4545e000 x4533a000 x3eeb8000}
+       {x45463000 x4530f800 x3efd8000}
+       {x45468000 x452f0000 x3f01e000}
+       {x4546a800 x452e7000 x3f05e000}
+       {x4546f800 x452f5000 x3f03e000}
+       {x45471000 x45316800 x3ef68000}
+       {x4546d800 x45344000 x3ee50000}
+       {x45469800 x4534a000 x3eef0000}
+       {x45464800 x45330000 x3f00e000}
+       {x45468000 x452f2800 x3f03a000}
+       {x4546a800 x452d3800 x3f04a000}
+       {x45468800 x452c5800 x3ee30000}}}
+     {t x454642e1 x4530f571}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone9 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45462000 x452e0000 x3e130000}
+       {x45463800 x452dc000 x3ec90000}
+       {x45468000 x452c7000 x3ecf8000}
+       {x4546a800 x4529d800 x3eda8000}
+       {x45468000 x45288000 x3eeb8000}
+       {x45467000 x45287000 x3ee80000}
+       {x45467000 x452a9000 x3ed90000}
+       {x45465800 x452d3800 x3e9a8000}
+       {x45466000 x452f5000 x3e918000}
+       {x45462000 x452fc800 x3eab0000}
+       {x45459800 x452e4800 x3ee58000}
+       {x45458000 x452b8000 x3efb8000}
+       {x45459000 x4528f800 x3f04a000}
+       {x4545b800 x4528c000 x3f042000}
+       {x45463800 x4529e800 x3efc0000}
+       {x4546d800 x452d3000 x3ee10000}
+       {x45473800 x452f6800 x3ecf8000}
+       {x45475000 x45301800 x3ed50000}
+       {x4546d800 x452f5000 x3ee90000}
+       {x45466000 x452c0800 x3f012000}
+       {x45466000 x45299800 x3f092000}
+       {x45467000 x45288000 x3f0d2000}
+       {x45464800 x4528b000 x3efb8000}}}
+     {t x4546590b x452bea6f}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone8 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45468000 x4526f000 x3ebe8000}
+       {x45466000 x4526f800 x3eb78000}
+       {x45465800 x4526a800 x3ebb8000}
+       {x4546a800 x45256800 x3ec90000}
+       {x4546d000 x4522f800 x3ed08000}
+       {x45469800 x4521a800 x3ee78000}
+       {x4546a800 x4521a800 x3eeb8000}
+       {x4546e800 x4523d000 x3edc0000}
+       {x4546a800 x45266800 x3ebc0000}
+       {x45464800 x45288000 x3ebb0000}
+       {x45463800 x45292000 x3ec78000}
+       {x45462000 x45279000 x3ee10000}
+       {x45467000 x4524e800 x3ef20000}
+       {x45469800 x4522f800 x3ef98000}
+       {x4546b000 x45227000 x3f026000}
+       {x45472000 x4523d000 x3efb0000}
+       {x45477800 x45266800 x3ee08000}
+       {x4547a000 x4529d800 x3ecb0000}
+       {x45476000 x452ab800 x3ecd8000}
+       {x45470000 x4529c800 x3eea0000}
+       {x4546d800 x4525f000 x3eff8000}
+       {x45470000 x4523a800 x3f076000}
+       {x45473800 x4522d000 x3f0fa000}
+       {x45480000 x45242000 x3f0ae000}
+       {x45486800 x45265800 x3f012000}
+       {x45484000 x45284800 x3ef90000}
+       {x45481000 x45278000 x3f032000}
+       {x4547c000 x4524b000 x3f072000}
+       {x45475000 x45225800 x3f08a000}
+       {x4546b000 x45213000 x3f07a000}}}
+     {t x4546ffbc x45258377}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone7 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4545f800 x45215000 x3ee08000}
+       {x4545d000 x4520c800 x3edb0000}
+       {x45462000 x451ed000 x3eda0000}
+       {x45463000 x451c6800 x3ede0000}
+       {x45461000 x451aa000 x3ee30000}
+       {x45463800 x451b1800 x3ec60000}
+       {x45466000 x451d1800 x3e9d8000}
+       {x45468800 x4520a000 x3e930000}
+       {x4546a800 x45227000 x3eaf8000}
+       {x4546b000 x4522c000 x3ec48000}
+       {x45469800 x4520d800 x3edf0000}
+       {x45469800 x451e6000 x3ef18000}
+       {x45468800 x451c6800 x3efa8000}
+       {x45468800 x451bc800 x3efd0000}
+       {x4546d000 x451cf800 x3ee90000}
+       {x45471000 x451f7800 x3ee18000}
+       {x45471000 x4522e000 x3ec10000}
+       {x45472000 x4523d800 x3ec18000}
+       {x45470000 x45234800 x3ed58000}
+       {x45471000 x45202800 x3ef20000}
+       {x45472000 x451db800 x3f012000}
+       {x45470000 x451c3000 x3f092000}
+       {x45471000 x451c5000 x3f08a000}
+       {x45477000 x451e6000 x3edc0000}
+       {x4547a000 x45210000 x3ecd8000}
+       {x4547f000 x4521c800 x3ed40000}
+       {x4547d800 x451fa000 x3ef40000}
+       {x45474800 x451d1800 x3efa0000}
+       {x45467000 x451b5000 x3eff8000}
+       {x45465800 x451b6000}}}
+     {t x4546c511 x451ee400}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone6 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45477000 x451a0000 x3e9e0000}
+       {x45472000 x451a2000 x3ea48000}
+       {x4546f800 x45192000 x3ec78000}
+       {x4546d000 x4515f000 x3edc8000}
+       {x45468000 x45141000 x3eee8000}
+       {x45467000 x45138000 x3ef98000}
+       {x45472000 x45154800 x3eed0000}
+       {x45471000 x45180800 x3eb40000}
+       {x4546b000 x451a9800 x3eae8000}
+       {x45467000 x451bb800 x3ebb0000}
+       {x45466000 x451a8800 x3ee60000}
+       {x45466000 x45179000 x3ef18000}
+       {x45462000 x4514d800 x3ef48000}
+       {x45462000 x45148000 x3f012000}
+       {x45468800 x4515a000 x3eff0000}
+       {x4546b000 x45192000 x3ee88000}
+       {x4546d000 x451bb000 x3ebb8000}
+       {x4546f800 x451ca000 x3ebe8000}
+       {x4546a800 x451b7800 x3eda8000}
+       {x45465800 x45186800 x3efd8000}
+       {x45463800 x45157800 x3f006000}
+       {x45463800 x4513e800 x3f052000}}}
+     {t x4546a346 x4517ea2f}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone5 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4546d000 x45145800 x3ebf0000}
+       {x4546c000 x45147000 x3ec28000}
+       {x45468000 x45141000 x3ec18000}
+       {x45468000 x4512a000 x3ec10000}
+       {x45463800 x450fe800 x3ec30000}
+       {x4545c000 x450e6800 x3ee28000}
+       {x4545a800 x450e0800 x3ee98000}
+       {x45460800 x450fd800 x3edb0000}
+       {x45463000 x45127800 x3e868000}
+       {x45462000 x4514b000 x3e888000}
+       {x45464800 x45158800 x3ea38000}
+       {x45469800 x45147000 x3ecc8000}
+       {x4546a800 x45123000 x3eda8000}
+       {x45468000 x45101000 x3ede0000}
+       {x45464800 x450e8000 x3ee98000}
+       {x45466000 x450eb800 x3ede0000}
+       {x45468800 x45105000 x3eb68000}
+       {x4546c000 x4513e000 x3e4b0000}
+       {x4546e800 x45157800 x3e840000}
+       {x45470000 x45157800 x3eb38000}
+       {x4546e800 x45132000 x3ed70000}
+       {x4546b000 x4510a000 x3ed98000}
+       {x45467000 x450ef800 x3ef38000}
+       {x45466000 x450ec000 x3efd8000}
+       {x4546d000 x45108800 x3ee00000}
+       {x45474800 x45138000 x3e930000}
+       {x45476000 x45160000 x3e900000}
+       {x45475000 x4514c000 x3ee48000}
+       {x45472000 x45119000 x3ef08000}
+       {x45468000 x450ea800 x3ef78000}
+       {x45464800 x450e7000 x3e6d0000}}}
+     {t x45469084 x4511e14a}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone4 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x4545f800 x450b0000 x3e190000}
+       {x45460800 x450b0000 x3e9a8000}
+       {x45463000 x450af800 x3ea60000}
+       {x4546a800 x450af800 x3eb58000}
+       {x45473800 x450b0000 x3ebd8000}
+       {x45476000 x450b0000 x3ebe0000}
+       {x45475000 x450b0000 x3ed08000}
+       {x45472000 x450b0000 x3ecd8000}
+       {x45470000 x450b0000 x3ecd0000}
+       {x4546d000 x450b1000 x3ece8000}
+       {x4546e800 x450b1000 x3eca8000}
+       {x45475000 x450b1000 x3ecb0000}
+       {x4547c000 x450b1000 x3ec98000}
+       {x4547c000 x450b0000 x3ede0000}
+       {x4547a000 x450b0000 x3ee48000}
+       {x45476000 x450b0000 x3ee48000}
+       {x4546f800 x450b1000 x3ee40000}
+       {x45474800 x450b1000 x3ee28000}
+       {x45479800 x450b1000 x3ee28000}
+       {x4547c800 x450b1000 x3ee28000}
+       {x4547d800 x450b1000 x3ee38000}
+       {x45479800 x450b2800 x3ee10000}
+       {x45476000 x450b3800 x3ee20000}
+       {x45475000 x450b3800 x3ee50000}
+       {x45476000 x450b3800 x3eed0000}
+       {x45478800 x450b2800 x3eee8000}
+       {x4547a000 x450b3800 x3ef00000}
+       {x4547c800 x450b3800 x3ef00000}
+       {x4547c800 x450b4800 x3ef08000}
+       {x4547a000 x450b5000 x3ef90000}
+       {x45478800 x450b4800 x3f012000}
+       {x45477800 x450b2800 x3f00a000}
+       {x4547b000 x450b2800 x3f006000}
+       {x4547f000 x450b4800 x3f012000}
+       {x4547f000 x450b7000 x3f006000}
+       {x4547b000 x450ba000 x3f00a000}
+       {x45471000 x450bc800 x3f016000}
+       {x4546b000 x450bd800 x3f026000}
+       {x4546d000 x450c2800 x3eff0000}
+       {x45471000 x450d2800 x3efc0000}
+       {x4546d000 x450e0800 x3ef30000}
+       {x45468800 x450e9000 x3ef48000}
+       {x45467000 x450e5800 x3efd0000}
+       {x45467000 x450d8000 x3f006000}
+       {x45468000 x450c7800 x3f02e000}
+       {x45469800 x450c0000 x3f072000}
+       {x4546e800 x450c6800 x3f05a000}
+       {x45471000 x450d8000 x3efa8000}
+       {x4546c000 x450ef800 x3ef18000}
+       {x45469800 x450f4800 x3ef90000}
+       {x45468000 x450eb800 x3f026000}
+       {x45468000 x450cf000 x3f072000}
+       {x4546b000 x450c4000 x3f0fe000}
+       {x45470000 x450c6800 x3f102000}
+       {x45477800 x450dc800 x3f0ae000}
+       {x45476000 x450f0800 x3f012000}
+       {x45473800 x450f8800 x3f03e000}
+       {x45471000 x450ee000 x3f0d6000}
+       {x4546d000 x450d9000 x3f15e000}
+       {x45468000 x450c9000 x3f1ce000}
+       {x45465800 x450c5000 x3f1d2000}
+       {x45463800 x450cb800 x3ee28000}}}
+     {t x45471908 x450c1529}
+     {a ro 0 go 0 bo 0 ao 0 bs x42540000 bu 1 src 1 stx x41f00000 sty xc0200000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone3 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45436800 x450b3800 x3eb70000}
+       {x4543c800 x450b2800 x3ed38000}
+       {x4544d000 x450b2800 x3ede0000}
+       {x45457000 x450b3800 x3edf8000}
+       {x45459800 x450b4800 x3edb0000}
+       {x45457000 x450b3800 x3ede0000}
+       {x45454000 x450b3800 x3edc8000}
+       {x4544f000 x450b3800 x3eda0000}
+       {x4544a800 x450b3800 x3eda0000}
+       {x4544f000 x450b2800 x3ed80000}
+       {x4545d000 x450b2800 x3ed80000}
+       {x4546d000 x450b2800 x3ed58000}
+       {x4546e800 x450b3800 x3ed58000}
+       {x45466000 x450b2800 x3ed90000}
+       {x45456800 x450b2000 x3edf8000}
+       {x45454800 x450b2000 x3ee60000}
+       {x45459000 x450b2000 x3ee30000}
+       {x4545f800 x450b2800 x3ee28000}
+       {x45460800 x450b2800 x3ee28000}
+       {x45463000 x450b2000 x3ee30000}
+       {x45466000 x450b2000 x3ee40000}
+       {x45467000 x450b2000 x3ee38000}
+       {x45468800 x450b2000 x3ee38000}
+       {x45469800 x450b2000 x3ee08000}
+       {x45468800 x450b2800 x3ea68000}}}
+     {t x4545a47b x450b2b33}
+     {a ro 0 go 0 bo 0 ao 0 bs x42280000 bu 1 src 1 stx x3f000000 sty xc1d00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone2 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45405800 x450b7000 x3e9a8000}
+       {x45406800 x450b7000 x3eb70000}
+       {x4540a800 x450b7000 x3ec38000}
+       {x45418000 x450b7000 x3ec90000}
+       {x4542b000 x450b7800 x3ec90000}
+       {x4542f000 x450b7800 x3ec30000}
+       {x4542c800 x450b7000 x3ec80000}
+       {x4541c000 x450b6000 x3ec60000}
+       {x45409800 x450b6000 x3ec50000}
+       {x45402000 x450b5000 x3ecb8000}
+       {x4540b800 x450b5000 x3ece0000}
+       {x45421000 x450b6000 x3ed48000}
+       {x45437800 x450b7000 x3ece8000}
+       {x45446800 x450b7800 x3ecf0000}
+       {x45442800 x450b7000 x3ed48000}
+       {x45431000 x450b6000 x3ed40000}
+       {x4540d000 x450b4800 x3ed30000}
+       {x453fb800 x450b2800 x3ed68000}
+       {x453fa000 x450b2800 x3eda0000}
+       {x4540f800 x450b2800 x3ee18000}
+       {x45429800 x450b3800 x3ee00000}
+       {x4543b800 x450b5000 x3ee00000}
+       {x4543e000 x450b5000 x3ede8000}
+       {x45431800 x450b4800 x3ee30000}
+       {x4541b000 x450b3800 x3ee40000}
+       {x45403000 x450b2800 x3ee48000}
+       {x453ff000 x450b2000 x3ee38000}
+       {x45402000 x450b1000 x3ee50000}
+       {x4541b000 x450b0000 x3eee8000}
+       {x45431800 x450b1000 x3ef00000}
+       {x45441800 x450b2000 x3eea8000}
+       {x45444000 x450b2800}}}
+     {t x4541e900 x450b4b00}
+     {a ro 0 go 0 bo 0 ao 0 bs x42280000 bu 1 src 1 stx x3f000000 sty xc1d00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}
+    {cubiccurve Clone1 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x45413800 x450c6000 x3eb70000}
+       {x45414800 x450c5000 x3ec70000}
+       {x45426000 x450c4000 x3ec88000}
+       {x45445000 x450c4000 x3ebb0000}
+       {x4545c000 x450c5000 x3ebb0000}
+       {x45463000 x450c4000 x3eba0000}
+       {x4544f000 x450c2800 x3ec20000}
+       {x4542f000 x450c1000 x3edc8000}
+       {x4541c000 x450c0000 x3ee70000}
+       {x4541a800 x450c0000 x3ee58000}
+       {x4541d800 x450c1000 x3ee50000}
+       {x4542d800 x450c2800 x3ee30000}
+       {x4543e000 x450c3800 x3ed58000}
+       {x45443000 x450c3800 x3ec70000}
+       {x4544a800 x450c3800 x3ec70000}
+       {x45449000 x450c2800 x3ed38000}
+       {x45442800 x450c1800 x3ee30000}
+       {x4543e000 x450c1000 x3ee28000}
+       {x4542f000 x450c1000 x3ee08000}
+       {x4541b000 x450c1000 x3edf0000}
+       {x4540e800 x450c0000 x3ee38000}
+       {x4541d800 x450c0000 x3ee58000}
+       {x45443000 x450c1000 x3ee70000}
+       {x45452000 x450c1000 x3ee10000}
+       {x4545a800 x450c1000 x3ee00000}
+       {x45453000 x450c1000 x3ee40000}
+       {x45437800 x450c0000 x3ee30000}
+       {x45406800 x450bf000 x3ee28000}
+       {x453f1800 x450be800 x3eeb8000}
+       {x453f2800 x450bd800 x3eed8000}
+       {x4541b000 x450bf000 x3ef50000}
+       {x45430000 x450c1000 x3eea8000}
+       {x45445000 x450c1800 x3eb68000}}}
+     {t x45431000 x450c19b2}
+     {a ro 0 go 0 bo 0 ao 0 bs x42280000 bu 1 src 1 stx x3f000000 sty xc1d00000 str 1 spx x45800000 spy x45800000 sb 1 ltn x447c4000 ltm x447c4000 ltt x40000000 tt x41980000}}}}}}
+ toolbox {brush {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 ltn 1009 ltm 1009 tt 17 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone bs 53 src 1 stx -40 sty -234 str 1 ssx 1 ssy 1 sf 1 sb 1 ltn 1009 ltm 1009 tt 19 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_lifetime_type single
+ toolbar_lifetime_start 1009
+ toolbar_lifetime_end 1009
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1204 903}
+ colorOverlay {0 0 0 0}
+ paint_source foreground
+ lifetime_start 1009
+ lifetime_end 1009
+ motionblur_on true
+ openspline_width 2
+ brush_size 53
+ brush_spacing 0.05000000075
+ brush_hardness 0.200000003
+ source_black_outside true
+ name RotoPaint12
+ xpos -3421
+ ypos -1226
+}
+Camera2 {
+ inputs 0
+ translate {{curve x1001 18442.10352 x1036 18829.48242 x1074 19897.38281 x1147 20727.44531} {curve x1001 -199.6287384 x1036 -270.3913879 x1074 -272.7832336 x1147 -267.9204102} {curve x1001 -4061.381592 x1036 -2463.062988 x1074 -2733.87793 x1147 -3811.313965}}
+ rotate {{curve x1001 -0.2616475517 x1147 1.080293668} {curve x1001 -89.9572182 x1147 80.41341536} {curve x1001 -4.904766527 x1147 4.791732873}}
+ focal 30
+ name Camera3
+ xpos -2985
+ ypos -200
+ addUserKnob {20 User}
+ addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+Sphere {
+ inputs 0
+ rows 20
+ columns 20
+ translate {19996.56287 -302 -3930.003906}
+ uniform_scale 100
+ name Sphere2
+ label Object
+ note_font_size 14
+ xpos -3443
+ ypos -40
+}
+Axis {
+ inputs 0
+ translate {21656 -406 -4321}
+ rotate {0 180 0}
+ name Axis1
+ gl_color 0xff0000ff
+ xpos -3416
+ ypos -673
+}
+Axis {
+ translate {-109 -53.5 0}
+ name originSet3
+ xpos -3159
+ ypos -673
+}
+Read {
+ inputs 0
+ file "\[lindex \[knob sequence] \[expr \[frame]-1]]"
+ cacheLocal always
+ last 4
+ origlast 4
+ origset true
+ sequence "/corky/projects/Sputnik_343196/library/environments/icctunneltile_tg/textures/versions/texture_set_v003/diffuse_map_01_1001.exr\n/corky/projects/Sputnik_343196/library/environments/icctunneltile_tg/textures/versions/texture_set_v003/diffuse_map_01_1002.exr\n/corky/projects/Sputnik_343196/library/environments/icctunneltile_tg/textures/versions/texture_set_v003/diffuse_map_01_1003.exr\n/corky/projects/Sputnik_343196/library/environments/icctunneltile_tg/textures/versions/texture_set_v003/diffuse_map_01_1004.exr\n"
+ name Read15
+ xpos -3637
+ ypos -1593
+ postage_stamp false
+}
+Dot {
+ name Dot77
+ xpos -3603
+ ypos -1407
+}
+set N935af70 [stack 0]
+Dot {
+ name Dot99
+ xpos -3262
+ ypos -1407
+}
+set N935f910 [stack 0]
+Dot {
+ name Dot101
+ xpos -3152
+ ypos -1407
+}
+set N9364480 [stack 0]
+Dot {
+ name Dot102
+ xpos -3042
+ ypos -1407
+}
+FrameHold {
+ first_frame 4
+ name FrameHold9
+ xpos -3076
+ ypos -1375
+}
+UVTile2 {
+ udim 1004
+ udim_enable true
+ name UVTile1
+ xpos -3076
+ ypos -895
+}
+push $N9364480
+FrameHold {
+ first_frame 3
+ name FrameHold10
+ xpos -3186
+ ypos -1389
+}
+UVTile2 {
+ udim 1003
+ udim_enable true
+ name UVTile2
+ xpos -3186
+ ypos -904
+}
+push $N935f910
+FrameHold {
+ first_frame 2
+ name FrameHold11
+ xpos -3296
+ ypos -1389
+}
+UVTile2 {
+ udim 1002
+ udim_enable true
+ name UVTile3
+ xpos -3296
+ ypos -896
+}
+Constant {
+ inputs 0
+ color {0.06117908657 0.01470460743 0.004136383999 1}
+ format "720 576 0 0 720 576 1.09 PAL"
+ name Constant8
+ tile_color 0xffffffff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ xpos -3745
+ ypos -1118
+ postage_stamp false
+}
+CornerPin2D {
+ to1 {3027 6061}
+ to2 {3243 6065}
+ to3 {3254 7425}
+ to4 {3021 7423}
+ invert false
+ from1 {0 0}
+ from2 {720 0}
+ from3 {720 576}
+ from4 {0 576}
+ name CornerPin2D8
+ xpos -3745
+ ypos -1092
+}
+Dot {
+ name Dot114
+ xpos -3711
+ ypos -1029
+}
+Constant {
+ inputs 0
+ color {0.06117908657 0.01470460743 0.004136383999 1}
+ format "720 576 0 0 720 576 1.09 PAL"
+ name Constant7
+ tile_color 0xffffffff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ xpos -4062
+ ypos -1248
+ postage_stamp false
+}
+CornerPin2D {
+ to1 {3038 2210}
+ to2 {3240 2214}
+ to3 {3246.5 3917.5}
+ to4 {3030 3918}
+ invert false
+ from1 {0 0}
+ from2 {720 0}
+ from3 {720 576}
+ from4 {0 576}
+ name CornerPin2D4
+ xpos -4062
+ ypos -1222
+}
+Dot {
+ name Dot113
+ xpos -4028
+ ypos -1159
+}
+Roto {
+ inputs 0
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44968000 x4461c000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Bezier1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43d26666 x45959f33}
+        {}
+        {xc0800000}
+        {x448a4000 x4594bc00}
+        {x40800000}
+        {}
+        {x448c0000 x45284000}
+        {}
+        {xc0800000 xc0800000}
+        {x43da8cc0 x45291e66}
+        {x40800000 x40800000}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {xc0800000}
+        {}
+        {x40800000}
+        {}
+        {}
+        {}
+        {xc0800000 xc0800000}
+        {}
+        {x40800000 x40800000}}}}
+     {t x44456000 x45695800}
+     {a osw 1 osf 0 str 1 spx x44968000 spy x4461c000 sb 1 ltn x447c4000 ltm x447c4000 tt x40800000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 1
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1204 903}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1009
+ lifetime_end 1009
+ motionblur_shutter_offset_type centred
+ openspline_width 1
+ source_black_outside true
+ name Roto61
+ xpos -3541
+ ypos -1317
+ hide_input true
+}
+set N93e5400 [stack 0]
+push $N935af70
+FrameHold {
+ first_frame 1
+ name FrameHold12
+ xpos -3637
+ ypos -1361
+}
+set N93f77c0 [stack 0]
+Group {
+ inputs 2
+ name Patcher11
+ tile_color 0x411557ff
+ gl_color 0xff0e34ff
+ label "\[value from_frame]-\[value to_frame]\n\n"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 10
+ note_font_color 0xffffffff
+ xpos -3829
+ ypos -1297
+ addUserKnob {20 User}
+ addUserKnob {3 cloneframe l "clone frame" -STARTLINE}
+ cloneframe 1009
+ addUserKnob {3 from_frame l "from frame"}
+ from_frame 1001
+ addUserKnob {3 to_frame l "to frame" -STARTLINE}
+ to_frame 1035
+ addUserKnob {22 grab l "grab reference pattern" T "\nn = nuke.thisNode()\nn\['copy_from_to_1'].execute()\nn\['disableCP'].setValue(0)\nn\['to1'].setExpression('parent.point1')\nn\['to2'].setExpression('parent.point2')\nn\['to3'].setExpression('parent.point3')\nn\['to4'].setExpression('parent.point4')\n\nn\['from1'].clearAnimated()\nn\['from2'].clearAnimated()\nn\['from3'].clearAnimated()\nn\['from4'].clearAnimated()\nn\['gl_color'].setValue(4279121151)\n" +STARTLINE}
+ addUserKnob {6 allignview l allign_view -STARTLINE}
+ addUserKnob {6 patch_only l "show reference only" -STARTLINE}
+ addUserKnob {22 externalMask l INVISIBLE +INVISIBLE T "d = nuke.toNode(\"maskDot\")\na = nuke.nodes.Input(name = \"mask\")\nd.setInput(0,a)" +STARTLINE}
+ addUserKnob {22 cutOut l INVISIBLE -STARTLINE +INVISIBLE T "d = nuke.toNode(\"maskDotB\")\na = nuke.nodes.Input(name = \"cutout\")\nnuke.toNode(\"Mcutout\")\['disable'].setValue(0)\nd.setInput(0,a)"}
+ addUserKnob {6 ExportPatchOnly l "export patch only" -STARTLINE}
+ ExportPatchOnly true
+ addUserKnob {41 translate T Transform8.translate}
+ addUserKnob {20 from l "Additional transforms" n 1}
+ from 0
+ addUserKnob {6 disableCP l "disable corner pin" +STARTLINE}
+ addUserKnob {41 copy_from_to_1 l "Copy 'to'" T CornerPin2D1.copy_from_to}
+ addUserKnob {41 from1 T CornerPin2D1.from1}
+ addUserKnob {41 from2 -STARTLINE T CornerPin2D1.from2}
+ addUserKnob {41 from3 T CornerPin2D1.from3}
+ addUserKnob {41 from4 -STARTLINE T CornerPin2D1.from4}
+ addUserKnob {41 to1 T CornerPin2D1.to1}
+ addUserKnob {41 to2 -STARTLINE T CornerPin2D1.to2}
+ addUserKnob {41 to3 T CornerPin2D1.to3}
+ addUserKnob {41 to4 -STARTLINE T CornerPin2D1.to4}
+ addUserKnob {41 rotate T Transform8.rotate}
+ addUserKnob {41 scale T Transform8.scale}
+ addUserKnob {41 center T Transform8.center}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 CC}
+ addUserKnob {41 multiply T Grade6.multiply}
+ addUserKnob {41 gamma T Grade6.gamma}
+ addUserKnob {41 add l offset T Grade6.add}
+ addUserKnob {26 Points}
+ addUserKnob {12 point4}
+ point4 {{curve x1009 435} {curve x1009 4776}}
+ addUserKnob {12 point3 -STARTLINE}
+ point3 {{curve x1009 1116} {curve x1009 4760}}
+ addUserKnob {12 point1}
+ point1 {{curve x1009 470} {curve x1009 2700}}
+ addUserKnob {12 point2 -STARTLINE}
+ point2 {{curve x1009 1140} {curve x1009 2690}}
+ addUserKnob {26 ""}
+ addUserKnob {41 size l "Blur roto" T Blur9.size}
+ addUserKnob {41 mix T Merge15.mix}
+}
+ Input {
+  inputs 0
+  name mask
+  selected true
+  xpos -6
+  ypos 467
+  number 1
+ }
+ Dot {
+  name maskDot
+  tile_color 0xff
+  xpos 291
+  ypos 471
+ }
+set N9482d30 [stack 0]
+ Input {
+  inputs 0
+  name Image
+  xpos 843
+  ypos -41
+ }
+ Dot {
+  name Dot22
+  xpos 877
+  ypos 84
+ }
+set N948c300 [stack 0]
+ Dot {
+  name Dot23
+  xpos 475
+  ypos 84
+ }
+set N9490ce0 [stack 0]
+ Shuffle {
+  alpha white
+  name Shuffle5
+  tile_color 0xffffffff
+  label "White Alpha"
+  xpos 441
+  ypos 175
+ }
+ FrameHold {
+  first_frame {{parent.cloneframe}}
+  name FrameHold6
+  xpos 441
+  ypos 213
+ }
+ Grade {
+  name Grade6
+  xpos 441
+  ypos 251
+ }
+ CornerPin2D {
+  to1 {{parent.point1} {parent.point1}}
+  to2 {{parent.point2} {parent.point2}}
+  to3 {{parent.point3} {parent.point3}}
+  to4 {{parent.point4} {parent.point4}}
+  invert false
+  from1 {430 5040}
+  from2 {1100 5030}
+  from3 {1090 7108}
+  from4 {440 7130}
+  name CornerPin2D1
+  xpos 441
+  ypos 277
+  disable {{parent.disableCP}}
+ }
+ Transform {
+  center {960 540}
+  name Transform8
+  xpos 441
+  ypos 325
+ }
+ Dot {
+  name Dot2
+  xpos 475
+  ypos 387
+ }
+set N94dc680 [stack 0]
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge13
+  xpos 441
+  ypos 467
+ }
+ Dot {
+  name Dot24
+  xpos 475
+  ypos 527
+ }
+set N94f0420 [stack 0]
+ Dot {
+  name Dot8
+  xpos 475
+  ypos 892
+ }
+push $N9482d30
+ Grade {
+  multiply {1 0.6 0.6 1}
+  name Grade2
+  xpos 257
+  ypos 554
+ }
+ Dot {
+  name Dot7
+  xpos 291
+  ypos 651
+ }
+push $N94dc680
+ Dot {
+  name Dot5
+  xpos 391
+  ypos 387
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix 0.5
+  name Merge1
+  xpos 357
+  ypos 647
+ }
+ Dot {
+  name Dot4
+  xpos 391
+  ypos 808
+ }
+push $N94dc680
+ EdgeDetectWrapper {
+  name EdgeDetect2
+  xpos 1043
+  ypos 377
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle7
+  tile_color 0xffffffff
+  xpos 1043
+  ypos 415
+ }
+ Invert {
+  channels rgba
+  name Invert4
+  xpos 1043
+  ypos 441
+ }
+ Dot {
+  name Dot26
+  xpos 1077
+  ypos 529
+ }
+push $N948c300
+ Dot {
+  name Dot25
+  xpos 1264
+  ypos 84
+ }
+set N9554290 [stack 0]
+ EdgeDetectWrapper {
+  name EdgeDetect1
+  xpos 1230
+  ypos 274
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle6
+  tile_color 0xffffffff
+  xpos 1230
+  ypos 312
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox A
+  mix 0.5
+  name Merge14
+  xpos 1230
+  ypos 525
+ }
+ Grade {
+  blackpoint 0.4
+  whitepoint 0.6
+  name Grade1
+  xpos 1230
+  ypos 564
+ }
+push $N94f0420
+push $N948c300
+ Merge2 {
+  inputs 2
+  name Merge15
+  xpos 843
+  ypos 523
+ }
+ Dot {
+  name Dot28
+  xpos 877
+  ypos 682
+ }
+ Dot {
+  name Dot3
+  xpos 877
+  ypos 682
+ }
+ Switch {
+  inputs 2
+  which {{parent.allignview}}
+  name Switch2
+  label "\[value which]"
+  xpos 1230
+  ypos 672
+ }
+push $N9554290
+ Dot {
+  name Dot27
+  xpos 1521
+  ypos 84
+ }
+ Switch {
+  inputs 2
+  which {{parent.from_frame<=frame&&frame<=parent.to_frame?1:0}}
+  name Switch1
+  label "\[value which]\ndisabler"
+  xpos 1487
+  ypos 666
+  addUserKnob {20 User}
+  addUserKnob {68 a M {disabled enabled}}
+ }
+ Switch {
+  inputs 2
+  which {{parent.patch_only}}
+  name Switch3
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 792
+ }
+ Switch {
+  inputs 2
+  which {{parent.ExportPatchOnly}}
+  name Switch4
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 876
+ }
+ Output {
+  name Output1
+  xpos 1487
+  ypos 989
+ }
+ Dot {
+  inputs 0
+  name maskDotB
+  xpos 191
+  ypos 398
+ }
+ Dot {
+  name Dot6
+  xpos 191
+  ypos 436
+ }
+push $N9490ce0
+ Dot {
+  name Dot1
+  xpos 291
+  ypos 84
+ }
+ Bezier {
+  replace true
+  blur_type smooth
+  points {{
+{411 212.6 35.6 0 37}
+{474.4 149 33.8 -1.58 35}
+{410.6 84 38.4 -3.14 35.6}
+{345.4 148.6 29.4 1.54 29.6}
+}}
+  shape {}
+  center {1024 778}
+  name Bezier1
+  xpos 257
+  ypos 333
+ }
+ Blur {
+  channels rgba
+  name Blur9
+  xpos 257
+  ypos 371
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  bbox B
+  name Mcutout
+  xpos 257
+  ypos 432
+  disable true
+ }
+end_group
+Transform {
+ translate {1996 -656}
+ rotate 180
+ scale 0.8000000119
+ center {770 3730}
+ shutteroffset centred
+ name Transform32
+ xpos -3829
+ ypos -1247
+}
+push $N93e5400
+push $N93f77c0
+Group {
+ inputs 2
+ name Patcher7
+ tile_color 0x411557ff
+ gl_color 0xff0e34ff
+ label "\[value from_frame]-\[value to_frame]\n\n"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 10
+ note_font_color 0xffffffff
+ xpos -3637
+ ypos -1273
+ addUserKnob {20 User}
+ addUserKnob {3 cloneframe l "clone frame" -STARTLINE}
+ cloneframe 1009
+ addUserKnob {3 from_frame l "from frame"}
+ from_frame 1001
+ addUserKnob {3 to_frame l "to frame" -STARTLINE}
+ to_frame 1035
+ addUserKnob {22 grab l "grab reference pattern" T "\nn = nuke.thisNode()\nn\['copy_from_to_1'].execute()\nn\['disableCP'].setValue(0)\nn\['to1'].setExpression('parent.point1')\nn\['to2'].setExpression('parent.point2')\nn\['to3'].setExpression('parent.point3')\nn\['to4'].setExpression('parent.point4')\n\nn\['from1'].clearAnimated()\nn\['from2'].clearAnimated()\nn\['from3'].clearAnimated()\nn\['from4'].clearAnimated()\nn\['gl_color'].setValue(4279121151)\n" +STARTLINE}
+ addUserKnob {6 allignview l allign_view -STARTLINE}
+ addUserKnob {6 patch_only l "show reference only" -STARTLINE}
+ addUserKnob {22 externalMask l INVISIBLE +INVISIBLE T "d = nuke.toNode(\"maskDot\")\na = nuke.nodes.Input(name = \"mask\")\nd.setInput(0,a)" +STARTLINE}
+ addUserKnob {22 cutOut l INVISIBLE -STARTLINE +INVISIBLE T "d = nuke.toNode(\"maskDotB\")\na = nuke.nodes.Input(name = \"cutout\")\nnuke.toNode(\"Mcutout\")\['disable'].setValue(0)\nd.setInput(0,a)"}
+ addUserKnob {6 ExportPatchOnly l "export patch only" -STARTLINE}
+ addUserKnob {41 translate T Transform8.translate}
+ addUserKnob {20 from l "Additional transforms" n 1}
+ from 0
+ addUserKnob {6 disableCP l "disable corner pin" +STARTLINE}
+ addUserKnob {41 copy_from_to_1 l "Copy 'to'" T CornerPin2D1.copy_from_to}
+ addUserKnob {41 from1 T CornerPin2D1.from1}
+ addUserKnob {41 from2 -STARTLINE T CornerPin2D1.from2}
+ addUserKnob {41 from3 T CornerPin2D1.from3}
+ addUserKnob {41 from4 -STARTLINE T CornerPin2D1.from4}
+ addUserKnob {41 to1 T CornerPin2D1.to1}
+ addUserKnob {41 to2 -STARTLINE T CornerPin2D1.to2}
+ addUserKnob {41 to3 T CornerPin2D1.to3}
+ addUserKnob {41 to4 -STARTLINE T CornerPin2D1.to4}
+ addUserKnob {41 rotate T Transform8.rotate}
+ addUserKnob {41 scale T Transform8.scale}
+ addUserKnob {41 center T Transform8.center}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 CC}
+ addUserKnob {41 multiply T Grade6.multiply}
+ addUserKnob {41 gamma T Grade6.gamma}
+ addUserKnob {41 add l offset T Grade6.add}
+ addUserKnob {26 Points}
+ addUserKnob {12 point4}
+ point4 {{curve x1009 435} {curve x1009 4776}}
+ addUserKnob {12 point3 -STARTLINE}
+ point3 {{curve x1009 1116} {curve x1009 4760}}
+ addUserKnob {12 point1}
+ point1 {{curve x1009 470} {curve x1009 2700}}
+ addUserKnob {12 point2 -STARTLINE}
+ point2 {{curve x1009 1140} {curve x1009 2690}}
+ addUserKnob {26 ""}
+ addUserKnob {41 size l "Blur roto" T Blur9.size}
+ addUserKnob {41 mix T Merge15.mix}
+}
+ Input {
+  inputs 0
+  name mask
+  selected true
+  xpos -6
+  ypos 467
+  number 1
+ }
+ Dot {
+  name maskDot
+  tile_color 0xff
+  xpos 291
+  ypos 471
+ }
+set N96394f0 [stack 0]
+ Input {
+  inputs 0
+  name Image
+  xpos 843
+  ypos -41
+ }
+ Dot {
+  name Dot22
+  xpos 877
+  ypos 84
+ }
+set N9642ac0 [stack 0]
+ Dot {
+  name Dot23
+  xpos 475
+  ypos 84
+ }
+set N96474a0 [stack 0]
+ Shuffle {
+  alpha white
+  name Shuffle5
+  tile_color 0xffffffff
+  label "White Alpha"
+  xpos 441
+  ypos 175
+ }
+ FrameHold {
+  first_frame {{parent.cloneframe}}
+  name FrameHold6
+  xpos 441
+  ypos 213
+ }
+ Grade {
+  name Grade6
+  xpos 441
+  ypos 251
+ }
+ CornerPin2D {
+  to1 {{parent.point1} {parent.point1}}
+  to2 {{parent.point2} {parent.point2}}
+  to3 {{parent.point3} {parent.point3}}
+  to4 {{parent.point4} {parent.point4}}
+  invert false
+  from1 {430 5040}
+  from2 {1100 5030}
+  from3 {1090 7108}
+  from4 {440 7130}
+  name CornerPin2D1
+  xpos 441
+  ypos 277
+  disable {{parent.disableCP}}
+ }
+ Transform {
+  center {960 540}
+  name Transform8
+  xpos 441
+  ypos 325
+ }
+ Dot {
+  name Dot2
+  xpos 475
+  ypos 387
+ }
+set N9692e40 [stack 0]
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge13
+  xpos 441
+  ypos 467
+ }
+ Dot {
+  name Dot24
+  xpos 475
+  ypos 527
+ }
+set N96a6be0 [stack 0]
+ Dot {
+  name Dot8
+  xpos 475
+  ypos 892
+ }
+push $N96394f0
+ Grade {
+  multiply {1 0.6 0.6 1}
+  name Grade2
+  xpos 257
+  ypos 554
+ }
+ Dot {
+  name Dot7
+  xpos 291
+  ypos 651
+ }
+push $N9692e40
+ Dot {
+  name Dot5
+  xpos 391
+  ypos 387
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix 0.5
+  name Merge1
+  xpos 357
+  ypos 647
+ }
+ Dot {
+  name Dot4
+  xpos 391
+  ypos 808
+ }
+push $N9692e40
+ EdgeDetectWrapper {
+  name EdgeDetect2
+  xpos 1043
+  ypos 377
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle7
+  tile_color 0xffffffff
+  xpos 1043
+  ypos 415
+ }
+ Invert {
+  channels rgba
+  name Invert4
+  xpos 1043
+  ypos 441
+ }
+ Dot {
+  name Dot26
+  xpos 1077
+  ypos 529
+ }
+push $N9642ac0
+ Dot {
+  name Dot25
+  xpos 1264
+  ypos 84
+ }
+set N970aa50 [stack 0]
+ EdgeDetectWrapper {
+  name EdgeDetect1
+  xpos 1230
+  ypos 274
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle6
+  tile_color 0xffffffff
+  xpos 1230
+  ypos 312
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox A
+  mix 0.5
+  name Merge14
+  xpos 1230
+  ypos 525
+ }
+ Grade {
+  blackpoint 0.4
+  whitepoint 0.6
+  name Grade1
+  xpos 1230
+  ypos 564
+ }
+push $N96a6be0
+push $N9642ac0
+ Merge2 {
+  inputs 2
+  name Merge15
+  xpos 843
+  ypos 523
+ }
+ Dot {
+  name Dot28
+  xpos 877
+  ypos 682
+ }
+ Dot {
+  name Dot3
+  xpos 877
+  ypos 682
+ }
+ Switch {
+  inputs 2
+  which {{parent.allignview}}
+  name Switch2
+  label "\[value which]"
+  xpos 1230
+  ypos 672
+ }
+push $N970aa50
+ Dot {
+  name Dot27
+  xpos 1521
+  ypos 84
+ }
+ Switch {
+  inputs 2
+  which {{parent.from_frame<=frame&&frame<=parent.to_frame?1:0}}
+  name Switch1
+  label "\[value which]\ndisabler"
+  xpos 1487
+  ypos 666
+  addUserKnob {20 User}
+  addUserKnob {68 a M {disabled enabled}}
+ }
+ Switch {
+  inputs 2
+  which {{parent.patch_only}}
+  name Switch3
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 792
+ }
+ Switch {
+  inputs 2
+  which {{parent.ExportPatchOnly}}
+  name Switch4
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 876
+ }
+ Output {
+  name Output1
+  xpos 1487
+  ypos 989
+ }
+ Dot {
+  inputs 0
+  name maskDotB
+  xpos 191
+  ypos 398
+ }
+ Dot {
+  name Dot6
+  xpos 191
+  ypos 436
+ }
+push $N96474a0
+ Dot {
+  name Dot1
+  xpos 291
+  ypos 84
+ }
+ Bezier {
+  replace true
+  blur_type smooth
+  points {{
+{411 212.6 35.6 0 37}
+{474.4 149 33.8 -1.58 35}
+{410.6 84 38.4 -3.14 35.6}
+{345.4 148.6 29.4 1.54 29.6}
+}}
+  shape {}
+  center {1024 778}
+  name Bezier1
+  xpos 257
+  ypos 333
+ }
+ Blur {
+  channels rgba
+  name Blur9
+  xpos 257
+  ypos 371
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  bbox B
+  name Mcutout
+  xpos 257
+  ypos 432
+  disable true
+ }
+end_group
+Merge2 {
+ inputs 2
+ name Merge93
+ xpos -3637
+ ypos -1239
+}
+Merge2 {
+ inputs 2
+ name Merge63
+ xpos -3637
+ ypos -1163
+}
+Merge2 {
+ inputs 2
+ name Merge64
+ xpos -3637
+ ypos -1033
+}
+FrameHold {
+ first_frame 1009
+ name FrameHold13
+ xpos -3637
+ ypos -947
+}
+UVTile2 {
+ udim_enable true
+ name UVTile4
+ xpos -3637
+ ypos -894
+}
+Dot {
+ name Dot103
+ xpos -3603
+ ypos -854
+}
+MergeMat {
+ inputs 2
+ name MergeMat6
+ xpos -3296
+ ypos -857
+}
+MergeMat {
+ inputs 2
+ name MergeMat7
+ xpos -3186
+ ypos -857
+}
+MergeMat {
+ inputs 2
+ name MergeMat8
+ xpos -3076
+ ypos -857
+}
+MultiTexture {
+ name MultiTexture1
+ xpos -3076
+ ypos -818
+}
+set N982c6f0 [stack 0]
+ReadGeo2 {
+ file /corky/projects/Sputnik_343196/library/environments/icctunneltile_tg/model/versions/cache_v003.abc
+ read_on_each_frame true
+ use_geometry_colors false
+ range_first 0
+ range_last 0
+ scene_view {{0} imported: 0 1 2 3 4 selected: 0 1 2 3 4 items: /root/C_geoExport_GRP/C_tunnelTile_GRP/C_pavement_PLY/C_pavement_PLYShape /root/C_geoExport_GRP/C_tunnelTile_GRP/C_walls_PLY/C_walls_PLYShape /root/C_geoExport_GRP/C_tunnelTile_GRP/C_tunnelCeiling_PLY/C_tunnelCeiling_PLYShape /root/C_geoExport_GRP/C_tunnelTile_GRP/C_blockColumns_PLY/C_blockColumns_PLYShape /root/C_geoExport_GRP/C_tunnelTile_GRP/C_ground_PLY/C_ground_PLYShape}
+ name ReadGeo5
+ xpos -3076
+ ypos -776
+}
+TransformGeo {
+ inputs 2
+ name TransformGeo7
+ xpos -3076
+ ypos -653
+}
+MergeGeo {
+ selectable false
+ name MergeGeo2
+ xpos -3076
+ ypos -621
+}
+set N7261b0a0 [stack 0]
+Group {
+ inputs 3
+ name Group1
+ xpos -3241
+ ypos -30
+}
+ Input {
+  inputs 0
+  name Camera
+  xpos -326
+  ypos -286
+  number 2
+ }
+ Dot {
+  name Dot2
+  xpos -292
+  ypos -196
+ }
+set N9868610 [stack 0]
+ Input {
+  inputs 0
+  name Scene
+  xpos -1699
+  ypos -219
+ }
+set N986d1f0 [stack 0]
+ Dot {
+  name Dot5
+  xpos -1353
+  ypos 378
+ }
+ Input {
+  inputs 0
+  name Object
+  xpos -970
+  ypos -238
+  number 1
+ }
+ Dot {
+  name Dot1
+  xpos -936
+  ypos -169
+ }
+set N987af40 [stack 0]
+ Scene {
+  inputs 2
+  name Scene_main1
+  xpos -1258
+  ypos 440
+ }
+push 0
+add_layer {normal normal.x normal.y normal.z}
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type velocity
+  output_shader_vectors true
+  N_channel normal
+  name Render_main1
+  xpos -1103
+  ypos 628
+ }
+set N988bdd0 [stack 0]
+ Dot {
+  name Dot6
+  xpos -1055
+  ypos 1174
+ }
+push $N988bdd0
+push $N9868610
+push $N987af40
+push 0
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type velocity
+  output_shader_vectors true
+  N_channel rgb
+  name Render_normals1
+  xpos -704
+  ypos 666
+ }
+set N98abe10 [stack 0]
+ DeepHoldout2 {
+  inputs 2
+  name DeepHoldout1
+  xpos -808
+  ypos 924
+ }
+push $N98abe10
+ Expression {
+  temp_name0 norm
+  temp_expr0 sqrt(r*r+g*g+b*b)
+  expr0 r/norm
+  expr1 g/norm
+  expr2 b/norm
+  name Normalize3
+  xpos -704
+  ypos 782
+ }
+set N98c35d0 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -702
+  ypos 940
+ }
+push $N98c35d0
+push $N9868610
+push $N9868610
+ Card2 {
+  inputs 0
+  image_aspect false
+  rows 3
+  columns 3
+  translate {0 0 {"\[python nuke.thisGroup().input(2)\\\['focal'\\].value(0)]"}}
+  scaling {{"\[python nuke.thisGroup().input(2)\\\['haperture'\\].value()]"} {"\[python nuke.thisGroup().input(2)\\\['vaperture'\\].value()]"} 1}
+  control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+  name Card_filmback1
+  xpos -19
+  ypos 406
+ }
+ TransformGeo {
+  inputs 2
+  rotate {0 180 0}
+  name TransformGeo4
+  xpos -129
+  ypos 406
+ }
+ Scene {
+  name Scene_eye_vec1
+  xpos -192
+  ypos 493
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant_bg1
+  xpos -153
+  ypos 587
+ }
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type velocity
+  output_shader_vectors true
+  P_channel rgb
+  name Render_filmback_coords1
+  xpos -326
+  ypos 624
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {{"\[python nuke.thisGroup().input(2)\\\['translate'\\].value(0)]"} {"\[python nuke.thisGroup().input(2)\\\['translate'\\].value(1)]"} {"\[python nuke.thisGroup().input(2)\\\['translate'\\].value(2)]"} {curve}}
+  name Constant_cam_coords1
+  xpos -483
+  ypos 602
+ }
+ Merge2 {
+  inputs 2
+  operation minus
+  name Eye_vec1
+  xpos -326
+  ypos 698
+ }
+ Expression {
+  temp_name0 norm
+  temp_expr0 sqrt(r*r+g*g+b*b)
+  expr0 r/norm
+  expr1 g/norm
+  expr2 b/norm
+  name Normalize4
+  xpos -326
+  ypos 724
+ }
+ MergeExpression {
+  inputs 2
+  temp_name0 idotn
+  temp_expr0 Ar*Br+Ag*Bg+Ab*Bb
+  temp_name1 normzero
+  temp_expr1 ((Ar==0)&&(Ag==0)&&(Ab==0))?0:1
+  expr0 (Br-2*idotn*Ar)*normzero
+  expr1 (Bg-2*idotn*Ag)*normzero
+  expr2 (Bb-2*idotn*Ab)*normzero
+  name Reflect_vec1
+  xpos -326
+  ypos 782
+ }
+set N9974980 [stack 0]
+ Shuffle {
+  red black
+  green black
+  alpha blue
+  name Z_to_alpha1
+  xpos -131
+  ypos 826
+ }
+ Clamp {
+  name Clamp2
+  xpos -131
+  ypos 852
+ }
+ Unpremult {
+  name Unpremult2
+  xpos -131
+  ypos 890
+ }
+push $N9974980
+ Multiply {
+  channels {rgba.red -rgba.green rgba.blue none}
+  value -1
+  name Multiply_flipXZ1
+  xpos -247
+  ypos 827
+ }
+ Expression {
+  temp_name0 radius
+  temp_expr0 (1/pi)*acos(-b)/sqrt(pow(r,2)+pow(g,2))
+  expr0 ((r*radius)+1)/2
+  expr1 ((g*radius)+1)/2
+  expr2 0
+  name Lightprobe_map3
+  xpos -247
+  ypos 865
+ }
+push $N9868610
+push 0
+ Camera2 {
+  inputs 2
+  translate {{"\[python nuke.thisGroup().input(1)\\\['translate'\\].value(0)]"} {"\[python nuke.thisGroup().input(1)\\\['translate'\\].value(1)]"} {"\[python nuke.thisGroup().input(1)\\\['translate'\\].value(2)]"}}
+  projection_mode spherical
+  near 1
+  far 100000
+  look_axis +Z
+  name Camera_env_map1
+  xpos -1898
+  ypos 624
+ }
+push $N986d1f0
+ Constant {
+  inputs 0
+  channels rgb
+  format "512 256 0 0 512 256 1 latlong"
+  name Constant_lat_long1
+  xpos -1547
+  ypos 621
+ }
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type velocity
+  name Render_env_map1
+  xpos -1699
+  ypos 644
+ }
+set N99e33d0 [stack 0]
+ SphericalTransform {
+  input "Lat Long map"
+  ry 180
+  output "Light Probe 360"
+  format "256 256 0 0 256 256 1 square_256"
+  fix true
+  name SphericalTransform_negZ1
+  xpos -1670
+  ypos 754
+ }
+ STMap {
+  inputs 2
+  channels rgb
+  uv rgb
+  name STMap3
+  xpos -247
+  ypos 917
+ }
+push $N9974980
+ Expression {
+  temp_name0 radius
+  temp_expr0 (1/pi)*acos(-b)/sqrt(pow(r,2)+pow(g,2))
+  expr0 ((r*radius)+1)/2
+  expr1 ((g*radius)+1)/2
+  expr2 0
+  name Lightprobe_map4
+  xpos -395
+  ypos 829
+ }
+push $N99e33d0
+ SphericalTransform {
+  input "Lat Long map"
+  output "Light Probe 360"
+  format "256 256 0 0 256 256 1 square_256"
+  fix true
+  name SphericalTransform_posZ1
+  xpos -1848
+  ypos 764
+ }
+ STMap {
+  inputs 2
+  channels rgb
+  uv rgb
+  name STMap4
+  xpos -395
+  ypos 918
+ }
+ Keymix {
+  inputs 3
+  maskChannel rgba.blue
+  name Keymix2
+  xpos -247
+  ypos 991
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy_alpha1
+  xpos -704
+  ypos 997
+ }
+ Premult {
+  name Premult2
+  xpos -704
+  ypos 1023
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Plus1
+  xpos -704
+  ypos 1170
+ }
+set N9a61050 [stack 0]
+ Output {
+  name Output1
+  xpos -704
+  ypos 1338
+ }
+push $N9a61050
+ Viewer {
+  frame 1114
+  frame_range 1001-1150
+  gain 3.1
+  viewerProcess "None (default)"
+  name Viewer1
+  xpos -20
+  ypos -93
+  hide_input true
+ }
+end_group
+set N985bd00 [stack 0]
+NoOp {
+ name ____4
+ help MainCam
+ tile_color 0x2d0000ff
+ label MainCam-
+ note_font_size 20
+ xpos -3220
+ ypos -392
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T MainCam}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+push $N7261b0a0
+Dot {
+ name Dot104
+ xpos -3042
+ ypos -512
+}
+push 0
+ScanlineRender {
+ inputs 2
+ samples 25
+ shutteroffset centred
+ name ScanlineRender5
+ label take9
+ xpos -3076
+ ypos -382
+ addUserKnob {20 User}
+ addUserKnob {12 LowHigh}
+ LowHigh {1 25}
+}
+Camera2 {
+ inputs 0
+ translate {0 2 11}
+ name Camera_main
+ xpos -727
+ ypos -1052
+}
+set N9abdeb0 [stack 0]
+NoOp {
+ name ____
+ help Camera_main
+ tile_color 0x2d0000ff
+ label Camera_main-
+ note_font_size 20
+ xpos -1423
+ ypos 176
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Camera_main}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+ColorWheel {
+ inputs 0
+ gamma 0.45
+ name ColorWheel1
+ xpos -2277
+ ypos -911
+}
+Card2 {
+ rows 3
+ columns 3
+ translate {{curve x1 -10 x20 10} 0 20}
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ xpos -2277
+ ypos -839
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ xpos -1805
+ ypos -1034
+}
+set N9b22c90 [stack 0]
+Card2 {
+ orientation ZX
+ rows 20
+ columns 20
+ translate {0 0.2 0}
+ scaling {1 1 1.35}
+ uniform_scale 5
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 
+1 {0 0 -0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 0.5 -0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {1 0 0} 
+1 {0 -0.5 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0.5 0.5 0} 
+1 {0 0.5 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {1 0.5 0} 
+1 {0 -0.5 0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 1 0} 
+1 {0 0 0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {1 1 0} }
+ name Card_floor
+ xpos -1697
+ ypos -815
+}
+push $N9b22c90
+ColorCorrect {
+ gain {0.2 0.2 0.2 1}
+ name CC_gray
+ xpos -1805
+ ypos -905
+}
+Card2 {
+ orientation ZX
+ rows 10
+ columns 10
+ translate {0 3.8 0}
+ scaling {1 1 1.35}
+ uniform_scale 5
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 
+1 {0 0 -0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 0.5 -0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {1 0 0} 
+1 {0 -0.5 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0.5 0.5 0} 
+1 {0 0.5 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {1 0.5 0} 
+1 {0 -0.5 0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 1 0} 
+1 {0 0 0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {1 1 0} }
+ name Card_ceiling
+ xpos -1805
+ ypos -858
+}
+push $N9b22c90
+ColorCorrect {
+ gain {0.2 0.2 1 1}
+ name CC_blue
+ xpos -1923
+ ypos -905
+}
+Card2 {
+ rows 3
+ columns 3
+ translate {0 0 -2.5}
+ uniform_scale 5
+ pivot {0 -0.5 0}
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 -0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {0 0 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0 0 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {0 0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_b_wall
+ xpos -1923
+ ypos -855
+}
+push $N9b22c90
+ColorCorrect {
+ gain {0.2 1 0.2 1}
+ name CC_green
+ xpos -2043
+ ypos -903
+}
+Card2 {
+ orientation YZ
+ rows 3
+ columns 3
+ translate {2.5 0 0}
+ uniform_scale 5
+ pivot {0 -0.5 0}
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 -0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {0 0 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0 0 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {0 0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_r_wall
+ xpos -2043
+ ypos -851
+}
+push $N9b22c90
+ColorCorrect {
+ gain {1 0.2 0.2 1}
+ name CC_red
+ xpos -2162
+ ypos -901
+}
+Card2 {
+ orientation YZ
+ rows 3
+ columns 3
+ translate {-2.5 0 0}
+ uniform_scale 5
+ pivot {0 -0.5 0}
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 -0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {0 0 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0 0 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {0 0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_l_wall
+ xpos -2162
+ ypos -847
+}
+MergeGeo {
+ inputs 5
+ name MergeGeo1
+ xpos -1923
+ ypos -815
+}
+TransformGeo {
+ name TransformGeo1
+ xpos -1923
+ ypos -756
+}
+Scene {
+ inputs 2
+ name Scene_env_map
+ xpos -1913
+ ypos -708
+}
+Dot {
+ name Dot2
+ label Scene
+ note_font_size 30
+ xpos -1889
+ ypos -509
+}
+set N9cdc5f0 [stack 0]
+Dot {
+ name Dot3
+ xpos -1796
+ ypos -66
+}
+Constant {
+ inputs 0
+ color {0 0 0 1}
+ name Constant1
+ xpos -1506
+ ypos -1021
+}
+Sphere {
+ rows 20
+ columns 20
+ translate {0 1.5 0}
+ name Sphere1
+ label Object
+ note_font_size 14
+ xpos -1506
+ ypos -923
+}
+set N9d0ac80 [stack 0]
+NoOp {
+ name Object-
+ help Sphere1
+ tile_color 0xfa0
+ note_font_size 20
+ xpos -1313
+ ypos -134
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Dot4}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Scene {
+ inputs 2
+ name Scene_main
+ xpos -1303
+ ypos -64
+}
+set N9d22180 [stack 0]
+push 0
+ScanlineRender {
+ inputs 3
+ motion_vectors_type velocity
+ output_shader_vectors true
+ N_channel normal
+ name Render_main
+ xpos -1313
+ ypos 192
+}
+Dot {
+ name Dot1
+ xpos -1279
+ ypos 700
+}
+push $N9abdeb0
+NoOp {
+ name ____1
+ help Camera_main
+ tile_color 0x2d0000ff
+ label Camera_main-
+ note_font_size 20
+ xpos -1048
+ ypos 177
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Camera_main}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+push $N9d0ac80
+NoOp {
+ name Object-1
+ help Sphere1
+ tile_color 0xfa0
+ note_font_size 20
+ xpos -928
+ ypos 40
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Dot4}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+push 0
+ScanlineRender {
+ inputs 3
+ motion_vectors_type velocity
+ output_shader_vectors true
+ N_channel rgb
+ name Render_normals
+ xpos -928
+ ypos 193
+}
+Expression {
+ temp_name0 norm
+ temp_expr0 sqrt(r*r+g*g+b*b)
+ expr0 r/norm
+ expr1 g/norm
+ expr2 b/norm
+ name Normalize2
+ xpos -928
+ ypos 303
+}
+set N9d73b10 [stack 0]
+push $N9d73b10
+push $N9abdeb0
+NoOp {
+ name ____2
+ help Camera_main
+ tile_color 0x2d0000ff
+ label Camera_main-
+ note_font_size 20
+ xpos -737
+ ypos 127
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Camera_main}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+push $N9abdeb0
+NoOp {
+ name ____3
+ help Camera_main
+ tile_color 0x2d0000ff
+ label Camera_main-
+ note_font_size 20
+ xpos -681
+ ypos -28
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Camera_main}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Card2 {
+ inputs 0
+ image_aspect false
+ rows 3
+ columns 3
+ translate {0 0 {-parent.Camera_main.focal}}
+ scaling {{parent.Camera_main.haperture} {parent.Camera_main.vaperture} 1}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_filmback
+ xpos -550
+ ypos -99
+}
+TransformGeo {
+ inputs 2
+ name TransformGeo2
+ xpos -550
+ ypos -12
+}
+Scene {
+ name Scene_eye_vec
+ xpos -540
+ ypos 49
+}
+Constant {
+ inputs 0
+ channels rgb
+ name Constant_bg
+ xpos -395
+ ypos 114
+}
+ScanlineRender {
+ inputs 3
+ motion_vectors_type velocity
+ output_shader_vectors true
+ P_channel rgb
+ name Render_filmback_coords
+ xpos -550
+ ypos 143
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {{parent.Camera_main.translate.x i} {parent.Camera_main.translate.y i} {parent.Camera_main.translate.z i} 1}
+ name Constant_cam_coords
+ xpos -745
+ ypos 201
+}
+Merge2 {
+ inputs 2
+ operation minus
+ name Eye_vec
+ xpos -550
+ ypos 224
+}
+Expression {
+ temp_name0 norm
+ temp_expr0 sqrt(r*r+g*g+b*b)
+ expr0 r/norm
+ expr1 g/norm
+ expr2 b/norm
+ name Normalize1
+ xpos -550
+ ypos 250
+}
+MergeExpression {
+ inputs 2
+ temp_name0 idotn
+ temp_expr0 Ar*Br+Ag*Bg+Ab*Bb
+ temp_name1 normzero
+ temp_expr1 ((Ar==0)&&(Ag==0)&&(Ab==0))?0:1
+ expr0 (Br-2*idotn*Ar)*normzero
+ expr1 (Bg-2*idotn*Ag)*normzero
+ expr2 (Bb-2*idotn*Ab)*normzero
+ name Reflect_vec
+ xpos -550
+ ypos 303
+}
+set N9e2bb30 [stack 0]
+Shuffle {
+ red black
+ green black
+ alpha blue
+ name Z_to_alpha
+ xpos -355
+ ypos 352
+}
+Clamp {
+ name Clamp1
+ xpos -355
+ ypos 378
+}
+Unpremult {
+ name Unpremult1
+ xpos -355
+ ypos 416
+}
+push $N9e2bb30
+Multiply {
+ channels {rgba.red -rgba.green rgba.blue none}
+ value -1
+ name Multiply_flipXZ
+ xpos -471
+ ypos 353
+}
+Expression {
+ temp_name0 radius
+ temp_expr0 (1/pi)*acos(-b)/sqrt(pow(r,2)+pow(g,2))
+ expr0 ((r*radius)+1)/2
+ expr1 ((g*radius)+1)/2
+ expr2 0
+ name Lightprobe_map2
+ xpos -471
+ ypos 391
+}
+Camera2 {
+ inputs 0
+ translate {{parent.Sphere1.translate.x} {parent.Sphere1.translate.y} {parent.Sphere1.translate.z}}
+ projection_mode spherical
+ name Camera_env_map
+ xpos -2062
+ ypos 150
+}
+push $N9cdc5f0
+Constant {
+ inputs 0
+ channels rgb
+ format "512 256 0 0 512 256 1 latlong"
+ name Constant_lat_long
+ xpos -1795
+ ypos 147
+}
+ScanlineRender {
+ inputs 3
+ motion_vectors_type velocity
+ name Render_env_map
+ xpos -1923
+ ypos 170
+}
+set N9e8f590 [stack 0]
+SphericalTransform {
+ input "Lat Long map"
+ ry 180
+ output "Light Probe 360"
+ format "256 256 0 0 256 256 1 square_256"
+ fix true
+ name SphericalTransform_negZ
+ xpos -1923
+ ypos 290
+}
+STMap {
+ inputs 2
+ channels rgb
+ uv rgb
+ name STMap2
+ xpos -471
+ ypos 443
+}
+push $N9e2bb30
+Expression {
+ temp_name0 radius
+ temp_expr0 (1/pi)*acos(-b)/sqrt(pow(r,2)+pow(g,2))
+ expr0 ((r*radius)+1)/2
+ expr1 ((g*radius)+1)/2
+ expr2 0
+ name Lightprobe_map1
+ xpos -619
+ ypos 355
+}
+push $N9e8f590
+SphericalTransform {
+ input "Lat Long map"
+ output "Light Probe 360"
+ format "256 256 0 0 256 256 1 square_256"
+ fix true
+ name SphericalTransform_posZ
+ xpos -2073
+ ypos 292
+}
+STMap {
+ inputs 2
+ channels rgb
+ uv rgb
+ name STMap1
+ xpos -619
+ ypos 444
+}
+Keymix {
+ inputs 3
+ maskChannel rgba.blue
+ name Keymix1
+ xpos -471
+ ypos 517
+}
+ShuffleCopy {
+ inputs 2
+ name ShuffleCopy_alpha
+ xpos -928
+ ypos 523
+}
+Premult {
+ name Premult1
+ xpos -928
+ ypos 549
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Plus
+ xpos -928
+ ypos 696
+}
+Viewer {
+ frame 1114
+ frame_range 1001-1150
+ input_process false
+ name Viewer2
+ xpos -942
+ ypos 844
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ tile_color 0xffffffff
+ label "<b>Camera!                "
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ xpos -788
+ ypos -1239
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ tile_color 0xffffffff
+ label "<b>Scene                "
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ xpos -2287
+ ypos -1244
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ tile_color 0xffffffff
+ label "<b>Object                "
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ xpos -1571
+ ypos -1243
+}
+StickyNote {
+ inputs 0
+ name StickyNote4
+ tile_color 0xffffffff
+ label "<b>Camera!                "
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ xpos -3823
+ ypos 413
+}
+StickyNote {
+ inputs 0
+ name StickyNote5
+ tile_color 0xffffffff
+ label "<b>Scene                "
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ xpos -5322
+ ypos 408
+}
+StickyNote {
+ inputs 0
+ name StickyNote6
+ tile_color 0xffffffff
+ label "<b>Object                "
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ xpos -4606
+ ypos 409
+}
+push $N7261b0a0
+Dot {
+ name Dot7
+ xpos -4924
+ ypos 99
+}
+push $N985bd00
+NoOp {
+ name ____8
+ help Camera_main
+ tile_color 0x2d0000ff
+ label Camera_main-
+ note_font_size 20
+ xpos -2497
+ ypos 1390
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Camera_main}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Camera2 {
+ inputs 0
+ translate {{curve x1001 159674.2773 x1021 19674.27734} {curve x1001 722.9841309 x1021 -422.9841309} {curve x1001 13033.00818 x1021 -2033.008179}}
+ rotate {4.617629643 -16.88375464 -1.675890646}
+ scaling {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ uniform_scale {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ skew {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ pivot {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal {{curve x1001 49.76115036 49.76115036 49.76115036 49.76115036 49.76115036 49.76115036 49.76115036 50.38418198 52.07247162 54.5545578 57.55970383 60.81650925 64.05347443 67 70.13252258 73.80937195 77.58300781 81.00483704 83.62641907 85 85.56090546 86.04709625 86.46399689 86.81690216 87.11109924 87.35199738 87.54489136 87.69510651 87.80799866 87.88889313 87.9431076 87.97599792 87.9928894 87.99910736 88 88}}
+ haperture {{curve x1001 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664 47.51999664}}
+ vaperture {{curve x1001 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969 17.81999969}}
+ near 1
+ win_translate {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal_point {{curve x1001 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5}}
+ fstop {{curve x1001 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905}}
+ file /corky/projects/Sputnik_343196/seq/buc/1700/data/animation/cameras/shot_cam/versions/cache_v001.abc
+ name Camera_main1
+ xpos -2626
+ ypos -417
+}
+Axis {
+ inputs 0
+ translate {{curve x1001 0 x1033 15.84000015} {curve x1001 0 x1033 0} {curve x1001 0 x1033 0}}
+ name Axis4
+ xpos -2668
+ ypos 87
+}
+push 0
+Camera2 {
+ inputs 2
+ translate {0 0 3.869999886}
+ look_axis +Z
+ name Camera1
+ xpos -2850
+ ypos 183
+ addUserKnob {20 User}
+ addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+Viewer {
+ frame 1114
+ frame_range 1001-1001
+ input_process false
+ name Viewer3
+ xpos -3977
+ ypos 2496
+}
+Axis {
+ inputs 0
+ translate {{curve x1001 18442.10352 x1036 18829.48242 x1074 19897.38281 x1147 20727.44531} {curve x1001 -199.6287384 x1036 -270.3913879 x1074 -272.7832336 x1147 -267.9204102} {curve x1001 -4061.381592 x1036 -2463.062988 x1074 -2733.87793 x1147 -3811.313965}}
+ rotate {{curve x1001 -0.2616475517 x1147 1.080293668} {curve x1001 -89.9572182 x1147 80.41341536} {curve x1001 -4.904766527 x1147 4.791732873}}
+ name Axis2
+ xpos -2861
+ ypos -728
+}
+Axis {
+ translate {0 0 -254}
+ name Axis3
+ xpos -2786
+ ypos -703
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard2
+ xpos -2711
+ ypos -754
+ postage_stamp false
+}
+Sphere {
+ name Sphere4
+ xpos -2711
+ ypos -703
+}
+TransformGeo {
+ inputs 2
+ name TransformGeo3
+ xpos -2711
+ ypos -653
+}
+push $N982c6f0
+Sphere {
+ translate {1860 0 -1320}
+ uniform_scale 4000
+ name Sphere3
+ xpos -2914
+ ypos -854
+}
+push $N9d22180
+push $N985bd00
+Viewer {
+ inputs 2
+ frame 1114
+ frame_range 1001-1150
+ gain 4.8
+ downrez 2
+ viewerProcess "None (default)"
+ name Viewer1
+ xpos 570
+ ypos 2362
+ hide_input true
+}

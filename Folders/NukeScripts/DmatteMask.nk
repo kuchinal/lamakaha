@@ -1,0 +1,1699 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Roto {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44866000 x440dc000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Bezier1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {x40c00000 x40800000}
+        {x4490a2e8 x445d1745}
+        {xc0c00000 xc0800000}
+        {xc2500000 xc0000000}
+        {x44ade8bb x44688000}
+        {x42500000 x40000000}
+        {x41000000 x42e00000}
+        {x44c8cba3 x444b1746}
+        {xc1000000 xc2e00000}
+        {x42b80000 xc0800000}
+        {x448df45e x4402a2e9}
+        {xc2b80000 x40800000}
+        {xc2700000 xc2000000}
+        {x445e68b8 x44342e8c}
+        {x42700000 x42000000}}}
+      {cc
+       {f 8192}
+       {p
+        {x40c00000 x40800000}
+        {}
+        {xc0c00000 xc0800000}
+        {xc2500000 xc0000000}
+        {}
+        {x42500000 x40000000}
+        {x41000000 x42e00000}
+        {}
+        {xc1000000 xc2e00000}
+        {x42b80000 xc0800000}
+        {}
+        {xc2b80000 x40800000}
+        {xc2700000 xc2000000}
+        {}
+        {x42700000 x42000000}}}}
+     {t x446a8000 x444c4ccd}
+     {a osw 1 osf 0 str 1 spx x44866000 spy x440dc000 sb 1 tt x40800000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 1
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1075 567}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ motionblur_shutter_offset_type centred
+ openspline_width 1
+ source_black_outside true
+ name Roto1
+ selected true
+ xpos -587
+ ypos -182
+ hide_input true
+}
+Blur {
+ channels rgba
+ size 50
+ name Blur1
+ label "\[value size]"
+ selected true
+ xpos -587
+ ypos -156
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -553
+ ypos -72
+}
+Group {
+ inputs 0
+ name Render_Input_CG6
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nkname = k.name()\npublished = n.knob('published').value()\n\nif kname in \['cacheLocal', 'first', 'last', 'before', 'after', 'on_error']:\n    val = k.value()\n    if kname in \['first', 'last']:\n        val = int(val)\n    readnodes = nuke.allNodes('Read', n)\n    for rn in readnodes:\n        rn.knob(kname).setValue(val)\n\nelif kname == 'primary_only':\n    val = k.value()\n    cpnodes = nuke.allNodes('Copy', n)\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n        \nelif kname == 'versions':\n    version = k.value()\n    from tx.path import Path\n    from tx_nuke.layers import NukeCGVersion\n    cgv = NukeCGVersion(Path(n.knob('render_folder').evaluate()) / version)\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)\n    else:\n        n.knob('element').setValue(elements\[0])"
+ tile_color 0x219a9bff
+ label "\[value versions]\n\[value element]"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 17
+ note_font_color 0xffffffff
+ selected true
+ xpos -476
+ ypos -317
+ addUserKnob {20 tab1 l CG}
+ addUserKnob {1 Sequence}
+ Sequence "\[value TrixterShotData.sequence]"
+ addUserKnob {1 Shot -STARTLINE}
+ Shot "\[value TrixterShotData.shot]"
+ addUserKnob {1 render_folder l INVISIBLE +INVISIBLE}
+ render_folder "\[value TrixterShotData.projectpath]/seq/\[value Sequence]/\[value Shot]/rendering/images/versions"
+ addUserKnob {26 ""}
+ addUserKnob {6 published l "published only" t "show only versions with published elements" -STARTLINE}
+ addUserKnob {4 versions l version M {fx_v002 fx_v004 fx_v005 fx_v006 fx_v007 fx_v008 fx_v009 fx_v010 fx_v011 fx_v012 fx_v013 fx_v014 fx_v015 fx_v016 fx_v017 fx_v018 fx_v019 fx_v021 fx_v022 fx_v023 fx_v024 fx_v025 fx_v026 fx_v027 fx_v028 fx_v029 fx_v030 fx_v031 fx_v032 fx_v033 fx_v034 fx_v035 fx_v036 fx_v037 fx_v038 fx_v039 fx_v040 fx_v041 fx_v042 fx_v043 fx_v044 fx_v045 fx_v046 fx_v047 fx_v048 fx_v049 fx_v050 fx_v051 fx_v052 fx_v053 fx_v054 fx_v055 fx_v056 fx_v057 fx_v058 fx_v060 fx_v061 fx_v062 fx_v063 fx_v065 fx_v066 fx_v067 fx_v069 fx_v070 fx_v071 fx_v072 fx_v073 fx_v074 fx_v075 fx_v076 fx_v077 fx_v078 fx_v079 fx_v080 fx_v081 fx_v082 fx_v083 fx_v084 fx_v085 fx_v086 fx_v087 fx_v088 fx_v089 fx_v090 fx_v091 fx_v093 fx_v094 release_v001 release_v002 release_v003 release_v004 release_v006 release_v007 release_v008 release_v009 release_v010 release_v011 release_v012 release_v014 release_v015 release_v016 release_v017 release_v018 release_v019 release_v022 release_v025 release_v026 release_v027 release_v028 release_v029 release_v030 release_v031 release_v032 release_v033 release_v034 release_v035 release_v036 release_v037 release_v038 release_v040 release_v041 release_v042 release_v043 release_v044}}
+ versions release_v042
+ addUserKnob {22 update_versions l update -STARTLINE T "import os\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\npublished = n.knob('published').value()\nversions = \[]\n\nrender_folder = n.knob('render_folder').evaluate()\nfiles = os.listdir(render_folder)\nfor f in files:\n    if os.path.isdir(os.path.join(render_folder, f)):\n        if os.path.exists(os.path.join(render_folder, f, 'primary')):\n            cgv = NukeCGVersion(os.path.join(render_folder, f))\n            if not published or cgv.has_publishes():\n                versions.append(f)\n\nversions.sort()\nn.knob('versions').setValues(versions)\nif len(versions) == 0:\n    n.knob('element').setValues(\[])\n\nelse:\n    maxversion = max(versions)\n    n.knob('versions').setValue(maxversion)\n    \n    cgv = NukeCGVersion(os.path.join(render_folder, maxversion))\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)\n    else:\n        n.knob('element').setValue(elements\[0])"}
+ addUserKnob {4 element M {rocket}}
+ addUserKnob {22 load_layers l "        L O A D   L A Y E R S        " T "from tx.path import Path\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\n\nvfolder = Path(n.knob('render_folder').evaluate()) / n.knob('versions').value()\ncgv = NukeCGVersion(vfolder)\n\nelement = n.knob('element').value()\nwith n:\n    outp = nuke.toNode('Output1')\n    nodes = nuke.allNodes()\n    nodes.pop(nodes.index(outp))\n    for node in nodes: nuke.delete(node)\n\n    ln = cgv.create_nodes(element)\n    outp.setInput(0, ln)\n    outp.setXYpos(ln.xpos(), ln.ypos()+100)\n\n    readnodes = nuke.allNodes('Read')\n    for k in \['cacheLocal', 'before', 'after', 'on_error']:\n        val = n.knob(k).value()\n        for rn in readnodes:\n            rn.knob(k).setValue(val)\n\n    cpnodes = nuke.allNodes('Copy')\n    val = n.knob('primary_only').value()\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n\ncgv.create_deep_nodes(element)\n\nfor k in \['first', 'last']:\n    n.knob(k).setValue(rn.knob(k).value())\n\nn.knob('file').setValue(cgv.elements\[element]\['layers']\[0].seq_string().rsplit(' ', 1)\[0])\n\npanel = nuke.Panel(\"localise?\")\npanel.addBooleanCheckBox('localise', False)\npanel.show()\ni = panel.value(\"localise\")\nif i == 1:\n    n.setSelected(False)\n    n.begin()\n    g=nuke.allNodes(\"Read\")\n    for Read in g:\n        Read.setSelected(True)\n    always();doLocalise(0)\n    n.end()\n    n\['reload'].execute()\n    n\['tile_color'].setValue(4000915711)\nelse:\n    n\['tile_color'].setValue(563780607)" +STARTLINE}
+ addUserKnob {26 line1 l "" +STARTLINE}
+ addUserKnob {1 file l INVISIBLE +INVISIBLE}
+ file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/primary/primary_rocket.#.exr
+ addUserKnob {6 primary_only l "primary only" t "disable all other layers to increase performance" +STARTLINE}
+ addUserKnob {4 cacheLocal l "cache locally" M {always auto never}}
+ cacheLocal auto
+ addUserKnob {3 first l "frame range"}
+ first 1007
+ addUserKnob {4 before l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {3 last l "" -STARTLINE}
+ last 1290
+ addUserKnob {4 after l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {4 on_error l "missing frames" M {error black checkerboard "nearest frame" ""}}
+ addUserKnob {22 reload l "reload all" t "press the reload button on all read nodes in the group" -STARTLINE T "n = nuke.thisNode()\n\nreadnodes = nuke.allNodes('Read', n)\nfor rn in readnodes:\n    rn.knob('reload').execute()"}
+}
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/crypto_asset/crypto_asset_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read38
+  xpos -190
+  ypos 4741
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CA_FixOverscan
+  xpos -190
+  ypos 4841
+ }
+set Nb82b3e0 [stack 0]
+push $Nb82b3e0
+push $Nb82b3e0
+push $Nb82b3e0
+push $Nb82b3e0
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/crypto_material/crypto_material_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read37
+  xpos -190
+  ypos 4241
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CM_FixOverscan
+  xpos -190
+  ypos 4341
+ }
+set Nb849ed0 [stack 0]
+push $Nb849ed0
+push $Nb849ed0
+push $Nb849ed0
+push $Nb849ed0
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/crypto_object/crypto_object_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read36
+  xpos -190
+  ypos 3741
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CO_FixOverscan
+  xpos -190
+  ypos 3841
+ }
+set Nb86d120 [stack 0]
+push $Nb86d120
+push $Nb86d120
+push $Nb86d120
+push $Nb86d120
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_8/light_group_8_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read35
+  xpos -190
+  ypos 3341
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_7/light_group_7_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read34
+  xpos -190
+  ypos 3241
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_6/light_group_6_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read33
+  xpos -190
+  ypos 3141
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_5/light_group_5_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read32
+  xpos -190
+  ypos 3041
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_4/light_group_4_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read31
+  xpos -190
+  ypos 2941
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_3/light_group_3_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read30
+  xpos -190
+  ypos 2841
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_2/light_group_2_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read29
+  xpos -190
+  ypos 2741
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/light_group_1/light_group_1_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read28
+  xpos -190
+  ypos 2641
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_9/id_9_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read27
+  xpos -190
+  ypos 2541
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_8/id_8_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read26
+  xpos -190
+  ypos 2441
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_7/id_7_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read25
+  xpos -190
+  ypos 2341
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_6/id_6_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read24
+  xpos -190
+  ypos 2241
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_5/id_5_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read23
+  xpos -190
+  ypos 2141
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_4/id_4_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read22
+  xpos -190
+  ypos 2041
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_3/id_3_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read21
+  xpos -190
+  ypos 1941
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_2/id_2_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read20
+  xpos -190
+  ypos 1841
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/id_1/id_1_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read19
+  xpos -190
+  ypos 1741
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/Z/Z_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read17
+  xpos -190
+  ypos 1541
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/sss/sss_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read14
+  xpos -190
+  ypos 1241
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/emission/emission_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read13
+  xpos -190
+  ypos 1141
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/refraction/refraction_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read12
+  xpos -190
+  ypos 1041
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/direct_transmission/direct_transmission_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read11
+  xpos -190
+  ypos 941
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/indirect_specular_2/indirect_specular_2_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read10
+  xpos -190
+  ypos 841
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/direct_specular_2/direct_specular_2_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read9
+  xpos -190
+  ypos 741
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/specular_color_2/specular_color_2_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read8
+  xpos -190
+  ypos 641
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/indirect_specular/indirect_specular_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read7
+  xpos -190
+  ypos 541
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/direct_specular/direct_specular_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read6
+  xpos -190
+  ypos 441
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/specular_color/specular_color_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read5
+  xpos -190
+  ypos 341
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/indirect_diffuse/indirect_diffuse_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read4
+  xpos -190
+  ypos 241
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/direct_diffuse/direct_diffuse_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read3
+  xpos -190
+  ypos 141
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/diffuse_color/diffuse_color_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read2
+  xpos -190
+  ypos 41
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/primary/primary_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read1
+  xpos -190
+  ypos -59
+  postage_stamp false
+ }
+set Nbaf0b00 [stack 0]
+push $Nbaf0b00
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  from1 rgba.green
+  to1 rgba.green
+  from2 rgba.blue
+  to2 rgba.blue
+  from3 rgba.alpha
+  to3 rgba.alpha
+  bbox B
+  name Copy1
+  xpos -40
+  ypos 16
+ }
+add_layer {diffuse_color diffuse_color.red diffuse_color.green diffuse_color.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_color.red
+  from1 rgba.green
+  to1 diffuse_color.green
+  from2 rgba.blue
+  to2 diffuse_color.blue
+  bbox B
+  name Copy2
+  xpos -40
+  ypos 116
+ }
+add_layer {diffuse_direct diffuse_direct.red diffuse_direct.green diffuse_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_direct.red
+  from1 rgba.green
+  to1 diffuse_direct.green
+  from2 rgba.blue
+  to2 diffuse_direct.blue
+  bbox B
+  name Copy3
+  xpos -40
+  ypos 216
+ }
+add_layer {diffuse_indirect diffuse_indirect.red diffuse_indirect.green diffuse_indirect.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_indirect.red
+  from1 rgba.green
+  to1 diffuse_indirect.green
+  from2 rgba.blue
+  to2 diffuse_indirect.blue
+  bbox B
+  name Copy4
+  xpos -40
+  ypos 316
+ }
+add_layer {specular_color specular_color.red specular_color.green specular_color.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color.red
+  from1 rgba.green
+  to1 specular_color.green
+  from2 rgba.blue
+  to2 specular_color.blue
+  bbox B
+  name Copy5
+  xpos -40
+  ypos 416
+ }
+add_layer {specular_direct specular_direct.red specular_direct.green specular_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct.red
+  from1 rgba.green
+  to1 specular_direct.green
+  from2 rgba.blue
+  to2 specular_direct.blue
+  bbox B
+  name Copy6
+  xpos -40
+  ypos 516
+ }
+add_layer {specular_indirect specular_indirect.red specular_indirect.green specular_indirect.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect.red
+  from1 rgba.green
+  to1 specular_indirect.green
+  from2 rgba.blue
+  to2 specular_indirect.blue
+  bbox B
+  name Copy7
+  xpos -40
+  ypos 616
+ }
+add_layer {specular_color_2 specular_color_2.red specular_color_2.green specular_color_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color_2.red
+  from1 rgba.green
+  to1 specular_color_2.green
+  from2 rgba.blue
+  to2 specular_color_2.blue
+  bbox B
+  name Copy8
+  xpos -40
+  ypos 716
+ }
+add_layer {specular_direct2 specular_direct2.red specular_direct2.green specular_direct2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct2.red
+  from1 rgba.green
+  to1 specular_direct2.green
+  from2 rgba.blue
+  to2 specular_direct2.blue
+  bbox B
+  name Copy9
+  xpos -40
+  ypos 816
+ }
+add_layer {specular_indirect2 specular_indirect2.red specular_indirect2.green specular_indirect2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect2.red
+  from1 rgba.green
+  to1 specular_indirect2.green
+  from2 rgba.blue
+  to2 specular_indirect2.blue
+  bbox B
+  name Copy10
+  xpos -40
+  ypos 916
+ }
+add_layer {transmission_direct transmission_direct.red transmission_direct.green transmission_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 transmission_direct.red
+  from1 rgba.green
+  to1 transmission_direct.green
+  from2 rgba.blue
+  to2 transmission_direct.blue
+  bbox B
+  name Copy11
+  xpos -40
+  ypos 1016
+ }
+add_layer {refraction refraction.red refraction.green refraction.blue refraction.alpha}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 refraction.red
+  from1 rgba.green
+  to1 refraction.green
+  from2 rgba.blue
+  to2 refraction.blue
+  bbox B
+  name Copy12
+  xpos -40
+  ypos 1116
+ }
+add_layer {emission emission.red emission.green emission.blue emission.alpha}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 emission.red
+  from1 rgba.green
+  to1 emission.green
+  from2 rgba.blue
+  to2 emission.blue
+  bbox B
+  name Copy13
+  xpos -40
+  ypos 1216
+ }
+add_layer {subsurface subsurface.red subsurface.green subsurface.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 subsurface.red
+  from1 rgba.green
+  to1 subsurface.green
+  from2 rgba.blue
+  to2 subsurface.blue
+  bbox B
+  name Copy14
+  xpos -40
+  ypos 1316
+ }
+set Nbbb89a0 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/P/P_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read15
+  xpos -190
+  ypos 1341
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult1
+  xpos -190
+  ypos 1367
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge1
+  xpos -190
+  ypos 1392
+ }
+push $Nbbb89a0
+add_layer {P P.red P.green P.blue P.alpha none P.blue P.alpha P.x P.y P.z}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 P.red
+  from1 rgba.green
+  to1 P.green
+  from2 rgba.blue
+  to2 P.blue
+  bbox B
+  name Copy15
+  xpos -40
+  ypos 1416
+ }
+set Nbbf4360 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/N/N_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read16
+  xpos -190
+  ypos 1441
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult2
+  xpos -190
+  ypos 1467
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge2
+  xpos -190
+  ypos 1492
+ }
+push $Nbbf4360
+add_layer {N N.red N.green N.blue N.alpha N.x N.y N.z N.r N.g N.b}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 N.red
+  from1 rgba.green
+  to1 N.green
+  from2 rgba.blue
+  to2 N.blue
+  bbox B
+  name Copy16
+  xpos -40
+  ypos 1516
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 depth.Z
+  bbox B
+  name Copy17
+  xpos -40
+  ypos 1616
+ }
+set Nbc3bbe0 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/pref/pref_rocket.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1007
+  last 1290
+  origfirst 1007
+  origlast 1290
+  origset true
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read18
+  xpos -190
+  ypos 1641
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult3
+  xpos -190
+  ypos 1667
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge3
+  xpos -190
+  ypos 1692
+ }
+push $Nbc3bbe0
+add_layer {pref pref.red pref.green pref.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 pref.red
+  from1 rgba.green
+  to1 pref.green
+  from2 rgba.blue
+  to2 pref.blue
+  bbox B
+  name Copy18
+  xpos -40
+  ypos 1716
+ }
+add_layer {id_1 id_1.red id_1.green id_1.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_1.red
+  from1 rgba.green
+  to1 id_1.green
+  from2 rgba.blue
+  to2 id_1.blue
+  bbox B
+  name Copy19
+  xpos -40
+  ypos 1816
+ }
+add_layer {id_2 id_2.red id_2.green id_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_2.red
+  from1 rgba.green
+  to1 id_2.green
+  from2 rgba.blue
+  to2 id_2.blue
+  bbox B
+  name Copy20
+  xpos -40
+  ypos 1916
+ }
+add_layer {id_3 id_3.red id_3.green id_3.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_3.red
+  from1 rgba.green
+  to1 id_3.green
+  from2 rgba.blue
+  to2 id_3.blue
+  bbox B
+  name Copy21
+  xpos -40
+  ypos 2016
+ }
+add_layer {id_4 id_4.red id_4.green id_4.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_4.red
+  from1 rgba.green
+  to1 id_4.green
+  from2 rgba.blue
+  to2 id_4.blue
+  bbox B
+  name Copy22
+  xpos -40
+  ypos 2116
+ }
+add_layer {id_5 id_5.red id_5.green id_5.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_5.red
+  from1 rgba.green
+  to1 id_5.green
+  from2 rgba.blue
+  to2 id_5.blue
+  bbox B
+  name Copy23
+  xpos -40
+  ypos 2216
+ }
+add_layer {id_6 id_6.red id_6.green id_6.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_6.red
+  from1 rgba.green
+  to1 id_6.green
+  from2 rgba.blue
+  to2 id_6.blue
+  bbox B
+  name Copy24
+  xpos -40
+  ypos 2316
+ }
+add_layer {id_7 id_7.red id_7.green id_7.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_7.red
+  from1 rgba.green
+  to1 id_7.green
+  from2 rgba.blue
+  to2 id_7.blue
+  bbox B
+  name Copy25
+  xpos -40
+  ypos 2416
+ }
+add_layer {id_8 id_8.red id_8.green id_8.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_8.red
+  from1 rgba.green
+  to1 id_8.green
+  from2 rgba.blue
+  to2 id_8.blue
+  bbox B
+  name Copy26
+  xpos -40
+  ypos 2516
+ }
+add_layer {id_9 id_9.red id_9.green id_9.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_9.red
+  from1 rgba.green
+  to1 id_9.green
+  from2 rgba.blue
+  to2 id_9.blue
+  bbox B
+  name Copy27
+  xpos -40
+  ypos 2616
+ }
+add_layer {light_group_1 light_group_1.red light_group_1.green light_group_1.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_1.red
+  from1 rgba.green
+  to1 light_group_1.green
+  from2 rgba.blue
+  to2 light_group_1.blue
+  bbox B
+  name Copy28
+  xpos -40
+  ypos 2716
+ }
+add_layer {light_group_2 light_group_2.red light_group_2.green light_group_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_2.red
+  from1 rgba.green
+  to1 light_group_2.green
+  from2 rgba.blue
+  to2 light_group_2.blue
+  bbox B
+  name Copy29
+  xpos -40
+  ypos 2816
+ }
+add_layer {light_group_3 light_group_3.red light_group_3.green light_group_3.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_3.red
+  from1 rgba.green
+  to1 light_group_3.green
+  from2 rgba.blue
+  to2 light_group_3.blue
+  bbox B
+  name Copy30
+  xpos -40
+  ypos 2916
+ }
+add_layer {light_group_4 light_group_4.red light_group_4.green light_group_4.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_4.red
+  from1 rgba.green
+  to1 light_group_4.green
+  from2 rgba.blue
+  to2 light_group_4.blue
+  bbox B
+  name Copy31
+  xpos -40
+  ypos 3016
+ }
+add_layer {light_group_5 light_group_5.red light_group_5.green light_group_5.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_5.red
+  from1 rgba.green
+  to1 light_group_5.green
+  from2 rgba.blue
+  to2 light_group_5.blue
+  bbox B
+  name Copy32
+  xpos -40
+  ypos 3116
+ }
+add_layer {light_group_6 light_group_6.red light_group_6.green light_group_6.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_6.red
+  from1 rgba.green
+  to1 light_group_6.green
+  from2 rgba.blue
+  to2 light_group_6.blue
+  bbox B
+  name Copy33
+  xpos -40
+  ypos 3216
+ }
+add_layer {light_group_7 light_group_7.red light_group_7.green light_group_7.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_7.red
+  from1 rgba.green
+  to1 light_group_7.green
+  from2 rgba.blue
+  to2 light_group_7.blue
+  bbox B
+  name Copy34
+  xpos -40
+  ypos 3316
+ }
+add_layer {light_group_8 light_group_8.red light_group_8.green light_group_8.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_8.red
+  from1 rgba.green
+  to1 light_group_8.green
+  from2 rgba.blue
+  to2 light_group_8.blue
+  bbox B
+  name Copy35
+  xpos -40
+  ypos 3416
+ }
+add_layer {crypto_object crypto_object.red crypto_object.green crypto_object.blue}
+add_layer {crypto_object00 crypto_object00.red crypto_object00.green crypto_object00.blue crypto_object00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object.blue
+  to0 crypto_object.blue
+  from1 crypto_object.green
+  to1 crypto_object.green
+  from2 crypto_object.red
+  to2 crypto_object.red
+  from3 crypto_object00.alpha
+  to3 crypto_object00.alpha
+  bbox B
+  name Copy36
+  xpos -40
+  ypos 3516
+ }
+add_layer {crypto_object01 crypto_object01.red crypto_object01.green crypto_object01.blue crypto_object01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object00.blue
+  to0 crypto_object00.blue
+  from1 crypto_object00.green
+  to1 crypto_object00.green
+  from2 crypto_object00.red
+  to2 crypto_object00.red
+  from3 crypto_object01.alpha
+  to3 crypto_object01.alpha
+  bbox B
+  name Copy37
+  xpos -40
+  ypos 3616
+ }
+add_layer {crypto_object02 crypto_object02.red crypto_object02.green crypto_object02.blue crypto_object02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object01.blue
+  to0 crypto_object01.blue
+  from1 crypto_object01.green
+  to1 crypto_object01.green
+  from2 crypto_object01.red
+  to2 crypto_object01.red
+  from3 crypto_object02.alpha
+  to3 crypto_object02.alpha
+  bbox B
+  name Copy38
+  xpos -40
+  ypos 3716
+ }
+ Copy {
+  inputs 2
+  from0 crypto_object02.blue
+  to0 crypto_object02.blue
+  from1 crypto_object02.green
+  to1 crypto_object02.green
+  from2 crypto_object02.red
+  to2 crypto_object02.red
+  bbox B
+  name Copy39
+  xpos -40
+  ypos 3816
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData1
+  xpos -40
+  ypos 3916
+ }
+add_layer {crypto_material00 crypto_material00.red crypto_material00.green crypto_material00.blue crypto_material00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material00.red
+  to0 crypto_material00.red
+  from1 crypto_material00.green
+  to1 crypto_material00.green
+  from2 crypto_material00.blue
+  to2 crypto_material00.blue
+  from3 crypto_material00.alpha
+  to3 crypto_material00.alpha
+  bbox B
+  name Copy40
+  xpos -40
+  ypos 4016
+ }
+add_layer {crypto_material crypto_material.red crypto_material.green crypto_material.blue}
+add_layer {crypto_material01 crypto_material01.red crypto_material01.green crypto_material01.blue crypto_material01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material.red
+  to0 crypto_material.red
+  from1 crypto_material.green
+  to1 crypto_material.green
+  from2 crypto_material.blue
+  to2 crypto_material.blue
+  from3 crypto_material01.alpha
+  to3 crypto_material01.alpha
+  bbox B
+  name Copy41
+  xpos -40
+  ypos 4116
+ }
+add_layer {crypto_material02 crypto_material02.red crypto_material02.green crypto_material02.blue crypto_material02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material01.blue
+  to0 crypto_material01.blue
+  from1 crypto_material01.green
+  to1 crypto_material01.green
+  from2 crypto_material01.red
+  to2 crypto_material01.red
+  from3 crypto_material02.alpha
+  to3 crypto_material02.alpha
+  bbox B
+  name Copy42
+  xpos -40
+  ypos 4216
+ }
+ Copy {
+  inputs 2
+  from0 crypto_material02.blue
+  to0 crypto_material02.blue
+  from1 crypto_material02.green
+  to1 crypto_material02.green
+  from2 crypto_material02.red
+  to2 crypto_material02.red
+  bbox B
+  name Copy43
+  xpos -40
+  ypos 4316
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData2
+  xpos -40
+  ypos 4416
+ }
+add_layer {crypto_asset crypto_asset.red crypto_asset.green crypto_asset.blue}
+add_layer {crypto_asset00 crypto_asset00.red crypto_asset00.green crypto_asset00.blue crypto_asset00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset.blue
+  to0 crypto_asset.blue
+  from1 crypto_asset.green
+  to1 crypto_asset.green
+  from2 crypto_asset.red
+  to2 crypto_asset.red
+  from3 crypto_asset00.alpha
+  to3 crypto_asset00.alpha
+  bbox B
+  name Copy44
+  xpos -40
+  ypos 4516
+ }
+add_layer {crypto_asset01 crypto_asset01.red crypto_asset01.green crypto_asset01.blue crypto_asset01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset00.blue
+  to0 crypto_asset00.blue
+  from1 crypto_asset00.green
+  to1 crypto_asset00.green
+  from2 crypto_asset00.red
+  to2 crypto_asset00.red
+  from3 crypto_asset01.alpha
+  to3 crypto_asset01.alpha
+  bbox B
+  name Copy45
+  xpos -40
+  ypos 4616
+ }
+add_layer {crypto_asset02 crypto_asset02.red crypto_asset02.green crypto_asset02.blue crypto_asset02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset01.blue
+  to0 crypto_asset01.blue
+  from1 crypto_asset01.green
+  to1 crypto_asset01.green
+  from2 crypto_asset01.red
+  to2 crypto_asset01.red
+  from3 crypto_asset02.alpha
+  to3 crypto_asset02.alpha
+  bbox B
+  name Copy46
+  xpos -40
+  ypos 4716
+ }
+ Copy {
+  inputs 2
+  from0 crypto_asset02.blue
+  to0 crypto_asset02.blue
+  from1 crypto_asset02.green
+  to1 crypto_asset02.green
+  from2 crypto_asset02.red
+  to2 crypto_asset02.red
+  bbox B
+  name Copy47
+  xpos -40
+  ypos 4816
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData3
+  xpos -40
+  ypos 4916
+ }
+ Output {
+  name Output1
+  xpos -40
+  ypos 5016
+ }
+end_group
+Remove {
+ operation keep
+ channels rgba
+ name Remove1
+ selected true
+ xpos -476
+ ypos -247
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 P.red
+ name Copy1
+ selected true
+ xpos -476
+ ypos -76
+}
+DeepRead {
+ inputs 0
+ file /corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v042/deep/deep_rocket.#.exr
+ cacheLocal always
+ format "2150 1134 0 0 2150 1134 1 LU"
+ first 1007
+ last 1290
+ origfirst 1007
+ origlast 1290
+ origset true
+ version 1
+ name DeepRead28
+ label "release_v042 rocket"
+ selected true
+ xpos -648
+ ypos 10
+}
+DeepRecolor {
+ inputs 2
+ channels all
+ name DeepRecolor1
+ selected true
+ xpos -476
+ ypos 10
+}
+DeepExpression {
+ chans1 deep
+ rgba.alpha P.red
+ deep.front P.red!=0?deep.front:0
+ deep.back P.red!=0?deep.back:0
+ name DeepExpression1
+ selected true
+ xpos -476
+ ypos 68
+}
+set Neb89c40 [stack 0]
+DeepSample {
+ pos {1245.199951 565}
+ accumulate true
+ name DeepSample1
+ selected true
+ xpos -645
+ ypos 97
+}
+Camera2 {
+ inputs 0
+ translate {{curve l x1001 -68.85173097 -69.53722513 -70.22660938 -70.91041526 -71.60195253 -72.32632471 -73.07913479 -73.83657971 -74.57797097 -75.30118525 -76.0074942 -76.68728292 -77.3392388 -77.97041783 -78.60500446 -79.25176639 -79.92296217 -80.62263269 -81.34801491 -82.08214659 -82.80857269 -83.51833784 -84.21012474 -84.89433187 -85.58222061 -86.28698084 -87.01276008 -87.7538396 -88.4808935 -89.12490607 -89.60425102 -89.91538501 -90.15914982 -90.43468343 -90.77561926 -91.16500716 -91.56664826 -91.9443556 -92.27929527 -92.56024326 -92.7900005 -92.97197221 -93.13011865 -93.27755301 -93.43415926 -93.59271972 -93.75434104 -93.91167 -94.07148194 -94.2381479 -94.41567236 -94.61505926 -94.84012627 -95.10642779 -95.41586489 -95.78343874 -96.20778354 -96.69666817 -97.2467315 -97.86662311 -98.55968219 -99.32621247 -100.154742 -101.0284877 -101.9241333 -102.818223 -103.6774632 -104.4745413 -105.1760876 -105.7725646 -106.2474781 -106.612963 -106.8800509 -107.0904046 -107.2747301 -107.4599633 -107.6522046 -107.8443625 -108.0498217 -108.2812211 -108.5819643 -108.9653148 -109.4545522 -110.0299583 -110.6711466 -111.3419309 -112.0502995 -112.8177435 -113.6501618 -114.5224509 -115.389455 -116.2033501 -116.9355591 -117.5884477 -118.1737143 -118.706575 -119.2003947 -119.6640616 -120.1101048 -120.5720958 -121.089205 -121.6864844 -122.3507609 -123.0529423 -123.7721354 -124.5236872 -125.3189516 -126.1585803 -127.0394567 -127.9608555 -128.9055896 -129.8146375 -130.6438294 -131.3717979 -132.0213335 -132.6070623 -133.1488311 -133.6502147 -134.1190689 -134.5688037 -135.0173345 -135.4836109 -135.9817419 -136.5372246 -137.1705529 -137.8957818 -138.7113444 -139.620292 -140.6256094 -141.7108414 -142.8191427 -143.8721422 -144.7914073 -145.5194791 -146.054481 -146.4885955 -146.9270579 -147.4088542 -147.8991904 -148.3689779 -148.8125808 -149.2452781 -149.6889222 -150.1616728 -150.6860467 -151.2690061 -151.9204163 -152.6274665 -153.3810259 -154.1617128 -154.9545075 -155.7361703 -156.4711373 -157.1339396 -157.7070572 -158.1973929 -158.6039215 -158.932823 -159.1827994 -159.3652334 -159.4880003 -159.5723058 -159.6558578 -159.7819711 -159.9637169 -160.1849463 -160.4263187 -160.6963867 -161.032008 -161.5121146 -162.1913279 -163.0495287 -163.9592627 -164.7938589 -165.5061143 -166.1319653 -166.7130193 -167.2900418 -167.8915513 -168.5042918 -169.1001404 -169.6611012 -170.1997585 -170.7259699 -171.2561988 -171.8149846 -172.4293778 -173.1010289 -173.8083598 -174.5461971 -175.3186753 -176.121488 -176.9310085 -177.7301734 -178.5243145 -179.330456 -180.1355712 -180.8759401 -181.4746737 -181.9112906 -182.2511637 -182.6055966 -183.0289579 -183.5019477 -183.989987 -184.489492 -185.0131852 -185.5712516 -186.1776101 -186.8368664 -187.5513144 -188.3005964 -189.0755795 -189.8609508 -190.655211 -191.4386802 -192.1935309 -192.9029099 -193.5529215 -194.1383529 -194.6555042 -195.1231325 -195.5525953 -195.9604976 -196.343751 -196.7064345 -197.0477994 -197.3733547 -197.6775725 -197.958151 -198.220487 -198.4788556 -198.7488268 -199.0394489 -199.3423724 -199.6371235 -199.9031941 -200.1312927 -200.3197124 -200.4660821 -200.5702673 -200.6312198 -200.6574875 -200.6530541 -200.6376425 -200.6187312 -200.6121558 -200.6148886 -200.6341241 -200.6624849 -200.6953538 -200.7221227 -200.7414619 -200.7595035 -200.7762459 -200.7902251 -200.794808 -200.7902077 -200.7747666 -200.7525 -200.7260633 -200.7007559 -200.6807559 -200.6682691 -200.6615795 -200.6587161 -200.6591649 -200.6641964 -200.6713663 -200.6779225 -200.6805034 -200.6795598 -200.6757797 -200.670759 -200.6679871 -200.6670165 -200.669894 -200.6727543 -200.6780794 -200.6819127 -200.6874717 -200.6913379 -200.6937279 -200.6928757 -200.688071 -200.6807805 -200.6697335 -200.6590418 -200.6482076 -200.6410179 -200.6363016 -200.6362115} {curve l x1001 64.67428232 64.68754963 64.69225734 64.6856916 64.66875881 64.64670639 64.62669876 64.61184842 64.59911045 64.58048033 64.54866814 64.49998618 64.43709449 64.37615978 64.34907308 64.39073251 64.5020555 64.62615389 64.68841372 64.66859325 64.59220892 64.48827314 64.377198 64.27521325 64.1886211 64.11740774 64.05736593 64.00258385 63.95769884 63.94376678 63.96404911 63.96164785 63.86850979 63.70977012 63.57961729 63.53148928 63.54590188 63.58495892 63.62651785 63.66697481 63.70500627 63.74259086 63.78060058 63.81936719 63.85358719 63.87771474 63.88878905 63.88706677 63.8770094 63.86132295 63.84306294 63.82069344 63.7934259 63.7587902 63.71982949 63.67995703 63.64267923 63.60731989 63.57330334 63.53995396 63.50547018 63.46485154 63.41321185 63.35185922 63.29294354 63.25238327 63.24072327 63.25482586 63.28531654 63.31988844 63.35186018 63.37709035 63.39854653 63.42439154 63.46376781 63.5188953 63.57789674 63.6271023 63.6527337 63.65708276 63.64210364 63.61549463 63.57551718 63.5224377 63.45020087 63.35867184 63.25407097 63.14948386 63.05630237 62.97940872 62.91789303 62.86565367 62.82168132 62.78951931 62.77440783 62.77839565 62.80193047 62.84408128 62.90296899 62.97785167 63.06754624 63.16593537 63.26329621 63.34578129 63.40290256 63.42674792 63.41750318 63.3702517 63.28513081 63.16582404 63.03471214 62.91761262 62.82844961 62.76358798 62.71890649 62.69683988 62.69375137 62.7043136 62.71946195 62.73820628 62.76055578 62.7934062 62.83876976 62.89387171 62.94937202 62.99886186 63.04106573 63.07907661 63.11338878 63.13574516 63.13492574 63.11412369 63.0946747 63.09895335 63.1241566 63.14320193 63.12815185 63.07621412 63.00029035 62.91580604 62.83345255 62.75982388 62.70009004 62.65797001 62.63751494 62.6331794 62.63690556 62.63765134 62.63480348 62.62925183 62.62969506 62.64141828 62.66864314 62.70891162 62.75959688 62.81651829 62.87670908 62.93540266 62.98609663 63.02362635 63.04343243 63.04646161 63.04714098 63.06081679 63.08073171 63.08715621 63.07251803 63.03705452 62.97641913 62.88210741 62.76329955 62.63660209 62.49973906 62.33942631 62.16753909 62.01503303 61.89986326 61.82882675 61.79591625 61.79674376 61.81627262 61.84802454 61.88424524 61.93010295 61.98489399 62.0514528 62.12449844 62.19410258 62.25154613 62.30212003 62.35271153 62.39881358 62.43234607 62.44772367 62.44625926 62.43813161 62.44101083 62.46741895 62.51137101 62.54116527 62.50926522 62.39359923 62.25364115 62.18822073 62.21517828 62.27252684 62.31157775 62.31782426 62.30301087 62.28572496 62.28662873 62.31280202 62.36540934 62.43531442 62.51149478 62.58160158 62.64176024 62.69597459 62.74836274 62.79972461 62.84486206 62.88154786 62.90770744 62.92569584 62.93510271 62.93562338 62.92406351 62.8990958 62.86118467 62.81554186 62.7684945 62.72369533 62.68204919 62.64415939 62.60989336 62.58102936 62.56057678 62.55759945 62.57943291 62.62773985 62.69384775 62.77024334 62.84835785 62.92194917 62.99074571 63.05845993 63.12570209 63.18359047 63.22598236 63.24451524 63.23910541 63.2082383 63.1594196 63.09976311 63.03797657 62.97724854 62.92133638 62.8742259 62.83950649 62.81972455 62.81462296 62.82408511 62.84745621 62.88479593 62.93401574 62.99203226 63.05557431 63.12063468 63.18271652 63.23828467 63.28450712 63.31991488 63.34064397 63.34630747 63.33540058 63.31220273 63.27701412 63.23389983 63.18196212 63.1253594 63.06704765 63.01155511 62.96197493 62.91876586 62.88515238 62.86106232 62.8506393 62.85221169 62.86731479 62.89291458 62.92917661 62.93933346} {curve l x1001 -36.67738219 -36.97497988 -37.30633631 -37.67273664 -38.07136773 -38.47936513 -38.86249169 -39.20594152 -39.52219391 -39.83418245 -40.15107809 -40.4712472 -40.79069912 -41.10634872 -41.41167057 -41.6939419 -41.94852998 -42.18667435 -42.42908954 -42.67782985 -42.92292311 -43.17080263 -43.45967158 -43.81697729 -44.23158962 -44.68681092 -45.17706863 -45.6830376 -46.17244643 -46.62184508 -47.01817756 -47.34468083 -47.59359502 -47.78690847 -47.96593164 -48.14918834 -48.33216483 -48.50023014 -48.65143255 -48.78247935 -48.89930399 -49.00193113 -49.09992828 -49.19114902 -49.27945016 -49.36103524 -49.44050799 -49.51942328 -49.60120883 -49.68852523 -49.78069973 -49.88240635 -49.99386592 -50.12289586 -50.27035798 -50.4441161 -50.64424875 -50.87440892 -51.13282535 -51.42299713 -51.74685914 -52.10637473 -52.4996593 -52.92247293 -53.36506828 -53.81275857 -54.24415456 -54.64239186 -54.99103875 -55.28503206 -55.51804771 -55.69886503 -55.83754202 -55.95608452 -56.06460038 -56.16731323 -56.25557903 -56.3225887 -56.37377653 -56.42413567 -56.49527463 -56.59501361 -56.73058499 -56.89755566 -57.09369707 -57.31427523 -57.57152299 -57.87904997 -58.23931904 -58.63572719 -59.0394745 -59.41372112 -59.73935906 -60.02452729 -60.28665284 -60.53836099 -60.78604264 -61.03077093 -61.27410597 -61.53491561 -61.8531592 -62.26327225 -62.74552109 -63.24002726 -63.71086109 -64.17058417 -64.63618157 -65.10124404 -65.54644109 -65.94633139 -66.30199544 -66.62956496 -66.95151303 -67.26226041 -67.55605981 -67.82355579 -68.06714463 -68.29008548 -68.50099847 -68.70892984 -68.9211672 -69.14550887 -69.38684089 -69.65265758 -69.94808224 -70.27825733 -70.64159444 -71.03052179 -71.43065401 -71.82643392 -72.20537244 -72.56062344 -72.88737552 -73.18357701 -73.44561578 -73.67522589 -73.87706256 -74.06129154 -74.23479363 -74.40363576 -74.57178665 -74.74337064 -74.92886125 -75.1351772 -75.37130637 -75.63608308 -75.93370129 -76.25841044 -76.60687742 -76.969759 -77.33654995 -77.69520919 -78.03168121 -78.33709284 -78.59912102 -78.81487226 -78.98199607 -79.1106121 -79.20938831 -79.2878734 -79.35023327 -79.40296941 -79.45185948 -79.50649206 -79.58084253 -79.68621634 -79.8220765 -79.9927588 -80.21503911 -80.51217437 -80.86080974 -81.21313314 -81.56595791 -81.97497435 -82.45139499 -82.95464997 -83.43917198 -83.88040874 -84.27089587 -84.60908548 -84.90518377 -85.17219714 -85.42936516 -85.68627426 -85.9525138 -86.23623227 -86.54650823 -86.88205888 -87.23269659 -87.59565514 -87.97769959 -88.38411017 -88.80530839 -89.21967557 -89.61101555 -89.98614272 -90.3628013 -90.73082478 -91.04341911 -91.25320959 -91.33482477 -91.30315711 -91.23535964 -91.23395479 -91.32302682 -91.46412556 -91.63198176 -91.82620593 -92.05220171 -92.30487644 -92.58380299 -92.88252701 -93.20872453 -93.55742193 -93.92751119 -94.2977654 -94.65558257 -94.98887065 -95.29464809 -95.57209965 -95.82529034 -96.06546049 -96.29876441 -96.53035478 -96.75556373 -96.97513514 -97.18958458 -97.40088153 -97.6009757 -97.78276325 -97.94568576 -98.09541045 -98.23770702 -98.37584829 -98.50615706 -98.61950199 -98.7107207 -98.78354708 -98.84298721 -98.88944518 -98.92387536 -98.94650333 -98.95989421 -98.96442895 -98.96696929 -98.96878708 -98.9740746 -98.98023187 -98.99195015 -99.00922339 -99.02928312 -99.04461532 -99.05532916 -99.06907092 -99.08817037 -99.11096301 -99.13215187 -99.14970402 -99.16061349 -99.16451554 -99.16137308 -99.15384588 -99.14512094 -99.1368084 -99.12805189 -99.11863121 -99.11009131 -99.10530788 -99.10502306 -99.10853923 -99.11296845 -99.11664867 -99.11847885 -99.11793605 -99.11597813 -99.11211152 -99.10762252 -99.10076148 -99.09394618 -99.08666332 -99.08240636 -99.08097785 -99.08322997 -99.08829033 -99.0946865 -99.10134987 -99.10529408 -99.10691264 -99.10451041 -99.09959251 -99.09123779 -99.08879396}}
+ rotate {{curve l x1001 -16.27867196 -16.72119356 -17.37827532 -18.01795219 -18.35280964 -18.2884245 -17.9550858 -17.55722522 -17.21300595 -16.96468102 -16.75563418 -16.43435118 -15.86777092 -14.99683094 -13.94978357 -12.87512591 -12.09505683 -11.75177374 -11.71446761 -11.74340114 -11.75980184 -11.91290335 -12.56078488 -13.72919456 -15.27774367 -16.98097713 -18.69456408 -20.38775663 -22.23338948 -24.21332465 -26.31048227 -28.35661883 -30.11174516 -31.19755336 -31.6592498 -31.5147574 -30.91712232 -30.03146336 -29.06841584 -28.06290751 -26.8527852 -25.3803272 -23.48233295 -21.38014409 -19.17897443 -17.19670394 -15.63979779 -14.60613322 -13.97812846 -13.66419727 -13.56639054 -13.58821378 -13.71432552 -13.96728281 -14.32341405 -14.76455534 -15.1698258 -15.4738525 -15.66592092 -15.67866522 -15.57748363 -15.45459824 -15.32283601 -15.19804654 -15.06622871 -14.94587532 -14.91108895 -14.93786518 -14.95794903 -15.00662656 -15.12172657 -15.22301786 -15.16722164 -14.98986709 -14.86312232 -14.85716296 -14.94817646 -15.0671157 -15.12027661 -15.10704149 -15.08129902 -15.06033053 -15.03177174 -15.01783894 -14.97264346 -14.9439761 -15.00816603 -14.97349843 -14.95394638 -14.96745481 -15.00889861 -15.1096473 -15.17043313 -15.23825031 -15.27705 -15.28977371 -15.2610268 -15.16663253 -15.10721762 -15.07068209 -15.02230114 -14.99234387 -14.97712877 -15.11445598 -15.37353853 -15.7087381 -16.09054843 -16.51039102 -16.93044379 -17.33019146 -17.6955293 -17.99252724 -18.13707081 -18.15506269 -18.09959531 -18.00520241 -17.89047859 -17.77224118 -17.60341058 -17.34445497 -17.01358654 -16.66166744 -16.18951295 -15.49223006 -14.66433125 -13.94018844 -13.43201242 -13.07742843 -12.90090597 -12.9454067 -13.1175639 -13.25808687 -13.29357048 -13.29464821 -13.35392122 -13.41512216 -13.40812042 -13.38133289 -13.33489831 -13.24007153 -13.06544366 -12.74880046 -12.2843975 -11.73307267 -11.19685263 -10.74283185 -10.40225587 -10.10528884 -9.8490716 -9.60111243 -9.388052952 -9.245463529 -9.181127354 -9.165549823 -9.158047618 -9.136401628 -9.118283573 -9.105135546 -9.091646115 -9.072469502 -9.053977974 -9.06302083 -9.118428644 -9.254463616 -9.485897226 -9.802507487 -10.21534148 -10.73317671 -11.37163114 -12.15510544 -13.11977776 -14.1976798 -15.29533019 -16.48052708 -17.53375887 -18.43336537 -19.03868335 -19.36988385 -19.67219468 -20.21658194 -20.92875334 -21.4810365 -21.80212575 -21.83065569 -21.53334751 -20.80554888 -19.76147276 -18.55989151 -17.27298484 -15.993096 -14.89637036 -13.9975405 -13.06540743 -12.12098404 -11.57069156 -11.55011475 -11.99104185 -13.03618503 -14.68783311 -16.90799226 -19.11337545 -21.03726387 -22.54786258 -23.38194492 -23.61217991 -23.32102892 -22.76287486 -21.93845443 -20.97757248 -20.08877238 -19.19548665 -18.35489009 -17.65582522 -17.03573502 -16.39597851 -15.9443234 -15.78192756 -15.68482547 -15.45651131 -15.05038369 -14.36166093 -13.31381222 -12.12455795 -11.11101873 -10.4298957 -10.17102165 -10.31451655 -10.81192386 -11.58014789 -12.59410573 -13.87788622 -15.41519794 -17.13805239 -18.94742296 -20.74590936 -22.26905344 -23.29624337 -23.67601109 -23.48180142 -22.88676175 -22.12584449 -21.31671876 -20.47638805 -19.54803314 -18.50180303 -17.3959563 -16.31172206 -15.38181917 -14.73310636 -14.36661382 -14.21802153 -14.24749004 -14.33817248 -14.37274935 -14.3654623 -14.36284218 -14.35932726 -14.34578977 -14.33394708 -14.31136793 -14.29207874 -14.27215595 -14.23098456 -14.18693975 -14.15268381 -14.122471 -14.08575105 -14.07985113 -14.08958335 -14.0992458 -14.10929738 -14.12332075 -14.13550018 -14.13846371 -14.13527671 -14.14405759 -14.14326179 -14.14131254 -14.14480132 -14.14652342 -14.14353068 -14.14519301 -14.13743484 -14.1293595 -14.12594285 -14.12160102 -14.11655401 -14.12048391 -14.11880131 -14.10780682 -14.09941726 -14.09867778} {curve l x1001 -145.8933534 -148.4682915 -150.7065334 -152.7557028 -154.6144633 -156.159416 -157.3376328 -158.0979522 -158.5687475 -158.8191794 -158.8055102 -158.5449855 -158.0964023 -157.4848121 -156.6387416 -155.6378031 -154.4048863 -152.9188617 -151.2582142 -149.3983121 -147.204514 -144.6532352 -141.5343361 -137.922788 -134.319662 -131.2617953 -128.9172487 -127.3017251 -125.9966146 -124.6855192 -123.164761 -121.5440155 -119.8902219 -118.3866508 -117.3286246 -116.8304259 -116.8314369 -117.0679822 -117.2865759 -117.3748455 -117.246614 -116.8241677 -116.0623707 -115.058973 -113.9845271 -113.1118328 -112.5225056 -112.1448914 -111.8385246 -111.5899314 -111.4217151 -111.3392259 -111.3685915 -111.3994902 -111.3502573 -111.2445039 -111.1489339 -111.1006787 -111.0770103 -111.0243126 -110.9884869 -111.0001672 -110.9069409 -110.5915013 -109.9727684 -109.1078081 -108.2932055 -107.7669062 -107.6072052 -107.8133866 -108.2795269 -108.6567084 -108.6143015 -107.968489 -106.8451968 -105.9494649 -105.8205193 -106.5341952 -107.7990057 -109.2354147 -110.66475 -112.168418 -113.9965448 -116.3684017 -119.071582 -122.0477158 -124.9943101 -127.801043 -130.2207506 -132.0887554 -133.2600341 -133.5242155 -132.8057326 -131.4130435 -129.545834 -127.2742254 -124.7389243 -121.9202922 -118.9751343 -115.8406243 -112.6234124 -109.520445 -106.7147926 -104.2384142 -102.1503926 -100.6595049 -99.70488653 -99.15404984 -98.88248105 -98.75952161 -98.66348475 -98.50023467 -98.27195164 -98.03342207 -97.74256622 -97.42552983 -97.15776272 -96.94512021 -96.75616816 -96.58000341 -96.32343712 -95.90867314 -95.43365679 -95.10414397 -94.87004353 -94.61349479 -94.29345692 -94.02667179 -94.12884004 -94.87934589 -96.28671163 -98.26587499 -100.7011995 -103.3983649 -106.1120784 -108.5894964 -110.8436429 -112.8536978 -114.6131618 -115.9803884 -116.8904498 -117.361703 -117.4445284 -117.270806 -116.9807749 -116.6726631 -116.3994707 -116.1690555 -115.9627315 -115.7975836 -115.6640339 -115.584042 -115.5420242 -115.5369325 -115.5462299 -115.5540851 -115.5176333 -115.3871313 -115.1103387 -114.6495764 -114.0026496 -113.1128122 -111.9367911 -110.4974658 -108.8864767 -107.1118989 -105.0965396 -102.7875391 -100.2526502 -97.61813211 -95.10645298 -92.73942415 -90.77781917 -89.37732038 -88.5779353 -88.170606 -88.04734556 -88.08287274 -88.09437749 -88.11567871 -88.2863506 -88.52040899 -88.77214939 -88.99590412 -89.09937895 -89.07582284 -88.8706943 -88.43092346 -87.85911043 -87.22826063 -86.66748748 -86.20321651 -85.76526559 -85.33344625 -84.98243167 -84.90962693 -85.16579148 -85.95174954 -87.35045113 -89.25429622 -91.44764293 -93.95115547 -96.87568572 -99.84198087 -103.0193982 -106.2703901 -109.4637376 -112.5313483 -115.3696985 -117.8483737 -120.0872902 -122.2176559 -124.0748779 -125.7574539 -127.3653001 -128.8005509 -130.0531309 -131.1430149 -131.9554089 -132.5434672 -132.9675334 -133.140581 -132.9281093 -132.3585847 -131.4823459 -130.3560577 -129.0085845 -127.5578218 -126.2100734 -125.06246 -124.1061686 -123.387452 -122.9872383 -122.8631027 -123.019812 -123.3827343 -123.8770522 -124.3737726 -124.792681 -125.1344173 -125.3497574 -125.4276584 -125.4084 -125.2821351 -125.0775509 -124.8498351 -124.6121293 -124.3926203 -124.2079078 -124.0563938 -123.932583 -123.863 -123.8369962 -123.8104563 -123.8173755 -123.8421737 -123.86189 -123.8683482 -123.8495365 -123.8100004 -123.7753792 -123.7480775 -123.7099592 -123.6510495 -123.6083648 -123.5662009 -123.5414849 -123.5322822 -123.5309375 -123.5241247 -123.5239582 -123.5169076 -123.5072029 -123.4947761 -123.4928188 -123.4903648 -123.4909749 -123.4952002 -123.4991294 -123.5019048 -123.5059226 -123.5036161 -123.501712 -123.493856 -123.4714331 -123.4281105 -123.3787521 -123.3334873 -123.2938707 -123.2554332 -123.2270219 -123.2261869} {curve l x1001 0.714407546 0.6985193672 0.6556432415 0.4517681097 0.1967389715 -0.05537806937 -0.144805783 -0.1972336233 -0.2160226997 -0.2341171278 -0.2409004724 -0.2569165795 -0.2710388293 -0.2850123422 -0.3297589051 -0.3036343884 -0.2882835814 -0.1359224061 -0.1470084711 -0.2489946442 -0.3344926893 -0.3320668033 -0.3970036961 -0.3956824564 -0.4394121847 -0.5615338859 -0.5714825782 -0.5438217244 -0.8405240784 -1.015350097 -1.106492933 -1.093313295 -0.8877729158 -0.8154173258 -0.4540725063 -0.2173783312 0.002603922799 0.07549969255 0.1114662327 0.1834614299 0.1627087143 0.07823695827 0.06172030231 -0.02289221919 -0.1156397848 -0.2732378108 -0.3569951165 -0.3552291821 -0.3704028241 -0.3803675167 -0.3853790283 -0.390251115 -0.4020283812 -0.4076378297 -0.402411858 -0.3899905751 -0.3665979638 -0.251123837 -0.2311238871 -0.2530472516 -0.2277532632 -0.2447681373 -0.3368190834 -0.4342916446 -0.4840480034 -0.5039535238 -0.4551302752 -0.3034152629 -0.1698312693 -0.03771751857 -0.02960570315 -0.03812926662 -0.185283185 -0.3551684988 -0.2959756106 -0.2071292609 0.01804566521 0.2392441541 0.3403627427 0.3493418166 0.3267944132 0.3768911286 0.5168255288 0.8318057887 1.14712518 1.090688333 0.5670541878 0.4965704729 0.2894983183 0.07651591803 -0.06239521351 -0.3477242762 -0.5444819336 -0.7118756006 -0.7332640282 -0.8426640687 -1.01155283 -0.9775247157 -1.021099713 -1.290052121 -1.167801551 -0.9769681004 -1.090344302 -0.8045497824 -0.4352926014 -0.2424739702 -0.162835659 -0.007913910748 0.114361761 0.1346985641 0.2144814712 0.3400591765 0.3922111537 0.3854636533 0.3688887986 0.4424273077 0.450744262 0.4640770052 0.4761515224 0.4411469852 0.3490563898 0.2766741105 0.3049556936 0.3124375745 0.3246561247 0.2753276882 0.187391349 0.2318076094 0.361961994 0.5385402924 0.7892368558 0.9745888947 1.170616753 1.180621677 1.314309795 1.493876181 1.409540609 1.296162724 1.13555788 0.9045490703 0.6758634999 0.5155347424 0.3922189375 0.3053964725 0.2527199334 0.2377877502 0.2749933888 0.2933557835 0.3081377879 0.3264931756 0.3516474375 0.3724768182 0.3904193274 0.4187707512 0.4573825075 0.4723205334 0.4135626821 0.3694140597 0.2974478582 0.2185043659 0.1384634172 0.01082502626 -0.1364668954 -0.1073057971 -0.09043381315 -0.09556139942 -0.1112272691 -0.1012408805 -0.04528048068 -0.01761332667 0.04550760672 0.05788732715 0.01578221508 -0.1403605154 -0.1176609443 -0.1131112517 -0.06309026394 -0.04543913465 -0.05362352382 -0.0567766329 -0.01735733185 0.0003247291596 -0.04402089117 -0.04775097308 -0.03937511896 -0.005520897963 0.006323414852 0.00225800736 -0.03211251055 0.01356946333 0.0190505936 -0.02040529134 0.07621954112 0.1775959782 0.1442212488 0.1059235538 0.2174206757 0.1893889708 0.2846461974 0.1080393383 0.05315577736 0.1098039511 0.3021037609 0.3413913067 0.4470445719 0.4448184539 0.6522291115 0.5199821523 0.2440741865 0.2695858094 0.1319851178 0.07140782959 0.005037133234 -0.10518254 -0.1642492949 -0.0863070433 0.008437431117 0.01469340832 -0.05011825228 -0.09465505965 -0.1662889344 -0.2610748255 -0.3712272323 -0.4639751198 -0.4682575956 -0.429096088 -0.3788477924 -0.3246661266 -0.2097627226 -0.1515602089 -0.0433571689 0.01254597492 0.1607906318 0.2689446265 0.3478198564 0.4460708504 0.5122701814 0.4391390585 0.3393456736 0.2688738765 0.2083459214 0.09830311025 0.04747877934 0.00381804188 -0.01679284656 -0.05692245493 -0.09909013455 -0.01958455099 0.1112188088 0.2068765646 0.1965012707 0.2311205169 0.2917646976 0.2799777807 0.2614714748 0.2438395911 0.2367485223 0.2316288997 0.2229275681 0.2057675432 0.2009980833 0.1998038377 0.2561349673 0.2387277608 0.2205528329 0.2068355251 0.192958296 0.2010124113 0.1905090898 0.1746284496 0.1728134759 0.1730524483 0.1869099909 0.2038457356 0.2153376087 0.2378994969 0.2949504823 0.2935844196 0.2795163493 0.2730587369 0.2597002166 0.2580214945 0.2317456609 0.172237828 0.1505298459 0.1512428413 0.1425596927 0.1629819845 0.1593708973 0.1722848701 0.2239275046 0.2276651099}}
+ scaling {{curve l x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve l x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve l x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ uniform_scale {{curve l x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ skew {{curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ pivot {{curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal {{curve l x1001 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275 35.29416275}}
+ haperture {{curve l x1001 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113}}
+ vaperture {{curve l x1001 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038}}
+ near {{curve l x1001 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776}}
+ far {{curve l x1001 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000}}
+ win_translate {{curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve l x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal_point {{curve l x1001 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5}}
+ fstop {{curve l x1001 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905}}
+ file /corky/projects/LevelUp_343202/seq/fgb/0060/data/animation/cameras/shot_cam/versions/cache_v001.abc
+ name Camera1
+ label MainCam
+ selected true
+ xpos -591
+ ypos 193
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $Neb89c40
+DeepToPoints {
+ inputs 2
+ name DeepToPoints1
+ selected true
+ xpos -497
+ ypos 213
+}
+push $Neb89c40
+DeepToImage {
+ name DeepToImage1
+ selected true
+ xpos -361
+ ypos 107
+}
+Premult {
+ name Premult1
+ selected true
+ xpos -343
+ ypos 221
+}

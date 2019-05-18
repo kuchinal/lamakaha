@@ -1,0 +1,417 @@
+set cut_paste_input [stack 0]
+version 8.0 v5
+push $cut_paste_input
+Group {
+name UVEdgeExtend
+selected true
+xpos 154
+ypos -1116
+addUserKnob {20 User}
+addUserKnob {14 Intensity R 0 100}
+Intensity 7.5
+addUserKnob {7 ErodeIncomingMatte l "Erode Incoming Alpha" R -100 100}
+addUserKnob {7 Edge_Erode l "Width (erode)" R 0 50}
+Edge_Erode 10
+addUserKnob {7 Edge_blur l "Edge Blur" R 0 100}
+Edge_blur 10
+addUserKnob {4 Output M {"Edges Extended" "Edge Only" "Area Effected"}}
+addUserKnob {6 InvertAlpha l "Pull Inward?" +STARTLINE}
+addUserKnob {7 Pull_Inward_edge_blur l "Pull Inward Edge Blur" R -50 50}
+Pull_Inward_edge_blur 10
+}
+Input {
+inputs 0
+name InputINPUT
+label Input
+xpos 525
+ypos 330
+}
+Dot {
+name Dot43
+xpos 559
+ypos 391
+}
+Dot {
+name Dot32
+xpos 559
+ypos 583
+}
+set N8ca41c30 [stack 0]
+Dot {
+name Dot33
+xpos 801
+ypos 583
+}
+set N8ca41fa0 [stack 0]
+Dot {
+name Dot34
+xpos 1211
+ypos 583
+}
+set N8ca42310 [stack 0]
+Remove {
+operation keep
+channels alpha
+name Remove4
+xpos 1177
+ypos 640
+}
+FilterErode {
+channels rgba
+size {{parent.ErodeIncomingMatte}}
+filter gaussian
+name FilterErode7
+xpos 1177
+ypos 713
+}
+set N8ca429f0 [stack 0]
+Invert {
+name Invert2
+xpos 1086
+ypos 781
+}
+push $N8ca429f0
+Switch {
+inputs 2
+which {{parent.InvertAlpha}}
+name Switch2
+xpos 1177
+ypos 787
+}
+push $N8ca42310
+Dot {
+name Dot35
+xpos 1446
+ypos 583
+}
+set N8ca430d0 [stack 0]
+Remove {
+name Remove1
+xpos 1412
+ypos 631
+}
+Reformat {
+type "to box"
+format "720 576 0 0 720 576 1.067 PAL_1"
+box_width {{InputINPUT.format.w}}
+box_height {{InputINPUT.format.t}}
+box_fixed true
+scale {1 1}
+name Reformat1
+xpos 1412
+ypos 682
+}
+set N8ca437b0 [stack 0]
+Ramp {
+p0 {-0.5 0}
+p1 {{parent.Reformat1.box_width-0.5} 0}
+color {1 0 0 1}
+name Ramp1
+xpos 1326
+ypos 722
+}
+push $N8ca437b0
+Ramp {
+p0 {0 -0.5}
+p1 {0 {parent.Reformat1.box_height-0.5 i}}
+color {0 1 0 1}
+name Ramp2
+xpos 1501
+ypos 728
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge1
+xpos 1412
+ypos 780
+}
+Shuffle {
+alpha white
+name Shuffle1
+xpos 1412
+ypos 804
+}
+Shuffle {
+alpha white
+name Shuffle4
+label "\[value in]"
+xpos 1412
+ypos 853
+}
+set N8ca448e0 [stack 0]
+Merge2 {
+inputs 2
+operation mask
+name Merge8
+label "\[value Achannels]"
+xpos 1177
+ypos 853
+}
+Blur {
+channels rgba
+size {{parent.Intensity}}
+name Blur1
+xpos 1177
+ypos 961
+}
+set N8ca44fc0 [stack 0]
+push $N8ca44fc0
+push $N8ca44fc0
+push $N8ca44fc0
+push $N8ca44fc0
+push $N8ca44fc0
+push 0
+push $N8ca44fc0
+push $N8ca448e0
+Merge2 {
+inputs 8+1
+name Merge9
+label "\[value Achannels]"
+xpos 1412
+ypos 955
+}
+Dot {
+name Dot44
+xpos 1448
+ypos 1127
+}
+push $N8ca41fa0
+Invert {
+channels alpha
+name Invert4
+xpos 657
+ypos 911
+}
+push $N8ca41fa0
+Switch {
+inputs 2
+which {{parent.InvertAlpha}}
+name Pull_inward
+xpos 767
+ypos 917
+}
+STMap {
+inputs 2
+uv rgb
+name STMap2
+xpos 767
+ypos 1118
+}
+Dot {
+name Dot45
+xpos 801
+ypos 1197
+}
+set N8ca460f0 [stack 0]
+Dot {
+name Dot49
+xpos 1398
+ypos 1197
+}
+set N8ca46460 [stack 0]
+Blur {
+channels rgba
+size {{parent.Pull_Inward_edge_blur}}
+name Blur3
+xpos 1266
+ypos 1265
+}
+push $N8ca46460
+Switch {
+inputs 2
+which {{parent.InvertAlpha}}
+name Pull_inward1
+xpos 1364
+ypos 1265
+}
+push $N8ca430d0
+Dot {
+name Dot36
+xpos 1694
+ypos 583
+}
+set N8ca46b40 [stack 0]
+Dot {
+name Dot2
+xpos 1904
+ypos 583
+}
+FilterErode {
+channels alpha
+size {{-parent.FilterErode8.size}}
+name FilterErode1
+xpos 1870
+ypos 955
+}
+Blur {
+channels alpha
+size {{parent.Blur25.size}}
+name Blur2
+xpos 1870
+ypos 1023
+}
+Dot {
+name Dot8
+xpos 1904
+ypos 1335
+}
+Invert {
+name Invert3
+xpos 1770
+ypos 1326
+}
+push $N8ca46b40
+FilterErode {
+channels alpha
+size {{parent.Edge_Erode}}
+name FilterErode8
+xpos 1660
+ypos 954
+}
+Blur {
+channels alpha
+size {{parent.Edge_blur}}
+name Blur25
+xpos 1660
+ypos 1024
+}
+Switch {
+inputs 2
+which {{parent.InvertAlpha}}
+name Pull_inward2
+xpos 1660
+ypos 1332
+}
+Dot {
+name Dot51
+xpos 1530
+ypos 1335
+}
+set N8ca486c0 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Multiply
+label "\[value Achannels]"
+xpos 1366
+ypos 1326
+}
+set N8ca48a30 [stack 0]
+Dot {
+name Dot6
+xpos 1400
+ypos 1617
+}
+set N8ca48da0 [stack 0]
+push $N8ca48da0
+push $N8ca486c0
+Grade {
+inputs 1+1
+multiply {4 0.8842215538 0.7226884365 1}
+name Grade1
+xpos 1496
+ypos 1614
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy1
+xpos 1496
+ypos 1668
+}
+Dot {
+name Dot3
+xpos 1530
+ypos 2092
+}
+push $N8ca48a30
+push $N8ca460f0
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy4
+xpos 767
+ypos 1326
+}
+Premult {
+name Premult2
+xpos 767
+ypos 1532
+}
+set N8ca49ed0 [stack 0]
+Dot {
+name Dot1
+xpos 1146
+ypos 1535
+}
+Input {
+inputs 0
+name InputMask
+xpos 891
+ypos 1790
+number 1
+}
+Invert {
+name Invert1
+xpos 891
+ypos 1833
+}
+push $N8ca41c30
+Dot {
+name Dot52
+xpos 559
+ypos 1649
+}
+set N8ca4ac90 [stack 0]
+Dot {
+name Dot53
+xpos 559
+ypos 1751
+}
+set N8ca4b000 [stack 0]
+push $N8ca4b000
+push $N8ca49ed0
+push $N8ca4ac90
+Merge2 {
+inputs 2
+name Merge10
+label "\[value Achannels]"
+xpos 767
+ypos 1640
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy5
+xpos 767
+ypos 1742
+}
+Keymix {
+inputs 3
+name Keymix2
+xpos 767
+ypos 1833
+}
+Dot {
+name Dot7
+xpos 801
+ypos 2092
+}
+Switch {
+inputs 3
+which {{parent.Output}}
+name Switch1
+xpos 1112
+ypos 2089
+}
+Output {
+name Output1
+label Output
+xpos 1112
+ypos 2149
+}
+end_group

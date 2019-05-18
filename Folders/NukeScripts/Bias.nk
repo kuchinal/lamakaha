@@ -1,0 +1,171 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+ name Bias37
+ help "bias function for better rolloff adjustments"
+ tile_color 0x55bfffff
+ selected true
+ xpos -577
+ ypos 30
+ addUserKnob {20 User l Bias}
+ addUserKnob {83 output M {rgb rgba alpha}}
+ output alpha
+ addUserKnob {41 bias T BiasExpr.bias}
+ addUserKnob {6 black_clamp l "black clamp" -STARTLINE}
+ black_clamp true
+ addUserKnob {6 white_clamp l "white clamp" -STARTLINE}
+ white_clamp true
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannelMask l mask T Dissolve1.maskChannelMask}
+ addUserKnob {6 Dissolve1_inject l inject -STARTLINE}
+ addUserKnob {6 Dissolve1_invert_mask l invert -STARTLINE}
+ addUserKnob {6 Dissolve1_fringe l fringe -STARTLINE}
+ addUserKnob {41 mix T Dissolve1.which}
+ addUserKnob {26 ""}
+ addUserKnob {26 credits l "" +STARTLINE T "Bias v1.1 || by Marco Meyer | www.marcomeyer-vfx.de | 9/2016"}
+}
+ Input {
+  inputs 0
+  name mask
+  xpos -40
+  ypos 150
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input
+  xpos -320
+  ypos -410
+ }
+ Dot {
+  name Dot2
+  xpos -286
+  ypos -246
+ }
+set N369e320 [stack 0]
+ Dot {
+  name Dot7
+  xpos -426
+  ypos -246
+ }
+set N36a0560 [stack 0]
+ Dot {
+  name Dot6
+  xpos -566
+  ypos -246
+ }
+set N36b0bd0 [stack 0]
+ Dot {
+  name Dot1
+  xpos -706
+  ypos -246
+ }
+set N3680fa0 [stack 0]
+ Clamp {
+  channels rgba
+  minimum {{((BiasExpr.bias-1)/(2*BiasExpr.bias-1))+.00001}}
+  minimum_enable {{"!isinf(((BiasExpr.bias-1)/(2*BiasExpr.bias-1))) && ((BiasExpr.bias-1)/(2*BiasExpr.bias-1)) < 0"}}
+  maximum {{((BiasExpr.bias-1)/(2*BiasExpr.bias-1))-.00001}}
+  maximum_enable {{"!isinf(((BiasExpr.bias-1)/(2*BiasExpr.bias-1))) && ((BiasExpr.bias-1)/(2*BiasExpr.bias-1)) > 0"}}
+  name Clamp2
+  xpos -1020
+  ypos -250
+ }
+ Expression {
+  expr0 "(r / ((((1.0/bias) - 2.0)*(1.0 - r))+1.0))"
+  expr1 "(g / ((((1.0/bias) - 2.0)*(1.0 - g))+1.0))"
+  expr2 "(b / ((((1.0/bias) - 2.0)*(1.0 - b))+1.0))"
+  channel3 alpha
+  expr3 "(a / ((((1.0/bias) - 2.0)*(1.0 - a))+1.0))"
+  name BiasExpr
+  xpos -1020
+  ypos -196
+  addUserKnob {20 User}
+  addUserKnob {7 bias R 0.005 0.995}
+  bias 0.5
+ }
+ Clamp {
+  channels rgba
+  minimum_enable {{black_clamp}}
+  maximum_enable {{white_clamp}}
+  name Clamp3
+  xpos -1020
+  ypos -152
+ }
+ Dot {
+  name Dot3
+  xpos -986
+  ypos -86
+ }
+set Nb9101c0 [stack 0]
+ Dot {
+  name Dot4
+  xpos -986
+  ypos -6
+ }
+set Nb913b60 [stack 0]
+ Dot {
+  name Dot5
+  xpos -986
+  ypos 74
+ }
+push $N36a0560
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -460
+  ypos 64
+ }
+push $Nb913b60
+push $N36b0bd0
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  name ShuffleCopy2
+  xpos -600
+  ypos -10
+ }
+push $Nb9101c0
+push $N3680fa0
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  alpha alpha2
+  name ShuffleCopy1
+  xpos -740
+  ypos -90
+ }
+ Switch {
+  inputs 3
+  which {{output}}
+  name Switch1
+  xpos -600
+  ypos 230
+ }
+push $N369e320
+ Dissolve {
+  inputs 2+1
+  channels rgba
+  which 1
+  maskChannelInput -rgba.alpha
+  inject {{parent.Dissolve1_inject}}
+  invert_mask {{parent.Dissolve1_invert_mask}}
+  fringe {{parent.Dissolve1_fringe}}
+  name Dissolve1
+  selected true
+  xpos -320
+  ypos 230
+ }
+ Output {
+  name Output1
+  xpos -320
+  ypos 390
+ }
+end_group

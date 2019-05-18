@@ -1,0 +1,18 @@
+try:
+    n = nuke.selectedNodes("Dot")
+    for t in n:
+        if t.Class()=="Dot":
+            dep = t.dependencies(nuke.INPUTS)[0]
+            x = dep['xpos'].value()
+            y = dep['ypos'].value()
+            if "red" in t['name'].value():
+                t['xpos'].setValue(x+3)
+                t['ypos'].setValue(y+111)
+            if "blue" in t['name'].value():
+                t['xpos'].setValue(x+35)
+                t['ypos'].setValue(y+111)
+            if "green" in t['name'].value():
+                t['xpos'].setValue(x+65)
+                t['ypos'].setValue(y+111)
+except:
+    print ""

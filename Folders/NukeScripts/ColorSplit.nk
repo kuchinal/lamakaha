@@ -1,0 +1,183 @@
+set cut_paste_input [stack 0]
+version 10.0 v1
+push $cut_paste_input
+Dot {
+ name Dot9
+ selected true
+ xpos -40
+ ypos -333
+}
+set N5ff01000 [stack 0]
+Dot {
+ name Dot10
+ selected true
+ xpos -148
+ ypos -333
+}
+set N5ff00c00 [stack 0]
+Dot {
+ name Dot11
+ selected true
+ xpos -274
+ ypos -333
+}
+set N5ff00800 [stack 0]
+Dot {
+ name Dot12
+ selected true
+ xpos -380
+ ypos -333
+}
+set N5ff00400 [stack 0]
+Dot {
+ name Dot13
+ selected true
+ xpos -488
+ ypos -333
+}
+set N5ff00000 [stack 0]
+Dot {
+ name Dot14
+ selected true
+ xpos -593
+ ypos -333
+}
+Shuffle {
+ green black
+ blue black
+ alpha black
+ name Shuffle9
+ tile_color 0x93000000
+ selected true
+ xpos -627
+ ypos -282
+}
+Dot {
+ name Dot4
+ selected true
+ xpos -593
+ ypos -117
+}
+push $N5ff00000
+Shuffle {
+ red black
+ blue black
+ alpha black
+ name Shuffle8
+ tile_color 0x3f633800
+ selected true
+ xpos -522
+ ypos -282
+}
+Dot {
+ name Dot5
+ selected true
+ xpos -488
+ ypos -143
+}
+push $N5ff00400
+Shuffle {
+ red black
+ green black
+ alpha black
+ name Shuffle7
+ tile_color 0x3d3f8e00
+ selected true
+ xpos -414
+ ypos -280
+}
+Dot {
+ name Dot6
+ selected true
+ xpos -380
+ ypos -169
+}
+push $N5ff00800
+Shuffle {
+ blue black
+ alpha black
+ name Shuffle4
+ tile_color 0x969600ff
+ selected true
+ xpos -308
+ ypos -279
+}
+Dot {
+ name Dot7
+ selected true
+ xpos -274
+ ypos -195
+}
+push $N5ff00c00
+Shuffle {
+ red black
+ alpha black
+ name Shuffle5
+ tile_color 0xffffff
+ selected true
+ xpos -182
+ ypos -281
+}
+Dot {
+ name Dot8
+ selected true
+ xpos -148
+ ypos -221
+}
+push $N5ff01000
+Shuffle {
+ green black
+ alpha black
+ name Shuffle6
+ tile_color 0x51004f00
+ selected true
+ xpos -74
+ ypos -283
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge3
+ selected true
+ xpos -74
+ ypos -225
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge4
+ selected true
+ xpos -74
+ ypos -199
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge5
+ selected true
+ xpos -74
+ ypos -173
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge6
+ selected true
+ xpos -74
+ ypos -147
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge7
+ selected true
+ xpos -74
+ ypos -121
+}
+Grade {
+ white 0.33
+ name Grade4
+ selected true
+ xpos -74
+ ypos -82
+}

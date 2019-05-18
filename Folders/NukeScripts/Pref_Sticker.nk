@@ -1,0 +1,136 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push 0
+push $cut_paste_input
+Group {
+inputs 2
+name Pref_Sticker
+tile_color 0x444fffff
+note_font "Bitstream Vera Sans Bold Bold"
+selected true
+xpos -4756
+ypos 56522
+addUserKnob {20 User}
+addUserKnob {41 in_1 l "Object Position" T Shuffle42.in}
+addUserKnob {41 add l center T picker.add}
+addUserKnob {41 value l Size T Scale.value}
+addUserKnob {26 ""}
+addUserKnob {41 restP l preview T Switch1.disable}
+}
+Input {
+inputs 0
+name Render
+xpos 139
+ypos -826
+}
+set Nce9c7660 [stack 0]
+Shuffle {
+in rgb
+in2 alpha
+red blue
+blue black
+alpha red2
+name Shuffle42
+label "\[value in]-->\[value out]"
+xpos 143
+ypos -732
+}
+set Nd4cb5120 [stack 0]
+Dot {
+name Dot2
+xpos 435
+ypos -722
+}
+Grade {
+multiply 0
+add {-1.325948834 11.65382195 0 1}
+black_clamp false
+name picker
+xpos 401
+ypos -637
+}
+Dot {
+name Dot1
+xpos 435
+ypos -535
+}
+Shuffle {
+blue black
+alpha black
+name Shuffle1
+label "\[value in]-->\[value out]"
+xpos 279
+ypos -545
+}
+push $Nd4cb5120
+Unpremult {
+name Unpremult21
+xpos 139
+ypos -612
+}
+Merge2 {
+inputs 2
+operation from
+name Merge170
+xpos 139
+ypos -539
+}
+Multiply {
+channels rgb
+value 0.1
+name Scale
+xpos 135
+ypos -501
+}
+Add {
+channels {rgba.red rgba.green -rgba.blue none}
+value 0.5
+name Add27
+xpos 135
+ypos -446
+}
+Expression {
+expr0 "r>1 || r<0 || g>1 || g<0 ? 0 : r"
+expr1 "r>1 || r<0 || g>1 || g<0 ? 0 : g"
+name Expression18
+selected true
+xpos 135
+ypos -391
+}
+Input {
+inputs 0
+name Texture
+xpos -83
+ypos -540
+number 1
+}
+STMap {
+inputs 2
+channels rgba
+uv rgb
+name STMap4
+xpos -83
+ypos -391
+}
+set N9e709970 [stack 0]
+push $N9e709970
+push $Nce9c7660
+Merge2 {
+inputs 2
+name Merge1
+xpos 32
+ypos -325
+}
+Switch {
+inputs 2
+which 1
+name Switch1
+xpos -83
+ypos -267
+}
+Output {
+name Output1
+xpos -83
+ypos -210
+}
+end_group

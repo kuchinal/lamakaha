@@ -1,0 +1,17 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Expression {
+ expr0 isnan(r)?r(x+offset.x,y+offset.y):r
+ expr1 isnan(g)?g(x+offset.x,y+offset.y):g
+ expr2 isnan(b)?b(x+offset.x,y+offset.y):b
+ expr3 isnan(a)?a(x+offset.x,y+offset.y):a
+ name NanFix
+ label "\n"
+ note_font_size 14
+ selected true
+ xpos -340
+ ypos -64
+ addUserKnob {20 Offset}
+ addUserKnob {12 offset}
+}

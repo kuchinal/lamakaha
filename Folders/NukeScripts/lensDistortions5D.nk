@@ -1,0 +1,116 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+LensDistortion {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 9 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 -0.06744946539
+ distortion2 0.02968276851
+ distortionCenter {-0.004774708766 -0.003512971336}
+ invertDistortion true
+ cardScale {0.9629788399 0.9629788399 1}
+ a -0.04550788924
+ b 0.05169241503
+ c 0.04771051556
+ gridType "Thin Line"
+ alignmentCorrection {1.011432886 0.009618716314 -1.390316356e-006 -0.009467429481 1.026345372 8.391145457e-006 -0.6688245535 -20.00897598 1}
+ name canon_24mm
+ selected true
+ xpos 70
+ ypos 516
+}
+push 0
+LensDistortion {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 9 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 -0.04915389791
+ distortion2 0.02158491872
+ distortionCenter {0.007540374994 0.00956061855}
+ invertDistortion true
+ cardScale {1.028339863 1.028339863 1}
+ a 0.03812150285
+ b -0.0419203788
+ c -0.03799913451
+ gridType "Thin Line"
+ alignmentCorrection {1.063592196 0.01798132434 2.269833203e-005 -0.008821969852 1.043921828 2.205888222e-006 -27.43168831 -33.06520081 1}
+ name canon_28mm
+ selected true
+ xpos 180
+ ypos 514
+}
+push 0
+LensDistortion {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 9 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 -0.01948656887
+ distortion2 0.009338569827
+ distortionCenter {0.004649116192 0.006913453341}
+ invertDistortion true
+ cardScale {1.010249496 1.010249496 1}
+ a 0.0140491575
+ b -0.01128274295
+ c -0.0190970134
+ gridType "Thin Line"
+ alignmentCorrection {1.025287986 0.01243117917 5.239792699e-006 -0.0129047595 1.021933317 2.786952564e-006 -9.837285042 -23.50946236 1}
+ name canon_35mm
+ selected true
+ xpos 290
+ ypos 512
+}
+push 0
+LensDistortion {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 9 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 -0.007661086973
+ distortion2 0.008816081099
+ distortionCenter {0.01085608918 -0.001645272598}
+ invertDistortion true
+ cardScale {0.9988461733 0.9988461733 1}
+ a 0.01794565469
+ b -0.01210855786
+ c -0.008089432493
+ gridType "Thin Line"
+ alignmentCorrection {0.979475677 -0.004838789813 -1.074099055e-005 -0.009758093394 0.9894750118 -8.416215678e-006 2.246324062 1.042661786 1}
+ name canon_50mm
+ selected true
+ xpos 400
+ ypos 510
+}
+push 0
+LensDistortion {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 9 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 -0.01716981456
+ distortion2 0.00365318195
+ distortionCenter {0.02601466887 0.08137004077}
+ invertDistortion true
+ cardScale {1.013780832 1.013780832 1}
+ a 0.006986267865
+ b -0.0179640837
+ c -0.004181277007
+ gridType "Thin Line"
+ alignmentCorrection {1.016362667 0.004896819126 4.868570159e-006 -0.009410785511 1.011695027 2.11309839e-006 0.8505603075 -9.506673813 1}
+ name canon_Prime_50mm
+ selected true
+ xpos 710
+ ypos 507
+}
+push 0
+LensDistortion {
+ serializeKnob ""
+ serialiseKnob "22 serialization::archive 9 0 0 0 0 0 0 0 0 0 0 0 0"
+ distortion1 0.005114882253
+ distortion2 0.007211113814
+ distortionCenter {0.01057953946 -0.06833292544}
+ invertDistortion true
+ cardScale {0.9875940681 0.9875940681 1}
+ a 0.01745310798
+ b -0.004382543731
+ c -0.003666645847
+ gridType "Thin Line"
+ alignmentCorrection {0.9737882018 -0.002235252876 -1.865763988e-005 -0.02084413916 0.9972036481 -1.809156174e-006 1.200798512 0.1170856133 1}
+ name canon_70mm
+ selected true
+ xpos 510
+ ypos 510
+}

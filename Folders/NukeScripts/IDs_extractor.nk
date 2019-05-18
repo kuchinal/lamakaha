@@ -1,0 +1,66 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+Group {
+ name Group59
+ knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0xb18b00ff
+ label rgb
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ selected true
+ xpos -502
+ ypos -126
+ addUserKnob {20 User}
+ addUserKnob {11 chan l Channels}
+ chan rgb
+ addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+ addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+ Input {
+  inputs 0
+  name Input1
+  selected true
+  xpos 563
+  ypos -311
+ }
+ Remove {
+  operation keep
+  channels rgb
+  name Remove49
+  label dsadsdasdsa
+  xpos 563
+  ypos -267
+ }
+ Shuffle {
+  in rgb
+  out rgb
+  name shufffle
+  autolabel "nuke.thisNode()\['label'].value()"
+  note_font_size 20
+  xpos 563
+  ypos -200
+  addUserKnob {20 User}
+  addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+ }
+ Remove {
+  operation keep
+  channels rgb
+  name Remove1
+  label "\[value operation] \[value channels]"
+  xpos 563
+  ypos -166
+ }
+ Output {
+  name Output1
+  xpos 563
+  ypos -111
+ }
+ Viewer {
+  input_process false
+  name Viewer1
+  xpos 822
+  ypos -302
+ }
+end_group

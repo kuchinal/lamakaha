@@ -1,0 +1,341 @@
+#! C:/Program Files/Nuke6.3v8/Nuke6.3.exe -nx
+version 6.3 v8
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="1920" y="120" w="1920" h="1080" fullscreen="1" screen="0">
+        <splitter orientation="1">
+            <split size="721"/>
+            <splitter orientation="2">
+                <split size="670"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="380"/>
+                <dock id="" activePageId="com.ohufx.MassivePanel">
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                    <page id="Script Editor.1"/>
+                    <page id="com.ohufx.SearchReplace"/>
+                    <page id="com.ohufx.MassivePanel"/>
+                </dock>
+            </splitter>
+            <split size="1195"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+            </dock>
+        </splitter>
+    </window>
+    <window x="0" y="0" w="1920" h="1200" fullscreen="1" screen="1">
+        <splitter orientation="2">
+            <split size="1200"/>
+            <dock id="" hideTitles="1" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name H:/.nuke/GeneralSetups/particles.nk
+ frame 1049
+ first_frame 1001
+ last_frame 1072
+ fps 25
+ format "2048 1556 0 0 2048 1556 2 BCR_scan_2K (anamorphic)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ proxySetting always
+}
+ParticleCurve {
+ inputs 0
+ name ParticleCurve1
+ xpos 463
+ ypos 136
+}
+ParticleSpeedLimit {
+ inputs 0
+ minimum 0.01
+ maximum 0.02
+ seed 3
+ name ParticleSpeedLimit1
+ xpos 608
+ ypos 169
+}
+ParticleDrag {
+ inputs 0
+ drag 0.5
+ min_age 0.2
+ max_age 4
+ name ParticleDrag1
+ xpos 477
+ ypos 248
+}
+ParticleExpression {
+ inputs 0
+ velexpr life<2?1:0
+ velexpr_onlynew true
+ name ParticleExpression1
+ xpos 600
+ ypos 119
+}
+ParticleTurbulence {
+ inputs 0
+ strength {{random(0.001,0.002)/95 i} {random(0.001,0.003)/100 i} {random(0.001,0.002)/100 i}}
+ name ParticleTurbulence1
+ xpos 346
+ ypos 164
+}
+ParticleSpeedLimit {
+ maximum 0.001
+ name ParticleSpeedLimit2
+ xpos 346
+ ypos 267
+}
+ParticleBounce {
+ out_friction 1
+ in_friction 1
+ object sphere
+ region sphere
+ uniform_scale 5
+ name ParticleBounce2
+ xpos 346
+ ypos 402
+}
+ParticleBounce {
+ inputs 0
+ name ParticleBounce1
+ xpos 2
+ ypos -178
+}
+Ramp {
+ inputs 0
+ name Ramp1
+ xpos -33
+ ypos -181
+}
+Bezier {
+ inputs 0
+ blur_type smooth
+ points {{
+{1050.3 906.6 7.6 -0.21 8.8}
+{1056 884.6 12.3 -2.29 19.4}
+{1063.2 848.8 27.9 -3.4 6.5}
+{1060.8 816.8 10.5 -2.06 9.7}
+{1049.2 837.4 3 -3.03 5.3}
+{1036.4 815.8 6 -4.4 8.2}
+{1037.4 847 7.8 3.66 37.6}
+{1040.9 865.2 3.7 1.03 9.7}
+{1043.5 883.2 23.8 2.23 7.7}
+}}
+ shape {}
+ center {1024 778}
+ name Bezier1
+ xpos -357
+ ypos -268
+ addUserKnob {20 Geo}
+ addUserKnob {4 type M {circle square oval rectangle triangle}}
+ addUserKnob {32 set -STARTLINE T BezierGeoProc}
+}
+Crop {
+ box {1017.5 806 1081.5 916}
+ reformat true
+ crop false
+ name Crop1
+ xpos -357
+ ypos -242
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat1
+ xpos -423
+ ypos -136
+}
+set Naebd120 [stack 0]
+Card2 {
+ rotate {-90 0 0}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card2
+ xpos -423
+ ypos -66
+}
+Card2 {
+ inputs 0
+ rotate {-90 0 0}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ xpos -217
+ ypos -38
+}
+push 0
+ParticleEmitter {
+ inputs 3
+ start_frame 1000
+ emit_from faces
+ rate {{curve x1000 0 100 0}}
+ lifetime 5000
+ velocity 0
+ size_variation 2
+ name ParticleEmitter2
+ xpos -375
+ ypos 40
+}
+ParticleExpression {
+ colexpr_onlynew true
+ sizeexpr "x(size) "
+ sizeexpr_onlynew true
+ posexpr "(randomv - 0.005) "
+ posexpr_onlynew true
+ velexpr "vel*(randomv - 0.5) *10"
+ velexpr_onlynew true
+ name ParticleExpression2
+ xpos -375
+ ypos 109
+}
+set Naebae10 [stack 0]
+ParticleCurve {
+ curves {r {}
+   g {}
+   b {}
+   a {curve l x0.01252219453 0.9296019673 x0.0437832959 0.9597014785 x0.07699821889 0.9980099201 x0.09262876213 1.00348258 x0.1180284023 0.9405472279 x0.1395204067 0.7681591511 x0.190319702 0.5492537022 x0.2215808183 0.6997512579 x0.2274422497 0.7626865506 x0.2508880496 0.6860696077 x0.2645648122 0.7517412901 x0.2958258986 0.7325870395 x0.336856097 0.7544776201 x0.3583480716 0.7927860022 x0.3622557223 0.7517412901 x0.3935168386 0.5930348635 x0.4286855459 0.4151741266 x0.4716695547 0.3057214022 x0.4892539382 0.2865672112 x0.5048844814 0.3932836056 x0.5361455679 0.5875622034 x0.5849910378 0.7845771313 0.9213929772 x0.6377441287 0.844776094 x0.6475132108 0.7024875879 x0.6709590554 0.5328358412 x0.7100354433 0.3878109455 x0.7452041507 0.2810945511 x0.7764652967 0.2455224395 x0.7979573011 0.2865672112 x0.8214030862 0.4124377966 x0.850710392 0.6149253845 x0.8917405605 0.7708954811 x0.9054173231 0.7763681412 x0.9288631678 0.5820895433 x0.9523089528 0.4097015262 x0.9542627931 0.2728856206 0.374129355 x1 1}
+   size {}
+   mass {}}
+ name ParticleCurve2
+ xpos -189
+ ypos 162
+}
+ParticleTurbulence {
+ strength {1e-006 1e-006 1e-006}
+ name ParticleTurbulence3
+ xpos -152
+ ypos 239
+}
+ParticleTurbulence {
+ strength {1e-005 1e-005 1e-005}
+ probability 0.1
+ name ParticleTurbulence4
+ xpos -152
+ ypos 302
+}
+ParticleTurbulence {
+ strength {{sin(frame/3)/100 i} {cos(frame/2)/100 i} {sin(frame/4)/120 i}}
+ probability 0.01
+ name ParticleTurbulence5
+ xpos -152
+ ypos 359
+}
+ParticleTurbulence {
+ strength {{"0.012 * abs(sin(frame/2)) *variable" i} {"0.005 * sin(frame/3) * variable" i} {"0.012 * abs(sin(frame)) * variable" i}}
+ name ParticleTurbulence2
+ xpos -152
+ ypos 441
+ addUserKnob {20 User}
+ addUserKnob {7 variable}
+ variable 1e-007
+}
+push $Naebae10
+ParticleMotionAlign {
+ name ParticleMotionAlign3
+ xpos -375
+ ypos 181
+}
+ParticleTurbulence {
+ strength {{sin(frame/3)/100*yy i} {cos(frame/2)/100*yy i} {sin(frame/4)/120*yy i}}
+ probability 0.01
+ name ParticleTurbulence6
+ xpos -375
+ ypos 246
+ addUserKnob {20 User}
+ addUserKnob {7 yy R 0 10}
+ yy 2
+}
+set Naebc460 [stack 0]
+ParticleSpeedLimit {
+ maximum 0.001
+ probability 0.2
+ name ParticleSpeedLimit3
+ xpos -186
+ ypos 500
+}
+Camera2 {
+ inputs 0
+ translate {0 0 12.18000031}
+ name Camera1
+ xpos -556
+ ypos 499
+}
+push $Naebc460
+ParticleTurbulence {
+ strength {{sin(frame/3)/100*yy i} {cos(frame/2)/100*yy i} {sin(frame/4)/120*yy i}}
+ probability 0.5
+ name ParticleTurbulence7
+ xpos -386
+ ypos 326
+ addUserKnob {20 User}
+ addUserKnob {7 yy R 0 10}
+ yy 1
+}
+set N16b2b500 [stack 0]
+Scene {
+ name Scene1
+ xpos -376
+ ypos 423
+}
+push 0
+ScanlineRender {
+ inputs 3
+ output_motion_vectors_type accurate
+ name ScanlineRender1
+ xpos -386
+ ypos 533
+}
+push $Naebd120
+Sphere {
+ rows 5
+ columns 5
+ scaling {0.1 0.2 0.2}
+ name Sphere1
+ xpos -317
+ ypos -96
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ xpos -225
+ ypos -275
+}
+ParticleSettings {
+ inputs 0
+ steps_per_frame 10
+ name ParticleSettings1
+ xpos -7
+ ypos 341
+}
+push $N16b2b500
+Viewer {
+ frame 1049
+ input_process false
+ name Viewer1
+ xpos 0
+ ypos 6
+}

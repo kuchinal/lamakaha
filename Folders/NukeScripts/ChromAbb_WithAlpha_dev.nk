@@ -1,0 +1,2841 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Roto {
+cliptype none
+curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x4486e000 x442da000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc306c1e8}
+        {x43d33ffa x44620002}
+        {x4306c1e8}
+        {0 xc2b7e928}
+        {x44269ffd x4485d001}
+        {0 x42b7e930}
+        {x4306c1e8}
+        {x43d33ffa x449aa001}
+        {xc286c1e8}
+        {x42309f10 x41f10b80}
+        {x4295ffff x44aa371c}
+        {xc2309f0c xc1f10b80}
+        {0 x4237e920}
+        {x43327ff4 x4485d001}
+        {0 xc2b7e928}}}
+      {cc
+       {f 8192}
+       {p
+        {xc306c1e8}
+        {xc28fa2e8 xc29345d8}
+        {x4306c1e8}
+        {0 xc2b7e928}
+        {}
+        {0 x42b7e930}
+        {x4306c1e8}
+        {}
+        {xc286c1e8}
+        {x42309f10 x41f10b80}
+        {}
+        {xc2309f0c xc1f10b80}
+        {0 x4237e920}
+        {}
+        {0 xc2b7e928}}}}
+     {t x447f0000 x44446000}
+     {a osw 1 osf 0 str 1 spx x4486e000 spy x442da000 sb 1 ltn x447b8000 ltm x447b8000 tt x40e00000}}}}}}
+toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+toolbar_brush_hardness 0.200000003
+toolbar_openspline_width 1
+toolbar_source_transform_scale {1 1}
+toolbar_source_transform_center {1079 694.5}
+colorOverlay {0 0 0 0}
+lifetime_type "all frames"
+lifetime_start 1006
+lifetime_end 1006
+motionblur_shutter_offset_type centred
+openspline_width 1
+source_black_outside true
+name Roto1
+selected true
+xpos 9469
+ypos 9435
+hide_input true
+}
+Dot {
+name Dot451
+selected true
+xpos 9503
+ypos 9521
+}
+CheckerBoard2 {
+inputs 0
+name CheckerBoard4
+selected true
+xpos 9572
+ypos 9436
+postage_stamp false
+}
+Merge2 {
+inputs 2
+operation mask
+bbox B
+name Merge17
+selected true
+xpos 9572
+ypos 9517
+}
+Dot {
+name Dot450
+selected true
+xpos 9606
+ypos 10061
+}
+set N8dbce4d0 [stack 0]
+Dot {
+name Dot10
+selected true
+xpos 9257
+ypos 10061
+}
+set Ne478e1c0 [stack 0]
+Dot {
+name Dot9
+selected true
+xpos 8934
+ypos 10061
+}
+set Nd8720430 [stack 0]
+Dot {
+name Dot455
+selected true
+xpos 8788
+ypos 10061
+}
+Radial {
+replace true
+area {{size} {size} {width-size} {height-size}}
+softness 0.5
+name Radial1
+selected true
+xpos 8754
+ypos 10118
+addUserKnob {20 User}
+addUserKnob {7 size R -1000 1000}
+size -80
+}
+Invert {
+channels rgba
+name Invert13
+selected true
+xpos 8754
+ypos 10144
+}
+Dot {
+name Dot462
+selected true
+xpos 8788
+ypos 10182
+}
+set N8e75ded0 [stack 0]
+Dot {
+name Dot454
+selected true
+xpos 8788
+ypos 10243
+}
+set Nebda31d0 [stack 0]
+Dot {
+name Dot453
+selected true
+xpos 8788
+ypos 10290
+}
+push $Nebda31d0
+push $Nd8720430
+Group {
+inputs 2
+name Itransform
+tile_color 0x81275aff
+note_font "Verdana Bold Bold Bold"
+note_font_size 12
+note_font_color 0xffffffff
+selected true
+xpos 8898
+ypos 10239
+addUserKnob {20 "" l Transform}
+addUserKnob {41 matrix T Transform1.matrix}
+addUserKnob {41 translate T Transform1.translate}
+addUserKnob {41 rotate T Transform1.rotate}
+addUserKnob {41 scale T Transform1.scale}
+addUserKnob {41 skewX l "skew X" T Transform1.skewX}
+addUserKnob {41 skewY l "skew Y" T Transform1.skewY}
+addUserKnob {41 skew +INVISIBLE T Transform1.skew}
+addUserKnob {41 center T Transform1.center}
+addUserKnob {22 setCenter -STARTLINE T "n = nuke.thisGroup()\nw= n.width()\nh=n.height()\nprint w,h\nn\['center'].setValue(\[w/2,h/2])"}
+addUserKnob {41 filter T Transform1.filter}
+addUserKnob {41 clamp T Transform1.clamp}
+addUserKnob {6 crop_1 l crop -STARTLINE}
+crop_1 true
+addUserKnob {41 crop l "black outside" +INVISIBLE T Transform1.crop}
+addUserKnob {41 clip l "knob crop \$value" +INVISIBLE T Transform1.clip}
+addUserKnob {14 AdjBBox1_numpixels l "Add Pixels" R 0 100}
+AdjBBox1_numpixels 50
+}
+Transform {
+inputs 0
+scale 0.995
+center {1024 584}
+black_outside false
+name Transform1
+label "expresison link this\nto avoid st map overlay"
+xpos -72
+ypos -136
+}
+Input {
+inputs 0
+name ctrlMask
+xpos -40
+ypos -51
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle1
+xpos -40
+ypos -24
+}
+Input {
+inputs 0
+name img
+xpos -385
+ypos -227
+}
+set N13da6580 [stack 0]
+Remove {
+name Remove1
+xpos -210
+ypos -232
+}
+AdjBBox {
+numpixels {{parent.AdjBBox1_numpixels.w} {parent.AdjBBox1_numpixels.h}}
+name AdjBBox1
+xpos -210
+ypos -196
+}
+Expression {
+expr0 x
+expr1 y
+name Expression1
+xpos -210
+ypos -140
+}
+set N8d5603c0 [stack 0]
+Dot {
+name Dot2
+xpos -286
+ypos -136
+}
+Transform {
+translate {{parent.Transform1.translate.main} {parent.Transform1.translate.main}}
+rotate {{parent.Transform1.rotate.main}}
+scale {{parent.Transform1.scale.main}}
+center {{parent.Transform1.center.main} {parent.Transform1.center.main}}
+filter {{Transform1.filter}}
+clamp {{parent.Transform1.clamp.main}}
+black_outside {{parent.Transform1.black_outside.main}}
+motionblur {{parent.Transform1.motionblur.main}}
+shutter {{parent.Transform1.shutter.main}}
+shutteroffset {{Transform1.shutteroffset}}
+shuttercustomoffset {{parent.Transform1.shuttercustomoffset.main}}
+name Transform2
+selected true
+xpos -320
+ypos -72
+}
+push $N8d5603c0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -210
+ypos -72
+}
+Merge2 {
+inputs 2
+operation multiply
+name Merge2
+xpos -210
+ypos -24
+}
+set N8d0ce3c0 [stack 0]
+Dot {
+name Dot1
+xpos -270
+ypos -21
+}
+Dot {
+name Dot3
+xpos -270
+ypos 159
+}
+push $N13da6580
+Dot {
+name Dot4
+xpos -351
+ypos 48
+}
+set Ne411aa60 [stack 0]
+Copy {
+inputs 2
+from0 rgba.red
+to0 rgba.red
+from1 rgba.green
+to1 rgba.green
+name Copy2
+xpos -385
+ypos 144
+}
+IDistort {
+channels none
+name IDistort1
+xpos -385
+ypos 192
+}
+push $N8d0ce3c0
+push $Ne411aa60
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy1
+xpos -210
+ypos 33
+}
+IDistort {
+uv forward
+name IDistort2
+xpos -210
+ypos 88
+}
+set N790cabf0 [stack 0]
+Remove {
+channels none
+name Remove2
+xpos -210
+ypos 124
+}
+Copy {
+inputs 2
+from0 -rgba.alpha
+to0 -rgba.alpha
+name Copy3
+xpos -210
+ypos 192
+}
+set Neacef2c0 [stack 0]
+Crop {
+box {0 0 {input.width} {input.height}}
+name Crop1
+xpos -340
+ypos 270
+}
+push $Neacef2c0
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos -210
+ypos 346
+disable {{!parent.crop_1}}
+}
+Output {
+name Output1
+xpos -210
+ypos 418
+}
+push $N790cabf0
+Viewer {
+input_process false
+name Viewer1
+xpos 70
+ypos -9
+hide_input true
+}
+end_group
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 mask.a
+name Copy1
+selected true
+xpos 8900
+ypos 10280
+}
+Dot {
+name Dot452
+selected true
+xpos 8934
+ypos 10331
+}
+set N2ecf2e50 [stack 0]
+push $N2ecf2e50
+Group {
+inputs 2
+name iFilter
+help "gizmo an py code by Pau Rocher Castellano\n--> bikura@gmail.com\nAny comments, suggestions, ... welcome!!\nThanks!!\n\n1. Plug an image\n2. Plug a Control channel in 'Mask'\n3. Choose your filter\n4. Set number of steps\n5. Click 'Regenerate'\n6. Set 'Amount' and 'Soften' values\n\nIn the 'filterSettings' tab you can modify the default settings for the chosen filter."
+selected true
+xpos 8900
+ypos 10372
+addUserKnob {20 iFilter}
+addUserKnob {41 from0 l "control channel" t "This channel controlls the amount of the effect." T Copyyy.from0}
+addUserKnob {6 invertMask l invert t "lennahc lortnoc eht strevnI" -STARTLINE}
+addUserKnob {6 crop l "crop to mask's BBox" t "When enabled gives faster results if the image BBox size is insanely big ...\n\nWARNING: this enabled might create artifacts!!!" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {7 Amount t Amount R -100 100}
+Amount 10
+addUserKnob {7 Soften t "Softens the merge between steps" R 0 100}
+Soften 5
+addUserKnob {26 ""}
+addUserKnob {4 Filter t "Choose the filter to use" M {dilerFast dilerFilter dilerBlur blur defocus "" ""}}
+Filter blur
+addUserKnob {7 Steps t "Number of steps" R 1 100}
+Steps 10
+addUserKnob {22 regenerate t "Sets up the amount of steps in the filter" T "filter = nuke.Enumeration_Knob.value(nuke.thisNode().knob (\"Filter\"))\nsteps = nuke.Array_Knob.value(nuke.thisNode().knob('Steps'))\npreviousAmount = nuke.Array_Knob.value(nuke.thisNode().knob('previousAmount'))\n\niFilter03.iFilter03 (filter, steps, previousAmount)\n\nnuke.thisNode().knob('previousAmount').setValue(steps)\n" +STARTLINE}
+addUserKnob {1 info t "information about the filter"}
+info ".:  Current filter: blur with 10 steps  (Click button to update ...) :."
+addUserKnob {26 ""}
+addUserKnob {7 previousAmount l INVISIBLE +INVISIBLE}
+previousAmount 10
+addUserKnob {20 filterSettings t "Specific filter settings"}
+addUserKnob {4 iFilterFilter l filter +INVISIBLE M {box triangle quadratic gaussian ""}}
+addUserKnob {7 iFilterBlur l blur +INVISIBLE}
+addUserKnob {3 iFilterQuality l quality +INVISIBLE}
+iFilterQuality 15
+addUserKnob {4 iFilterBlurFilter M {box triangle quadratic gaussian}}
+addUserKnob {3 iFilterBlurQuality}
+iFilterBlurQuality 15
+addUserKnob {7 iFilterDefAspect l "aspect ratio" +INVISIBLE R 0 5}
+iFilterDefAspect 1
+addUserKnob {7 iFilterDefScaling l scaling +INVISIBLE R 1 10}
+iFilterDefScaling 1
+addUserKnob {3 iFilterDefQuality l quality +INVISIBLE}
+iFilterDefQuality 20
+addUserKnob {4 iFilterDefMethod l method +INVISIBLE M {accelerated "full precision"}}
+}
+Input {
+inputs 0
+name mask
+xpos 100
+ypos -545
+number 1
+}
+set N2f895bc0 [stack 0]
+push $N2f895bc0
+Copy {
+inputs 2
+from0 mask.a
+to0 rgba.red
+name Copyyy
+xpos 100
+ypos -493
+}
+Invert {
+name Invert1
+xpos 100
+ypos -443
+disable {{1-parent.invertMask i}}
+}
+Dot {
+name puntazoMask
+xpos 134
+ypos -328
+}
+set N2f8e5760 [stack 0]
+Expression {
+temp_name0 r9
+temp_expr0 step(r,0.9)
+expr0 r9
+name idilerExpr9
+xpos 900
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur9
+label "\[value size]"
+xpos 900
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r8
+temp_expr0 step(r,0.8)
+expr0 r8
+name idilerExpr8
+xpos 800
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur8
+label "\[value size]"
+xpos 800
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r7
+temp_expr0 step(r,0.7)
+expr0 r7
+name idilerExpr7
+xpos 700
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur7
+label "\[value size]"
+xpos 700
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r6
+temp_expr0 step(r,0.6)
+expr0 r6
+name idilerExpr6
+xpos 600
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur6
+label "\[value size]"
+xpos 600
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r5
+temp_expr0 step(r,0.5)
+expr0 r5
+name idilerExpr5
+xpos 500
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur5
+label "\[value size]"
+xpos 500
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r4
+temp_expr0 step(r,0.4)
+expr0 r4
+name idilerExpr4
+xpos 400
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur4
+label "\[value size]"
+xpos 400
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r3
+temp_expr0 step(r,0.3)
+expr0 r3
+name idilerExpr3
+xpos 300
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur3
+label "\[value size]"
+xpos 300
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r2
+temp_expr0 step(r,0.2)
+expr0 r2
+name idilerExpr2
+xpos 200
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur2
+label "\[value size]"
+xpos 200
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r1
+temp_expr0 step(r,0.1)
+expr0 r1
+name idilerExpr1
+xpos 100
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur1
+label "\[value size]"
+xpos 100
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r10
+temp_expr0 step(r,1.0)
+expr0 r10
+name idilerExpr10
+xpos -10
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur10
+label "\[value size]"
+xpos -10
+ypos 150
+}
+Input {
+inputs 0
+name Image
+xpos -100
+ypos -543
+}
+Shuffle {
+name Shuffle1
+xpos -100
+ypos -509
+}
+set N2f7ba490 [stack 0]
+Crop {
+box {{puntazoMask.bbox.x-Amount i} {puntazoMask.bbox.y-Amount i} {puntazoMask.bbox.r+Amount i} {puntazoMask.bbox.t+Amount i}}
+name iFilterCrop
+xpos -100
+ypos -475
+disable {{1-parent.crop i}}
+}
+Dot {
+name puntazo
+xpos -66
+ypos -326
+}
+set N2f7d1f00 [stack 0]
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*1}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode1
+label "\[value size]"
+xpos 100
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix1
+xpos 100
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*2}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode2
+label "\[value size]"
+xpos 200
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix2
+xpos 200
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*3}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode3
+label "\[value size]"
+xpos 300
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix3
+xpos 300
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*4}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode4
+label "\[value size]"
+xpos 400
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix4
+xpos 400
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*5}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode5
+label "\[value size]"
+xpos 500
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix5
+xpos 500
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*6}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode6
+label "\[value size]"
+xpos 600
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix6
+xpos 600
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*7}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode7
+label "\[value size]"
+xpos 700
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix7
+xpos 700
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*8}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode8
+label "\[value size]"
+xpos 800
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix8
+xpos 800
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*9}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode9
+label "\[value size]"
+xpos 900
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix9
+xpos 900
+ypos 550
+}
+push $N2f7d1f00
+Blur {
+size {{parent.Amount/10*10}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode10
+label "\[value size]"
+xpos 1000
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix10
+selected true
+xpos 1000
+ypos 550
+}
+set N2da83430 [stack 0]
+Output {
+name Out
+xpos -164
+ypos 1035
+}
+push $N2f8e5760
+Expression {
+temp_name0 r33
+temp_expr0 step(r,1.0)
+expr0 r33
+name idilerExpr101
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur101
+xpos -10
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r47
+temp_expr0 step(r,1.0)
+expr0 r47
+name idilerExpr118
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur118
+xpos -10
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r40
+temp_expr0 step(r,1.0)
+expr0 r40
+name idilerExpr128
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur128
+xpos -10
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r32
+temp_expr0 step(r,1.0)
+expr0 r32
+name idilerExpr130
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur130
+xpos -10
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r52
+temp_expr0 step(r,1.0)
+expr0 r52
+name idilerExpr152
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur152
+xpos -10
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r68
+temp_expr0 step(r,1.0)
+expr0 r68
+name idilerExpr104
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur104
+xpos -10
+ypos 150
+}
+push $N2f8e5760
+Expression {
+temp_name0 r100
+temp_expr0 step(r,1.0)
+expr0 r100
+name idilerExpr117
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur117
+xpos -10
+ypos 150
+}
+push $N2da83430
+push $N2f7ba490
+Dot {
+name Dot1
+xpos -130
+ypos -467
+}
+Rectangle {
+cliptype none
+area {{puntazoMask.bbox.x i} {puntazoMask.bbox.y i} {puntazoMask.bbox.r i} {puntazoMask.bbox.t i}}
+color 0
+name Rectangle1
+xpos -164
+ypos -422
+}
+Merge2 {
+inputs 2
+bbox B
+name iFilterFinalMerge
+xpos -164
+ypos 863
+}
+push $N2f7d1f00
+Switch {
+inputs 2
+which {{parent.crop i}}
+name iFilterSwitch
+xpos -155
+ypos 967
+}
+end_group
+Dot {
+name Dot449
+selected true
+xpos 8934
+ypos 10639
+}
+ColorBars {
+inputs 0
+name ColorBars1
+selected true
+xpos 10029
+ypos 9458
+}
+Dot {
+name Dot70
+selected true
+xpos 10063
+ypos 10463
+}
+set Nde8e7e60 [stack 0]
+Dot {
+name Dot114
+selected true
+xpos 9828
+ypos 10463
+}
+Dot {
+name Dot11
+selected true
+xpos 9828
+ypos 10532
+}
+set Ne49c1f20 [stack 0]
+Dot {
+name Dot406
+selected true
+xpos 9408
+ypos 10532
+}
+set Ne6bdfc60 [stack 0]
+Dot {
+name Dot13
+selected true
+xpos 9151
+ypos 10532
+}
+Merge2 {
+inputs 2
+name Merge146
+selected true
+xpos 9117
+ypos 10635
+}
+Shuffle {
+green black
+blue black
+alpha black
+name Shuffle1
+tile_color 0x93000000
+selected true
+xpos 9117
+ypos 10661
+}
+Dot {
+name Dot378
+selected true
+xpos 9151
+ypos 10910
+}
+push $N8e75ded0
+Dot {
+name Dot463
+selected true
+xpos 9111
+ypos 10182
+}
+set N10c2c210 [stack 0]
+Dot {
+name Dot456
+selected true
+xpos 9111
+ypos 10226
+}
+set Nee9ed70 [stack 0]
+Dot {
+name Dot457
+selected true
+xpos 9111
+ypos 10273
+}
+push $Nee9ed70
+push $Ne478e1c0
+Group {
+inputs 2
+name Itransform1
+tile_color 0x81275aff
+note_font "Verdana Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xffffffff
+selected true
+xpos 9223
+ypos 10222
+addUserKnob {20 "" l Transform}
+addUserKnob {41 matrix T Transform1.matrix}
+addUserKnob {41 translate T Transform1.translate}
+addUserKnob {41 rotate T Transform1.rotate}
+addUserKnob {41 scale T Transform1.scale}
+addUserKnob {41 skewX l "skew X" T Transform1.skewX}
+addUserKnob {41 skewY l "skew Y" T Transform1.skewY}
+addUserKnob {41 skew +INVISIBLE T Transform1.skew}
+addUserKnob {41 center T Transform1.center}
+addUserKnob {22 setCenter -STARTLINE T "n = nuke.thisGroup()\nw= n.width()\nh=n.height()\nprint w,h\nn\['center'].setValue(\[w/2,h/2])"}
+addUserKnob {41 filter T Transform1.filter}
+addUserKnob {41 clamp T Transform1.clamp}
+addUserKnob {6 crop_1 l crop -STARTLINE}
+crop_1 true
+addUserKnob {41 crop l "black outside" +INVISIBLE T Transform1.crop}
+addUserKnob {41 clip l "knob crop \$value" +INVISIBLE T Transform1.clip}
+addUserKnob {14 AdjBBox1_numpixels l "Add Pixels" R 0 100}
+AdjBBox1_numpixels 50
+}
+Transform {
+inputs 0
+scale 1.005
+center {1024 584}
+black_outside false
+name Transform1
+label "expresison link this\nto avoid st map overlay"
+xpos -72
+ypos -136
+}
+Input {
+inputs 0
+name ctrlMask
+xpos -40
+ypos -51
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle1
+xpos -40
+ypos -24
+}
+Input {
+inputs 0
+name img
+xpos -385
+ypos -227
+}
+set N571ed9b0 [stack 0]
+Remove {
+name Remove1
+xpos -210
+ypos -232
+}
+AdjBBox {
+numpixels {{parent.AdjBBox1_numpixels.w} {parent.AdjBBox1_numpixels.h}}
+name AdjBBox1
+xpos -210
+ypos -196
+}
+Expression {
+expr0 x
+expr1 y
+name Expression1
+xpos -210
+ypos -140
+}
+set Nc8c19760 [stack 0]
+Dot {
+name Dot2
+xpos -286
+ypos -136
+}
+Transform {
+translate {{parent.Transform1.translate.main} {parent.Transform1.translate.main}}
+rotate {{parent.Transform1.rotate.main}}
+scale {{parent.Transform1.scale.main}}
+center {{parent.Transform1.center.main} {parent.Transform1.center.main}}
+filter {{Transform1.filter}}
+clamp {{parent.Transform1.clamp.main}}
+black_outside {{parent.Transform1.black_outside.main}}
+motionblur {{parent.Transform1.motionblur.main}}
+shutter {{parent.Transform1.shutter.main}}
+shutteroffset {{Transform1.shutteroffset}}
+shuttercustomoffset {{parent.Transform1.shuttercustomoffset.main}}
+name Transform2
+selected true
+xpos -320
+ypos -72
+}
+push $Nc8c19760
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -210
+ypos -72
+}
+Merge2 {
+inputs 2
+operation multiply
+name Merge2
+xpos -210
+ypos -24
+}
+set N2319a5e0 [stack 0]
+Dot {
+name Dot1
+xpos -270
+ypos -21
+}
+Dot {
+name Dot3
+xpos -270
+ypos 159
+}
+push $N571ed9b0
+Dot {
+name Dot4
+xpos -351
+ypos 48
+}
+set N2eaac540 [stack 0]
+Copy {
+inputs 2
+from0 rgba.red
+to0 rgba.red
+from1 rgba.green
+to1 rgba.green
+name Copy2
+xpos -385
+ypos 144
+}
+IDistort {
+channels none
+name IDistort1
+xpos -385
+ypos 192
+}
+push $N2319a5e0
+push $N2eaac540
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy1
+xpos -210
+ypos 33
+}
+IDistort {
+uv forward
+name IDistort2
+xpos -210
+ypos 88
+}
+set N2cfcb8e0 [stack 0]
+Remove {
+channels none
+name Remove2
+xpos -210
+ypos 124
+}
+Copy {
+inputs 2
+from0 -rgba.alpha
+to0 -rgba.alpha
+name Copy3
+xpos -210
+ypos 192
+}
+set N2cfaa420 [stack 0]
+Crop {
+box {0 0 {input.width} {input.height}}
+name Crop1
+xpos -340
+ypos 270
+}
+push $N2cfaa420
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos -210
+ypos 346
+disable {{!parent.crop_1}}
+}
+Output {
+name Output1
+xpos -210
+ypos 418
+}
+push $N2cfcb8e0
+Viewer {
+input_process false
+name Viewer1
+xpos 70
+ypos -9
+hide_input true
+}
+end_group
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 mask.a
+name Copy3
+selected true
+xpos 9223
+ypos 10263
+}
+Dot {
+name Dot458
+selected true
+xpos 9257
+ypos 10316
+}
+set N2d7fa7e0 [stack 0]
+push $N2d7fa7e0
+Group {
+inputs 2
+name iFilter1
+help "gizmo an py code by Pau Rocher Castellano\n--> bikura@gmail.com\nAny comments, suggestions, ... welcome!!\nThanks!!\n\n1. Plug an image\n2. Plug a Control channel in 'Mask'\n3. Choose your filter\n4. Set number of steps\n5. Click 'Regenerate'\n6. Set 'Amount' and 'Soften' values\n\nIn the 'filterSettings' tab you can modify the default settings for the chosen filter."
+selected true
+xpos 9223
+ypos 10357
+addUserKnob {20 iFilter}
+addUserKnob {41 from0 l "control channel" t "This channel controlls the amount of the effect." T Copyyy.from0}
+addUserKnob {6 invertMask l invert t "lennahc lortnoc eht strevnI" -STARTLINE}
+addUserKnob {6 crop l "crop to mask's BBox" t "When enabled gives faster results if the image BBox size is insanely big ...\n\nWARNING: this enabled might create artifacts!!!" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {7 Amount t Amount R -100 100}
+Amount 10
+addUserKnob {7 Soften t "Softens the merge between steps" R 0 100}
+Soften 5
+addUserKnob {26 ""}
+addUserKnob {4 Filter t "Choose the filter to use" M {dilerFast dilerFilter dilerBlur blur defocus "" ""}}
+Filter blur
+addUserKnob {7 Steps t "Number of steps" R 1 100}
+Steps 10
+addUserKnob {22 regenerate t "Sets up the amount of steps in the filter" T "filter = nuke.Enumeration_Knob.value(nuke.thisNode().knob (\"Filter\"))\nsteps = nuke.Array_Knob.value(nuke.thisNode().knob('Steps'))\npreviousAmount = nuke.Array_Knob.value(nuke.thisNode().knob('previousAmount'))\n\niFilter03.iFilter03 (filter, steps, previousAmount)\n\nnuke.thisNode().knob('previousAmount').setValue(steps)\n" +STARTLINE}
+addUserKnob {1 info t "information about the filter"}
+info ".:  Current filter: blur with 10 steps  (Click button to update ...) :."
+addUserKnob {26 ""}
+addUserKnob {7 previousAmount l INVISIBLE +INVISIBLE}
+previousAmount 10
+addUserKnob {20 filterSettings t "Specific filter settings"}
+addUserKnob {4 iFilterFilter l filter +INVISIBLE M {box triangle quadratic gaussian ""}}
+addUserKnob {7 iFilterBlur l blur +INVISIBLE}
+addUserKnob {3 iFilterQuality l quality +INVISIBLE}
+iFilterQuality 15
+addUserKnob {4 iFilterBlurFilter M {box triangle quadratic gaussian}}
+addUserKnob {3 iFilterBlurQuality}
+iFilterBlurQuality 15
+addUserKnob {7 iFilterDefAspect l "aspect ratio" +INVISIBLE R 0 5}
+iFilterDefAspect 1
+addUserKnob {7 iFilterDefScaling l scaling +INVISIBLE R 1 10}
+iFilterDefScaling 1
+addUserKnob {3 iFilterDefQuality l quality +INVISIBLE}
+iFilterDefQuality 20
+addUserKnob {4 iFilterDefMethod l method +INVISIBLE M {accelerated "full precision"}}
+}
+Input {
+inputs 0
+name mask
+xpos 100
+ypos -545
+number 1
+}
+set Nc85d6f20 [stack 0]
+push $Nc85d6f20
+Copy {
+inputs 2
+from0 mask.a
+to0 rgba.red
+name Copyyy
+xpos 100
+ypos -493
+}
+Invert {
+name Invert1
+xpos 100
+ypos -443
+disable {{1-parent.invertMask i}}
+}
+Dot {
+name puntazoMask
+xpos 134
+ypos -328
+}
+set Neacfdab0 [stack 0]
+Expression {
+temp_name0 r9
+temp_expr0 step(r,0.9)
+expr0 r9
+name idilerExpr9
+xpos 900
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur9
+label "\[value size]"
+xpos 900
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r8
+temp_expr0 step(r,0.8)
+expr0 r8
+name idilerExpr8
+xpos 800
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur8
+label "\[value size]"
+xpos 800
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r7
+temp_expr0 step(r,0.7)
+expr0 r7
+name idilerExpr7
+xpos 700
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur7
+label "\[value size]"
+xpos 700
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r6
+temp_expr0 step(r,0.6)
+expr0 r6
+name idilerExpr6
+xpos 600
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur6
+label "\[value size]"
+xpos 600
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r5
+temp_expr0 step(r,0.5)
+expr0 r5
+name idilerExpr5
+xpos 500
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur5
+label "\[value size]"
+xpos 500
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r4
+temp_expr0 step(r,0.4)
+expr0 r4
+name idilerExpr4
+xpos 400
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur4
+label "\[value size]"
+xpos 400
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r3
+temp_expr0 step(r,0.3)
+expr0 r3
+name idilerExpr3
+xpos 300
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur3
+label "\[value size]"
+xpos 300
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r2
+temp_expr0 step(r,0.2)
+expr0 r2
+name idilerExpr2
+xpos 200
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur2
+label "\[value size]"
+xpos 200
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r1
+temp_expr0 step(r,0.1)
+expr0 r1
+name idilerExpr1
+xpos 100
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur1
+label "\[value size]"
+xpos 100
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r10
+temp_expr0 step(r,1.0)
+expr0 r10
+name idilerExpr10
+xpos -10
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur10
+label "\[value size]"
+xpos -10
+ypos 150
+}
+Input {
+inputs 0
+name Image
+xpos -100
+ypos -543
+}
+Shuffle {
+name Shuffle1
+xpos -100
+ypos -509
+}
+set N8bc39480 [stack 0]
+Crop {
+box {{puntazoMask.bbox.x-Amount i} {puntazoMask.bbox.y-Amount i} {puntazoMask.bbox.r+Amount i} {puntazoMask.bbox.t+Amount i}}
+name iFilterCrop
+xpos -100
+ypos -475
+disable {{1-parent.crop i}}
+}
+Dot {
+name puntazo
+xpos -66
+ypos -326
+}
+set Nd04f2c60 [stack 0]
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*1}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode1
+label "\[value size]"
+xpos 100
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix1
+xpos 100
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*2}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode2
+label "\[value size]"
+xpos 200
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix2
+xpos 200
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*3}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode3
+label "\[value size]"
+xpos 300
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix3
+xpos 300
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*4}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode4
+label "\[value size]"
+xpos 400
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix4
+xpos 400
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*5}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode5
+label "\[value size]"
+xpos 500
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix5
+xpos 500
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*6}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode6
+label "\[value size]"
+xpos 600
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix6
+xpos 600
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*7}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode7
+label "\[value size]"
+xpos 700
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix7
+xpos 700
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*8}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode8
+label "\[value size]"
+xpos 800
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix8
+xpos 800
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*9}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode9
+label "\[value size]"
+xpos 900
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix9
+xpos 900
+ypos 550
+}
+push $Nd04f2c60
+Blur {
+size {{parent.Amount/10*10}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode10
+label "\[value size]"
+xpos 1000
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix10
+selected true
+xpos 1000
+ypos 550
+}
+set Nc5a38950 [stack 0]
+Output {
+name Out
+xpos -164
+ypos 1035
+}
+push $Neacfdab0
+Expression {
+temp_name0 r33
+temp_expr0 step(r,1.0)
+expr0 r33
+name idilerExpr101
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur101
+xpos -10
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r47
+temp_expr0 step(r,1.0)
+expr0 r47
+name idilerExpr118
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur118
+xpos -10
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r40
+temp_expr0 step(r,1.0)
+expr0 r40
+name idilerExpr128
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur128
+xpos -10
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r32
+temp_expr0 step(r,1.0)
+expr0 r32
+name idilerExpr130
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur130
+xpos -10
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r52
+temp_expr0 step(r,1.0)
+expr0 r52
+name idilerExpr152
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur152
+xpos -10
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r68
+temp_expr0 step(r,1.0)
+expr0 r68
+name idilerExpr104
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur104
+xpos -10
+ypos 150
+}
+push $Neacfdab0
+Expression {
+temp_name0 r100
+temp_expr0 step(r,1.0)
+expr0 r100
+name idilerExpr117
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur117
+xpos -10
+ypos 150
+}
+push $Nc5a38950
+push $N8bc39480
+Dot {
+name Dot1
+xpos -130
+ypos -467
+}
+Rectangle {
+cliptype none
+area {{puntazoMask.bbox.x i} {puntazoMask.bbox.y i} {puntazoMask.bbox.r i} {puntazoMask.bbox.t i}}
+color 0
+name Rectangle1
+xpos -164
+ypos -422
+}
+Merge2 {
+inputs 2
+bbox B
+name iFilterFinalMerge
+xpos -164
+ypos 863
+}
+push $Nd04f2c60
+Switch {
+inputs 2
+which {{parent.crop i}}
+name iFilterSwitch
+xpos -155
+ypos 967
+}
+end_group
+Dot {
+name Dot448
+selected true
+xpos 9257
+ypos 10646
+}
+push $Ne6bdfc60
+Merge2 {
+inputs 2
+name Merge37
+selected true
+xpos 9374
+ypos 10642
+}
+Shuffle {
+red black
+blue black
+alpha black
+name Shuffle61
+tile_color 0x3f633800
+selected true
+xpos 9374
+ypos 10668
+}
+Dot {
+name Dot341
+selected true
+xpos 9408
+ypos 10816
+}
+push $N10c2c210
+Dot {
+name Dot464
+selected true
+xpos 9460
+ypos 10182
+}
+Dot {
+name Dot459
+selected true
+xpos 9460
+ypos 10224
+}
+set N439f91d0 [stack 0]
+Dot {
+name Dot460
+selected true
+xpos 9460
+ypos 10271
+}
+push $N439f91d0
+push $N8dbce4d0
+Group {
+inputs 2
+name Itransform2
+tile_color 0x81275aff
+note_font "Verdana Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xffffffff
+selected true
+xpos 9572
+ypos 10220
+addUserKnob {20 "" l Transform}
+addUserKnob {41 matrix T Transform1.matrix}
+addUserKnob {41 translate T Transform1.translate}
+addUserKnob {41 rotate T Transform1.rotate}
+addUserKnob {41 scale T Transform1.scale}
+addUserKnob {41 skewX l "skew X" T Transform1.skewX}
+addUserKnob {41 skewY l "skew Y" T Transform1.skewY}
+addUserKnob {41 skew +INVISIBLE T Transform1.skew}
+addUserKnob {41 center T Transform1.center}
+addUserKnob {22 setCenter -STARTLINE T "n = nuke.thisGroup()\nw= n.width()\nh=n.height()\nprint w,h\nn\['center'].setValue(\[w/2,h/2])"}
+addUserKnob {41 filter T Transform1.filter}
+addUserKnob {41 clamp T Transform1.clamp}
+addUserKnob {6 crop_1 l crop -STARTLINE}
+crop_1 true
+addUserKnob {41 crop l "black outside" +INVISIBLE T Transform1.crop}
+addUserKnob {41 clip l "knob crop \$value" +INVISIBLE T Transform1.clip}
+addUserKnob {14 AdjBBox1_numpixels l "Add Pixels" R 0 100}
+AdjBBox1_numpixels 50
+}
+Transform {
+inputs 0
+scale 1.005
+center {1024 584}
+black_outside false
+name Transform1
+label "expresison link this\nto avoid st map overlay"
+xpos -72
+ypos -136
+}
+Input {
+inputs 0
+name ctrlMask
+xpos -40
+ypos -51
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle1
+xpos -40
+ypos -24
+}
+Input {
+inputs 0
+name img
+xpos -385
+ypos -227
+}
+set Ncaa3d20 [stack 0]
+Remove {
+name Remove1
+xpos -210
+ypos -232
+}
+AdjBBox {
+numpixels {{parent.AdjBBox1_numpixels.w} {parent.AdjBBox1_numpixels.h}}
+name AdjBBox1
+xpos -210
+ypos -196
+}
+Expression {
+expr0 x
+expr1 y
+name Expression1
+xpos -210
+ypos -140
+}
+set N23ad1b60 [stack 0]
+Dot {
+name Dot2
+xpos -286
+ypos -136
+}
+Transform {
+translate {{parent.Transform1.translate.main} {parent.Transform1.translate.main}}
+rotate {{parent.Transform1.rotate.main}}
+scale {{parent.Transform1.scale.main}}
+center {{parent.Transform1.center.main} {parent.Transform1.center.main}}
+filter {{Transform1.filter}}
+clamp {{parent.Transform1.clamp.main}}
+black_outside {{parent.Transform1.black_outside.main}}
+motionblur {{parent.Transform1.motionblur.main}}
+shutter {{parent.Transform1.shutter.main}}
+shutteroffset {{Transform1.shutteroffset}}
+shuttercustomoffset {{parent.Transform1.shuttercustomoffset.main}}
+name Transform2
+selected true
+xpos -320
+ypos -72
+}
+push $N23ad1b60
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -210
+ypos -72
+}
+Merge2 {
+inputs 2
+operation multiply
+name Merge2
+xpos -210
+ypos -24
+}
+set N2ed8b910 [stack 0]
+Dot {
+name Dot1
+xpos -270
+ypos -21
+}
+Dot {
+name Dot3
+xpos -270
+ypos 159
+}
+push $Ncaa3d20
+Dot {
+name Dot4
+xpos -351
+ypos 48
+}
+set Nee32cda0 [stack 0]
+Copy {
+inputs 2
+from0 rgba.red
+to0 rgba.red
+from1 rgba.green
+to1 rgba.green
+name Copy2
+xpos -385
+ypos 144
+}
+IDistort {
+channels none
+name IDistort1
+xpos -385
+ypos 192
+}
+push $N2ed8b910
+push $Nee32cda0
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy1
+xpos -210
+ypos 33
+}
+IDistort {
+uv forward
+name IDistort2
+xpos -210
+ypos 88
+}
+set N23be8110 [stack 0]
+Remove {
+channels none
+name Remove2
+xpos -210
+ypos 124
+}
+Copy {
+inputs 2
+from0 -rgba.alpha
+to0 -rgba.alpha
+name Copy3
+xpos -210
+ypos 192
+}
+set N2479b220 [stack 0]
+Crop {
+box {0 0 {input.width} {input.height}}
+name Crop1
+xpos -340
+ypos 270
+}
+push $N2479b220
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos -210
+ypos 346
+disable {{!parent.crop_1}}
+}
+Output {
+name Output1
+xpos -210
+ypos 418
+}
+push $N23be8110
+Viewer {
+input_process false
+name Viewer1
+xpos 70
+ypos -9
+hide_input true
+}
+end_group
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 mask.a
+name Copy14
+selected true
+xpos 9572
+ypos 10261
+}
+Dot {
+name Dot461
+selected true
+xpos 9606
+ypos 10324
+}
+set N236d3c60 [stack 0]
+push $N236d3c60
+Group {
+inputs 2
+name iFilter2
+help "gizmo an py code by Pau Rocher Castellano\n--> bikura@gmail.com\nAny comments, suggestions, ... welcome!!\nThanks!!\n\n1. Plug an image\n2. Plug a Control channel in 'Mask'\n3. Choose your filter\n4. Set number of steps\n5. Click 'Regenerate'\n6. Set 'Amount' and 'Soften' values\n\nIn the 'filterSettings' tab you can modify the default settings for the chosen filter."
+selected true
+xpos 9572
+ypos 10365
+addUserKnob {20 iFilter}
+addUserKnob {41 from0 l "control channel" t "This channel controlls the amount of the effect." T Copyyy.from0}
+addUserKnob {6 invertMask l invert t "lennahc lortnoc eht strevnI" -STARTLINE}
+addUserKnob {6 crop l "crop to mask's BBox" t "When enabled gives faster results if the image BBox size is insanely big ...\n\nWARNING: this enabled might create artifacts!!!" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {7 Amount t Amount R -100 100}
+Amount 10
+addUserKnob {7 Soften t "Softens the merge between steps" R 0 100}
+Soften 5
+addUserKnob {26 ""}
+addUserKnob {4 Filter t "Choose the filter to use" M {dilerFast dilerFilter dilerBlur blur defocus "" ""}}
+Filter blur
+addUserKnob {7 Steps t "Number of steps" R 1 100}
+Steps 10
+addUserKnob {22 regenerate t "Sets up the amount of steps in the filter" T "filter = nuke.Enumeration_Knob.value(nuke.thisNode().knob (\"Filter\"))\nsteps = nuke.Array_Knob.value(nuke.thisNode().knob('Steps'))\npreviousAmount = nuke.Array_Knob.value(nuke.thisNode().knob('previousAmount'))\n\niFilter03.iFilter03 (filter, steps, previousAmount)\n\nnuke.thisNode().knob('previousAmount').setValue(steps)\n" +STARTLINE}
+addUserKnob {1 info t "information about the filter"}
+info ".:  Current filter: blur with 10 steps  (Click button to update ...) :."
+addUserKnob {26 ""}
+addUserKnob {7 previousAmount l INVISIBLE +INVISIBLE}
+previousAmount 10
+addUserKnob {20 filterSettings t "Specific filter settings"}
+addUserKnob {4 iFilterFilter l filter +INVISIBLE M {box triangle quadratic gaussian ""}}
+addUserKnob {7 iFilterBlur l blur +INVISIBLE}
+addUserKnob {3 iFilterQuality l quality +INVISIBLE}
+iFilterQuality 15
+addUserKnob {4 iFilterBlurFilter M {box triangle quadratic gaussian}}
+addUserKnob {3 iFilterBlurQuality}
+iFilterBlurQuality 15
+addUserKnob {7 iFilterDefAspect l "aspect ratio" +INVISIBLE R 0 5}
+iFilterDefAspect 1
+addUserKnob {7 iFilterDefScaling l scaling +INVISIBLE R 1 10}
+iFilterDefScaling 1
+addUserKnob {3 iFilterDefQuality l quality +INVISIBLE}
+iFilterDefQuality 20
+addUserKnob {4 iFilterDefMethod l method +INVISIBLE M {accelerated "full precision"}}
+}
+Input {
+inputs 0
+name mask
+xpos 100
+ypos -545
+number 1
+}
+set N244ed730 [stack 0]
+push $N244ed730
+Copy {
+inputs 2
+from0 mask.a
+to0 rgba.red
+name Copyyy
+xpos 100
+ypos -493
+}
+Invert {
+name Invert1
+xpos 100
+ypos -443
+disable {{1-parent.invertMask i}}
+}
+Dot {
+name puntazoMask
+xpos 134
+ypos -328
+}
+set N24de5b20 [stack 0]
+Expression {
+temp_name0 r9
+temp_expr0 step(r,0.9)
+expr0 r9
+name idilerExpr9
+xpos 900
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur9
+label "\[value size]"
+xpos 900
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r8
+temp_expr0 step(r,0.8)
+expr0 r8
+name idilerExpr8
+xpos 800
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur8
+label "\[value size]"
+xpos 800
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r7
+temp_expr0 step(r,0.7)
+expr0 r7
+name idilerExpr7
+xpos 700
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur7
+label "\[value size]"
+xpos 700
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r6
+temp_expr0 step(r,0.6)
+expr0 r6
+name idilerExpr6
+xpos 600
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur6
+label "\[value size]"
+xpos 600
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r5
+temp_expr0 step(r,0.5)
+expr0 r5
+name idilerExpr5
+xpos 500
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur5
+label "\[value size]"
+xpos 500
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r4
+temp_expr0 step(r,0.4)
+expr0 r4
+name idilerExpr4
+xpos 400
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur4
+label "\[value size]"
+xpos 400
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r3
+temp_expr0 step(r,0.3)
+expr0 r3
+name idilerExpr3
+xpos 300
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur3
+label "\[value size]"
+xpos 300
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r2
+temp_expr0 step(r,0.2)
+expr0 r2
+name idilerExpr2
+xpos 200
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur2
+label "\[value size]"
+xpos 200
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r1
+temp_expr0 step(r,0.1)
+expr0 r1
+name idilerExpr1
+xpos 100
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur1
+label "\[value size]"
+xpos 100
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r10
+temp_expr0 step(r,1.0)
+expr0 r10
+name idilerExpr10
+xpos -10
+ypos 100
+}
+Blur {
+channels rgba
+size {{parent.Soften}}
+name idilerBlur10
+label "\[value size]"
+xpos -10
+ypos 150
+}
+Input {
+inputs 0
+name Image
+xpos -100
+ypos -543
+}
+Shuffle {
+name Shuffle1
+xpos -100
+ypos -509
+}
+set N23584e90 [stack 0]
+Crop {
+box {{puntazoMask.bbox.x-Amount i} {puntazoMask.bbox.y-Amount i} {puntazoMask.bbox.r+Amount i} {puntazoMask.bbox.t+Amount i}}
+name iFilterCrop
+xpos -100
+ypos -475
+disable {{1-parent.crop i}}
+}
+Dot {
+name puntazo
+xpos -66
+ypos -326
+}
+set N2c0f1f80 [stack 0]
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*1}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode1
+label "\[value size]"
+xpos 100
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix1
+xpos 100
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*2}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode2
+label "\[value size]"
+xpos 200
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix2
+xpos 200
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*3}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode3
+label "\[value size]"
+xpos 300
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix3
+xpos 300
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*4}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode4
+label "\[value size]"
+xpos 400
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix4
+xpos 400
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*5}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode5
+label "\[value size]"
+xpos 500
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix5
+xpos 500
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*6}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode6
+label "\[value size]"
+xpos 600
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix6
+xpos 600
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*7}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode7
+label "\[value size]"
+xpos 700
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix7
+xpos 700
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*8}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode8
+label "\[value size]"
+xpos 800
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix8
+xpos 800
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*9}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode9
+label "\[value size]"
+xpos 900
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix9
+xpos 900
+ypos 550
+}
+push $N2c0f1f80
+Blur {
+size {{parent.Amount/10*10}}
+filter {{parent.iFilterBlurFilter}}
+quality {{parent.iFilterBlurQuality}}
+name idilerErode10
+label "\[value size]"
+xpos 1000
+ypos 500
+}
+Keymix {
+inputs 3
+channels rgba
+maskChannel rgba.red
+name idilerKeymix10
+selected true
+xpos 1000
+ypos 550
+}
+set N25c80820 [stack 0]
+Output {
+name Out
+xpos -164
+ypos 1035
+}
+push $N24de5b20
+Expression {
+temp_name0 r33
+temp_expr0 step(r,1.0)
+expr0 r33
+name idilerExpr101
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur101
+xpos -10
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r47
+temp_expr0 step(r,1.0)
+expr0 r47
+name idilerExpr118
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur118
+xpos -10
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r40
+temp_expr0 step(r,1.0)
+expr0 r40
+name idilerExpr128
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur128
+xpos -10
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r32
+temp_expr0 step(r,1.0)
+expr0 r32
+name idilerExpr130
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur130
+xpos -10
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r52
+temp_expr0 step(r,1.0)
+expr0 r52
+name idilerExpr152
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur152
+xpos -10
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r68
+temp_expr0 step(r,1.0)
+expr0 r68
+name idilerExpr104
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur104
+xpos -10
+ypos 150
+}
+push $N24de5b20
+Expression {
+temp_name0 r100
+temp_expr0 step(r,1.0)
+expr0 r100
+name idilerExpr117
+xpos -10
+ypos 100
+}
+Blur {
+size {{parent.Soften}}
+name idilerBlur117
+xpos -10
+ypos 150
+}
+push $N25c80820
+push $N23584e90
+Dot {
+name Dot1
+xpos -130
+ypos -467
+}
+Rectangle {
+cliptype none
+area {{puntazoMask.bbox.x i} {puntazoMask.bbox.y i} {puntazoMask.bbox.r i} {puntazoMask.bbox.t i}}
+color 0
+name Rectangle1
+xpos -164
+ypos -422
+}
+Merge2 {
+inputs 2
+bbox B
+name iFilterFinalMerge
+xpos -164
+ypos 863
+}
+push $N2c0f1f80
+Switch {
+inputs 2
+which {{parent.crop i}}
+name iFilterSwitch
+xpos -155
+ypos 967
+}
+end_group
+Dot {
+name Dot438
+selected true
+xpos 9606
+ypos 10644
+}
+push $Ne49c1f20
+Merge2 {
+inputs 2
+name Merge24
+selected true
+xpos 9794
+ypos 10640
+}
+Shuffle {
+red black
+green black
+alpha black
+name Shuffle93
+tile_color 0x3d3f8e00
+selected true
+xpos 9794
+ypos 10666
+}
+Dot {
+name Dot131
+selected true
+xpos 9828
+ypos 10768
+}
+push $Nde8e7e60
+Grade {
+channels all
+white 0
+name Grade62
+selected true
+xpos 10029
+ypos 10622
+}
+Merge2 {
+inputs 2
+name Merge175
+selected true
+xpos 10029
+ypos 10764
+}
+Merge2 {
+inputs 2
+name Merge147
+selected true
+xpos 10029
+ypos 10812
+}
+Merge2 {
+inputs 2
+name Merge200
+selected true
+xpos 10029
+ypos 10906
+}

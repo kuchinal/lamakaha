@@ -1,0 +1,25 @@
+def farmCrack():
+    name = nuke.toNode("root")['name'].value()
+    shortName = name.rpartition("/")[2].rpartition(".")[0]
+    path = name.rpartition("/scripts/")[0]+"/RenderTemp/"
+    latests = []
+    dates = []
+    if os.path.exists(path):
+        content = os.listdir(path)
+        for item in content:
+            if shortName in item:
+                    latests.append(item)
+        for script in latests:
+            date = script.rpartition(".")[0].rpartition("_")[2]
+            dates.append(date)
+    
+        dates.sort()
+        latestScript = path+shortName+"_"+date+".nk"
+    
+          
+    with open(name,"r+") as f:
+        curent = f.read()
+        f.close()
+    with open(latestScript, "w") as f:
+        f.write(curent)
+        f.close()

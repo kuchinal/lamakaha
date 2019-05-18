@@ -1,0 +1,53 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Group {
+ name extractor
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x4c00ff
+ note_font "Verdana Bold"
+ note_font_size 14
+ note_font_color 0xffffffff
+ selected true
+ xpos -921
+ ypos 466
+ addUserKnob {20 User}
+ addUserKnob {22 extract T "base = nuke.thisNode()\nnuke.root().begin()\nxp = base\['xpos'].value()\nyp = base\['ypos'].value()\nx = base\['sampler'].value(0)\ny = base\['sampler'].value(1)\nw = base.width()\nh = base.height()\n\nrp =  base.dependencies(nuke.INPUTS)\[1].sample(\"red\",x, y)\ngp =  base.dependencies(nuke.INPUTS)\[1].sample(\"green\",x, y)\nbp =  base.dependencies(nuke.INPUTS)\[1].sample(\"blue\",x, y)\n\nrr =  base.dependencies(nuke.INPUTS)\[2].sample(\"red\",x, y,3,3)*90*0.65\ngr =  base.dependencies(nuke.INPUTS)\[2].sample(\"green\",x, y,3,3)*-90*0.65\n\nu =  base.dependencies(nuke.INPUTS)\[3].sample(\"red\",x, y)*w-w/2\nv =  base.dependencies(nuke.INPUTS)\[3].sample(\"green\",x, y)*h-h/2\n\npanel=nuke.Panel(\"Card name\")\npanel.addSingleLineInput(\"Card name\",\"\")\npanel.addEnumerationPulldown(\"object\", \"Card Axis Cube Sphere Cylinder UVposition\")\npanel.show()\nlabel = panel.value('Card name')\nobject = panel.value('object')\nif object == \"Card\":\n    object = nuke.nodes.Card2()\nelif object == \"Axis\":\n    object = nuke.nodes.Axis()\nelif object == \"Cube\":\n    object = nuke.nodes.Cube()\nelif object == \"Sphere\":\n    object = nuke.nodes.Sphere()\nelif object == \"Cylinder\":\n    object = nuke.nodes.Cylinder()\n\nif object != \"UVposition\":\n    object\['translate'].setValue(\[rp,gp,bp])\n    object\['rotate'].setValue(\[gr,rr,0])\n    object\['xpos'].setValue(xp)\n    object\['ypos'].setValue(yp+50)\n    object\['label'].setValue(label)\nif object == \"UVposition\":\n    object = nuke.createNode(\"Transform\")\n    object\['center'].setValue(\[w/2,h/2])\n    object\['translate'].setValue(\[u,v])\n    object\['scale'].setValue(0.1)\n    object\['xpos'].setValue(xp)\n    object\['ypos'].setValue(yp+50)\n    object\['label'].setValue(label)\n    object.setInput(0,None)\n\nobject.setSelected(True)\nbase.setSelected(False) \n\nautolabelOverride.autolabelOverride()" +STARTLINE}
+ addUserKnob {12 sampler}
+ sampler {1075 985}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 help_1 l "" +STARTLINE T "this node will generate 3D position and orientation for your object based on world osition pass and Normal pass \nexpecting rgb channels\nthis node is expecting Nuke normals and nuke position - which means if you have render passes from 3D application you may need to convert them to nuke space (3Dmax)\nin addition you can extract transform for UV positioning in STmap."}
+}
+ Input {
+  inputs 0
+  name worldP
+  xpos -238
+  ypos 504
+  number 1
+ }
+ Input {
+  inputs 0
+  name normals
+  xpos -337
+  ypos 508
+  number 2
+ }
+ Input {
+  inputs 0
+  name UV
+  xpos -437
+  ypos 508
+  number 3
+ }
+ Input {
+  inputs 0
+  name beauty
+  xpos -132
+  ypos 503
+ }
+ Output {
+  name Output1
+  xpos -132
+  ypos 609
+ }
+end_group

@@ -1,0 +1,50 @@
+###Cam  LU RL RU LL rangeA  rangeB
+rangeA = nuke.Root().knob('first_frame').getValue()
+rangeB = nuke.Root().knob('last_frame').getValue()
+RL = nuke.toNode("RL")
+Cam = nuke.toNode("cam")
+corner = nuke.toNode("CornerPin2D1")
+
+def fixer():
+    import math
+    first = rangeA                                
+    last = rangeB
+    frame = first
+    while frame<last+1:
+        #getting the axis position
+        x = RL['translate'].getValueAt(frame,0)
+        y = RL['translate'].getValueAt(frame,1)
+        z = RL['translate'].getValueAt(frame,2)
+        #getting the camera position
+        xc = Cam['translate'].getValueAt(frame,0)
+        yc = Cam['translate'].getValueAt(frame,1)
+        zc = Cam['translate'].getValueAt(frame,2)
+        #getting the camera vector
+        a = Cam['matrix'].getValueAt(frame,2)
+        b = Cam['matrix'].getValueAt(frame,6)
+        c = Cam['matrix'].getValueAt(frame,10)
+        #getting the vector
+        vecx = xc - x
+        vecy = yc - y
+        vecz = zc - z
+        #getting the magnitude
+        magn = math.sqrt(vecx*vecx + vecy*vecy + vecz*vecz)
+
+        #getting the vector
+        nvecx = vecx/magn
+        nvecy = vecy/magn
+        nvecz = vecz/magn
+
+        #getting the dot product
+        dot = a*nvecx + b*nvecy +c*nvecz
+        print frame,dot
+        if dot < 0 :
+            bx = corner['to2'].getValueAt(frame)[0]
+            by = corner['to2'].getValueAt(frame)[1]
+            corner['to2'].setValueAt(bx*-1,frame,0)
+            corner['to2'].setValueAt(by*-1,frame,1)
+
+        frame = frame+1
+
+
+fixer()

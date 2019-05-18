@@ -1,0 +1,2897 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+push $cut_paste_input
+Group {
+inputs 2
+name Group5
+selected true
+xpos -5650
+ypos 808
+}
+Input {
+inputs 0
+name mask
+xpos -965
+ypos 582
+}
+Dot {
+name Dot64
+xpos -838
+ypos 643
+}
+set Nb233c990 [stack 0]
+Group {
+name ErodeMini10
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -792
+ypos 772
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3c016700 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3c01a710 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3c01a710
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3c016700
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3df2c6e0 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3df31260 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3df31260
+push $N3df2c6e0
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3df3f150 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3df4f580 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -1
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3df4f580
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3df78440 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3df78440
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3df3f150
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+push $Nb233c990
+Group {
+name ErodeMini8
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -801
+ypos 728
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N38a87cf0 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N38a8c950 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N38a8c950
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N38a87cf0
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N38952100 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N38956c80 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N38956c80
+push $N38952100
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N38964b70 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N38974fa0 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -3
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N38974fa0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3881dea0 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3881dea0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N38964b70
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+push $Nb233c990
+Group {
+name ErodeMini6
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -785
+ypos 698
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3f22d7b0 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3f232410 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3f232410
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3f22d7b0
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3f26e570 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3f2730f0 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3f2730f0
+push $N3f26e570
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3f280fe0 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3f291410 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -4
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3f291410
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3f13a310 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3f13a310
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3f280fe0
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+push $Nb233c990
+Group {
+name ErodeMini4
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -785
+ypos 667
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3f049bf0 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3f04e850 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3f04e850
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3f049bf0
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3f08a9b0 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3f08f530 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3f08f530
+push $N3f08a9b0
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3ef1d460 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3ef2d890 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -6
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3ef2d890
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3ef56750 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3ef56750
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3ef1d460
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+push $Nb233c990
+Group {
+name ErodeMini1
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -785
+ypos 639
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3ee66020 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3ee6ac80 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3ee6ac80
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3ee66020
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3ed26e10 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3ed2b990 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3ed2b990
+push $N3ed26e10
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3ed39880 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3ed49cb0 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -8
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3ed49cb0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3ed72b70 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3ed72b70
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3ed39880
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+push $Nb233c990
+Group {
+name ErodeMini2
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -777
+ypos 589
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3f882430 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3f887090 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3f887090
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3f882430
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3f743220 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3f747da0 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3f747da0
+push $N3f743220
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3f755c90 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3f7660c0 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -10
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3f7660c0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3f78ef80 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3f78ef80
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3f755c90
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+Input {
+inputs 0
+name blood
+xpos -689
+ypos 468
+number 1
+}
+Group {
+inputs 2
+name ErodeMini3
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -675
+ypos 582
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3f5292e0 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3f52df40 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3f52df40
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3f5292e0
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3f56a0a0 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3f56ec20 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3f56ec20
+push $N3f56a0a0
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3f57cb10 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3f58cf40 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -1
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3f58cf40
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3f435e40 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3f435e40
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3f57cb10
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+Clamp {
+channels rgba
+name Clamp1
+xpos -675
+ypos 608
+}
+Group {
+inputs 2
+name ErodeMini
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -675
+ypos 639
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3f353f50 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3f358bb0 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3f358bb0
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3f353f50
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3fe14d40 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3fe198c0 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3fe198c0
+push $N3fe14d40
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3fe277b0 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3fe37be0 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -2
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3fe37be0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3fe60aa0 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3fe60aa0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3fe277b0
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+Group {
+inputs 2
+name ErodeMini5
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -675
+ypos 667
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3fd703f0 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3fd75050 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3fd75050
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3fd703f0
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3fc31200 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3fc35d80 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3fc35d80
+push $N3fc31200
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3fc43c70 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3fc540a0 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -1
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3fc540a0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3fc7cf60 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3fc7cf60
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3fc43c70
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+Group {
+inputs 2
+name ErodeMini7
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -675
+ypos 698
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N3fb8c870 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N3fb914d0 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N3fb914d0
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N3fb8c870
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N3fa4d660 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N3fa521e0 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N3fa521e0
+push $N3fa4d660
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N3fa600d0 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N3fa70500 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size 2
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N3fa70500
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N3f9193f0 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N3f9193f0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N3fa600d0
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+Group {
+inputs 2
+name ErodeMini9
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -682
+ypos 728
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N40428d10 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N4042d970 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N4042d970
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N40428d10
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N40469ad0 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N4046e650 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N4046e650
+push $N40469ad0
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N4047c540 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N4048c970 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size -1
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N4048c970
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N40335870 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N40335870
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N4047c540
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+Group {
+inputs 2
+name ErodeMini11
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+xpos -682
+ypos 772
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set N40245190 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N40249df0 [stack 0]
+Blur {
+channels rgba
+name Blur2
+selected true
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N40249df0
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $N40245190
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N40285f50 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N4028aad0 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N4028aad0
+push $N40285f50
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N40118a70 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set N40128e20 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size {2.6 2.6}
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $N40128e20
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N40151ce0 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels rgba
+size {{parent.miniErodeSize}}
+name FilterErode6
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N40151ce0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels rgba
+name Blur1
+xpos -528
+ypos 698
+}
+push $N40118a70
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group
+Output {
+name Output1
+xpos -673
+ypos 836
+}
+end_group

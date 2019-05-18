@@ -1,0 +1,168 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x3f758201
+ label "<b>     "
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos 5616
+ ypos 237
+ bookmark false
+ bdwidth 397
+ bdheight 508
+}
+Card2 {
+ inputs 0
+ display wireframe
+ rows 1
+ columns 1
+ type bicubic
+ control_points {3 3 3 6 
+
+1 {{parent.Axis1.translate} {parent.Axis1.translate} {parent.Axis1.translate}} 1 {0.1666666865 0 0} 0 {0 0 0} 1 {0 0.126627624 0} 0 {0 0 0} 0 {0 0 0} 
+1 {{parent.Axis2.translate} {parent.Axis2.translate} {parent.Axis2.translate}} 1 {0.1666666716 0 0} 1 {-0.1666666716 0 0} 1 {0 0.126627624 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {{parent.Axis3.translate} {parent.Axis3.translate} {parent.Axis3.translate}} 0 {0 0 0} 1 {-0.1666666865 0 0} 1 {0 0.126627624 0} 0 {0 0 0} 0 {1 0 0} 
+1 {{parent.Axis4.translate} {parent.Axis4.translate} {parent.Axis4.translate}} 1 {0.1666666865 0 0} 0 {0 0 0} 1 {0 0.1266276091 0} 1 {0 -0.1266276091 0} 0 {0 0.5 0} 
+1 {{parent.Axis5.translate} {parent.Axis5.translate} {parent.Axis5.translate}} 1 {0.1666666716 0 0} 1 {-0.1666666716 0 0} 1 {0 0.1266276091 0} 1 {0 -0.1266276091 0} 0 {0.5 0.5 0} 
+1 {{parent.Axis6.translate} {parent.Axis6.translate} {parent.Axis6.translate}} 0 {0 0 0} 1 {-0.1666666865 0 0} 1 {0 0.1266276091 0} 1 {0 -0.1266276091 0} 0 {1 0.5 0} 
+1 {{parent.Axis7.translate} {parent.Axis7.translate} {parent.Axis7.translate}} 1 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 1 {0 -0.126627624 0} 0 {0 1 0} 
+1 {{parent.Axis8.translate} {parent.Axis8.translate} {parent.Axis8.translate}} 1 {0.1666666716 0 0} 1 {-0.1666666716 0 0} 0 {0 0 0} 1 {0 -0.126627624 0} 0 {0.5 1 0} 
+1 {{parent.Axis9.translate} {parent.Axis9.translate} {parent.Axis9.translate}} 0 {0 0 0} 1 {-0.1666666865 0 0} 0 {0 0 0} 1 {0 -0.126627624 0} 0 {1 1 0} }
+ drawPosition {-0.1475000381 -0.1120654643 0}
+ name Card1
+ selected true
+ xpos 5655
+ ypos 707
+}
+Axis {
+ inputs 0
+ translate {0.4999999702 0.3798827827 0}
+ name Axis9
+ selected true
+ xpos 5915
+ ypos 325
+}
+Axis {
+ inputs 0
+ translate {-0.5 0.3798827827 0}
+ name Axis7
+ selected true
+ xpos 5706
+ ypos 326
+}
+Axis {
+ inputs 0
+ translate {0 0.3798827827 0}
+ name Axis8
+ selected true
+ xpos 5803
+ ypos 322
+}
+MergeGeo {
+ inputs 3
+ name MergeGeo4
+ selected true
+ xpos 5794
+ ypos 415
+}
+Dot {
+ name Dot1
+ selected true
+ xpos 5626
+ ypos 418
+}
+Dot {
+ name Dot2
+ selected true
+ xpos 5626
+ ypos 504
+}
+Axis {
+ inputs 0
+ translate {-0.5 0 0}
+ name Axis4
+ selected true
+ xpos 5716
+ ypos 455
+}
+Axis {
+ inputs 0
+ name Axis5
+ selected true
+ xpos 5807
+ ypos 460
+}
+Axis {
+ inputs 0
+ translate {0.4999999702 0 0}
+ name Axis6
+ selected true
+ xpos 5913
+ ypos 453
+}
+MergeGeo {
+ inputs 4
+ name MergeGeo3
+ selected true
+ xpos 5797
+ ypos 539
+}
+Dot {
+ name Dot4
+ selected true
+ xpos 5626
+ ypos 542
+}
+Dot {
+ name Dot3
+ selected true
+ xpos 5626
+ ypos 670
+}
+Axis {
+ inputs 0
+ translate {0.4999999702 -0.3798828125 0}
+ name Axis3
+ selected true
+ xpos 5913
+ ypos 574
+}
+Axis {
+ inputs 0
+ translate {-0.5 -0.3798828125 0}
+ name Axis1
+ selected true
+ xpos 5714
+ ypos 579
+}
+push $cut_paste_input
+Axis {
+ translate {0 -0.3798828125 0}
+ name Axis2
+ selected true
+ xpos 5811
+ ypos 577
+}
+MergeGeo {
+ inputs 4
+ name MergeGeo2
+ selected true
+ xpos 5801
+ ypos 667
+}
+MergeGeo {
+ inputs 2
+ name MergeGeo5
+ selected true
+ xpos 5801
+ ypos 707
+}
+TransformGeo {
+ name TransformGeo1
+ selected true
+ xpos 5801
+ ypos 792
+}

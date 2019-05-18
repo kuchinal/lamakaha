@@ -1,0 +1,55 @@
+set cut_paste_input [stack 0]
+version 10.5 v1
+push $cut_paste_input
+Group {
+ name Crop_bbox1
+ tile_color 0xa880a8ff
+ selected true
+ addUserKnob {20 User}
+ addUserKnob {15 region l box}
+ region {0 0 500 500}
+ addUserKnob {6 reformat +STARTLINE}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 copyright l "" +STARTLINE T "Crop_bbox v1.0.0 - © Armen Mailyan, 2017"}
+}
+ Input {
+  inputs 0
+  name Input1
+  selected true
+  xpos -137
+  ypos -5
+ }
+set N3b3c000 [stack 0]
+ Transform {
+  translate {{(width/2)-center} {(height/2)-center}}
+  center {{"(\[value region.r]+\[value region.x])/2"} {"(\[value region.t]+\[value region.y])/2"}}
+  shutteroffset centred
+  name Transform3
+  xpos -137
+  ypos 44
+ }
+ Reformat {
+  type "to box"
+  box_width {{"\[value region.r]-\[value region.x]"}}
+  box_height {{"\[value region.t]-\[value region.y]"}}
+  box_fixed true
+  resize none
+  pbb true
+  name Reformat1
+  xpos -137
+  ypos 87
+ }
+push $N3b3c000
+ Switch {
+  inputs 2
+  which {{parent.reformat}}
+  name Switch1
+  xpos -137
+  ypos 151
+ }
+ Output {
+  name Output1
+  xpos -137
+  ypos 215
+ }
+end_group

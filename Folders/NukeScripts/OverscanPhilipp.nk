@@ -1,0 +1,88 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Group {
+ inputs 0
+ name overscan_calculate_X_Y_v02
+ selected true
+ xpos -4073
+ ypos 6083
+ addUserKnob {20 User}
+ addUserKnob {26 input l "" +STARTLINE T input}
+ addUserKnob {41 format l "output format" T Reformat40.format}
+ addUserKnob {7 X R 0 2}
+ X 1.2
+ addUserKnob {7 Y R 0 2}
+ Y 1.2
+ addUserKnob {26 hint l "" +STARTLINE T "kill Y link to X if needed"}
+ addUserKnob {26 ""}
+ addUserKnob {26 sdggg l "" +STARTLINE T "output: calculated overscan "}
+ addUserKnob {12 perc l "in Percent"}
+ perc {{(X-1)*100} {(Y-1)*100}}
+ addUserKnob {41 Z l "in Pixels" T Transform1.Z}
+ addUserKnob {26 d l "" +STARTLINE}
+ addUserKnob {26 sda l "" +STARTLINE T "Set output-format\n\nPut lensedistortion node after\n\nMove slider till black edges dissapear by viewing lensdistrotion node\n\n\n\n\n\n\n"}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  xpos 1490
+  ypos -6
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x388e8e00
+  label (parent.Y*height)-height
+  note_font_size 42
+  xpos 720
+  ypos 432
+  bdwidth 210
+  bdheight 402
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color 1
+  name Constant6
+  xpos 730
+  ypos 512
+ }
+ Reformat {
+  name Reformat40
+  label "set here root format\n"
+  xpos 730
+  ypos 593
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop1
+  xpos 730
+  ypos 651
+ }
+ Transform {
+  scale {{parent.X} {(parent.Y-1)*pixel_aspect+1}}
+  center {{width/2} {height/2}}
+  shutteroffset centred
+  name Transform1
+  selected true
+  xpos 730
+  ypos 709
+  addUserKnob {20 User}
+  addUserKnob {12 Z}
+  Z {{(((X*width)-width))} {(Y*height)-height}}
+ }
+set Nb7fd9af0 [stack 0]
+ Output {
+  name Output1
+  xpos 730
+  ypos 804
+ }
+push $Nb7fd9af0
+ Viewer {
+  frame_range 1001-1025
+  viewerProcess "None (default)"
+  name Viewer1
+  xpos 840
+  ypos 584
+ }
+end_group

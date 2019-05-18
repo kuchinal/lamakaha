@@ -1,0 +1,24 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Axis {
+ name Axis1
+ selected true
+ xpos -1516
+ ypos 469
+ addUserKnob {20 User}
+ addUserKnob {22 Noise -STARTLINE T "n=nuke.selectedNode()\nn\[\"translate\"].setExpression(\"curve+fBm(frame*xfrequency,10.5,11.5,xoctaves,2,.5)*xamplitude\",0)\nn\[\"translate\"].setExpression(\"curve+fBm(frame*yfrequency,10.5,11.5,yoctaves,2,.5)*yamplitude\",1)\nn\[\"translate\"].setExpression(\"curve+fBm(frame*zfrequency,10.5,11.5,zoctaves,2,.5)*zamplitude\",2)"}
+ addUserKnob {26 X_Noise}
+ addUserKnob {7 xfrequency l frequency}
+ addUserKnob {7 xamplitude l amplitude}
+ addUserKnob {7 xoctaves l octaves}
+ addUserKnob {26 Y_Noise}
+ addUserKnob {7 yfrequency l frequency}
+ addUserKnob {7 yamplitude l amplitude}
+ addUserKnob {7 yoctaves l octaves}
+ addUserKnob {26 Z_Noise}
+ addUserKnob {7 zfrequency l frequency}
+ addUserKnob {7 zamplitude l amplitude}
+ addUserKnob {7 zoctaves l octaves}
+ addUserKnob {22 Set -STARTLINE T "n = nuke.thisNode()\nvalue = n\['sample'].value()\[:3]\nn\['translate'].setValue(value)"}
+}

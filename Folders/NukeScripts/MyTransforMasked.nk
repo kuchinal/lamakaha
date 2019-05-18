@@ -1,0 +1,138 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Roto {
+inputs 0
+cliptype none
+curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 0}
+    {t x44700000 x44070000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}}}}}
+toolbox {createBezier {
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+toolbar_brush_hardness 0.200000003
+toolbar_source_transform_scale {1 1}
+toolbar_source_transform_center {960 540}
+openspline_width 1
+name Roto3
+selected true
+xpos -164
+ypos 184
+hide_input true
+}
+Blur {
+channels rgba
+name Blur3
+selected true
+xpos -164
+ypos 210
+}
+Dot {
+name Dot9
+tile_color 0xff
+selected true
+xpos -130
+ypos 245
+}
+push $cut_paste_input
+Dot {
+name Dot10
+selected true
+xpos 110
+ypos 88
+}
+set Nec9a2a0 [stack 0]
+Dot {
+name Dot11
+selected true
+xpos -3
+ypos 88
+}
+Shuffle {
+alpha white
+name Shuffle3
+tile_color 0xffffffff
+label "White Alpha"
+selected true
+xpos -37
+ypos 117
+}
+FrameHold {
+first_frame 1002
+name FrameHold3
+selected true
+xpos -37
+ypos 155
+}
+Grade {
+name Grade5
+selected true
+xpos -37
+ypos 193
+}
+Transform {
+center {960 540}
+name Transform5
+selected true
+xpos -37
+ypos 217
+}
+set N1f0b0160 [stack 0]
+Merge2 {
+inputs 2
+operation mask
+bbox A
+name Merge5
+selected true
+xpos -37
+ypos 241
+}
+Dot {
+name Dot12
+selected true
+xpos -3
+ypos 279
+}
+push $N1f0b0160
+Invert {
+channels rgba
+name Invert1
+selected true
+xpos 180
+ypos 217
+}
+push $Nec9a2a0
+Merge2 {
+inputs 2
+operation copy
+bbox A
+mix 0.5
+name Merge7
+selected true
+xpos 76
+ypos 216
+}
+Merge2 {
+inputs 2
+name Merge6
+selected true
+xpos 76
+ypos 275
+}

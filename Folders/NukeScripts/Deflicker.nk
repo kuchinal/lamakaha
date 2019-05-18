@@ -1,0 +1,75 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Dot {
+ name Dot12
+ selected true
+ xpos -1097
+ ypos 570
+}
+Dot {
+ name Dot8
+ selected true
+ xpos -1097
+ ypos 618
+}
+set N7aae790 [stack 0]
+Dot {
+ name Dot9
+ selected true
+ xpos -867
+ ypos 618
+}
+Blur {
+ size 2000
+ name Blur2
+ label "adjust to balance deflicker and ghosting"
+ selected true
+ xpos -901
+ ypos 647
+}
+set N7ac6540 [stack 0]
+Dot {
+ name Dot10
+ selected true
+ xpos -722
+ ypos 663
+}
+FrameHold {
+ first_frame 1
+ name FrameHold1
+ label "frame at which to retain luminance"
+ selected true
+ xpos -756
+ ypos 699
+}
+Dot {
+ name Dot11
+ selected true
+ xpos -722
+ ypos 749
+}
+push $N7ac6540
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge4
+ selected true
+ xpos -901
+ ypos 745
+}
+push $N7aae790
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge5
+ selected true
+ xpos -1131
+ ypos 745
+}
+Dot {
+ name Dot13
+ selected true
+ xpos -1097
+ ypos 790
+}

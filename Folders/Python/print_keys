@@ -1,0 +1,77 @@
+import nuke
+def print_keys():
+    a = nuke.Panel("knob")
+    a.addSingleLineInput('knob', 'knob')
+    a.show()
+    knob = a.value("knob")
+    n= nuke.selectedNode()
+    k = n[knob]
+    name = n[knob].label()
+    print knob
+    try:
+        array_size = len(n[knob].value())
+    except:
+        array_size = 1
+    print array_size
+    if array_size ==4:
+        animCurveX = k.animation( 0 ) #ANIMATION IN THE FIRST FIELD (X VALUE)
+        animCurveY = k.animation( 1 ) #ANIMATION IN THE SECOND FIELD (Y VALUE)
+        animCurveZ = k.animation( 2 ) #ANIMATION IN THE SECOND FIELD (Z VALUE)
+        animCurveW = k.animation( 3 ) #ANIMATION IN THE SECOND FIELD (W VALUE)
+        for key in animCurveX.keys():
+            xValueX = key.x
+            yValueX = key.y
+        for key in animCurveY.keys():
+            xValueY = key.x
+            yValueY = key.y
+        for key in animCurveZ.keys():
+            xValueZ = key.x
+            yValueZ = key.y
+        for key in animCurveW.keys():
+            xValueW = key.x
+            yValueW = key.y
+            print '%s X at %s has value %s' % ( name, xValueX, yValueX )
+            print '%s Y at %s has value %s' % ( name, xValueY, yValueY )
+            print '%s Z at %s has value %s' % ( name, xValueZ, yValueZ )
+            print '%s Z at %s has value %s' % ( name, xValueW, yValueW )
+
+
+    if array_size ==3:
+        animCurveX = k.animation( 0 ) #ANIMATION IN THE FIRST FIELD (X VALUE)
+        animCurveY = k.animation( 1 ) #ANIMATION IN THE SECOND FIELD (Y VALUE)
+        animCurveZ = k.animation( 2 ) #ANIMATION IN THE SECOND FIELD (Z VALUE)
+        for key in animCurveX.keys():
+            xValueX = key.x
+            yValueX = key.y
+        for key in animCurveY.keys():
+            xValueY = key.x
+            yValueY = key.y
+        for key in animCurveZ.keys():
+            xValueZ = key.x
+            yValueZ = key.y
+            print '%s X at %s has value %s' % ( name, xValueX, yValueX )
+            print '%s Y at %s has value %s' % ( name, xValueY, yValueY )
+            print '%s Z at %s has value %s' % ( name, xValueZ, yValueZ )
+
+    if array_size ==2:
+        animCurveX = k.animation( 0 ) #ANIMATION IN THE FIRST FIELD (X VALUE)
+        animCurveY = k.animation( 1 ) #ANIMATION IN THE SECOND FIELD (Y VALUE)
+        for key in animCurveX.keys():
+            xValueX = key.x
+            yValueX = key.y
+        for key in animCurveY.keys():
+            xValueY = key.x
+            yValueY = key.y
+            print '%s X at %s has value %s' % ( name, xValueX, yValueX )
+            print '%s Y at %s has value %s' % ( name, xValueY, yValueY )
+
+    if array_size ==1:
+        animCurveX = k.animation( 0 ) #ANIMATION IN THE FIRST FIELD (X VALUE)
+        for key in animCurveX.keys():
+            xValueX = key.x
+            yValueX = key.y
+            print '%s X at %s has value %s' % ( name, xValueX, yValueX )
+
+
+
+
