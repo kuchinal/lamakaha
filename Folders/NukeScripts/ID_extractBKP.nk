@@ -1,0 +1,70 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+add_layer {id_1 id_1.red id_1.green id_1.blue}
+Group {
+name ID28
+autolabel "nuke.thisNode()\['label'].evaluate()"
+tile_color 0x3d3d3dff
+label "<font color=\"white\">\[value Achannels]\n<font color=\"Red\">\[value Red]\n<font color=\"Green\">\[value Green]\n<font color=\"Blue\">\[value Blue]"
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 14
+note_font_color 0xffffffff
+selected true
+xpos 23834
+ypos -15941
+addUserKnob {20 User}
+addUserKnob {41 Achannels l "ID channel" T ID2.Achannels}
+addUserKnob {1 Red}
+Red red
+addUserKnob {22 extractRed l extract -STARTLINE T "a=nuke.thisGroup()\na.end()\na.setSelected(True)\nshuffle_Smart.shuffleRed()"}
+addUserKnob {1 Green}
+Green green
+addUserKnob {22 extractGreen l extract -STARTLINE T "a=nuke.thisGroup()\na.end()\na.setSelected(True)\nshuffle_Smart.shuffleGreen()"}
+addUserKnob {1 Blue}
+Blue blue
+addUserKnob {22 extractBlue l ectract -STARTLINE T "a=nuke.thisGroup()\na.end()\na.setSelected(True)\nshuffle_Smart.shuffleBlue()"}
+}
+Input {
+inputs 0
+name Input1
+xpos -576
+ypos -367
+}
+Dot {
+name Dot1
+xpos -542
+ypos -303
+}
+set N319d9e40 [stack 0]
+push $N319d9e40
+Dot {
+name Dot2
+xpos -667
+ypos -303
+}
+Remove {
+name Remove1
+xpos -701
+ypos -209
+}
+Merge2 {
+inputs 2
+Achannels id_1
+Bchannels none
+output rgb
+name ID2
+tile_color 0xffffffff
+label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+note_font_size 15
+selected true
+xpos -576
+ypos -236
+postage_stamp_frame 1001
+}
+Output {
+name Output1
+xpos -576
+ypos -124
+}
+end_group

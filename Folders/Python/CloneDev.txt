@@ -1,0 +1,29 @@
+nod = nuke.selectedNode()
+x = nod['xpos'].value()
+y = nod['ypos'].value()
+nodname = nod['name'].value()
+clas = nod.Class()
+list = "disable"
+for i in range (nod.getNumKnobs()):
+    name =  nod.knob (i).name()
+    print name
+    list = list +" " +name
+print list
+
+p = nuke.Panel('links')
+p.addEnumerationPulldown('Link A', list)
+p.addEnumerationPulldown('Link B', list)
+p.addEnumerationPulldown('Link C', list)
+p.addEnumerationPulldown('Link D', list)
+p.addEnumerationPulldown('Link E', list)
+p.addEnumerationPulldown('Link F', list)
+p.addEnumerationPulldown('Link G', list)
+p.addEnumerationPulldown('Link H', list)
+p.addEnumerationPulldown('Link I', list)
+p.addEnumerationPulldown('Link K', list)
+p.show()
+
+new = nuke.createNode(clas)
+new.setInput(0,None)
+new.setXYpos(x+150,y)
+

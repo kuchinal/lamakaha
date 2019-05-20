@@ -1,0 +1,573 @@
+set cut_paste_input [stack 0]
+version 6.1 v3
+BackdropNode {
+ inputs 0
+ name BackdropNode14
+ tile_color 0x8e8e3800
+ label "Displace\n"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 60
+ selected true
+ xpos 1172
+ ypos 379
+ bdwidth 623
+ bdheight 345
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode10
+ tile_color 0x7171c600
+ label "Stereo\n"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 60
+ selected true
+ xpos 2177
+ ypos 379
+ bdwidth 213
+ bdheight 158
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode11
+ tile_color 0xbc7140ff
+ label "Point Cloud"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 60
+ note_font_color 0xff
+ selected true
+ xpos 1797
+ ypos 379
+ bdwidth 378
+ bdheight 157
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode13
+ tile_color 0x8e8e3800
+ label Depth
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 60
+ selected true
+ xpos 3221
+ ypos 377
+ bdwidth 211
+ bdheight 170
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode12
+ tile_color 0x799cd2ff
+ label "Depth Colored\n"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 60
+ selected true
+ xpos 2746
+ ypos 377
+ bdwidth 474
+ bdheight 166
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode15
+ tile_color 0xff7171ff
+ label "Left /Right"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 60
+ selected true
+ xpos 2391
+ ypos 378
+ bdwidth 358
+ bdheight 165
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0xff
+ label Helpers
+ note_font "DejaVu Sans Bold Bold"
+ note_font_size 100
+ selected true
+ xpos 1188
+ ypos -1010
+ bdwidth 1796
+ bdheight 490
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0xaaaaaaff
+ label "Layers\n"
+ note_font "DejaVu Sans Bold Bold"
+ note_font_size 100
+ selected true
+ xpos 1190
+ ypos -1461
+ bdwidth 1894
+ bdheight 447
+}
+push $cut_paste_input
+Merge2 {
+ name Merge19
+ tile_color 0xffffff
+ label Depth
+ note_font_size 50
+ selected true
+ xpos 1978
+ ypos -175
+ icon hiddeninput10.png
+ hide_input true
+}
+set N6b22260 [stack 0]
+Dot {
+ name Dot25
+ label "Depth input"
+ note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 50
+ note_font_color 0xd19c00ff
+ selected true
+ xpos 2012
+ ypos 272
+}
+set N6b269c0 [stack 0]
+Dot {
+ name Dot26
+ selected true
+ xpos 2914
+ ypos 272
+}
+set N6b30c60 [stack 0]
+Dot {
+ name Dot36
+ selected true
+ xpos 3316
+ ypos 272
+}
+NoOp {
+ name NoOp2
+ label DEPTH
+ note_font_size 20
+ selected true
+ xpos 3282
+ ypos 475
+}
+push $N6b30c60
+Group {
+ name Group3
+ label "Depth Colored"
+ note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ selected true
+ xpos 2880
+ ypos 478
+ addUserKnob {20 User}
+ addUserKnob {41 Focus T Add1.value}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -222
+  ypos -112
+ }
+ Add {
+  value 0.46
+  name Add1
+  xpos -222
+  ypos -40
+ }
+ ColorWheel {
+  inputs 0
+  format "1920 1080 0 0 1920 1080 1 HD"
+  gamma 0.45
+  name ColorWheel1
+  xpos -131
+  ypos -323
+ }
+ Crop {
+  box {418 0 1502 1076}
+  reformat true
+  crop false
+  name Crop2
+  xpos -131
+  ypos -218
+ }
+ SphericalTransform {
+  rx 90
+  out_rot_order YZX
+  fix true
+  name SphericalTransform1
+  xpos -131
+  ypos -182
+ }
+ Crop {
+  box {0 725 1940 795}
+  reformat true
+  crop false
+  name Crop1
+  xpos -131
+  ypos -13
+ }
+set N6b554e0 [stack 0]
+ STMap {
+  inputs 2
+  uv rgb
+  name STMap1
+  xpos -222
+  ypos 59
+ }
+ Output {
+  name Output1
+  xpos -222
+  ypos 160
+ }
+push $N6b554e0
+ Viewer {
+  viewerProcess None
+  input_process false
+  name Viewer1
+  xpos -131
+  ypos 43
+ }
+end_group
+push $N6b269c0
+push $cut_paste_input
+Dot {
+ name Dot32
+ selected true
+ xpos 2255
+ ypos -179
+}
+Dot {
+ name Dot28
+ label "Color Input"
+ note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 50
+ note_font_color 0xcf00ff
+ selected true
+ xpos 2255
+ ypos 170
+}
+set N6b70090 [stack 0]
+Dot {
+ name Dot33
+ selected true
+ xpos 1868
+ ypos 170
+}
+set N6b6d0e0 [stack 0]
+Dot {
+ name Dot34
+ selected true
+ xpos 1868
+ ypos 491
+}
+kvDepthPoints {
+ inputs 2
+ name kvDepthPoints1
+ label "POINT CLOUD"
+ note_font_size 20
+ selected true
+ xpos 1978
+ ypos 469
+ "Point size" 10
+ nthPoint 5
+ drawScreen false
+ drawBBox false
+}
+Grid {
+ inputs 0
+ number {30 15}
+ size 3
+ color {1 1 1 0.5}
+ name Grid3
+ selected true
+ xpos 1673
+ ypos 506
+}
+Text {
+ message "-0.003 = 0.658\n"
+ font //Rocky/CINE/_GlobalScripts/Fonts/arial.ttf
+ yjustify center
+ box {525 223 1575 670}
+ translate {-346 368}
+ scale 1.601
+ center {536 426}
+ color {0 0.5 0 1}
+ name Text3
+ selected true
+ xpos 1673
+ ypos 534
+}
+Card2 {
+ rows 1
+ columns 1
+ translate {0 0 0.3285999894}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card4
+ label -0.003
+ note_font_size 20
+ selected true
+ xpos 1673
+ ypos 581
+ disable true
+}
+Grid {
+ inputs 0
+ number {30 15}
+ size 3
+ color {1 1 1 0.5}
+ name Grid2
+ selected true
+ xpos 1577
+ ypos 420
+}
+Text {
+ message "0.003 = 0.343\n"
+ font //Rocky/CINE/_GlobalScripts/Fonts/arial.ttf
+ yjustify center
+ box {525 223 1575 670}
+ translate {-480 360}
+ scale 1.601
+ center {536 426}
+ color {0 0 0.5 1}
+ name Text2
+ selected true
+ xpos 1577
+ ypos 448
+}
+Card2 {
+ rows 1
+ columns 1
+ translate {0 0 0.1710000038}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card2
+ label 0.003
+ note_font_size 20
+ selected true
+ xpos 1577
+ ypos 518
+ disable true
+}
+Grid {
+ inputs 0
+ number {30 15}
+ size 3
+ color {1 1 1 0.5}
+ name Grid1
+ selected true
+ xpos 1447
+ ypos 420
+}
+Text {
+ message Screen
+ font //Rocky/CINE/_GlobalScripts/Fonts/arial.ttf
+ yjustify center
+ box {525 223 1575 670}
+ translate {404 360}
+ scale 1.601
+ center {536 426}
+ color {1 0 0 1}
+ name Text1
+ selected true
+ xpos 1447
+ ypos 448
+}
+Card2 {
+ rows 1
+ columns 1
+ translate {0 0 0.251}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ label screen
+ note_font_size 20
+ selected true
+ xpos 1447
+ ypos 484
+}
+push $N6b269c0
+Dot {
+ name Dot27
+ selected true
+ xpos 1263
+ ypos 272
+}
+push $N6b6d0e0
+Dot {
+ name Dot29
+ selected true
+ xpos 1353
+ ypos 170
+}
+Card2 {
+ rows 200
+ columns 200
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card3
+ selected true
+ xpos 1319
+ ypos 498
+}
+DisplaceGeo {
+ inputs 2
+ scale 0.5
+ name DisplaceGeo2
+ selected true
+ xpos 1229
+ ypos 498
+ disable true
+}
+Light2 {
+ inputs 0
+ intensity 3
+ translate {-1.077999949 0 0.648999989}
+ name Light4
+ selected true
+ xpos 1405
+ ypos 557
+}
+Light2 {
+ intensity 7
+ translate {2.424000025 0 1.101999998}
+ name Light3
+ selected true
+ xpos 1317
+ ypos 557
+}
+set N6d00930 [stack 0]
+push $N6d00930
+Scene {
+ inputs 6
+ name Scene3
+ selected true
+ xpos 1239
+ ypos 557
+}
+Dot {
+ name Dot35
+ selected true
+ xpos 1263
+ ypos 675
+}
+push 0
+ScanlineRender {
+ inputs 2
+ output_motion_vectors_type accurate
+ name ScanlineRender3
+ label DISPL
+ note_font_size 20
+ selected true
+ xpos 1434
+ ypos 653
+}
+push $N6b70090
+svo_Visor_V3 {
+ name svo_Visor_V3_1
+ label STEREO
+ note_font_size 20
+ selected true
+ xpos 2221
+ ypos 473
+ anaglyphMethod Interlaced
+ saturationSelect "Full Color"
+}
+push $N6b22260
+push 0
+push 0
+push 0
+push $N6b22260
+Viewer {
+ inputs 5
+ frame 100
+ gain 1.9
+ gamma 0.07
+ viewerProcess None
+ input_process false
+ translate {0.8439999819 -0.5460000038}
+ rotate -72.03675144
+ name Viewer3
+ tile_color 0xe4ff
+ label Viewer1
+ note_font_size 50
+ selected true
+ xpos 1128
+ ypos -159
+ icon hiddeninput10.png
+ hide_input true
+}
+push $N6b22260
+push 0
+push 0
+push 0
+push $N6b70090
+Dot {
+ name Dot30
+ selected true
+ xpos 2565
+ ypos 170
+}
+NoOp {
+ name NoOp1
+ label L/R
+ note_font_size 20
+ selected true
+ xpos 2531
+ ypos 476
+ icon hiddeninput10.png
+}
+Viewer {
+ inputs 5
+ frame 100
+ viewerProcess None
+ input_process false
+ translate {-0.1519999951 -0.2259999961}
+ rotate -51.70039153
+ gauge 0.7331439651
+ name Viewer2
+ tile_color 0xff0000ff
+ label Viewer2
+ note_font_size 50
+ selected true
+ xpos 1581
+ ypos -175
+ icon hiddeninput10.png
+ hide_input true
+}

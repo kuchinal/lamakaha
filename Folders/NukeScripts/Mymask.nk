@@ -1,0 +1,48 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+add_layer {rgba rgba.water}
+Bezier {
+ inputs 0
+ output alpha
+ cliptype none
+ points {{
+}}
+ shape {}
+ center {1024 778}
+ name Bezier2
+ selected true
+ xpos -567
+ ypos 642
+ addUserKnob {20 Geo}
+ addUserKnob {4 type M {circle square oval rectangle triangle}}
+ addUserKnob {32 set -STARTLINE T BezierGeoProc}
+}
+Blur {
+ name Blur1
+ selected true
+ xpos -567
+ ypos 688
+}
+Dot {
+ name Dot3
+ tile_color 0xff
+ selected true
+ xpos -533
+ ypos 741
+}
+push $cut_paste_input
+Dot {
+ name Dot1
+ tile_color 0xff
+ selected true
+ xpos -423
+ ypos 608
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge2
+ selected true
+ xpos -457
+ ypos 738
+}

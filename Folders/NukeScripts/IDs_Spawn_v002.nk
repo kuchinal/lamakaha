@@ -1,0 +1,266 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Dot {
+ name Dot1
+ selected true
+ xpos 2025
+ ypos 1364
+}
+set N26cf12a0 [stack 0]
+Dot {
+ name Dot401
+ selected true
+ xpos 2128
+ ypos 1364
+}
+set N1631ae10 [stack 0]
+Dot {
+ name Dot3
+ selected true
+ xpos 2215
+ ypos 1364
+}
+set N15e3d2c0 [stack 0]
+Dot {
+ name Dot4
+ selected true
+ xpos 2296
+ ypos 1364
+}
+set N15e3d5f0 [stack 0]
+Dot {
+ name Dot5
+ selected true
+ xpos 2380
+ ypos 1364
+}
+set N15e3d920 [stack 0]
+Dot {
+ name Dot6
+ selected true
+ xpos 2462
+ ypos 1364
+}
+set N15e3e910 [stack 0]
+Dot {
+ name Dot7
+ selected true
+ xpos 2546
+ ypos 1364
+}
+set N15e3ec40 [stack 0]
+Dot {
+ name Dot8
+ selected true
+ xpos 2628
+ ypos 1364
+}
+push $N15e3ec40
+push $N15e3e910
+push $N15e3d920
+push $N15e3d5f0
+push $N15e3d2c0
+push $N1631ae10
+push $N26cf12a0
+Remove {
+ name Remove1
+ selected true
+ xpos 1991
+ ypos 1386
+}
+Dot {
+ name Dot2
+ selected true
+ xpos 2025
+ ypos 1427
+}
+add_layer {IDMtl_1 IDMtl_1.red IDMtl_1.green IDMtl_1.blue IDMtl_1.alpha}
+Merge2 {
+ inputs 2
+ Achannels IDMtl_1
+ Bchannels none
+ output rgb
+ name ID10
+ autolabel lab
+ tile_color 0xffffffff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+ note_font_size 15
+ selected true
+ xpos 2094
+ ypos 1390
+ postage_stamp_frame 1001
+ addUserKnob {20 User}
+ addUserKnob {22 SpawnRed l "<font color=\"Red\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Red'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(2466250752L)\ns\['red'].setValue(1)\ns\['green'].setValue(1)\ns\['blue'].setValue(1)\ns\['alpha'].setValue(1)\ns\['hide_input'].setValue(1)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Red l "Red   " -STARTLINE}
+ Red red
+ addUserKnob {22 SpawnGreen l "<font color=\"Green\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Green'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1063467008L)\ns\['red'].setValue(2)\ns\['green'].setValue(2)\ns\['blue'].setValue(2)\ns\['alpha'].setValue(2)\ns\['hide_input'].setValue(2)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Green -STARTLINE}
+ Green green
+ addUserKnob {22 SpawnBlue l "<font color=\"Blue\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Blue'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1027575296L)\ns\['red'].setValue(3)\ns\['green'].setValue(3)\ns\['blue'].setValue(3)\ns\['alpha'].setValue(3)\ns\['hide_input'].setValue(3)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Blue l "Blue   " -STARTLINE}
+ Blue blue
+ addUserKnob {22 Set T "p = nuke.thisNode()\nlayer = str(p\['Achannels'].value().rsplit(\".\")\[0])\nred=p\['Red'].value()\ngreen=p\['Green'].value()\nblue=p\['Blue'].value()\nfra=str(int(p\['postage_stamp_frame'].value()))\nlab = layer+\" \\n \" + red+\" \\n \" + green+\" \\n \" + blue+\" \\n \" + \"frame \"+ fra\np\['autolabel'].setValue(\"lab\")" +STARTLINE}
+}
+add_layer {IDMtl_2 IDMtl_2.red IDMtl_2.green IDMtl_2.blue IDMtl_2.alpha}
+Merge2 {
+ inputs 2
+ Achannels IDMtl_2
+ Bchannels none
+ output rgb
+ name ID11
+ autolabel lab
+ tile_color 0xffffffff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+ note_font_size 15
+ selected true
+ xpos 2181
+ ypos 1390
+ postage_stamp_frame 1001
+ addUserKnob {20 User}
+ addUserKnob {22 SpawnRed l "<font color=\"Red\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Red'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(2466250752L)\ns\['red'].setValue(1)\ns\['green'].setValue(1)\ns\['blue'].setValue(1)\ns\['alpha'].setValue(1)\ns\['hide_input'].setValue(1)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Red l "Red   " -STARTLINE}
+ Red red
+ addUserKnob {22 SpawnGreen l "<font color=\"Green\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Green'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1063467008L)\ns\['red'].setValue(2)\ns\['green'].setValue(2)\ns\['blue'].setValue(2)\ns\['alpha'].setValue(2)\ns\['hide_input'].setValue(2)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Green -STARTLINE}
+ Green green
+ addUserKnob {22 SpawnBlue l "<font color=\"Blue\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Blue'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1027575296L)\ns\['red'].setValue(3)\ns\['green'].setValue(3)\ns\['blue'].setValue(3)\ns\['alpha'].setValue(3)\ns\['hide_input'].setValue(3)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Blue l "Blue   " -STARTLINE}
+ Blue blue
+ addUserKnob {22 Set T "p = nuke.thisNode()\nlayer = str(p\['Achannels'].value().rsplit(\".\")\[0])\nred=p\['Red'].value()\ngreen=p\['Green'].value()\nblue=p\['Blue'].value()\nfra=str(int(p\['postage_stamp_frame'].value()))\nlab = layer+\" \\n \" + red+\" \\n \" + green+\" \\n \" + blue+\" \\n \" + \"frame \"+ fra\np\['autolabel'].setValue(\"lab\")" +STARTLINE}
+}
+add_layer {IDMtl_3 IDMtl_3.red IDMtl_3.green IDMtl_3.blue IDMtl_3.alpha}
+Merge2 {
+ inputs 2
+ Achannels IDMtl_3
+ Bchannels none
+ output rgb
+ name ID12
+ autolabel lab
+ tile_color 0xffffffff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+ note_font_size 15
+ selected true
+ xpos 2262
+ ypos 1390
+ postage_stamp_frame 1001
+ addUserKnob {20 User}
+ addUserKnob {22 SpawnRed l "<font color=\"Red\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Red'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(2466250752L)\ns\['red'].setValue(1)\ns\['green'].setValue(1)\ns\['blue'].setValue(1)\ns\['alpha'].setValue(1)\ns\['hide_input'].setValue(1)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Red l "Red   " -STARTLINE}
+ Red red
+ addUserKnob {22 SpawnGreen l "<font color=\"Green\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Green'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1063467008L)\ns\['red'].setValue(2)\ns\['green'].setValue(2)\ns\['blue'].setValue(2)\ns\['alpha'].setValue(2)\ns\['hide_input'].setValue(2)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Green -STARTLINE}
+ Green green
+ addUserKnob {22 SpawnBlue l "<font color=\"Blue\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Blue'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1027575296L)\ns\['red'].setValue(3)\ns\['green'].setValue(3)\ns\['blue'].setValue(3)\ns\['alpha'].setValue(3)\ns\['hide_input'].setValue(3)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Blue l "Blue   " -STARTLINE}
+ Blue blue
+ addUserKnob {22 Set T "p = nuke.thisNode()\nlayer = str(p\['Achannels'].value().rsplit(\".\")\[0])\nred=p\['Red'].value()\ngreen=p\['Green'].value()\nblue=p\['Blue'].value()\nfra=str(int(p\['postage_stamp_frame'].value()))\nlab = layer+\" \\n \" + red+\" \\n \" + green+\" \\n \" + blue+\" \\n \" + \"frame \"+ fra\np\['autolabel'].setValue(\"lab\")" +STARTLINE}
+}
+add_layer {IDMtl_4 IDMtl_4.red IDMtl_4.green IDMtl_4.blue IDMtl_4.alpha}
+Merge2 {
+ inputs 2
+ Achannels IDMtl_4
+ Bchannels none
+ output rgb
+ name ID13
+ autolabel lab
+ tile_color 0xffffffff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+ note_font_size 15
+ selected true
+ xpos 2346
+ ypos 1390
+ postage_stamp_frame 1001
+ addUserKnob {20 User}
+ addUserKnob {22 SpawnRed l "<font color=\"Red\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Red'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(2466250752L)\ns\['red'].setValue(1)\ns\['green'].setValue(1)\ns\['blue'].setValue(1)\ns\['alpha'].setValue(1)\ns\['hide_input'].setValue(1)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Red l "Red   " -STARTLINE}
+ Red red
+ addUserKnob {22 SpawnGreen l "<font color=\"Green\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Green'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1063467008L)\ns\['red'].setValue(2)\ns\['green'].setValue(2)\ns\['blue'].setValue(2)\ns\['alpha'].setValue(2)\ns\['hide_input'].setValue(2)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Green -STARTLINE}
+ Green green
+ addUserKnob {22 SpawnBlue l "<font color=\"Blue\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Blue'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1027575296L)\ns\['red'].setValue(3)\ns\['green'].setValue(3)\ns\['blue'].setValue(3)\ns\['alpha'].setValue(3)\ns\['hide_input'].setValue(3)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Blue l "Blue   " -STARTLINE}
+ Blue blue
+ addUserKnob {22 Set T "p = nuke.thisNode()\nlayer = str(p\['Achannels'].value().rsplit(\".\")\[0])\nred=p\['Red'].value()\ngreen=p\['Green'].value()\nblue=p\['Blue'].value()\nfra=str(int(p\['postage_stamp_frame'].value()))\nlab = layer+\" \\n \" + red+\" \\n \" + green+\" \\n \" + blue+\" \\n \" + \"frame \"+ fra\np\['autolabel'].setValue(\"lab\")" +STARTLINE}
+}
+add_layer {IDMtl_5 IDMtl_5.red IDMtl_5.green IDMtl_5.blue IDMtl_5.alpha}
+Merge2 {
+ inputs 2
+ Achannels IDMtl_5
+ Bchannels none
+ output rgb
+ name ID14
+ autolabel lab
+ tile_color 0xffffffff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+ note_font_size 15
+ selected true
+ xpos 2428
+ ypos 1390
+ postage_stamp_frame 1001
+ addUserKnob {20 User}
+ addUserKnob {22 SpawnRed l "<font color=\"Red\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Red'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(2466250752L)\ns\['red'].setValue(1)\ns\['green'].setValue(1)\ns\['blue'].setValue(1)\ns\['alpha'].setValue(1)\ns\['hide_input'].setValue(1)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Red l "Red   " -STARTLINE}
+ Red red
+ addUserKnob {22 SpawnGreen l "<font color=\"Green\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Green'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1063467008L)\ns\['red'].setValue(2)\ns\['green'].setValue(2)\ns\['blue'].setValue(2)\ns\['alpha'].setValue(2)\ns\['hide_input'].setValue(2)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Green -STARTLINE}
+ Green green
+ addUserKnob {22 SpawnBlue l "<font color=\"Blue\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Blue'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1027575296L)\ns\['red'].setValue(3)\ns\['green'].setValue(3)\ns\['blue'].setValue(3)\ns\['alpha'].setValue(3)\ns\['hide_input'].setValue(3)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Blue l "Blue   " -STARTLINE}
+ Blue blue
+ addUserKnob {22 Set T "p = nuke.thisNode()\nlayer = str(p\['Achannels'].value().rsplit(\".\")\[0])\nred=p\['Red'].value()\ngreen=p\['Green'].value()\nblue=p\['Blue'].value()\nfra=str(int(p\['postage_stamp_frame'].value()))\nlab = layer+\" \\n \" + red+\" \\n \" + green+\" \\n \" + blue+\" \\n \" + \"frame \"+ fra\np\['autolabel'].setValue(\"lab\")" +STARTLINE}
+}
+add_layer {IDMtl_6 IDMtl_6.red IDMtl_6.green IDMtl_6.blue IDMtl_6.alpha}
+Merge2 {
+ inputs 2
+ Achannels IDMtl_6
+ Bchannels none
+ output rgb
+ name ID15
+ autolabel lab
+ tile_color 0xffffffff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+ note_font_size 15
+ selected true
+ xpos 2512
+ ypos 1390
+ postage_stamp_frame 1001
+ addUserKnob {20 User}
+ addUserKnob {22 SpawnRed l "<font color=\"Red\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Red'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(2466250752L)\ns\['red'].setValue(1)\ns\['green'].setValue(1)\ns\['blue'].setValue(1)\ns\['alpha'].setValue(1)\ns\['hide_input'].setValue(1)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Red l "Red   " -STARTLINE}
+ Red red
+ addUserKnob {22 SpawnGreen l "<font color=\"Green\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Green'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1063467008L)\ns\['red'].setValue(2)\ns\['green'].setValue(2)\ns\['blue'].setValue(2)\ns\['alpha'].setValue(2)\ns\['hide_input'].setValue(2)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Green -STARTLINE}
+ Green green
+ addUserKnob {22 SpawnBlue l "<font color=\"Blue\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Blue'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1027575296L)\ns\['red'].setValue(3)\ns\['green'].setValue(3)\ns\['blue'].setValue(3)\ns\['alpha'].setValue(3)\ns\['hide_input'].setValue(3)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Blue l "Blue   " -STARTLINE}
+ Blue blue
+ addUserKnob {22 Set T "p = nuke.thisNode()\nlayer = str(p\['Achannels'].value().rsplit(\".\")\[0])\nred=p\['Red'].value()\ngreen=p\['Green'].value()\nblue=p\['Blue'].value()\nfra=str(int(p\['postage_stamp_frame'].value()))\nlab = layer+\" \\n \" + red+\" \\n \" + green+\" \\n \" + blue+\" \\n \" + \"frame \"+ fra\np\['autolabel'].setValue(\"lab\")" +STARTLINE}
+}
+add_layer {IDMtl_7 IDMtl_7.red IDMtl_7.green IDMtl_7.blue IDMtl_7.alpha}
+Merge2 {
+ inputs 2
+ Achannels IDMtl_7
+ Bchannels none
+ output rgb
+ name ID16
+ autolabel lab
+ tile_color 0xffffffff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+ note_font_size 15
+ selected true
+ xpos 2594
+ ypos 1390
+ postage_stamp_frame 1001
+ addUserKnob {20 User}
+ addUserKnob {22 SpawnRed l "<font color=\"Red\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Red'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(2466250752L)\ns\['red'].setValue(1)\ns\['green'].setValue(1)\ns\['blue'].setValue(1)\ns\['alpha'].setValue(1)\ns\['hide_input'].setValue(1)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Red l "Red   " -STARTLINE}
+ Red red
+ addUserKnob {22 SpawnGreen l "<font color=\"Green\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Green'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1063467008L)\ns\['red'].setValue(2)\ns\['green'].setValue(2)\ns\['blue'].setValue(2)\ns\['alpha'].setValue(2)\ns\['hide_input'].setValue(2)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Green -STARTLINE}
+ Green green
+ addUserKnob {22 SpawnBlue l "<font color=\"Blue\">Spawn" T "t = nuke.thisNode()\nchannel = t\['Blue'].value()\nx = t\['xpos'].value()\ny = t\['ypos'].value()\ns = nuke.nodes.Shuffle()\ns.setXYpos(x,y+100)\ns.setInput(0,t)\ns\['in'].setValue(\"rgba\")\ns\['tile_color'].setValue(1027575296L)\ns\['red'].setValue(3)\ns\['green'].setValue(3)\ns\['blue'].setValue(3)\ns\['alpha'].setValue(3)\ns\['hide_input'].setValue(3)\ns\['note_font_size'].setValue(14)\ns\['autolabel'].setValue(\"nuke.thisNode()\['label'].value()\")\ns\['label'].setValue(channel)" +STARTLINE}
+ addUserKnob {1 Blue l "Blue   " -STARTLINE}
+ Blue blue
+ addUserKnob {22 Set T "p = nuke.thisNode()\nlayer = str(p\['Achannels'].value().rsplit(\".\")\[0])\nred=p\['Red'].value()\ngreen=p\['Green'].value()\nblue=p\['Blue'].value()\nfra=str(int(p\['postage_stamp_frame'].value()))\nlab = layer+\" \\n \" + red+\" \\n \" + green+\" \\n \" + blue+\" \\n \" + \"frame \"+ fra\np\['autolabel'].setValue(\"lab\")" +STARTLINE}
+}

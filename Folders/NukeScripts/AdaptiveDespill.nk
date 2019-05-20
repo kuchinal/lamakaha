@@ -1,0 +1,818 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+NoOp {
+ name KEY-
+ help NoOp1
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -28509
+ ypos 23628
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T NoOp1}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+ addUserKnob {26 "" +STARTLINE T "<font color='DimGray'><b> &copy; Alexey Kuchinski"}
+}
+Shuffle {
+ red alpha
+ green alpha
+ blue alpha
+ name Shuffle12
+ tile_color 0xffffffff
+ selected true
+ xpos -28509
+ ypos 23720
+}
+Group {
+ name ErodeMini
+ tile_color 0xe58700ff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ note_font_color 0xe58700ff
+ selected true
+ xpos -28509
+ ypos 23775
+ addUserKnob {20 User}
+ addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+ addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+ addUserKnob {26 ERODE}
+ addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+ addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+ addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+ addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+ addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+ addUserKnob {26 BLUR}
+ addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+ addUserKnob {26 ""}
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {26 ""}
+ addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+ addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos -198
+  ypos 103
+  number 1
+ }
+ Dot {
+  name Dot15
+  xpos -164
+  ypos 218
+ }
+set N2dc82ca0 [stack 0]
+ Dot {
+  name Dot14
+  xpos -164
+  ypos 285
+ }
+set N17508a70 [stack 0]
+ Blur {
+  channels rgba
+  name Blur2
+  selected true
+  xpos -198
+  ypos 584
+ }
+ Dot {
+  name Dot13
+  xpos -164
+  ypos 866
+ }
+push $N17508a70
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha white
+  name Shuffle1
+  xpos -292
+  ypos 281
+ }
+push $N2dc82ca0
+ Shuffle {
+  alpha white
+  name Shuffle2
+  xpos -413
+  ypos 214
+  disable {{"\[exists parent.input1] "}}
+ }
+ Switch {
+  inputs 2
+  which {{parent.cutIn}}
+  name Switch1
+  xpos -413
+  ypos 281
+ }
+ Dot {
+  name Dot8
+  xpos -379
+  ypos 353
+ }
+set Na7f26b90 [stack 0]
+ Dot {
+  name Dot3
+  xpos -379
+  ypos 619
+ }
+set N2853b7a0 [stack 0]
+ Dot {
+  name Dot9
+  xpos -379
+  ypos 702
+ }
+push $N2853b7a0
+push $Na7f26b90
+ Input {
+  inputs 0
+  name Input1
+  xpos -528
+  ypos 84
+ }
+ Dot {
+  name Dot10
+  xpos -494
+  ypos 110
+ }
+set N287639f0 [stack 0]
+ Invert {
+  channels rgba
+  mix {{parent.Invertinput}}
+  name Invert4
+  xpos -528
+  ypos 171
+ }
+ Dot {
+  name Dot5
+  xpos -494
+  ypos 236
+ }
+set N26cab6d0 [stack 0]
+ Dot {
+  name Dot6
+  xpos -705
+  ypos 236
+ }
+ FilterErode {
+  channels rgba
+  size 3
+  name FilterErode1
+  xpos -739
+  ypos 281
+ }
+ Dot {
+  name Dot7
+  xpos -705
+  ypos 353
+ }
+push $N26cab6d0
+ Merge2 {
+  inputs 2+1
+  operation copy
+  name Merge1
+  xpos -528
+  ypos 349
+ }
+ Dot {
+  name Dot1
+  xpos -494
+  ypos 432
+ }
+set N931b05d0 [stack 0]
+ Dot {
+  name Dot4
+  xpos -696
+  ypos 432
+ }
+ Reformat {
+  type scale
+  scale 5
+  name Reformat11
+  xpos -730
+  ypos 468
+ }
+ FilterErode {
+  channels rgba
+  size {{parent.miniErodeSize}}
+  name FilterErode6
+  xpos -730
+  ypos 494
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat11.scale}}
+  name Reformat12
+  xpos -730
+  ypos 520
+ }
+ Dot {
+  name Dot2
+  xpos -696
+  ypos 619
+ }
+push $N931b05d0
+ Merge2 {
+  inputs 2+1
+  operation copy
+  name Merge2
+  xpos -528
+  ypos 615
+  disable {{!parent.miniErode}}
+ }
+ Blur {
+  inputs 1+1
+  channels rgba
+  name Blur1
+  xpos -528
+  ypos 698
+ }
+push $N287639f0
+ Dot {
+  name Dot11
+  xpos -872
+  ypos 110
+ }
+ Dot {
+  name Dot12
+  xpos -872
+  ypos 804
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  mix {{parent.mix}}
+  name mix
+  xpos -528
+  ypos 800
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  mix {{parent.cutIn}}
+  name Merge3
+  xpos -528
+  ypos 862
+ }
+ Output {
+  name Output1
+  xpos -528
+  ypos 943
+ }
+end_group
+Dot {
+ name Dot174
+ selected true
+ xpos -28475
+ ypos 23828
+}
+push 0
+NoOp {
+ name Plate-
+ help Dot178
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -27977
+ ypos 23407
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Dot178}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+ addUserKnob {26 "" +STARTLINE T "<font color='DimGray'><b> &copy; Alexey Kuchinski"}
+}
+Dot {
+ name Dot179
+ selected true
+ xpos -27943
+ ypos 23502
+}
+set N31d5f150 [stack 0]
+Group {
+ name despillMadnessMy
+ note_font "Bitstream Vera Sans"
+ selected true
+ xpos -27977
+ ypos 23581
+ mapsize {0.15 0.15}
+ addUserKnob {20 DespillMadness l "Despill Settings"}
+ addUserKnob {41 screenType l "screen type" T GizmoControl.screenType}
+ addUserKnob {41 algorithm l "despill algorithm" T GizmoControl.algorithm}
+ addUserKnob {41 LimitPercentage l "fine tune" T RedLimitsGreen.LimitPercentage}
+ addUserKnob {26 ""}
+ addUserKnob {26 text_2 l "" +STARTLINE T "spill area correction"}
+ addUserKnob {26 spacer l " " T " "}
+ addUserKnob {6 sourceLuma l "restore source luminance" t "Restores luminance of original image." +STARTLINE}
+ addUserKnob {41 saturation T CC_SpillMap.saturation}
+ addUserKnob {41 gamma T CC_SpillMap.gamma}
+ addUserKnob {41 offset T CC_SpillMap.offset}
+ addUserKnob {26 ""}
+ addUserKnob {41 spillMatteOut l "output spill matte in alpha" T GizmoControl.spillMatteOut}
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannel l mask T KeymixMask.maskChannel}
+ addUserKnob {6 invmsk l invert -STARTLINE}
+ addUserKnob {41 which l mix T mix.which}
+}
+ Input {
+  inputs 0
+  name img
+  xpos 262
+  ypos -342
+ }
+ Dot {
+  name Dot6
+  xpos 296
+  ypos -186
+ }
+set N705ec6e0 [stack 0]
+ Dot {
+  name Dot2
+  xpos 296
+  ypos -71
+ }
+set N9a0a040 [stack 0]
+ Dot {
+  name Dot3
+  xpos 626
+  ypos -71
+ }
+set N3c9f8630 [stack 0]
+ Expression {
+  expr2 b>g*LimitPercentage?g*LimitPercentage:b
+  expr3 b-g*LimitPercentage
+  name GreenLimitsBlue1
+  xpos 728
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N3c9f8630
+ Expression {
+  expr2 b>r*LimitPercentage?r*LimitPercentage:b
+  expr3 b-r*LimitPercentage
+  name RedLimitsBlue
+  xpos 592
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N3c9f8630
+ Expression {
+  expr2 b>(g+2*r)/2*LimitPercentage?(g+2*r)/2*LimitPercentage:b
+  expr3 b-(2*r+g)*LimitPercentage/2
+  name DoubleRedAve2
+  xpos 1125
+  ypos 43
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N3c9f8630
+ Expression {
+  expr2 b>(2*g+r)/2*LimitPercentage?(2*g+r)/2*LimitPercentage:b
+  expr3 b-(r+2*g)*LimitPercentage/2
+  name DoubleGreenAve
+  xpos 998
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage}}
+ }
+push $N3c9f8630
+ Expression {
+  expr2 b>(g+r)/2*LimitPercentage?(g+r)/2*LimitPercentage:b
+  expr3 b-(r+g)*LimitPercentage/2
+  name RedAndGreenLimitBlue
+  xpos 862
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+ Switch {
+  inputs 5
+  which {{GizmoControl.algorithm i}}
+  name SwitchBlue
+  xpos 728
+  ypos 190
+ }
+ Dot {
+  name Dot5
+  xpos 762
+  ypos 370
+ }
+push $N9a0a040
+ Dot {
+  name Dot1
+  xpos 164
+  ypos -71
+ }
+set N9465ec70 [stack 0]
+ Expression {
+  expr1 g>b*LimitPercentage?b*LimitPercentage:g
+  expr3 g-b*LimitPercentage
+  name BlueLimitsGreen
+  xpos -15
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N9465ec70
+ Expression {
+  expr1 g>r*LimitPercentage?r*LimitPercentage:g
+  expr3 g-r*LimitPercentage
+  name RedLimitsGreen
+  xpos -160
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage 0.94
+ }
+push $N9465ec70
+ Expression {
+  expr1 g>(b+2*r)/3*LimitPercentage?(b+2*r)/3*LimitPercentage:g
+  expr3 g-(r+b)*LimitPercentage/2
+  name DoubleRedAve
+  xpos 370
+  ypos 42
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N9465ec70
+ Expression {
+  expr1 g>(2*b+r)/3*LimitPercentage?(2*b+r)/3*LimitPercentage:g
+  expr3 g-(r+b)*LimitPercentage/2
+  name DoubleBlueAve
+  xpos 257
+  ypos 42
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+push $N9465ec70
+ Expression {
+  expr1 g>(b+r)/2*LimitPercentage?(b+r)/2*LimitPercentage:g
+  expr3 g-(r+b)*LimitPercentage/2
+  name RedAveBlueLimitsGreen
+  xpos 130
+  ypos 44
+  addUserKnob {20 User}
+  addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+  LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+ }
+ Switch {
+  inputs 5
+  which {{GizmoControl.algorithm i}}
+  name SwitchGreen
+  xpos -15
+  ypos 199
+ }
+ Dot {
+  name Dot4
+  xpos 19
+  ypos 370
+ }
+ Switch {
+  inputs 2
+  which {{GizmoControl.screenType i}}
+  name SwitchMain
+  xpos 257
+  ypos 366
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos 257
+  ypos 408
+ }
+ ColorCorrect {
+  maskChannelInput rgba.alpha
+  name CC_SpillMap
+  note_font Verdana
+  xpos 257
+  ypos 468
+ }
+set N2687f020 [stack 0]
+ Dot {
+  name Dot9
+  xpos 440
+  ypos 478
+ }
+ Dot {
+  name Dot10
+  xpos 440
+  ypos 1389
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos -696
+  ypos -348
+  number 1
+ }
+ Expression {
+  channel0 {-rgba.red -rgba.green -rgba.blue none}
+  expr0 0
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  expr1 0
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  expr2 0
+  channel3 {rgba.alpha none none rgba.alpha}
+  expr3 a==0?0:a
+  name AlphaFix1
+  label "To avid Gizmo being in state of\nerror without something plugged in input."
+  xpos -696
+  ypos 861
+ }
+set N31ad76a0 [stack 0]
+push $N31ad76a0
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name CopyMask
+  xpos -296
+  ypos 867
+ }
+ Invert {
+  name Invert1
+  xpos -296
+  ypos 943
+  disable {{parent.invmsk i}}
+ }
+push $N705ec6e0
+ Dot {
+  name Dot7
+  xpos -345
+  ypos -186
+ }
+ Dot {
+  name Dot8
+  xpos -345
+  ypos 551
+ }
+ Expression {
+  channel0 {-rgba.red -rgba.green -rgba.blue none}
+  expr0 0
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  expr1 0
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  expr2 0
+  channel3 {rgba.alpha none none rgba.alpha}
+  expr3 a==0?0:a
+  name AlphaFix
+  label "To avid Gizmo being in state of\nerror without something plugged in input."
+  xpos -27
+  ypos 534
+ }
+set N30a2cff0 [stack 0]
+ Dot {
+  name Dot11
+  xpos -113
+  ypos 614
+ }
+ Dot {
+  name Dot12
+  xpos -113
+  ypos 818
+ }
+set N70582ed0 [stack 0]
+push $N30a2cff0
+push $N30a2cff0
+push $N2687f020
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  from3 rgba.alpha
+  to3 rgba.alpha
+  name CopyAlpha
+  xpos 257
+  ypos 534
+ }
+set N2dd1c0d0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge3
+  xpos -27
+  ypos 672
+ }
+ Clamp {
+  name Clamp2
+  xpos -27
+  ypos 698
+ }
+ Saturation {
+  saturation 0
+  name Saturation2
+  xpos -27
+  ypos 736
+ }
+push $N2dd1c0d0
+ Merge2 {
+  inputs 2
+  operation plus
+  name RestoreLuma
+  xpos 257
+  ypos 736
+  disable {{!parent.sourceLuma i}}
+ }
+ Keymix {
+  inputs 3
+  maskChannel -rgba.alpha
+  name KeymixMask
+  xpos 257
+  ypos 943
+ }
+push $N70582ed0
+ Dot {
+  name Dot13
+  xpos -113
+  ypos 1087
+ }
+ Dissolve {
+  inputs 2
+  which 1
+  name mix
+  xpos 257
+  ypos 1077
+ }
+ Switch {
+  inputs 2
+  which {{GizmoControl.spillMatteOut i}}
+  name SwitchSpillMap
+  xpos 257
+  ypos 1385
+ }
+ Output {
+  name Output1
+  xpos 257
+  ypos 1485
+ }
+ NoOp {
+  inputs 0
+  name GizmoControl
+  selected true
+  xpos 875
+  ypos 414
+  addUserKnob {20 User}
+  addUserKnob {26 version l v1.0}
+  addUserKnob {4 screenType l "screen type" M {green blue}}
+  screenType blue
+  addUserKnob {4 algorithm l "despill algorithm" M {average "double green/blue average" "double red average" "red limit" "green/blue limit" ""}}
+  addUserKnob {6 spillMatteOut l "output spill matte in alpha" +STARTLINE}
+ }
+end_group
+set N2a55a430 [stack 0]
+Dot {
+ name Dot177
+ selected true
+ xpos -28803
+ ypos 23585
+}
+Dot {
+ name Dot182
+ selected true
+ xpos -28803
+ ypos 23639
+}
+push $N31d5f150
+Dot {
+ name Dot180
+ selected true
+ xpos -28684
+ ypos 23502
+}
+Merge2 {
+ inputs 2
+ operation from
+ bbox B
+ name Merge11
+ label "spill map"
+ selected true
+ xpos -28718
+ ypos 23629
+}
+set N2d7b0990 [stack 0]
+Shuffle {
+ red green
+ blue green
+ alpha green
+ name Shuffle11
+ tile_color 0x3f633800
+ selected true
+ xpos -28811
+ ypos 23691
+}
+push $N2d7b0990
+Shuffle {
+ red blue
+ green blue
+ alpha blue
+ name Shuffle10
+ tile_color 0x3d3f8e00
+ selected true
+ xpos -28650
+ ypos 23690
+}
+Switch {
+ inputs 2
+ name Green_Blue
+ label "\[value which]"
+ selected true
+ xpos -28718
+ ypos 23728
+}
+Grade {
+ inputs 1+1
+ multiply 0
+ name Grade3
+ label "clear core"
+ selected true
+ xpos -28718
+ ypos 23818
+}
+Grade {
+ whitepoint {0.1678739786 0.1678739786 0.1678739786 0.1680487692}
+ name Grade5
+ label "whitepoint\nsample here!!!"
+ selected true
+ xpos -28718
+ ypos 23881
+}
+Dot {
+ name Dot175
+ selected true
+ xpos -28684
+ ypos 23972
+}
+NoOp {
+ inputs 0
+ name BG-
+ help Dot285
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -28322
+ ypos 23630
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T Dot285}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+ addUserKnob {26 "" +STARTLINE T "<font color='DimGray'><b> &copy; Alexey Kuchinski"}
+}
+Grade {
+ add {0.05145639554 0.06092069298 0.05281722546 0}
+ reverse true
+ black_clamp false
+ name Grade6
+ label "spill offset\nsampleDespill!"
+ selected true
+ xpos -28322
+ ypos 23888
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge13
+ label "background in edge spill"
+ selected true
+ xpos -28322
+ ypos 23962
+}
+Dot {
+ name Dot289
+ selected true
+ xpos -28288
+ ypos 24023
+}
+push $N2a55a430
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge23
+ label "despilled "
+ selected true
+ xpos -27977
+ ypos 24013
+}

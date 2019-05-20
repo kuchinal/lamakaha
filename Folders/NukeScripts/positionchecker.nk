@@ -1,0 +1,1203 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+name positionchecker
+tile_color 0xe000dbff
+note_font "Verdana Bold Bold Bold"
+note_font_size 15
+selected true
+xpos -33591
+ypos -26666
+}
+Input {
+inputs 0
+name Input1
+xpos -408
+ypos 152
+}
+Dot {
+name Dot6
+xpos -374
+ypos 237
+}
+set N3c2f4d00 [stack 0]
+ColorWheel {
+inputs 0
+format "512 512 0 0 512 512 1 square_512"
+gamma 0.45
+name ColorWheel1
+xpos -536
+ypos -883
+}
+set N7acb9c70 [stack 0]
+GridWarp3 {
+toolbar_visibility_src false
+divisions 3
+source_grid_col   {
+    1 3 3 4 1 0
+    {default }
+    {
+      { {2 0 0} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 256 0} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 512 0} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3334 0}  {2 -85.3333 0} } } 
+      { {2 0 256} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 256 256} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 512 256} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3334 0}  {2 -85.3333 0} } } 
+      { {2 0 512} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 256 512} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 512 512} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3334 0}  {2 -85.3333 0} } } 
+    }
+  }
+destination_grid_col   {
+    1 3 3 4 1 0
+    {default }
+    {
+      { {1 {curve x1 -153.8559875} {curve x1 -165.3760376}} { {1 {curve x1 0} {curve x1 140.4586792}}  {1 {curve x1 0} {curve x1 -140.4586792}}  {1 {curve x1 136.6186676} {curve x1 0}}  {1 {curve x1 -136.6186829} {curve x1 0}} } } 
+      { {2 256 0} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {1 {curve x1 665.855957} {curve x1 -165.3760376}} { {1 {curve x1 0} {curve x1 140.4586792}}  {1 {curve x1 0} {curve x1 -140.4586792}}  {1 {curve x1 136.6187744} {curve x1 0}}  {1 {curve x1 -136.6186523} {curve x1 0}} } } 
+      { {2 0 256} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 256 256} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {2 512 256} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3334 0}  {2 -85.3333 0} } } 
+      { {1 {curve x1 -153.8559875} {curve x1 677.3760986}} { {1 {curve x1 0} {curve x1 140.4586182}}  {1 {curve x1 0} {curve x1 -140.4586792}}  {1 {curve x1 136.6186676} {curve x1 0}}  {1 {curve x1 -136.6186829} {curve x1 0}} } } 
+      { {2 256 512} { {2 0 85.3333}  {2 0 -85.3333}  {2 85.3333 0}  {2 -85.3333 0} } } 
+      { {1 {curve x1 665.855957} {curve x1 677.3760986}} { {1 {curve x1 0} {curve x1 140.4586182}}  {1 {curve x1 0} {curve x1 -140.4586792}}  {1 {curve x1 136.6187744} {curve x1 0}}  {1 {curve x1 -136.6186523} {curve x1 0}} } } 
+    }
+  }
+grids_manually_moved true
+source_grid_transform_center {256 256}
+destination_grid_transform_center {256 256}
+name GridWarp3_1
+xpos -536
+ypos -766
+}
+Crop {
+box {0 0 512 512}
+name Crop1
+xpos -536
+ypos -628
+}
+set Ne8507860 [stack 0]
+Dot {
+name Dot2
+xpos -611
+ypos -624
+}
+Grid {
+replace true
+number 20
+name Grid1
+xpos -645
+ypos -606
+}
+Dot {
+name Dot1
+xpos -611
+ypos -567
+}
+push $Ne8507860
+Merge2 {
+inputs 2
+operation from
+bbox B
+name Merge1
+xpos -536
+ypos -571
+}
+set N39ff2400 [stack 0]
+Text {
+replace true
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {27 0}
+center {256 256}
+name Text42
+xpos -1296
+ypos -328
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {1 -26}
+center {256 256}
+color {0 0.6 0 1}
+name Text43
+xpos -1296
+ypos -302
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -51}
+center {256 256}
+color {1 0 1 1}
+name Text44
+xpos -1296
+ypos -276
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -77}
+center {256 256}
+color {0 0 0 1}
+name Text45
+xpos -1296
+ypos -250
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {26 -102}
+center {256 256}
+color {0 0 1 1}
+name Text46
+xpos -1293
+ypos -224
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -128}
+center {256 256}
+name Text47
+xpos -1293
+ypos -198
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {25 -154}
+center {256 256}
+color {1 0 0 1}
+name Text48
+xpos -1293
+ypos -172
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {2 -179}
+center {256 256}
+color {1 1 0 1}
+name Text49
+xpos -1293
+ypos -146
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {25 -205}
+center {256 256}
+color {0 0 0 1}
+name Text50
+xpos -1293
+ypos -120
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {4 -230}
+center {256 256}
+color {0 0 1 1}
+name Text51
+xpos -1293
+ypos -94
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -256}
+center {256 256}
+name Text52
+xpos -1293
+ypos -68
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -282}
+center {256 256}
+color {0 1 0 1}
+name Text53
+xpos -1293
+ypos -42
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {31 -307}
+center {256 256}
+color {1 1 0 1}
+name Text54
+xpos -1293
+ypos -16
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {1 -333}
+center {256 256}
+color {0 0 0 1}
+name Text55
+xpos -1293
+ypos 10
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {28 -358}
+center {256 256}
+color {0 0 1 1}
+name Text56
+xpos -1293
+ypos 45
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {4 -384}
+center {256 256}
+name Text57
+xpos -1293
+ypos 71
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -410}
+center {256 256}
+color {0 1 0 1}
+name Text58
+xpos -1293
+ypos 97
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {6 -435}
+center {256 256}
+color {1 0 0 1}
+name Text59
+xpos -1293
+ypos 123
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -461}
+center {256 256}
+color {0 0 0 1}
+name Text60
+xpos -1293
+ypos 149
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {3 -486}
+center {256 256}
+color {0 0 1 1}
+name Text61
+xpos -1293
+ypos 175
+}
+Dot {
+name Dot4
+xpos -824
+ypos 9
+}
+set N881d13e0 [stack 0]
+FilterErode {
+channels all
+size -1
+name FilterErode2
+xpos -858
+ypos 62
+}
+Dot {
+name Dot3
+xpos -824
+ypos 115
+}
+push $N881d13e0
+Invert {
+channels rgb
+name Invert1
+xpos -737
+ypos -43
+}
+Premult {
+name Premult1
+xpos -737
+ypos -17
+}
+Grade {
+white 0.5
+name Grade1
+xpos -737
+ypos 9
+}
+FilterErode {
+channels all
+size -3
+name FilterErode1
+xpos -737
+ypos 35
+}
+push $N39ff2400
+Shuffle {
+alpha white
+name Shuffle1
+tile_color 0xffffffff
+label "White Alpha"
+xpos -536
+ypos -374
+}
+Merge2 {
+inputs 2
+bbox B
+name Merge4
+xpos -536
+ypos 41
+}
+Merge2 {
+inputs 2
+bbox B
+name Merge2
+xpos -536
+ypos 111
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos -535
+ypos 233
+}
+Reformat {
+type "to box"
+box_width {{bbox.w}}
+box_height {{bbox.h}}
+box_fixed true
+resize distort
+name Reformat1
+xpos -535
+ypos 275
+}
+set Ne97037b0 [stack 0]
+Dot {
+name Dot5
+xpos -501
+ypos 356
+}
+push $N3c2f4d00
+Merge2 {
+inputs 2
+operation copy
+bbox B
+name Merge3
+xpos -408
+ypos 352
+}
+Output {
+name Output1
+xpos -408
+ypos 523
+}
+push $N7acb9c70
+Group {
+name UV
+help "Please insert your BG image to set resolution of your UV image :)"
+tile_color 0x9900ff
+note_font "Verdana Bold Bold Bold Bold Bold"
+note_font_color 0x510000ff
+xpos -414
+ypos -750
+addUserKnob {20 User}
+addUserKnob {26 tip l "" +STARTLINE T "Hi, if i forgot - this node will generate UV map in size of my input image, good luck to me"}
+}
+Input {
+inputs 0
+name Input1
+xpos -293
+ypos -52
+}
+Remove {
+name Remove1
+selected true
+xpos -293
+ypos -26
+}
+Reformat {
+type "to box"
+format "720 576 0 0 720 576 1.067 PAL_1"
+box_width {{Input1.bbox.w i}}
+box_height {{Input1.bbox.t i}}
+box_fixed true
+scale {1 1}
+name Reformat1
+xpos -293
+ypos 42
+}
+set Ne9f03900 [stack 0]
+Ramp {
+p0 {-0.5 0}
+p1 {{parent.Reformat1.box_width-0.5 i} 0}
+color {1 0 0 1}
+name Ramp1
+xpos -379
+ypos 82
+}
+push $Ne9f03900
+Ramp {
+p0 {0 -0.5}
+p1 {0 {parent.Reformat1.box_height-0.5 i}}
+color {0 1 0 1}
+name Ramp2
+xpos -202
+ypos 79
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge1
+xpos -302
+ypos 135
+}
+Shuffle {
+alpha white
+name Shuffle1
+xpos -302
+ypos 162
+}
+Output {
+name Output1
+xpos -302
+ypos 235
+}
+end_group
+push $Ne97037b0
+Viewer {
+frame_range 1001-1109
+viewerProcess "None (default)"
+name Viewer1
+xpos 817
+ypos -16
+hide_input true
+}
+Transform {
+inputs 0
+center {1281.5 824}
+shutteroffset centred
+name Transform1
+xpos -985
+ypos -643
+}
+Text {
+inputs 0
+message "\[value frame]"
+font /mnt/repository/etc/resources/fonts/arial.ttf
+yjustify center
+box {640 412 1922 1236}
+center {1281.5 824}
+name Text21
+xpos -1041
+ypos -548
+}
+push $N39ff2400
+Text {
+replace true
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {27 0}
+center {256 256}
+name Text1
+xpos -862
+ypos -546
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {1 -26}
+center {256 256}
+color {0 0.6 0 1}
+name Text2
+xpos -861
+ypos -520
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -51}
+center {256 256}
+color {1 0 1 1}
+name Text3
+xpos -861
+ypos -494
+}
+Text {
+message 1234567890
+font /mnt/repository/etc/resources/fonts/arial.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -77}
+center {256 256}
+color {0 0 0 1}
+name Text4
+xpos -861
+ypos -468
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {26 -102}
+center {256 256}
+color {0 0 1 1}
+name Text5
+xpos -858
+ypos -442
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -128}
+center {256 256}
+name Text6
+xpos -858
+ypos -416
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {25 -154}
+center {256 256}
+color {1 0 0 1}
+name Text7
+xpos -858
+ypos -390
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {2 -179}
+center {256 256}
+color {1 1 0 1}
+name Text8
+xpos -858
+ypos -364
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {25 -205}
+center {256 256}
+color {0 0 0 1}
+name Text9
+xpos -858
+ypos -338
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {4 -230}
+center {256 256}
+color {0 0 1 1}
+name Text10
+xpos -858
+ypos -312
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -256}
+center {256 256}
+name Text11
+xpos -858
+ypos -286
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -282}
+center {256 256}
+color {0 1 0 1}
+name Text12
+xpos -858
+ypos -260
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {31 -307}
+center {256 256}
+color {1 1 0 1}
+name Text13
+xpos -858
+ypos -234
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {1 -333}
+center {256 256}
+color {0 0 0 1}
+name Text14
+xpos -858
+ypos -208
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {28 -358}
+center {256 256}
+color {0 0 1 1}
+name Text15
+xpos -858
+ypos -173
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {4 -384}
+center {256 256}
+name Text16
+xpos -858
+ypos -147
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -410}
+center {256 256}
+color {0 1 0 1}
+name Text17
+xpos -858
+ypos -121
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {6 -435}
+center {256 256}
+color {1 0 0 1}
+name Text18
+xpos -858
+ypos -95
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -461}
+center {256 256}
+color {0 0 0 1}
+name Text19
+xpos -858
+ypos -69
+}
+Text {
+message 1234567890
+font /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {3 -486}
+center {256 256}
+color {0 0 1 1}
+name Text20
+xpos -858
+ypos -43
+}
+push $N39ff2400
+Text {
+replace true
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {27 0}
+center {256 256}
+name Text22
+xpos -1035
+ypos -309
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {1 -26}
+center {256 256}
+color {0 0.6 0 1}
+name Text23
+xpos -1035
+ypos -283
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -51}
+center {256 256}
+color {1 0 1 1}
+name Text24
+xpos -1035
+ypos -257
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -77}
+center {256 256}
+color {0 0 0 1}
+name Text25
+xpos -1035
+ypos -231
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {26 -102}
+center {256 256}
+color {0 0 1 1}
+name Text26
+xpos -1032
+ypos -205
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -128}
+center {256 256}
+name Text27
+xpos -1032
+ypos -179
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {25 -154}
+center {256 256}
+color {1 0 0 1}
+name Text28
+xpos -1032
+ypos -153
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {2 -179}
+center {256 256}
+color {1 1 0 1}
+name Text29
+xpos -1032
+ypos -127
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {25 -205}
+center {256 256}
+color {0 0 0 1}
+name Text30
+xpos -1032
+ypos -101
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {4 -230}
+center {256 256}
+color {0 0 1 1}
+name Text31
+xpos -1032
+ypos -75
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -256}
+center {256 256}
+name Text32
+xpos -1032
+ypos -49
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {0 -282}
+center {256 256}
+color {0 1 0 1}
+name Text33
+xpos -1032
+ypos -23
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {31 -307}
+center {256 256}
+color {1 1 0 1}
+name Text34
+xpos -1032
+ypos 3
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {1 -333}
+center {256 256}
+color {0 0 0 1}
+name Text35
+xpos -1032
+ypos 29
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {28 -358}
+center {256 256}
+color {0 0 1 1}
+name Text36
+xpos -1032
+ypos 64
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {4 -384}
+center {256 256}
+name Text37
+xpos -1032
+ypos 90
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -410}
+center {256 256}
+color {0 1 0 1}
+name Text38
+xpos -1032
+ypos 116
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {6 -435}
+center {256 256}
+color {1 0 0 1}
+name Text39
+xpos -1032
+ypos 142
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {29 -461}
+center {256 256}
+color {0 0 0 1}
+name Text40
+xpos -1032
+ypos 168
+}
+Text {
+message 1234567890
+font "set cut_paste_input \[stack 0]\nversion 9.0 v7\npush \$cut_paste_input\nText \{\nreplace true\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{27 0\}\ncenter \{256 256\}\nname Text1\nselected true\nxpos -862\nypos -546\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -26\}\ncenter \{256 256\}\ncolor \{0 0.6 0 1\}\nname Text2\nselected true\nxpos -861\nypos -520\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -51\}\ncenter \{256 256\}\ncolor \{1 0 1 1\}\nname Text3\nselected true\nxpos -861\nypos -494\n\}\nText \{\nmessage 1234567890\nfont /mnt/repository/etc/resources/fonts/arial.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -77\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text4\nselected true\nxpos -861\nypos -468\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{26 -102\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text5\nselected true\nxpos -858\nypos -442\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -128\}\ncenter \{256 256\}\nname Text6\nselected true\nxpos -858\nypos -416\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -154\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text7\nselected true\nxpos -858\nypos -390\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{2 -179\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text8\nselected true\nxpos -858\nypos -364\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{25 -205\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text9\nselected true\nxpos -858\nypos -338\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -230\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text10\nselected true\nxpos -858\nypos -312\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -256\}\ncenter \{256 256\}\nname Text11\nselected true\nxpos -858\nypos -286\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{0 -282\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text12\nselected true\nxpos -858\nypos -260\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{31 -307\}\ncenter \{256 256\}\ncolor \{1 1 0 1\}\nname Text13\nselected true\nxpos -858\nypos -234\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{1 -333\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text14\nselected true\nxpos -858\nypos -208\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{28 -358\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text15\nselected true\nxpos -858\nypos -173\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{4 -384\}\ncenter \{256 256\}\nname Text16\nselected true\nxpos -858\nypos -147\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -410\}\ncenter \{256 256\}\ncolor \{0 1 0 1\}\nname Text17\nselected true\nxpos -858\nypos -121\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{6 -435\}\ncenter \{256 256\}\ncolor \{1 0 0 1\}\nname Text18\nselected true\nxpos -858\nypos -95\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{29 -461\}\ncenter \{256 256\}\ncolor \{0 0 0 1\}\nname Text19\nselected true\nxpos -858\nypos -69\n\}\nText \{\nmessage 1234567890\nfont /usr/share/fonts/abyssinica/Abyssinica_SIL.ttf\nsize 18\nkerning 2.27\nyjustify top\nTransform 1\nbox \{7 0 512 506\}\ntranslate \{3 -486\}\ncenter \{256 256\}\ncolor \{0 0 1 1\}\nname Text20\nselected true\nxpos -858\nypos -43\n\}\n"
+size 18
+kerning 2.27
+yjustify top
+Transform 1
+box {7 0 512 506}
+translate {3 -486}
+center {256 256}
+color {0 0 1 1}
+name Text41
+xpos -1032
+ypos 233
+}
+end_group

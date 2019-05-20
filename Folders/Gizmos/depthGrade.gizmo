@@ -1,0 +1,139 @@
+#! /mnt/repository/software/install/nuke/10.5v5/centos-6_x86-64/libnuke-10.5.5.so -nx
+version 10.5 v5
+Group {
+ name DepthGrade
+ tile_color 0xab74c5ff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ addUserKnob {20 User}
+ addUserKnob {6 premultiply +STARTLINE}
+ addUserKnob {6 rgb l "Depth is in rgb" -STARTLINE}
+ rgb true
+ addUserKnob {41 close T Grade116.close}
+ addUserKnob {41 far T Grade116.far}
+ addUserKnob {41 set T Grade116.set}
+ addUserKnob {26 refine l "refine selection"}
+ addUserKnob {7 blackRefine l "black refine" R -10 10}
+ addUserKnob {7 whiteRefine l "white refine" R -10 10}
+ addUserKnob {7 gamma R 0 2}
+ gamma 1
+ addUserKnob {7 distance_1 l distance R -10 10}
+ addUserKnob {26 ""}
+ addUserKnob {7 BGdistance l "BG distance offset" R 0 2000}
+ BGdistance 1000
+ addUserKnob {6 InvertDepth l INVISIBLE +INVISIBLE +STARTLINE}
+ addUserKnob {6 FixBG l "Fix BG hole" -STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -342
+  ypos -940
+ }
+ Shuffle {
+  in depth
+  in2 alpha
+  red alpha
+  green alpha
+  blue alpha
+  out rgb
+  out2 alpha
+  name Shuffle1
+  tile_color 0x505151ff
+  xpos -342
+  ypos -893
+  disable {{parent.rgb}}
+ }
+ Premult {
+  name Premult1
+  xpos -342
+  ypos -867
+  disable {{!parent.premultiply}}
+ }
+ Invert {
+  channels rgb
+  name Invert1
+  xpos -342
+  ypos -801
+  disable {{!parent.InvertDepth}}
+ }
+ Dot {
+  name Dot1
+  xpos -308
+  ypos -710
+ }
+set Nf7253c0 [stack 0]
+ Grade {
+  white 0
+  add {{parent.BGdistance}}
+  black_clamp false
+  name Grade1
+  xpos -147
+  ypos -714
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Dot {
+  name Dot2
+  xpos -113
+  ypos -623
+ }
+push $Nf7253c0
+ Merge2 {
+  inputs 2
+  operation under
+  also_merge all
+  mix {{parent.FixBG}}
+  name Merge2
+  xpos -342
+  ypos -627
+ }
+ Grade {
+  gamma {{parent.gamma}}
+  black_clamp false
+  name Grade116
+  tile_color 0xf00000ff
+  gl_color 0xf00000ff
+  xpos -342
+  ypos -585
+  addUserKnob {20 User}
+  addUserKnob {12 close}
+  close {200 200}
+  addUserKnob {12 far}
+  far {400 200}
+  addUserKnob {41 gamma_1 l gamma T Grade116.gamma}
+  addUserKnob {22 set T "me = nuke.thisNode()\ngroup = nuke.thisGroup()\nme\['blackpoint'].setValue(0)\nme\['whitepoint'].setValue(1)\n\ngroup\['blackRefine'].setValue(0)\ngroup\['whiteRefine'].setValue(0)\ngroup\['distance_1'].setValue(0)\ncloseP = nuke.sample(me,\"r\",me\['close'].value(0),me\['close'].value(1))\nfarP = nuke.sample(me,\"r\",me\['far'].value(0),me\['far'].value(1))\nprint closeP, farP\nme\['blackpoint'].setValue(closeP)\nme\['whitepoint'].setValue(farP)" +STARTLINE}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Grade {
+  blackpoint {{parent.blackRefine/10}}
+  whitepoint {{parent.whiteRefine/10+1}}
+  add {{parent.distance_1/10}}
+  black_clamp false
+  name refiner
+  xpos -342
+  ypos -509
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle2
+  tile_color 0x93000000
+  xpos -342
+  ypos -468
+ }
+ Clamp {
+  channels rgba
+  name Clamp3
+  xpos -342
+  ypos -431
+ }
+ Output {
+  name Output1
+  xpos -342
+  ypos -359
+ }
+end_group

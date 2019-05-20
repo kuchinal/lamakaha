@@ -1,0 +1,10 @@
+set cut_paste_input [stack 0]
+version 7.0 v9
+push $cut_paste_input
+Multiply {
+ channels rgba
+ name Fade
+ selected true
+ xpos -261
+ ypos 34
+}

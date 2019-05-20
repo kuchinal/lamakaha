@@ -1,0 +1,112 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name ST2UV
+ selected true
+ xpos -334
+ ypos 330
+ addUserKnob {20 User}
+ addUserKnob {41 Center l center T Constant6.color}
+ addUserKnob {41 value T Scale.value}
+ addUserKnob {26 ""}
+ addUserKnob {41 restP T Switch1.disable}
+}
+ Constant {
+  inputs 0
+  color {-0.08673095703 5.03515625 0 1}
+  name Constant6
+  xpos 405
+  ypos -562
+ }
+ Shuffle {
+  blue black
+  alpha black
+  name Shuffle1
+  label "\[value in]-->\[value out]"
+  xpos 279
+  ypos -545
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos 139
+  ypos -676
+ }
+add_layer {restP restP.red restP.green restP.blue restP.alpha}
+ Shuffle {
+  in restP
+  in2 alpha
+  red blue
+  blue black
+  alpha red2
+  name Shuffle42
+  label "\[value in]-->\[value out]"
+  xpos 139
+  ypos -636
+ }
+set N1000fb60 [stack 0]
+ Unpremult {
+  name Unpremult21
+  xpos 139
+  ypos -586
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  name Merge170
+  xpos 139
+  ypos -539
+ }
+ Multiply {
+  channels rgb
+  value 1.34
+  name Scale
+  xpos 135
+  ypos -501
+ }
+ Add {
+  channels {rgba.red rgba.green -rgba.blue none}
+  value 0.5
+  name Add27
+  xpos 135
+  ypos -446
+ }
+ Expression {
+  expr0 "r>1 || r<0 || g>1 || g<0 ? 0 : r"
+  expr1 "r>1 || r<0 || g>1 || g<0 ? 0 : g"
+  name Expression18
+  xpos 135
+  ypos -391
+ }
+ Input {
+  inputs 0
+  name Input2
+  xpos -83
+  ypos -539
+  number 1
+ }
+ STMap {
+  inputs 2
+  channels rgb
+  uv rgb
+  name STMap4
+  xpos -83
+  ypos -391
+ }
+push $N1000fb60
+ Switch {
+  inputs 2
+  which 1
+  name Switch1
+  xpos -83
+  ypos -344
+ }
+ Output {
+  name Output1
+  xpos -83
+  ypos -291
+ }
+end_group

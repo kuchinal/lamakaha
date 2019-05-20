@@ -1,0 +1,279 @@
+#! C:/Program Files/Nuke6.3v8/Nuke6.3.exe -nx
+version 6.3 v8
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="1920" y="120" w="1920" h="1080" fullscreen="1" screen="0">
+        <splitter orientation="1">
+            <split size="721"/>
+            <splitter orientation="2">
+                <split size="911"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="139"/>
+                <dock id="" activePageId="Curve Editor.1">
+                    <page id="DopeSheet.1"/>
+                    <page id="Script Editor.1"/>
+                    <page id="com.ohufx.SearchReplace"/>
+                    <page id="com.ohufx.MassivePanel"/>
+                    <page id="Curve Editor.1"/>
+                </dock>
+            </splitter>
+            <split size="1195"/>
+            <dock id="" activePageId="DAG.1">
+                <page id="DAG.1"/>
+            </dock>
+        </splitter>
+    </window>
+    <window x="0" y="0" w="1920" h="1200" fullscreen="1" screen="1">
+        <splitter orientation="2">
+            <split size="1200"/>
+            <dock id="" hideTitles="1" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name H:/.nuke/GeneralSetups/particlesExplosion.nk
+ frame 1041
+ first_frame 1001
+ last_frame 1072
+ fps 25
+ format "2048 1556 0 0 2048 1556 2 BCR_scan_2K (anamorphic)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ proxySetting always
+}
+ParticleExpression {
+ inputs 0
+ posexpr (randomv)
+ name ParticleExpression1
+ xpos -168
+ ypos -128
+}
+Constant {
+ inputs 0
+ channels rgb
+ name Constant1
+ xpos -13
+ ypos 85
+}
+Reformat {
+ type "to box"
+ box_height 800
+ box_fixed true
+ name Reformat1
+ xpos -13
+ ypos 157
+}
+ParticleSettings {
+ inputs 0
+ steps_per_frame 10
+ name ParticleSettings1
+ xpos -226
+ ypos -10
+}
+Camera2 {
+ inputs 0
+ translate {0 3.900000095 29.29999924}
+ focal 20
+ name Camera1
+ xpos -636
+ ypos 379
+}
+Bezier {
+ inputs 0
+ blur_type smooth
+ points {{
+{1074 906 9.2 0.06 10.7}
+{1093 866 1.7 -1.58 10.2}
+{1087 872 5.1 -2.41 1.5}
+{1075 882 15.6 -3.03 14.4}
+{1053 868 14.2 2.22 7.4}
+}}
+ shape {}
+ center {1024 778}
+ color {1 0 1 1}
+ name Bezier1
+ xpos -790
+ ypos -147
+ addUserKnob {20 Geo}
+ addUserKnob {4 type M {circle square oval rectangle triangle}}
+ addUserKnob {32 set -STARTLINE T BezierGeoProc}
+}
+Crop {
+ box {1050.099976 862.7999878 1095 909.2000122}
+ reformat true
+ crop false
+ name Crop1
+ xpos -790
+ ypos -121
+}
+set N54f61b90 [stack 0]
+Card2 {
+ inputs 0
+ translate {-17.26000023 6.239999771 -0.6999999881}
+ rotate {0 90 0}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ xpos -498
+ ypos -161
+}
+push 0
+ParticleEmitter {
+ inputs 2
+ start_frame 1000
+ rate {{curve i x1001 2 0}}
+ lifetime 20
+ velocity 0.6
+ rotation_velocity_variation 0.5
+ size 0.5
+ spread 0.1
+ name ParticleEmitter1
+ xpos -498
+ ypos -87
+}
+ParticleSpawn {
+ inputs 2
+ rate 20
+ rate_variation 1
+ lifetime 20
+ velocity 0.3
+ velocity_variation 0.2
+ rotation_velocity 1
+ rotation_velocity_variation 0.5
+ size 0.3
+ size_variation 1
+ mass 2.5
+ mass_variation 0.5
+ transfer_velocity 0
+ spread 2000
+ velocity_direction false
+ min_age 0.99
+ name ParticleSpawn1
+ xpos -498
+ ypos 1
+}
+ParticleExpression {
+ massexpr_onlynew true
+ velexpr randomv-.5
+ velexpr_onlynew true
+ channels {b}
+ name ParticleExpression2
+ xpos -498
+ ypos 63
+}
+ParticleDrag {
+ drag 0.3
+ rotational_drag 1
+ channels {b}
+ name ParticleDrag1
+ xpos -498
+ ypos 114
+}
+ParticleMotionAlign {
+ name ParticleMotionAlign1
+ xpos -498
+ ypos 161
+}
+ParticleGravity {
+ to {0 -0.01 0}
+ probability 0.8
+ min_age 0.2
+ seed 1
+ channels {b}
+ name ParticleGravity1
+ xpos -498
+ ypos 213
+}
+ParticleCurve {
+ curves {r {}
+   g {}
+   b {}
+   a {}
+   size {curve 0.01230347157 s0 1}
+   mass {curve x0.008614558727 -0.006218910217 s0 x1 0.9952442646}}
+ affect_rgb false
+ affect_alpha false
+ affect_mass true
+ channels {b}
+ name ParticleCurve1
+ xpos -498
+ ypos 251
+}
+push 0
+ScanlineRender {
+ inputs 3
+ output_motion_vectors_type accurate
+ name ScanlineRender1
+ xpos -498
+ ypos 399
+}
+Viewer {
+ frame 1041
+ input_process false
+ name Viewer1
+ xpos -63
+ ypos -11
+}
+push $N54f61b90
+Card2 {
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card2
+ xpos -771
+ ypos -60
+}
+push $N54f61b90
+Sphere {
+ name Sphere1
+ xpos -819
+ ypos -23
+}
+CheckerBoard2 {
+ inputs 0
+ boxsize 1000
+ name CheckerBoard1
+ xpos -542
+ ypos -367
+}
+Cube {
+ rows 1
+ columns 1
+ translate {-0.5 0.5 -0.5}
+ pivot {0.5 -0.5 0.5}
+ name Cube1
+ xpos -542
+ ypos -295
+}
+ParticleTurbulence {
+ inputs 0
+ strength {0.1 0.1 0.1}
+ scale {10 10 10}
+ channels {b}
+ name ParticleTurbulence1
+ xpos -328
+ ypos 51
+}

@@ -1,0 +1,14 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Expression {
+ expr0 (x+0.5)/width
+ expr1 (y+0.5)/height
+ name UV
+ tile_color 0xc1bf00ff
+ note_font "Verdana Bold"
+ note_font_size 14
+ selected true
+ xpos -244
+ ypos 15
+}

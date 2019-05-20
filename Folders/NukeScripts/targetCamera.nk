@@ -1,0 +1,21 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Axis2 {
+translate {4.28000021 0 -3}
+name Target
+selected true
+xpos -6878
+ypos -5953
+}
+Light2 {
+inputs 0
+light_type spot
+translate {0 0 3}
+rotate {{degrees(atan((Target.translate.y-translate.y)/sqrt(pow2(sqrt(pow2(Target.translate.x-translate.x)+pow2(Target.translate.z-translate.z))))))} {"Target.translate.x-translate.x >= 0 ? 270-degrees(atan((Target.translate.z-translate.z)/(Target.translate.x-translate.x))): -degrees(atan((Target.translate.z-translate.z)/(Target.translate.x-translate.x)))-270"} 0}
+depthmap_slope_bias 0.01
+name Light2
+selected true
+xpos -6720
+ypos -6019
+}

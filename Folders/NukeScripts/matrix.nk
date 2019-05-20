@@ -1,0 +1,94 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+add_layer {rgba rgba.water}
+Matrix {
+ matrix {
+     {1 2 1}
+     {2 4 2}
+     {1 2 1}
+   }
+ normalize true
+ name Matrix3
+ label "Soften\n\n"
+ note_font_size 20
+ selected true
+ xpos -17
+ ypos 248
+}
+push 0
+Matrix {
+ matrix {
+     {1 2 -3 2 1}
+     {2 -3 1 3 -2}
+     {-3 1 -10 1 -3}
+     {2 -3 1 3 -2}
+     {1 2 -3 2 1}
+   }
+ name Matrix4
+ label "Edge Detect \n\n"
+ note_font_size 20
+ selected true
+ xpos 111
+ ypos 248
+}
+push 0
+Matrix {
+ matrix {
+     {1 0 -3 0 1}
+     {2 0 1 0 -2}
+     {-3 1 4 1 -3}
+     {2 0 1 0 -3}
+     {1 0 -3 0 1}
+   }
+ name Matrix2
+ label "Bump \n"
+ note_font_size 20
+ selected true
+ xpos -131
+ ypos 245
+}
+push 0
+Matrix {
+ matrix {
+     {1 -2 1}
+     {-2 4 -2}
+     {1 -2 1}
+   }
+ name Matrix1
+ label "Edge detect \n"
+ note_font_size 20
+ selected true
+ xpos -288
+ ypos 254
+}
+push 0
+Matrix {
+ matrix {
+     {10 0 0}
+     {0 5 0}
+     {0 0 -16}
+   }
+ name Matrix6
+ label "Direct Embose \n\n\n"
+ note_font_size 20
+ selected true
+ xpos 388
+ ypos 240
+}
+push 0
+Matrix {
+ matrix {
+     {0 0 -3 0 1}
+     {0 0 1 0 -2}
+     {-8 -5 0 5 10}
+     {0 0 1 0 -3}
+     {0 0 -3 0 1}
+   }
+ name Matrix5
+ label "Bump \n"
+ note_font_size 20
+ selected true
+ xpos 244
+ ypos 255
+}

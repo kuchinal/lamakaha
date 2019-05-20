@@ -1,0 +1,284 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+push 0
+push $cut_paste_input
+Group {
+inputs 3
+name CamProj3
+help "This tool performs camera projection the same way the Project3D shader does, except it doesn't need the geometry to be imported in NUKE.\nIt uses instead the position pass (in world space).\n\nUsage:\n- Type in the name of the camera you want to project from.\n- Connect a position pass and the image you want to project. \n- Specify the frame from wich you want to project.\n\nLimitations:\n- Projections will \"slide\" on the surface of animated objects (as in real life).\n- It copes badly with strong motion-blured position passes.\n- If the aspect ratio is not 1 (e.g. anamorphic) projections could present slight degradations.\n"
+tile_color 0x3b00ff
+label "\[value this.input2]"
+note_font "Verdana Bold Bold Bold Bold Bold"
+note_font_size 14
+note_font_color 0xff
+selected true
+xpos 34457
+ypos 1566
+mapsize {0.15 0.15}
+addUserKnob {20 Projection t " This tool performs camera projection the same way the Project3D shader does, except it doesn't need the geometry to be imported in NUKE.\nIt uses instead the position pass (in world space).\n\nUsage:\n- Type in the name of the camera you want to project from.\n- Connect a position pass and the image you want to project. \n- Specify the frame from wich you want to project.\n\nLimitations:\n- Projections will \"slide\" on the surface of animated objects (as in real life).\n- It copes badly with strong motion-blured position passes.\n- If the aspect ratio is not 1 (e.g. anamorphic) projections could present slight degradations.\n"}
+addUserKnob {26 ""}
+addUserKnob {1 input2 l INVISIBLE t "Tipe here the name of the camera you want to project from (case sensitive)." +INVISIBLE}
+addUserKnob {41 Projection_Frame l Frame t "Specify here your reference frame for the projection." -STARTLINE T Frame.Projection_Frame}
+addUserKnob {41 format l "Projection Format" -STARTLINE T Reformat1.format}
+addUserKnob {6 Freeze_Input_Image t "If you're projecting a static frame, roto or paint stroke this might be helpful as it keeps the projected element from changing over time." +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {7 Treshold t "Echoes shadowing is done comparing the real depth buffer against the projected one. Treshold is the amount of difference between the two buffers that is \"allowed\" before a shadow becomes visible.\n\nIncrease this to cull out unwanted shadows." -STARTLINE R 0.2 50}
+Treshold 1
+addUserKnob {6 Compute_Projection_Shadow l "Occlude Projection Echoes" t "When projecting on objects that overlap in the field of view of the projector, normally you get \"echoes\", meaning that images supposed to be on the foreground show up in the background as well. This check prevents that from happening, casting a shadow from the camera." +STARTLINE}
+Compute_Projection_Shadow true
+addUserKnob {6 Prevent_Outside_Projection l "Prevent Outside Projection" t "Use this to prevent colours from showing up outside the camera frustum." -STARTLINE}
+Prevent_Outside_Projection true
+addUserKnob {41 filter -STARTLINE T STMap1.filter}
+addUserKnob {41 channels l Channels -STARTLINE T STMap1.channels}
+}
+NoOp {
+inputs 0
+name Frame
+xpos 210
+ypos -710
+addUserKnob {20 User}
+addUserKnob {3 Projection_Frame}
+Projection_Frame 1001
+}
+Input {
+inputs 0
+name Camera
+xpos -83
+ypos -575
+number 2
+}
+Input {
+inputs 0
+name PWorld
+xpos -565
+ypos -710
+number 1
+}
+Reformat {
+format {{{parent.Reformat1.format}}}
+pbb true
+name Reformat2
+xpos -565
+ypos -583
+}
+Expression {
+expr0 "(r - myHost.world_matrix.3)"
+expr1 "(g - myHost.world_matrix.7)"
+expr2 "(b - myHost.world_matrix.11)"
+name P_Cam_Distance
+xpos -565
+ypos -537
+}
+Expression {
+temp_name0 x
+temp_expr0 "myHost.world_matrix.0 * r + myHost.world_matrix.4 * g + myHost.world_matrix.8 * b"
+temp_name1 y
+temp_expr1 "myHost.world_matrix.1 * r + myHost.world_matrix.5 * g + myHost.world_matrix.9 * b"
+temp_name2 z
+temp_expr2 "myHost.world_matrix.2 * r + myHost.world_matrix.6 * g + myHost.world_matrix.10 * b"
+expr0 x
+expr1 y
+expr2 z
+name Camera_Transform
+xpos -565
+ypos -485
+}
+set N25d50e40 [stack 0]
+Expression {
+temp_name0 ratio
+temp_expr0 "1 / pixel_aspect"
+temp_name1 focal
+temp_expr1 parent.myHost.focal
+temp_name2 u
+temp_expr2 "0.5 + ( r  * ( ( focal / parent.myHost.haperture )/ b ) ) * -1"
+temp_name3 v
+temp_expr3 "0.5 + ( g * ( ( focal / ( parent.myHost.vaperture * ratio ) )/ b ) ) * -1"
+expr0 "u>0 && u<1 && v>0  && v<1? u : 0"
+expr1 "v>0  && v<1 && u>0 && u<1? v : 0"
+expr2 0
+expr3 0
+name Projection_Solver
+xpos -565
+ypos -416
+}
+set N31a90f80 [stack 0]
+push $N25d50e40
+FrameHold {
+first_frame {{parent.Frame.Projection_Frame i}}
+name FrameHold2
+xpos -415
+ypos -505
+disable {{1-parent.Compute_Projection_Shadow i}}
+}
+set N549326c0 [stack 0]
+Input {
+inputs 0
+name IMG
+xpos -290
+ypos -712
+}
+FrameHold {
+first_frame {{parent.Frame.Projection_Frame}}
+name FrameHold1
+xpos -290
+ypos -666
+disable {{parent.Freeze_Input_Image?0:1}}
+}
+Reformat {
+pbb true
+name Reformat1
+xpos -290
+ypos -586
+}
+Crop {
+box {1 1 {"width - box.x"} {"height - box.y"}}
+name Crop1
+xpos -290
+ypos -553
+disable {{1-parent.Prevent_Outside_Projection}}
+}
+Copy {
+inputs 2
+from0 rgba.blue
+to0 depth.Z
+name Copy1
+xpos -290
+ypos -491
+disable {{"1- parent.Compute_Projection_Shadow" i}}
+}
+Dot {
+name Dot2
+xpos -256
+ypos -331
+}
+STMap {
+inputs 2
+channels rgba
+uv rgb
+filter Simon
+name STMap1
+xpos -565
+ypos -335
+}
+Dot {
+name Dot5
+xpos -531
+ypos -106
+}
+set N3459a380 [stack 0]
+push $N25d50e40
+Dot {
+name Dot7
+xpos -831
+ypos -481
+}
+Grade {
+channels {-rgba.red -rgba.green rgba.blue none}
+add {{parent.Treshold i}}
+black_clamp false
+name Grade3
+xpos -865
+ypos -241
+}
+push $N31a90f80
+Dot {
+name Dot4
+xpos -681
+ypos -412
+}
+push $N549326c0
+Dot {
+name Dot3
+xpos -381
+ypos -231
+}
+STMap {
+inputs 2
+channels {-rgba.red -rgba.green rgba.blue none}
+uv rgb
+name STMap2
+xpos -715
+ypos -235
+disable {{1-parent.Compute_Projection_Shadow}}
+}
+Dot {
+name Dot8
+xpos -681
+ypos -156
+}
+MergeExpression {
+inputs 2
+temp_name0 shadow
+temp_expr0 "Ab > Bb ? 1 : 0"
+expr0 shadow
+expr1 shadow
+expr2 shadow
+expr3 shadow
+name MergeExpression1
+xpos -865
+ypos -160
+disable {{1-parent.Compute_Projection_Shadow}}
+}
+Dot {
+name Dot1
+xpos -831
+ypos -106
+}
+Merge2 {
+inputs 2
+operation in
+name In
+xpos -715
+ypos -60
+}
+push $N3459a380
+Dot {
+name Dot9
+xpos -531
+ypos 19
+}
+Merge2 {
+inputs 2
+operation in
+name In1
+xpos -715
+ypos 16
+}
+Output {
+name Output1
+xpos -715
+ypos 61
+}
+Viewer {
+frame_range 1001-1107
+viewerProcess "None (default)"
+input_process false
+name Viewer1
+xpos 70
+ypos -10
+hide_input true
+}
+Camera2 {
+inputs 0
+useMatrix true
+matrix {
+    {{"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[0\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[1\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[2\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[3\\]]"}}
+    {{"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[4\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[5\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[6\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[7\\]]"}}
+    {{"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[8\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[9\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[10\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[11\\]]"}}
+    {{"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[12\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[13\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[14\\]]"} {"\[python nuke.thisGroup().input(2)\\\['world_matrix'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())\\\[15\\]]"}}
+  }
+focal {{"\[python nuke.thisGroup().input(2)\\\['focal'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())]"}}
+haperture {{"\[python nuke.thisGroup().input(2)\\\['haperture'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())]"}}
+vaperture {{"\[python nuke.thisGroup().input(2)\\\['vaperture'\\].valueAt(nuke.thisGroup()\\\['Projection_Frame'\\].value())]"}}
+name myHost
+xpos -73
+ypos -503
+addUserKnob {20 User}
+addUserKnob {1 versionPath t "this is the element you have loaded"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+end_group

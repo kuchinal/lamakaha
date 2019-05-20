@@ -1,0 +1,1481 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Group {
+ inputs 0
+ name Render_Input_CG1
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nkname = k.name()\npublished = n.knob('published').value()\n\nif kname in \['cacheLocal', 'first', 'last', 'before', 'after', 'on_error']:\n    val = k.value()\n    if kname in \['first', 'last']:\n        val = int(val)\n    readnodes = nuke.allNodes('Read', n)\n    for rn in readnodes:\n        rn.knob(kname).setValue(val)\n\nelif kname == 'primary_only':\n    val = k.value()\n    cpnodes = nuke.allNodes('Copy', n)\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n        \nelif kname == 'versions':\n    version = k.value()\n    from tx.path import Path\n    from tx_nuke.layers import NukeCGVersion\n    cgv = NukeCGVersion(Path(n.knob('render_folder').evaluate()) / version)\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)"
+ tile_color 0x8ff020ff
+ label "\[value versions]\n\[value element]"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 17
+ note_font_color 0xffffffff
+ selected true
+ xpos -1812
+ ypos -820
+ addUserKnob {20 tab1 l CG}
+ addUserKnob {1 Sequence l INVISIBLE +INVISIBLE}
+ Sequence "\[value TrixterShotData.sequence]"
+ addUserKnob {1 Shot l INVISIBLE -STARTLINE +INVISIBLE}
+ Shot "\[value TrixterShotData.shot]"
+ addUserKnob {1 render_folder l INVISIBLE +INVISIBLE}
+ render_folder "\[value TrixterShotData.projectpath]/seq/\[value Sequence]/\[value Shot]/rendering/images/versions"
+ addUserKnob {26 ""}
+ addUserKnob {6 published l "published only" t "show only versions with published elements" -STARTLINE}
+ addUserKnob {4 versions l version M {release_v004}}
+ addUserKnob {22 update_versions l update -STARTLINE T "import os\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\npublished = n.knob('published').value()\nversions = \[]\n\nrender_folder = n.knob('render_folder').evaluate()\nfiles = os.listdir(render_folder)\nfor f in files:\n    if os.path.isdir(os.path.join(render_folder, f)):\n        if os.path.exists(os.path.join(render_folder, f, 'primary')):\n            cgv = NukeCGVersion(os.path.join(render_folder, f))\n            if not published or cgv.has_publishes():\n                versions.append(f)\n\nversions.sort()\nn.knob('versions').setValues(versions)\nif len(versions) == 0:\n    n.knob('element').setValues(\[])\n\nelse:\n    maxversion = max(versions)\n    n.knob('versions').setValue(maxversion)\n    \n    cgv = NukeCGVersion(os.path.join(render_folder, maxversion))\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)"}
+ addUserKnob {4 element M {forest treetops}}
+ addUserKnob {22 load_layers l "        L O A D   L A Y E R S        " T "from tx.path import Path\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\n\nvfolder = Path(n.knob('render_folder').evaluate()) / n.knob('versions').value()\ncgv = NukeCGVersion(vfolder)\n\nelement = n.knob('element').value()\nwith n:\n    outp = nuke.toNode('Output1')\n    nodes = nuke.allNodes()\n    nodes.pop(nodes.index(outp))\n    for node in nodes: nuke.delete(node)\n\n    ln = cgv.create_nodes(element)\n    outp.setInput(0, ln)\n    outp.setXYpos(ln.xpos(), ln.ypos()+100)\n\n    readnodes = nuke.allNodes('Read')\n    for k in \['before', 'after', 'on_error']:\n        val = n.knob(k).value()\n        for rn in readnodes:\n            rn.knob(k).setValue(val)\n\n    cpnodes = nuke.allNodes('Copy')\n    val = n.knob('primary_only').value()\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n\ncgv.create_deep_nodes(element)\n\nfor k in \['first', 'last']:\n    n.knob(k).setValue(rn.knob(k).value())\n\npanel = nuke.Panel(\"localise?\")\npanel.addBooleanCheckBox('localise', False)\npanel.show()\ni = panel.value(\"localise\")\nif i == 1:\n    n.setSelected(False)\n    n.begin()\n    g=nuke.allNodes(\"Read\")\n    for Read in g:\n        Read.setSelected(True)\n    always();doLocalise(0)\n    n.end()\n    n\['reload'].execute()\n    n\['tile_color'].setValue(4000915711)\nelse:\n    n\['tile_color'].setValue(563780607)\n\nt = 1\nwhile t==1:\n    for one in readnodes:\n        path = one\['file'].value().rpartition(\"/\")\[0]+\"/\"\n        t =2\nn\['file'].setValue(path)" +STARTLINE}
+ addUserKnob {26 line1 l "" +STARTLINE}
+ addUserKnob {6 primary_only l "primary only" t "disable all other layers to increase performance" +STARTLINE}
+ addUserKnob {22 localize_primary -STARTLINE T "n = nuke.thisNode()\nn.setSelected(False)\nn.begin()\ng=nuke.allNodes(\"Read\")\nfor Read in g:\n    if \"primary\" in Read\['file'].value():\n        Read.setSelected(True)\nalways();doLocalise(0)\nn.end()\nn\['reload'].execute()\nn\['tile_color'].setValue(2414878975)"}
+ addUserKnob {4 cacheLocal l "cache locally" M {always auto never}}
+ cacheLocal auto
+ addUserKnob {3 first l "frame range"}
+ first 1001
+ addUserKnob {4 before l "" -STARTLINE M {hold loop bounce black}}
+ before black
+ addUserKnob {3 last l "" -STARTLINE}
+ last 1237
+ addUserKnob {4 after l "" -STARTLINE M {hold loop bounce black}}
+ after black
+ addUserKnob {4 on_error l "missing frames" M {error black checkerboard "nearest frame" ""}}
+ addUserKnob {22 reload l "reload all" t "press the reload button on all read nodes in the group" -STARTLINE T "n = nuke.thisNode()\n\nreadnodes = nuke.allNodes('Read', n)\nfor rn in readnodes:\n    rn.knob('reload').execute()"}
+ addUserKnob {1 file}
+ file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/primary/
+ addUserKnob {22 localize l "<b><font color=\"orange\">localize" T "n = nuke.thisNode()\nn.setSelected(False)\nn.begin()\ng=nuke.allNodes(\"Read\")\nfor Read in g:\n    Read.setSelected(True)\nalways();doLocalise(0)\nn.end()\nn\['reload'].execute()\nn\['tile_color'].setValue(4000915711)" +STARTLINE}
+ addUserKnob {22 delocalize l "<b><font color=\"red\">delocalize" -STARTLINE T "import shutil\nimport os\ng = nuke.thisGroup()\ng\['tile_color'].setValue(562336767)\ng.begin()\ny = nuke.allNodes(\"Read\")\nfor node in y:\n\tfullLocalPath = nuke.toNode(\"preferences\")\['localCachePath'].evaluate() + node\['file'].value().replace(\"corky\",\"_corky\")\n\tfullLocalDir = fullLocalPath.rpartition(\"/\")\[0]\n\t#print fullLocalDir\n\tshotName = fullLocalPath.rpartition(\"/\")\[2].rpartition(\".\")\[0].rpartition(\".\")\[0]\n\t#print shotName\n\tcontent=os.listdir(fullLocalDir)\n\tfor item in content:\n\t\t#print item\n\t\tif shotName in item:\n\t\t\tos.remove(fullLocalDir +\"/\"+ item)\n\t\t\tprint \"deleted \"+fullLocalDir +\"/\"+ item\n\ng.end()\n\n\n#/corky/projects/LevelUp_343202/seq/fgb/0060/rendering/images/versions/release_v061/primary/primary_FX_trunk1.#.exr\n#/corky/projects/LevelUp_343202/seq/irl/0270/rendering/images/versions/release_v022/primary/primary_martinex.#.exr"}
+ addUserKnob {22 separator l | -STARTLINE}
+ addUserKnob {22 Localized l "<b><font color=\"orange\">Mark as Localized" -STARTLINE T "y = nuke.thisNode()\ny\['tile_color'].setValue(4000915711)"}
+ addUserKnob {22 deloc l "<b><font color=\"teal\">Mark as Not Localized" -STARTLINE T "y = nuke.thisNode()\ny\['tile_color'].setValue(562336767)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {26 f l "" +STARTLINE T "modified by Alexey Kuchinski"}
+}
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/crypto_asset/crypto_asset_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read33
+  xpos -190
+  ypos 4241
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CA_FixOverscan
+  xpos -190
+  ypos 4341
+ }
+set Nff958d0 [stack 0]
+push $Nff958d0
+push $Nff958d0
+push $Nff958d0
+push $Nff958d0
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/crypto_material/crypto_material_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read32
+  xpos -190
+  ypos 3741
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CM_FixOverscan
+  xpos -190
+  ypos 3841
+ }
+set N14ce7820 [stack 0]
+push $N14ce7820
+push $N14ce7820
+push $N14ce7820
+push $N14ce7820
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/crypto_object/crypto_object_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read31
+  xpos -190
+  ypos 3241
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CO_FixOverscan
+  xpos -190
+  ypos 3341
+ }
+set N1743e240 [stack 0]
+push $N1743e240
+push $N1743e240
+push $N1743e240
+push $N1743e240
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/light_group_3/light_group_3_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read30
+  xpos -190
+  ypos 2841
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/light_group_2/light_group_2_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read29
+  xpos -190
+  ypos 2741
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/light_group_1/light_group_1_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read28
+  xpos -190
+  ypos 2641
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_9/id_9_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read27
+  xpos -190
+  ypos 2541
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_8/id_8_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read26
+  xpos -190
+  ypos 2441
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_7/id_7_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read25
+  xpos -190
+  ypos 2341
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_6/id_6_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read24
+  xpos -190
+  ypos 2241
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_5/id_5_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read23
+  xpos -190
+  ypos 2141
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_4/id_4_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read22
+  xpos -190
+  ypos 2041
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_3/id_3_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read21
+  xpos -190
+  ypos 1941
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_2/id_2_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read20
+  xpos -190
+  ypos 1841
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/id_1/id_1_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read19
+  xpos -190
+  ypos 1741
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/Z/Z_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read17
+  xpos -190
+  ypos 1541
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/sss/sss_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read14
+  xpos -190
+  ypos 1241
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/emission/emission_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read13
+  xpos -190
+  ypos 1141
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/refraction/refraction_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read12
+  xpos -190
+  ypos 1041
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/direct_transmission/direct_transmission_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read11
+  xpos -190
+  ypos 941
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/indirect_specular_2/indirect_specular_2_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read10
+  xpos -190
+  ypos 841
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/direct_specular_2/direct_specular_2_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read9
+  xpos -190
+  ypos 741
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/specular_color_2/specular_color_2_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read8
+  xpos -190
+  ypos 641
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/indirect_specular/indirect_specular_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read7
+  xpos -190
+  ypos 541
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/direct_specular/direct_specular_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read6
+  xpos -190
+  ypos 441
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/specular_color/specular_color_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read5
+  xpos -190
+  ypos 341
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/indirect_diffuse/indirect_diffuse_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read4
+  xpos -190
+  ypos 241
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/direct_diffuse/direct_diffuse_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read3
+  xpos -190
+  ypos 141
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/diffuse_color/diffuse_color_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read2
+  xpos -190
+  ypos 41
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/primary/primary_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read1
+  xpos -194
+  ypos -58
+  postage_stamp false
+ }
+set N57bb26a0 [stack 0]
+push $N57bb26a0
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  from1 rgba.green
+  to1 rgba.green
+  from2 rgba.blue
+  to2 rgba.blue
+  from3 rgba.alpha
+  to3 rgba.alpha
+  bbox B
+  name Copy1
+  xpos -40
+  ypos 16
+ }
+add_layer {diffuse_color diffuse_color.red diffuse_color.green diffuse_color.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_color.red
+  from1 rgba.green
+  to1 diffuse_color.green
+  from2 rgba.blue
+  to2 diffuse_color.blue
+  bbox B
+  name Copy2
+  xpos -40
+  ypos 116
+ }
+add_layer {diffuse_direct diffuse_direct.red diffuse_direct.green diffuse_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_direct.red
+  from1 rgba.green
+  to1 diffuse_direct.green
+  from2 rgba.blue
+  to2 diffuse_direct.blue
+  bbox B
+  name Copy3
+  xpos -40
+  ypos 216
+ }
+add_layer {diffuse_indirect diffuse_indirect.red diffuse_indirect.green diffuse_indirect.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_indirect.red
+  from1 rgba.green
+  to1 diffuse_indirect.green
+  from2 rgba.blue
+  to2 diffuse_indirect.blue
+  bbox B
+  name Copy4
+  xpos -40
+  ypos 316
+ }
+add_layer {specular_color specular_color.red specular_color.green specular_color.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color.red
+  from1 rgba.green
+  to1 specular_color.green
+  from2 rgba.blue
+  to2 specular_color.blue
+  bbox B
+  name Copy5
+  xpos -40
+  ypos 416
+ }
+add_layer {specular_direct specular_direct.red specular_direct.green specular_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct.red
+  from1 rgba.green
+  to1 specular_direct.green
+  from2 rgba.blue
+  to2 specular_direct.blue
+  bbox B
+  name Copy6
+  xpos -40
+  ypos 516
+ }
+add_layer {specular_indirect specular_indirect.red specular_indirect.green specular_indirect.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect.red
+  from1 rgba.green
+  to1 specular_indirect.green
+  from2 rgba.blue
+  to2 specular_indirect.blue
+  bbox B
+  name Copy7
+  xpos -40
+  ypos 616
+ }
+add_layer {specular_color_2 specular_color_2.red specular_color_2.green specular_color_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color_2.red
+  from1 rgba.green
+  to1 specular_color_2.green
+  from2 rgba.blue
+  to2 specular_color_2.blue
+  bbox B
+  name Copy8
+  xpos -40
+  ypos 716
+ }
+add_layer {specular_direct2 specular_direct2.red specular_direct2.green specular_direct2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct2.red
+  from1 rgba.green
+  to1 specular_direct2.green
+  from2 rgba.blue
+  to2 specular_direct2.blue
+  bbox B
+  name Copy9
+  xpos -40
+  ypos 816
+ }
+add_layer {specular_indirect2 specular_indirect2.red specular_indirect2.green specular_indirect2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect2.red
+  from1 rgba.green
+  to1 specular_indirect2.green
+  from2 rgba.blue
+  to2 specular_indirect2.blue
+  bbox B
+  name Copy10
+  xpos -40
+  ypos 916
+ }
+add_layer {transmission_direct transmission_direct.red transmission_direct.green transmission_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 transmission_direct.red
+  from1 rgba.green
+  to1 transmission_direct.green
+  from2 rgba.blue
+  to2 transmission_direct.blue
+  bbox B
+  name Copy11
+  xpos -40
+  ypos 1016
+ }
+add_layer {refraction refraction.red refraction.green refraction.blue refraction.alpha}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 refraction.red
+  from1 rgba.green
+  to1 refraction.green
+  from2 rgba.blue
+  to2 refraction.blue
+  bbox B
+  name Copy12
+  xpos -40
+  ypos 1116
+ }
+add_layer {emission emission.red emission.green emission.blue emission.alpha}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 emission.red
+  from1 rgba.green
+  to1 emission.green
+  from2 rgba.blue
+  to2 emission.blue
+  bbox B
+  name Copy13
+  xpos -40
+  ypos 1216
+ }
+add_layer {subsurface subsurface.red subsurface.green subsurface.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 subsurface.red
+  from1 rgba.green
+  to1 subsurface.green
+  from2 rgba.blue
+  to2 subsurface.blue
+  bbox B
+  name Copy14
+  xpos -40
+  ypos 1316
+ }
+set N236fbd20 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/P/P_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read15
+  xpos -190
+  ypos 1341
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult1
+  xpos -190
+  ypos 1367
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge1
+  xpos -190
+  ypos 1392
+ }
+push $N236fbd20
+add_layer {P P.red P.green P.blue P.alpha none P.blue P.alpha P.x P.y P.z}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 P.red
+  from1 rgba.green
+  to1 P.green
+  from2 rgba.blue
+  to2 P.blue
+  bbox B
+  name Copy15
+  xpos -40
+  ypos 1416
+ }
+set N2593cac0 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/N/N_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read16
+  xpos -190
+  ypos 1427
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult2
+  xpos -190
+  ypos 1467
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge2
+  xpos -190
+  ypos 1492
+ }
+push $N2593cac0
+add_layer {N N.red N.green N.blue N.alpha N.x N.y N.z N.r N.g N.b}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 N.red
+  from1 rgba.green
+  to1 N.green
+  from2 rgba.blue
+  to2 N.blue
+  bbox B
+  name Copy16
+  xpos -40
+  ypos 1516
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 depth.Z
+  bbox B
+  name Copy17
+  xpos -40
+  ypos 1616
+ }
+set N259837b0 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fcf/1010/rendering/images/versions/release_v004/pref/pref_forest.#.exr
+  cacheLocal always
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1001
+  before black
+  last 1237
+  after black
+  origfirst 1001
+  origlast 1237
+  origset true
+  version 2
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read18
+  xpos -190
+  ypos 1641
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult3
+  xpos -190
+  ypos 1667
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge3
+  xpos -190
+  ypos 1692
+ }
+push $N259837b0
+add_layer {pref pref.red pref.green pref.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 pref.red
+  from1 rgba.green
+  to1 pref.green
+  from2 rgba.blue
+  to2 pref.blue
+  bbox B
+  name Copy18
+  xpos -40
+  ypos 1716
+ }
+add_layer {id_1 id_1.red id_1.green id_1.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_1.red
+  from1 rgba.green
+  to1 id_1.green
+  from2 rgba.blue
+  to2 id_1.blue
+  bbox B
+  name Copy19
+  xpos -40
+  ypos 1816
+ }
+add_layer {id_2 id_2.red id_2.green id_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_2.red
+  from1 rgba.green
+  to1 id_2.green
+  from2 rgba.blue
+  to2 id_2.blue
+  bbox B
+  name Copy20
+  xpos -40
+  ypos 1916
+ }
+add_layer {id_3 id_3.red id_3.green id_3.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_3.red
+  from1 rgba.green
+  to1 id_3.green
+  from2 rgba.blue
+  to2 id_3.blue
+  bbox B
+  name Copy21
+  xpos -40
+  ypos 2016
+ }
+add_layer {id_4 id_4.red id_4.green id_4.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_4.red
+  from1 rgba.green
+  to1 id_4.green
+  from2 rgba.blue
+  to2 id_4.blue
+  bbox B
+  name Copy22
+  xpos -40
+  ypos 2116
+ }
+add_layer {id_5 id_5.red id_5.green id_5.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_5.red
+  from1 rgba.green
+  to1 id_5.green
+  from2 rgba.blue
+  to2 id_5.blue
+  bbox B
+  name Copy23
+  xpos -40
+  ypos 2216
+ }
+add_layer {id_6 id_6.red id_6.green id_6.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_6.red
+  from1 rgba.green
+  to1 id_6.green
+  from2 rgba.blue
+  to2 id_6.blue
+  bbox B
+  name Copy24
+  xpos -40
+  ypos 2316
+ }
+add_layer {id_7 id_7.red id_7.green id_7.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_7.red
+  from1 rgba.green
+  to1 id_7.green
+  from2 rgba.blue
+  to2 id_7.blue
+  bbox B
+  name Copy25
+  xpos -40
+  ypos 2416
+ }
+add_layer {id_8 id_8.red id_8.green id_8.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_8.red
+  from1 rgba.green
+  to1 id_8.green
+  from2 rgba.blue
+  to2 id_8.blue
+  bbox B
+  name Copy26
+  xpos -40
+  ypos 2516
+ }
+add_layer {id_9 id_9.red id_9.green id_9.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_9.red
+  from1 rgba.green
+  to1 id_9.green
+  from2 rgba.blue
+  to2 id_9.blue
+  bbox B
+  name Copy27
+  xpos -40
+  ypos 2616
+ }
+add_layer {light_group_1 light_group_1.red light_group_1.green light_group_1.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_1.red
+  from1 rgba.green
+  to1 light_group_1.green
+  from2 rgba.blue
+  to2 light_group_1.blue
+  bbox B
+  name Copy28
+  xpos -40
+  ypos 2716
+ }
+add_layer {light_group_2 light_group_2.red light_group_2.green light_group_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_2.red
+  from1 rgba.green
+  to1 light_group_2.green
+  from2 rgba.blue
+  to2 light_group_2.blue
+  bbox B
+  name Copy29
+  xpos -40
+  ypos 2816
+ }
+add_layer {light_group_3 light_group_3.red light_group_3.green light_group_3.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_3.red
+  from1 rgba.green
+  to1 light_group_3.green
+  from2 rgba.blue
+  to2 light_group_3.blue
+  bbox B
+  name Copy30
+  xpos -40
+  ypos 2916
+ }
+add_layer {crypto_object crypto_object.red crypto_object.green crypto_object.blue}
+add_layer {crypto_object00 crypto_object00.red crypto_object00.green crypto_object00.blue crypto_object00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object.blue
+  to0 crypto_object.blue
+  from1 crypto_object.green
+  to1 crypto_object.green
+  from2 crypto_object.red
+  to2 crypto_object.red
+  from3 crypto_object00.alpha
+  to3 crypto_object00.alpha
+  bbox B
+  name Copy31
+  xpos -40
+  ypos 3016
+ }
+add_layer {crypto_object01 crypto_object01.red crypto_object01.green crypto_object01.blue crypto_object01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object00.blue
+  to0 crypto_object00.blue
+  from1 crypto_object00.green
+  to1 crypto_object00.green
+  from2 crypto_object00.red
+  to2 crypto_object00.red
+  from3 crypto_object01.alpha
+  to3 crypto_object01.alpha
+  bbox B
+  name Copy32
+  xpos -40
+  ypos 3116
+ }
+add_layer {crypto_object02 crypto_object02.red crypto_object02.green crypto_object02.blue crypto_object02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object01.blue
+  to0 crypto_object01.blue
+  from1 crypto_object01.green
+  to1 crypto_object01.green
+  from2 crypto_object01.red
+  to2 crypto_object01.red
+  from3 crypto_object02.alpha
+  to3 crypto_object02.alpha
+  bbox B
+  name Copy33
+  xpos -40
+  ypos 3216
+ }
+ Copy {
+  inputs 2
+  from0 crypto_object02.blue
+  to0 crypto_object02.blue
+  from1 crypto_object02.green
+  to1 crypto_object02.green
+  from2 crypto_object02.red
+  to2 crypto_object02.red
+  bbox B
+  name Copy34
+  xpos -40
+  ypos 3316
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData1
+  xpos -40
+  ypos 3430
+  disable true
+ }
+add_layer {crypto_material crypto_material.red crypto_material.green crypto_material.blue}
+add_layer {crypto_material00 crypto_material00.red crypto_material00.green crypto_material00.blue crypto_material00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material.blue
+  to0 crypto_material.blue
+  from1 crypto_material.green
+  to1 crypto_material.green
+  from2 crypto_material.red
+  to2 crypto_material.red
+  from3 crypto_material00.alpha
+  to3 crypto_material00.alpha
+  bbox B
+  name Copy35
+  xpos -40
+  ypos 3516
+ }
+add_layer {crypto_material01 crypto_material01.red crypto_material01.green crypto_material01.blue crypto_material01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material00.blue
+  to0 crypto_material00.blue
+  from1 crypto_material00.green
+  to1 crypto_material00.green
+  from2 crypto_material00.red
+  to2 crypto_material00.red
+  from3 crypto_material01.alpha
+  to3 crypto_material01.alpha
+  bbox B
+  name Copy36
+  xpos -40
+  ypos 3616
+ }
+add_layer {crypto_material02 crypto_material02.red crypto_material02.green crypto_material02.blue crypto_material02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material01.blue
+  to0 crypto_material01.blue
+  from1 crypto_material01.green
+  to1 crypto_material01.green
+  from2 crypto_material01.red
+  to2 crypto_material01.red
+  from3 crypto_material02.alpha
+  to3 crypto_material02.alpha
+  bbox B
+  name Copy37
+  xpos -40
+  ypos 3716
+ }
+ Copy {
+  inputs 2
+  from0 crypto_material02.blue
+  to0 crypto_material02.blue
+  from1 crypto_material02.green
+  to1 crypto_material02.green
+  from2 crypto_material02.red
+  to2 crypto_material02.red
+  bbox B
+  name Copy38
+  xpos -40
+  ypos 3817
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData2
+  xpos -40
+  ypos 3916
+  disable true
+ }
+add_layer {crypto_asset crypto_asset.red crypto_asset.green crypto_asset.blue}
+add_layer {crypto_asset00 crypto_asset00.red crypto_asset00.green crypto_asset00.blue crypto_asset00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset.blue
+  to0 crypto_asset.blue
+  from1 crypto_asset.green
+  to1 crypto_asset.green
+  from2 crypto_asset.red
+  to2 crypto_asset.red
+  from3 crypto_asset00.alpha
+  to3 crypto_asset00.alpha
+  bbox B
+  name Copy39
+  xpos -40
+  ypos 4016
+ }
+add_layer {crypto_asset01 crypto_asset01.red crypto_asset01.green crypto_asset01.blue crypto_asset01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset00.blue
+  to0 crypto_asset00.blue
+  from1 crypto_asset00.green
+  to1 crypto_asset00.green
+  from2 crypto_asset00.red
+  to2 crypto_asset00.red
+  from3 crypto_asset01.alpha
+  to3 crypto_asset01.alpha
+  bbox B
+  name Copy40
+  xpos -40
+  ypos 4116
+ }
+add_layer {crypto_asset02 crypto_asset02.red crypto_asset02.green crypto_asset02.blue crypto_asset02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset01.blue
+  to0 crypto_asset01.blue
+  from1 crypto_asset01.green
+  to1 crypto_asset01.green
+  from2 crypto_asset01.red
+  to2 crypto_asset01.red
+  from3 crypto_asset02.alpha
+  to3 crypto_asset02.alpha
+  bbox B
+  name Copy41
+  xpos -40
+  ypos 4216
+ }
+ Copy {
+  inputs 2
+  from0 crypto_asset02.blue
+  to0 crypto_asset02.blue
+  from1 crypto_asset02.green
+  to1 crypto_asset02.green
+  from2 crypto_asset02.red
+  to2 crypto_asset02.red
+  bbox B
+  name Copy42
+  xpos -40
+  ypos 4316
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData3
+  xpos -40
+  ypos 4417
+  disable true
+ }
+ Output {
+  name Output1
+  xpos -40
+  ypos 4516
+ }
+end_group

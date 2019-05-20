@@ -1,0 +1,81 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+push $cut_paste_input
+Dot {
+name Dot719
+selected true
+xpos -3748
+ypos -21467
+}
+set N762bc280 [stack 0]
+add_layer {scatter scatter.red scatter.green scatter.blue scatter.alpha}
+add_layer {wetness wetness.red wetness.green wetness.blue wetness.alpha}
+add_layer {ambient ambient.red ambient.green ambient.blue ambient.alpha}
+add_layer {diffuse diffuse.red diffuse.green diffuse.blue diffuse.alpha}
+Remove {
+operation keep
+channels scatter
+channels2 wetness
+channels3 ambient
+channels4 diffuse
+name Remove10
+selected true
+xpos -3713
+ypos -21424
+}
+push 0
+push $N762bc280
+add_layer {indirect indirect.red indirect.green indirect.blue indirect.alpha}
+add_layer {specular specular.red specular.green specular.blue specular.alpha}
+add_layer {specular2 specular2.red specular2.green specular2.blue specular2.alpha}
+add_layer {specular3 specular3.red specular3.green specular3.blue}
+Remove {
+operation keep
+channels indirect
+channels2 specular
+channels3 specular2
+channels4 specular3
+name Remove11
+selected true
+xpos -3892
+ypos -21411
+}
+push $N762bc280
+add_layer {refraction refraction.red refraction.green refraction.blue refraction.alpha}
+add_layer {reflection reflection.red reflection.green reflection.blue reflection.alpha}
+add_layer {reflection2 reflection2.red reflection2.green reflection2.blue reflection2.alpha}
+add_layer {reflection3 reflection3.red reflection3.green reflection3.blue}
+Remove {
+operation keep
+channels refraction
+channels2 reflection
+channels3 reflection2
+channels4 reflection3
+name Remove12
+selected true
+xpos -4060
+ypos -21411
+}
+Merge2 {
+inputs 3+1
+operation plus
+also_merge all
+name Merge345
+selected true
+xpos -3814
+ypos -21334
+}
+push 0
+Merge2 {
+inputs 2
+operation plus
+Achannels none
+also_merge all
+mix {{curve x1009 0.3 s0 x1023 0 s0}}
+name Merge344
+label InteractiveLight
+note_font_size 14
+selected true
+xpos -4365
+ypos -21349
+}

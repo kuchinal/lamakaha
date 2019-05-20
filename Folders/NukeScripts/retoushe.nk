@@ -1,0 +1,195 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+RotoPaint {
+inputs 0
+cliptype none
+curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x4480c000 x43d68000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}}}}}
+toolbox {brush {
+  { selectAll h 1 str 1 ssx 1 ssy 1 sf 1 ep1 5 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush opc 0.03 bs 42.4 h 0 str 1 ssx 1 ssy 1 sf 1 sb 1 ltn 1084 ltm 1084 tt 17 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+toolbar_opacity 0.02999999933
+toolbar_brush_size 42.40000153
+toolbar_brush_hardness 0
+toolbar_lifetime_type single
+toolbar_lifetime_start 1084
+toolbar_lifetime_end 1084
+toolbar_source_transform_scale {1 1}
+toolbar_source_transform_center {1030 429}
+colorOverlay {0 0 0 0}
+lifetime_start 1084
+lifetime_end 1084
+view {}
+motionblur_on true
+openspline_width 2
+brush_size 42.40000153
+brush_spacing 0.05000000075
+brush_hardness 0
+source_black_outside true
+name RotoPaint5
+selected true
+xpos -431
+ypos -7086
+}
+set N2db80c40 [stack 0]
+Dot {
+name Dot237
+selected true
+xpos -397
+ypos -7024
+}
+push $cut_paste_input
+Dot {
+name Dot231
+selected true
+xpos -541
+ypos -7302
+}
+set N37125aa0 [stack 0]
+Dot {
+name Dot233
+selected true
+xpos -703
+ypos -7302
+}
+set N40104990 [stack 0]
+Dot {
+name Dot232
+selected true
+xpos -861
+ypos -7302
+}
+Grade {
+gamma 0.6
+name Grade80
+selected true
+xpos -895
+ypos -7224
+}
+Dot {
+name Dot234
+selected true
+xpos -861
+ypos -7024
+}
+push $N2db80c40
+RotoPaint {
+inputs 0
+cliptype none
+curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x4480c000 x43d68000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}}}}}
+toolbox {brush {
+  { selectAll h 1 str 1 ssx 1 ssy 1 sf 1 ep1 5 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush opc 0.05 bs 14.2 h 0 str 1 ssx 1 ssy 1 sf 1 sb 1 ltn 1084 ltm 1084 tt 17 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+toolbar_opacity 0.05000000075
+toolbar_brush_size 14.19999981
+toolbar_brush_hardness 0
+toolbar_lifetime_type single
+toolbar_lifetime_start 1084
+toolbar_lifetime_end 1084
+toolbar_source_transform_scale {1 1}
+toolbar_source_transform_center {1030 429}
+colorOverlay {0 0 0 0}
+lifetime_start 1084
+lifetime_end 1084
+view {}
+motionblur_on true
+openspline_width 2
+brush_size 44.20000076
+brush_spacing 0.05000000075
+brush_hardness 0
+source_black_outside true
+name RotoPaint3
+selected true
+xpos -442
+ypos -7228
+}
+Dot {
+name Dot236
+selected true
+xpos -408
+ypos -7161
+}
+push $N40104990
+Grade {
+gamma 1.6
+name Grade78
+selected true
+xpos -737
+ypos -7231
+}
+Dot {
+name Dot235
+selected true
+xpos -703
+ypos -7161
+}
+push $N37125aa0
+Merge2 {
+inputs 2+1
+operation color-dodge
+name Merge98
+label brighten
+note_font_size 14
+selected true
+xpos -575
+ypos -7175
+}
+Grade {
+inputs 1+1
+multiply {2 1 0.4 1}
+name Grade81
+selected true
+xpos -575
+ypos -7086
+}
+Merge2 {
+inputs 2+1
+operation color-burn
+name Merge99
+label darken
+note_font_size 14
+selected true
+xpos -575
+ypos -7038
+}

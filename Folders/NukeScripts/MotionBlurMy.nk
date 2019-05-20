@@ -1,0 +1,146 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+name MotionBlurMy
+tile_color 0x334745ff
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_color 0xff
+selected true
+xpos 39654
+ypos 31135
+addUserKnob {20 User}
+addUserKnob {41 format l "output format" T Reformat1.format}
+addUserKnob {41 antialiasing T ScanlineRender8.antialiasing}
+addUserKnob {41 filter T ScanlineRender8.filter}
+addUserKnob {41 overscan T ScanlineRender8.overscan}
+addUserKnob {41 samples T ScanlineRender8.samples}
+addUserKnob {41 shutter T ScanlineRender8.shutter}
+addUserKnob {41 shutteroffset l "shutter offset" T ScanlineRender8.shutteroffset}
+addUserKnob {41 shuttercustomoffset l "" -STARTLINE T ScanlineRender8.shuttercustomoffset}
+addUserKnob {41 temporal_jitter l "randomize time" T ScanlineRender8.temporal_jitter}
+addUserKnob {41 spatial_jitter l "sample diameter" T ScanlineRender8.spatial_jitter}
+addUserKnob {41 focal_jitter l "focus diameter" T ScanlineRender8.focal_jitter}
+addUserKnob {41 stochastic_samples l "stochastic samples" T ScanlineRender8.stochastic_samples}
+addUserKnob {41 uniform_distribution l "uniform distribution" T ScanlineRender8.uniform_distribution}
+addUserKnob {20 Help}
+addUserKnob {26 d l "" +STARTLINE T "If you do not know why it is not working....\n\nThis tool is designed enable us to add real motion blur to our 3d render \n\nit will give the proper motion blur and not the kaka you get from the VectorBlur node\n\nto make it happen:\nbring your camera and connect to the camera input, do not use dot in between it has to be connected straight\n\nbring your object from which you want to generate motion blur - card, sphere, cube, whatever! it must to be connected straight to the gizmo, do not use dot in between.\nif your obgect is animated; it must to have an animation in it self - the alembic will not work since the gizmo will expect translate values from the object\n\nconnect the image you want to blur to the image input\n\nwish you good luck!\n\n"}
+}
+Axis {
+inputs 0
+xform_order TRS
+rot_order YXZ
+translate {{-parent.input2.translate.x x1001 21922.91797 21873.16211 21824.35547 21773.10742 21718.53516 21662.86328 21608.07227 21558.94922 21515.74219 21467.38672 21418.19922 21366.98242 21315.36914 21263.41016 21210.9668 21159.61133 21106.85156 21050.7832 20995.16602 20940.69727 20887.11133 20834.05859 20780.84766 20728.12109 20675.76953 20622.55664 20569.59375 20515.81641 20461.54297 20408.54297 20357.31641 20303.5 20247.20703 20189.63672 20135.90234 20084.18555 20031.73828 19978.75977 19924.25977 19868.23047 19811.9668 19754.83789} {-parent.input2.translate.y x1001 -361.8381653 -361.4718018 -361.2357483 -361.5283813 -361.3092041 -361.169281 -361.4421387 -361.2203674 -356.4503784 -355.7200317 -355.7385864 -356.7651672 -356.9053345 -357.7529907 -357.7625427 -358.8103638 -358.9655151 -358.9980164 -358.2675476 -357.5027466 -357.9734802 -358.1888123 -356.8234253 -356.3399048 -356.2237244 -355.6270142 -356.2521667 -356.3258362 -356.6036987 -357.3174133 -358.3000183 -358.8061829 -358.0141907 -357.6074829 -357.3181763 -355.0087891 -353.4838867 -353.3733826 -353.1771851 -353.4851685 -353.993103 -354.2358398} {-parent.input2.translate.z x1001 -3706.196777 -3705.867188 -3704.258301 -3701.500732 -3699.622559 -3701.275391 -3707.273926 -3714.515137 -3718.535645 -3718.233154 -3716.192871 -3714.077393 -3712.332031 -3710.971924 -3710.075439 -3708.946533 -3707.000732 -3704.294189 -3701.717285 -3700.353516 -3700.28125 -3702.467529 -3706.150879 -3709.60083 -3712.147217 -3714.084473 -3715.449707 -3716.787109 -3717.406982 -3716.648926 -3714.876953 -3713.192871 -3712.819824 -3715.555908 -3720.401123 -3725.63623 -3729.857422 -3733.067627 -3735.983643 -3738.537598 -3738.293701 -3738.686279}}
+rotate {{-parent.input2.rotate.x x1001 1.639218807 1.63216424 1.582981825 1.570674419 1.534968376 1.613594055 1.889340281 2.222440958 2.013899088 2.067029953 2.028942585 1.995987654 1.820535898 1.707853317 1.540490746 1.506611228 1.434657812 1.43421936 1.444369793 1.447075844 1.546288133 1.597736239 1.579892993 1.678221703 1.835914969 1.900935531 2.053589106 2.102154255 2.08949852 2.026296139 2.028753519 2.00054574 1.836988568 1.789644718 1.826516867 1.778800249 1.828628421 1.907449484 1.8958987 1.866431594 1.888198137 1.899448037} {-parent.input2.rotate.y x1001 179.9067535 180.161087 179.9578094 179.9352417 179.9224548 179.9288635 180.3572998 180.5236359 180.2224579 180.2723083 180.1690979 179.9818573 179.9462128 179.9431152 180.3442688 180.6010437 180.7261505 180.6883545 180.3652191 179.875824 179.6961975 179.6457672 179.6914368 179.6227264 179.3877258 179.1742859 178.9752502 178.9888153 179.2318573 179.4564514 179.4968872 179.8324432 180.6085205 181.3135681 181.4537964 181.0982666 180.5276794 179.5771637 178.7676849 178.0653839 177.8026886 177.5774078} {-parent.input2.rotate.z x1001 -0.09443205194 0.01789811417 -0.1013577995 -0.09941553999 -0.09658737688 0.03055839663 -0.04978923933 -0.0193096702 -0.1075725814 -0.1212827805 -0.03343748346 -0.03725896827 -0.06133911541 -0.05612683281 0.2129428523 -0.1181024988 -0.09833899891 0.01865475048 0.003615647785 0.003267751903 0.002787439191 -0.001949683205 0.2060821457 0.1763808261 -0.1250885302 0.1020232371 -0.1841951032 -0.1878519961 0.09177142616 -0.1226950311 0.1403010006 -0.1110381667 -0.07125477664 -0.03602703871 -0.1130001426 -0.02626071272 -0.06356898367 0.185533668 -0.09865937677 -0.1062400114 -0.1049222736 -0.1001303079}}
+name Axis10
+xpos 1168
+ypos 635
+}
+set N2d550190 [stack 0]
+Camera2 {
+translate {{parent.input1.translate.x} {parent.input1.translate.y} {parent.input1.translate.z}}
+rotate {{parent.input1.rotate.x} {parent.input1.rotate.y} {parent.input1.rotate.z}}
+focal {{parent.input1.focal}}
+haperture {{parent.input1.haperture}}
+vaperture {{parent.input1.vaperture}}
+near {{parent.input1.near}}
+far {{parent.input1.far}}
+name Camera8
+xpos 1316
+ypos 635
+addUserKnob {20 User}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+Dot {
+name Dot208
+xpos 1340
+ypos 754
+}
+set N32448240 [stack 0]
+Dot {
+name Dot203
+xpos 1340
+ypos 1102
+}
+push $N32448240
+Input {
+inputs 0
+name plate
+xpos 1577
+ypos 483
+}
+Project3D {
+inputs 2
+crop false
+name Project3D9
+xpos 1577
+ypos 750
+}
+NoTimeBlur {
+name NoTimeBlur3
+xpos 1577
+ypos 794
+}
+Dot {
+name Dot411
+xpos 1611
+ypos 985
+}
+push $N2d550190
+Dot {
+name Dot207
+xpos 1192
+ypos 915
+}
+Input {
+inputs 0
+name object
+xpos 1731
+ypos 480
+number 2
+}
+TransformGeo {
+inputs 2
+name TransformGeo1
+xpos 1731
+ypos 903
+}
+ApplyMaterial {
+inputs 2
+name ApplyMaterial1
+xpos 1731
+ypos 981
+}
+Reformat {
+inputs 0
+name Reformat1
+xpos 1841
+ypos 1098
+}
+ScanlineRender {
+inputs 3
+conservative_shader_sampling false
+overscan 20
+samples 50
+shutteroffset centred
+motion_vectors_type distance
+name ScanlineRender8
+xpos 1731
+ypos 1098
+}
+Output {
+name Output1
+xpos 1731
+ypos 1198
+}
+Input {
+inputs 0
+name camera
+xpos 1307
+ypos 491
+number 1
+}
+end_group

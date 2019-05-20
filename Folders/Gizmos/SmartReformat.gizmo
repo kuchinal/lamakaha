@@ -1,0 +1,69 @@
+#! C:/Program Files/Nuke10.0v3/nuke-10.0.3.dll -nx
+version 10.0 v3
+Group {
+ name smartReformat
+ tile_color 0xa57aaaff
+ addUserKnob {20 eSmartReformat}
+ addUserKnob {26 format l Format}
+ addUserKnob {41 original_format l "original format" T Maths.original_format}
+ addUserKnob {41 output_format l "output format" T Maths.output_format}
+ addUserKnob {12 original_to1 l INVISIBLE +INVISIBLE}
+ original_to1 {{input.to1} {input.to1}}
+ addUserKnob {12 original_to2 l INVISIBLE +INVISIBLE}
+ original_to2 {{input.to2} {input.to2}}
+ addUserKnob {12 original_to3 l INVISIBLE +INVISIBLE}
+ original_to3 {{input.to3} {input.to3}}
+ addUserKnob {12 original_to4 l INVISIBLE +INVISIBLE}
+ original_to4 {{input.to4} {input.to4}}
+ addUserKnob {12 baked_reformat_to1 l INVISIBLE +INVISIBLE}
+ baked_reformat_to1 {{original_to1*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {original_to1*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ addUserKnob {12 baked_reformat_to2 l INVISIBLE +INVISIBLE}
+ baked_reformat_to2 {{original_to2*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {original_to2*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ addUserKnob {12 baked_reformat_to3 l INVISIBLE +INVISIBLE}
+ baked_reformat_to3 {{original_to3*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {original_to3*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ addUserKnob {12 baked_reformat_to4 l INVISIBLE +INVISIBLE}
+ baked_reformat_to4 {{original_to4*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {original_to4*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ addUserKnob {12 original_translate l INVISIBLE +INVISIBLE}
+ original_translate {{input.translate} {input.translate}}
+ addUserKnob {12 baked_reformat_translate l INVISIBLE +INVISIBLE}
+ baked_reformat_translate {{original_translate*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {original_translate*Maths.x_f x1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ addUserKnob {12 original_center l INVISIBLE +INVISIBLE}
+ original_center {{input.center} {input.center}}
+ addUserKnob {12 baked_reformat_center l INVISIBLE +INVISIBLE}
+ baked_reformat_center {{original_center*Maths.x_f x1 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024 1024} {original_center*Maths.x_f x1 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576 576}}
+ addUserKnob {26 ""}
+ addUserKnob {22 bake l Bake T "node = nuke.thisNode()\n\ndef checkInput():\n    if not node.input(0):\n        nuke.message(\"Input not connected!\")\n        return False\n    else:\n        return True\n\ndef bakeCurve(curve):\n    first = int(nuke.root().knob('first_frame').value())\n    last = int(nuke.root().knob('last_frame').value()) + 1\n    inc = 1\n\n    for f in xrange( first, last, inc):\n        curve.setKey( f, curve.evaluate( f ) )\n    curve.setExpression( 'curve' )\n\nnode = nuke.thisNode()\nk = node\['baked_reformat_translate']\nl = node\['baked_reformat_to1']\nm = node\['baked_reformat_to2']\nn = node\['baked_reformat_to3']\no = node\['baked_reformat_to4']\np = node\['baked_reformat_center']\n\nanimCurvex = k.animation(0)\nanimCurvey = k.animation(1)\nanimCurveto1x = l.animation(0)\nanimCurveto1y = l.animation(1)\nanimCurveto2x = m.animation(0)\nanimCurveto2y = m.animation(1)\nanimCurveto3x = n.animation(0)\nanimCurveto3y = n.animation(1)\nanimCurveto4x = o.animation(0)\nanimCurveto4y = o.animation(1)\nanimCurveto5x = p.animation(0)\nanimCurveto5y = p.animation(1)\n\n\nif animCurvex:\n    bakeCurve(animCurvex)\n\nif animCurvey:\n    bakeCurve(animCurvey)\n\nif animCurveto1x:\n    bakeCurve(animCurveto1x)\n\nif animCurveto1y:\n    bakeCurve(animCurveto1y)\n\nif animCurveto2x:\n    bakeCurve(animCurveto2x)\n\nif animCurveto2y:\n    bakeCurve(animCurveto2y)\n\nif animCurveto3x:\n    bakeCurve(animCurveto3x)\n\nif animCurveto3y:\n    bakeCurve(animCurveto3y)\n\nif animCurveto4x:\n    bakeCurve(animCurveto4x)\n\nif animCurveto4y:\n    bakeCurve(animCurveto4y)\n\nif animCurveto5x:\n    bakeCurve(animCurveto5x)\n\nif animCurveto5y:\n    bakeCurve(animCurveto5y)\n\nnuke.message('Animation Baked!')" +STARTLINE}
+ addUserKnob {22 create l Create -STARTLINE T "node = nuke.thisNode()\noFT = node\['output_format'].value()\n\nrTrb = node\['baked_reformat_translate']\narTrb = rTrb.toScript(True)\nprint arTrb\n\naArgs = \"knob \" + node.name() + \".\" + rTrb.name()\naCurve = nuke.tcl(aArgs)\nprint aCurve\n\nt1 = node\['baked_reformat_to1']\nat1 = t1.toScript(True)\nprint at1\n\naArgst1 = \"knob \" + node.name() + \".\" + t1.name()\naCurvet1 = nuke.tcl(aArgst1)\nprint aCurvet1\n\nt2 = node\['baked_reformat_to2']\nat2 = t2.toScript(True)\nprint at2\n\naArgst2 = \"knob \" + node.name() + \".\" + t2.name()\naCurvet2 = nuke.tcl(aArgst2)\nprint aCurvet2\n\nt3 = node\['baked_reformat_to3']\nat3 = t3.toScript(True)\nprint at3\n\naArgst3 = \"knob \" + node.name() + \".\" + t3.name()\naCurvet3 = nuke.tcl(aArgst3)\nprint aCurvet3\n\nt4 = node\['baked_reformat_to4']\nat4 = t4.toScript(True)\nprint at4\n\naArgst4 = \"knob \" + node.name() + \".\" + t4.name()\naCurvet4 = nuke.tcl(aArgst4)\nprint aCurvet4\n\nc5 = node\['baked_reformat_center']\nac5 = c5.toScript(True)\nprint ac5\n\naArgsc5 = \"knob \" + node.name() + \".\" + c5.name()\naCurvec5 = nuke.tcl(aArgsc5)\nprint aCurvec5\n\ndef createTransform():\n\n    #generate Transform\n\n    nuke.root().begin() \n\t\t\n    t = nuke.createNode('Transform', inpanel = False)\n    k = t\['translate']\n    k.setAnimated()\n    k.fromScript(aCurve)\n    center = t\['center']\n    center.setAnimated()\n    center.fromScript(aCurvec5)\n    t\['label'].setValue(node.name() + \"_Baked\")\n    nuke.message('Transform Created!')\n\ndef createCornerPin2D():\n\n    #generate CornerPin2D\n\n    nuke.root().begin()\n\n    c = nuke.createNode('CornerPin2D', inpanel = False)\n    point1 = c\['to1']\n    point2 = c\['to2']\n    point3 = c\['to3']\n    point4 = c\['to4']\n    point1.setAnimated()\n    point2.setAnimated()\n    point3.setAnimated()\n    point4.setAnimated()\n    point1.fromScript(aCurvet1)\n    point2.fromScript(aCurvet2)\n    point3.fromScript(aCurvet3)\n    point4.fromScript(aCurvet4)\n    c\['label'].setValue(node.name() + \"_Baked\")\n    nuke.message('CornerPin2D Created!')\n\ndef ereformat():\n    if node.knob('choice').value() == \"Transform\":\n        createTransform()\n    elif node.knob('choice').value() == \"CornerPin\":\n        createCornerPin2D()\nereformat()"}
+ addUserKnob {68 choice l "" -STARTLINE M {Transform CornerPin ""}}
+ addUserKnob {22 reset l "Reset All" T "node = nuke.thisNode()\npoint1 = node\['baked_reformat_to1']\npoint2 = node\['baked_reformat_to2']\npoint3 = node\['baked_reformat_to3']\npoint4 = node\['baked_reformat_to4']\nt1 = node\['baked_reformat_translate']\ncenter = node\['baked_reformat_center']\npoint1.setExpression('original_to1*Maths.x_f')\npoint2.setExpression('original_to2*Maths.x_f')\npoint3.setExpression('original_to3*Maths.x_f')\npoint4.setExpression('original_to4*Maths.x_f')\nt1.setExpression('original_translate*Maths.x_f')\ncenter.setExpression('original_center*Maths.x_f')\n\nnuke.message('eSmartReformat has been set to default!')\n\n\n" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {26 credits l "" +STARTLINE T "eSmartReformat  v1.0  ||  by Ermes Vincenti  |  ermesvincenti.wordpress.com  |  2017"}
+ addUserKnob {22 website l eTools T "import os\nimport sys\n\ntry:\n    import subprocess\n    def _run(cmd, shell, wait):\n        opener = subprocess.Popen(cmd, shell=shell)\n        if wait:\n            opener.wait()\n        return opener.pid\nexcept ImportError:\n    import popen2\n    def _run(cmd, shell, wait):\n        opener = popen2.Popen3(cmd)\n        if wait:\n            opener.wait()\n        return opener.pid\n\ndef _open(url, wait=0):\n    if sys.platform == \"darwin\":\n        cmd = \[\"open\", url]\n    elif hasattr(os, \"startfile\"):\n        return os.startfile(url)\n    elif os.environ.has_key(\"KDE_FULL_SESSION\") or os.environ.has_key(\"KDE_MULTIHEAD\") or \\\n        os.environ.has_key(\"GNOME_DESKTOP_SESSION_ID\") or os.environ.has_key(\"GNOME_KEYRING_SOCKET\"):\n        cmd = \[\"xdg-open\", url]\n    else:\n        raise OSError, \"Desktop not supported.\"\n\n    return _run(cmd, 0, wait)\n\n_open('http://ermesvincenti.wordpress.com/')" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 448
+  ypos 203
+ }
+ NoOp {
+  name Maths
+  tile_color 0xa57aaaff
+  selected true
+  xpos 448
+  ypos 278
+  addUserKnob {20 maths l Maths}
+  addUserKnob {26 format l Format}
+  addUserKnob {14 original_format l "original format" t "\t\t\t\t\t\t\t\t" R 0 100}
+  original_format {1920 1080}
+  addUserKnob {14 output_format l "output format" R 0 100}
+  output_format {2048 1152}
+  addUserKnob {12 x_f}
+  x_f {{output_format/original_format} {output_format/original_format}}
+ }
+ Output {
+  name Output1
+  xpos 448
+  ypos 343
+ }
+end_group

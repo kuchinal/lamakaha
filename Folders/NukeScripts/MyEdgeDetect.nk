@@ -1,0 +1,216 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name EdgeDetect_My
+ note_font "Verdana Bold Bold Bold Bold Bold"
+ selected true
+ xpos -404
+ ypos 268
+ addUserKnob {20 User}
+ addUserKnob {7 Size R 0 20}
+ Size 2
+ addUserKnob {7 Blur R 0 20}
+ addUserKnob {41 translate l offset T InnerTransform.translate}
+ addUserKnob {6 Mask +STARTLINE}
+ addUserKnob {6 Inside -STARTLINE}
+ addUserKnob {6 Outside -STARTLINE}
+ addUserKnob {41 disable_1 l "Use alpha" t "Use alpha as pattern for edge detect, otherwise rgb will be used" -STARTLINE T Expression1.disable}
+ addUserKnob {26 ""}
+ addUserKnob {26 sence l "" +STARTLINE T "Threshhold tweek"}
+ addUserKnob {7 blacks R -1 1}
+ addUserKnob {7 whites R -1 1}
+ addUserKnob {18 colorsContribution R 0 3}
+ colorsContribution {1 1 1}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos -351
+  ypos -498
+  number 1
+ }
+add_layer {rgba rgba.water}
+ Shuffle {
+  alpha white
+  name Shuffle1
+  xpos -311
+  ypos 160
+  disable {{parent.Mask i}}
+ }
+ Dot {
+  name Dot8
+  xpos -277
+  ypos 291
+ }
+ Input {
+  inputs 0
+  name Source
+  xpos -450
+  ypos -740
+ }
+ Grade {
+  channels rgba
+  blackpoint {{-parent.blacks/20}}
+  whitepoint {{parent.whites+1}}
+  white {{parent.colorsContribution} {parent.colorsContribution} {parent.colorsContribution} {parent.colorsContribution}}
+  black_clamp false
+  name Tweek
+  xpos -450
+  ypos -649
+ }
+ Expression {
+  expr3 (r+g+b)/3
+  name Expression1
+  xpos -450
+  ypos -545
+  disable true
+ }
+ Dot {
+  name Dot10
+  xpos -416
+  ypos -476
+ }
+set N2960b440 [stack 0]
+ Dot {
+  name Dot1
+  xpos -550
+  ypos -476
+ }
+set N2960b770 [stack 0]
+ Dot {
+  name Dot3
+  xpos -801
+  ypos -476
+ }
+set N2960baa0 [stack 0]
+ Dot {
+  name Dot5
+  xpos -962
+  ypos -476
+ }
+ Dot {
+  name Dot6
+  xpos -962
+  ypos -26
+ }
+set N297514e0 [stack 0]
+ Dot {
+  name Dot7
+  xpos -962
+  ypos 75
+ }
+push $N297514e0
+push $N2960baa0
+ Blur {
+  size {{parent.Size i}}
+  name Blur1
+  xpos -835
+  ypos -438
+ }
+ set C29751b40 [stack 0]
+ Clamp {
+  name Clamp1
+  xpos -835
+  ypos -400
+ }
+ TransformMasked {
+  center {1024 778}
+  name InnerTransform
+  xpos -835
+  ypos -362
+ }
+ Dot {
+  name Dot4
+  xpos -801
+  ypos -272
+ }
+push $N2960b770
+clone $C29751b40 {
+  xpos -584
+  ypos -436
+  selected false
+ }
+ Clamp {
+  name Clamp2
+  xpos -581
+  ypos -398
+ }
+ Dot {
+  name Dot2
+  xpos -547
+  ypos -272
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge1
+  xpos -719
+  ypos -276
+ }
+ Grade {
+  channels alpha
+  multiply 20
+  gamma 0.4
+  black_clamp false
+  name Grade1
+  xpos -719
+  ypos -239
+ }
+ Clamp {
+  name Clamp3
+  xpos -719
+  ypos -201
+ }
+ Blur {
+  size {{parent.Blur i}}
+  name Blur2
+  xpos -719
+  ypos -153
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  name Merge2
+  xpos -719
+  ypos -30
+  disable {{!parent.Inside i}}
+ }
+ Merge2 {
+  inputs 2
+  operation stencil
+  name Merge3
+  xpos -719
+  ypos 71
+  disable {{!parent.Outside i}}
+ }
+ Dot {
+  name Dot9
+  xpos -685
+  ypos 291
+ }
+push $N2960b440
+ Merge2 {
+  inputs 2+1
+  operation copy
+  name Merge4
+  xpos -450
+  ypos 287
+ }
+set N29754b10 [stack 0]
+ Output {
+  name Output1
+  xpos -450
+  ypos 487
+ }
+push $N29754b10
+ Viewer {
+  viewerProcess None
+  input_process false
+  name Viewer1
+  selected true
+  xpos -40
+  ypos -10
+  hide_input true
+ }
+end_group

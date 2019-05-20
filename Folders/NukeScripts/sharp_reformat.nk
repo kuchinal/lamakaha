@@ -1,0 +1,61 @@
+set cut_paste_input [stack 0]
+version 8.0 v4
+push $cut_paste_input
+Group {
+ name SharpReformat
+ selected true
+ xpos -4214
+ ypos 5644
+ addUserKnob {20 User}
+ addUserKnob {26 info l "" +STARTLINE T "Scales down to Creed 2K with improved sharpness.\n\nKeep \"Simon\" filter unless extra sharpening is requested.\n"}
+ addUserKnob {41 format l "output format" T Reformat_to_2K.format}
+ addUserKnob {41 filter T Reformat_to_2K.filter}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 176
+  ypos -226
+ }
+ Log2Lin {
+  operation lin2log
+  name Log2Lin1
+  xpos 176
+  ypos -186
+ }
+ Clamp {
+  channels rgba
+  maximum_enable false
+  name Clamp_Neg
+  xpos 176
+  ypos -160
+ }
+set N27f888c0 [stack 0]
+ Reformat {
+  format "2048 1152 0 0 2048 1152 1 2K_Creed(16:9)"
+  filter Simon
+  name Reformat_to_2K
+  selected true
+  xpos 176
+  ypos -134
+ }
+ Log2Lin {
+  name Log2Lin2
+  xpos 176
+  ypos -104
+ }
+ Output {
+  name Output1
+  xpos 176
+  ypos -4
+ }
+push $N27f888c0
+ Viewer {
+  masking_ratio 2.35
+  input_process false
+  name Viewer1
+  xpos 730
+  ypos -10
+  hide_input true
+ }
+end_group

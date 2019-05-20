@@ -1,0 +1,45 @@
+set cut_paste_input [stack 0]
+version 6.1 v3
+push $cut_paste_input
+Group {
+ name Uno
+ tile_color 0xffffffff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_color 0xff0000ff
+ selected true
+ xpos 142
+ ypos -25
+ mapsize {0.15 0.15}
+ addUserKnob {20 User l channelUno}
+ addUserKnob {22 Red l "<font color=\"Red\">R" -STARTLINE T "nuke.thisNode()\['channel'].setValue('  \[red]')\nnuke.thisNode()\['note_font_color'].setValue(4278190335L)\nnuke.thisNode()\['tile_color'].setValue(4294967295)\nnuke.toNode(\"channelSolo_expression\")\['expr0'].setValue('r')\n"}
+ addUserKnob {22 green l "<font color=\"Lime\">G" -STARTLINE T "nuke.thisNode()\['channel'].setValue('  \[green]')\nnuke.thisNode()\['note_font_color'].setValue(16711935)\nnuke.thisNode()\['tile_color'].setValue(4294967295)\n\nnuke.toNode(\"channelSolo_expression\")\['expr0'].setValue('g')"}
+ addUserKnob {22 blue l "<font color=\"DodgerBlue\">B" -STARTLINE T "nuke.thisNode()\['channel'].setValue('  \[blue]')\nnuke.thisNode()\['note_font_color'].setValue(65535)\nnuke.thisNode()\['tile_color'].setValue(4294967295)\n\nnuke.toNode(\"channelSolo_expression\")\['expr0'].setValue('b')"}
+ addUserKnob {26 space l " " -STARTLINE T "  "}
+ addUserKnob {22 Alpha l "<font color=\"White\">a" -STARTLINE T "nuke.thisNode()\['channel'].setValue('  \[alpha]')\nnuke.thisNode()\['note_font_color'].setValue(4294967295)\nnuke.thisNode()\['tile_color'].setValue(255)\nnuke.toNode(\"channelSolo_expression\")\['expr0'].setValue('a')"}
+ addUserKnob {22 Luminance l "<font color=\"Grey\">Lum" -STARTLINE T "nuke.thisNode()\['channel'].setValue('  \[Luminance]')\nnuke.thisNode()\['note_font_color'].setValue(1280068863)\nnuke.thisNode()\['tile_color'].setValue(4294967295)\n\n\nnuke.toNode(\"channelSolo_expression\")\['expr0'].setValue('(r*0.21264936)+(g*0.71516907)+(b*0.07218152)')\n\n"}
+ addUserKnob {26 ""}
+ addUserKnob {26 channel l " " T "  \[red]"}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -505
+  ypos 434
+ }
+ Expression {
+  channel0 {rgba.red rgba.green rgba.blue rgba.alpha}
+  expr0 r
+  channel1 none
+  channel2 none
+  channel3 none
+  name channelSolo_expression
+  selected true
+  xpos -505
+  ypos 460
+ }
+ Output {
+  name Output1
+  xpos -505
+  ypos 574
+ }
+end_group

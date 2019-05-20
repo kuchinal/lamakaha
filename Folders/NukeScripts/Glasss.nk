@@ -1,0 +1,434 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name Glass
+ tile_color 0x70272fff
+ note_font "Verdana Bold"
+ note_font_size 14
+ note_font_color 0xffffffff
+ selected true
+ xpos -187
+ ypos 154
+ addUserKnob {20 "" l Glass}
+ addUserKnob {4 Displacement l control t "please select red if you have only red channel mask, select normals if you have normals, shuffle refraction filter or fresnel to blue channel to have additional controls, it will expect to have alpha in both cases" M {"red channel" normals "" "" "" "" "" ""}}
+ addUserKnob {7 blur_1 l "blur ctrl" R 0 100}
+ addUserKnob {7 displace l Displace R 0 20}
+ displace 1
+ addUserKnob {7 abberation l Abberation}
+ addUserKnob {6 premultiply +STARTLINE}
+ addUserKnob {20 defocus n 1}
+ defocus 0
+ addUserKnob {6 useDef l "Apply Defocus" -STARTLINE}
+ addUserKnob {41 size T ZBlur1.size}
+ addUserKnob {41 max_size l maximum T ZBlur1.max_size}
+ addUserKnob {41 shape l "filter shape" T ZBlur1.shape}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {20 glasscolor l "glass color" n 1}
+ glasscolor 0
+ addUserKnob {41 multiply T Grade4.multiply}
+ addUserKnob {41 add l offset T Grade4.add}
+ addUserKnob {41 gamma T Grade4.gamma}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 fresnel n 1}
+ fresnel 0
+ addUserKnob {7 whitepoint R 0 2}
+ whitepoint 1
+ addUserKnob {7 blackpoint -STARTLINE R -1 1}
+ addUserKnob {7 add_1 l add -STARTLINE}
+ addUserKnob {7 blur}
+ addUserKnob {18 color}
+ color {0 0 0}
+ addUserKnob {20 endGroup n -1}
+}
+ Input {
+  inputs 0
+  name control
+  xpos -64
+  ypos -563
+  number 1
+ }
+ Dot {
+  name Dot11
+  xpos -30
+  ypos -510
+ }
+set N1c9a3d40 [stack 0]
+ Dot {
+  name Dot12
+  xpos 356
+  ypos -510
+ }
+ Dot {
+  name Dot13
+  xpos 356
+  ypos 719
+ }
+push $N1c9a3d40
+ Dot {
+  name Dot14
+  xpos -363
+  ypos -510
+ }
+ Shuffle {
+  in2 rgba
+  black blue2
+  white alpha2
+  out forward
+  out2 depth
+  name Shuffle2
+  label green
+  xpos -397
+  ypos -407
+ }
+ Grade {
+  channels forward
+  multiply 8
+  black_clamp false
+  name Grade5
+  xpos -397
+  ypos -371
+ }
+ Dot {
+  name Dot9
+  xpos -363
+  ypos -20
+ }
+push $N1c9a3d40
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle3
+  label red
+  xpos -64
+  ypos -421
+ }
+set N1c9a58c0 [stack 0]
+push $N1c9a58c0
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy6
+  xpos -64
+  ypos -354
+ }
+set N1c9a5c30 [stack 0]
+ Dot {
+  name Dot2
+  xpos 94
+  ypos -343
+ }
+set N1caf7fa0 [stack 0]
+ Transform {
+  translate {0 -1}
+  center {320 240}
+  name down
+  xpos 60
+  ypos -140
+ }
+push $N1c9a5c30
+ Dot {
+  name Dot3
+  xpos -122
+  ypos -343
+ }
+ Dot {
+  name Dot4
+  xpos -207
+  ypos -343
+ }
+ Transform {
+  translate {0 1}
+  center {320 240}
+  name up
+  xpos -241
+  ypos -180
+ }
+push $N1caf7fa0
+ Dot {
+  name Dot5
+  xpos 176
+  ypos -343
+ }
+ Transform {
+  translate {1 0}
+  center {320 240}
+  name right
+  xpos 142
+  ypos -221
+ }
+push $N1c9a5c30
+ Shuffle {
+  in alpha
+  green black
+  blue black
+  out rgb
+  name Shuffle1
+  xpos -64
+  ypos -311
+ }
+ Transform {
+  translate {-1 0}
+  center {320 240}
+  name left
+  xpos -64
+  ypos -285
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.green
+  name Copy2
+  xpos -64
+  ypos -227
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.blue
+  name Copy3
+  xpos -64
+  ypos -187
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy4
+  xpos -64
+  ypos -147
+ }
+ Expression {
+  temp_name0 l
+  temp_expr0 red
+  temp_name1 r
+  temp_expr1 green
+  temp_name2 u
+  temp_expr2 blue
+  temp_name3 d
+  temp_expr3 alpha
+  channel0 {forward.u -forward.v -backward.u none}
+  expr0 (l-r)*width
+  channel1 {-forward.u forward.v -backward.u none}
+  expr1 (d-u)*width
+  channel2 depth
+  expr2 (abs(l-r)+abs(d-u))*width/2
+  name Expression1
+  xpos -64
+  ypos -111
+ }
+ Blur {
+  channels forward
+  size {{parent.blur_1}}
+  name Blur3
+  xpos -64
+  ypos -87
+ }
+ Switch {
+  inputs 2
+  which {{Displacement}}
+  name Switch2
+  xpos -64
+  ypos -23
+ }
+ Dot {
+  name Dot8
+  xpos -30
+  ypos 1
+ }
+set N1cafafc0 [stack 0]
+ Dot {
+  name Dot6
+  xpos 234
+  ypos 1
+ }
+ Dot {
+  name Dot7
+  xpos 234
+  ypos 193
+ }
+set N1cafb6a0 [stack 0]
+ Dot {
+  name Dot1
+  xpos 234
+  ypos 631
+ }
+push $N1cafb6a0
+push $N1cafafc0
+ Input {
+  inputs 0
+  name image
+  xpos -236
+  ypos 81
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels forward
+  name Copy1
+  xpos -64
+  ypos 69
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels depth
+  name Copy8
+  xpos -64
+  ypos 178
+ }
+ ZBlur {
+  channels rgba
+  math -linear
+  size 10
+  shape 1
+  name ZBlur1
+  xpos -65
+  ypos 240
+  disable {{!parent.useDef}}
+ }
+ Dot {
+  name Dot10
+  xpos -30
+  ypos 268
+ }
+set N1cbd5e60 [stack 0]
+ IDistort {
+  channels {rgba.red rgba.green rgba.blue rgba.alpha}
+  uv forward
+  uv_scale {{parent.displace}}
+  name IDistort4
+  xpos 98
+  ypos 491
+ }
+push $N1cbd5e60
+ IDistort {
+  channels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+  uv forward
+  uv_scale {{parent.displace/(1+parent.abberation/10)}}
+  name IDistort3
+  xpos 66
+  ypos 314
+ }
+push $N1cbd5e60
+ IDistort {
+  channels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  uv forward
+  uv_scale {{parent.displace/(1-parent.abberation/10)}}
+  name IDistort1
+  xpos -188
+  ypos 309
+ }
+push $N1cbd5e60
+ IDistort {
+  channels {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  uv forward
+  uv_scale {{parent.displace}}
+  name IDistort2
+  xpos -64
+  ypos 311
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  name Copy9
+  xpos -64
+  ypos 372
+ }
+ Copy {
+  inputs 2
+  from0 rgba.blue
+  to0 rgba.blue
+  name Copy10
+  selected true
+  xpos -64
+  ypos 408
+ }
+ Switch {
+  inputs 2
+  which {{parent.abberation==0}}
+  name Switch1
+  xpos -64
+  ypos 491
+  addUserKnob {20 "" l Weta}
+  addUserKnob {32 knob l "update input order" t "changes the input order according to the input nodes' horizontal order (left most node becomes input 0)" -STARTLINE T " reconnectInputs"}
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  channels depth
+  name Copy5
+  xpos -64
+  ypos 616
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy7
+  xpos -62
+  ypos 710
+ }
+ Grade {
+  channels depth
+  blackpoint {{parent.blackpoint}}
+  whitepoint {{parent.whitepoint}}
+  add {{parent.add_1}}
+  black_clamp false
+  name Grade1
+  xpos -62
+  ypos 834
+ }
+ Clamp {
+  channels depth
+  name Clamp1
+  xpos -62
+  ypos 878
+ }
+ Blur {
+  channels depth
+  size {{parent.blur}}
+  name Blur1
+  xpos -62
+  ypos 927
+ }
+ Grade {
+  add {{parent.color}}
+  maskChannelInput depth.Z
+  name Grade3
+  xpos -62
+  ypos 977
+ }
+ Grade {
+  maskChannelInput rgba.alpha
+  name Grade4
+  xpos -62
+  ypos 1029
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove1
+  xpos -62
+  ypos 1136
+ }
+ Premult {
+  name Premult2
+  xpos -62
+  ypos 1223
+  disable {{!parent.premultiply}}
+ }
+ Output {
+  name Output1
+  xpos -62
+  ypos 1383
+ }
+end_group

@@ -1,0 +1,27 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Retime {
+ input.first_lock true
+ input.last 1056
+ output.first_lock true
+ output.last 10560
+ speed 0.1
+ before continue
+ after continue
+ filter none
+ time ""
+ name Retime2
+ selected true
+ xpos -6623
+ ypos 2669
+}
+TimeWarp {
+ lookup {{frame*1/Retime2.speed}}
+ length 10
+ time ""
+ name TimeWarp2
+ selected true
+ xpos -6623
+ ypos 2700
+}

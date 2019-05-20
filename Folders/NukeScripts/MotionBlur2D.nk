@@ -1,0 +1,227 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+Transform {
+inputs 0
+translate {{curve x1039 -266 x1113 484 x1114 -694 x1154 -558 x1202 -12 x1263 378} {curve x1039 -540 x1113 142 x1114 -440 x1154 205 x1202 -355 x1263 475}}
+center {1024 778}
+name Transform4
+selected true
+xpos -513
+ypos 3535
+}
+Group {
+name vector_module1
+help "For creating a custom motion vector pass based on translate data. Plug in a Transform or Tracker node that corresponds to a specific moving area of your image. Merge multiple instances of the vector_module together to create a motion vector pass.\n\nSee http://richardfrazer.com/tools-tutorials/custom-motion-vector-blur-using-trackers for a full tutorial."
+selected true
+xpos -513
+ypos 3618
+addUserKnob {20 User}
+addUserKnob {4 shutter M {centred start end ""}}
+addUserKnob {7 master_radius R 1 1000}
+master_radius 400
+addUserKnob {26 ""}
+addUserKnob {26 credit l "" +STARTLINE T "Vector Module v1.0 by Richard Frazer www.richardfrazer.com"}
+}
+Input {
+inputs 0
+name transform_2d
+xpos -313
+ypos -386
+}
+Shuffle {
+red black
+green black
+blue black
+alpha black
+name Shuffle1
+xpos -313
+ypos -298
+}
+set N1ddd8010 [stack 0]
+Radial {
+area {{position.x-radius} {position.y-radius} {position.x+radius} {position.y+radius}}
+color {{parent.shutter==1?vector_start.x:parent.shutter==2?vector_end.x:vector_centred.x} {parent.shutter==1?vector_start.y:parent.shutter==2?vector_end.y:vector_centred.y} 0 1}
+name Radial1
+selected true
+xpos -313
+ypos -200
+addUserKnob {20 User}
+addUserKnob {7 radius R 1 100}
+radius {{parent.master_radius}}
+addUserKnob {12 vector_centred}
+vector_centred {{((position(t+1)-position(t))+(position(t)-position(t-1)))/2} {((position(t+1)-position(t))+(position(t)-position(t-1)))/2}}
+addUserKnob {12 vector_start}
+vector_start {{position-position(t-1)} {position-position(t-1)}}
+addUserKnob {12 vector_end}
+vector_end {{position(t+1)-position} {position(t+1)-position}}
+addUserKnob {12 position}
+position {{parent.input0.center.x+parent.input0.translate.x} {parent.input0.center.y+parent.input0.translate.y}}
+}
+CheckerBoard2 {
+inputs 0
+name CheckerBoard1
+xpos -148
+ypos -195
+}
+Switch {
+inputs 2
+which {{"parent.input0.name +1"}}
+name Switch3
+xpos -313
+ypos -100
+}
+Output {
+name Output1
+xpos -313
+ypos 27
+}
+push $N1ddd8010
+Viewer {
+input_process false
+near 0.9
+far 10000
+name Viewer1
+xpos 30
+ypos -247
+}
+end_group
+Transform {
+inputs 0
+translate {{curve x1039 -441 x1113 484 x1154 463 x1202 -117.8000031 x1263 -774} {curve x1039 362 x1113 142 x1154 -496 x1202 -137.5 x1263 -562}}
+center {1024 778}
+name Transform2
+selected true
+xpos -385
+ypos 3535
+}
+Group {
+name vector_module
+help "For creating a custom motion vector pass based on translate data. Plug in a Transform or Tracker node that corresponds to a specific moving area of your image. Merge multiple instances of the vector_module together to create a motion vector pass.\n\nSee http://richardfrazer.com/tools-tutorials/custom-motion-vector-blur-using-trackers for a full tutorial."
+selected true
+xpos -385
+ypos 3619
+addUserKnob {20 User}
+addUserKnob {4 shutter M {centred start end ""}}
+addUserKnob {7 master_radius R 1 1000}
+master_radius 400
+addUserKnob {26 ""}
+addUserKnob {26 credit l "" +STARTLINE T "Vector Module v1.0 by Richard Frazer www.richardfrazer.com"}
+}
+Input {
+inputs 0
+name transform_2d
+xpos -313
+ypos -386
+}
+Shuffle {
+red black
+green black
+blue black
+alpha black
+name Shuffle1
+xpos -313
+ypos -298
+}
+set N7ee4a10 [stack 0]
+Radial {
+area {{position.x-radius} {position.y-radius} {position.x+radius} {position.y+radius}}
+color {{parent.shutter==1?vector_start.x:parent.shutter==2?vector_end.x:vector_centred.x} {parent.shutter==1?vector_start.y:parent.shutter==2?vector_end.y:vector_centred.y} 0 1}
+name Radial1
+selected true
+xpos -313
+ypos -200
+addUserKnob {20 User}
+addUserKnob {7 radius R 1 100}
+radius {{parent.master_radius}}
+addUserKnob {12 vector_centred}
+vector_centred {{((position(t+1)-position(t))+(position(t)-position(t-1)))/2} {((position(t+1)-position(t))+(position(t)-position(t-1)))/2}}
+addUserKnob {12 vector_start}
+vector_start {{position-position(t-1)} {position-position(t-1)}}
+addUserKnob {12 vector_end}
+vector_end {{position(t+1)-position} {position(t+1)-position}}
+addUserKnob {12 position}
+position {{parent.input0.center.x+parent.input0.translate.x} {parent.input0.center.y+parent.input0.translate.y}}
+}
+CheckerBoard2 {
+inputs 0
+name CheckerBoard1
+xpos -148
+ypos -195
+}
+Switch {
+inputs 2
+which {{"parent.input0.name +1"}}
+name Switch3
+xpos -313
+ypos -100
+}
+Output {
+name Output1
+xpos -313
+ypos 27
+}
+push $N7ee4a10
+Viewer {
+input_process false
+near 0.9
+far 10000
+name Viewer1
+xpos 30
+ypos -247
+}
+end_group
+Merge2 {
+inputs 2
+name Merge5
+selected true
+xpos -385
+ypos 3661
+}
+Blur {
+channels rgba
+size 300
+name Blur2
+selected true
+xpos -385
+ypos 3699
+}
+Unpremult {
+name Unpremult2
+selected true
+xpos -385
+ypos 3723
+}
+Dot {
+name Dot10
+selected true
+xpos -351
+ypos 3760
+}
+CheckerBoard2 {
+inputs 0
+name CheckerBoard1
+selected true
+xpos -135
+ypos 3673
+postage_stamp false
+}
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy3
+selected true
+xpos -135
+ypos 3745
+}
+VectorBlur {
+channels rgba
+uv forward
+scale 5
+name VectorBlur1
+selected true
+xpos -135
+ypos 3806
+}

@@ -1,0 +1,176 @@
+set cut_paste_input [stack 0]
+version 9.0 v1
+push $cut_paste_input
+Group {
+ name GizmoBuilder
+ help "provides various features for quick creation and publishing of tools and gizmos"
+ onCreate "import nuke\nn = nuke.thisNode()\nn\[\"knobs_input_knobs\"].setValues(\[\"----------\"])\nn\[\"knobs_input_knobs\"].setValue(\"----------\")"
+ onDestroy "import nuke\nn = nuke.thisNode()\nn\[\"knobs_input_knobs\"].setValues(\[\"----------\"])\nn\[\"knobs_input_knobs\"].setValue(\"----------\")"
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nif len(n.dependencies()) != 0:\n    grp = n.dependencies()\[0]\nelse:\n    grp = None\n\ndef refresh_knob_info():\n    if grp:\n        sel = n\[\"knobs_input_knobs\"].value()\n        if grp.knob(sel):\n            k_name = grp.knob(sel).name()\n            k_label = grp.knob(sel).label()\n            k_type = grp.knob(sel).Class()\n            k_flags = None\n            k_visible = grp.knob(sel).visible()\n            k_enabled = grp.knob(sel).enabled()\n            n\[\"knobs_get_name\"].setValue(k_name)\n            n\[\"knobs_get_label\"].setValue(k_label)\n            n\[\"knobs_get_type\"].setValue(k_type)\n            n\[\"knobs_get_visible\"].setValue(k_visible)\n            n\[\"knobs_get_enabled\"].setValue(k_enabled)\n\ndef refresh_knob_list():\n    if not grp:\n        n\[\"knobs_input_knobs\"].setValues(\[\"----------\"])\n        n\[\"knobs_input_knobs\"].setValue(\"----------\")\n    else:\n        ks_names = \[]\n        only_ui = n\[\"knobs_only_ui\"].value()\n        knob_all = grp.allKnobs()\n        skip = False\n        if only_ui:\n            if knob_all\[0].name() == \"name\":\n                last_knob = \"window\"\n            else:\n                last_knob = \"useLifetime\"\n        for kn in knob_all:\n            k_name = kn.name()\n            if not k_name:\n                if not ks_names:\n                    continue\n                k_name = \"----------\"\n            if only_ui:\n                if k_name == \"name\":\n                    skip = True\n                if k_name == last_knob:\n                    skip = False\n                    continue\n            if not skip:\n                ks_names.append(k_name)\n        n\[\"knobs_input_knobs\"].setValues(ks_names)\n\nif k.name() in \[\"inputChange\", \"create_knob\", \"knobs_only_ui\"]:\n    refresh_knob_list()\n    refresh_knob_info()\n\nif k.name() == \"knobs_input_knobs\":\n    refresh_knob_info()\n"
+ note_font "DejaVu Sans"
+ addUserKnob {20 User l GizmoBuilder}
+ addUserKnob {26 gizmo_div l <b>gizmo</b>}
+ addUserKnob {1 gizmo_name l Name}
+ gizmo_name CardToTrack
+ addUserKnob {6 gizmo_to_usertab l "to UserTab" -STARTLINE}
+ gizmo_to_usertab true
+ addUserKnob {22 gizmo_set_name l set -STARTLINE T "import re\nn = nuke.thisNode()\n\ngrp = n.dependencies()\[0]\nname = n\[\"gizmo_name\"].value()\nname = re.sub(\"^\\d\", \"_\", name)\nname = re.sub(\"(\\W)+\", \"_\", name)\nn\[\"gizmo_name\"].setValue(name)\n\n\n\nif n\[\"gizmo_to_usertab\"].value():\n    if grp.knob(\"User\"):\n        grp.knob(\"User\").setLabel(name)\ngrp.setName(name)"}
+ addUserKnob {1 gizmo_help l Help}
+ gizmo_help "help text"
+ addUserKnob {22 gizmo_set_help l set -STARTLINE T "n = nuke.thisNode()\n\ngrp = n.dependencies()\[0]\ngrp.knob(\"help\").setValue(n\[\"gizmo_help\"].value())"}
+ addUserKnob {26 ""}
+ addUserKnob {26 credits_div l <b>credits</b>}
+ addUserKnob {3 credits_version_major l "Version Major"}
+ credits_version_major 1
+ addUserKnob {3 credits_version_minor l VersionMinor -STARTLINE}
+ addUserKnob {4 credits_release_type l "Release Type" -STARTLINE M {alpha beta RC Release ""}}
+ credits_release_type Release
+ addUserKnob {3 credits_prerelease_version l "Prerelease Version" -STARTLINE}
+ credits_prerelease_version 1
+ addUserKnob {1 credits_creator l Creator}
+ credits_creator "by Alexey Kuchinski"
+ addUserKnob {1 credits_contact l Contact t "add email / website url"}
+ credits_contact lamakaha@gmail.com
+ addUserKnob {1 credits_separator l Separator}
+ credits_separator |
+ addUserKnob {1 credits_extra_line l "Extra Line"}
+ addUserKnob {6 credits_add_name l Name +STARTLINE}
+ credits_add_name true
+ addUserKnob {6 credits_add_version l Version -STARTLINE}
+ credits_add_version true
+ addUserKnob {6 credits_add_creator l Creator -STARTLINE}
+ credits_add_creator true
+ addUserKnob {6 credits_add_contact l Contact -STARTLINE}
+ credits_add_contact true
+ addUserKnob {6 credits_add_month l Month -STARTLINE}
+ credits_add_month true
+ addUserKnob {6 credits_add_year l Year -STARTLINE}
+ credits_add_year true
+ addUserKnob {6 credits_add_extra_line l "Extra Line" +STARTLINE}
+ addUserKnob {22 credits_add_update l "Add / Update" T "import datetime\n\nn = nuke.thisNode()\n\ngrp = n.dependencies()\[0]\nname = n\[\"gizmo_name\"].value()\n\ncredits_knob = grp.knob(\"credits\")\nif not credits_knob:\n    credits_knob = nuke.Text_Knob(\"credits\" , \"\")\n    grp.addKnob(credits_knob)\n\nver_map = \{\"alpha\":\"a\", \"beta\":\"b\", \"RC\":\"RC\", \"Release\":None\}\n\n\n\ndef build_version():\n    ver_maj = int(n\[\"credits_version_major\"].value())\n    ver_min = int(n\[\"credits_version_minor\"].value())\n    ver_list = \[\"v\", str(ver_maj), \".\", str(ver_min)]\n    ver_type = ver_map\[n\[\"credits_release_type\"].value()]\n    if ver_type:\n        ver_pre_rel = int(n\[\"credits_prerelease_version\"].value())\n        ver_list += \[ver_type, str(ver_pre_rel)]\n    version = \"\".join(ver_list)\n    return version\n\nver = build_version()\ncreator = n\[\"credits_creator\"].value()\ncontact = n\[\"credits_contact\"].value()\nseparator = n\[\"credits_separator\"].value()\nextra_line = n\[\"credits_extra_line\"].value()\n\ncredit_line_one = \[]\ncredit_line_two = \[]\n\nnow = datetime.datetime.now()\n\nyear = str(now.year)\nmonth = str(now.month)\n\nif n\[\"credits_add_name\"].value():\n    credit_line_one += \[name]\n\nif n\[\"credits_add_version\"].value():\n    credit_line_one += \[ver]\n\ncredit_line_one = \"  \".join(credit_line_one)\n\n\nif n\[\"credits_add_creator\"].value():\n    credit_line_two += \[creator]\n    \nif n\[\"credits_add_contact\"].value():\n    credit_line_two += \[contact]\n\ndate = None\nif n\[\"credits_add_year\"].value():\n    if n\[\"credits_add_month\"].value():\n        date = month+\"/\"+year\n    else:\n        date = year\n    credit_line_two += \[date]\n\n\njoiner_one = \"  \"+separator+\"  \"\ncredit_line_two = joiner_one.join(credit_line_two)\nif n\[\"credits_add_extra_line\"].value():\n    credit_line_two +=\"\\n\"+extra_line\njoiner_two = \"  \"+separator+separator+\"  \"\nnew_credits = joiner_two.join(filter(None, \[credit_line_one, credit_line_two]))  \n    \n\ncredits_knob.setValue(new_credits)\n" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {26 export_div l <b>export</b>}
+ addUserKnob {2 export_directory l "Backup Directory"}
+ export_directory /corky/projects/RnD_00001/exchange/underUserAlexey/bkp/
+ addUserKnob {2 export_publish_directory l "Publish Directory"}
+ export_publish_directory /corky/projects/RnD_00001/exchange/underUserAlexey/
+ addUserKnob {2 file l INVISIBLE +INVISIBLE}
+ file "\[eval \[value export_directory]]"
+ addUserKnob {6 export_as_group l "As Group" +STARTLINE}
+ export_as_group true
+ addUserKnob {6 export_add_version l Publish +STARTLINE}
+ export_add_version true
+ addUserKnob {22 export_create l Create T "import os\nimport nuke\nimport re\n\ngizmobuilder = nuke.thisNode()\nout_grp = gizmobuilder.dependencies()\[0]\nname = gizmobuilder\[\"gizmo_name\"].value()\n\nex_dir = gizmobuilder\[\"export_directory\"].value()\nex_pub_dir = gizmobuilder\[\"export_publish_directory\"].value()\n\nver_map = \{\"alpha\": \"a\", \"beta\": \"b\", \"RC\": \"RC\", \"Release\": None\}\n\n\ndef build_version():\n    ver_maj = int(gizmobuilder\[\"credits_version_major\"].value())\n    ver_min = int(gizmobuilder\[\"credits_version_minor\"].value())\n    ver_list = \[\"v\", str(ver_maj), \".\", str(ver_min)]\n    ver_type = ver_map\[gizmobuilder\[\"credits_release_type\"].value()]\n    if ver_type:\n        ver_pre_rel = int(gizmobuilder\[\"credits_prerelease_version\"].value())\n        ver_list += \[ver_type, str(ver_pre_rel)]\n    version = \"\".join(ver_list)\n    return version\n\nver = build_version().replace(\".\", \"_\")\nbackup_name = \"_\".join(\[name, ver])\nsuccess = False\nif os.path.exists(ex_dir) and os.path.exists(ex_pub_dir):\n    if os.path.isdir(ex_dir) and os.path.isdir(ex_pub_dir):\n        backup_filename = backup_name+\".gizmo\"\n        publish_filename = name+\".gizmo\"\n        ex_backup_path = os.path.join(ex_dir, backup_filename)\n        ex_publish_path = os.path.join(ex_pub_dir, publish_filename)\n        \n        nuke.root().begin()\n        for s in nuke.selectedNodes():\n            s.setSelected(False)\n        out_grp.setSelected(True)\n\n        overwrite = True\n        files_to_write = \[ex_backup_path]\n        if gizmobuilder\[\"export_add_version\"].value():\n            files_to_write.append(ex_publish_path)\n        for fp in files_to_write:\n            if os.path.exists(fp):\n                overwrite = nuke.ask(\"File \{0\} exists, overwrite?\".format(fp))\n            if overwrite:\n                with open(fp, \"w+\") as f:\n                    nuke.nodeCopy(fp)\n                    success = True\n\nif success:\n    for fp in files_to_write:\n        lines = \[]\n        with open(fp, \"r\") as in_f:\n            remove_pos = True\n            replace_grp = True\n            for i, line in enumerate(in_f):\n                if i < 4:\n                    if line.startswith(\"version \"):\n                        pat = re.compile(\"^(version \[\\d]+\\.\[\\d]+ )(v\[\\d]+)\")\n                        line = re.sub(pat, r\"\\1v1\" ,line)\n                if not gizmobuilder.knob(\"export_as_group\").value() and replace_grp:\n                    if line.startswith(\"Group \{\"):\n                        line = line.replace(\"Group \{\", \"Gizmo \{\")\n                        replace_grp = False\n                if remove_pos:\n                    \n                    if line.startswith(\" xpos\"):\n                        continue\n                    elif line.startswith(\" ypos\"):\n                        continue\n                    elif line.startswith(\" selected true\"):\n                        continue\n                    if line.startswith(\"\}\"):\n                        remove_pos = False\n                lines.append(line)\n\n        with open(fp, \"w\") as out_f:\n            for line in lines:\n                out_f.write(line)\n" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {26 credits l "" +STARTLINE T "Gizmobuilder  v1.6  ||  by Marco Meyer  |  www.marcomeyer-vfx.de  |  9/2016"}
+ addUserKnob {20 get_tab l "Get Callbacks"}
+ addUserKnob {4 get_callback_list l Callbacks M {knobChanged autolabel updateUI onUserCreate onCreate onDestroy onScriptLoad onScriptSave onScriptClose beforeRender beforeFrameRender afterFrameRender afterRender "" "" ""}}
+ addUserKnob {22 get_callback l "Get Callback" -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\ncb = grp.knob(n.knob(\"get_callback_list\").value()).value()\nn\[\"get_callback_script\"].setValue(cb)"}
+ addUserKnob {43 get_callback_script l Script}
+ addUserKnob {20 callbacks_tab l Callbacks}
+ addUserKnob {26 cb_title_oneline l "<b>Callback OneLine</b>"}
+ addUserKnob {4 cb_callbacks_list_oneline l "" +STARTLINE M {knobChanged autolabel updateUI onUserCreate onCreate onDestroy onScriptLoad onScriptSave onScriptClose beforeRender beforeFrameRender afterFrameRender afterRender "" ""}}
+ cb_callbacks_list_oneline autolabel
+ addUserKnob {22 cb_clear_oneline l clear -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_oneline\").value()\ngrp.knob(cb).setValue(\"\")"}
+ addUserKnob {1 cb_code_oneline l Code -STARTLINE}
+ cb_code_oneline "nuke.thisNode().name()+\" <font color='blue'>test</font>\""
+ addUserKnob {22 cb_assign_oneline l Assign -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_oneline\").value()\ncode = n\[\"cb_code_oneline\"].value()\ngrp.knob(cb).setValue(code)"}
+ addUserKnob {26 cb_title_1 l "<b>Callback 1</b>"}
+ addUserKnob {4 cb_callbacks_list_1 l "" +STARTLINE M {knobChanged autolabel updateUI onUserCreate onCreate onDestroy onScriptLoad onScriptSave onScriptClose beforeRender beforeFrameRender afterFrameRender afterRender "" ""}}
+ addUserKnob {22 cb_clear_1 l clear -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_1\").value()\ngrp.knob(cb).setValue(\"\")"}
+ addUserKnob {2 cb_file_1 l file -STARTLINE}
+ addUserKnob {22 cb_assign_1 l Assign -STARTLINE T "n = nuke.thisNode()\n\n\n\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_1\").value()\nwith open(n\[\"cb_file_1\"].value(), \"r\") as in_file:\n    code = in_file.read()\ngrp.knob(cb).setValue(code)"}
+ addUserKnob {26 cb_title_2 l "<b>Callback 2</b>"}
+ addUserKnob {4 cb_callbacks_list_2 l "" +STARTLINE M {knobChanged autolabel updateUI onUserCreate onCreate onDestroy onScriptLoad onScriptSave onScriptClose beforeRender beforeFrameRender afterFrameRender afterRender "" ""}}
+ cb_callbacks_list_2 onCreate
+ addUserKnob {22 cb_clear_2 l clear -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_2\").value()\ngrp.knob(cb).setValue(\"\")"}
+ addUserKnob {2 cb_file_2 l file -STARTLINE}
+ addUserKnob {22 cb_assign_2 l Assign -STARTLINE T "n = nuke.thisNode()\n\n\n\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_2\").value()\nwith open(n\[\"cb_file_2\"].value(), \"r\") as in_file:\n    code = in_file.read()\ngrp.knob(cb).setValue(code)"}
+ addUserKnob {26 cb_title_3 l "<b>Callback 3</b>"}
+ addUserKnob {4 cb_callbacks_list_3 l "" +STARTLINE M {knobChanged autolabel updateUI onUserCreate onCreate onDestroy onScriptLoad onScriptSave onScriptClose beforeRender beforeFrameRender afterFrameRender afterRender "" ""}}
+ cb_callbacks_list_3 onDestroy
+ addUserKnob {22 cb_clear_3 l clear -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_3\").value()\ngrp.knob(cb).setValue(\"\")"}
+ addUserKnob {2 cb_file_3 l file -STARTLINE}
+ addUserKnob {22 cb_assign_3 l Assign -STARTLINE T "n = nuke.thisNode()\n\n\n\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_3\").value()\nwith open(n\[\"cb_file_3\"].value(), \"r\") as in_file:\n    code = in_file.read()\ngrp.knob(cb).setValue(code)"}
+ addUserKnob {26 cb_title_4 l "<b>Callback 4</b>"}
+ addUserKnob {4 cb_callbacks_list_4 l "" +STARTLINE M {knobChanged autolabel updateUI onUserCreate onCreate onDestroy onScriptLoad onScriptSave onScriptClose beforeRender beforeFrameRender afterFrameRender afterRender "" ""}}
+ cb_callbacks_list_4 updateUI
+ addUserKnob {22 cb_clear_4 l clear -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_4\").value()\ngrp.knob(cb).setValue(\"\")"}
+ addUserKnob {2 cb_file_4 l file -STARTLINE}
+ addUserKnob {22 cb_assign_4 l Assign -STARTLINE T "n = nuke.thisNode()\n\n\n\ngrp = n.dependencies()\[0]\ncb = n.knob(\"cb_callbacks_list_4\").value()\nwith open(n\[\"cb_file_4\"].value(), \"r\") as in_file:\n    code = in_file.read()\ngrp.knob(cb).setValue(code)"}
+ addUserKnob {20 knobs_tab l Knobs}
+ addUserKnob {26 create_knob_text l "<b>Create Knob</b>"}
+ addUserKnob {4 create_knobtype_list l KnobType M {AColor_Knob Array_Knob Axis_Knob BBox_Knob BeginTabGroup_Knob Bitmask_Knob Boolean_Knob Box3_Knob CascadingEnumeration_Knob ChannelMask_Knob Channel_Knob ColorChip_Knob Color_Knob Disable_Knob Double_Knob EditableEnumeration_Knob EndTabGroup_Knob Enumeration_Knob EvalString_Knob Eyedropper_Knob File_Knob Font_Knob Format_Knob FreeType_Knob Help_Knob Histogram_Knob IArray_Knob Int_Knob Keyer_Knob Link_Knob LookupCurves_Knob MultiView_Knob Multiline_Eval_String_Knob Obsolete_Knob OneView_Knob Password_Knob Pulldown_Knob PyCustom_Knob PyScript_Knob Radio_Knob Range_Knob Scale_Knob SceneView_Knob Script_Knob String_Knob Tab_Knob Text_Knob Transform2d_Knob UV_Knob Unsigned_Knob ViewView_Knob WH_Knob XYZ_Knob XY_Knob "" "" ""}}
+ create_knobtype_list File_Knob
+ addUserKnob {1 create_name l name -STARTLINE}
+ create_name new_knob
+ addUserKnob {1 create_label l Label -STARTLINE}
+ create_label "New Label"
+ addUserKnob {1 create_optional l optional t "in case the knob needs a third argument on creation"}
+ create_optional "\[\"for\",\"enum\"]"
+ addUserKnob {22 create_knob l create T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\nname = n\[\"create_name\"].value()\nif not grp.knob(name):\n    label = n\[\"create_label\"].value()\n    opt = n\[\"create_optional\"].value()   \n    ktype = n\[\"create_knobtype_list\"].value()\n    cmd1 = \"nuke.\{0\}(name,label)\".format(ktype)\n    cmd2 = \"nuke.\{0\}(name,label,\{1\})\".format(ktype, opt)\n    knob = None\n    try:\n        knob = eval(cmd1)\n    except:\n        pass\n    try:\n        knob = eval(cmd2)\n    except:\n        pass\n    if knob:\n        grp.addKnob(knob)\nelse:\n    nuke.message(\"knob name already exists, please change\")" +STARTLINE}
+ addUserKnob {26 div_knob_info l "<b>Knob Info</b>"}
+ addUserKnob {22 knobs_get_input_knobs l "Get Knobs" -STARTLINE +HIDDEN T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\nks = grp.knobs()\nks_names = \[]\nknob_num = grp.numKnobs()\nfor k in range(knob_num):\n    k_name =grp.knob(k).name()\n    if not k_name:\n        k_name = \"----------\"\n    ks_names.append(k_name)\n\nn\[\"knobs_input_knobs\"].setValues(ks_names)"}
+ addUserKnob {4 knobs_input_knobs l "Input Knobs" M {----------}}
+ addUserKnob {6 knobs_only_ui l "only UI knobs" -STARTLINE}
+ knobs_only_ui true
+ addUserKnob {22 knobs_update_info l "Update Info" -STARTLINE +HIDDEN T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\nsel = n\[\"knobs_input_knobs\"].value()\nif grp.knob(sel):\n    k_name = grp.knob(sel).name()\n    k_label = grp.knob(sel).label()\n    k_type = grp.knob(sel).Class()\n    k_flags = None\n    k_visible = grp.knob(sel).visible()\n    k_enabled = grp.knob(sel).enabled()\n    n\[\"knobs_get_name\"].setValue(k_name)\n    n\[\"knobs_get_label\"].setValue(k_label)\n    n\[\"knobs_get_type\"].setValue(k_type)\n    n\[\"knobs_get_visible\"].setValue(k_visible)\n    n\[\"knobs_get_enabled\"].setValue(k_enabled)"}
+ addUserKnob {1 knobs_get_name l name +DISABLED +HIDDEN}
+ knobs_get_name User
+ addUserKnob {1 knobs_get_label l Label +DISABLED}
+ knobs_get_label main
+ addUserKnob {1 knobs_get_type l Type +DISABLED}
+ knobs_get_type Tab_Knob
+ addUserKnob {6 knobs_get_visible l visible +DISABLED +STARTLINE}
+ knobs_get_visible true
+ addUserKnob {22 knobs_visible_toggle l toggle -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\nsel = n\[\"knobs_get_name\"].value()\nif grp.knob(sel).visible():\n    grp.knob(sel).setVisible(False)\n    n\[\"knobs_get_visible\"].setValue(False)\nelse:\n    grp.knob(sel).setVisible(True)\n    n\[\"knobs_get_visible\"].setValue(True)"}
+ addUserKnob {6 knobs_get_enabled l enabled +DISABLED +STARTLINE}
+ knobs_get_enabled true
+ addUserKnob {22 knobs_enabled_toggle l toggle -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\nsel = n\[\"knobs_get_name\"].value()\nif grp.knob(sel).enabled():\n    grp.knob(sel).setEnabled(False)\n    n\[\"knobs_get_enabled\"].setValue(False)\nelse:\n    grp.knob(sel).setEnabled(True)\n    n\[\"knobs_get_enabled\"].setValue(True)"}
+ addUserKnob {26 ""}
+ addUserKnob {26 flags_div l "<b>Edit Flags</b>" T " (experimental)"}
+ addUserKnob {68 flags_list l Flags M {"" General/NO_ANIMATION General/DO_NOT_WRITE General/INVISIBLE General/RESIZABLE General/STARTLINE General/ENDLINE General/NO_RERENDER General/KNOB_CHANGED_ALWAYS General/NO_KNOB_CHANGED General/ALWAYS_SAVE General/NODE_KNOB General/HANDLES_ANYWAY General/KNOB_CHANGED_RECURSIVE General/INDETERMINATE General/COLOURCHIP_HAS_UNSET General/SMALL_UI General/NO_NUMERIC_FIELDS General/NO_CURVE_EDITOR General/NO_MULTIVIEW General/EARLY_STORE General/MODIFIES_GEOMETRY General/OUTPUT_ONLY General/NO_KNOB_CHANGED_FINISHED "Numeric Knobs/MAGNITUDE" "Numeric Knobs/SLIDER" "Numeric Knobs/LOG_SLIDER" "Numeric Knobs/STORE_INTEGER" "Numeric Knobs/FORCE_RANGE" "Numeric Knobs/ANGLE" "Numeric Knobs/NO_PROXYSCALE" "String Knobs/GRANULAR_UNDO" "String Knobs/NO_RECURSIVE_PATHS" "Toolbar Knob/TOOLBAR_GROUP" "Toolbar Knob/TOOLBAR_LEFT" "Toolbar Knob/TOOLBAR_TOP" "Toolbar Knob/TOOLBAR_BOTTOM" "Toolbar Knob/TOOLBAR_RIGHT" "Toolbar Knob/TOOLBAR_POSITION" "Tab Knobs/TABBEGINCLOSEDGROUP" "Tab Knobs/TABBEGINGROUP" "Tab Knobs/TABENDGROUP" "Tab Knobs/TABKNOB" "Channel Knobs/NO_CHECKMARKS" "Channel Knobs/NO_ALPHA_PULLDOWN" "Format Knob/PROXY_DEFAULT" knobcalls/DISABLED knobcalls/NO_HANDLES knobcalls/HIDDEN knobcalls/NO_UNDO knobcalls/READ_ONLY ""}}
+ flags_list General/STARTLINE
+ addUserKnob {22 flags_toggle l toggle -STARTLINE T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\n\nflag = \"nuke.\"+n.knob(\"flags_list\").value().split(\"/\")\[-1]\nsel = n\[\"knobs_input_knobs\"].value()\nif grp.knob(sel).getFlag(eval(flag)):\n    grp.knob(sel).clearFlag(eval(flag))\nelse:\n    grp.knob(sel).setFlag(eval(flag))"}
+ addUserKnob {20 default_value_tab l "Default Values"}
+ addUserKnob {22 default_values_read l "Read Values" T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\nks_names = \[]\nknob_all = grp.allKnobs()\nskip = False\n\nif knob_all\[0].name() == \"name\":\n    last_knob = \"window\"\nelse:\n    last_knob = \"useLifetime\"\nfor kn in knob_all:\n\n    k_name = kn.name()\n    if k_name == last_knob:\n        skip = False\n        continue\n    if kn.Class() in \[\"Tab_Knob\",\"Obsolete_Knob\", \"BeginTabGroup_Knob\",\"EndTabGroup_Knob\", \"PyScript_Knob\", \"Script_Knob\", \"Format_Knob\"]:\n        continue\n    if not k_name:\n        continue\n    if k_name == \"credits\":\n        continue\n    if k_name == \"name\":\n        skip = True\n\n    if not skip:\n        ks_names.append(k_name)\n\nformatted = \[]\nfor knob in ks_names:\n    val = grp.knob(knob).value()\n    array = False\n    if type(val) in \[tuple, list, nuke.math.Matrix4, nuke.math.Matrix3, nuke.math.Vector2, nuke.math.Vector3, nuke.math.Vector4, nuke.math.Quaternion]:\n        array = True\n    elif grp.knob(knob).Class() in \[\"Array_Knob\", \"IArray_Knob\"]:\n        array = True\n        val = grp.knob(knob).array()\n    else:\n        if val:\n            string = \" ; \".join(\[knob, str(val)])\n            formatted.append(string)\n        elif type(val) == bool and val == False:\n            string = \" ; \".join(\[knob, str(val)])\n            formatted.append(string)\n    if array:\n        for i in range(len(val)):\n            v = val\[i]\n            string = \" ; \".join(\[knob, str(v), str(i)])\n            formatted.append(string)   \n\nn.knob(\"default_value_editor\").setValue(\"\\n\".join(formatted))\n" +STARTLINE}
+ addUserKnob {43 default_value_editor l Values t "Enter Values line by line index is optional. example:\nknob_name ; value \[; index]"}
+ addUserKnob {22 default_values_set l "Set Values" T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\nks_names = \[]\nval_string = n.knob(\"default_value_editor\").value()\neach = val_string.split(\"\\n\")\nfor k in each:\n    id = None\n    vals = k.split(\" ; \")\n    is_float = False\n    try:\n        val1 = float(vals\[1])\n        is_float = True\n    except:\n        pass\n    if not is_float:\n        if vals\[1] in \[\"True\", \"False\"]:\n            val1 = True if vals\[1] == \"True\" else False\n        else:\n            val1 = vals\[1]\n    if len(vals) == 3:\n        id = int(vals\[2])\n        grp.knob(vals\[0]).setValue(val1, id)\n    else:\n        grp.knob(vals\[0]).setValue(val1)" +STARTLINE}
+ addUserKnob {20 python_tab l Python}
+ addUserKnob {2 python_script_dir l "Script Dir"}
+ python_script_dir /corky/projects/RnD_00001/exchange/underUserAlexey/pythonBKPS/
+ addUserKnob {22 python_get_buttons l "get script buttons" T "n = nuke.thisNode()\ngrp = n.dependencies()\[0]\n\npy_script_knobs = \[]\nall_knobs = grp.allKnobs()\nfor knob in all_knobs:\n    if knob.Class() == \"PyScript_Knob\":\n        py_script_knobs.append(knob)\n\nprint (py_script_knobs)\nfor p in py_script_knobs:\n    \n    if n.knob(\"pys_knob_name_\"+p.name()):\n        continue\n\n    nk_knob_name = nuke.String_Knob(\"pys_knob_name_\"+p.name(), \"knob\")\n    nk_knob_name.setFlag(nuke.STARTLINE)\n    nk_knob_name.setValue(p.name())\n\n    nk_extract = nuke.PyScript_Knob(\"pys_extract_\"+p.name(), \"extract to file\")\n    nk_extract.clearFlag(nuke.STARTLINE)\n\n    nk_file_name = nuke.String_Knob(\"pys_file_name_\"+p.name(), \"filename\")\n    nk_file_name.clearFlag(nuke.STARTLINE)\n    nk_file_name.setValue(p.name()+\".py\")\n\n    extract_cmd = \"\"\"\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\noutpath = None\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    outpath = os.path.join(n\['python_script_dir'].value(), n\['\{0\}'].value())\n    if os.path.exists(outpath):\n        if not nuke.ask('File exists:\\\\n'+ outpath +'\\\\n\\\\noverwrite?'):\n            cancel = True       \nelse:\n    cancel = True\n    nuke.message('Script dir is not a directory or does not exist')\n\nif not cancel:\n    cmd = grp.knob(n\['\{1\}'].value()).command()\n    print cmd\n    print '======== TO:'+ outpath\n    with open(outpath, 'w') as _out_file:\n        _out_file.write(cmd)\n\"\"\".format( \"pys_file_name_\"+p.name(), \"pys_knob_name_\"+p.name() )\n    nk_extract.setCommand(extract_cmd)\n\n    nk_update = nuke.PyScript_Knob(\"pys_update_\"+p.name(), \"update from file\")\n    nk_update.clearFlag(nuke.STARTLINE)\n    update_cmd = \"\"\"\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\ninpath = None\n\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    inpath = os.path.join(n\['python_script_dir'].value(), n\['\{0\}'].value())\n    if not os.path.exists(inpath):\n        nuke.message('file does not exist:\\\\n'+inpath)\n        cancel = True\nif not cancel:\n    with open(inpath, 'r') as _in_file:\n        cmd = _in_file.read()\n    grp.knob(n\['\{1\}'].value()).setCommand(cmd)\n\"\"\".format( \"pys_file_name_\"+p.name(), \"pys_knob_name_\"+p.name() )\n    nk_update.setCommand(update_cmd)\n    n.addKnob(nk_knob_name)\n    n.addKnob(nk_extract)\n    n.addKnob(nk_file_name)\n    n.addKnob(nk_update)" +STARTLINE}
+ addUserKnob {22 python_clear_script_buttons l "clear script buttons" -STARTLINE T "n = nuke.thisNode()\n\npy_script_knobs = \[]\nall_knobs = n.allKnobs()\nfor knob in all_knobs:\n    if knob.name().startswith(\"pys_\"):\n        n.removeKnob(knob)"}
+ addUserKnob {26 ""}
+ addUserKnob {1 pys_knob_name_REF l knob}
+ pys_knob_name_REF REF
+ addUserKnob {22 pys_extract_REF l "extract to file" -STARTLINE T "\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\noutpath = None\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    outpath = os.path.join(n\['python_script_dir'].value(), n\['pys_file_name_REF'].value())\n    if os.path.exists(outpath):\n        if not nuke.ask('File exists:\\n'+ outpath +'\\n\\noverwrite?'):\n            cancel = True       \nelse:\n    cancel = True\n    nuke.message('Script dir is not a directory or does not exist')\n\nif not cancel:\n    cmd = grp.knob(n\['pys_knob_name_REF'].value()).command()\n    print cmd\n    print '======== TO:'+ outpath\n    with open(outpath, 'w') as _out_file:\n        _out_file.write(cmd)\n"}
+ addUserKnob {1 pys_file_name_REF l filename -STARTLINE}
+ pys_file_name_REF REF.py
+ addUserKnob {22 pys_update_REF l "update from file" -STARTLINE T "\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\ninpath = None\n\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    inpath = os.path.join(n\['python_script_dir'].value(), n\['pys_file_name_REF'].value())\n    if not os.path.exists(inpath):\n        nuke.message('file does not exist:\\n'+inpath)\n        cancel = True\nif not cancel:\n    with open(inpath, 'r') as _in_file:\n        cmd = _in_file.read()\n    grp.knob(n\['pys_knob_name_REF'].value()).setCommand(cmd)\n"}
+ addUserKnob {1 pys_knob_name_Adjust l knob}
+ pys_knob_name_Adjust Adjust
+ addUserKnob {22 pys_extract_Adjust l "extract to file" -STARTLINE T "\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\noutpath = None\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    outpath = os.path.join(n\['python_script_dir'].value(), n\['pys_file_name_Adjust'].value())\n    if os.path.exists(outpath):\n        if not nuke.ask('File exists:\\n'+ outpath +'\\n\\noverwrite?'):\n            cancel = True       \nelse:\n    cancel = True\n    nuke.message('Script dir is not a directory or does not exist')\n\nif not cancel:\n    cmd = grp.knob(n\['pys_knob_name_Adjust'].value()).command()\n    print cmd\n    print '======== TO:'+ outpath\n    with open(outpath, 'w') as _out_file:\n        _out_file.write(cmd)\n"}
+ addUserKnob {1 pys_file_name_Adjust l filename -STARTLINE}
+ pys_file_name_Adjust Adjust.py
+ addUserKnob {22 pys_update_Adjust l "update from file" -STARTLINE T "\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\ninpath = None\n\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    inpath = os.path.join(n\['python_script_dir'].value(), n\['pys_file_name_Adjust'].value())\n    if not os.path.exists(inpath):\n        nuke.message('file does not exist:\\n'+inpath)\n        cancel = True\nif not cancel:\n    with open(inpath, 'r') as _in_file:\n        cmd = _in_file.read()\n    grp.knob(n\['pys_knob_name_Adjust'].value()).setCommand(cmd)\n"}
+ addUserKnob {1 pys_knob_name_C2T l knob}
+ pys_knob_name_C2T C2T
+ addUserKnob {22 pys_extract_C2T l "extract to file" -STARTLINE T "\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\noutpath = None\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    outpath = os.path.join(n\['python_script_dir'].value(), n\['pys_file_name_C2T'].value())\n    if os.path.exists(outpath):\n        if not nuke.ask('File exists:\\n'+ outpath +'\\n\\noverwrite?'):\n            cancel = True       \nelse:\n    cancel = True\n    nuke.message('Script dir is not a directory or does not exist')\n\nif not cancel:\n    cmd = grp.knob(n\['pys_knob_name_C2T'].value()).command()\n    print cmd\n    print '======== TO:'+ outpath\n    with open(outpath, 'w') as _out_file:\n        _out_file.write(cmd)\n"}
+ addUserKnob {1 pys_file_name_C2T l filename -STARTLINE}
+ pys_file_name_C2T C2T.py
+ addUserKnob {22 pys_update_C2T l "update from file" -STARTLINE T "\nimport os\nn = nuke.thisNode()\ngrp = n.dependencies()\[0]\nscript_dir = n.knob('python_script_dir').value()\ncancel = False\ninpath = None\n\nif os.path.isdir(script_dir) and os.path.exists(script_dir):\n    inpath = os.path.join(n\['python_script_dir'].value(), n\['pys_file_name_C2T'].value())\n    if not os.path.exists(inpath):\n        nuke.message('file does not exist:\\n'+inpath)\n        cancel = True\nif not cancel:\n    with open(inpath, 'r') as _in_file:\n        cmd = _in_file.read()\n    grp.knob(n\['pys_knob_name_C2T'].value()).setCommand(cmd)\n"}
+}
+ Input {
+  inputs 0
+  name Input
+  selected true
+  xpos -75
+  ypos -203
+ }
+ Output {
+  name Output1
+  xpos -75
+  ypos -90
+ }
+end_group

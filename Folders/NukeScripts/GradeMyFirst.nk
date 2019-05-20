@@ -1,0 +1,61 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Group {
+name Grade
+tile_color 0x6cacffff
+selected true
+xpos 4259
+ypos 5906
+addUserKnob {20 User}
+addUserKnob {41 saturation T Saturation1.saturation}
+addUserKnob {41 mode l "" -STARTLINE T Saturation1.mode}
+addUserKnob {41 blackpoint T Grade20.blackpoint}
+addUserKnob {41 whitepoint T Grade20.whitepoint}
+addUserKnob {41 black l lift T Grade20.black}
+addUserKnob {41 white l gain T Grade20.white}
+addUserKnob {41 multiply T Grade20.multiply}
+addUserKnob {41 add l offset T Grade20.add}
+addUserKnob {41 gamma T Grade20.gamma}
+addUserKnob {26 "" l mask}
+addUserKnob {41 maskChannelMask l "" -STARTLINE T Grade20.maskChannelMask}
+addUserKnob {41 maskChannelInput l "" -STARTLINE T Grade20.maskChannelInput}
+addUserKnob {41 invert_mask l invert -STARTLINE T Grade20.invert_mask}
+addUserKnob {41 unpremult l "(un)premult by" T Grade20.unpremult}
+addUserKnob {41 black_clamp l "black clamp" -STARTLINE T Grade20.black_clamp}
+addUserKnob {41 white_clamp l "white clamp" -STARTLINE T Grade20.white_clamp}
+addUserKnob {41 mix T Grade20.mix}
+}
+Input {
+inputs 0
+name Mask
+xpos 688
+ypos 490
+number 1
+}
+set N28bd9a10 [stack 0]
+push $N28bd9a10
+Input {
+inputs 0
+name Input1
+xpos 553
+ypos 450
+}
+Saturation {
+inputs 1+1
+name Saturation1
+xpos 553
+ypos 490
+}
+Grade {
+inputs 1+1
+name Grade20
+xpos 553
+ypos 514
+}
+Output {
+name Output1
+xpos 553
+ypos 614
+}
+end_group

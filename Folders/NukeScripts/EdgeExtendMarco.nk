@@ -1,0 +1,7069 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+push $cut_paste_input
+Group {
+inputs 2
+name mmVectorEdgeExtend
+help "Push rgb pixels outwards using vectors  generated perpedicular to a control matte edge."
+selected true
+xpos 7457
+ypos -14005
+addUserKnob {20 Title l mmVectorEdgeExtend}
+addUserKnob {4 premult l "input is" M {premultiplied unpremultiplied}}
+premult unpremultiplied
+addUserKnob {41 from0 l "control matte channel" T Copy4.from0}
+addUserKnob {26 ""}
+addUserKnob {3 slices t "The number of iterations of the expansion operation, up to 34."}
+slices 24
+addUserKnob {7 preblur_vector l "preblur vector" t "Blur the vector a bit before it's used to extend the rgb pixels.  Can help with blending and will also extend the edge further." R 0 10}
+preblur_vector 3
+addUserKnob {7 vector_length l "vector length" t "The length of the vector blur operation per slice. Best to avoid making this too high because it can slow things down when multiplied by the number of slices." R 1 10}
+vector_length 12
+addUserKnob {7 softness l "expansion softness" t "blends the expansion slices" R 0 10}
+softness 4
+addUserKnob {26 ""}
+addUserKnob {26 credit l "" t "based on Michael Garretts' VectorEdgeExtend on nukepedia" +STARTLINE T "mmVectorEdgeExtend || by Marco Meyer |  www.marcomeyer-vfx.de | 2015/11\nbased on Michael Garretts' VectorEdgeExtend on nukepedia"}
+}
+Input {
+inputs 0
+name ctrl_matte
+xpos 1122
+ypos 457
+number 1
+}
+Input {
+inputs 0
+name img
+xpos 840
+ypos 457
+}
+Dot {
+name Dot2
+xpos 874
+ypos 570
+}
+set Na1686a80 [stack 0]
+Unpremult {
+name Unpremult11
+xpos 965
+ypos 566
+disable {{parent.premult}}
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy4
+xpos 1122
+ypos 559
+disable {{"!\[exists parent.input1]" i}}
+}
+set N94206570 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode12
+xpos 1183
+ypos 740
+}
+push $N94206570
+push $N94206570
+Expression {
+expr3 a>0
+name Expression2
+xpos 1324
+ypos 565
+}
+set N513aebc0 [stack 0]
+push $N513aebc0
+Group {
+inputs 2
+name ExtendEdge
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 1324
+ypos 660
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{parent.preblur_vector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{parent.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N941cfe70 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N602dcb70 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N602dcb70
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N602dcb70
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N602dcb70
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N51ceea80 [stack 0]
+push $N51ceea80
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N513cc830 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N513cc830
+Viewer {
+frame 15
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N941cfe70
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix11
+xpos 1320
+ypos 754
+}
+set N515a5980 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode10
+xpos 1423
+ypos 836
+}
+push $N515a5980
+push $N515a5980
+push $N515a5980
+Group {
+inputs 2
+name ExtendEdge2
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 1509
+ypos 741
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N51583650 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N50e92920 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N50e92920
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N50e92920
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N50e92920
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N518f7b10 [stack 0]
+push $N518f7b10
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N51686340 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N51686340
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N51583650
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix12
+xpos 1509
+ypos 823
+}
+set N512ec2a0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode9
+xpos 1617
+ypos 920
+}
+push $N512ec2a0
+push $N512ec2a0
+push $N512ec2a0
+Group {
+inputs 2
+name ExtendEdge1
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 1695
+ypos 823
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N515ea250 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N517c0210 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N517c0210
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N517c0210
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N517c0210
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N514e4050 [stack 0]
+push $N514e4050
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N94471210 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N94471210
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N515ea250
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix13
+xpos 1695
+ypos 895
+}
+set N94ff75b0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode11
+xpos 1764
+ypos 972
+}
+push $N94ff75b0
+push $N94ff75b0
+push $N94ff75b0
+Group {
+inputs 2
+name ExtendEdge3
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 1891
+ypos 895
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N518db2d0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N50ad4e70 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N50ad4e70
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N50ad4e70
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N50ad4e70
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N50eb4c40 [stack 0]
+push $N50eb4c40
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N50ed46d0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N50ed46d0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N518db2d0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix14
+xpos 1891
+ypos 967
+}
+set N508d7350 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode13
+xpos 1976
+ypos 1046
+}
+push $N508d7350
+push $N508d7350
+push $N508d7350
+Group {
+inputs 2
+name ExtendEdge4
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 2060
+ypos 977
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N508f65d0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N507a4780 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N507a4780
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N507a4780
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N507a4780
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N507f00c0 [stack 0]
+push $N507f00c0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N5068fb60 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N5068fb60
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N508f65d0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix15
+xpos 2071
+ypos 1039
+}
+set N506f6730 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode14
+xpos 2113
+ypos 1111
+}
+push $N506f6730
+push $N506f6730
+push $N506f6730
+Group {
+inputs 2
+name ExtendEdge10
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 2263
+ypos 1039
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N505959c0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N505c3ba0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N505c3ba0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N505c3ba0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N505c3ba0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N5048f510 [stack 0]
+push $N5048f510
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N504aefa0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N504aefa0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N505959c0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix16
+xpos 2263
+ypos 1111
+}
+set N50395ba0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode15
+xpos 2308
+ypos 1196
+}
+push $N50395ba0
+push $N50395ba0
+push $N50395ba0
+Group {
+inputs 2
+name ExtendEdge11
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 2449
+ypos 1111
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N503b4df0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N503e2fd0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N503e2fd0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N503e2fd0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N503e2fd0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N502b4950 [stack 0]
+push $N502b4950
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N502d43e0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N502d43e0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N503b4df0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix17
+xpos 2451
+ypos 1188
+}
+set N501bafd0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode16
+xpos 2507
+ypos 1290
+}
+push $N501bafd0
+push $N501bafd0
+push $N501bafd0
+Group {
+inputs 2
+name ExtendEdge12
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 2635
+ypos 1183
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N501da230 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N47f89450 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N47f89450
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N47f89450
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N47f89450
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N47fd4d90 [stack 0]
+push $N47fd4d90
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N47ff4820 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N47ff4820
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N501da230
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix18
+xpos 2635
+ypos 1255
+}
+set N47edb440 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode17
+xpos 2684
+ypos 1344
+}
+push $N47edb440
+push $N47edb440
+push $N47edb440
+Group {
+inputs 2
+name ExtendEdge13
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 2829
+ypos 1255
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N47efa720 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N47da8890 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N47da8890
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N47da8890
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N47da8890
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N47df41d0 [stack 0]
+push $N47df41d0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N47c93c70 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N47c93c70
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N47efa720
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix19
+xpos 2829
+ypos 1327
+}
+set N47cfa840 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode18
+xpos 2870
+ypos 1404
+}
+push $N47cfa840
+push $N47cfa840
+push $N47cfa840
+Group {
+inputs 2
+name ExtendEdge14
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 3023
+ypos 1327
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N47b99bd0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N47bc7db0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N47bc7db0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N47bc7db0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N47bc7db0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N47a93720 [stack 0]
+push $N47a93720
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N47ab31b0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N47ab31b0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N47b99bd0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix20
+xpos 3023
+ypos 1419
+}
+set N47999db0 [stack 0]
+Dot {
+name Dot1
+xpos 3143
+ypos 1431
+}
+set N479a2ce0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode1
+xpos 3175
+ypos 1504
+}
+push $N479a2ce0
+push $N479a2ce0
+push $N479a2ce0
+Group {
+inputs 2
+name ExtendEdge5
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 3328
+ypos 1427
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N479bdaa0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N479ebc80 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N479ebc80
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N479ebc80
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N479ebc80
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N478b7600 [stack 0]
+push $N478b7600
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N478d7090 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N478d7090
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N479bdaa0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix1
+xpos 3320
+ypos 1537
+}
+set N477bdc80 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode2
+xpos 3335
+ypos 1604
+}
+push $N477bdc80
+push $N477bdc80
+push $N477bdc80
+Group {
+inputs 2
+name ExtendEdge6
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 3488
+ypos 1527
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N477dced0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N4768ae50 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N4768ae50
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N4768ae50
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N4768ae50
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N476d6790 [stack 0]
+push $N476d6790
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N476f6220 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N476f6220
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N477dced0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix2
+xpos 3480
+ypos 1637
+}
+set N475dce40 [stack 0]
+Dot {
+name Dot3
+xpos 3647
+ypos 1636
+}
+set N475e6180 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode3
+xpos 3679
+ypos 1709
+}
+push $N475e6180
+push $N475e6180
+push $N475e6180
+Group {
+inputs 2
+name ExtendEdge7
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 3832
+ypos 1632
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N47480cb0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N474aeff0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N474aeff0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N474aeff0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N474aeff0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N474fa930 [stack 0]
+push $N474fa930
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N4739a3f0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N4739a3f0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N47480cb0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix3
+xpos 3824
+ypos 1742
+}
+set N47281010 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode4
+xpos 3832
+ypos 1827
+}
+push $N47281010
+push $N47281010
+push $N47281010
+Group {
+inputs 2
+name ExtendEdge8
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 3985
+ypos 1750
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N472a0250 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N472ce120 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N472ce120
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N472ce120
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N472ce120
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N47099aa0 [stack 0]
+push $N47099aa0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N470b9530 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N470b9530
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N472a0250
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix4
+xpos 3977
+ypos 1860
+}
+set N46fa0140 [stack 0]
+Dot {
+name Dot4
+xpos 4104
+ypos 1846
+}
+set N46fa94e0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode5
+xpos 4136
+ypos 1919
+}
+push $N46fa94e0
+push $N46fa94e0
+push $N46fa94e0
+Group {
+inputs 2
+name ExtendEdge9
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 4289
+ypos 1842
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N46fc4160 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N46ff2340 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N46ff2340
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N46ff2340
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N46ff2340
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N46ebdcb0 [stack 0]
+push $N46ebdcb0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N46edd740 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N46edd740
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N46fc4160
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix5
+xpos 4281
+ypos 1952
+}
+set N46dc4350 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode6
+xpos 4300
+ypos 2029
+}
+push $N46dc4350
+push $N46dc4350
+push $N46dc4350
+Group {
+inputs 2
+name ExtendEdge15
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 4453
+ypos 1952
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N46de35b0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N46c917f0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N46c917f0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N46c917f0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N46c917f0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N46cdd130 [stack 0]
+push $N46cdd130
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N46cfcbc0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N46cfcbc0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N46de35b0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix6
+xpos 4445
+ypos 2062
+}
+set N46be37e0 [stack 0]
+Dot {
+name Dot5
+xpos 4591
+ypos 2074
+}
+set N46bec710 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode7
+xpos 4623
+ypos 2147
+}
+push $N46bec710
+push $N46bec710
+push $N46bec710
+Group {
+inputs 2
+name ExtendEdge16
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 4776
+ypos 2070
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N46a87540 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N46ab5720 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N46ab5720
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N46ab5720
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N46ab5720
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N46981090 [stack 0]
+push $N46981090
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N469a0b20 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N469a0b20
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N46a87540
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix7
+xpos 4768
+ypos 2180
+}
+set N46887740 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode8
+xpos 4783
+ypos 2247
+}
+push $N46887740
+push $N46887740
+push $N46887740
+Group {
+inputs 2
+name ExtendEdge17
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 4936
+ypos 2170
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N468a6980 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N468d4b60 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N468d4b60
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N468d4b60
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N468d4b60
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N467a04d0 [stack 0]
+push $N467a04d0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N467bff60 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N467bff60
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N468a6980
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix8
+xpos 4928
+ypos 2280
+}
+set N466a6b70 [stack 0]
+Dot {
+name Dot6
+xpos 5095
+ypos 2279
+}
+set N46bf0e00 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode19
+xpos 5127
+ypos 2352
+}
+push $N46bf0e00
+push $N46bf0e00
+push $N46bf0e00
+Group {
+inputs 2
+name ExtendEdge18
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 5280
+ypos 2275
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N466caa80 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N466f8c60 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N466f8c60
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N466f8c60
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N466f8c60
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N465c45c0 [stack 0]
+push $N465c45c0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N465e4050 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N465e4050
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N466caa80
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix9
+xpos 5272
+ypos 2385
+}
+set N464cac70 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode20
+xpos 5280
+ypos 2470
+}
+push $N464cac70
+push $N464cac70
+push $N464cac70
+Group {
+inputs 2
+name ExtendEdge19
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 5433
+ypos 2393
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N464e9a70 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N46397c80 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N46397c80
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N46397c80
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N46397c80
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N463e35c0 [stack 0]
+push $N463e35c0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N46283190 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N46283190
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N464e9a70
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix10
+xpos 5425
+ypos 2503
+}
+set N462e9ca0 [stack 0]
+Dot {
+name Dot7
+xpos 5552
+ypos 2489
+}
+set N462f3080 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode21
+xpos 5584
+ypos 2562
+}
+push $N462f3080
+push $N462f3080
+push $N462f3080
+Group {
+inputs 2
+name ExtendEdge20
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 5737
+ypos 2485
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N4618de20 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N461bc000 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N461bc000
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N461bc000
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N461bc000
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N46087970 [stack 0]
+push $N46087970
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N460a7400 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N460a7400
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N4618de20
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix21
+xpos 5729
+ypos 2595
+}
+set N45f8e010 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode22
+xpos 5748
+ypos 2672
+}
+push $N45f8e010
+push $N45f8e010
+push $N45f8e010
+Group {
+inputs 2
+name ExtendEdge21
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 5901
+ypos 2595
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N45fad270 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N45fdb450 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N45fdb450
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N45fdb450
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N45fdb450
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N45ea6dc0 [stack 0]
+push $N45ea6dc0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N45ec6850 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N45ec6850
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N45fad270
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix22
+xpos 5893
+ypos 2705
+}
+set N45dad460 [stack 0]
+Dot {
+name Dot8
+xpos 6015
+ypos 2716
+}
+set N45db6390 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode23
+xpos 6047
+ypos 2789
+}
+push $N45db6390
+push $N45db6390
+push $N45db6390
+Group {
+inputs 2
+name ExtendEdge22
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 6200
+ypos 2712
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N45dd1140 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N45dff320 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N45dff320
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N45dff320
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N45dff320
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N45ccac90 [stack 0]
+push $N45ccac90
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N45cea720 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N45cea720
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N45dd1140
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix23
+selected true
+xpos 6192
+ypos 2822
+}
+set N45bd1340 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode24
+xpos 6207
+ypos 2889
+}
+push $N45bd1340
+push $N45bd1340
+push $N45bd1340
+Group {
+inputs 2
+name ExtendEdge23
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 6360
+ypos 2812
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N45be6a60 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N45a9e270 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N45a9e270
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N45a9e270
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N45a9e270
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N45ae9bb0 [stack 0]
+push $N45ae9bb0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N471896f0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N471896f0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N45be6a60
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix24
+selected true
+xpos 6352
+ypos 2922
+}
+set N471f0250 [stack 0]
+Dot {
+name Dot9
+xpos 6519
+ypos 2921
+}
+set N471f96f0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode25
+xpos 6551
+ypos 2994
+}
+push $N471f96f0
+push $N471f96f0
+push $N471f96f0
+Group {
+inputs 2
+name ExtendEdge24
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 6704
+ypos 2917
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N51a93510 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N51ac16f0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N51ac16f0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N51ac16f0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N51ac16f0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N4598e060 [stack 0]
+push $N4598e060
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N459adaf0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N459adaf0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N51a93510
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix25
+selected true
+xpos 6696
+ypos 3027
+}
+set N456946f0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode26
+xpos 6704
+ypos 3112
+}
+push $N456946f0
+push $N456946f0
+push $N456946f0
+Group {
+inputs 2
+name ExtendEdge25
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 6857
+ypos 3035
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N456b3380 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N456e1560 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N456e1560
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N456e1560
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N456e1560
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N455aced0 [stack 0]
+push $N455aced0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N455cc960 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N455cc960
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N456b3380
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix26
+selected true
+xpos 6849
+ypos 3145
+}
+set N454b3520 [stack 0]
+Dot {
+name Dot10
+xpos 6976
+ypos 3131
+}
+set N454bca50 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode27
+xpos 7008
+ypos 3204
+}
+push $N454bca50
+push $N454bca50
+push $N454bca50
+Group {
+inputs 2
+name ExtendEdge26
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 7161
+ypos 3127
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N454d77d0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N453859c0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N453859c0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N453859c0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N453859c0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N453d1300 [stack 0]
+push $N453d1300
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N453f0d90 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N453f0d90
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N454d77d0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix27
+selected true
+xpos 7153
+ypos 3237
+}
+set N452d79b0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode28
+xpos 7172
+ypos 3314
+}
+push $N452d79b0
+push $N452d79b0
+push $N452d79b0
+Group {
+inputs 2
+name ExtendEdge27
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 7325
+ypos 3237
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N452f6c30 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N451a4e50 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N451a4e50
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N451a4e50
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N451a4e50
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N451f0790 [stack 0]
+push $N451f0790
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N45090270 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N45090270
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N452f6c30
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix28
+selected true
+xpos 7317
+ypos 3347
+}
+set N450f6e40 [stack 0]
+Dot {
+name Dot11
+xpos 7463
+ypos 3359
+}
+set N452f6600 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode29
+xpos 7495
+ypos 3432
+}
+push $N452f6600
+push $N452f6600
+push $N452f6600
+Group {
+inputs 2
+name ExtendEdge28
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 7648
+ypos 3355
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N44f9aba0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N44fc8d80 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N44fc8d80
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N44fc8d80
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N44fc8d80
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N44e946f0 [stack 0]
+push $N44e946f0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N44eb4180 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N44eb4180
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N44f9aba0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix29
+selected true
+xpos 7640
+ypos 3465
+}
+set N44d9ad80 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode30
+xpos 7655
+ypos 3532
+}
+push $N44d9ad80
+push $N44d9ad80
+push $N44d9ad80
+Group {
+inputs 2
+name ExtendEdge29
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 7808
+ypos 3455
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N44db9fc0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N44de81a0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N44de81a0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N44de81a0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N44de81a0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N44cb3b30 [stack 0]
+push $N44cb3b30
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N44cd35c0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N44cd35c0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N44db9fc0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix30
+selected true
+xpos 7800
+ypos 3565
+}
+set N44bba1a0 [stack 0]
+Dot {
+name Dot12
+xpos 7967
+ypos 3564
+}
+set N44f90ea0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode31
+xpos 7999
+ypos 3637
+}
+push $N44f90ea0
+push $N44f90ea0
+push $N44f90ea0
+Group {
+inputs 2
+name ExtendEdge30
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 8152
+ypos 3560
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N44bddec0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N44a8c0d0 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N44a8c0d0
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N44a8c0d0
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N44a8c0d0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N44ad7a10 [stack 0]
+push $N44ad7a10
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N44af74a0 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N44af74a0
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N44bddec0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix31
+selected true
+xpos 8144
+ypos 3670
+}
+set N449de0b0 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode32
+xpos 8152
+ypos 3755
+}
+push $N449de0b0
+push $N449de0b0
+push $N449de0b0
+Group {
+inputs 2
+name ExtendEdge31
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 8305
+ypos 3678
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N44bc74f0 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N448aae00 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N448aae00
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N448aae00
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N448aae00
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N448f6740 [stack 0]
+push $N448f6740
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N44796210 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N44796210
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N44bc74f0
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix32
+selected true
+xpos 8297
+ypos 3788
+}
+set N447fcdf0 [stack 0]
+Dot {
+name Dot13
+xpos 8424
+ypos 3774
+}
+set N44686480 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode33
+xpos 8456
+ypos 3847
+}
+push $N44686480
+push $N44686480
+push $N44686480
+Group {
+inputs 2
+name ExtendEdge32
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 8609
+ypos 3770
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N446a1230 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N446cf410 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N446cf410
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N446cf410
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N446cf410
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N4459ad70 [stack 0]
+push $N4459ad70
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N445ba800 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N445ba800
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N446a1230
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix33
+selected true
+xpos 8601
+ypos 3880
+}
+set N444a1410 [stack 0]
+Erode {
+size {{softness}}
+blur 1
+name Erode34
+xpos 8620
+ypos 3957
+}
+push $N444a1410
+push $N444a1410
+push $N444a1410
+Group {
+inputs 2
+name ExtendEdge33
+help "Very useful as a super unpremultiplier.  The input matte is used as the source edge to extend the input colour channels beyond their existing alpha.  It can also be used to do dilate/erode operations on an alpha. The effect can be extended by using multiple copies.  The result should probably be re-comped with the original using an edge matte through a KeyMix so that only the desired areas are used.  "
+xpos 8773
+ypos 3880
+addUserKnob {20 Controls}
+addUserKnob {7 preblurVector R 0 10}
+preblurVector {{ExtendEdge.preblurVector}}
+addUserKnob {7 vector_length R 0 10}
+vector_length {{ExtendEdge.vector_length}}
+}
+Input {
+inputs 0
+name Input
+xpos 556
+ypos -426
+}
+set N444c0670 [stack 0]
+Dot {
+name Dot1
+xpos 707
+ypos -414
+}
+Dot {
+name Dot2
+xpos 707
+ypos -121
+}
+Input {
+inputs 0
+name matte
+xpos 440
+ypos -424
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle3
+xpos 440
+ypos -346
+}
+Group {
+name Edge2Vec2
+xpos 440
+ypos -322
+}
+Input {
+inputs 0
+name Input1
+xpos -172
+ypos -315
+}
+Clamp {
+channels rgb
+name Clamp1
+xpos -172
+ypos -250
+}
+set N444ee850 [stack 0]
+Position {
+translate {0 1}
+name Position2
+xpos -62
+ypos -106
+}
+push $N444ee850
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos -103
+ypos -28
+}
+push $N444ee850
+Position {
+translate {1 0}
+name Position1
+xpos -285
+ypos -98
+}
+push $N444ee850
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -253
+ypos -29
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy3
+xpos -179
+ypos 27
+}
+Grade {
+channels {rgba.red rgba.green -rgba.blue none}
+multiply {{Input1.height*Grade1.height} {Input1.height*Grade1.height} {curve} {curve}}
+black_clamp false
+name Grade1
+xpos -179
+ypos 196
+addUserKnob {20 User}
+addUserKnob {7 height l Height}
+height 1
+}
+set N443ba1c0 [stack 0]
+push $N443ba1c0
+Expression {
+channel0 rgb
+expr0 sqrt((r*r)+(g*g)+(b*b))
+name VectorLength
+xpos -260
+ypos 278
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge4
+xpos -179
+ypos 350
+}
+set N443d9c50 [stack 0]
+Output {
+name Output1
+xpos -179
+ypos 494
+}
+push $N443d9c50
+Viewer {
+frame_range 1-100
+fps 25
+colour_sample_bbox {0.1114754081 0.07213114947 0.1147540957 0.07540983707}
+name Viewer1
+selected true
+xpos -285
+ypos -16
+}
+end_group
+Blur {
+channels rgb
+size {{parent.preblurVector}}
+name Blur5
+label "pre blur vector"
+xpos 440
+ypos -296
+}
+push $N444c0670
+ShuffleCopy {
+inputs 2
+red red
+green green
+out forward
+name ShuffleCopy1
+label "rg to forward"
+xpos 556
+ypos -194
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale {{vector_length*-1}}
+name IDistort1
+selected true
+xpos 556
+ypos -149
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 556
+ypos -92
+}
+Output {
+name Output1
+xpos 556
+ypos -8
+}
+end_group
+Keymix {
+inputs 3
+channels rgb
+name Keymix34
+selected true
+xpos 8765
+ypos 3990
+}
+push $N444a1410
+push $N447fcdf0
+push $N449de0b0
+push $N44bba1a0
+push $N44d9ad80
+push $N450f6e40
+push $N452d79b0
+push $N454b3520
+push $N456946f0
+push $N471f0250
+push $N45bd1340
+push $N45dad460
+push $N45f8e010
+push $N462e9ca0
+push $N464cac70
+push $N466a6b70
+push $N46887740
+push $N46be37e0
+push $N46dc4350
+push $N46fa0140
+push $N47281010
+push $N475dce40
+push $N477bdc80
+push $N47999db0
+push $N47cfa840
+push $N47edb440
+push $N501bafd0
+push $N50395ba0
+push $N506f6730
+push $N508d7350
+push $N94ff75b0
+push $N512ec2a0
+push $N515a5980
+push $Na1686a80
+Switch {
+inputs 35
+which {{parent.slices}}
+name Switch3
+selected true
+xpos 2002
+ypos 3750
+}
+Output {
+name Output1
+xpos 2010
+ypos 4010
+}
+end_group

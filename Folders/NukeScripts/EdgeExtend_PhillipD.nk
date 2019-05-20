@@ -1,0 +1,129 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+name UV_edgeextend_matrix
+selected true
+xpos 74486
+ypos 9323
+addUserKnob {20 User}
+addUserKnob {26 a l "" +STARTLINE T "feed unpremulted with alpha"}
+addUserKnob {41 edge_thickness l "edge thickness" T Blur11.size}
+addUserKnob {41 amount T Grade48.multiply}
+}
+Input {
+inputs 0
+name Input1
+xpos 730
+ypos 487
+}
+Dot {
+name Dot26
+xpos 752
+ypos 527
+}
+set N55842380 [stack 0]
+push $N55842380
+Shuffle {
+red alpha
+green alpha
+blue alpha
+name Shuffle27
+label "\[value in]"
+xpos 967
+ypos 540
+}
+set N916ddf20 [stack 0]
+Matrix {
+channels {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+matrix {
+    {0 0 0}
+    {0 -1 1}
+    {0 0 0}
+  }
+name Matrix3
+xpos 908
+ypos 618
+}
+push $N916ddf20
+Matrix {
+channels {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+matrix {
+    {0 1 0}
+    {0 -1 0}
+    {0 0 0}
+  }
+name Matrix4
+xpos 1035
+ypos 625
+}
+Copy {
+inputs 2
+from0 rgba.red
+to0 rgba.red
+name Copy5
+xpos 972
+ypos 677
+}
+Shuffle {
+blue black
+alpha black
+name Shuffle28
+label "\[value in]"
+xpos 972
+ypos 732
+}
+Grade {
+white 20
+multiply 0.58
+black_clamp false
+name Grade48
+xpos 972
+ypos 788
+}
+Blur {
+channels rgba
+size 6.2
+name Blur11
+label "\[value size]"
+xpos 972
+ypos 827
+}
+push $N55842380
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy6
+xpos 972
+ypos 898
+}
+IDistort {
+channels rgb
+uv motion
+name IDistort1
+xpos 972
+ypos 972
+}
+ShuffleCopy {
+inputs 2
+name ShuffleCopy2
+xpos 746
+ypos 983
+}
+Output {
+name Output1
+xpos 746
+ypos 1058
+}
+Viewer {
+frame_range 1001-1048
+viewerProcess "None (default)"
+name Viewer1
+selected true
+xpos 746
+ypos 1108
+}
+end_group

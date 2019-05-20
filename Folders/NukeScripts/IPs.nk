@@ -1,0 +1,234 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+BackdropNode {
+ inputs 0
+ name _
+ tile_color 0x3333ff
+ note_font_size 42
+ selected true
+ xpos -201
+ ypos -341
+ bdheight 140
+}
+Constant {
+ inputs 0
+ channels rgb
+ name IPs
+ tile_color 0xffffff
+ selected true
+ xpos -192
+ ypos -325
+ postage_stamp false
+}
+Group {
+ name cached
+ tile_color 0xb1b1ff
+ note_font "Verdana Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -192
+ ypos -307
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -245
+  ypos -61
+ }
+ Text {
+  message cached
+  Font 0
+  font C:/Windows/Fonts/arial.ttf
+  size 60
+  yjustify bottom
+  Transform 1
+  box {0 0 608 86}
+  center {1024 778}
+  color {1 0 0 1}
+  name Text1
+  xpos -245
+  ypos -21
+ }
+ Shuffle {
+  name Shuffle1
+  xpos -245
+  ypos 5
+  cached true
+ }
+ Output {
+  name Output1
+  xpos -245
+  ypos 105
+ }
+end_group
+Group {
+ name flip
+ tile_color 0x9999ff
+ note_font "Verdana Bold"
+ note_font_size 14
+ selected true
+ xpos -192
+ ypos -289
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -245
+  ypos -61
+ }
+ Mirror {
+  Horizontal true
+  name Mirror1
+  selected true
+  xpos -245
+  ypos -26
+ }
+ Text {
+  message flip
+  Font 0
+  font C:/Windows/Fonts/arial.ttf
+  size 60
+  yjustify bottom
+  Transform 1
+  box {0 0 608 86}
+  center {1024 778}
+  color {1 0 0 1}
+  name Text1
+  xpos -245
+ }
+ Shuffle {
+  name Shuffle1
+  xpos -245
+  ypos 26
+  cached true
+ }
+ Output {
+  name Output1
+  xpos -245
+  ypos 105
+ }
+end_group
+Group {
+ name flop
+ tile_color 0x7f7fff
+ note_font "Verdana Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -192
+ ypos -271
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -245
+  ypos -61
+ }
+ Mirror {
+  Vertical true
+  name Mirror1
+  xpos -245
+  ypos -26
+ }
+ Text {
+  message flop
+  Font 0
+  font C:/Windows/Fonts/arial.ttf
+  size 60
+  yjustify bottom
+  Transform 1
+  box {0 0 608 86}
+  center {1024 778}
+  color {1 0 0 1}
+  name Text1
+  xpos -245
+ }
+ Shuffle {
+  name Shuffle1
+  xpos -245
+  ypos 26
+  cached true
+ }
+ Output {
+  name Output1
+  xpos -245
+  ypos 105
+ }
+end_group
+Group {
+ name grid
+ tile_color 0xb2b2ff
+ note_font "Verdana Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -192
+ ypos -252
+ addUserKnob {20 User l "Grid options"}
+ addUserKnob {41 number l "number of cells" T Grid1.number}
+ addUserKnob {41 size l "size of the lines" T Grid1.size}
+ addUserKnob {41 color l "color of the lines" T Grid1.color}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -245
+  ypos -53
+ }
+ Grid {
+  number 6
+  size 10
+  name Grid1
+  xpos -245
+  ypos 9
+ }
+ Output {
+  name Output1
+  xpos -245
+  ypos 105
+ }
+end_group
+Group {
+ name saturation
+ tile_color 0xffffff
+ note_font "Verdana Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -192
+ ypos -233
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -245
+  ypos -75
+ }
+ Saturation {
+  saturation 5
+  name Saturation1
+  xpos -245
+  ypos -26
+ }
+ Text {
+  message saturationX5
+  Font 0
+  font C:/Windows/Fonts/arial.ttf
+  size 60
+  yjustify bottom
+  Transform 1
+  box {0 0 608 86}
+  center {1024 778}
+  color {1 0 0 1}
+  name Text1
+  xpos -245
+ }
+ Shuffle {
+  name Shuffle1
+  xpos -245
+  ypos 26
+  cached true
+ }
+ Output {
+  name Output1
+  xpos -245
+  ypos 105
+ }
+end_group

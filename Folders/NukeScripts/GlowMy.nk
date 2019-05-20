@@ -1,0 +1,213 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name GlowMy
+ tile_color 0xe58d00ff
+ note_font "Verdana Bold"
+ note_font_size 14
+ selected true
+ xpos -40
+ ypos -62
+ addUserKnob {20 GlowBrights l "Glow Brights"}
+ addUserKnob {7 blackpoint l "black point"}
+ addUserKnob {7 whitepoint l "white point"}
+ addUserKnob {26 ""}
+ addUserKnob {3 MASTER_BLUR l "MASTER BLUR"}
+ MASTER_BLUR 1
+ addUserKnob {41 gain_1 l "MASTER GAIN" T Brightness.gain}
+ addUserKnob {3 RED_X}
+ addUserKnob {3 GREEN_X -STARTLINE}
+ addUserKnob {3 BLUE_X -STARTLINE}
+ addUserKnob {3 RED_Y}
+ addUserKnob {3 GREEN_Y -STARTLINE}
+ addUserKnob {3 BLUE_Y -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {6 Preview l "Preview Width" +STARTLINE}
+ addUserKnob {6 EffectOnly l "Effect only" -STARTLINE}
+ addUserKnob {6 crop l "Crop to format" -STARTLINE}
+ crop true
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -235
+  ypos 54
+ }
+ Dot {
+  name Dot6
+  xpos -201
+  ypos 118
+ }
+set N11c66030 [stack 0]
+ Dot {
+  name Dot1
+  xpos -201
+  ypos 637
+ }
+set N11c69330 [stack 0]
+ Dot {
+  name Dot13
+  xpos -201
+  ypos 821
+ }
+push $N11c66030
+ Dot {
+  name Dot5
+  xpos -114
+  ypos 118
+ }
+set N11c66360 [stack 0]
+ Dot {
+  name Dot8
+  selected true
+  xpos 73
+  ypos 118
+ }
+ Keyer {
+  operation "luminance key"
+  range {{parent.blackpoint i} {-parent.whitepoint+1 i} 1 1}
+  name Keyer1
+  xpos 39
+  ypos 148
+ }
+ Dot {
+  name Dot9
+  xpos 73
+  ypos 209
+ }
+push $N11c66360
+ Dot {
+  name Dot7
+  xpos -112
+  ypos 157
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -148
+  ypos 199
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -148
+  ypos 237
+ }
+ Premult {
+  name Premult2
+  xpos -148
+  ypos 277
+ }
+ Dot {
+  name Dot10
+  xpos -114
+  ypos 326
+ }
+set N27b0b620 [stack 0]
+ Dot {
+  name Dot4
+  xpos -18
+  ypos 326
+ }
+set N11c679b0 [stack 0]
+ Dot {
+  name Dot2
+  xpos 79
+  ypos 326
+ }
+set N11c68340 [stack 0]
+ Dot {
+  name Dot12
+  xpos 217
+  ypos 326
+ }
+ Dot {
+  name Dot11
+  xpos 217
+  ypos 755
+ }
+push $N11c69330
+push $N27b0b620
+ Blur {
+  size {{RED_X+MASTER_BLUR i} {RED_Y+MASTER_BLUR i}}
+  quality 17
+  crop false
+  name BlurRed
+  xpos -148
+  ypos 399
+ }
+ Dot {
+  name Dot3
+  xpos -114
+  ypos 479
+ }
+push $N11c679b0
+ Blur {
+  size {{GREEN_X+MASTER_BLUR i} {GREEN_Y+MASTER_BLUR i}}
+  crop false
+  name BlurGreen
+  xpos -52
+  ypos 400
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  Bchannels {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  name Merge2
+  xpos -52
+  ypos 475
+ }
+push $N11c68340
+ Blur {
+  size {{BLUE_X+MASTER_BLUR i} {BLUE_Y+MASTER_BLUR i}}
+  crop false
+  name BlurBlue
+  xpos 45
+  ypos 400
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red rgba.green -rgba.blue rgba.alpha}
+  Bchannels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+  name Merge3
+  xpos 45
+  ypos 475
+ }
+ ColorCorrect {
+  name Brightness
+  xpos 45
+  ypos 553
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge1
+  xpos 45
+  ypos 633
+  disable {{parent.EffectOnly i}}
+ }
+ Switch {
+  inputs 2
+  which {{parent.Preview i}}
+  name Switch1
+  xpos 45
+  ypos 751
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos 45
+  ypos 817
+  disable {{!parent.crop i}}
+ }
+ Output {
+  name Output1
+  xpos 45
+  ypos 921
+ }
+end_group

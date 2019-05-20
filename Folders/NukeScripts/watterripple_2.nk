@@ -1,0 +1,484 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x7171c600
+ label "These embiggen the circle over time. \nThe animation curve for this is an \nacelerating one so that they are placed \nfurther appart as they grow older."
+ note_font Verdana
+ note_font_size 15
+ selected true
+ xpos -326
+ ypos -246
+ bdwidth 311
+ bdheight 167
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x8e8e3800
+ label "These make a circle"
+ note_font Verdana
+ note_font_size 15
+ selected true
+ xpos -334
+ ypos -520
+ bdwidth 307
+ bdheight 250
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x8e8e3800
+ label "These 'loop' the expanding circle over itself. "
+ note_font_size 15
+ selected true
+ xpos -326
+ ypos -43
+ bdwidth 374
+ bdheight 516
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x8e8e3800
+ label "The ripple effect requires that the a Motion \nchannel is inserted into the image. This is what \nthe ShuffleCopy is doing. \t\t"
+ note_font_size 15
+ selected true
+ xpos -604
+ ypos 1325
+ bdwidth 328
+ bdheight 175
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x8e8e3800
+ label "This merge is set to overlay blend mode. The maths:\n- If FG mid grey then no change\n- If FG black then darker\n- If FG white then lighter"
+ note_font_size 15
+ selected true
+ xpos -601
+ ypos 1517
+ bdwidth 363
+ bdheight 113
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x8e8e3800
+ label "This is an alternate way to make an expanding\ncircle. This circle made using this meathod \nis even in thickness no matter how large it gets. \nThough clever it does not produce the apparent \nthickening of the ripple size that a real ripple \nwould have. \n"
+ note_font Verdana
+ note_font_size 15
+ selected true
+ xpos -794
+ ypos -542
+ bdwidth 380
+ bdheight 505
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode8
+ tile_color 0x7171c600
+ label "These fellows fade out the effect towrds the edge."
+ note_font_size 15
+ selected true
+ xpos -320
+ ypos 839
+ bdwidth 619
+ bdheight 176
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x7171c600
+ label "These nodes emboss the circles. This emboss will drive the shadow and the light of the ripple. \nZ brurs have been used  in this script instead of normal blurs as they produce a more realsitic \nfade out of blur. "
+ note_font_size 15
+ selected true
+ xpos -318
+ ypos 501
+ bdwidth 623
+ bdheight 320
+}
+push $cut_paste_input
+clone node14a18200|Radial|3836 Radial {
+ area {241 255 753 767}
+ softness 0
+ name Radial3
+ selected true
+ xpos -728
+ ypos -353
+}
+set C14a18200 [stack 0]
+Transform {
+ scale 0.26
+ center {512 512}
+ name Transform6
+ selected true
+ xpos -728
+ ypos -292
+}
+Transform {
+ scale {{curve i L x1 1 S x37 7.234987259 L x95 19.85316658}}
+ center {512 512}
+ name Transform5
+ selected true
+ xpos -728
+ ypos -245
+}
+set N14cbab40 [stack 0]
+push $N14cbab40
+Blur {
+ size 25.5
+ name Blur3
+ selected true
+ xpos -655
+ ypos -209
+}
+Merge2 {
+ inputs 2
+ operation exclusion
+ name Merge7
+ selected true
+ xpos -728
+ ypos -119
+}
+ColorLookup {
+ lut {master {curve K 0 C x0.2376922816 1}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ name ColorLookup1
+ selected true
+ xpos -728
+ ypos -95
+}
+Radial {
+ inputs 0
+ area {0 0 1016 1022}
+ softness 0.46
+ name Radial4
+ selected true
+ xpos -78
+ ypos 934
+}
+Dot {
+ name Dot3
+ selected true
+ xpos -44
+ ypos 986
+}
+set N14cbbe60 [stack 0]
+Radial {
+ inputs 0
+ area {0 0 1016 1022}
+ name Radial1
+ selected true
+ xpos 178
+ ypos 704
+}
+Constant {
+ inputs 0
+ channels rgb
+ name Constant3
+ selected true
+ xpos -86
+ ypos 560
+}
+clone $C14a18200 {
+ inputs 0
+ xpos -302
+ ypos -424
+ selected true
+}
+clone $C14a18200 {
+ inputs 0
+ xpos -138
+ ypos -446
+ selected true
+}
+Transform {
+ scale 0.9
+ center {512 512}
+ name Transform1
+ selected true
+ xpos -138
+ ypos -422
+}
+Merge2 {
+ inputs 2
+ operation difference
+ name Merge1
+ selected true
+ xpos -222
+ ypos -302
+}
+Transform {
+ scale 0.26
+ center {512 512}
+ name Transform2
+ selected true
+ xpos -222
+ ypos -144
+}
+Transform {
+ scale {{curve i L x1 1 l x56 12.53390503}}
+ center {512 512}
+ name Transform3
+ selected true
+ xpos -222
+ ypos -106
+}
+Dot {
+ name Dot4
+ selected true
+ xpos -188
+ ypos 32
+}
+set N14cbdb10 [stack 0]
+push $N14cbdb10
+TimeOffset {
+ time_offset 5
+ name TimeOffset1
+ selected true
+ xpos -69
+ ypos 29
+}
+Dot {
+ name Dot5
+ selected true
+ xpos -35
+ ypos 115
+}
+Merge2 {
+ inputs 2
+ name Merge4
+ selected true
+ xpos -222
+ ypos 112
+}
+Dot {
+ name Dot6
+ selected true
+ xpos -187
+ ypos 196
+}
+set N14cbe7d0 [stack 0]
+push $N14cbe7d0
+TimeOffset {
+ time_offset 10
+ name TimeOffset2
+ selected true
+ xpos -68
+ ypos 193
+}
+Dot {
+ name Dot7
+ selected true
+ xpos -34
+ ypos 279
+}
+Merge2 {
+ inputs 2
+ name Merge5
+ selected true
+ xpos -221
+ ypos 276
+}
+Dot {
+ name Dot8
+ selected true
+ xpos -187
+ ypos 357
+}
+set N14deb900 [stack 0]
+push $N14deb900
+TimeOffset {
+ time_offset 15
+ name TimeOffset3
+ selected true
+ xpos -68
+ ypos 354
+}
+Dot {
+ name Dot9
+ selected true
+ xpos -34
+ ypos 440
+}
+Merge2 {
+ inputs 2
+ name Merge6
+ selected true
+ xpos -221
+ ypos 437
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -187
+ ypos 637
+}
+set N14dec5c0 [stack 0]
+CopyBBox {
+ inputs 2
+ name CopyBBox1
+ selected true
+ xpos -91
+ ypos 635
+}
+Emboss {
+ channels rgb
+ Angle 16
+ Width 7.9
+ output -rgba.alpha
+ name Emboss1
+ selected true
+ xpos 57
+ ypos 629
+}
+Blur {
+ size 13
+ name Blur2
+ selected true
+ xpos 57
+ ypos 663
+}
+ShuffleCopy {
+ inputs 2
+ black green
+ out2 depth
+ name ShuffleCopy3
+ selected true
+ xpos 57
+ ypos 704
+}
+ZBlur {
+ math far=0
+ center 0.92
+ size 24
+ max_size 8.5
+ name ZBlur1
+ selected true
+ xpos 57
+ ypos 744
+}
+ColorLookup {
+ lut {master {curve C 0 x0.4306153655 0.3242965873 x0.4373845756 0.3412935734 L x0.4915384054 0.5164179206 S x0.6641537547 0.9296019673 C x1 1}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ name ColorLookup2
+ selected true
+ xpos 57
+ ypos 782
+}
+ColorLookup {
+ inputs 1+1
+ lut {master {curve C 0.5 0.5054726601}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ invert_mask true
+ name ColorLookup3
+ selected true
+ xpos 55
+ ypos 982
+}
+Dot {
+ name Dot2
+ selected true
+ xpos 89
+ ypos 1582
+}
+Radial {
+ inputs 0
+ area {0 0 1016 1022}
+ name Radial2
+ selected true
+ xpos -113
+ ypos 1113
+}
+push $N14cbbe60
+push $N14dec5c0
+ColorLookup {
+ inputs 1+1
+ lut {master {curve C 0.004726409912 -0.0007462501526}
+   red {}
+   green {}
+   blue {}
+   alpha {}}
+ invert_mask true
+ name ColorLookup4
+ selected true
+ xpos -221
+ ypos 983
+}
+ShuffleCopy {
+ inputs 2
+ black green
+ out2 depth
+ name ShuffleCopy2
+ selected true
+ xpos -223
+ ypos 1113
+}
+ZBlur {
+ math far=0
+ center 0.92
+ size 100
+ max_size 19.5
+ name ZBlur2
+ selected true
+ xpos -217
+ ypos 1405
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ selected true
+ xpos -401
+ ypos 1251
+}
+ShuffleCopy {
+ inputs 2
+ black red
+ white green
+ red2 blue
+ green2 alpha
+ out2 motion
+ name ShuffleCopy1
+ selected true
+ xpos -401
+ ypos 1411
+}
+IDistort {
+ uv motion
+ uv_scale 10
+ name IDistort1
+ selected true
+ xpos -401
+ ypos 1453
+}
+Merge2 {
+ inputs 2
+ operation overlay
+ name Merge3
+ selected true
+ xpos -401
+ ypos 1578
+}
+Viewer {
+ frame 28
+ frame_range 1-115
+ frame_range_lock true
+ rgb_only true
+ input_process false
+ name Viewer1
+ selected true
+ xpos -40
+ ypos -10
+ hide_input true
+}

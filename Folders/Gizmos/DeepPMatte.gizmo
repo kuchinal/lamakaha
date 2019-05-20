@@ -1,0 +1,153 @@
+Group {
+ name DeepPMatte addUserKnob {20 User l DeepPMatte t DeepPMatte}
+ addUserKnob {41 in l "deep point position" t "Deep Point Position Channel\n" T DeepExpressionShuffle.chans0}
+ addUserKnob {6 unpremult l (un)premult +STARTLINE}
+ unpremult true
+ addUserKnob {6 zup l Z-Up -STARTLINE}
+ addUserKnob {20 Sphere n 1}
+ addUserKnob {13 translate}
+ addUserKnob {7 scale l Scale R 0 100}
+ scale 50
+ addUserKnob {7 falloff l Falloff R 0 100}
+ falloff 50
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {26 note l Notes: t "more at willould.co.uk" T "Matte created based on sample distance from sphere centre\nbuggy"}
+}
+add_layer {DPM_Position DPM_Position.red DPM_Position.green DPM_Position.blue DPM_Position.alpha}
+ Constant {
+  inputs 0
+  channels DPM_Position
+  format "1920 1080 0 0 1920 1080 1 HD_1080"
+  name Constant1
+  xpos 547
+  ypos -195
+ }
+ DeepFromImage {
+  name DeepFromImage1
+  xpos 547
+  ypos -66
+ }
+ Input {
+  inputs 0
+  name DeepIn
+  label DeepIn
+  xpos 319
+  ypos -148
+ }
+ DeepMerge {
+  inputs 2
+  name DeepMerge1
+  xpos 319
+  ypos -66
+ }
+ DeepExpression {
+  temp_name0 dr
+  temp_expr0 "\[python \{nuke.thisNode().knob('chans0').value(0)+ str(\".red\")\}]"
+  temp_name1 dg
+  temp_expr1 "\[python \{nuke.thisNode().knob('chans0').value(0)+ str(\".green\")\}]"
+  temp_name2 db
+  temp_expr2 "\[python \{nuke.thisNode().knob('chans0').value(0)+ str(\".blue\")\}]"
+  chans0 none
+  chans1 DPM_Position
+  DPM_Position.red dr
+  DPM_Position.green dg
+  DPM_Position.blue db
+  name DeepExpressionShuffle
+  xpos 319
+  ypos -15
+ }
+ DeepExpression {
+  chans0 DPM_Position
+  chans1 none
+  DPM_Position.red DPM_Position.red
+  DPM_Position.green DPM_Position.blue
+  DPM_Position.blue -DPM_Position.green
+  DPM_Position.alpha DPM_Position.alpha
+  name DeepExpression2
+  label "Z - Up Conversion"
+  xpos 319
+  ypos 52
+  disable {{"\[python 1-nuke.thisGroup()\\\['zup'\\].value()]" x1 1}}
+ }
+ DeepExpression {
+  chans0 DPM_Position
+  chans1 none
+  DPM_Position.red DPM_Position.red/rgba.alpha
+  DPM_Position.green DPM_Position.green/rgba.alpha
+  DPM_Position.blue DPM_Position.blue/rgba.alpha
+  name DeepExpression1
+  label "Unpremult Samples"
+  xpos 319
+  ypos 131
+  disable {{"\[python 1-nuke.thisGroup()\\\['unpremult'\\].value()]"}}
+ }
+ DeepExpression {
+  temp_name0 centerx
+  temp_expr0 "\[python \{nuke.toNode(\"DPM_Sphere\").knob('translate').value(0)\}]"
+  temp_name1 centery
+  temp_expr1 "\[python \{nuke.toNode(\"DPM_Sphere\").knob('translate').value(1)\}]"
+  temp_name2 centerz
+  temp_expr2 "\[python \{nuke.toNode(\"DPM_Sphere\").knob('translate').value(2)\}]"
+  chans1 none
+  rgba.red pow2(DPM_Position.red-centerx)
+  rgba.green pow2(DPM_Position.green-centery)
+  rgba.blue pow2(DPM_Position.blue-centerz)
+  name DeepExpression7
+  label "Set Center Point"
+  xpos 319
+  ypos 209
+  addUserKnob {20 User}
+ }
+ DeepExpression {
+  temp_name0 p_matte
+  temp_expr0 1-(sqrt(rgba.red+rgba.green+rgba.blue))
+  temp_name1 falloff
+  temp_expr1 "\[python \{nuke.thisGroup()\['falloff'].value(0)\}]"
+  temp_name2 scale
+  temp_expr2 "\[python \{nuke.toNode(\"DPM_Sphere\").knob('uniform_scale').value(0)\}]"
+  chans1 none
+  rgba.red (p_matte+scale)/falloff<0?0:(p_matte+scale)/falloff
+  rgba.green (p_matte+scale)/falloff<0?0:(p_matte+scale)/falloff
+  rgba.blue (p_matte+scale)/falloff<0?0:(p_matte+scale)/falloff  name DeepExpression8
+  label "Set Scale and Softness"
+  xpos 319
+  ypos 289
+ }
+set Nba216c00 [stack 0]
+ DeepExpression {
+  chans1 none
+  rgba.red rgba.red*rgba.alpha
+  rgba.green rgba.green*rgba.alpha
+  rgba.blue rgba.blue*rgba.alpha
+  name DeepExpression3
+  label "Premult Samples"
+  xpos 319
+  ypos 419
+  disable {{"\[python 1-nuke.thisGroup()\\\['unpremult'\\].value()]" x1 1}}
+ }
+ Output {
+  name Output1
+  xpos 319
+  ypos 563
+ }
+push $Nba216c00
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  xpos -62
+  ypos 295
+ }
+ Sphere {
+  inputs 0
+  cast_shadow false
+  receive_shadow false
+  rows 20
+  columns 20
+  translate {{"\[python nuke.thisGroup()\\\['translate'\\].value(0)]" x1 86.5 x70 -68} {"\[python nuke.thisGroup()\\\['translate'\\].value(1)]" x1 0 x70 64.99958801} {"\[python nuke.thisGroup()\\\['translate'\\].value(2)]" x1 0 x70 305.2000122}}
+  uniform_scale {{"\[python nuke.thisGroup()\\\['scale'\\].value(0)]" x70 20 x80 30}}
+  name DPM_Sphere
+  xpos 575
+  ypos 212
+ }
+end_group

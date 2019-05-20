@@ -1,0 +1,873 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+CheckerBoard2 {
+inputs 0
+name CheckerBoard5
+selected true
+xpos -16056
+ypos 5917
+postage_stamp false
+}
+Transform {
+translate {-286 -236}
+center {1312 620}
+shutteroffset centred
+name Transform37
+selected true
+xpos -16056
+ypos 5964
+disable true
+}
+set N686530d0 [stack 0]
+Transform {
+scale 30
+center {1312 620}
+shutteroffset centred
+name Transform36
+selected true
+xpos -16056
+ypos 6056
+disable true
+}
+push $cut_paste_input
+NoOp {
+name ObjectP1-
+help ObjectP1
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos -16364
+ypos 5834
+hide_input true
+addUserKnob {20 User}
+addUserKnob {26 connect l "connected to :" T ObjectP1}
+addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+addUserKnob {22 reconnectSimilar l "reconnect similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\n\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        if one\['connect'].value()==c:\n            one.setInput(0,nuke.toNode(c))"}
+addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+addUserKnob {6 showsource -STARTLINE +HIDDEN}
+addUserKnob {26 "" +STARTLINE T "<font color='DimGray'><b> &copy; Alexey Kuchinski"}
+}
+set N1ba48ea0 [stack 0]
+Dot {
+name Dot158
+selected true
+xpos -16406
+ypos 6104
+}
+push $N1ba48ea0
+Group {
+name PrefUnWrap
+selected true
+xpos -16271
+ypos 5923
+addUserKnob {20 tab1 l PrefUnWrap}
+addUserKnob {41 format T OFormat.format}
+addUserKnob {26 div1 l camera}
+addUserKnob {41 center T Axis4.translate}
+addUserKnob {41 rotate T Axis3.rotate}
+addUserKnob {7 distance R 0 100}
+distance 30
+addUserKnob {26 div2 l "" +STARTLINE}
+addUserKnob {41 size l "fill holes" T TNT_MDivOversize3.size}
+addUserKnob {41 size_1 l "depth treshold" T Blur1.size}
+}
+Constant {
+inputs 0
+channels rgb
+format "2624 1240 0 0 2624 1240 1 CRE"
+name OFormat
+xpos 444
+ypos -818
+}
+Input {
+inputs 0
+name vec
+xpos 2
+ypos -794
+}
+Axis2 {
+inputs 0
+translate {0 12.4 0}
+name Axis4
+xpos 630
+ypos -840
+}
+Axis2 {
+inputs 0
+translate {{parent.Axis4.translate} {parent.Axis4.translate} {parent.Axis4.translate}}
+name Axis3
+xpos 870
+ypos -840
+}
+Camera2 {
+inputs 2
+translate {0 0 {group.distance}}
+vaperture {{haperture*OFormat.height/OFormat.width}}
+name Camera6
+note_font "Bitstream Vera Sans"
+xpos 751
+ypos -690
+addUserKnob {20 User}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+Group {
+inputs 3
+name Group6
+xpos 444
+ypos -624
+}
+Input {
+inputs 0
+name img
+xpos 140
+ypos 440
+number 2
+}
+Input {
+inputs 0
+name cam
+xpos 440
+ypos 140
+}
+Dot {
+name Dot2
+xpos 474
+ypos 204
+}
+set N39153390 [stack 0]
+Dot {
+name Dot1
+xpos 474
+ypos 324
+}
+push $N39153390
+Input {
+inputs 0
+name vec
+xpos 300
+ypos 110
+number 1
+}
+Shuffle {
+alpha white
+name Shuffle1
+label "\[value in]"
+xpos 300
+ypos 164
+}
+C44Matrix {
+inputs 2
+matrixFrom "from camera input"
+invert true
+name C44Matrix1
+xpos 300
+ypos 257
+}
+Shuffle {
+alpha white
+name Shuffle2
+label "\[value in]"
+xpos 300
+ypos 304
+}
+C44Matrix {
+inputs 2
+matrixFrom "from camera input"
+matrixType projection
+w_divide true
+name C44Matrix2
+xpos 300
+ypos 373
+}
+Expression {
+temp_name0 stretch
+temp_expr0 img.width/img.height*img.pixel_aspect
+expr0 (r+1)/2
+expr1 (g*stretch+1)/2
+expr2 1/b
+expr3 a
+name Expression1
+xpos 300
+ypos 440
+}
+set N39193140 [stack 0]
+Output {
+name Output1
+xpos 300
+ypos 530
+}
+push $N39193140
+push 0
+push 0
+push 0
+push 0
+push 0
+push $N39193140
+Viewer {
+inputs 7
+frame 1025
+frame_range 1001-1048
+viewerProcess "None (default)"
+name Viewer1
+selected true
+xpos -40
+ypos 332
+}
+end_group
+set N391468d0 [stack 0]
+Grade {
+multiply {{width} {height} 1 1}
+black_clamp false
+name Grade4
+xpos 444
+ypos -525
+}
+push $N391468d0
+Dot {
+name Dot1
+xpos 234
+ypos -576
+}
+Dot {
+name Dot13
+xpos 234
+ypos -456
+}
+push $N391468d0
+TNT_UVMap {
+name TNT_UVMap3
+note_font "Bitstream Vera Sans"
+xpos 324
+ypos -550
+format 0
+}
+Shuffle {
+alpha white
+name Shuffle12
+label "\[value in]"
+xpos 324
+ypos -498
+}
+Copy {
+inputs 2
+from0 rgba.blue
+to0 rgba.blue
+name Copy2
+xpos 324
+ypos -429
+}
+BlinkScript {
+inputs 2
+ProgramGroup 1
+KernelDescription "1 \"InverseSTKernel\" iterate pixelWise 4d652d106409f708899eecbd2721a4fc6f1422cae4947a506003620991450a66 3 \"src\" Read Point \"uv\" Read Point \"dst\" Write Random 0"
+kernelSource "//Requirements: \n// Windows: Nuke 9.0\n// Linux & mac OSX: Nuke 10.0v4\n\nkernel InverseSTKernel : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessPoint, eEdgeClamped> src;\n  Image<eRead, eAccessPoint, eEdgeClamped> uv;\n  Image<eWrite, eAccessRandom> dst;\n\n  void process() \{\n      //always make sure that you don't write outside bounds\n      //as it will usually crash nuke.\n      if (dst.bounds.inside(uv().x,uv().y)) \{ \n          if (dst(uv().x,uv().y).z <= src().z) \{    \n          dst(uv().x,uv().y) = src(); \}\n      \}\n  \}\n\};\n"
+useGPUIfAvailable false
+rebuild ""
+rebuild_finalise ""
+name BlinkScript6
+xpos 444
+ypos -376
+}
+set N39260be0 [stack 0]
+Blur {
+channels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+name Blur1
+label "\[value size]"
+xpos 624
+ypos -382
+}
+Unpremult {
+name Unpremult4
+xpos 624
+ypos -310
+}
+Grade {
+white {1 1 0.9999992 0.99999}
+name Grade8
+xpos 624
+ypos -250
+}
+push $N39260be0
+MergeExpression {
+inputs 2
+expr0 "B.b > A.b? B.r : 0"
+expr1 "B.b > A.b? B.g : 0"
+expr2 "B.b > A.b? B.b : 0"
+expr3 "B.b > A.b? B.a : 0"
+name MergeExpression1
+xpos 564
+ypos -190
+addUserKnob {20 User}
+addUserKnob {7 treshold}
+treshold -0.00025
+}
+TNT_MDivOversize {
+name TNT_MDivOversize3_clone1
+xpos 564
+ypos -100
+icon "\[value TNT_MDivOversize3.icon]"
+Info 0
+size {{TNT_MDivOversize3.size}}
+transparencyBlend {{TNT_MDivOversize3.transparencyBlend}}
+mode {{TNT_MDivOversize3.mode}}
+}
+Blur {
+channels rgba
+size 3
+name Blur2
+label "\[value size]"
+xpos 564
+ypos -46
+}
+push $N39260be0
+TNT_MDivOversize {
+name TNT_MDivOversize3
+xpos 440
+ypos -107
+Info 0
+size 8.6
+}
+MergeExpression {
+inputs 2
+expr0 "A.b > B.b? A.r : B.r"
+expr1 "A.b > B.b? A.g : B.g"
+expr2 0
+expr3 "A.b > B.b? A.a : B.a"
+name MergeExpression2
+xpos 440
+ypos 50
+addUserKnob {20 User}
+addUserKnob {7 treshold}
+treshold -0.00025
+}
+Reformat {
+type "to box"
+format "1920 1080 0 0 1920 1080 1 HD_1080"
+box_width {{OFormat.width}}
+box_height {{OFormat.height}}
+box_pixel_aspect {{OFormat.pixel_aspect}}
+resize distort
+name Reformat6
+xpos 440
+ypos 111
+}
+ModifyMetaData {
+metadata {
+ {set tx/nuke/prefunwrap/cpm "\[value Camera6.world_matrix]"}
+}
+name ModifyMetaData1
+xpos 440
+ypos 174
+}
+set N398c3650 [stack 0]
+Output {
+name Output1
+xpos 440
+ypos 260
+}
+push $N398c3650
+Viewer {
+frame_range 1001-1069
+viewerProcess "None (default)"
+name Viewer1
+selected true
+xpos 1610
+ypos -10
+hide_input true
+}
+end_group
+Group {
+inputs 2
+name PrefProject
+selected true
+xpos -16276
+ypos 6108
+addUserKnob {20 tab1 l PrefProject}
+addUserKnob {26 div1 l camera}
+addUserKnob {41 center T Axis4.translate}
+addUserKnob {41 rotate T Axis3.rotate}
+addUserKnob {7 distance R 0 100}
+distance 30
+addUserKnob {26 div2 l "" +STARTLINE}
+addUserKnob {4 output M {"UV Map" projection}}
+addUserKnob {41 filter T STMap1.filter}
+}
+Axis2 {
+inputs 0
+translate {0 12.6 0}
+name Axis4
+xpos 450
+ypos -90
+}
+Axis2 {
+inputs 0
+translate {{parent.Axis4.translate} {parent.Axis4.translate} {parent.Axis4.translate}}
+name Axis3
+xpos 690
+ypos -90
+}
+Camera2 {
+inputs 2
+translate {0 0 {group.distance}}
+vaperture {{haperture*img.height/img.width}}
+name Camera6
+note_font "Bitstream Vera Sans"
+xpos 570
+ypos 60
+addUserKnob {20 User}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+Dot {
+name Dot2
+xpos 594
+ypos 204
+}
+set N38ff6280 [stack 0]
+Dot {
+name Dot1
+xpos 594
+ypos 324
+}
+push $N38ff6280
+Input {
+inputs 0
+name vec
+xpos 300
+ypos -40
+number 1
+}
+Shuffle {
+alpha white
+name Shuffle1
+label "\[value in]"
+xpos 300
+ypos 163
+}
+C44Matrix {
+inputs 2
+matrixFrom "from camera input"
+invert true
+name C44Matrix1
+xpos 300
+ypos 259
+}
+Shuffle {
+alpha white
+name Shuffle2
+label "\[value in]"
+xpos 300
+ypos 306
+}
+C44Matrix {
+inputs 2
+matrixFrom "from camera input"
+matrixType projection
+w_divide true
+name C44Matrix2
+xpos 300
+ypos 369
+}
+Expression {
+temp_name0 stretch
+temp_expr0 img.width/img.height*img.pixel_aspect
+expr0 (r+1)/2
+expr1 (g*stretch+1)/2
+expr2 0
+expr3 0
+name Expression1
+selected true
+xpos 300
+ypos 436
+}
+Shuffle {
+blue black
+alpha black
+name Shuffle3
+label "\[value in]"
+xpos 300
+ypos 494
+}
+set N39044970 [stack 0]
+Input {
+inputs 0
+name img
+xpos 140
+ypos 440
+}
+STMap {
+inputs 2
+channels rgba
+uv rgb
+name STMap1
+xpos 300
+ypos 552
+}
+set N39058090 [stack 0]
+push $N39044970
+Dot {
+name Dot3
+xpos 474
+ypos 564
+}
+Switch {
+inputs 2
+which {{group.output}}
+name Switch1
+label "\[value which]"
+xpos 300
+ypos 617
+}
+Output {
+name Output1
+xpos 300
+ypos 680
+}
+push $N39044970
+push 0
+push 0
+push 0
+push 0
+push 0
+push $N39058090
+Viewer {
+inputs 7
+frame 1025
+frame_range 1001-1048
+viewerProcess "None (default)"
+name Viewer1
+xpos -40
+ypos 332
+}
+end_group
+push $N686530d0
+STMap {
+inputs 2
+channels rgba
+uv rgb
+name STMap1
+selected true
+xpos -16135
+ypos 6176
+}
+push $N1ba48ea0
+Group {
+name PrefUnWrap1
+selected true
+xpos -16524
+ypos 5956
+addUserKnob {20 tab1 l PrefUnWrap}
+addUserKnob {41 format T OFormat.format}
+addUserKnob {26 div1 l camera}
+addUserKnob {41 center T Axis4.translate}
+addUserKnob {41 rotate T Axis3.rotate}
+addUserKnob {7 distance R 0 100}
+distance 30
+addUserKnob {26 div2 l "" +STARTLINE}
+addUserKnob {41 size l "fill holes" T TNT_MDivOversize3.size}
+addUserKnob {41 size_1 l "depth treshold" T Blur1.size}
+}
+Constant {
+inputs 0
+channels rgb
+format "2624 1240 0 0 2624 1240 1 CRE"
+name OFormat
+xpos 444
+ypos -817
+}
+Input {
+inputs 0
+name vec
+xpos 1
+ypos -790
+}
+Axis2 {
+inputs 0
+translate {0 12.4 0}
+name Axis4
+xpos 630
+ypos -840
+}
+Axis2 {
+inputs 0
+translate {{parent.Axis4.translate} {parent.Axis4.translate} {parent.Axis4.translate}}
+name Axis3
+xpos 870
+ypos -840
+}
+Camera2 {
+inputs 2
+translate {0 0 {group.distance}}
+vaperture {{haperture*OFormat.height/OFormat.width}}
+name Camera6
+note_font "Bitstream Vera Sans"
+xpos 751
+ypos -690
+addUserKnob {20 User}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+Group {
+inputs 3
+name Group6
+xpos 444
+ypos -612
+}
+Input {
+inputs 0
+name cam
+xpos 440
+ypos 140
+}
+Dot {
+name Dot2
+xpos 474
+ypos 204
+}
+set N89cfdd50 [stack 0]
+Dot {
+name Dot1
+xpos 474
+ypos 324
+}
+push $N89cfdd50
+Input {
+inputs 0
+name vec
+xpos 300
+ypos 110
+number 1
+}
+Shuffle {
+alpha white
+name Shuffle1
+label "\[value in]"
+xpos 300
+ypos 164
+}
+C44Matrix {
+inputs 2
+matrixFrom "from camera input"
+invert true
+name C44Matrix1
+xpos 300
+ypos 257
+}
+Shuffle {
+alpha white
+name Shuffle2
+label "\[value in]"
+xpos 300
+ypos 305
+}
+C44Matrix {
+inputs 2
+matrixFrom "from camera input"
+matrixType projection
+w_divide true
+name C44Matrix2
+selected true
+xpos 300
+ypos 373
+}
+Expression {
+temp_name0 stretch
+temp_expr0 img.width/img.height*img.pixel_aspect
+expr0 (r+1)/2
+expr1 (g*stretch+1)/2
+expr2 1/b
+expr3 a
+name Expression1
+xpos 300
+ypos 440
+}
+set N89aee5c0 [stack 0]
+push 0
+push 0
+push 0
+push 0
+push 0
+Input {
+inputs 0
+name img
+xpos 140
+ypos 440
+number 2
+}
+Viewer {
+inputs 7
+frame_range 1001-1048
+input_number 6
+viewerProcess "None (default)"
+name Viewer1
+xpos -40
+ypos 332
+}
+push $N89aee5c0
+Output {
+name Output1
+xpos 300
+ypos 530
+}
+end_group
+set N89d81790 [stack 0]
+Grade {
+multiply {{width} {height} 1 1}
+black_clamp false
+name Grade4
+xpos 444
+ypos -521
+}
+push $N89d81790
+Dot {
+name Dot1
+xpos 234
+ypos -576
+}
+Dot {
+name Dot13
+xpos 234
+ypos -456
+}
+push $N89d81790
+TNT_UVMap {
+name TNT_UVMap3
+note_font "Bitstream Vera Sans"
+xpos 324
+ypos -550
+format 0
+}
+Shuffle {
+alpha white
+name Shuffle12
+label "\[value in]"
+xpos 324
+ypos -498
+}
+Copy {
+inputs 2
+from0 rgba.blue
+to0 rgba.blue
+name Copy2
+selected true
+xpos 324
+ypos -428
+}
+BlinkScript {
+inputs 2
+ProgramGroup 1
+KernelDescription "1 \"InverseSTKernel\" iterate pixelWise 4d652d106409f708899eecbd2721a4fc6f1422cae4947a506003620991450a66 3 \"src\" Read Point \"uv\" Read Point \"dst\" Write Random 0"
+kernelSource "//Requirements: \n// Windows: Nuke 9.0\n// Linux & mac OSX: Nuke 10.0v4\n\nkernel InverseSTKernel : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessPoint, eEdgeClamped> src;\n  Image<eRead, eAccessPoint, eEdgeClamped> uv;\n  Image<eWrite, eAccessRandom> dst;\n\n  void process() \{\n      //always make sure that you don't write outside bounds\n      //as it will usually crash nuke.\n      if (dst.bounds.inside(uv().x,uv().y)) \{ \n          if (dst(uv().x,uv().y).z <= src().z) \{    \n          dst(uv().x,uv().y) = src(); \}\n      \}\n  \}\n\};\n"
+useGPUIfAvailable false
+rebuild ""
+rebuild_finalise ""
+name BlinkScript6
+xpos 440
+ypos -376
+}
+set N89cc4e30 [stack 0]
+Blur {
+channels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+name Blur1
+label "\[value size]"
+xpos 624
+ypos -382
+}
+Unpremult {
+name Unpremult4
+xpos 624
+ypos -310
+}
+Grade {
+white {1 1 0.9999992 0.99999}
+name Grade8
+xpos 624
+ypos -250
+}
+push $N89cc4e30
+MergeExpression {
+inputs 2
+expr0 "B.b > A.b? B.r : 0"
+expr1 "B.b > A.b? B.g : 0"
+expr2 "B.b > A.b? B.b : 0"
+expr3 "B.b > A.b? B.a : 0"
+name MergeExpression1
+xpos 564
+ypos -190
+addUserKnob {20 User}
+addUserKnob {7 treshold}
+treshold -0.00025
+}
+TNT_MDivOversize {
+name TNT_MDivOversize3_clone1
+xpos 564
+ypos -100
+icon "\[value TNT_MDivOversize3.icon]"
+Info 0
+size {{TNT_MDivOversize3.size}}
+transparencyBlend {{TNT_MDivOversize3.transparencyBlend}}
+mode {{TNT_MDivOversize3.mode}}
+}
+Blur {
+channels rgba
+size 3
+name Blur2
+label "\[value size]"
+xpos 564
+ypos -46
+}
+push $N89cc4e30
+TNT_MDivOversize {
+name TNT_MDivOversize3
+xpos 440
+ypos -100
+Info 0
+size 1
+}
+MergeExpression {
+inputs 2
+expr0 "A.b > B.b? A.r : B.r"
+expr1 "A.b > B.b? A.g : B.g"
+expr2 0
+expr3 "A.b > B.b? A.a : B.a"
+name MergeExpression2
+xpos 440
+ypos 50
+addUserKnob {20 User}
+addUserKnob {7 treshold}
+treshold -0.00025
+}
+Reformat {
+type "to box"
+format "1920 1080 0 0 1920 1080 1 HD_1080"
+box_width {{OFormat.width}}
+box_height {{OFormat.height}}
+box_pixel_aspect {{OFormat.pixel_aspect}}
+resize distort
+name Reformat6
+xpos 440
+ypos 110
+}
+ModifyMetaData {
+metadata {
+ {set tx/nuke/prefunwrap/cpm "\[value Camera6.world_matrix]"}
+}
+name ModifyMetaData1
+xpos 440
+ypos 170
+}
+Output {
+name Output1
+xpos 440
+ypos 260
+}
+end_group

@@ -1,0 +1,2212 @@
+set cut_paste_input [stack 0]
+version 10.0 v3
+Camera2 {
+ inputs 0
+ translate {{Camera10.translate(at)} {Camera10.translate(at)} {Camera10.translate(at)}}
+ rotate {{Camera10.rotate(at)} {Camera10.rotate(at)} {Camera10.rotate(at)}}
+ scaling {{Camera10.scaling(at)} {Camera10.scaling(at)} {Camera10.scaling(at)}}
+ uniform_scale {{Camera10.uniform_scale(at)}}
+ skew {{Camera10.skew(at)} {Camera10.skew(at)} {Camera10.skew(at)}}
+ pivot {{Camera10.pivot(at)} {Camera10.pivot(at)} {Camera10.pivot(at)}}
+ focal {{Camera10.focal(at)}}
+ haperture {{Camera10.haperture(at)}}
+ vaperture {{Camera10.vaperture(at)}}
+ near {{Camera10.near(at)}}
+ far {{Camera10.far(at)}}
+ win_translate {{Camera10.win_translate(at)} {Camera10.win_translate(at)}}
+ focal_point {{Camera10.focal_point(at)}}
+ fstop {{Camera10.fstop(at)}}
+ frame_rate {{Camera10.frame_rate(at)}}
+ name Camera1_Proj1
+ tile_color 0xc97fff
+ gl_color 0xc97fff
+ label "at \[value at]"
+ selected true
+ xpos -950
+ ypos -1122
+ addUserKnob {20 Frame}
+ addUserKnob {3 at}
+ at {{parent.FrameHold21.knob.first_frame}}
+ addUserKnob {22 Py_setThisFrame l "set to this frame" -STARTLINE T "n = nuke.thisNode();f = nuke.toNode('root').knob('frame').value();n.knob('at').setValue(f)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+Read {
+ inputs 0
+ file /corky/projects/LevelUp_343202/seq/irl/0020/rendering/images/versions/release_v061/primary/primary_set_extension.#.exr
+ localizationPolicy on
+ format "2150 1134 0 0 2150 1134 1 LU"
+ first 1001
+ before black
+ last 1098
+ after black
+ origfirst 1001
+ origlast 1098
+ origset true
+ version 2
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read8
+ selected true
+ xpos -1040
+ ypos -1417
+ postage_stamp false
+}
+Dot {
+ name Dot773
+ selected true
+ xpos -1006
+ ypos -1321
+}
+set Nc316670 [stack 0]
+FrameHold {
+ first_frame {{(int(frame/10)+1)*10}}
+ name FrameHold21
+ selected true
+ xpos -528
+ ypos -1286
+}
+Unpremult {
+ name Unpremult2
+ selected true
+ xpos -528
+ ypos -1248
+}
+push 0
+Read {
+ inputs 0
+ file /corky/projects/LevelUp_343202/seq/irl/0020/rendering/images/versions/release_v061/P/P_set_extension.#.exr
+ localizationPolicy on
+ format "2150 1134 0 0 2150 1134 1 LU"
+ first 1001
+ before black
+ last 1098
+ after black
+ origfirst 1001
+ origlast 1098
+ origset true
+ version 2
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read16
+ selected true
+ xpos -1045
+ ypos -1652
+ postage_stamp false
+}
+set Nc348440 [stack 0]
+Group {
+ inputs 4
+ name CamProj_Ppass_B2
+ help "This gizmo does camera projection using the STMap node to remap all the layers in the input image.  It uses a 3D render of point positions in world space (as output by Nuke's ScanlineRender node) and a 3D camera to create UV texture coordinates that are then used to warp an input image such as a matte painting. It optionally uses exr metadata (from a RenderMan-compliant renderer such as PRMan or 3Delight) to work out the 3D camera projection.\n\nNOTE: The projection works best with unmatted input images or at least unpremulted matting with some coverage, then all masking occurs within the gizmo.\n\nIt can mask the projected image in the following ways:\n- Crop based on camera frustum.\n- Input image matte channel.\n- Input alpha from the 3D render.\n- Depth map shadow mask based on an image of point (P) in world space rendered from the  projecting camera.  This means the projection will only be visible based on what surfaces the projecting camera can see.  The effect of this is more evident as the viewing camera changes position and angle.\n- Projecting on surfaces facing camera, using normal (N) in world space. This means all surfaces facing the projecting camera will receive the projection regardless of whether they are blocked by other geometry. This is like Nuke's existing camera projection masking."
+ knobChanged "\n        \n\n\n"
+ label "freese input and camera on the same frame"
+ note_font_size 14
+ selected true
+ xpos -708
+ ypos -1017
+ addUserKnob {20 ReProject3D}
+ addUserKnob {41 surface_point l "surface point" t "Choose the input P surface layer from the \"vec\" input.  Note that it needs to be rendered in world space." T ShuffleP.in}
+ addUserKnob {41 surface_alpha l "surface alpha" t "Choose the input surface's alpha channel, from the \"vec\" input.  This is used as an overall object mask to matte the camera projection." T Multiply2.maskChannelMask}
+ addUserKnob {41 projected_matte l "projected matte" t "Choose a matte channel in the stream from the \"img\" input to premult all layers of the projected texture.  Note: this happens *after* the texture warp since it's cleaner." T Multiply7.maskChannelMask}
+ addUserKnob {4 camera t "Choose either a Nuke 3D camera (cam input) or, if available, derive the camera position and projection from RenderMan OpenEXR metadata (vec input)." M {"nuke camera" "renderman openexr metadata" "" "" "" "" ""}}
+ addUserKnob {7 imageAspect l "image aspect ratio" t "Enter the aspect ratio of the source image being projected." R 0 3}
+ imageAspect {{input0.width/input0.height}}
+ addUserKnob {6 outputUVs l "output UV's instead" t "This will output UV (ST) coordinates to the r+g channels.  Use this if you want to remap an image downstream instead of using the internal STMap node." +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {20 projection_occlusion l "projection occlusion" n 1}
+ addUserKnob {6 crop_to_frustum l "crop to cam frustum" t "This will limit the projection to the bounds of the camera frustum, and turn off tiling of the projection edge pixels." +STARTLINE}
+ addUserKnob {6 zdepth_shadow l "enable zdepth shadow matte" t "Enables the ability to mask the projection with a shadow which is derived from a still image of world P (point) space as seen from the projecting camera.  This image is connected to the \"shadow\" input.\n\nIf you are projecting on a frame from the rendering camera move then select the right frame, apply a FrameHold and connect to the \"shadow\" input.  If you are projecting from a camera that is not a still frame derived from the render cam move then you need a separate world P (point) space render from the correct point of view." +STARTLINE}
+ addUserKnob {6 smooth l "smooth edges" t "Uses Bilateral blur to anti alias the zdepth matte to some extent.  Can be expensive." -STARTLINE}
+ addUserKnob {41 shadow_point l "shadow point" t "Choose the input P layer from the \"shadow\" input. It should be a still image in world space and rendered from the projecting camera.\n\nIf using metadata, then the \"shadow\" input can be connected to the main point P render and the frame will be held on the projecting frame.  If _not_using metadata, then you will need to use a FrameHold node before the \"shadow\" input." T ShufflePshad.in}
+ addUserKnob {7 bias l "shadow bias" R 0.01 1}
+ bias 0.1
+ addUserKnob {6 front_facing_only l "project on front facing surfaces only (requires normal vectors)" t "This will mask the projection in the same way Nuke does in full 3D.  Requires world N (normals) in the stream of the \"vec\" input." +STARTLINE}
+ addUserKnob {6 smooth_ l "smooth edges" t "Uses Bilateral blur to anti alias the matte to some extent.  Can be expensive." -STARTLINE}
+ addUserKnob {41 surface_normal l "surface normal" t "Choose the normal vectors layer (in world space) from the \"vec\" input. Used to derive the front-facing matte." T ShuffleN.in}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 matrix l INVISIBLE +INVISIBLE T Matrix1.matrix}
+ addUserKnob {1 focal l INVISIBLE +INVISIBLE}
+ focal "\[value parent.\[full_name \[node this]].Shuffle2.focal]"
+ addUserKnob {1 filmbackHeight l INVISIBLE +INVISIBLE}
+ filmbackHeight "\[value parent.\[full_name \[node this]].Shuffle2.v_apert]"
+ addUserKnob {20 endGroup n -1}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  label "mdata Pworld to Pcam"
+  note_font_size 18
+  xpos 1100
+  ypos -83
+  bdwidth 197
+  bdheight 336
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x8e8e3800
+  label "Cam Shadow UV's"
+  note_font_size 18
+  xpos 566
+  ypos 1149
+  bdwidth 344
+  bdheight 245
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x7171c600
+  label "img UV's"
+  note_font_size 18
+  xpos 557
+  ypos 652
+  bdwidth 336
+  bdheight 244
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  label "Pworld to Pcam"
+  note_font_size 18
+  xpos 189
+  ypos -70
+  bdwidth 190
+  bdheight 338
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode5
+  tile_color 0x888888ff
+  label "Cam Shadow"
+  note_font_size 18
+  xpos 292
+  ypos 1457
+  bdwidth 637
+  bdheight 622
+ }
+ BackdropNode {
+  inputs 0
+  name Depth1
+  label "mdata P to Z from projcam"
+  note_font_size 18
+  xpos 1308
+  ypos -3
+  bdwidth 188
+  bdheight 180
+ }
+ BackdropNode {
+  inputs 0
+  name Depth2
+  label "mdata P to Z from shotcam"
+  note_font_size 18
+  xpos 854
+  ypos -4
+  bdwidth 234
+  bdheight 179
+ }
+ BackdropNode {
+  inputs 0
+  name Depth5
+  label "P to Z from projcam"
+  note_font_size 18
+  xpos 413
+  bdwidth 188
+  bdheight 180
+ }
+ BackdropNode {
+  inputs 0
+  name Depth6
+  label "P to Z from shotcam"
+  note_font_size 18
+  xpos -43
+  ypos -5
+  bdwidth 188
+  bdheight 180
+ }
+ BackdropNode {
+  inputs 0
+  name FacingRatio
+  label FacingRatio
+  note_font_size 18
+  xpos -927
+  ypos -155
+  bdwidth 294
+  bdheight 384
+ }
+ Input {
+  inputs 0
+  name vec
+  label "\[value number]"
+  xpos -720
+  ypos -521
+ }
+ Dot {
+  name Dot9
+  xpos -686
+  ypos -373
+ }
+set Naca014f0 [stack 0]
+push $Naca014f0
+ Shuffle {
+  in rgb
+  alpha white
+  name ShuffleP
+  xpos -606
+  ypos -265
+ }
+ Multiply {
+  inputs 1+1
+  channels alpha
+  value {{"!\[value . maskChannelMask]"}}
+  invert_mask true
+  name Multiply2
+  xpos -606
+  ypos -166
+  disable {{"!\[exists parent.input0]"}}
+ }
+set Naca14c70 [stack 0]
+push $Naca014f0
+ Shuffle {
+  in none
+  name ShuffleN
+  xpos -834
+  ypos -250
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy2
+  label alpha
+  xpos -834
+  ypos -113
+ }
+ Unpremult {
+  name Unpremult3
+  xpos -834
+  ypos -73
+  disable {{!Multiply2.maskChannelMask i}}
+ }
+set Naca3e5b0 [stack 0]
+ ColorMatrix {
+  matrix {
+      {{Matrix1.matrix.0 i} {Matrix1.matrix.1 i} {Matrix1.matrix.2 i}}
+      {{Matrix1.matrix.4 i} {Matrix1.matrix.5 i} {Matrix1.matrix.6 i}}
+      {{Matrix1.matrix.8 i} {Matrix1.matrix.9 i} {Matrix1.matrix.10 i}}
+    }
+  invert true
+  name ColorMatrix3
+  label "Convert to camera space"
+  xpos -741
+  ypos -17
+ }
+push $Naca3e5b0
+ ColorMatrix {
+  matrix {
+      {{Axis1.world_matrix.0 i} {Axis1.world_matrix.1 i} {Axis1.world_matrix.2 i}}
+      {{Axis1.world_matrix.4 i} {Axis1.world_matrix.5 i} {Axis1.world_matrix.6 i}}
+      {{Axis1.world_matrix.8 i} {Axis1.world_matrix.9 i} {Axis1.world_matrix.10 i}}
+    }
+  invert true
+  name ColorMatrix2
+  label "Convert to camera space"
+  xpos -920
+  ypos -17
+ }
+ Switch {
+  inputs 2
+  which {{parent.camera}}
+  name Switch1
+  xpos -834
+  ypos 38
+ }
+ set Caca60e30 [stack 0]
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  value -1
+  name Multiply10
+  label "reverse z"
+  xpos -834
+  ypos 82
+ }
+ Expression {
+  expr0 clamp(-b)
+  expr1 0
+  expr2 0
+  name Expression5
+  xpos -834
+  ypos 136
+ }
+ Expression {
+  expr0 "step(0, r)"
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  channel3 {none none none -rgba.alpha}
+  name cull_backfaces
+  label step
+  xpos -834
+  ypos 175
+ }
+ Bilateral {
+  Size 1
+  PositionalSigma 2
+  ColorSigma 2
+  name Bilateral2
+  xpos -834
+  ypos 2078
+  disable {{!smooth_ i}}
+ }
+set Nabdf83e0 [stack 0]
+ Dot {
+  name Dot7
+  xpos -800
+  ypos 2208
+ }
+set Nabe03b00 [stack 0]
+push $Nabe03b00
+push $Nabdf83e0
+push $Naca14c70
+ Dot {
+  name Dot14
+  xpos -80
+  ypos -134
+ }
+set Nabe086f0 [stack 0]
+ Dot {
+  name Dot15
+  xpos -6
+  ypos 1804
+ }
+ Invert {
+  channels alpha
+  name Invert2
+  xpos 590
+  ypos 1793
+ }
+push $Nabe086f0
+ Dot {
+  name Dot16
+  xpos 282
+  ypos -127
+ }
+set Nabe1d490 [stack 0]
+ Dot {
+  name Dot4
+  xpos 1178
+  ypos -134
+ }
+ Unpremult {
+  name Unpremult2
+  xpos 1159
+  ypos -48
+  disable {{!Multiply2.maskChannelMask}}
+ }
+ Expression {
+  temp_name0 R
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 G
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 B
+  temp_expr2 Matrix1.matrix.11
+  expr0 r-R
+  expr1 g-G
+  expr2 b-B
+  name Expression1
+  label "translate Pworld to camera"
+  xpos 1160
+  ypos -16
+ }
+set Nabe2ed30 [stack 0]
+ Premult {
+  name Premult2
+  xpos 898
+  ypos 34
+ }
+ Multiply {
+  channels rgb
+  value -1
+  name Multiply6
+  label "cam to surface ray direction"
+  xpos 898
+  ypos 66
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 camy
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 camz
+  temp_expr2 Matrix1.matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength1
+  xpos 898
+  ypos 110
+ }
+push $Nabe1d490
+ Unpremult {
+  name Unpremult1
+  xpos 248
+  ypos -25
+  disable {{!Multiply2.maskChannelMask i}}
+ }
+ Expression {
+  temp_name0 R
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 G
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 B
+  temp_expr2 Axis1.world_matrix.11
+  expr0 r-R
+  expr1 g-G
+  expr2 b-B
+  name Expression14
+  label "translate Pworld to camera"
+  xpos 248
+  ypos 5
+ }
+set Nf24eebe0 [stack 0]
+ Premult {
+  name Premult6
+  xpos 3
+  ypos 36
+ }
+ Multiply {
+  channels rgb
+  value -1
+  name Multiply12
+  label "cam to surface ray direction"
+  xpos 3
+  ypos 68
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 camy
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 camz
+  temp_expr2 Axis1.world_matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength5
+  xpos 3
+  ypos 110
+ }
+clone $Caca60e30 {
+  inputs 2
+  xpos 246
+  ypos 638
+  selected false
+ }
+ Dot {
+  name Dot5
+  xpos 471
+  ypos 1626
+ }
+push $Nabe2ed30
+ ColorMatrix {
+  matrix {
+      {{Matrix1.matrix.0} {Matrix1.matrix.1} {Matrix1.matrix.2}}
+      {{Matrix1.matrix.4} {Matrix1.matrix.5} {Matrix1.matrix.6}}
+      {{Matrix1.matrix.8} {Matrix1.matrix.9} {Matrix1.matrix.10}}
+    }
+  invert true
+  name ColorMatrix1
+  label "Rotate to camera"
+  xpos 1160
+  ypos 28
+ }
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  value -1
+  name Multiply8
+  label "reverse Z"
+  xpos 1160
+  ypos 71
+ }
+ Premult {
+  name Premult3
+  xpos 1157
+  ypos 125
+ }
+ Expression {
+  expr2 b<0?0:b
+  name Expression2
+  label "clip Z behind cam"
+  xpos 1157
+  ypos 197
+ }
+set Nf216cb20 [stack 0]
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression7
+  label CameraUVs
+  xpos 820
+  ypos 1235
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{"h_apert/\[metadata exr/screenWindowWidth]" i}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{width/height*pixel_aspect i}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert 1
+ }
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression9
+  label "clamp projection to cam frustum"
+  xpos 820
+  ypos 1275
+  disable {{!crop_to_frustum i}}
+ }
+push $Nf24eebe0
+ ColorMatrix {
+  matrix {
+      {{Axis1.world_matrix.0} {Axis1.world_matrix.1} {Axis1.world_matrix.2}}
+      {{Axis1.world_matrix.4} {Axis1.world_matrix.5} {Axis1.world_matrix.6}}
+      {{Axis1.world_matrix.8} {Axis1.world_matrix.9} {Axis1.world_matrix.10}}
+    }
+  invert true
+  name ColorMatrix4
+  label "Rotate to camera"
+  xpos 248
+  ypos 49
+ }
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  value -1
+  name Multiply13
+  label "reverse Z"
+  xpos 248
+  ypos 93
+ }
+ Premult {
+  name Premult7
+  xpos 248
+  ypos 140
+ }
+ Expression {
+  expr2 b<0?0:b
+  name Expression15
+  label "clip Z behind cam"
+  xpos 248
+  ypos 205
+ }
+set Nf21b94f0 [stack 0]
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression10
+  label CameraUVs
+  xpos 576
+  ypos 1232
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{parent.Shuffle1.focal i}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{parent.Shuffle1.h_apert i}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert {{parent.Shuffle1.v_apert i}}
+ }
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression11
+  label "clamp projection to cam frustum"
+  xpos 576
+  ypos 1272
+  disable {{!crop_to_frustum}}
+ }
+clone $Caca60e30 {
+  inputs 2
+  xpos 700
+  ypos 1364
+  selected false
+ }
+ Dot {
+  name Dot11
+  xpos 734
+  ypos 1479
+ }
+set Nf29d2070 [stack 0]
+ Dot {
+  name Dot18
+  xpos 643
+  ypos 1483
+ }
+ Dot {
+  name Dot12
+  xpos 643
+  ypos 1579
+ }
+push $Nf29d2070
+ Input {
+  inputs 0
+  name shadow
+  label "\[value number]"
+  xpos 693
+  ypos -521
+  number 1
+ }
+ FrameHold {
+  first_frame {{parent.Matrix1.frameHold i}}
+  name FrameHold1
+  xpos 693
+  ypos -425
+  disable {{!parent.camera i}}
+ }
+ Shuffle {
+  in none
+  alpha white
+  out rgb
+  name ShufflePshad
+  label "no alpha required"
+  xpos 693
+  ypos -329
+ }
+set Nf29ed460 [stack 0]
+ Expression {
+  temp_name0 camx
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 camy
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 camz
+  temp_expr2 Matrix1.matrix.11
+  expr0 camx-r
+  expr1 camy-g
+  expr2 camz-b
+  name Expression6
+  label "cam to surface ray direction"
+  xpos 1347
+  ypos 49
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 camy
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 camz
+  temp_expr2 Matrix1.matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength2
+  xpos 1347
+  ypos 118
+ }
+push $Nf29ed460
+ Expression {
+  temp_name0 camx
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 camy
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 camz
+  temp_expr2 Axis1.world_matrix.11
+  expr0 camx-r
+  expr1 camy-g
+  expr2 camz-b
+  name Expression18
+  label "cam to surface ray direction"
+  xpos 458
+  ypos 53
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 camy
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 camz
+  temp_expr2 Axis1.world_matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength6
+  xpos 458
+  ypos 118
+ }
+clone $Caca60e30 {
+  inputs 2
+  xpos 1226
+  ypos 638
+  selected false
+ }
+ Dot {
+  name Dot8
+  xpos 1152
+  ypos 1506
+ }
+ STMap {
+  inputs 2
+  channels {rgba.red -rgba.green -rgba.blue none}
+  uv rgb
+  blur -rgba.alpha
+  blur_scale 0
+  maskChannel -rgba.alpha
+  name STMap3
+  label "warp Pshad"
+  xpos 700
+  ypos 1521
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox4
+  xpos 700
+  ypos 1601
+ }
+ MergeExpression {
+  inputs 2
+  expr0 "step(Ar, Br+bias)"
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  channel3 {none none none -rgba.alpha}
+  name MergeExpression3
+  label "Step depthtest"
+  xpos 700
+  ypos 1640
+  addUserKnob {20 User}
+  addUserKnob {7 bias}
+  bias {{parent.bias i}}
+ }
+ ChannelMerge {
+  inputs 2
+  operation max
+  B rgba.red
+  output rgba.red
+  name ChannelMerge1
+  label "clean shadow edges"
+  xpos 700
+  ypos 1779
+ }
+ Expression {
+  expr0 step(0,r)
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  channel3 {none none none -rgba.alpha}
+  name Expression19
+  label "step (clean edges)"
+  xpos 700
+  ypos 1847
+ }
+ Bilateral {
+  Size 1
+  PositionalSigma 2
+  ColorSigma 2
+  name Bilateral1
+  xpos 700
+  ypos 1906
+  disable {{!smooth i}}
+ }
+ Gamma {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  value 0.45
+  name Gamma2
+  xpos 700
+  ypos 1960
+ }
+push $Naca14c70
+ Dot {
+  name Dot6
+  xpos -572
+  ypos 998
+ }
+push $Nf216cb20
+ Dot {
+  name Dot3
+  label "mdata cam"
+  xpos 864
+  ypos 626
+ }
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression3
+  label CameraUVs
+  xpos 771
+  ypos 703
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{parent.Shuffle2.focal}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{parent.Shuffle2.h_apert}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert {{parent.Shuffle2.v_apert}}
+ }
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression4
+  label "clamp projection to cam frustum"
+  xpos 771
+  ypos 743
+  disable {{!crop_to_frustum i}}
+ }
+push $Nf21b94f0
+ Dot {
+  name Dot2
+  label "nuke cam"
+  xpos 544
+  ypos 624
+ }
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression16
+  label CameraUVs
+  xpos 566
+  ypos 699
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{(Shuffle1.v_apert*parent.imageAspect)/(Shuffle1.h_apert/Shuffle1.focal)}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{Shuffle1.v_apert*parent.imageAspect}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert {{parent.Shuffle1.v_apert}}
+ }
+set Ndccc60 [stack 0]
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression17
+  label "clamp projection to cam frustum"
+  xpos 566
+  ypos 743
+  disable {{!crop_to_frustum}}
+ }
+clone $Caca60e30 {
+  inputs 2
+  xpos 678
+  ypos 854
+  selected false
+ }
+ Dot {
+  name Dot1
+  xpos -203
+  ypos 858
+ }
+set Ne05940 [stack 0]
+push $Ne05940
+ Input {
+  inputs 0
+  name img
+  label "\[value number]"
+  xpos -410
+  ypos -523
+  number 2
+ }
+ Expression {
+  expr0 x/width
+  expr1 y/height
+  expr2 0
+  name Expression8
+  label UVs
+  xpos -410
+  ypos -434
+  disable {{!outputUVs i}}
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  blur -rgba.alpha
+  blur_scale 0
+  maskChannel -rgba.alpha
+  name STMap1
+  xpos -410
+  ypos 761
+ }
+set Ne1d090 [stack 0]
+push $Ne1d090
+ Shuffle {
+  alpha white
+  name Shuffle6
+  xpos -510
+  ypos 854
+ }
+ Multiply {
+  inputs 1+1
+  channels alpha
+  value 0
+  invert_mask true
+  name Multiply7
+  xpos -410
+  ypos 906
+  disable {{"!\[value . maskChannelMask]" i}}
+ }
+ Premult {
+  channels all
+  name Premult1
+  label "by projected matte"
+  xpos -410
+  ypos 960
+ }
+ Multiply {
+  inputs 1+1
+  value 0
+  invert_mask true
+  name Multiply1
+  label "cam frustum"
+  xpos -410
+  ypos 1023
+ }
+ Multiply {
+  inputs 1+1
+  value {{"\[value . maskChannelMask]>0?0:1" i}}
+  invert_mask true
+  name Multiply3
+  label "by surface alpha"
+  xpos -410
+  ypos 1080
+ }
+ Multiply {
+  inputs 1+1
+  value {{"\[value . maskChannelMask]>0?0:1" i}}
+  maskChannelMask rgba.red
+  invert_mask true
+  name Multiply4
+  xpos -410
+  ypos 1996
+  disable {{!parent.zdepth_shadow i}}
+ }
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask rgba.red
+  invert_mask true
+  name Multiply5
+  xpos -410
+  ypos 2077
+  disable {{!front_facing_only}}
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -410
+  ypos 2204
+ }
+ CopyMetaData {
+  inputs 2
+  name CopyMetaData1
+  xpos -410
+  ypos 2261
+ }
+ Output {
+  name Output1
+  xpos -410
+  ypos 2320
+ }
+push $Ndccc60
+ Viewer {
+  frame_range 957-2127
+  viewerProcess "None (default)"
+  name Viewer1
+  xpos 462
+  ypos 260
+ }
+push $Naca014f0
+ Dot {
+  name Dot10
+  xpos 1094
+  ypos -387
+ }
+set N15919a70 [stack 0]
+ Shuffle {
+  name Shuffle2
+  label "mdata focal, aperture"
+  xpos 950
+  ypos -267
+  disable {{!parent.camera}}
+  addUserKnob {20 User}
+  addUserKnob {7 focal}
+  focal {{"parent.filmbackWidth/\[metadata exr/screenWindowWidth]"}}
+  addUserKnob {7 h_apert}
+  h_apert {{parent.filmbackWidth}}
+  addUserKnob {7 v_apert}
+  v_apert {{"parent.useMetaData? parent.filmbackWidth*(1/(\[metadata input/width]/\[metadata input/height])) : parent.filmbackWidth*(1/imageAspect)"}}
+ }
+push $N15919a70
+push 0
+ Switch {
+  inputs 2
+  which {{parent.camera i}}
+  name Switch2
+  xpos 1170
+  ypos -307
+ }
+ Matrix {
+  channels none
+  matrix {
+      {1 0 0 0}
+      {0 1 0 0}
+      {0 0 -1 0}
+      {0 0 0 1}
+    }
+  name Matrix1
+  label "working with callback in init.py"
+  xpos 1170
+  ypos -262
+  addUserKnob {20 User}
+  addUserKnob {3 frameHold}
+  frameHold {{parent.holdFrame}}
+  addUserKnob {3 doThis}
+  doThis {{"\[python exrCam()]"}}
+ }
+ Input {
+  inputs 0
+  name cam
+  label "\[value number]"
+  xpos 204
+  ypos -521
+  number 3
+ }
+set N15943470 [stack 0]
+ Shuffle {
+  name Shuffle1
+  label "cam focal, aperture"
+  xpos 66
+  ypos -315
+  disable {{"!\[exists parent.input3]"}}
+  addUserKnob {20 User}
+  addUserKnob {7 focal}
+  focal {{"\[input \[node this.parent] 3].focal"}}
+  addUserKnob {7 h_apert}
+  h_apert {{"\[input \[node this.parent] 3].haperture"}}
+  addUserKnob {7 v_apert}
+  v_apert {{"\[input \[node this.parent] 3].vaperture"}}
+ }
+push $N15943470
+ Axis2 {
+  name Axis1
+  xpos 381
+  ypos -316
+ }
+end_group
+Camera2 {
+ inputs 0
+ translate {{Camera10.translate(at)} {Camera10.translate(at)} {Camera10.translate(at)}}
+ rotate {{Camera10.rotate(at)} {Camera10.rotate(at)} {Camera10.rotate(at)}}
+ scaling {{Camera10.scaling(at)} {Camera10.scaling(at)} {Camera10.scaling(at)}}
+ uniform_scale {{Camera10.uniform_scale(at)}}
+ skew {{Camera10.skew(at)} {Camera10.skew(at)} {Camera10.skew(at)}}
+ pivot {{Camera10.pivot(at)} {Camera10.pivot(at)} {Camera10.pivot(at)}}
+ focal {{Camera10.focal(at)}}
+ haperture {{Camera10.haperture(at)}}
+ vaperture {{Camera10.vaperture(at)}}
+ near {{Camera10.near(at)}}
+ far {{Camera10.far(at)}}
+ win_translate {{Camera10.win_translate(at)} {Camera10.win_translate(at)}}
+ focal_point {{Camera10.focal_point(at)}}
+ fstop {{Camera10.fstop(at)}}
+ frame_rate {{Camera10.frame_rate(at)}}
+ name Camera1_Proj
+ tile_color 0xc97fff
+ gl_color 0xc97fff
+ label "at \[value at]"
+ selected true
+ xpos -1090
+ ypos -1119
+ addUserKnob {20 Frame}
+ addUserKnob {3 at}
+ at {{parent.FrameHold23.knob.first_frame}}
+ addUserKnob {22 Py_setThisFrame l "set to this frame" -STARTLINE T "n = nuke.thisNode();f = nuke.toNode('root').knob('frame').value();n.knob('at').setValue(f)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $Nc316670
+FrameHold {
+ first_frame {{int(frame/10)*10}}
+ name FrameHold23
+ selected true
+ xpos -1412
+ ypos -1297
+}
+Unpremult {
+ name Unpremult1
+ selected true
+ xpos -1412
+ ypos -1259
+}
+push 0
+push $Nc348440
+Group {
+ inputs 4
+ name CamProj_Ppass_B1
+ help "This gizmo does camera projection using the STMap node to remap all the layers in the input image.  It uses a 3D render of point positions in world space (as output by Nuke's ScanlineRender node) and a 3D camera to create UV texture coordinates that are then used to warp an input image such as a matte painting. It optionally uses exr metadata (from a RenderMan-compliant renderer such as PRMan or 3Delight) to work out the 3D camera projection.\n\nNOTE: The projection works best with unmatted input images or at least unpremulted matting with some coverage, then all masking occurs within the gizmo.\n\nIt can mask the projected image in the following ways:\n- Crop based on camera frustum.\n- Input image matte channel.\n- Input alpha from the 3D render.\n- Depth map shadow mask based on an image of point (P) in world space rendered from the  projecting camera.  This means the projection will only be visible based on what surfaces the projecting camera can see.  The effect of this is more evident as the viewing camera changes position and angle.\n- Projecting on surfaces facing camera, using normal (N) in world space. This means all surfaces facing the projecting camera will receive the projection regardless of whether they are blocked by other geometry. This is like Nuke's existing camera projection masking."
+ knobChanged "\n        \n\n\n"
+ label "freese input and camera on the same frame"
+ note_font_size 14
+ selected true
+ xpos -1273
+ ypos -1023
+ addUserKnob {20 ReProject3D}
+ addUserKnob {41 surface_point l "surface point" t "Choose the input P surface layer from the \"vec\" input.  Note that it needs to be rendered in world space." T ShuffleP.in}
+ addUserKnob {41 surface_alpha l "surface alpha" t "Choose the input surface's alpha channel, from the \"vec\" input.  This is used as an overall object mask to matte the camera projection." T Multiply2.maskChannelMask}
+ addUserKnob {41 projected_matte l "projected matte" t "Choose a matte channel in the stream from the \"img\" input to premult all layers of the projected texture.  Note: this happens *after* the texture warp since it's cleaner." T Multiply7.maskChannelMask}
+ addUserKnob {4 camera t "Choose either a Nuke 3D camera (cam input) or, if available, derive the camera position and projection from RenderMan OpenEXR metadata (vec input)." M {"nuke camera" "renderman openexr metadata" "" "" "" "" ""}}
+ addUserKnob {7 imageAspect l "image aspect ratio" t "Enter the aspect ratio of the source image being projected." R 0 3}
+ imageAspect {{input0.width/input0.height}}
+ addUserKnob {6 outputUVs l "output UV's instead" t "This will output UV (ST) coordinates to the r+g channels.  Use this if you want to remap an image downstream instead of using the internal STMap node." +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {20 projection_occlusion l "projection occlusion" n 1}
+ addUserKnob {6 crop_to_frustum l "crop to cam frustum" t "This will limit the projection to the bounds of the camera frustum, and turn off tiling of the projection edge pixels." +STARTLINE}
+ addUserKnob {6 zdepth_shadow l "enable zdepth shadow matte" t "Enables the ability to mask the projection with a shadow which is derived from a still image of world P (point) space as seen from the projecting camera.  This image is connected to the \"shadow\" input.\n\nIf you are projecting on a frame from the rendering camera move then select the right frame, apply a FrameHold and connect to the \"shadow\" input.  If you are projecting from a camera that is not a still frame derived from the render cam move then you need a separate world P (point) space render from the correct point of view." +STARTLINE}
+ addUserKnob {6 smooth l "smooth edges" t "Uses Bilateral blur to anti alias the zdepth matte to some extent.  Can be expensive." -STARTLINE}
+ addUserKnob {41 shadow_point l "shadow point" t "Choose the input P layer from the \"shadow\" input. It should be a still image in world space and rendered from the projecting camera.\n\nIf using metadata, then the \"shadow\" input can be connected to the main point P render and the frame will be held on the projecting frame.  If _not_using metadata, then you will need to use a FrameHold node before the \"shadow\" input." T ShufflePshad.in}
+ addUserKnob {7 bias l "shadow bias" R 0.01 1}
+ bias 0.1
+ addUserKnob {6 front_facing_only l "project on front facing surfaces only (requires normal vectors)" t "This will mask the projection in the same way Nuke does in full 3D.  Requires world N (normals) in the stream of the \"vec\" input." +STARTLINE}
+ addUserKnob {6 smooth_ l "smooth edges" t "Uses Bilateral blur to anti alias the matte to some extent.  Can be expensive." -STARTLINE}
+ addUserKnob {41 surface_normal l "surface normal" t "Choose the normal vectors layer (in world space) from the \"vec\" input. Used to derive the front-facing matte." T ShuffleN.in}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 matrix l INVISIBLE +INVISIBLE T Matrix1.matrix}
+ addUserKnob {1 focal l INVISIBLE +INVISIBLE}
+ focal "\[value parent.\[full_name \[node this]].Shuffle2.focal]"
+ addUserKnob {1 filmbackHeight l INVISIBLE +INVISIBLE}
+ filmbackHeight "\[value parent.\[full_name \[node this]].Shuffle2.v_apert]"
+ addUserKnob {20 endGroup n -1}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  label "mdata Pworld to Pcam"
+  note_font_size 18
+  xpos 1100
+  ypos -83
+  bdwidth 197
+  bdheight 336
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x8e8e3800
+  label "Cam Shadow UV's"
+  note_font_size 18
+  xpos 566
+  ypos 1149
+  bdwidth 344
+  bdheight 245
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x7171c600
+  label "img UV's"
+  note_font_size 18
+  xpos 557
+  ypos 652
+  bdwidth 336
+  bdheight 244
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  label "Pworld to Pcam"
+  note_font_size 18
+  xpos 189
+  ypos -70
+  bdwidth 190
+  bdheight 338
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode5
+  tile_color 0x888888ff
+  label "Cam Shadow"
+  note_font_size 18
+  xpos 292
+  ypos 1457
+  bdwidth 637
+  bdheight 622
+ }
+ BackdropNode {
+  inputs 0
+  name Depth1
+  label "mdata P to Z from projcam"
+  note_font_size 18
+  xpos 1308
+  ypos -3
+  bdwidth 188
+  bdheight 180
+ }
+ BackdropNode {
+  inputs 0
+  name Depth2
+  label "mdata P to Z from shotcam"
+  note_font_size 18
+  xpos 854
+  ypos -4
+  bdwidth 234
+  bdheight 179
+ }
+ BackdropNode {
+  inputs 0
+  name Depth5
+  label "P to Z from projcam"
+  note_font_size 18
+  xpos 413
+  bdwidth 188
+  bdheight 180
+ }
+ BackdropNode {
+  inputs 0
+  name Depth6
+  label "P to Z from shotcam"
+  note_font_size 18
+  xpos -43
+  ypos -5
+  bdwidth 188
+  bdheight 180
+ }
+ BackdropNode {
+  inputs 0
+  name FacingRatio
+  label FacingRatio
+  note_font_size 18
+  xpos -927
+  ypos -155
+  bdwidth 294
+  bdheight 384
+ }
+ Input {
+  inputs 0
+  name vec
+  label "\[value number]"
+  xpos -720
+  ypos -521
+ }
+ Dot {
+  name Dot9
+  xpos -686
+  ypos -373
+ }
+set Nb2ca4160 [stack 0]
+push $Nb2ca4160
+ Shuffle {
+  in rgb
+  alpha white
+  name ShuffleP
+  xpos -606
+  ypos -265
+ }
+ Multiply {
+  inputs 1+1
+  channels alpha
+  value {{"!\[value . maskChannelMask]"}}
+  invert_mask true
+  name Multiply2
+  xpos -606
+  ypos -166
+  disable {{"!\[exists parent.input0]"}}
+ }
+set Nb2c68c40 [stack 0]
+push $Nb2ca4160
+ Shuffle {
+  in none
+  name ShuffleN
+  xpos -834
+  ypos -250
+ }
+ ShuffleCopy {
+  inputs 2
+  name ShuffleCopy2
+  label alpha
+  xpos -834
+  ypos -113
+ }
+ Unpremult {
+  name Unpremult3
+  xpos -834
+  ypos -73
+  disable {{!Multiply2.maskChannelMask i}}
+ }
+set N1487a000 [stack 0]
+ ColorMatrix {
+  matrix {
+      {{Matrix1.matrix.0 i} {Matrix1.matrix.1 i} {Matrix1.matrix.2 i}}
+      {{Matrix1.matrix.4 i} {Matrix1.matrix.5 i} {Matrix1.matrix.6 i}}
+      {{Matrix1.matrix.8 i} {Matrix1.matrix.9 i} {Matrix1.matrix.10 i}}
+    }
+  invert true
+  name ColorMatrix3
+  label "Convert to camera space"
+  xpos -741
+  ypos -17
+ }
+push $N1487a000
+ ColorMatrix {
+  matrix {
+      {{Axis1.world_matrix.0 i} {Axis1.world_matrix.1 i} {Axis1.world_matrix.2 i}}
+      {{Axis1.world_matrix.4 i} {Axis1.world_matrix.5 i} {Axis1.world_matrix.6 i}}
+      {{Axis1.world_matrix.8 i} {Axis1.world_matrix.9 i} {Axis1.world_matrix.10 i}}
+    }
+  invert true
+  name ColorMatrix2
+  label "Convert to camera space"
+  xpos -920
+  ypos -17
+ }
+ Switch {
+  inputs 2
+  which {{parent.camera}}
+  name Switch1
+  xpos -834
+  ypos 38
+ }
+ set Cf02ec9d0 [stack 0]
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  value -1
+  name Multiply10
+  label "reverse z"
+  xpos -834
+  ypos 82
+ }
+ Expression {
+  expr0 clamp(-b)
+  expr1 0
+  expr2 0
+  name Expression5
+  xpos -834
+  ypos 136
+ }
+ Expression {
+  expr0 "step(0, r)"
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  channel3 {none none none -rgba.alpha}
+  name cull_backfaces
+  label step
+  xpos -834
+  ypos 175
+ }
+ Bilateral {
+  Size 1
+  PositionalSigma 2
+  ColorSigma 2
+  name Bilateral2
+  xpos -834
+  ypos 2078
+  disable {{!smooth_ i}}
+ }
+set N97886c0 [stack 0]
+ Dot {
+  name Dot7
+  xpos -800
+  ypos 2208
+ }
+set N1f2c8e50 [stack 0]
+push $N1f2c8e50
+push $N97886c0
+push $Nb2c68c40
+ Dot {
+  name Dot14
+  xpos -80
+  ypos -134
+ }
+set Nb2c5d940 [stack 0]
+ Dot {
+  name Dot15
+  xpos -6
+  ypos 1804
+ }
+ Invert {
+  channels alpha
+  name Invert2
+  xpos 590
+  ypos 1793
+ }
+push $Nb2c5d940
+ Dot {
+  name Dot16
+  xpos 282
+  ypos -127
+ }
+set Nb2ca8e00 [stack 0]
+ Dot {
+  name Dot4
+  xpos 1178
+  ypos -134
+ }
+ Unpremult {
+  name Unpremult2
+  xpos 1159
+  ypos -48
+  disable {{!Multiply2.maskChannelMask}}
+ }
+ Expression {
+  temp_name0 R
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 G
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 B
+  temp_expr2 Matrix1.matrix.11
+  expr0 r-R
+  expr1 g-G
+  expr2 b-B
+  name Expression1
+  label "translate Pworld to camera"
+  xpos 1160
+  ypos -16
+ }
+set N24189b0 [stack 0]
+ Premult {
+  name Premult2
+  xpos 898
+  ypos 34
+ }
+ Multiply {
+  channels rgb
+  value -1
+  name Multiply6
+  label "cam to surface ray direction"
+  xpos 898
+  ypos 66
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 camy
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 camz
+  temp_expr2 Matrix1.matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength1
+  xpos 898
+  ypos 110
+ }
+push $Nb2ca8e00
+ Unpremult {
+  name Unpremult1
+  xpos 248
+  ypos -25
+  disable {{!Multiply2.maskChannelMask i}}
+ }
+ Expression {
+  temp_name0 R
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 G
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 B
+  temp_expr2 Axis1.world_matrix.11
+  expr0 r-R
+  expr1 g-G
+  expr2 b-B
+  name Expression14
+  label "translate Pworld to camera"
+  xpos 248
+  ypos 5
+ }
+set Nf17ae1e0 [stack 0]
+ Premult {
+  name Premult6
+  xpos 3
+  ypos 36
+ }
+ Multiply {
+  channels rgb
+  value -1
+  name Multiply12
+  label "cam to surface ray direction"
+  xpos 3
+  ypos 68
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 camy
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 camz
+  temp_expr2 Axis1.world_matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength5
+  xpos 3
+  ypos 110
+ }
+clone $Cf02ec9d0 {
+  inputs 2
+  xpos 246
+  ypos 638
+  selected false
+ }
+ Dot {
+  name Dot5
+  xpos 471
+  ypos 1626
+ }
+push $N24189b0
+ ColorMatrix {
+  matrix {
+      {{Matrix1.matrix.0} {Matrix1.matrix.1} {Matrix1.matrix.2}}
+      {{Matrix1.matrix.4} {Matrix1.matrix.5} {Matrix1.matrix.6}}
+      {{Matrix1.matrix.8} {Matrix1.matrix.9} {Matrix1.matrix.10}}
+    }
+  invert true
+  name ColorMatrix1
+  label "Rotate to camera"
+  xpos 1160
+  ypos 28
+ }
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  value -1
+  name Multiply8
+  label "reverse Z"
+  xpos 1160
+  ypos 71
+ }
+ Premult {
+  name Premult3
+  xpos 1157
+  ypos 125
+ }
+ Expression {
+  expr2 b<0?0:b
+  name Expression2
+  label "clip Z behind cam"
+  xpos 1157
+  ypos 197
+ }
+set Nebbd2ac0 [stack 0]
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression7
+  label CameraUVs
+  xpos 820
+  ypos 1235
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{"h_apert/\[metadata exr/screenWindowWidth]" i}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{width/height*pixel_aspect i}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert 1
+ }
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression9
+  label "clamp projection to cam frustum"
+  xpos 820
+  ypos 1275
+  disable {{!crop_to_frustum i}}
+ }
+push $Nf17ae1e0
+ ColorMatrix {
+  matrix {
+      {{Axis1.world_matrix.0} {Axis1.world_matrix.1} {Axis1.world_matrix.2}}
+      {{Axis1.world_matrix.4} {Axis1.world_matrix.5} {Axis1.world_matrix.6}}
+      {{Axis1.world_matrix.8} {Axis1.world_matrix.9} {Axis1.world_matrix.10}}
+    }
+  invert true
+  name ColorMatrix4
+  label "Rotate to camera"
+  xpos 248
+  ypos 49
+ }
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  value -1
+  name Multiply13
+  label "reverse Z"
+  xpos 248
+  ypos 93
+ }
+ Premult {
+  name Premult7
+  xpos 248
+  ypos 140
+ }
+ Expression {
+  expr2 b<0?0:b
+  name Expression15
+  label "clip Z behind cam"
+  xpos 248
+  ypos 205
+ }
+set N2f0246a0 [stack 0]
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression10
+  label CameraUVs
+  xpos 576
+  ypos 1232
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{parent.Shuffle1.focal i}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{parent.Shuffle1.h_apert i}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert {{parent.Shuffle1.v_apert i}}
+ }
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression11
+  label "clamp projection to cam frustum"
+  xpos 576
+  ypos 1272
+  disable {{!crop_to_frustum}}
+ }
+clone $Cf02ec9d0 {
+  inputs 2
+  xpos 700
+  ypos 1364
+  selected false
+ }
+ Dot {
+  name Dot11
+  xpos 734
+  ypos 1479
+ }
+set Nb292c240 [stack 0]
+ Dot {
+  name Dot18
+  xpos 643
+  ypos 1483
+ }
+ Dot {
+  name Dot12
+  xpos 643
+  ypos 1579
+ }
+push $Nb292c240
+ Input {
+  inputs 0
+  name shadow
+  label "\[value number]"
+  xpos 693
+  ypos -521
+  number 1
+ }
+ FrameHold {
+  first_frame {{parent.Matrix1.frameHold i}}
+  name FrameHold1
+  xpos 693
+  ypos -425
+  disable {{!parent.camera i}}
+ }
+ Shuffle {
+  in none
+  alpha white
+  out rgb
+  name ShufflePshad
+  label "no alpha required"
+  xpos 693
+  ypos -329
+ }
+set Nb2947710 [stack 0]
+ Expression {
+  temp_name0 camx
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 camy
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 camz
+  temp_expr2 Matrix1.matrix.11
+  expr0 camx-r
+  expr1 camy-g
+  expr2 camz-b
+  name Expression6
+  label "cam to surface ray direction"
+  xpos 1347
+  ypos 49
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Matrix1.matrix.3
+  temp_name1 camy
+  temp_expr1 Matrix1.matrix.7
+  temp_name2 camz
+  temp_expr2 Matrix1.matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength2
+  xpos 1347
+  ypos 118
+ }
+push $Nb2947710
+ Expression {
+  temp_name0 camx
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 camy
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 camz
+  temp_expr2 Axis1.world_matrix.11
+  expr0 camx-r
+  expr1 camy-g
+  expr2 camz-b
+  name Expression18
+  label "cam to surface ray direction"
+  xpos 458
+  ypos 53
+ }
+ Expression {
+  temp_name0 camx
+  temp_expr0 Axis1.world_matrix.3
+  temp_name1 camy
+  temp_expr1 Axis1.world_matrix.7
+  temp_name2 camz
+  temp_expr2 Axis1.world_matrix.11
+  expr0 sqrt((camx*r)+(camy*g)+(camz*b))
+  expr1 0
+  expr2 0
+  name VectorLength6
+  xpos 458
+  ypos 118
+ }
+clone $Cf02ec9d0 {
+  inputs 2
+  xpos 1226
+  ypos 638
+  selected false
+ }
+ Dot {
+  name Dot8
+  xpos 1152
+  ypos 1506
+ }
+ STMap {
+  inputs 2
+  channels {rgba.red -rgba.green -rgba.blue none}
+  uv rgb
+  blur -rgba.alpha
+  blur_scale 0
+  maskChannel -rgba.alpha
+  name STMap3
+  label "warp Pshad"
+  xpos 700
+  ypos 1521
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox4
+  xpos 700
+  ypos 1601
+ }
+ MergeExpression {
+  inputs 2
+  expr0 "step(Ar, Br+bias)"
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  channel3 {none none none -rgba.alpha}
+  name MergeExpression3
+  label "Step depthtest"
+  xpos 700
+  ypos 1640
+  addUserKnob {20 User}
+  addUserKnob {7 bias}
+  bias {{parent.bias i}}
+ }
+ ChannelMerge {
+  inputs 2
+  operation max
+  B rgba.red
+  output rgba.red
+  name ChannelMerge1
+  label "clean shadow edges"
+  xpos 700
+  ypos 1779
+ }
+ Expression {
+  expr0 step(0,r)
+  channel1 {-rgba.red -rgba.green -rgba.blue none}
+  channel2 {-rgba.red -rgba.green -rgba.blue none}
+  channel3 {none none none -rgba.alpha}
+  name Expression19
+  label "step (clean edges)"
+  xpos 700
+  ypos 1847
+ }
+ Bilateral {
+  Size 1
+  PositionalSigma 2
+  ColorSigma 2
+  name Bilateral1
+  xpos 700
+  ypos 1906
+  disable {{!smooth i}}
+ }
+ Gamma {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  value 0.45
+  name Gamma2
+  xpos 700
+  ypos 1960
+ }
+push $Nb2c68c40
+ Dot {
+  name Dot6
+  xpos -572
+  ypos 998
+ }
+push $Nebbd2ac0
+ Dot {
+  name Dot3
+  label "mdata cam"
+  xpos 864
+  ypos 626
+ }
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression3
+  label CameraUVs
+  xpos 771
+  ypos 703
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{parent.Shuffle2.focal}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{parent.Shuffle2.h_apert}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert {{parent.Shuffle2.v_apert}}
+ }
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression4
+  label "clamp projection to cam frustum"
+  xpos 771
+  ypos 743
+  disable {{!crop_to_frustum i}}
+ }
+push $N2f0246a0
+ Dot {
+  name Dot2
+  label "nuke cam"
+  xpos 544
+  ypos 624
+ }
+ Expression {
+  temp_name0 h_tan
+  temp_expr0 "(h_apert /2) / focal"
+  temp_name1 v_tan
+  temp_expr1 "(v_apert /2)  / focal"
+  expr0 "0.5 + 0.5 * r / h_tan / b"
+  expr1 "0.5 + 0.5 * g / v_tan / b"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name Expression16
+  label CameraUVs
+  xpos 566
+  ypos 699
+  addUserKnob {20 "" l User}
+  addUserKnob {26 "" l "camera settings"}
+  addUserKnob {7 focal l "focal length" t "Link to projecting camera's focal length" R 0 100}
+  focal {{(Shuffle1.v_apert*parent.imageAspect)/(Shuffle1.h_apert/Shuffle1.focal)}}
+  addUserKnob {7 h_apert l "horiz aperture" t "Link to projecting camera's horizontal aperture" R 0 50}
+  h_apert {{Shuffle1.v_apert*parent.imageAspect}}
+  addUserKnob {7 v_apert l "vert aperture" t "Link to projecting camera's vertical aperture" R 0 50}
+  v_apert {{parent.Shuffle1.v_apert}}
+ }
+set Nad31c880 [stack 0]
+ Expression {
+  expr3 "(r<0 || r>1 || g<0 || g>1)?0:a"
+  name Expression17
+  label "clamp projection to cam frustum"
+  xpos 566
+  ypos 743
+  disable {{!crop_to_frustum}}
+ }
+clone $Cf02ec9d0 {
+  inputs 2
+  xpos 678
+  ypos 854
+  selected false
+ }
+ Dot {
+  name Dot1
+  xpos -203
+  ypos 858
+ }
+set Nad3553d0 [stack 0]
+push $Nad3553d0
+ Input {
+  inputs 0
+  name img
+  label "\[value number]"
+  xpos -410
+  ypos -523
+  number 2
+ }
+ Expression {
+  expr0 x/width
+  expr1 y/height
+  expr2 0
+  name Expression8
+  label UVs
+  xpos -410
+  ypos -434
+  disable {{!outputUVs i}}
+ }
+ STMap {
+  inputs 2
+  uv rgb
+  blur -rgba.alpha
+  blur_scale 0
+  maskChannel -rgba.alpha
+  name STMap1
+  xpos -410
+  ypos 761
+ }
+set Nee9767a0 [stack 0]
+push $Nee9767a0
+ Shuffle {
+  alpha white
+  name Shuffle6
+  xpos -510
+  ypos 854
+ }
+ Multiply {
+  inputs 1+1
+  channels alpha
+  value 0
+  invert_mask true
+  name Multiply7
+  xpos -410
+  ypos 906
+  disable {{"!\[value . maskChannelMask]" i}}
+ }
+ Premult {
+  channels all
+  name Premult1
+  label "by projected matte"
+  xpos -410
+  ypos 960
+ }
+ Multiply {
+  inputs 1+1
+  value 0
+  invert_mask true
+  name Multiply1
+  label "cam frustum"
+  xpos -410
+  ypos 1023
+ }
+ Multiply {
+  inputs 1+1
+  value {{"\[value . maskChannelMask]>0?0:1" i}}
+  invert_mask true
+  name Multiply3
+  label "by surface alpha"
+  xpos -410
+  ypos 1080
+ }
+ Multiply {
+  inputs 1+1
+  value {{"\[value . maskChannelMask]>0?0:1" i}}
+  maskChannelMask rgba.red
+  invert_mask true
+  name Multiply4
+  xpos -410
+  ypos 1996
+  disable {{!parent.zdepth_shadow i}}
+ }
+ Multiply {
+  inputs 1+1
+  value 0
+  maskChannelMask rgba.red
+  invert_mask true
+  name Multiply5
+  xpos -410
+  ypos 2077
+  disable {{!front_facing_only}}
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -410
+  ypos 2204
+ }
+ CopyMetaData {
+  inputs 2
+  name CopyMetaData1
+  xpos -410
+  ypos 2261
+ }
+ Output {
+  name Output1
+  xpos -410
+  ypos 2320
+ }
+push $Nad31c880
+ Viewer {
+  frame_range 957-2127
+  viewerProcess "None (default)"
+  name Viewer1
+  xpos 462
+  ypos 260
+ }
+push $Nb2ca4160
+ Dot {
+  name Dot10
+  xpos 1094
+  ypos -387
+ }
+set Nedf4f560 [stack 0]
+ Shuffle {
+  name Shuffle2
+  label "mdata focal, aperture"
+  xpos 950
+  ypos -267
+  disable {{!parent.camera}}
+  addUserKnob {20 User}
+  addUserKnob {7 focal}
+  focal {{"parent.filmbackWidth/\[metadata exr/screenWindowWidth]"}}
+  addUserKnob {7 h_apert}
+  h_apert {{parent.filmbackWidth}}
+  addUserKnob {7 v_apert}
+  v_apert {{"parent.useMetaData? parent.filmbackWidth*(1/(\[metadata input/width]/\[metadata input/height])) : parent.filmbackWidth*(1/imageAspect)"}}
+ }
+push $Nedf4f560
+push 0
+ Switch {
+  inputs 2
+  which {{parent.camera i}}
+  name Switch2
+  xpos 1170
+  ypos -307
+ }
+ Matrix {
+  channels none
+  matrix {
+      {1 0 0 0}
+      {0 1 0 0}
+      {0 0 -1 0}
+      {0 0 0 1}
+    }
+  name Matrix1
+  label "working with callback in init.py"
+  xpos 1170
+  ypos -262
+  addUserKnob {20 User}
+  addUserKnob {3 frameHold}
+  frameHold {{parent.holdFrame}}
+  addUserKnob {3 doThis}
+  doThis {{"\[python exrCam()]"}}
+ }
+ Input {
+  inputs 0
+  name cam
+  label "\[value number]"
+  xpos 204
+  ypos -521
+  number 3
+ }
+set N13eac290 [stack 0]
+ Shuffle {
+  name Shuffle1
+  label "cam focal, aperture"
+  xpos 66
+  ypos -315
+  disable {{"!\[exists parent.input3]"}}
+  addUserKnob {20 User}
+  addUserKnob {7 focal}
+  focal {{"\[input \[node this.parent] 3].focal"}}
+  addUserKnob {7 h_apert}
+  h_apert {{"\[input \[node this.parent] 3].haperture"}}
+  addUserKnob {7 v_apert}
+  v_apert {{"\[input \[node this.parent] 3].vaperture"}}
+ }
+push $N13eac290
+ Axis2 {
+  name Axis1
+  xpos 381
+  ypos -316
+ }
+end_group
+Dissolve {
+ inputs 2
+ which {{(frame-FrameHold23.knob.first_frame)/10}}
+ name Dissolve1
+ label "\[value which]"
+ selected true
+ xpos -1038
+ ypos -849
+}
+push $cut_paste_input
+Camera2 {
+ read_from_file true
+ translate {{curve x1001 -29.59472944 -29.59347535 -29.59219646 -29.59089367 -29.58956754 -29.58821898 -29.58684891 -29.58545786 -29.58404677 -29.58261653 -29.5811677 -29.57970119 -29.57821792 -29.57671842 -29.57520362 -29.57367444 -29.57213141 -29.57057544 -29.56900747 -29.56742802 -29.56583801 -29.56423838 -29.56262964 -29.56101272 -29.55938855 -29.55775764 -29.55612092 -29.55447935 -29.55283339 -29.55118401 -29.54953214 -29.54787828 -29.54622335 -29.54456832 -29.54291366 -29.54126032 -29.53960924 -29.53796091 -29.53631628 -29.53467629 -29.53304142 -29.53141262 -29.52979083 -29.52817654 -29.5265707 -29.52497424 -29.52338766 -29.5218119 -29.5202479 -29.51869615 -29.5171576 -29.51563317 -29.51412339 -29.51262917 -29.51115144 -29.50969073 -29.50824797 -29.50682407 -29.50541957 -29.50403539 -29.50267244 -29.50133127 -29.5000128 -29.49871793 -29.49744721 -29.49620157 -29.49498189 -29.49378876 -29.49262307 -29.49148572 -29.49037729 -29.48929868 -29.48825078 -29.48723418 -29.48624978 -29.48529845 -29.4843808 -29.48349773 -29.48265009 -29.48183853 -29.48106391 -29.48032709 -29.47962874 -29.4789697 -29.47835082 -29.47777279 -29.47723646 -29.47674265 -29.47629208 -29.47588557 -29.47552396 -29.47520796 -29.47493841 -29.47471611 -29.47454181 -29.47441634 -29.47434048 -29.47431502 -29.47431502} {curve x1001 24.09741856 24.10175112 24.10616938 24.11067019 24.11525163 24.11991056 24.12464382 24.12944952 24.13432451 24.1392656 24.14427095 24.14933739 24.1544617 24.15964209 24.16487535 24.17015827 24.17548908 24.18086456 24.18628148 24.1917381 24.19723118 24.20275748 24.20831529 24.21390136 24.21951244 24.22514683 24.23080127 24.23647251 24.24215886 24.24785706 24.25356385 24.25927755 24.26499489 24.27071263 24.27642906 24.28214093 24.28784499 24.29353954 24.29922133 24.30488711 24.31053517 24.31616226 24.32176514 24.32734209 24.33288987 24.33840523 24.34388646 24.34933032 24.35473356 24.36009445 24.36540977 24.37067628 24.37589222 24.38105438 24.38615954 24.39120592 24.39619031 24.40110952 24.40596172 24.41074372 24.41545236 24.42008576 24.42464077 24.42911422 24.43350422 24.43780761 24.44202128 24.44614326 24.45017042 24.45409968 24.45792902 24.46165534 24.46527559 24.46878768 24.47218854 24.47547516 24.47864538 24.48169618 24.48462455 24.4874283 24.49010442 24.49264994 24.49506259 24.49733941 24.49947746 24.50147441 24.50332731 24.50503329 24.50658991 24.50799429 24.50924358 24.51033527 24.5112665 24.51203449 24.51263663 24.51307011 24.51333218 24.51342016 24.51342016} {curve x1001 503.564309 503.3240478 503.0790344 502.8294434 502.5753808 502.3170209 502.0545396 501.7880406 501.5176993 501.2436926 500.9661221 500.6851643 500.4009971 500.1137201 499.8235109 499.530548 499.2349295 498.9368337 498.63644 498.3338449 498.0292276 497.7227679 497.4145613 497.1047874 496.7936266 496.4811734 496.1676079 495.8531108 495.5377759 495.2217839 494.9053153 494.5884638 494.2714102 493.954335 493.6373319 493.3205815 493.0042646 492.6884748 492.3733928 492.059199 491.7459874 491.4339387 491.1232329 490.8139646 490.5063142 490.2004611 489.8965011 489.5946139 489.2949785 488.9976917 488.7029327 488.4108799 488.1216313 487.8353655 487.55226 487.2724145 486.9960069 486.7232136 486.4541363 486.1889519 485.9278356 485.6708915 485.4182951 485.1702208 484.9267747 484.6881315 484.4544639 484.2258809 484.0025557 483.7846598 483.5723048 483.3656627 483.1649032 482.9701413 482.7815472 482.599289 482.4234851 482.254304 482.091912 481.936431 481.7880279 481.6468669 481.5130739 481.3868137 481.2682486 481.1575085 481.0547563 480.9601519 480.8738296 480.7959503 480.7266715 480.6661321 480.6144907 480.5719023 480.5385108 480.5144722 480.4999391 480.4950604 480.4950604}}
+ rotate {{curve x1001 8.52105277 8.521147348 8.521428461 8.521892129 8.522534505 8.52335162 8.524339441 8.525494211 8.526811909 8.528288453 8.529920173 8.531702998 8.533632803 8.535705998 8.537918468 8.540266049 8.542745224 8.54535184 8.548081695 8.550931345 8.5538966 8.556973227 8.560157844 8.56344623 8.566834126 8.570318208 8.573894227 8.577557901 8.581305958 8.585134125 8.589038101 8.593014661 8.597059513 8.601168339 8.605337954 8.609564051 8.6138423 8.618169552 8.622541486 8.626953764 8.631403265 8.635885659 8.640396606 8.644933005 8.649490521 8.654064813 8.658652796 8.663250133 8.667852485 8.672456778 8.677058675 8.681653842 8.68623921 8.690810446 8.695363225 8.699894473 8.704399866 8.708875092 8.713317065 8.717721474 8.722084019 8.7264016 8.730669919 8.734884693 8.739042801 8.743139958 8.747171905 8.751135489 8.755026446 8.758840539 8.762574578 8.766224322 8.769785559 8.773255057 8.776628597 8.779901998 8.783071975 8.786134337 8.789084935 8.791920425 8.794636647 8.797229483 8.799695525 8.802030645 8.804230762 8.806292393 8.808211445 8.809983876 8.811606122 8.813074127 8.814383888 8.815531756 8.816513711 8.817325794 8.817964259 8.818425127 8.818704485 8.818798482 8.818798482} {curve x1001 0.6951047875 0.6949136478 0.6943455196 0.6934084408 0.692110174 0.6904587223 0.6884622175 0.686128226 0.6834648473 0.6804803008 0.6771819706 0.6735780462 0.6696768288 0.6654855337 0.6610124343 0.6562659075 0.6512530131 0.6459821027 0.6404616224 0.6346984901 0.6287011293 0.6224780493 0.6160360396 0.6093835894 0.6025292649 0.5954797405 0.5882435649 0.5808293551 0.5732436838 0.5654951527 0.5575924236 0.5495419806 0.5413524723 0.5330325988 0.524588769 0.5160296721 0.5073640401 0.49859822 0.4897409352 0.4808009432 0.4717845423 0.4627004838 0.4535575443 0.4443619866 0.4351225833 0.4258481237 0.4165448483 0.4072215445 0.397887008 0.3885474698 0.379211726 0.3698885717 0.360584242 0.3513075346 0.3420672379 0.3328696039 0.3237234256 0.3146374778 0.3056180426 0.2966739016 0.2878138095 0.2790440913 0.2703735108 0.2618107957 0.2533623271 0.2450368439 0.2368430406 0.228787367 0.2208785307 0.2131251859 0.2055338643 0.1981132352 0.1908719059 0.1838165026 0.1769556499 0.1702979011 0.1638499901 0.1576204896 0.1516178922 0.1458490523 0.1403224837 0.1350466117 0.1300284237 0.125276368 0.1207987956 0.1166028394 0.1126968755 0.1090891735 0.1057870248 0.1027987261 0.1001324585 0.09779568483 0.09579661522 0.09414333555 0.09284349242 0.09190520247 0.09133644922 0.09114507572 0.09114507572} {curve x1001 0.9115970474 0.9115754961 0.9115114388 0.9114057815 0.9112593991 0.9110731936 0.9108480812 0.9105849145 0.9102846058 0.909948081 0.909576172 0.909169801 0.908729903 0.9082572905 0.9077528953 0.9072176606 0.9066523814 0.9060579981 0.9054354618 0.9047855514 0.9041092155 0.9034074124 0.9026809063 0.9019306535 0.9011576186 0.9003625531 0.8995464199 0.8987101898 0.8978546026 0.8969806276 0.8960892405 0.8951811717 0.8942573957 0.8933188928 0.892366385 0.8914008517 0.890423277 0.8894343763 0.8884351329 0.8874265342 0.8864092902 0.8853843876 0.8843528163 0.8833152824 0.8822727756 0.8812262872 0.8801765213 0.8791244692 0.8780711235 0.8770171873 0.8759636533 0.8749115142 0.8738614738 0.8728145254 0.8717716611 0.8707335869 0.8697012957 0.8686757784 0.8676577446 0.8666481862 0.8656480921 0.8646581768 0.8636794306 0.8627128393 0.8617591243 0.8608192728 0.8598942675 0.8589848374 0.8580919666 0.8572166331 0.8563595754 0.8555217735 0.8547042001 0.8539076046 0.8531329619 0.8523812388 0.8516531969 0.8509498053 0.850272024 0.8496206282 0.8489965803 0.8484008328 0.8478341759 0.8472975646 0.8467919429 0.8463181173 0.8458770348 0.8454696299 0.8450967271 0.844759264 0.8444581653 0.8441942744 0.8439685192 0.8437818133 0.8436350207 0.8435290583 0.8434648282 0.843443216 0.843443216}}
+ scaling {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ uniform_scale {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ skew {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ pivot {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal {{curve x1001 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24 24}}
+ haperture {{curve x1001 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113}}
+ vaperture {{curve x1001 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038}}
+ near {{curve x1001 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776}}
+ far {{curve x1001 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000 100000}}
+ win_translate {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal_point {{curve x1001 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5}}
+ fstop {{curve x1001 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905}}
+ file /corky/projects/LevelUp_343202/seq/irl/0020/data/animation/cameras/shot_cam/versions/cache_v003.abc
+ name Camera10
+ label MainCam
+ selected true
+ xpos -1029
+ ypos -1274
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}

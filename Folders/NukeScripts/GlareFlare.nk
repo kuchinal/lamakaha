@@ -1,0 +1,665 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode15
+ tile_color 0x44755901
+ label Glare
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos 1947
+ ypos -6480
+ bdwidth 875
+ bdheight 701
+}
+Read {
+ inputs 0
+ file y:/oblivion_obl-2324/fts/0112/elements/2d/comp-matte/v009/fullres/obl_fts_0112_comp-matte_v009_aky.%04d.exr
+ cacheLocal always
+ first 1001
+ last 1433
+ origfirst 1001
+ origlast 1433
+ origset true
+ name Read9
+ selected true
+ xpos 2328
+ ypos -6426
+ postage_stamp false
+}
+Dot {
+ name Dot121
+ selected true
+ xpos 2362
+ ypos -6368
+}
+set N23728810 [stack 0]
+Mirror {
+ Horizontal true
+ Vertical true
+ name Mirror1
+ selected true
+ xpos 2124
+ ypos -6336
+}
+set N23728b40 [stack 0]
+Grade {
+ blackpoint 0.105
+ whitepoint 0.68
+ multiply {0.2062164396 0.2151437998 0.2399999946 0.2399999946}
+ gamma 0.405
+ black_clamp false
+ name Grade28
+ selected true
+ xpos 2069
+ ypos -6293
+}
+Glint {
+ length 795
+ oddlen 0.25
+ rotation 90
+ steps 8
+ name Glint1
+ selected true
+ xpos 2069
+ ypos -6253
+}
+set N237291a0 [stack 0]
+Defocus {
+ defocus 700
+ name Defocus4
+ selected true
+ xpos 2047
+ ypos -6179
+}
+Group {
+ name CHannelsShift1
+ selected true
+ xpos 2047
+ ypos -6141
+ addUserKnob {20 User}
+ addUserKnob {18 translate_x l "translate x" R -10 10}
+ translate_x {0 0 0}
+ addUserKnob {18 translate_y l "translate y" R -10 10}
+ translate_y {0 0 0}
+ addUserKnob {26 ""}
+ addUserKnob {18 rotate R -10 10}
+ rotate {-0.5 0.1 -0.7}
+ addUserKnob {26 ""}
+ addUserKnob {18 scale_x l "scale x" R -1 1}
+ scale_x {2 1 1}
+ addUserKnob {18 scale_y l "scale y" t "\t\t\t" R -1 1}
+ scale_y {1 0 1}
+ addUserKnob {26 ""}
+ addUserKnob {18 skew R -10 10}
+ skew {-0.1 -0.2 0}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -485
+  ypos 219
+ }
+ Dot {
+  name Dot2
+  xpos -451
+  ypos 267
+ }
+set N23729b30 [stack 0]
+ Dot {
+  name Dot1
+  selected true
+  xpos -837
+  ypos 267
+ }
+set N23729e60 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1147
+  ypos 267
+ }
+ Shuffle {
+  red black
+  green black
+  alpha blue
+  name BLUE
+  xpos -1179
+  ypos 324
+ }
+ Transform {
+  translate {{parent.translate_x.b} {parent.translate_y.b}}
+  rotate {{parent.rotate.b}}
+  scale {{parent.scale_x.b/10+.9} {parent.scale_y.b/10+.9}}
+  skew {{parent.skew.b/100}}
+  center {960 540}
+  black_outside false
+  name T_BLUE
+  xpos -1179
+  ypos 350
+ }
+ Dot {
+  name Dot5
+  xpos -1145
+  ypos 632
+ }
+push $N23729e60
+ Shuffle {
+  red black
+  blue black
+  alpha black
+  name GREEN
+  xpos -869
+  ypos 368
+ }
+ Transform {
+  translate {{parent.translate_x.g} {parent.translate_y.g}}
+  rotate {{parent.rotate.g}}
+  scale {{parent.scale_x.g/10+.9} {parent.scale_y.g/10+.9}}
+  skew {{parent.skew.g/100}}
+  center {960 540}
+  black_outside false
+  name T_GREEN
+  xpos -869
+  ypos 394
+ }
+ Dot {
+  name Dot4
+  xpos -835
+  ypos 573
+ }
+push $N23729b30
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name RED
+  xpos -485
+  ypos 306
+ }
+ Transform {
+  translate {{parent.translate_x.r} {parent.translate_y.r}}
+  rotate {{parent.rotate.r}}
+  scale {{parent.scale_x.r/10+.9} {parent.scale_y.r/10+.9}}
+  skew {{parent.skew.r/100}}
+  center {960 540}
+  black_outside false
+  name T_red
+  xpos -485
+  ypos 332
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  Bchannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name Merge1
+  xpos -485
+  ypos 569
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+  Bchannels {rgba.red rgba.green -rgba.blue rgba.alpha}
+  name Merge2
+  xpos -485
+  ypos 628
+ }
+ Output {
+  name Output1
+  xpos -485
+  ypos 669
+ }
+end_group
+ColorCorrect {
+ saturation 0.8
+ name ColorCorrect4
+ selected true
+ xpos 2047
+ ypos -6087
+}
+Clamp {
+ maximum 15
+ name Clamp10
+ selected true
+ xpos 2047
+ ypos -5983
+}
+Dot {
+ name Dot90
+ selected true
+ xpos 2079
+ ypos -5885
+}
+push $N237291a0
+Defocus {
+ defocus 200
+ name Defocus3
+ selected true
+ xpos 2145
+ ypos -6181
+}
+Group {
+ name CHannelsShift
+ selected true
+ xpos 2145
+ ypos -6136
+ addUserKnob {20 User}
+ addUserKnob {18 translate_x l "translate x" R -10 10}
+ translate_x {0 0 0}
+ addUserKnob {18 translate_y l "translate y" R -10 10}
+ translate_y {0 0 0}
+ addUserKnob {26 ""}
+ addUserKnob {18 rotate R -10 10}
+ rotate {0.2 -0.1 0.5}
+ addUserKnob {26 ""}
+ addUserKnob {18 scale_x l "scale x" R -1 1}
+ scale_x {1 1 1}
+ addUserKnob {18 scale_y l "scale y" t "\t\t\t" R -1 1}
+ scale_y {1 1 1}
+ addUserKnob {26 ""}
+ addUserKnob {18 skew R -10 10}
+ skew {-0.1 0 0}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -485
+  ypos 219
+ }
+ Dot {
+  name Dot2
+  xpos -451
+  ypos 267
+ }
+set N2372d7c0 [stack 0]
+ Dot {
+  name Dot1
+  selected true
+  xpos -837
+  ypos 267
+ }
+set N2372daf0 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1147
+  ypos 267
+ }
+ Shuffle {
+  red black
+  green black
+  alpha blue
+  name BLUE
+  xpos -1179
+  ypos 324
+ }
+ Transform {
+  translate {{parent.translate_x.b} {parent.translate_y.b}}
+  rotate {{parent.rotate.b}}
+  scale {{parent.scale_x.b/10+.9} {parent.scale_y.b/10+.9}}
+  skew {{parent.skew.b/100}}
+  center {960 540}
+  black_outside false
+  name T_BLUE
+  xpos -1179
+  ypos 350
+ }
+ Dot {
+  name Dot5
+  xpos -1145
+  ypos 632
+ }
+push $N2372daf0
+ Shuffle {
+  red black
+  blue black
+  alpha black
+  name GREEN
+  xpos -869
+  ypos 368
+ }
+ Transform {
+  translate {{parent.translate_x.g} {parent.translate_y.g}}
+  rotate {{parent.rotate.g}}
+  scale {{parent.scale_x.g/10+.9} {parent.scale_y.g/10+.9}}
+  skew {{parent.skew.g/100}}
+  center {960 540}
+  black_outside false
+  name T_GREEN
+  xpos -869
+  ypos 394
+ }
+ Dot {
+  name Dot4
+  xpos -835
+  ypos 573
+ }
+push $N2372d7c0
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name RED
+  xpos -485
+  ypos 306
+ }
+ Transform {
+  translate {{parent.translate_x.r} {parent.translate_y.r}}
+  rotate {{parent.rotate.r}}
+  scale {{parent.scale_x.r/10+.9} {parent.scale_y.r/10+.9}}
+  skew {{parent.skew.r/100}}
+  center {960 540}
+  black_outside false
+  name T_red
+  xpos -485
+  ypos 332
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  Bchannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name Merge1
+  xpos -485
+  ypos 569
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+  Bchannels {rgba.red rgba.green -rgba.blue rgba.alpha}
+  name Merge2
+  xpos -485
+  ypos 628
+ }
+ Output {
+  name Output1
+  xpos -485
+  ypos 669
+ }
+end_group
+ColorCorrect {
+ saturation 0.8
+ name ColorCorrect3
+ selected true
+ xpos 2145
+ ypos -6090
+}
+Clamp {
+ maximum 15
+ name Clamp7
+ selected true
+ xpos 2145
+ ypos -5982
+}
+push $N23728b40
+Grade {
+ blackpoint 0.105
+ whitepoint 0.68
+ multiply {0.2062164396 0.2151437998 0.2399999946 0.2399999946}
+ gamma 0.105
+ black_clamp false
+ name Grade24
+ selected true
+ xpos 2178
+ ypos -6290
+}
+Glint {
+ length 150
+ oddlen 0.25
+ rotation 45
+ steps 8
+ name Glint2
+ selected true
+ xpos 2178
+ ypos -6250
+}
+Defocus {
+ defocus 100
+ name Defocus5
+ selected true
+ xpos 2243
+ ypos -6189
+}
+Group {
+ name CHannelsShift2
+ selected true
+ xpos 2243
+ ypos -6142
+ addUserKnob {20 User}
+ addUserKnob {18 translate_x l "translate x" R -10 10}
+ translate_x {0 0 0}
+ addUserKnob {18 translate_y l "translate y" R -10 10}
+ translate_y {0 0 0}
+ addUserKnob {26 ""}
+ addUserKnob {18 rotate R -10 10}
+ rotate {0.2 -0.1 0.5}
+ addUserKnob {26 ""}
+ addUserKnob {18 scale_x l "scale x" R -1 1}
+ scale_x {1 1.2 1}
+ addUserKnob {18 scale_y l "scale y" t "\t\t\t" R -1 1}
+ scale_y {1 1 1.5}
+ addUserKnob {26 ""}
+ addUserKnob {18 skew R -10 10}
+ skew {-0.1 0 0}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -485
+  ypos 219
+ }
+ Dot {
+  name Dot2
+  xpos -451
+  ypos 267
+ }
+set N23abb5e0 [stack 0]
+ Dot {
+  name Dot1
+  selected true
+  xpos -837
+  ypos 267
+ }
+set N23abb910 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1147
+  ypos 267
+ }
+ Shuffle {
+  red black
+  green black
+  alpha blue
+  name BLUE
+  xpos -1179
+  ypos 324
+ }
+ Transform {
+  translate {{parent.translate_x.b} {parent.translate_y.b}}
+  rotate {{parent.rotate.b}}
+  scale {{parent.scale_x.b/10+.9} {parent.scale_y.b/10+.9}}
+  skew {{parent.skew.b/100}}
+  center {960 540}
+  black_outside false
+  name T_BLUE
+  xpos -1179
+  ypos 350
+ }
+ Dot {
+  name Dot5
+  xpos -1145
+  ypos 632
+ }
+push $N23abb910
+ Shuffle {
+  red black
+  blue black
+  alpha black
+  name GREEN
+  xpos -869
+  ypos 368
+ }
+ Transform {
+  translate {{parent.translate_x.g} {parent.translate_y.g}}
+  rotate {{parent.rotate.g}}
+  scale {{parent.scale_x.g/10+.9} {parent.scale_y.g/10+.9}}
+  skew {{parent.skew.g/100}}
+  center {960 540}
+  black_outside false
+  name T_GREEN
+  xpos -869
+  ypos 394
+ }
+ Dot {
+  name Dot4
+  xpos -835
+  ypos 573
+ }
+push $N23abb5e0
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name RED
+  xpos -485
+  ypos 306
+ }
+ Transform {
+  translate {{parent.translate_x.r} {parent.translate_y.r}}
+  rotate {{parent.rotate.r}}
+  scale {{parent.scale_x.r/10+.9} {parent.scale_y.r/10+.9}}
+  skew {{parent.skew.r/100}}
+  center {960 540}
+  black_outside false
+  name T_red
+  xpos -485
+  ypos 332
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  Bchannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name Merge1
+  xpos -485
+  ypos 569
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+  Bchannels {rgba.red rgba.green -rgba.blue rgba.alpha}
+  name Merge2
+  xpos -485
+  ypos 628
+ }
+ Output {
+  name Output1
+  xpos -485
+  ypos 669
+ }
+end_group
+ColorCorrect {
+ saturation 0.5
+ name ColorCorrect2
+ selected true
+ xpos 2243
+ ypos -6116
+}
+Clamp {
+ maximum 15
+ name Clamp11
+ selected true
+ xpos 2243
+ ypos -6071
+}
+Dot {
+ name Dot116
+ selected true
+ xpos 2277
+ ypos -6033
+}
+push $N23728810
+push $N23728810
+Bezier {
+ replace true
+ extra_blur 37
+ blur_type smooth
+ points {{
+{1197 1131 23.6 -0.3 23.6}
+{1252 1007 23.6 -0.62 23.6}
+{1574 834 65.4 -0.61 65.4}
+{1760 650 39.5 -0.83 39.5}
+{1858 526 39.5 0.14 39.5}
+{2031 689 59.4 1.23 59.4}
+{2073 1134 111.7 2.92 111.7}
+{-256 1207 77 -3.08 77}
+{-21 1008 77 -0.99 77}
+{95 676 43.3 -1.15 43.3}
+{193 533 43.3 0.2 43.3}
+{407 738 74.1 0.67 74.1}
+{673 911 60.7 0.58 60.7}
+{875 1046 22.8 0.91 22.8}
+{847 1133 22.8 0.14 22.8}
+}}
+ shape {}
+ center {1024 540}
+ name Bezier26
+ selected true
+ xpos 2572
+ ypos -6356
+ addUserKnob {20 Geo}
+ addUserKnob {4 type M {circle square oval rectangle triangle}}
+ addUserKnob {32 set -STARTLINE T BezierGeoProc}
+}
+push $N23728810
+Grade {
+ inputs 1+1
+ whitepoint 0.29
+ multiply {0.9321882725 0.9674381614 1 1}
+ black_clamp false
+ name Grade29
+ selected true
+ xpos 2445
+ ypos -6300
+}
+Switch {
+ inputs 2
+ which {{curve i x1009 1 0 x1013 0 x1015 1}}
+ name Switch1
+ selected true
+ xpos 2328
+ ypos -6197
+}
+Merge2 {
+ inputs 2
+ operation plus
+ bbox B
+ mix 0.5
+ name Merge45
+ selected true
+ xpos 2328
+ ypos -6037
+}
+Merge2 {
+ inputs 2
+ operation plus
+ bbox B
+ mix 0.5
+ name Merge44
+ selected true
+ xpos 2328
+ ypos -5976
+}
+Merge2 {
+ inputs 2
+ operation plus
+ bbox B
+ mix 0.5
+ name Merge40
+ selected true
+ xpos 2328
+ ypos -5889
+}

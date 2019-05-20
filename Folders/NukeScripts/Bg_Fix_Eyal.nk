@@ -1,0 +1,57 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+push 0
+Dot {
+name Dot261
+label color
+note_font_size 30
+selected true
+xpos -6811
+ypos -8182
+}
+Dot {
+name Dot260
+selected true
+xpos -6811
+ypos -8010
+}
+push 0
+Dot {
+name Dot259
+label cleanPlate
+note_font_size 30
+selected true
+xpos -6588
+ypos -8184
+}
+Merge2 {
+inputs 2
+operation divide
+name Merge125
+selected true
+xpos -6622
+ypos -8014
+}
+Dot {
+name Dot262
+selected true
+xpos -6588
+ypos -7862
+}
+push $cut_paste_input
+Dot {
+name Dot258
+label plate
+note_font_size 30
+selected true
+xpos -6382
+ypos -8182
+}
+Merge2 {
+inputs 2
+operation multiply
+name Merge126
+selected true
+xpos -6416
+ypos -7866
+}

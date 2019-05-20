@@ -1,0 +1,143 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+PostageStamp {
+ inputs 0
+ name FG_Denoised2
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -7033
+ ypos -144
+ hide_input true
+}
+PostageStamp {
+ inputs 0
+ name Bluescreen
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -7152
+ ypos -143
+ hide_input true
+}
+Merge2 {
+ inputs 2
+ operation minus
+ name Merge8
+ selected true
+ xpos -7099
+ ypos -49
+}
+ColorCorrect {
+ gain 1.5
+ name ColorCorrect3
+ selected true
+ xpos -7099
+ ypos -23
+}
+Shuffle {
+ green red
+ blue red
+ alpha red
+ name Shuffle3
+ selected true
+ xpos -7099
+ ypos 3
+}
+Clamp {
+ name Clamp2
+ selected true
+ xpos -7099
+ ypos 63
+}
+Dot {
+ name Dot10
+ selected true
+ xpos -7065
+ ypos 248
+}
+push $cut_paste_input
+PostageStamp {
+ name FG_Denoised1
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -6727
+ ypos -153
+ hide_input true
+}
+set Nb57ea0e0 [stack 0]
+PostageStamp {
+ inputs 0
+ name Bluescreen1
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -6870
+ ypos -151
+ hide_input true
+}
+set Nb57ea410 [stack 0]
+Merge2 {
+ inputs 2
+ operation min
+ name Merge5
+ selected true
+ xpos -6727
+ ypos -46
+}
+push $Nb57ea410
+push $Nb57ea0e0
+Merge2 {
+ inputs 2
+ operation max
+ name Merge13
+ selected true
+ xpos -6870
+ ypos -45
+}
+Merge2 {
+ inputs 2
+ operation divide
+ name Merge21
+ selected true
+ xpos -6812
+}
+ColorCorrect {
+ saturation 0
+ gamma 0.4
+ gain 1.3
+ name ColorCorrect4
+ selected true
+ xpos -6812
+ ypos 45
+}
+Clamp {
+ name Clamp1
+ selected true
+ xpos -6812
+ ypos 71
+}
+Dot {
+ name Dot49
+ selected true
+ xpos -6778
+ ypos 166
+}
+push 0
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge22
+ selected true
+ xpos -6603
+ ypos 162
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge23
+ selected true
+ xpos -6603
+ ypos 244
+}

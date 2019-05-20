@@ -1,0 +1,552 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Group {
+name Breakdown
+tile_color 0xdeffff
+label MultiWiper
+note_font "Nimbus Sans L Bold Bold"
+note_font_size 16
+selected true
+xpos -11775
+ypos 57984
+addUserKnob {20 User l Multiwiper}
+addUserKnob {41 min_frame_clamp l "Start frame" t "Start of animation." T Wiper.min_frame_clamp}
+addUserKnob {6 hold_frame_enabled l "Enable hold frame" t "Holds a frame on your inputs." +STARTLINE}
+hold_frame_enabled true
+addUserKnob {3 hold_frame_number l "Hold at (frame)" t "Frame to hold on."}
+hold_frame_number 1065
+addUserKnob {41 format l Format T Wiper.format}
+addUserKnob {26 ""}
+addUserKnob {26 input_number_tx l "" -STARTLINE T Inputs:}
+addUserKnob {26 inputs_number l "" -STARTLINE T 10}
+addUserKnob {22 remove_input l - t "Removes input. You can't go below 2 inputs." T "from __future__ import with_statement\nimport nuke\n\ngrp = nuke.thisNode()\ncurrentInput = int(grp.knob(\"inputs_number\").value())\n\nif currentInput > 2:\n    # Remove node\n    with grp:\n        if nuke.exists(\"Input%s\" % currentInput):\n            nuke.delete(nuke.toNode(\"Input%s\" % currentInput))\n            nuke.delete(nuke.toNode(\"FrameHold%s\" % currentInput))\n            nuke.delete(nuke.toNode(\"Crop%s\" % currentInput))\n    # Edit current input number\n    grp.knob(\"inputs_number\").setValue(str(currentInput - 1))\nelse:\n    nuke.message(\"This node needs at least 2 inputs.\")\n" +STARTLINE}
+addUserKnob {22 add_input l + t "Adds input." -STARTLINE T "from __future__ import with_statement\nimport nuke\n\ngrp = nuke.thisNode()\n\ncurrentInputs = int(grp.knob(\"inputs_number\").value())\nnextInput = currentInputs + 1\n\nwith grp:\n    # Creates input node\n    inputnod = nuke.createNode(\"Input\", inpanel=False)\n    frameholdnod = nuke.createNode(\"FrameHold\", inpanel=False)\n    cropnod = nuke.createNode(\"Crop\", inpanel=False)\n    cropnod.knob(\"box\").setExpression(\"parent.input.format.w\", 2)\n    cropnod.knob(\"box\").setExpression(\"parent.input.format.h\", 3)\n    frameholdnod.knob(\"first_frame\").setExpression(\"parent.hold_frame_number\")\n    frameholdnod.knob(\"disable\").setExpression(\"!parent.hold_frame_enabled\")\n    # Connect output to switch 1 & 2\n    switch1 = nuke.toNode(\"Switch1\")\n    switch2 = nuke.toNode(\"Switch2\")\n    switch1.connectInput(currentInputs, cropnod)\n    switch2.connectInput(currentInputs, cropnod)\n\n# Add 1 to the total of inputs\ngrp.knob(\"inputs_number\").setValue(str(nextInput))\n\n"}
+addUserKnob {26 ""}
+addUserKnob {41 waveLength l "Wipe duration" t "Duration of the wipe (in frames)" T Wiper.waveLength}
+addUserKnob {41 wait_between l Wait t "Sets the time between two wipes." T Wiper.wait_between}
+addUserKnob {26 waitlabel l "" -STARTLINE T "frame(s) between each wipe."}
+addUserKnob {41 size l "Wipe soften" t "How soft is the wipe effect." T Wiper.size}
+addUserKnob {7 wipe_angle l "Wipe angle" t "Adjusts the angle of the wipe. Minimum is -90 degrees, max is 90 degrees (horizontal)." R -90 90}
+addUserKnob {20 wipe_tx_tab l Labels}
+addUserKnob {6 wipe_labels_enabled l Enabled t "Enables the labels." +STARTLINE}
+addUserKnob {1 wipe_labels l Labels t "Enter labels separated by commas. First label goes to the first wipe, etc."}
+wipe_labels "CG,Distortion,Final Grading"
+addUserKnob {26 ""}
+addUserKnob {2 wipe_labels_font l "Font path" t "Path to the font you want to use..."}
+wipe_labels_font /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+addUserKnob {3 wipe_labels_scale l Size t "Size of the font."}
+wipe_labels_scale 50
+addUserKnob {41 color l Color t "Color of the font." T Text1.color}
+addUserKnob {41 opacity l Opacity t "Opacity of the font." T Text1.opacity}
+addUserKnob {26 ""}
+addUserKnob {12 wipe_label_pos l Position t "Position of the labels in the frame."}
+wipe_label_pos {-300 330}
+addUserKnob {20 about_tab l About}
+addUserKnob {26 about_tx l "" +STARTLINE T "Script written by Yoann Gouraud, 2012-2013 \nygouraud@artfx.fr\n\nIf this gizmo has been useful to you, mentionning my name in your reel is\nappreciated but not required.\n\nCredits also goes to David Emeny for creating the original Wiper gizmo.\nhttp://www.davidemeny.com/nuke.php"}
+}
+Input {
+inputs 0
+name Input17
+number 16
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold17
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop17
+selected true
+}
+set Nf0d1d40 [stack 0]
+Input {
+inputs 0
+name Input16
+number 15
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold16
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop16
+}
+set N1bc19280 [stack 0]
+Input {
+inputs 0
+name Input15
+number 14
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold15
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop15
+}
+set N1ba52270 [stack 0]
+Input {
+inputs 0
+name Input14
+number 13
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold14
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop14
+}
+set N1f0e2240 [stack 0]
+Input {
+inputs 0
+name Input13
+number 12
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold13
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop13
+}
+set N213cd3c0 [stack 0]
+push 0
+push 0
+Input {
+inputs 0
+name Input10
+number 9
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold10
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop10
+}
+set N1b997410 [stack 0]
+Input {
+inputs 0
+name Input9
+number 8
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold9
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop9
+}
+set Nfd15c80 [stack 0]
+Input {
+inputs 0
+name Input8
+number 7
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold8
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop8
+}
+set N1cb957a0 [stack 0]
+Input {
+inputs 0
+name Input7
+number 6
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold7
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop7
+}
+set N20794060 [stack 0]
+Input {
+inputs 0
+name Input6
+xpos 1060
+ypos -49
+number 5
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold6
+xpos 1060
+ypos -23
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop6
+xpos 1060
+ypos 38
+}
+set N17aae8f0 [stack 0]
+Input {
+inputs 0
+name Input5
+xpos 950
+ypos -49
+number 4
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold5
+xpos 950
+ypos -23
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop5
+xpos 950
+ypos 38
+}
+set N1ec0d7e0 [stack 0]
+Input {
+inputs 0
+name Input4
+xpos 840
+ypos -49
+number 3
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold4
+xpos 840
+ypos -23
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop4
+xpos 840
+ypos 38
+}
+set N13fcda20 [stack 0]
+Input {
+inputs 0
+name Input3
+xpos 730
+ypos -49
+number 2
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold3
+xpos 730
+ypos -23
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop3
+xpos 730
+ypos 38
+}
+set N1e187680 [stack 0]
+Input {
+inputs 0
+name Input2
+xpos 394
+ypos -213
+number 1
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold2
+xpos 394
+ypos -170
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop2
+xpos 394
+ypos -118
+}
+set N1fec26b0 [stack 0]
+Input {
+inputs 0
+name Input1
+xpos 88
+ypos -215
+}
+FrameHold {
+first_frame {{parent.hold_frame_number}}
+name FrameHold1
+xpos 88
+ypos -168
+disable {{!parent.hold_frame_enabled}}
+}
+Crop {
+box {0 0 {parent.input.format.w} {parent.input.format.h}}
+name Crop1
+xpos 88
+ypos -120
+}
+set N1f272620 [stack 0]
+Switch {
+inputs 17
+which {{parent.Wiper.wipe_number}}
+name Switch1
+xpos 88
+ypos 35
+}
+push $Nf0d1d40
+push $N1bc19280
+push $N1ba52270
+push $N1f0e2240
+push $N213cd3c0
+push 0
+push 0
+push $N1b997410
+push $Nfd15c80
+push $N1cb957a0
+push $N20794060
+push $N17aae8f0
+push $N1ec0d7e0
+push $N13fcda20
+push $N1e187680
+push $N1fec26b0
+push $N1f272620
+Switch {
+inputs 17
+which {{"parent.Wiper.wipe_number  + 1" x59 1}}
+name Switch2
+xpos 394
+ypos 86
+}
+Group {
+inputs 2
+name Wiper
+note_font "Bitstream Vera Sans"
+xpos 262
+ypos 168
+mapsize {0.15 0.15}
+addUserKnob {20 Wiper}
+addUserKnob {41 wipe l Wipe T Ramp1.wipe}
+addUserKnob {41 size l Soften T Blur1.size}
+addUserKnob {20 User}
+addUserKnob {41 format T Constant1.format}
+addUserKnob {7 waveLength l Wavelength}
+waveLength 10
+addUserKnob {3 offset l Offset}
+offset 1
+addUserKnob {3 wait_between l "Wait between wipes (frames)"}
+wait_between 5
+addUserKnob {3 inputs_number_int l "Inputs number"}
+inputs_number_int {{"\[python nuke.thisParent().knob(\\\"inputs_number\\\").value()]"}}
+addUserKnob {3 wipe_number_labels l "Wipe number for labels"}
+wipe_number_labels {{"int(frame - min_frame_clamp)<0?-1:\nint(clamp(\nclamp(frame - min_frame_clamp, 0, 100000) \n/ (waveLength + wait_between),0,inputs_number_int-2))"}}
+addUserKnob {3 wipe_number l "Wipe number"}
+wipe_number {{"int(clamp(frame - min_frame_clamp, 0, 100000) / (waveLength + wait_between))"}}
+addUserKnob {3 total_wipe_duration l "Total wipe duration (frames)"}
+total_wipe_duration {{"waveLength + wait_between"}}
+addUserKnob {6 is_waiting l Waiting -STARTLINE}
+is_waiting {{"\[if \{\[value frame] >= \[value min_frame_clamp]\} \{\nreturn \{inrange(clamp(frame - min_frame_clamp, 0 ,1000000), waveLength + (total_wipe_duration * wipe_number), waveLength + (total_wipe_duration * wipe_number) + wait_between)\}\n\} else \{ \nreturn 0\n\}]"}}
+addUserKnob {7 wipe_value_add l "Add wipe value"}
+wipe_value_add {{"\[ if \{\[value is_waiting]\} \{ return 200\} else \{ return 0\}]"}}
+addUserKnob {3 wipe_progress l "Wipe progress (frames)"}
+wipe_progress {{"\[if \{\[value is_waiting]\} \{ return 0\} else \{ return \{clamp(frame - min_frame_clamp, 0, 10000) - (total_wipe_duration * wipe_number) \}\}]"}}
+addUserKnob {7 wipe_progress_normalized l "Wipe progress (normalized)"}
+wipe_progress_normalized {{"wipe_progress / waveLength"}}
+addUserKnob {7 wipe_value l "Wipe value"}
+wipe_value {{"\[if \{\[value frame] >= \[value min_frame_clamp]\} \{return \{-100 + (200*wipe_progress_normalized) + wipe_value_add\}\} else \{ return -100\}]"}}
+addUserKnob {3 max_frame_clamp l "Max frame"}
+max_frame_clamp 60
+addUserKnob {3 min_frame_clamp l "Min frame"}
+min_frame_clamp 1001
+addUserKnob {3 clamped_frame l "Clamped frame"}
+clamped_frame 54
+}
+Input {
+ inputs 0
+ name Input2
+ xpos -769
+ ypos -668
+ number 1
+}
+Dot {
+ name Dot19
+ xpos -735
+ ypos -532
+}
+set N20d37000 [stack 0]
+Dot {
+ name Dot3
+ xpos -735
+ ypos -154
+}
+Constant {
+ inputs 0
+ channels rgb
+ name Constant1
+ xpos -423
+ ypos -786
+}
+Ramp {
+ output {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+ p0 {{root.width*(wipe/100)-4} 0}
+ p1 {{root.width+2} 0}
+ name Ramp1
+ xpos -423
+ ypos -693
+ addUserKnob {20 User}
+ addUserKnob {7 wipe l Wipe R -100 100}
+ wipe {{wipe_value}}
+}
+Transform {
+ scale {{"1 + 0.004 * parent.parent.size"}}
+ center {640 360}
+ name Transform2
+ xpos -423
+ ypos -655
+}
+Transform {
+ rotate {{parent.parent.wipe_angle x334 13.75305881}}
+ scale {{"scale_to_match / parent.Constant1.height" x334 2.890371758}}
+ center {{"parent.Constant1.width / 2"} {"parent.Constant1.height / 2"}}
+ name Transform1
+ xpos -423
+ ypos -585
+ addUserKnob {20 User}
+ addUserKnob {7 scale_to_match l "Scale to match"}
+ scale_to_match {{"parent.Constant1.width * sin(abs(rotate)*0.0175) + parent.Constant1.height * cos(abs(rotate)*0.0175)"}}
+}
+Grade {
+ channels alpha
+ blackpoint 0.5
+ whitepoint 0.5
+ name Grade1
+ xpos -423
+ ypos -531
+}
+Clamp {
+ name Clamp1
+ xpos -423
+ ypos -479
+}
+Blur {
+ channels alpha
+ name Blur1
+ xpos -423
+ ypos -433
+}
+set N21a7ac80 [stack 0]
+EdgeDetectWrapper {
+ channels alpha
+ name EdgeDetect1
+ xpos -423
+ ypos -304
+}
+Dilate {
+ channels alpha
+ size {2 -7}
+ name Dilate1
+ selected true
+ xpos -423
+ ypos -256
+}
+TNT_CropOverscan {
+ name TNT_CropOverscan1
+ xpos -423
+ ypos -218
+ box {0 0 2563 1648}
+}
+Input {
+ inputs 0
+ name Input1
+ xpos -641
+ ypos -668
+}
+set N1eb994b0 [stack 0]
+Dot {
+ name Dot2
+ xpos -481
+ ypos -603
+}
+Dot {
+ name Dot1
+ xpos -481
+ ypos -280
+}
+push $N21a7ac80
+push $N20d37000
+push $N1eb994b0
+Keymix {
+ inputs 3
+ bbox B
+ name Keymix1
+ xpos -641
+ ypos -433
+}
+Switch {
+ inputs 2
+ which {{wipe>99?1:0 i}}
+ name Switch1
+ xpos -641
+ ypos -284
+}
+Grade {
+ inputs 1+1
+ multiply 0
+ name Grade2
+ xpos -641
+ ypos -210
+}
+Switch {
+ inputs 2
+ which {{wipe<-99?1:0}}
+ name Switch2
+ xpos -641
+ ypos -159
+}
+Output {
+ name Output1
+ xpos -641
+ ypos -36
+}
+end_group
+Text {
+message "\[python nuke.thisParent().knob(\"wipe_labels\").value().split(\",\")\\\[int(nuke.toNode(\"Wiper\").knob(\"wipe_number_labels\").value() + 1)\\]]"
+font "\[value parent.wipe_labels_font]"
+size {{parent.wipe_labels_scale}}
+yjustify center
+Transform 1
+box {320 180 960 540}
+translate {{parent.wipe_label_pos.x} {parent.wipe_label_pos.y}}
+center {640 360}
+name Text1
+xpos 262
+ypos 244
+disable {{!parent.wipe_labels_enabled}}
+}
+Output {
+name Output1
+xpos 262
+ypos 426
+}
+end_group

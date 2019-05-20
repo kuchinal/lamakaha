@@ -1,0 +1,135 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Reformat {
+ format "2048 2048 0 0 2048 2048 1 square_2K"
+ name Reformat9
+ selected true
+ xpos -12000
+ ypos -3243
+}
+Radial {
+ area {512 512 1536 1536}
+ name Radial4
+ selected true
+ xpos -12000
+ ypos -3136
+}
+Dot {
+ name Dot21
+ selected true
+ xpos -11966
+ ypos -3031
+}
+set N1338b7e0 [stack 0]
+Noise {
+ replace true
+ size 1
+ zoffset {{t*0.05+50}}
+ center {1024 778}
+ name Noise2
+ selected true
+ xpos -12000
+ ypos -2936
+}
+Grade {
+ white 2.38
+ multiply 1.02
+ gamma 0.236
+ name Grade33
+ selected true
+ xpos -12000
+ ypos -2875
+}
+push $N1338b7e0
+Dot {
+ name Dot18
+ selected true
+ xpos -11866
+ ypos -3033
+}
+Dot {
+ name Dot19
+ selected true
+ xpos -11866
+ ypos -2830
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge17
+ selected true
+ xpos -12000
+ ypos -2834
+}
+Reformat {
+ type "to box"
+ box_width 4096
+ name Reformat12
+ selected true
+ xpos -12000
+ ypos -2779
+}
+Transform {
+ scale 0.5
+ center {2048 2048}
+ shutteroffset centred
+ name Transform15
+ selected true
+ xpos -12000
+ ypos -2753
+}
+VolumeRays {
+ name VolumeRays2
+ label "Mar 20 2005"
+ selected true
+ xpos -12000
+ ypos -2682
+ vol_pos {2048 2048}
+ raylength 120
+ quality High
+ volume_end_color {0 0 0 0}
+}
+Radial {
+ invert true
+ area {0 0 4096 4096}
+ color 0
+ name Radial6
+ selected true
+ xpos -12000
+ ypos -2644
+}
+Reformat {
+ format "2048 2048 0 0 2048 2048 1 square_2K"
+ box_width 4096
+ name Reformat13
+ selected true
+ xpos -12000
+ ypos -2617
+}
+Transform {
+ translate {0 -900}
+ center {1024 1024}
+ shutteroffset centred
+ name Transform16
+ selected true
+ xpos -12000
+ ypos -2579
+}
+Grade {
+ white 0.45
+ gamma 0.75
+ name Grade31
+ selected true
+ xpos -12000
+ ypos -2534
+}
+Blur {
+ channels rgba
+ size 4.3
+ name Blur11
+ label "\[value size]"
+ selected true
+ xpos -12000
+ ypos -2473
+}

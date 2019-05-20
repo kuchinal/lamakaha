@@ -1,0 +1,127 @@
+#! C:/Program Files/Nuke7.0v8/Nuke7.0.exe -nx
+version 7.0 v8
+Gizmo {
+}
+ Constant {
+  inputs 0
+  channels rgb
+  format "256 256 0 0 256 256 1 square_256"
+  name Constant2
+  xpos -298
+  ypos 250
+  postage_stamp false
+ }
+ Roto {
+  curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 512}
+    {t x44800000 x44428000}
+    {a opc x3f000000}
+    {curvegroup RectangleCusped1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x41c80000 x4369cccd}
+        {}
+        {}
+        {x436c999a x4369cccd}
+        {}
+        {}
+        {x436c999a x41a33333}
+        {}
+        {}
+        {x41c80000 x41a33333}
+        {}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}
+        {}}}}
+     {t x4302cccd x42fe3333}
+     {a g 0 b 0 inv 1 str 1 spx x44800000 spy x44428000 sb 1 tt x41100000}}}}}}
+  toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createEllipse ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 8 }
+  { createRectangleCusped ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+  toolbar_brush_hardness 0.200000003
+  toolbar_source_transform_scale {1 1}
+  toolbar_source_transform_center {1024 778}
+  color {1 0 0 1}
+  colorOverlay {0 0 0 0}
+  opacity 0.5
+  lifetime_type "all frames"
+  view {}
+  motionblur_on true
+  motionblur_shutter_offset_type centred
+  inverted true
+  source_black_outside true
+  createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+  name Roto1
+  xpos -298
+  ypos 276
+ }
+ Reformat {
+  type "to box"
+  box_width {{Dot2.bbox.w}}
+  box_height {{Dot2.bbox.h}}
+  box_fixed true
+  resize distort
+  name Reformat1
+  xpos -298
+  ypos 302
+ }
+ Dot {
+  name Dot1
+  xpos -264
+  ypos 365
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -182
+  ypos 214
+ }
+ Dot {
+  name Dot2
+  xpos -148
+  ypos 254
+ }
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos -182
+  ypos 361
+ }
+ Output {
+  name Output1
+  xpos -182
+  ypos 461
+ }
+end_group

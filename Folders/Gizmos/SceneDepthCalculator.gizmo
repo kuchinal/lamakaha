@@ -1,0 +1,85 @@
+#! /Applications/Nuke11.0v1/Nuke11.0v1.app/Contents/MacOS/libnuke-11.0.1.dylib -nx
+version 11.0 v1
+Gizmo {
+ inputs 2
+ tile_color 0xd6ff32ff
+ addUserKnob {20 tab_general l General}
+ addUserKnob {3 frameST l "Frame Range" +DISABLED}
+ frameST 1001
+ addUserKnob {3 frameED l "" -STARTLINE +DISABLED}
+ frameED 1100
+ addUserKnob {41 customFrameR l "Custom Range" -STARTLINE T frameRangeSetup.customFrameR}
+ addUserKnob {22 calculate T "thisGRP = nuke.thisGroup()\n\nif thisGRP.input(0) != None and thisGRP.input(1) != None :\n\tresetTR = nuke.toNode('resetTR')\n\n\tcustomFR = thisGRP\['customFrameR'].getValue()\n\n\tif customFR == 1 :\n\t\tframeST = int(thisGRP\['frameST'].getValue())\n\t\tframeED = int(thisGRP\['frameED'].getValue())\n\telse :\n\t\tframeST = nuke.root().firstFrame()\n\t\tframeED = nuke.root().lastFrame()\n\n\tthisGRP\['depthValue'].clearAnimated()\n\tthisGRP\['depth_offset'].clearAnimated()\n\n\n\t#check if animated scene#########################################\n\n\tcheckANI = 0\n\n\tfor a in thisGRP.input(0).knobs().keys() :\n\t\tif thisGRP.input(0).knob(a).isAnimated() == True :\n\t\t\tcheckANI = 1\n\n\tfor a in thisGRP.input(1).knobs().keys() :\n\t\tif thisGRP.input(1).knob(a).isAnimated() == True :\n\t\t\tcheckANI = 1\n\n\t#Reset target coordinate#########################################\n\n\tresetAXIS = nuke.nodes.Axis(name='resetPOS')\n\n\tresetAXIS\['xform_order'].setExpression('parent.parent.\{0\}.xform_order'.format(thisGRP.input(0).name()))\n\tresetAXIS\['rot_order'].setExpression('parent.parent.\{0\}.rot_order'.format(thisGRP.input(0).name()))\n\tresetAXIS\['translate'].setExpression('parent.parent.\{0\}.translate*-1'.format(thisGRP.input(0).name()))\n\tresetAXIS\['rotate'].setExpression('parent.parent.\{0\}.rotate*-1'.format(thisGRP.input(0).name()))\n\tresetAXIS\['pivot'].setExpression('parent.parent.\{0\}.translate'.format(thisGRP.input(0).name()))\n\n\tresetTR.setInput(1,resetAXIS)\n\n\t#Get Matrix after reset##########################################\n\n\ttargetMain = nuke.math.Matrix4()\n\tmRTR = nuke.math.Matrix4()\n\tmRAX = nuke.math.Matrix4()\n\n\tif checkANI != 0 :\n\t\tthisGRP\['depthValue'].setAnimated()\n\t\tthisGRP\['depth_offset'].setAnimated()\n\t\tfor n in xrange (frameST, frameED +1 ) :\n\t\t\tfor m in range (0,16) :\n\t\t\t\ttargetMain\[m] = nuke.toNode(thisGRP.input(1).name()).knob('matrix').getValueAt(n)\[m]\n\t\t\t\tmRTR = nuke.toNode('resetTR').knob('matrix').getValueAt(n)\[m]\n\t\t\t\tmRAX\[m] = nuke.toNode('resetPOS').knob('matrix').getValueAt(n)\[m]\n\t  \n\t\t\ttargetResult_mx = targetMain*mRTR*mRAX\n\t  \n\t\t\ttargetResult_mx.transpose()\n\t  \n\t\t\tmxTR = nuke.math.Matrix4(targetResult_mx)\n\t\t\tmxTR.translationOnly()\n\t  \n\t\t\tthisGRP\['depthValue'].setValueAt(mxTR\[14]*-1, time=n)\n\t\t\tthisGRP\['depth_offset'].setValueAt(mxTR\[14]*-1, time=n)\n\telse :\n\t\tfor m in range (0,16) :\n\t\t\ttargetMain\[m] = nuke.toNode(thisGRP.input(1).name()).knob('matrix').getValue()\[m]\n\t\t\tmRTR = nuke.toNode('resetTR').knob('matrix').getValue()\[m]\n\t\t\tmRAX\[m] = nuke.toNode('resetPOS').knob('matrix').getValue()\[m]\n\t  \n\t\ttargetResult_mx = targetMain*mRTR*mRAX\n\n\t\ttargetResult_mx.transpose()\n\n\t\tmxTR = nuke.math.Matrix4(targetResult_mx)\n\t\tmxTR.translationOnly()\n\n\t\tthisGRP\['depthValue'].setValue(mxTR\[14]*-1)\n\t\tthisGRP\['depth_offset'].setValue(mxTR\[14]*-1)\n\n\tinputNodes = '<b>nodes:</b> ' + thisGRP.input(0).name() + ', ' + thisGRP.input(1).name() + ' | <b>Range:</b> ' + str(frameST) + '-' + str(frameED)\n\tthisGRP\['inputNodes'].setValue(inputNodes)\n\t\n\tnuke.delete(resetAXIS)\n\nelse :\n\tnuke.message('Camera and Target must be connected')" +STARTLINE}
+ addUserKnob {26 result l Result}
+ addUserKnob {7 depthValue l Depth +DISABLED R -100 100}
+ addUserKnob {41 offsetValue l Offset T offsetSetup.offsetValue}
+ addUserKnob {7 depth_offset l "Output Depth" R -500 500}
+ addUserKnob {26 ""}
+ addUserKnob {26 inputNodes l "Result from" T "<b>nodes:</b> Camera1, Axis1 | <b>Range:</b> 1001-1100"}
+ addUserKnob {20 t_VERSION l Version}
+ addUserKnob {26 l_VERSION l <b>Version</b> T 1.0}
+ addUserKnob {26 l_DATE l "<b>Date Modified</b>" T 2018/03/30}
+ addUserKnob {26 l_CHANGELOG l <b>Changelog</b> T "1.0\n- use geo and camera to calculate the depth.\nuseful for depth of field, deep compositing, \nclip zdepth, 3D scene scale \nand any zdepth related compositing method."}
+ addUserKnob {26 l_DEV l "<b>Developed by</b>" T "Mark Joey Tang"}
+}
+ Input {
+  inputs 0
+  name target
+  xpos 138
+  ypos -2
+  number 1
+ }
+ TransformGeo {
+  name resetTR
+  xpos 138
+  ypos 111
+ }
+ Input {
+  inputs 0
+  name cam
+  xpos 0
+ }
+ Scene {
+  inputs 2
+  name Scene1
+  xpos 10
+  ypos 90
+ }
+ Dot {
+  name Dot2
+  xpos 34
+  ypos 191
+ }
+set Nbc3bc490 [stack 0]
+ Dot {
+  name Dot3
+  xpos 34
+  ypos 236
+ }
+set Nbc3e7140 [stack 0]
+ Output {
+  name Output1
+  xpos 0
+  ypos 282
+ }
+push $Nbc3bc490
+ Dot {
+  name offsetSetup
+  knobChanged "\nif nuke.thisGroup().knob('offsetValue').getValue() != 0 :\n  nuke.thisGroup().knob('depth_offset').setExpression('depthValue + offsetValue')\nelse :\n  nuke.thisGroup().knob('depth_offset').clearAnimated()\n"
+  tile_color 0xff0000ff
+  xpos 107
+  ypos 191
+  addUserKnob {20 User}
+  addUserKnob {7 offsetValue l "Offset Value" R -500 500}
+ }
+push $Nbc3e7140
+ Dot {
+  name frameRangeSetup
+  knobChanged "\nif nuke.thisGroup().knob('customFrameR').getValue() == 0 :\n  nuke.thisGroup().knob('frameST').setEnabled(False)\n  nuke.thisGroup().knob('frameED').setEnabled(False)\nelse :\n  nuke.thisGroup().knob('frameST').setEnabled(True)\n  nuke.thisGroup().knob('frameED').setEnabled(True)\n"
+  tile_color 0xffff
+  xpos 107
+  ypos 236
+  addUserKnob {20 User}
+  addUserKnob {6 customFrameR l "Custom Range" +STARTLINE}
+ }
+end_group

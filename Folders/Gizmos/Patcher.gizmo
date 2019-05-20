@@ -1,0 +1,399 @@
+#! /mnt/repository/software/nuke/9.0v7/centos-6_x86-64/libnuke-9.0.7.so -nx
+version 9.0 v7
+Group {
+ name Patcher
+ inputs 2
+ tile_color 0x411557ff
+ gl_color 0x339bffff
+ label "\[value from_frame]-\[value to_frame]\n\n"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+ note_font_size 10
+ note_font_color 0xffffffff
+ addUserKnob {20 User}
+ addUserKnob {41 operation T Merge15.operation}
+ addUserKnob {41 Achannels l channels T Merge15.Achannels}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {3 cloneframe l "clone frame"}
+ cloneframe 1
+ addUserKnob {6 Current l "use current frame" -STARTLINE}
+ Current true
+ addUserKnob {3 from_frame l "from frame"}
+ from_frame 1
+ addUserKnob {3 to_frame l "to frame" -STARTLINE}
+ to_frame 1
+ addUserKnob {6 Whole l "whole range" -STARTLINE}
+ Whole true
+ addUserKnob {22 grab l "grab reference pattern" T "\nn = nuke.thisNode()\nn\['copy_from_to_1'].execute()\nn\['disableCP'].setValue(0)\nn\['to1'].setExpression('parent.point1')\nn\['to2'].setExpression('parent.point2')\nn\['to3'].setExpression('parent.point3')\nn\['to4'].setExpression('parent.point4')\n\nn\['from1'].clearAnimated()\nn\['from2'].clearAnimated()\nn\['from3'].clearAnimated()\nn\['from4'].clearAnimated()\nn\['gl_color'].setValue(4279121151)\n" +STARTLINE}
+ addUserKnob {6 allignview l allign_view -STARTLINE}
+ addUserKnob {6 patch_only l "show reference only" -STARTLINE}
+ addUserKnob {22 externalMask l INVISIBLE +INVISIBLE T "d = nuke.toNode(\"maskDot\")\na = nuke.nodes.Input(name = \"mask\")\nd.setInput(0,a)" +STARTLINE}
+ addUserKnob {22 cutOut l INVISIBLE -STARTLINE +INVISIBLE T "d = nuke.toNode(\"maskDotB\")\na = nuke.nodes.Input(name = \"cutout\")\nnuke.toNode(\"Mcutout\")\['disable'].setValue(0)\nd.setInput(0,a)"}
+ addUserKnob {6 ExportPatchOnly l "export patch only" -STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 translate l "<font color=\"Green\"><b>TRANSLATE" T Transform8.translate}
+ addUserKnob {41 rotate T Transform8.rotate}
+ addUserKnob {41 scale T Transform8.scale}
+ addUserKnob {41 center T Transform8.center}
+ addUserKnob {26 CC l "<font color=\"Dark Red\"><b>CC"}
+ addUserKnob {41 multiply T Grade6.multiply}
+ addUserKnob {41 gamma T Grade6.gamma}
+ addUserKnob {41 add l offset T Grade6.add}
+ addUserKnob {26 ""}
+ addUserKnob {20 from l "Additional transforms" n 1}
+ from 0
+ addUserKnob {6 disableCP l "disable corner pin" +STARTLINE}
+ addUserKnob {41 copy_from_to_1 l "Copy 'to'" T CornerPin2D1.copy_from_to}
+ addUserKnob {41 from1 T CornerPin2D1.from1}
+ addUserKnob {41 from2 -STARTLINE T CornerPin2D1.from2}
+ addUserKnob {41 from3 T CornerPin2D1.from3}
+ addUserKnob {41 from4 -STARTLINE T CornerPin2D1.from4}
+ addUserKnob {41 to1 T CornerPin2D1.to1}
+ addUserKnob {41 to2 -STARTLINE T CornerPin2D1.to2}
+ addUserKnob {41 to3 T CornerPin2D1.to3}
+ addUserKnob {41 to4 -STARTLINE T CornerPin2D1.to4}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 Points}
+ addUserKnob {12 point4}
+ point4 {924 878}
+ addUserKnob {12 point3 -STARTLINE}
+ point3 {1124 878}
+ addUserKnob {12 point1}
+ point1 {924 678}
+ addUserKnob {12 point2 -STARTLINE}
+ point2 {1124 678}
+ addUserKnob {26 ""}
+ addUserKnob {41 size l "Blur roto" T Blur9.size}
+ addUserKnob {41 mix T Merge15.mix}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x3f289601
+  note_font "Helvetica bold"
+  note_font_size 100
+  xpos 1033
+  ypos 189
+  bookmark false
+  bdwidth 297
+  bdheight 450
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x4c354f01
+  note_font "Helvetica bold"
+  note_font_size 100
+  xpos 431
+  ypos -188
+  bookmark false
+  bdwidth 189
+  bdheight 376
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 11
+  ypos 262
+  number 1
+ }
+ Blur {
+  channels rgba
+  name Blur9
+  xpos 11
+  ypos 302
+ }
+ Dot {
+  name maskDot
+  tile_color 0xff
+  xpos 45
+  ypos 471
+ }
+set N9593580 [stack 0]
+ Input {
+  inputs 0
+  name Image
+  xpos 843
+  ypos -428
+ }
+ Dot {
+  name Dot22
+  xpos 877
+  ypos -303
+ }
+set N959a590 [stack 0]
+ Dot {
+  name Dot23
+  xpos 475
+  ypos -303
+ }
+ Shuffle {
+  alpha white
+  name Shuffle5
+  tile_color 0xffffffff
+  label "White Alpha"
+  selected true
+  xpos 441
+  ypos -103
+ }
+set N95a3830 [stack 0]
+ FrameHold {
+  first_frame {{parent.cloneframe}}
+  name FrameHold6
+  xpos 520
+  ypos -54
+ }
+push $N95a3830
+ Switch {
+  inputs 2
+  which 1
+  name patternFrameSwitch
+  label "\[value which]"
+  xpos 441
+  ypos 8
+  disable {{parent.Current}}
+ }
+ Grade {
+  name Grade6
+  xpos 441
+  ypos 61
+ }
+ CornerPin2D {
+  to1 {{parent.point1} {parent.point1}}
+  to2 {{parent.point2} {parent.point2}}
+  to3 {{parent.point3} {parent.point3}}
+  to4 {{parent.point4} {parent.point4}}
+  invert false
+  from1 {{parent.point1} {parent.point1}}
+  from2 {{parent.point2} {parent.point2}}
+  from3 {{parent.point3} {parent.point3}}
+  from4 {{parent.point4} {parent.point4}}
+  name CornerPin2D1
+  xpos 441
+  ypos 87
+  disable {{parent.disableCP}}
+ }
+ Transform {
+  center {1024 778}
+  name Transform8
+  xpos 441
+  ypos 113
+ }
+ Dot {
+  name Dot2
+  xpos 475
+  ypos 387
+ }
+set N95f51c0 [stack 0]
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox A
+  name Merge13
+  xpos 441
+  ypos 467
+ }
+ Dot {
+  name Dot24
+  xpos 475
+  ypos 527
+ }
+set N9609f40 [stack 0]
+ Dot {
+  name Dot8
+  xpos 475
+  ypos 892
+ }
+push $N9593580
+ Grade {
+  multiply {1 0.6 0.6 1}
+  name Grade2
+  xpos 11
+  ypos 554
+ }
+ Dot {
+  name Dot7
+  xpos 45
+  ypos 651
+ }
+push $N95f51c0
+ Dot {
+  name Dot5
+  xpos 391
+  ypos 387
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix 0.5
+  name Merge1
+  xpos 357
+  ypos 647
+ }
+ Dot {
+  name Dot4
+  xpos 391
+  ypos 808
+ }
+push $N95f51c0
+ EdgeDetectWrapper {
+  name EdgeDetect2
+  xpos 1043
+  ypos 377
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle7
+  tile_color 0xffffffff
+  xpos 1043
+  ypos 415
+ }
+ Invert {
+  channels rgba
+  name Invert4
+  xpos 1043
+  ypos 441
+ }
+ Dot {
+  name Dot26
+  xpos 1077
+  ypos 529
+ }
+push $N959a590
+ Dot {
+  name Dot25
+  xpos 1264
+  ypos -303
+ }
+set N966fef0 [stack 0]
+ EdgeDetectWrapper {
+  name EdgeDetect1
+  xpos 1230
+  ypos 274
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle6
+  tile_color 0xffffffff
+  xpos 1230
+  ypos 312
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox A
+  mix 0.5
+  name Merge14
+  xpos 1230
+  ypos 525
+ }
+ Grade {
+  blackpoint 0.4
+  whitepoint 0.6
+  name Grade1
+  xpos 1230
+  ypos 564
+ }
+push $N9609f40
+push $N959a590
+ Merge2 {
+  inputs 2
+  name Merge15
+  xpos 843
+  ypos 523
+ }
+ Dot {
+  name Dot28
+  xpos 877
+  ypos 682
+ }
+ Dot {
+  name Dot3
+  xpos 877
+  ypos 682
+ }
+ Switch {
+  inputs 2
+  which {{parent.allignview}}
+  name Switch2
+  label "\[value which]"
+  xpos 1230
+  ypos 672
+ }
+set N96c9fd0 [stack 0]
+ Dot {
+  name Dot1
+  xpos 1264
+  ypos 750
+ }
+push $N96c9fd0
+push $N966fef0
+ Dot {
+  name Dot27
+  xpos 1521
+  ypos -303
+ }
+ Switch {
+  inputs 2
+  which {{parent.from_frame<=frame&&frame<=parent.to_frame?1:0}}
+  name Switch1
+  label "\[value which]\ndisabler"
+  xpos 1477
+  ypos 666
+  addUserKnob {20 User}
+  addUserKnob {68 a M {disabled enabled}}
+ }
+ Switch {
+  inputs 2
+  which {{parent.Whole}}
+  name range
+  label "\[value which]"
+  xpos 1477
+  ypos 740
+ }
+ Switch {
+  inputs 2
+  which {{parent.patch_only}}
+  name Switch3
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 792
+ }
+ Switch {
+  inputs 2
+  which {{parent.ExportPatchOnly}}
+  name Switch4
+  label "\[value which]\npatch only view"
+  xpos 1487
+  ypos 876
+ }
+ Output {
+  name Output1
+  xpos 1487
+  ypos 989
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  tile_color 0xffffffff
+  label "<b>compare                "
+  note_font "Helvetica bold"
+  note_font_size 50
+  xpos 1035
+  ypos 118
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote2
+  tile_color 0xffffffff
+  label "<b>pattern                "
+  note_font "Helvetica bold"
+  note_font_size 50
+  xpos 430
+  ypos -259
+ }
+end_group

@@ -1,0 +1,56 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+ name FullFade
+ tile_color 0xff
+ note_font "Bitstream Vera Sans Bold Bold"
+ note_font_size 14
+ selected true
+ xpos 1601
+ ypos 88112
+ addUserKnob {20 User}
+ addUserKnob {41 format T Constant5.format}
+ addUserKnob {41 value T fade.value}
+ addUserKnob {26 ""}
+ addUserKnob {26 help_1 l "" +STARTLINE T "this node is fading (Da!)\nthe cool thing is that when value is \"0\" it will completely kill all channels, bboxes and put a black constatn instead - so your rendert will be super fast"}
+}
+ Constant {
+  inputs 0
+  name Constant5
+  tile_color 0xff
+  xpos -872
+  ypos 655
+  postage_stamp false
+ }
+ Dot {
+  name Dot674
+  xpos -838
+  ypos 775
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -751
+  ypos 613
+ }
+ Multiply {
+  channels rgba
+  name fade
+  xpos -751
+  ypos 653
+ }
+ Switch {
+  inputs 2
+  which {{input0.value==0?1:0}}
+  name Switch2
+  label "\[value which]"
+  xpos -751
+  ypos 765
+ }
+ Output {
+  name Output1
+  xpos -751
+  ypos 865
+ }
+end_group

@@ -1,0 +1,122 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Dot {
+ name Dot186
+ tile_color 1
+ selected true
+ xpos -393
+ ypos -295
+}
+set N1a6abbc0 [stack 0]
+Dot {
+ name Dot181
+ tile_color 1
+ selected true
+ xpos -312
+ ypos -295
+}
+set Nafa59f0 [stack 0]
+Dot {
+ name Dot182
+ tile_color 1
+ selected true
+ xpos -232
+ ypos -295
+}
+set N1a6aa8a0 [stack 0]
+Shuffle {
+ red black
+ green black
+ blue black
+ alpha blue
+ name B
+ tile_color 0x4cff
+ note_font_size 20
+ selected true
+ xpos -266
+ ypos -260
+}
+push $N1a6aa8a0
+Dot {
+ name Dot183
+ tile_color 1
+ selected true
+ xpos -151
+ ypos -295
+}
+set N1a6aabd0 [stack 0]
+HueKeyer {
+ lut {amount {curve x1.25 0 s0 x1.5 1 s0 x2.5 1 s0 x2.75 0 s0}
+   sat_thrsh {}}
+ invert false
+ name Y
+ tile_color 0x7f7f00ff
+ selected true
+ xpos -185
+ ypos -261
+}
+push $Nafa59f0
+Shuffle {
+ red black
+ green black
+ blue black
+ alpha green
+ name G
+ tile_color 0x4c00ff
+ note_font_size 20
+ selected true
+ xpos -346
+ ypos -260
+}
+push $N1a6abbc0
+Shuffle {
+ red black
+ green black
+ blue black
+ alpha red
+ name R
+ tile_color 0x4c0000ff
+ label "\n"
+ note_font_size 20
+ selected true
+ xpos -427
+ ypos -260
+}
+push $N1a6aabd0
+Dot {
+ name Dot184
+ tile_color 1
+ selected true
+ xpos -71
+ ypos -295
+}
+set N1a6aaf00 [stack 0]
+HueKeyer {
+ lut {amount {curve x3.25 0 s0 x3.5 1 s0 x4.5 1 s0 x4.75 0 s0}
+   sat_thrsh {}}
+ invert false
+ name C
+ tile_color 0x7f7fff
+ selected true
+ xpos -105
+ ypos -261
+}
+push $N1a6aaf00
+Dot {
+ name Dot185
+ tile_color 1
+ selected true
+ xpos 9
+ ypos -295
+}
+HueKeyer {
+ lut {amount {curve x0.5 1 s0 x0.75 0 s0 x5.25 0 s0 x5.5 1 s0}
+   sat_thrsh {}}
+ invert false
+ name M
+ tile_color 0x7f007fff
+ selected true
+ xpos -25
+ ypos -261
+}
