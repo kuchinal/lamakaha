@@ -12,7 +12,7 @@ if nuke.NUKE_VERSION_MAJOR > 10:
     n11 = True;n10 = False
 
     
-#gfgfg
+
 
 nuke.tprint("_"*100);nuke.tprint("now loading my user");nuke.tprint("_"*100);nuke.tprint("_"*100)
 
