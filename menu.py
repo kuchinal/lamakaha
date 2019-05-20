@@ -75,7 +75,7 @@ nodesMenu.addCommand("AOVs/TransformWorld_ik", "nuke.nodePaste(UserDir+'/Folders
 
 
 nodesMenu.addCommand("3D/MotionBlurCurved ", "nuke.createNode(\'MotionBlurCurved\')",icon ="MotionBlur2D.png")
-nodesMenu.addCommand("3D/ReflectionMy", "nuke.nodePaste(UserDir+'/GeneralSetups/reflectionMy.nk')",icon="my.png") 
+nodesMenu.addCommand("3D/ReflectionMy", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/reflectionMy.nk')",icon="my.png") 
 nodesMenu.addCommand('3D/WorldToRTS - calculate world matrix to TRS','import WorldToRTS; WorldToRTS.consolidateAnimatedNodeTransforms()',icon="Camera.png")
 nodesMenu.addCommand("3D/Camera", "nuke.createNode(\"Camera2\")","F11",  icon="Camera.png")
 nodesMenu.addCommand("3D/ScanlineRender", "import slrcreate; slrcreate.slrcreate()","F12",icon = "Render.png")
@@ -86,14 +86,14 @@ nodesMenu.addCommand("3D/Sphere", "nuke.createNode(\"Sphere\")","Alt+F10",  icon
 
 nodesMenu.addCommand("3D/CameraTracker", "nuke.createNode(\"CameraTracker1_0\")", "alt+F12",icon="Tracker.png")
 nodesMenu.addCommand("3D/Project3D", "nuke.createNode(\"Project3D\")","Ctrl+F11", icon="Shader_cam.png")
-
+nodesMenu.addCommand("3D/Light", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/LightTargeted.nk')","+l", icon="PointLight.png")
 
 nodesMenu.addCommand("Draw/PerspectiveGuide", "nuke.createNode('BB_PerspectiveGuide_1_1_0')", icon="BB_icon.png")
 nodesMenu.addCommand("Draw/UV generator", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/UVgenerator.nk')",icon="UVv.png")
 nodesMenu.addCommand("Draw/Caustic", "nuke.createNode(\'Caustics\')") 
 nodesMenu.addCommand('Draw/Grid', "nuke.createNode(\"Grid\")","Ctrl+F3",icon = "Grid.png")
 nodesMenu.addCommand("Draw/Noise", "nuke.createNode(\"Noise\")","Ctrl+F2", icon="Noise.png")
-nodesMenu.addCommand("Draw/Constant white", "nuke.nodePaste(UserDir+'/GeneralSetups/ConstantWhite.nk')","Ctrl+f1", icon="Constant.png")
+nodesMenu.addCommand("Draw/Constant white", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/ConstantWhite.nk')","Ctrl+f1", icon="Constant.png")
 nodesMenu.addCommand("Draw/RotoPaint", "nuke.createNode(\"RotoPaint\")","Alt+f2")
 
 nodesMenu.addCommand("Merge/ContactSheetMy", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/ContactSheetMy.nk')")
@@ -131,7 +131,7 @@ nodesMenu.addCommand("Filter/DarkWrap","nuke.createNode(\'DarkWrap\')",icon = "B
 nodesMenu.addCommand("Filter/VolumeRays", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/VolumeRays.nk')", icon="Ramp.png")
 nodesMenu.addCommand("Filter/ChromAbb",  "nuke.nodePaste(UserDir+'/Folders/NukeScripts/ChromAbb.nk')", icon="FlareFactoryPlus.png")
 nodesMenu.addCommand("Filter/PolarCoordinates", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/PolarCoordinates.nk')",icon="my.png")
-nodesMenu.addCommand("Sharpen", "nuke.nodePaste(UserDir+'/GeneralSetups/Sharpen.nk')")
+nodesMenu.addCommand("Sharpen", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/Sharpen.nk')")
 
 nodesMenu.addCommand('Transform/CardToTrack', "nuke.createNode(\"CardToTrack\")",icon = "Card.png")
 nodesMenu.addCommand('Transform/TrackToRoto','import TrackToRoto; TrackToRoto.RotoFromTrack()',"Shift+p",icon="Tracker.png")
@@ -142,6 +142,9 @@ nodesMenu.addCommand("Transform/ITransform","nuke.nodePaste(UserDir+'/Folders/Nu
 nodesMenu.addCommand("Transform/TransformMasked", "nuke.createNode(\"TransformMasked\")","Alt+f6", icon="TransformMasked.png")
 nodesMenu.addCommand("Transform/Cr", "cropMy.cropMy()","F6", icon="Crop.png")
 nodesMenu.addCommand("Transform/CornerPin", "nuke.createNode(\"CornerPinMy11\")", "shift+ctrl+c", icon="CornerPin.png")
+nodesMenu.addCommand('Reformat','import myReformat; myReformat.myReformat()',"ctrl+r", icon="Reformat.png")
+nodesMenu.addCommand("ReformatCrop","import ReformatCrop; ReformatCrop.ReformatCrop()",'ctrl+shift+r')
+nodesMenu.addCommand("Tracker", "nuke.createNode(\"Tracker4\")", "ctrl+t",icon="Tracker.png")
 
 
 nodesMenu.addCommand('Nodegraph/Auto Backdrop', 'import autoBackdropp; autoBackdropp.autoBackdrop()', 'alt+b',icon = "Backdrop.png")
@@ -164,6 +167,8 @@ nodesMenu.addCommand("Nodegraph/Connect", "nuke.connectNodes(False, False)", "Up
 nodesMenu.addCommand('Nodegraph/Align/horizontally', 'import alignNodes; alignNodes.alignNodes( nuke.selectedNodes(), direction="y" )',"l")
 nodesMenu.addCommand("Nodegraph/scaleNodesExpand", "import scaleNodesA; scaleNodesA.scaleNodes( 1.3,1)","Shift+.")
 nodesMenu.addCommand("Nodegraph/scaleNodesContract", "import scaleNodesA; scaleNodesA.scaleNodes( .7, 1 )","Ctrl+Shift+.")
+nodesMenu.addCommand('Nodegraph/autoplace nodes', '[n.autoplace() for n in nuke.selectedNodes()]',"Ctrl+Alt+l")
+
 
 nodesMenu.addCommand("Color/Full Fade", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/FullFade.nk')","Shift+f",icon="my.png")       
 nodesMenu.addCommand("Color/Expression", "import expressionMy; expressionMy.expressionMy()","Alt+f1", icon="my.png")
@@ -185,15 +190,15 @@ nodesMenu.addCommand("Color/Saturation", "nuke.createNode('Saturation')","Alt+F9
 nodesMenu.addCommand("Color/HueShift", "nuke.createNode(\"HueShift\")","Ctrl+h", icon="HueShift.png")
 nodesMenu.addCommand("Color/HSVTool", "nuke.createNode(\"HSVTool\")","Shift+h", icon="HSVTool.png")
 
-nodesMenu.addCommand('Keyer/IBKMy', 'nuke.nodePaste(UserDir+"/GeneralSetups/IBK.nk")',"Ctrl+F5",icon="luma.png")
+nodesMenu.addCommand('Keyer/IBKMy', 'nuke.nodePaste(UserDir+"/Folders/NukeScripts/IBK.nk")',"Ctrl+F5",icon="luma.png")
 nodesMenu.addCommand("Keyer/AddKeyer", "nuke.createNode('AddKeyer')", icon="luma.png")
-nodesMenu.addCommand("Keyer/LumaKey", "nuke.nodePaste(UserDir+'/GeneralSetups/LumaKey.nk')","Ctrl+F7",icon="luma.png")
+nodesMenu.addCommand("Keyer/LumaKey", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/LumaKey.nk')","Ctrl+F7",icon="luma.png")
 
 nodesMenu.addCommand('Keyer/Edge/EdgeScatter', "nuke.createNode(\"EdgeScatter\")",icon = "Defocus.png")
 nodesMenu.addCommand("Keyer/Despill/DespillMadness", "nuke.createNode('DespillMadnessMy')", icon="HueKeyer.png")
 nodesMenu.addCommand("Keyer/Edge/EdgeScatter", "nuke.createNode('EdgeScatter')", icon="Difference.png")
-nodesMenu.addCommand("Keyer/Edge/VectorExtendEdge", "nuke.nodePaste(UserDir+'/GeneralSetups/VectorExtendEdge.nk')","v",icon="Difference.png")
-nodesMenu.addCommand("Keyer/Edge/UVExtendEdge", "nuke.nodePaste(UserDir+'/GeneralSetups/edgeExtendMatrix.nk')",icon="Difference.png")
+nodesMenu.addCommand("Keyer/Edge/VectorExtendEdge", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/VectorExtendEdge.nk')","v",icon="Difference.png")
+nodesMenu.addCommand("Keyer/Edge/UVExtendEdge", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/edgeExtendMatrix.nk')",icon="Difference.png")
 nodesMenu.addCommand("Keyer/Edge/RoughEdge", "nuke.createNode(\'RoughEdgeMy\')")
 nodesMenu.addCommand("Keyer/Edge/Erode_My", "nuke.createNode(\"Erode_My\")","Ctrl+Shift+e",icon="ErodeBlur.png")
 
@@ -213,44 +218,13 @@ nodesMenu.addCommand("Channel/Remove", "nuke.createNode(\"Remove\")", "Ctrl+Alt+
 
 
 
-
-
-
-
-
-
-nodesMenu.addCommand('Shortcuted/cop','cop.cop()',"ctrl+alt+c", icon="CornerPin.png")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #######################################    NODEGRAPH MENU    ####################################################
 nodegraphMenu = nuke.menu('Node Graph')
-nodegraphMenu.addCommand('My/Dots ', 'import Dots; Dots.Dots()', ',',icon = "Dot.png")
-nodegraphMenu.addCommand('My/Transform', 'import myTransform; myTransform.transformThis()', 't')
-nodegraphMenu.addCommand('My/Merge', 'import myMerge; myMerge.mergeThis()', 'm',shortcutContext=2)
-nodegraphMenu.addCommand("My/MyCC", "import myCC; myCC.myCC()","c")
-#nodegraphMenu.addCommand('Align/autoplace', 'autoplace()',"Ctrl+Alt+l")
+nodegraphMenu.addCommand('@;Dots ', 'import Dots; Dots.Dots()', ',',icon = "Dot.png")
+nodegraphMenu.addCommand('@;Transform', 'import myTransform; myTransform.transformThis()', 't')
+nodegraphMenu.addCommand('@;Merge', 'import myMerge; myMerge.mergeThis()', 'm',shortcutContext=2)
+nodegraphMenu.addCommand("@;MyCC", "import myCC; myCC.myCC()","c")
+
 
 
 
