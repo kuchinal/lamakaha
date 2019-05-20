@@ -1,0 +1,122 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Axis {
+ inputs 0
+ translate {{parent.small.translate} {parent.small.translate} 0}
+ name Axis2
+ selected true
+ xpos 955
+ ypos 8315
+}
+Axis {
+ translate {{parent.mid.translate.x} {parent.mid.translate.y} 0}
+ name Axis1
+ selected true
+ xpos 955
+ ypos 8397
+}
+Camera2 {
+ translate {0 0 88.40000153}
+ name Camera1
+ selected true
+ xpos 955
+ ypos 8489
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+set N114708d0 [stack 0]
+push $N114708d0
+push $cut_paste_input
+Transform {
+ translate {132 2}
+ scale 1.15
+ center {1075 567}
+ shutteroffset centred
+ name Transform12
+ selected true
+ xpos 1201
+ ypos 8292
+}
+Transform {
+ translate {{curve x1000.839722 -7.608000511 x1001.607788 -2.726495465 x1002.376038 -40.15001432 x1003.143799 -5.979479003 x1004.680176 13.54654118 x1005.634155 -27.67493698 x1007.475098 17.92976378 x1009.124695 -28.12849426 x1010.965637 4.51928146 x1012.937134 -11.26400499 x1014.64801 -18.22999671 x1017.409302 10.65770378 x1020.171082 -27.01102252 x1022.012268 7.545461262 x1024 -32.52474489 x1026 27.09145297 x1027.407837 -1.500994896 x1028.721558 -11.26400499 x1030.034912 -27.10838423 x1032 25.53532185 x1035 -29.02236176 x1040 29.93305397 x1041.258911 -5.332778931 x1043 -36.65932226 x1044.54248 -4.247544345 x1046 11.99570465 x1050.256958 -7.443921835 x1051.77417 -43.1329914 x1054.197144 -10.64029933 x1055.77417 -5.97718811 x1057.77417 -40.04209137 x1060.77417 2.145210635 x1060.77417 -4.247544345 x1062.077881 -13.83667682} {curve x1000.839722 0.3205719238 x1001.607788 -17.3710106 x1001.952087 12.54784414 x1003.143799 -20.62399414 x1004.713745 12.54784414 x1005.448181 -35.26850928 x1009.124695 8.324139335 x1010.965637 -29.09031381 x1012.806763 -9.854635334 x1014.64801 18.54696655 x1017.545776 -6.382499942 x1020.171082 22.13738251 x1022.154053 -16.14551003 x1024.657227 27.78803538 -30.79002517 x1029.167969 13.14352024 x1031 30.06023452 x1035 -56.71805573 x1036 48.80388641 x1040 -31.66217804 x1042 35.52563477 x1043 -53.41217434 x1048 43.28781641 x1050 -10.64029933 25.99784088 x1054.77417 -30.50954142 x1056.77417 42.92580032 x1060.77417 -23.08738667 x1064.053955 34.10898554 x1067.06543 -7.443921835 21.32347558 x1073.087891 -9.332778931 x1073.321899 8.667221069 x1075.329712 -9.332778931 x1076.337402 8.667221069}}
+ center {1075 567}
+ shutteroffset centred
+ name small
+ selected true
+ xpos 1201
+ ypos 8330
+}
+Transform {
+ translate {{curve x905.8568726 -8.58160097 x907.9763794 -4.932074699 x910.0961304 -32.91076446 x912.2049561 -7.36408056 x916.4494019 7.234024525 x918.5844727 36.4302347 x924.9377441 47.37881351 x929.1820068 -14.6631331 x933.4265747 -21.96218565 x939.7799683 -7.36408056 x944.0241699 21.83212961 x952.5125732 -11.01360683 x958.8659668 -36.56029073 x965.2195435 -14.6631331 x970.2265625 3.584498254 x975.2324829 25.48165588 x978.5875854 -0.0650280177 x981.916626 -7.36408056 x985.2454834 -40.209817 x986.9228516 -36.56029073 x988.600647 -32.91076446 x990.2522583 7.238235881 x995.335022 -33.5609143 x1000.418213 5.774584338 x1003.620117 -14.6631331 x1007 -16.31213379 x1011.956116 -7.36408056 x1015 12.39248657 x1021.969238 -11.01360683 x1026.975952 -36.56029073 x1031.982544 -14.6631331 x1036.989258 3.584498254 x1041 16.9287262 x1045.35083 -0.0650280177 x1048.679443 -7.36408056 x1052 -18.31265937 x1057 -30.99311829 x1070 16.55574036} {curve x905.8568726 -2.654016522 x907.9763794 -15.88065351 x910.0961304 21.83212961 x912.2049561 -18.31265937 x916.4494019 25.48165588 x918.5844727 -29.26123819 x924.9377441 25.48165588 x929.1820068 -14.6631331 x933.4265747 25.48165588 x939.7799683 -14.6631331 x944.0241699 40.07976097 x952.5125732 -3.714554289 x958.8659668 36.4302347 x965.2195435 -11.01360683 x971.5983887 21.83212961 x977.9777832 -21.96218565 x983.0604248 10.8835508 x988.1682739 -21.96218565 x993.2512817 -3.714554289 x995.8182983 -47.50886954 x998.3599243 21.83212961 x1000.900818 -18.31265937 x1006 8.44833374 x1009 -11.05327606 x1016 8.010093689 x1021.334473 -14.6631331 x1026.416992 25.48165588 x1033 -14.6631331 x1037 -29.67840576 x1049 29.48377991 x1057 16.99398041 x1064.691528 -11.01360683 x1072.340454 21.83212961 x1079.990601 -21.96218565 x1085.098022 10.8835508 x1090.206421 -21.96218565 x1095.314697 10.8835508}}
+ center {1075 567}
+ shutteroffset centred
+ name mid
+ selected true
+ xpos 1201
+ ypos 8356
+}
+Project3D {
+ inputs 2
+ crop false
+ name Project3D1
+ selected true
+ xpos 1206
+ ypos 8509
+}
+NoTimeBlur {
+ name NoTimeBlur1
+ selected true
+ xpos 1206
+ ypos 8541
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ uniform_scale 300
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ selected true
+ xpos 1206
+ ypos 8574
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+Reformat {
+ inputs 0
+ format "2150 1134 0 0 2150 1134 1 LevelUp"
+ name Reformat1
+ selected true
+ xpos 1422
+ ypos 8547
+}
+ScanlineRender {
+ inputs 3
+ projection_mode perspective
+ overscan 100
+ samples 25
+ shutter 0.02
+ shutteroffset centred
+ name ScanlineRender1
+ selected true
+ xpos 1206
+ ypos 8615
+}

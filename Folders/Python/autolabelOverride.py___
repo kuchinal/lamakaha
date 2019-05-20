@@ -1,0 +1,14 @@
+def autolabelOverride():
+    import nuke
+    import re
+    n = nuke.selectedNodes()
+    for p in n:
+        nodename = p['name'].value()
+        label = p['label'].value()
+        if "[" in label:
+            p['autolabel'].setValue("nuke.thisNode()['label'].evaluate()")
+        elif label == "" :
+            p['autolabel'].setValue("nuke.thisNode()['name'].value()")
+        else:
+            p['autolabel'].setValue("nuke.thisNode()['label'].value()")
+        p['note_font_size'].setValue(14)

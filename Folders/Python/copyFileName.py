@@ -1,12 +1,10 @@
-
 import nuke
-try:
-    from PySide import QtCore, QtGui
-except:
-    import PySide2
-    from PySide2 import QtCore, QtGui
-
 def copyFileName():
+    try:
+        from PySide import QtCore, QtGui, QtGui as QtWidgets 
+    except:
+        from PySide2 import QtWidgets, QtCore, QtGui 
+
     a= nuke.selectedNodes()
     l=""
     for one in a:
@@ -19,13 +17,7 @@ def copyFileName():
                 first=one['range_first'].value()
             l=l+t+" "+str(first)+"-"+str(last)+"\n"
             print l
-    try:
-        qclip = QtGui.QApplication.clipboard()
-    except:
-        PySide2.QtWidgets.QApplication.clipboard() 
+
+    qclip = QtWidgets.QApplication.clipboard() 
     qclip.clear() 
     qclip.setText(l)
-
-
-
-

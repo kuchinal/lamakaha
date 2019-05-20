@@ -46,13 +46,10 @@ def shuffleCreate():
         nuke.createNode('Shuffle')
 
 
-
-
-
-
 def shuffleAlpha():
     import nuke
     import nukescripts
+    from menu import UserDir
     try:
         a = nuke.selectedNode()
         if a.Class() == "Shuffle":
@@ -76,7 +73,7 @@ def shuffleAlpha():
                 a['tile_color'].setValue(4294967295)               
 
             else:
-                nuke.createNode("Axis") 
+                nuke.createNode("Axis2") 
         elif a.Class() == "Grade":
             a['channels'].setValue("rgba")
             a['label'].setValue("rgba")
@@ -87,10 +84,10 @@ def shuffleAlpha():
             a['also_merge'].setValue("all")
             a['label'].setValue("all")
         else:
-            nuke.createNode("Axis")
+            nuke.nodePaste(UserDir+'/Folders/NukeScripts/AxisMy.nk')
             pass            
     except:
-        nuke.createNode("Axis") 
+        nuke.nodePaste(UserDir+'/Folders/NukeScripts/AxisMy.nk')
         pass
 
 ###################################################################################################################################################
@@ -306,6 +303,81 @@ def shuffleBlue():
         nuke.createNode("Blur")
 
 
+def shuffleNormal():
+    import nuke
+    import nukescripts
+    try:
+        a = nuke.selectedNode()
+        name = a['name'].value()
+        if a.Class() == "Shuffle":
+            name = a['name'].value()
+            r = a['red'].value()
+            g = a['green'].value()
+            b = a['blue'].value()
+            aa = a['alpha'].value()
+            lab = a['label'].value()
+            if  a['in'].value() == "rgba" and r == "red" and g == "green" and b == "blue" and aa == "alpha" :
+                a['label'].setValue("")
+                a['in'].setValue("N")
+                a.setName("N")
+                a['tile_color'].setValue(1128481791)
+            else:
+                nuke.createNode("Blur") 
+        else:
+            Label.Label()                
+    except:
+        Label.Label()
 
+def shuffleWorldPosition():
+    import nuke
+    import nukescripts
+    try:
+        a = nuke.selectedNode()
+        name = a['name'].value()
+        if a.Class() == "Shuffle":
+            name = a['name'].value()
+            r = a['red'].value()
+            g = a['green'].value()
+            b = a['blue'].value()
+            aa = a['alpha'].value()
+            lab = a['label'].value()
+            if  a['in'].value() == "rgba" and r == "red" and g == "green" and b == "blue" and aa == "alpha" :
+                a['label'].setValue("")
+                a['in'].setValue("P")
+                a.setName("P")
+                a['tile_color'].setValue(1027575296L)
+            else:
+                nuke.createNode("Blur") 
+
+        else:
+            nuke.createNode("Write")                
+    except:
+        nuke.createNode("Write")  
+
+def shufflePref():
+    import nuke
+    import nukescripts
+    try:
+        a = nuke.selectedNode()
+        name = a['name'].value()
+        if a.Class() == "Shuffle":
+            name = a['name'].value()
+            r = a['red'].value()
+            g = a['green'].value()
+            b = a['blue'].value()
+            aa = a['alpha'].value()
+            lab = a['label'].value()
+            if  a['in'].value() == "rgba" and r == "red" and g == "green" and b == "blue" and aa == "alpha" :
+                a['label'].setValue("")
+                a['in'].setValue("Pref")
+                a.setName("Pref")
+                a['tile_color'].setValue(1128481791)
+            else:
+                nuke.createNode("Roto") 
+
+        else:
+            nuke.createNode("Roto")                
+    except:
+        nuke.createNode("Roto")  
 
 

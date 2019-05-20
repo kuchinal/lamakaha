@@ -1,0 +1,61 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Card2 {
+ image_aspect false
+ rows 1
+ columns 1
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name CardWpos
+ tile_color 0x6400ff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ note_font_color 0x56b6ffff
+ selected true
+ xpos -1052
+ ypos -522
+ addUserKnob {20 Wpos}
+ addUserKnob {20 Wpos_1 l Wpos n 1}
+ Wpos_1 0
+ addUserKnob {22 Set l "Pick World Position " t "Use this button when you want to pick the position from the world position pass,\n\ntip - connect your \"Wpos\"(rgb) to the input of the card. now you allways can pick the Wpos if you pressing the alt+ctrl key while watching the plate." -STARTLINE T "nuke.thisNode()\['translate'].setValue(nuke.thisNode()\['ColorPicker'].value())"}
+ addUserKnob {18 ColorPicker l "World Position Pass picker" -STARTLINE}
+ ColorPicker {0 0 0}
+ addUserKnob {6 ColorPicker_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 q l "" +STARTLINE}
+ addUserKnob {6 Point_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {22 GrabCam l "Grab Camera and backplate" t "in order to calculate position of the card in 3d space you have to give some info to the tool\n\n1 select the camera and the plate and grab them - press \"grab camera and backplate\"\n2 find some feature in your footage whichi s visible during the shot longest,press \"Set Ref Frame\",  position the card on this feature on it using X and Y arrows, ignore Z for now\n3 go to another frame and adjust the position of the card moving it in 3d space by Z axis only\n \n\nyou found the position!\n\ntip: you may want to use two viewers one with 3d space, second with screenspace" T "n = nuke.thisNode()\nb = nuke.selectedNodes()\nfor node in b:\n\tif \"Camera\" in node.Class():\n\t\tcam = node\['name'].value()\n\t\tn\['cam'].setValue(cam)\n\t\tcam = n\['cam'].getValue()\n\t\texpX = 'degrees(atan(('+cam+'.translate.y(ref)-translate.y)/sqrt(pow2(sqrt(pow2('+cam+'.translate.x(ref)-translate.x)+pow2('+cam+'.translate.z(ref)-translate.z))))))'\n\t\texpY = ''+cam+'.translate.x(ref)-translate.x >= 0 ? 270-degrees(atan(('+cam+'.translate.z(ref)-translate.z)/('+cam+'.translate.x(ref)-translate.x))): -degrees(atan(('+cam+'.translate.z(ref)-translate.z)/('+cam+'.translate.x(ref)-translate.x)))-270'\n\t\tn\['rotate'].setExpression(expX,0)\n\t\tn\['rotate'].setExpression(expY,1)\n\t\tn\['X'].setValue(expX)\n\t\tn\['Y'].setValue(expY)\n\t\tpos = node\['translate'].value()\n\t\tn\['translate'].setValue(pos)\n\t\tz = n\['translate'].value(2)\n\t\tn\['translate'].setValue(z+10,2)\n\t\t\n\n\n\telse:\n\t\tback = node\['name'].value()\n\t\tn\['back'].setValue(back)\t" +STARTLINE}
+ addUserKnob {1 cam l INVISIBLE -STARTLINE +INVISIBLE}
+ cam mainCam3
+ addUserKnob {1 back l INVISIBLE -STARTLINE +INVISIBLE}
+ back auto_generated_undistNode29
+ addUserKnob {22 setRef l "Set Ref Frame" t "in order to calculate position of the card in 3d space you have to give some info to the tool\n\n1 select the camera and the plate and grab them - press \"grab camera and backplate\"\n2 find some feature in your footage whichi s visible during the shot longest,press \"Set Ref Frame\",  position the card on this feature on it using X and Y arrows, ignore Z for now\n3 go to another frame and adjust the position of the card moving it in 3d space by Z axis only\n \n\nyou found the position!\n\ntip: you may want to use two viewers one with 3d space, second with screenspace" T "n = nuke.thisNode()\nn\['ref'].setValue(nuke.frame())\nn\['label'].setValue(\"\")" +STARTLINE}
+ addUserKnob {3 ref l "Ref Frame" -STARTLINE}
+ ref 1001
+ addUserKnob {26 ""}
+ addUserKnob {41 translate_1 l translate T CardWpos.translate}
+ addUserKnob {41 rotate_1 l rotate T CardWpos.rotate}
+ addUserKnob {41 scaling_1 l scale T CardWpos.scaling}
+ addUserKnob {41 scale t "uniform scale" T CardWpos.uniform_scale}
+ addUserKnob {26 ""}
+ addUserKnob {22 reset l "Happy with position" t "happy with 3d position? press me and adjust the \ncard rotation to match the perspective of your object" -STARTLINE T "n = nuke.thisNode()\n\nn\['trans'].setValue(n\['translate'].value())\n\nn\['rotate'].clearAnimated()\n"}
+ addUserKnob {22 CarttoTrack l "<b>Card to Track me baby" T "#from __future__ import with_statement\n\n#then later when you want to open the script\nwith nuke.Root(): \n\tC2T.C2T(True)\n\n\n" +STARTLINE}
+ addUserKnob {22 restore l Restore t "Restire previous values of the Card" T "n = nuke.thisNode()\nt = n\['trans'].value()\nn\['translate'].setValue(t)\n\nX=n\['X'].value()\nY=n\['Y'].value()\nn\['rotate'].setExpression(X,0)\nn\['rotate'].setExpression(Y,1)\nn\['rotate'].setValue(0,2)" +STARTLINE}
+ addUserKnob {1 X l INVISIBLE +INVISIBLE}
+ X degrees(atan((mainCam3.translate.y(ref)-translate.y)/sqrt(pow2(sqrt(pow2(mainCam3.translate.x(ref)-translate.x)+pow2(mainCam3.translate.z(ref)-translate.z))))))
+ addUserKnob {1 Y l INVISIBLE +INVISIBLE}
+ Y "mainCam3.translate.x(ref)-translate.x >= 0 ? 270-degrees(atan((mainCam3.translate.z(ref)-translate.z)/(mainCam3.translate.x(ref)-translate.x))): -degrees(atan((mainCam3.translate.z(ref)-translate.z)/(mainCam3.translate.x(ref)-translate.x)))-270"
+ addUserKnob {13 trans l INVISIBLE +INVISIBLE}
+ trans {5.146845818 -0.5867807269 -2.380971432}
+ addUserKnob {26 ""}
+}

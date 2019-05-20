@@ -1,0 +1,155 @@
+#! C:/Program Files/Nuke6.3v4/Nuke6.3.exe -nx
+version 6.3 v4
+Group {
+ name Height2Normals
+ tile_color 0xb4aaffff
+ note_font "Verdana Bold Italic"
+ addUserKnob {20 User}
+ addUserKnob {3 Resolution t "Quality of Displacement\n\nUse 1 polygon per pixel for best quality\n(resolution of texture map)\n"}
+ Resolution 1024
+ addUserKnob {7 Depth t "Height of Normal Map"}
+ Depth 0.1
+ addUserKnob {41 filter T DisplaceGeo1.filter}
+ addUserKnob {41 filter_size l "filter size" T DisplaceGeo1.filter_size}
+ addUserKnob {6 Flip_GreenChannel l "Flip Green Channel" t "Inverts Green Channel\n\nON for Maya\n\nOFF for 3ds Max " +STARTLINE}
+}
+ Camera2 {
+  inputs 0
+  translate {0 0 2.03}
+  projection_mode orthographic
+  focal 24.5
+  haperture {{focal i}}
+  vaperture {{focal i}}
+  name Camera1
+  xpos 94
+  ypos -202
+ }
+set N87060840 [stack 0]
+push $N87060840
+push 0
+push 0
+push 0
+ Input {
+  inputs 0
+  name Heightmap
+  xpos 222
+  ypos -358
+ }
+ Card2 {
+  inputs 0
+  display textured+lines
+  rows {{parent.Resolution i}}
+  columns {{rows i x1 100}}
+  control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+  name Card1
+  xpos 115
+  ypos -296
+ }
+ DisplaceGeo {
+  inputs 2
+  scale {{parent.Depth i}}
+  filter_size 2
+  name DisplaceGeo1
+  xpos 222
+  ypos -282
+ }
+ Scene {
+  inputs 5
+  display textured
+  render_mode textured
+  name Scene1
+  xpos 232
+  ypos -213
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos 326
+  ypos -163
+ }
+ ScanlineRender {
+  inputs 3
+  transparency false
+  filter Parzen
+  samples 4
+  output_motion_vectors_type off
+  output_shader_vectors true
+  N_channel rgb
+  displacement_max_tessellation 1
+  displacement_mode adaptive
+  name ScanlineRender1
+  xpos 222
+  ypos -139
+ }
+ Grade {
+  channels {rgba.red rgba.green -rgba.blue}
+  black 0.5
+  name Grade1
+  xpos 222
+  ypos -88
+ }
+set N8705d9d0 [stack 0]
+ Invert {
+  channels rgb
+  name Invert1
+  xpos 412
+  ypos -79
+ }
+push $N8705d9d0
+ ShuffleCopy {
+  inputs 2
+  in rgb
+  in2 rgb
+  green green
+  alpha alpha2
+  out rgb
+  name ShuffleCopy1
+  xpos 412
+  ypos -18
+ }
+push $N8705d9d0
+ Switch {
+  inputs 2
+  which {{parent.Flip_GreenChannel i}}
+  name Switch1
+  xpos 222
+  ypos -18
+ }
+ Clamp {
+  channels rgb
+  name Clamp1
+  xpos 222
+  ypos 22
+ }
+ Colorspace {
+  colorspace_in sRGB
+  name Colorspace1
+  xpos 222
+  ypos 71
+ }
+set N71c59040 [stack 0]
+ Viewer {
+  roi {0.08299999684 -0.7889999747 0.1675000042 -0.7095000148}
+  input_process false
+  name Viewer1
+  xpos 215
+  ypos 153
+ }
+push $N71c59040
+ Output {
+  name Output1
+  xpos 222
+  ypos 121
+ }
+end_group

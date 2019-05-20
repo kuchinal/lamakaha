@@ -1,0 +1,1280 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x447a3801
+ label "normals out"
+ note_font "Helvetica bold"
+ note_font_size 30
+ selected true
+ xpos 189
+ ypos -920
+ bdwidth 217
+ bdheight 65
+}
+push $cut_paste_input
+Camera2 {
+ translate {-6.199998856 4.359999657 -13.02000046}
+ rotate {-12.65400028 -150.1829987 0}
+ name Camera1
+ selected true
+ xpos -14
+ ypos -1050
+}
+set N9b6fc30 [stack 0]
+push $N9b6fc30
+Constant {
+ inputs 0
+ color 1
+ format "512 512 0 0 512 512 1 square_512"
+ name Constant1
+ selected true
+ xpos 130
+ ypos -1313
+}
+set N9b6ff60 [stack 0]
+Sphere {
+ translate {-0.6299999952 2.167999983 -1.419999957}
+ name Sphere1
+ selected true
+ xpos 240
+ ypos -1186
+}
+push $N9b6ff60
+Sphere {
+ translate {3.234999895 1.559999943 -0.09000000358}
+ name Sphere2
+ selected true
+ xpos 130
+ ypos -1186
+}
+push $N9b6ff60
+Sphere {
+ translate {-0.9649999738 -0.4050000012 0.5}
+ name Sphere3
+ selected true
+ xpos 20
+ ypos -1186
+}
+Scene {
+ inputs 4
+ name Scene1
+ selected true
+ xpos 140
+ ypos -1097
+}
+Constant {
+ inputs 0
+ channels rgb
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant12
+ selected true
+ xpos 1369
+ ypos -970
+}
+set N19fb5d60 [stack 0]
+ScanlineRender {
+ inputs 3
+ samples 10
+ output_motion_vectors_type accurate
+ output_shader_vectors true
+ N_channel rgb
+ name ScanlineRender1
+ selected true
+ xpos 130
+ ypos -947
+}
+Dot {
+ name Dot13
+ selected true
+ xpos 164
+ ypos -830
+}
+set N32f72c00 [stack 0]
+Dot {
+ name Dot6
+ selected true
+ xpos -475
+ ypos -831
+}
+Dot {
+ name Dot7
+ selected true
+ xpos -475
+ ypos 677
+}
+push $N32f72c00
+Unpremult {
+ name Unpremult1
+ selected true
+ xpos 130
+ ypos -778
+}
+Dot {
+ name Dot11
+ selected true
+ xpos 164
+ ypos -717
+}
+set N19fb63c0 [stack 0]
+Dot {
+ name Dot12
+ selected true
+ xpos -314
+ ypos -718
+}
+Dot {
+ name Dot5
+ selected true
+ xpos -314
+ ypos 254
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0 1 0.2 0}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant10
+ selected true
+ xpos -204
+ ypos 124
+}
+Group {
+ inputs 2
+ name Dot_product1
+ selected true
+ xpos -204
+ ypos 250
+ addUserKnob {20 User}
+ addUserKnob {6 knob_normalizeA l "normalize A Vector" +STARTLINE}
+ knob_normalizeA true
+ addUserKnob {6 knob_normalizeB l "normalize B Vector" +STARTLINE}
+ knob_normalizeB true
+ addUserKnob {6 knob_dotA l "dot alpha as well" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name VEC_A
+  xpos -517
+  ypos 184
+ }
+ Group {
+  name Normalize_Vector_A
+  xpos -517
+  ypos 223
+  disable {{"1 - parent.knob_normalizeA" i}}
+  addUserKnob {20 User}
+  addUserKnob {7 know_rescale l scaling t "scales the output to that value" R 0 100}
+  know_rescale 1
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -532
+   ypos -411
+  }
+  Expression {
+   temp_name0 length
+   temp_expr0 sqrt(Br*Br+Bg*Bg+Bb*Bb)+0.00001
+   temp_name1 scale
+   temp_expr1 parent.know_rescale
+   expr0 "(Br / length) * scale"
+   expr1 "(Bg / length) * scale"
+   expr2 "(Bb / length) * scale"
+   name NORMALIZE_RGB
+   xpos -532
+   ypos -357
+  }
+  Output {
+   name Output1
+   xpos -532
+   ypos -271
+  }
+ end_group
+ Input {
+  inputs 0
+  name VEC_B
+  xpos -345
+  ypos 183
+  number 1
+ }
+ Group {
+  name Normalize_Vector
+  xpos -345
+  ypos 225
+  disable {{"1 - parent.knob_normalizeB"}}
+  addUserKnob {20 User}
+  addUserKnob {7 know_rescale l scaling t "scales the output to that value" R 0 100}
+  know_rescale 1
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -532
+   ypos -411
+  }
+  Expression {
+   temp_name0 length
+   temp_expr0 sqrt(Br*Br+Bg*Bg+Bb*Bb)+0.00001
+   temp_name1 scale
+   temp_expr1 parent.know_rescale
+   expr0 "(Br / length) * scale"
+   expr1 "(Bg / length) * scale"
+   expr2 "(Bb / length) * scale"
+   name NORMALIZE_RGB
+   selected true
+   xpos -532
+   ypos -343
+  }
+  Output {
+   name Output1
+   xpos -532
+   ypos -271
+  }
+ end_group
+ MergeExpression {
+  inputs 2
+  temp_name0 result
+  temp_expr0 Ar*Br+Ag*Bg+Ab*Bb
+  expr0 result
+  expr1 result
+  expr2 result
+  expr3 knob_dotA>0.5?result:Ba
+  name DOT_PRODUCT
+  xpos -441
+  ypos 294
+  addUserKnob {20 "" l User}
+ }
+set Na928c70 [stack 0]
+ Output {
+  name Output1
+  xpos -441
+  ypos 341
+ }
+push $Na928c70
+ Viewer {
+  useGPUForViewer false
+  viewerProcess None
+  input_process false
+  name Viewer1
+  selected true
+  xpos -40
+  ypos -10
+  hide_input true
+ }
+end_group
+Grade {
+ multiply {0.9819999933 1 0.985075295 1}
+ name Grade1
+ selected true
+ xpos -204
+ ypos 276
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -170
+ ypos 362
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {1 1 1 1}
+ name Constant11
+ selected true
+ xpos 117
+ ypos 256
+}
+Grade {
+ multiply 0.225
+ name Grade2
+ selected true
+ xpos 117
+ ypos 332
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name LIGHT
+ selected true
+ xpos 117
+ ypos 358
+}
+Dot {
+ name Dot9
+ selected true
+ xpos 151
+ ypos 491
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0 0 1 0}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant9
+ selected true
+ xpos 511
+ ypos -465
+}
+push $N19fb63c0
+Dot {
+ name Dot16
+ selected true
+ xpos 292
+ ypos -718
+}
+set N19fd1a30 [stack 0]
+Group {
+ name RotationMatrix
+ help "Use this for rotating xyz vector data such as P and N."
+ selected true
+ xpos 258
+ ypos -363
+ addUserKnob {20 RotationMatrix}
+ addUserKnob {41 in l "vector in" T Shuffle1.in}
+ addUserKnob {41 out l output T ShuffleCopy1.out}
+ addUserKnob {13 rot l rotation t "Link to say axis' or camera's rotate"}
+ rot {{parent.Camera1.rotate.x} {parent.Camera1.rotate.y} {parent.Camera1.rotate.z}}
+ addUserKnob {4 zchannel l "z channel" t "reverse z is used for example if translating world normals to\ncam normals based on a linked camera rotation" M {reverse "don't reverse"}}
+ zchannel "don't reverse"
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -304
+  ypos -79
+ }
+set Na92a5f0 [stack 0]
+ Shuffle {
+  in rgb
+  out rgb
+  name Shuffle1
+  xpos -189
+  ypos -22
+ }
+ ColorMatrix {
+  matrix {
+      {{cos(radians(yrot))} 0 {-sin(radians(yrot))}}
+      {0 1 0}
+      {{sin(radians(yrot))} 0 {cos(radians(yrot))}}
+    }
+  name ColorMatrix14
+  label yrot
+  xpos -189
+  ypos 42
+  addUserKnob {20 "" l User}
+  addUserKnob {7 yrot l "y rotation" R -90 90}
+  yrot {{parent.rot.y}}
+ }
+ ColorMatrix {
+  matrix {
+      {1 0 0}
+      {0 {cos(radians(xrot)) i} {sin(radians(xrot)) i}}
+      {0 {-sin(radians(xrot)) i} {cos(radians(xrot)) i}}
+    }
+  name ColorMatrix15
+  label "xrot\n"
+  xpos -189
+  ypos 80
+  addUserKnob {20 "" l User}
+  addUserKnob {7 xrot l "x rotation" R -90 90}
+  xrot {{parent.rot.x i}}
+ }
+ ColorMatrix {
+  matrix {
+      {{cos(radians(zrot)) i} {sin(radians(zrot)) i} 0}
+      {{-sin(radians(zrot)) i} {cos(radians(zrot)) i} 0}
+      {0 0 1}
+    }
+  name ColorMatrix13
+  label "zrot\n"
+  selected true
+  xpos -189
+  ypos 118
+  addUserKnob {20 "" l User}
+  addUserKnob {7 zrot l "z rotation" R -90 90}
+  zrot {{parent.rot.z i}}
+ }
+set Na92b2b0 [stack 0]
+ Multiply {
+  channels {-rgba.red -rgba.green rgba.blue}
+  value -1
+  name Multiply4
+  label "reverse Z"
+  xpos -189
+  ypos 201
+  disable {{parent.zchannel x1 0}}
+ }
+push $Na92a5f0
+ ShuffleCopy {
+  inputs 2
+  in rgb
+  red red
+  green green
+  blue blue
+  out rgb
+  name ShuffleCopy1
+  xpos -304
+  ypos 292
+ }
+ Output {
+  name Output1
+  xpos -304
+  ypos 399
+ }
+push $Na92b2b0
+ Viewer {
+  useGPUForViewer false
+  viewerProcess None
+  input_process false
+  name Viewer1
+  xpos 70
+  ypos -10
+  hide_input true
+ }
+end_group
+set N9efac20 [stack 0]
+Group {
+ inputs 2
+ name Dot_product
+ selected true
+ xpos 511
+ ypos -364
+ addUserKnob {20 User}
+ addUserKnob {6 knob_normalizeA l "normalize A Vector" +STARTLINE}
+ knob_normalizeA true
+ addUserKnob {6 knob_normalizeB l "normalize B Vector" +STARTLINE}
+ knob_normalizeB true
+ addUserKnob {6 knob_dotA l "dot alpha as well" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name VEC_A
+  xpos -516
+  ypos 182
+ }
+ Group {
+  name Normalize_Vector_A
+  xpos -516
+  ypos 219
+  disable {{"1 - parent.knob_normalizeA" i}}
+  addUserKnob {20 User}
+  addUserKnob {7 know_rescale l scaling t "scales the output to that value" R 0 100}
+  know_rescale 1
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -532
+   ypos -411
+  }
+  Expression {
+   temp_name0 length
+   temp_expr0 sqrt(Br*Br+Bg*Bg+Bb*Bb)+0.00001
+   temp_name1 scale
+   temp_expr1 parent.know_rescale
+   expr0 "(Br / length) * scale"
+   expr1 "(Bg / length) * scale"
+   expr2 "(Bb / length) * scale"
+   name NORMALIZE_RGB
+   xpos -532
+   ypos -357
+  }
+  Output {
+   name Output1
+   xpos -532
+   ypos -271
+  }
+ end_group
+ Input {
+  inputs 0
+  name VEC_B
+  xpos -345
+  ypos 182
+  number 1
+ }
+ Group {
+  name Normalize_Vector
+  xpos -345
+  ypos 222
+  disable {{"1 - parent.knob_normalizeB"}}
+  addUserKnob {20 User}
+  addUserKnob {7 know_rescale l scaling t "scales the output to that value" R 0 100}
+  know_rescale 1
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -532
+   ypos -411
+  }
+  Expression {
+   temp_name0 length
+   temp_expr0 sqrt(Br*Br+Bg*Bg+Bb*Bb)+0.00001
+   temp_name1 scale
+   temp_expr1 parent.know_rescale
+   expr0 "(Br / length) * scale"
+   expr1 "(Bg / length) * scale"
+   expr2 "(Bb / length) * scale"
+   name NORMALIZE_RGB
+   selected true
+   xpos -532
+   ypos -343
+  }
+  Output {
+   name Output1
+   xpos -532
+   ypos -271
+  }
+ end_group
+ MergeExpression {
+  inputs 2
+  temp_name0 result
+  temp_expr0 Ar*Br+Ag*Bg+Ab*Bb
+  expr0 result
+  expr1 result
+  expr2 result
+  expr3 knob_dotA>0.5?result:Ba
+  name DOT_PRODUCT
+  xpos -449
+  ypos 293
+  addUserKnob {20 "" l User}
+ }
+set N19972090 [stack 0]
+ Output {
+  name Output1
+  xpos -441
+  ypos 341
+ }
+push $N19972090
+ Viewer {
+  useGPUForViewer false
+  viewerProcess None
+  input_process false
+  name Viewer1
+  selected true
+  xpos -40
+  ypos -10
+  hide_input true
+ }
+end_group
+Group {
+ name Frenel
+ selected true
+ xpos 511
+ ypos -261
+ addUserKnob {20 User}
+ addUserKnob {7 ior l IOR R 0 5}
+ ior {{parent.Refract_Vector1.knob_refF i}}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 460
+  ypos -318
+ }
+ Expression {
+  temp_name0 IOR
+  temp_expr0 "1.0 / parent.ior"
+  temp_name1 _FF
+  temp_expr1 "( IOR - 1.0 ) * ( IOR - 1.0 )"
+  temp_name2 _F
+  temp_expr2 "_FF + (  4 * IOR * pow( 1 - r, 5) )"
+  temp_name3 F
+  temp_expr3 "_F / ( ( IOR + 1 ) * ( IOR + 1 ) )"
+  expr0 F
+  expr1 F
+  expr2 F
+  name Expression1
+  xpos 460
+  ypos -256
+ }
+ Output {
+  name Output1
+  xpos 460
+  ypos -178
+ }
+end_group
+set N9efbae0 [stack 0]
+Invert {
+ name Invert1
+ selected true
+ xpos 511
+ ypos -36
+}
+Dot {
+ name Dot4
+ selected true
+ xpos 545
+ ypos 71
+}
+push $N19fb63c0
+Constant {
+ inputs 0
+ channels rgb
+ color {0 0 -1 0}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant2
+ label "Blue = -1\n"
+ note_font "Verdana Bold"
+ note_font_size 30
+ selected true
+ xpos 643
+ ypos -698
+}
+set N199733b0 [stack 0]
+Group {
+ inputs 2
+ name Refract_Vector1
+ selected true
+ xpos 130
+ ypos -647
+ addUserKnob {20 User}
+ addUserKnob {7 knob_refT l "refractive index from" R 0 10}
+ knob_refT 1
+ addUserKnob {7 knob_refF l "refractive index from" R 0 10}
+ knob_refF 2
+}
+ Input {
+  inputs 0
+  name I_VEC
+  xpos -518
+  ypos 334
+ }
+ Dot {
+  name Dot1
+  xpos -484
+  ypos 489
+ }
+ Input {
+  inputs 0
+  name N_VEC
+  xpos -352
+  ypos 334
+  number 1
+ }
+ MergeExpression {
+  inputs 2
+  temp_name0 IdotN
+  temp_expr0 Ar*Br+Ag*Bg+Ab*Bb
+  temp_name1 bb
+  temp_expr1 "(IdotN >=0)? (parent.knob_refT / parent.knob_refF) : (parent.knob_refF / parent.knob_refT)"
+  temp_name2 D2
+  temp_expr2 "1 - bb * bb *(1 - IdotN * IdotN)"
+  temp_name3 aa
+  temp_expr3 "(IdotN > 0 ) ? bb * IdotN - sqrt(D2) : bb * IdotN + sqrt(D2)"
+  expr0 "(D2 > 0 ) ? Ar * bb - Br * aa : 0"
+  expr1 "(D2 > 0 ) ? Ag * bb - Bg * aa : 0"
+  expr2 "(D2 > 0 ) ? Ab * bb - Bb * aa : 0"
+  expr3 "(D2 > 0 ) ? 1: 0"
+  name refract_expression
+  label "\n\n\n"
+  selected true
+  xpos -352
+  ypos 483
+ }
+ Output {
+  name Output1
+  xpos -352
+  ypos 692
+ }
+end_group
+set N9efbe90 [stack 0]
+push 0
+Group {
+ inputs 2
+ name Vector_to_st2
+ selected true
+ xpos 130
+ ypos -163
+ addUserKnob {20 User}
+ addUserKnob {6 knob_flipST l "flip s and t" +STARTLINE}
+ knob_flipST true
+ addUserKnob {6 knob_invertS l "invert S" +STARTLINE}
+ knob_invertS true
+ addUserKnob {6 knob_invertT l "invert T" +STARTLINE}
+ knob_invertT true
+ addUserKnob {6 knob_premult l premult +STARTLINE}
+ knob_premult true
+}
+ Input {
+  inputs 0
+  name VEC_IN
+  xpos -268
+  ypos -587
+  number 1
+ }
+ Expression {
+  temp_name0 s
+  temp_expr0 "acos(g) / 3.1415"
+  temp_name1 t
+  temp_expr1 "(3.1415 + atan2(b,\nr)) / (2 * 3.1415)"
+  temp_name2 ss
+  temp_expr2 "(knob_invertS > 0.5 ) ? (s * -1 + 1):s"
+  temp_name3 tt
+  temp_expr3 "(knob_invertT > 0.5 ) ? (t * -1 + 1):t"
+  expr0 "(parent.knob_flipST > 0.5 ) ? tt : ss"
+  expr1 "(parent.knob_flipST > 0.5 ) ? ss: tt"
+  expr2 0
+  name Expression1
+  selected true
+  xpos -268
+  ypos -513
+ }
+ Output {
+  name Output1
+  xpos -268
+  ypos -387
+ }
+end_group
+set N19a448b0 [stack 0]
+push $N19a448b0
+Constant {
+ inputs 0
+ channels rgb
+ color {0.7260011435 1 0.03687983751 1}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant8
+ selected true
+ xpos 905
+ ypos -771
+ cached true
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {1 0.4032304883 0.3298953772 1}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant7
+ selected true
+ xpos 1006
+ ypos -775
+ cached true
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.2976078391 1 0.8990035057 1}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant6
+ selected true
+ xpos 1097
+ ypos -775
+ cached true
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {1 0.05593001842 0.3156177998 1}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant4
+ selected true
+ xpos 1186
+ ypos -773
+ cached true
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {0.4597997069 0.3792209029 1 1}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant5
+ selected true
+ xpos 1277
+ ypos -777
+ cached true
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {1 0.8285713196 0.3530935645 1}
+ format "640 480 0 0 640 480 1 PC_Video"
+ name Constant3
+ selected true
+ xpos 806
+ ypos -770
+}
+SphericalTransform {
+ inputs 6
+ input Cube
+ out_ry {{frame*10 i}}
+ fix true
+ name SphericalTransform1
+ selected true
+ xpos 1044
+ ypos -517
+}
+set N19a2ebc0 [stack 0]
+STMap {
+ inputs 2
+ channels rgb
+ uv rgb
+ name STMap2
+ selected true
+ xpos 733
+ ypos -163
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy2
+ selected true
+ xpos 733
+ ypos -77
+}
+Premult {
+ name Premult2
+ selected true
+ xpos 733
+ ypos -17
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name REFRACT
+ selected true
+ xpos 733
+ ypos 67
+}
+Dot {
+ name Dot3
+ selected true
+ xpos 767
+ ypos 134
+}
+push $N9efbae0
+push $N19fd1a30
+Dot {
+ name Dot14
+ selected true
+ xpos 435
+ ypos -718
+}
+Dot {
+ name Dot15
+ selected true
+ xpos 435
+ ypos -544
+}
+push $N199733b0
+Group {
+ inputs 2
+ name Reflect_Vector
+ selected true
+ xpos 643
+ ypos -548
+ addUserKnob {20 User}
+ addUserKnob {6 knob_normalize l "normalize output" +STARTLINE}
+ knob_normalize true
+ addUserKnob {6 knob_useAA l "anti alias result" +STARTLINE}
+ knob_useAA true
+}
+ Input {
+  inputs 0
+  name N_VEC
+  xpos -352
+  ypos 264
+  number 1
+ }
+set N19a2fbb0 [stack 0]
+push $N19a2fbb0
+ Input {
+  inputs 0
+  name I_VEC
+  xpos -518
+  ypos 179
+ }
+set N19a2fee0 [stack 0]
+ Group {
+  inputs 2
+  name Dot_product
+  xpos -518
+  ypos 264
+  addUserKnob {20 User}
+  addUserKnob {6 knob_normalizeA l "normalize A Vector" +STARTLINE}
+  addUserKnob {6 knob_normalizeB l "normalize B Vector" +STARTLINE}
+  addUserKnob {6 knob_dotA l "dot alpha as well" +STARTLINE}
+ }
+  Input {
+   inputs 0
+   name VEC_A
+   xpos -517
+   ypos 184
+  }
+  Group {
+   name Normalize_Vector_A
+   xpos -517
+   ypos 223
+   disable {{"1 - parent.knob_normalizeA"}}
+   addUserKnob {20 User}
+   addUserKnob {7 know_rescale l scaling t "scales the output to that value" R 0 100}
+   know_rescale 1
+  }
+   Input {
+    inputs 0
+    name Input1
+    xpos -532
+    ypos -411
+   }
+   Expression {
+    temp_name0 length
+    temp_expr0 sqrt(Br*Br+Bg*Bg+Bb*Bb)+0.00001
+    temp_name1 scale
+    temp_expr1 parent.know_rescale
+    expr0 "(Br / length) * scale"
+    expr1 "(Bg / length) * scale"
+    expr2 "(Bb / length) * scale"
+    name NORMALIZE_RGB
+    selected true
+    xpos -532
+    ypos -343
+   }
+   Output {
+    name Output1
+    xpos -532
+    ypos -271
+   }
+  end_group
+  Input {
+   inputs 0
+   name VEC_B
+   xpos -345
+   ypos 183
+   number 1
+  }
+  Group {
+   name Normalize_Vector
+   xpos -345
+   ypos 223
+   disable {{"1 - parent.knob_normalizeB"}}
+   addUserKnob {20 User}
+   addUserKnob {7 know_rescale l scaling t "scales the output to that value" R 0 100}
+   know_rescale 1
+  }
+   Input {
+    inputs 0
+    name Input1
+    xpos -532
+    ypos -411
+   }
+   Expression {
+    temp_name0 length
+    temp_expr0 sqrt(Br*Br+Bg*Bg+Bb*Bb)+0.00001
+    temp_name1 scale
+    temp_expr1 parent.know_rescale
+    expr0 "(Br / length) * scale"
+    expr1 "(Bg / length) * scale"
+    expr2 "(Bb / length) * scale"
+    name NORMALIZE_RGB
+    selected true
+    xpos -532
+    ypos -343
+   }
+   Output {
+    name Output1
+    xpos -532
+    ypos -271
+   }
+  end_group
+  MergeExpression {
+   inputs 2
+   temp_name0 result
+   temp_expr0 Ar*Br+Ag*Bg+Ab*Bb
+   expr0 result
+   expr1 result
+   expr2 result
+   expr3 knob_dotA>0.5?result:Ba
+   name DOT_PRODUCT
+   selected true
+   xpos -441
+   ypos 291
+   addUserKnob {20 "" l User}
+  }
+  Output {
+   name Output1
+   xpos -441
+   ypos 341
+  }
+ end_group
+ Multiply {
+  channels rgb
+  value 2
+  name TIMES_2
+  xpos -518
+  ypos 304
+ }
+ Dot {
+  name Dot2
+  xpos -484
+  ypos 386
+ }
+set N19af4960 [stack 0]
+ Merge2 {
+  inputs 2
+  operation multiply
+  Achannels rgb
+  Bchannels rgb
+  name Multiply
+  xpos -352
+  ypos 380
+ }
+set N19af4c90 [stack 0]
+ Viewer {
+  name Viewer1
+  xpos -187
+  ypos 370
+ }
+push $N19af4960
+ Dot {
+  name Dot5
+  xpos -484
+  ypos 616
+ }
+push $N19af4c90
+push $N19a2fee0
+ Dot {
+  name Dot3
+  xpos -212
+  ypos 185
+ }
+ Dot {
+  name Dot4
+  xpos -218
+  ypos 498
+ }
+ Merge2 {
+  inputs 2
+  operation minus
+  Achannels rgb
+  Bchannels rgb
+  name Merge3
+  xpos -352
+  ypos 492
+ }
+ Group {
+  name NORMALIZE
+  xpos -352
+  ypos 528
+  disable {{1-parent.knob_normalize}}
+  addUserKnob {20 User}
+  addUserKnob {7 know_rescale l scaling t "scales the output to that value" R 0 100}
+  know_rescale 1
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -532
+   ypos -411
+  }
+  Expression {
+   temp_name0 length
+   temp_expr0 sqrt(Br*Br+Bg*Bg+Bb*Bb)+0.00001
+   temp_name1 scale
+   temp_expr1 parent.know_rescale
+   expr0 "(Br / length) * scale"
+   expr1 "(Bg / length) * scale"
+   expr2 "(Bb / length) * scale"
+   name NORMALIZE_RGB
+   selected true
+   xpos -532
+   ypos -343
+  }
+  Output {
+   name Output1
+   xpos -532
+   ypos -271
+  }
+ end_group
+ Matrix {
+  channels rgb
+  matrix {
+      {1 2 1}
+      {2 4 2}
+      {1 2 1}
+    }
+  normalize true
+  name AA
+  selected true
+  xpos -352
+  ypos 563
+  disable {{1-parent.knob_useAA}}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -352
+  ypos 602
+ }
+ Premult {
+  name Premult2
+  xpos -352
+  ypos 649
+ }
+ Output {
+  name Output1
+  xpos -352
+  ypos 692
+ }
+end_group
+push 0
+Group {
+ inputs 2
+ name Vector_to_st1
+ selected true
+ xpos 643
+ ypos -494
+ addUserKnob {20 User}
+ addUserKnob {6 knob_flipST l "flip s and t" +STARTLINE}
+ knob_flipST true
+ addUserKnob {6 knob_invertS l "invert S" +STARTLINE}
+ knob_invertS true
+ addUserKnob {6 knob_invertT l "invert T" +STARTLINE}
+ knob_invertT true
+ addUserKnob {6 knob_premult l premult +STARTLINE}
+ knob_premult true
+}
+ Input {
+  inputs 0
+  name VEC_IN
+  xpos -268
+  ypos -587
+  number 1
+ }
+ Expression {
+  temp_name0 s
+  temp_expr0 "acos(g) / 3.1415"
+  temp_name1 t
+  temp_expr1 "(3.1415 + atan2(b,\nr)) / (2 * 3.1415)"
+  temp_name2 ss
+  temp_expr2 "(knob_invertS > 0.5 ) ? (s * -1 + 1):s"
+  temp_name3 tt
+  temp_expr3 "(knob_invertT > 0.5 ) ? (t * -1 + 1):t"
+  expr0 "(parent.knob_flipST > 0.5 ) ? tt : ss"
+  expr1 "(parent.knob_flipST > 0.5 ) ? ss: tt"
+  expr2 0
+  name Expression1
+  xpos -268
+  ypos -513
+ }
+ Output {
+  name Output1
+  xpos -268
+  ypos -387
+ }
+end_group
+Dot {
+ name Dot2
+ selected true
+ xpos 677
+ ypos -428
+}
+push $N19a2ebc0
+STMap {
+ inputs 2
+ channels rgba
+ uv rgb
+ name STMap1
+ selected true
+ xpos 1044
+ ypos -432
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name REFLECT
+ selected true
+ xpos 1044
+ ypos -261
+}
+Dot {
+ name Dot8
+ selected true
+ xpos 1078
+ ypos -138
+}
+push $N19fb5d60
+Merge2 {
+ inputs 2
+ operation plus
+ bbox B
+ name Merge3
+ label "Reflections \n"
+ note_font_size 20
+ selected true
+ xpos 1369
+ ypos -157
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge1
+ label "Refractions \n"
+ note_font_size 20
+ selected true
+ xpos 1372
+ ypos 115
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge2
+ label "Light \n"
+ note_font_size 20
+ selected true
+ xpos 1372
+ ypos 472
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy1
+ selected true
+ xpos 1372
+ ypos 667
+}
+Premult {
+ name Premult1
+ selected true
+ xpos 1372
+ ypos 776
+}
+Dot {
+ name Dot10
+ selected true
+ xpos 1406
+ ypos 865
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ selected true
+ xpos 1707
+ ypos 692
+}
+Merge2 {
+ inputs 2
+ bbox B
+ name Merge4
+ selected true
+ xpos 1707
+ ypos 861
+}
+push $N9efbe90
+push $N9efac20
+Viewer {
+ inputs 2
+ frame 1
+ useGPUForViewer false
+ viewerProcess None
+ input_process false
+ name Viewer1
+ selected true
+ xpos 877
+ ypos 367
+ hide_input true
+}

@@ -1,0 +1,1417 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+add_layer {P P.red P.green P.blue P.alpha none P.blue P.alpha}
+Group {
+name mmUnifiedNoise1
+help "all-purpose noise generator with various noise presets"
+knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\n\n\nif k.name() == \"source_type\":\n    n\[\"pos_data\"].setEnabled( k.value() == \"3D\" )\n    n\[\"unpremultiply\"].setEnabled( k.value() == \"3D\" )\n\n\nif k.name() == \"swirlsrc\":\n    n\[\"swirl_scale\"].setVisible( k.value() == \"static noise\" )\n    n\[\"swirl_seed\"].setVisible( k.value() == \"static noise\" )\n\n\nif k.name() == \"noisetype\":\n    n\[\"noise_settings_line\"].setVisible(k.value() in \[\"fBm\", \"turbulence\", \"simplex\", \"simplex crater\"])\n\n    n\[\"useGPU\"].setVisible(k.value() in \[\"simplex\", \"simplex crater\"])\n\n    n\[\"octaves\"].setVisible(k.value() in \[\"fBm\", \"turbulence\", \"simplex\", \"simplex crater\"])\n    n\[\"lacunarity\"].setVisible(k.value() in \[\"fBm\", \"turbulence\", \"simplex\", \"simplex crater\"])\n\n    n\[\"gain\"].setVisible(k.value() in \[\"fBm\", \"turbulence\"])\n\n    n\[\"compress\"].setVisible(k.value() in \[\"fBm\", \"turbulence\"])\n\n\n"
+tile_color 0x989898ff
+label "\[value source_type] \[value noisetype]"
+note_font "DejaVu Sans"
+note_font_size 10
+note_font_color 0x212121ff
+selected true
+xpos 7443
+ypos 23185
+addUserKnob {20 User l UnifiedNoise}
+addUserKnob {4 source_type l source t "select either 3D position vectors if available or start lookdev'ing your patterns in 2D first by mapping them to 2D screenspaceor latlong coordinates." M {3D 2D latlong "" "" "" "" "" "" "" "" "" ""}}
+addUserKnob {41 pos_data l "position data" T Shuffle_Pos_chan.in}
+addUserKnob {41 output_channel l "output channel" T Copy1.to0}
+addUserKnob {6 unpremultiply +STARTLINE}
+addUserKnob {6 useAlpha l "ignore outside alpha" -STARTLINE}
+useAlpha true
+addUserKnob {26 ""}
+addUserKnob {7 pre_scale l "prescale worldspace" R -3 3}
+pre_scale 1.18
+addUserKnob {26 ""}
+addUserKnob {4 noisetype M {fBm turbulence noise random sinusoid checkerboard bulge simplex "simplex crater" "" "" "" "" "" "" "" ""}}
+noisetype "simplex crater"
+addUserKnob {13 offset}
+addUserKnob {41 rot l rotation T Rotation.rot}
+addUserKnob {13 size}
+size {1 1 1}
+addUserKnob {26 input_info l "" +STARTLINE T "all additional inputs expect 0-1 ranged alpha channels"}
+addUserKnob {26 ""}
+addUserKnob {4 swirlsrc l "swirl source" M {"static noise" "displace input"}}
+addUserKnob {7 swirl l "swirl amount" R 0 4}
+addUserKnob {7 swirl_scale l "swirl scale" R 0.001 4}
+swirl_scale 1
+addUserKnob {3 swirl_seed l "swirl seed"}
+addUserKnob {26 ""}
+addUserKnob {7 pixelate_amount l "pixelate amount"}
+addUserKnob {7 pixelate_detail l "pixelate detail" R 1e-05 5}
+pixelate_detail 2
+addUserKnob {26 noise_settings_line l "" +STARTLINE}
+addUserKnob {6 useGPU l " Use GPU" +STARTLINE}
+useGPU true
+addUserKnob {3 octaves}
+octaves 4
+addUserKnob {7 lacunarity R 0 5}
+lacunarity 2
+addUserKnob {7 gain +HIDDEN}
+gain 0.5
+addUserKnob {7 compress t "The resulting values of all the generated patterns should be limited to the selected output range. However, using \"fBm\" or \"turbulence\" with certain settings can exceed this range in some areas. Increase this value up to 1  to maintain more details in these areas. Values will be squeezed to fit within the output range." +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 remap_values l "remap output values"}
+addUserKnob {7 output_min_value l "min value" R -1 1}
+addUserKnob {7 output_max_value l "max value" R 0 4}
+output_max_value 1
+addUserKnob {26 ""}
+addUserKnob {4 quality l anti-aliasing M {none low mid high "" "" "" ""}}
+addUserKnob {41 filter -STARTLINE T Reformat2.filter}
+addUserKnob {26 ""}
+addUserKnob {26 credit l "" +STARTLINE T "mmUnifiedNoise  v1.0  ||  by Marco Meyer  |  www.marcomeyer-vfx.de"}
+}
+Input {
+inputs 0
+name input
+xpos -600
+ypos -1690
+}
+AddChannels {
+channels alpha
+color 1
+name AddChannels1
+xpos -600
+ypos -1624
+}
+Dot {
+name Dot8
+xpos -566
+ypos -1446
+}
+set N221d370 [stack 0]
+Dot {
+name Dot1
+xpos -566
+ypos 1914
+}
+Dot {
+name Dot40
+xpos 134
+ypos 1914
+}
+set N2226940 [stack 0]
+push $N221d370
+Dot {
+name Dot10
+xpos -146
+ypos -1446
+}
+set N222b460 [stack 0]
+Expression {
+expr3 a>0
+name Expression4
+xpos -180
+ypos -1290
+}
+Dot {
+name Dot4
+xpos -146
+ypos 1674
+}
+push $N222b460
+Dot {
+name Dot6
+xpos 414
+ypos -1446
+}
+NoOp {
+name format_src
+xpos 380
+ypos -1370
+}
+set N230c020 [stack 0]
+Input {
+inputs 0
+name lac
+xpos 660
+ypos -1450
+number 1
+}
+Reformat {
+type "to box"
+box_width {{format_src.width}}
+box_height {{format_src.height}}
+box_fixed true
+box_pixel_aspect {{format_src.pixel_aspect}}
+resize none
+pbb true
+name Reformat3
+xpos 660
+ypos -1351
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos 660
+ypos -1290
+}
+set N2324790 [stack 0]
+Input {
+inputs 0
+name oct
+xpos 800
+ypos -1450
+number 2
+}
+Reformat {
+type "to box"
+box_width {{format_src.width}}
+box_height {{format_src.height}}
+box_fixed true
+box_pixel_aspect {{format_src.pixel_aspect}}
+resize none
+pbb true
+name Reformat5
+xpos 800
+ypos -1368
+}
+CopyBBox {
+inputs 2
+name CopyBBox2
+xpos 800
+ypos -1290
+}
+set N2107870 [stack 0]
+Input {
+inputs 0
+name gain
+xpos 940
+ypos -1450
+number 3
+}
+Reformat {
+type "to box"
+box_width {{format_src.width}}
+box_height {{format_src.height}}
+box_fixed true
+box_pixel_aspect {{format_src.pixel_aspect}}
+resize none
+pbb true
+name Reformat7
+xpos 940
+ypos -1387
+}
+CopyBBox {
+inputs 2
+name CopyBBox3
+xpos 940
+ypos -1290
+}
+set N2122bc0 [stack 0]
+Input {
+inputs 0
+name displ
+xpos 1080
+ypos -1450
+number 4
+}
+Reformat {
+type "to box"
+box_width {{format_src.width}}
+box_height {{format_src.height}}
+box_fixed true
+box_pixel_aspect {{format_src.pixel_aspect}}
+resize none
+pbb true
+name Reformat8
+xpos 1080
+ypos -1414
+}
+CopyBBox {
+inputs 2
+name CopyBBox4
+xpos 1080
+ypos -1290
+}
+AddChannels {
+channels alpha
+color 0.5
+name AddChannels6
+xpos 1080
+ypos -1136
+}
+Group {
+name FitRange6
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 1080
+ypos -1062
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin {0 0 0 0}
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin -1
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax 1
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+name Clamp2
+selected true
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Dot {
+name Dot27
+xpos 1114
+ypos -726
+}
+push $N2122bc0
+AddChannels {
+channels alpha
+color 1
+name AddChannels4
+xpos 940
+ypos -1136
+}
+Group {
+name FitRange4
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 940
+ypos -1062
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin {0 0 0 0}
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin {0 0 0 0}
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax {{parent.gain}}
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+maximum_enable false
+name Clamp2
+selected true
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Dot {
+name Dot5
+xpos 974
+ypos -806
+}
+push $N2107870
+AddChannels {
+channels alpha
+color 1
+name AddChannels3
+xpos 800
+ypos -1136
+}
+Group {
+name FitRange2
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 800
+ypos -1062
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin {0 0 0 0}
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin {0 0 0 0}
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax {{parent.octaves}}
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+name Clamp2
+selected true
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Dot {
+name Dot3
+xpos 834
+ypos -886
+}
+push $N2324790
+AddChannels {
+channels alpha
+color 1
+name AddChannels2
+xpos 660
+ypos -1136
+}
+Group {
+name FitRange1
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 659
+ypos -1062
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin {0 0 0 0}
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin {0 0 0 0}
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax {{parent.lacunarity}}
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+maximum_enable false
+name Clamp2
+selected true
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Dot {
+name Dot2
+xpos 694
+ypos -966
+}
+push $N230c020
+Dot {
+name Dot28
+xpos 274
+ypos -1366
+}
+set N1c17bc0 [stack 0]
+Dot {
+name Dot39
+xpos 134
+ypos -1366
+}
+Expression {
+expr0 cos(2*PI*x/size.w+PI/2)*sin(PI*(y/size.h))
+expr1 cos(PI*(1-y/size.h))
+expr2 cos(2*PI*x/size.w)*sin(PI*(y/size.h))
+name Expression5
+label "latlong unit sphere"
+xpos 100
+ypos -1296
+addUserKnob {20 User}
+addUserKnob {14 size R 0 100}
+size {{width} {height}}
+}
+Multiply {
+channels rgb
+value 5
+name Multiply1
+xpos 100
+ypos -1256
+}
+Multiply {
+channels rgb
+value {{"pow(10, parent.pre_scale)"}}
+name Multiply_PreScale_WS2
+xpos 100
+ypos -1207
+}
+Dot {
+name Dot38
+xpos 134
+ypos -1046
+}
+push $N1c17bc0
+Expression {
+expr0 cx*10
+expr1 cy*10
+expr2 1
+expr3 1
+name Expression22
+label NDC
+xpos 240
+ypos -1296
+}
+Multiply {
+channels {rgba.red rgba.green -rgba.blue none}
+value {{"pow(10, parent.pre_scale)"}}
+name Multiply_PreScale_WS1
+xpos 240
+ypos -1210
+}
+Dot {
+name Dot29
+xpos 274
+ypos -1126
+}
+push $N230c020
+Shuffle {
+in P
+in2 rgba
+alpha alpha2
+name Shuffle_Pos_chan
+selected true
+xpos 380
+ypos -1288
+}
+set N1b2a730 [stack 0]
+Unpremult {
+name Unpremult1
+xpos 380
+ypos -1210
+disable {{!parent.unpremultiply}}
+}
+Multiply {
+channels rgb
+value {{"pow(10, parent.pre_scale)"}}
+name Multiply_PreScale_WS
+xpos 381
+ypos -1167
+}
+Switch {
+inputs 3
+which {{parent.source_type}}
+name Switch_InputType
+xpos 381
+ypos -1050
+}
+add_layer {noise3d noise3d.red noise3d.green noise3d.blue noise3d.alpha}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 noise3d.red
+name Copy2
+xpos 381
+ypos -976
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 noise3d.green
+name Copy3
+xpos 380
+ypos -896
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 noise3d.blue
+name Copy4
+xpos 380
+ypos -816
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 noise3d.alpha
+name Copy5
+xpos 380
+ypos -736
+}
+Dot {
+name Dot32
+xpos 414
+ypos -566
+}
+set N190c3e0 [stack 0]
+Dot {
+name Dot33
+xpos 274
+ypos -566
+}
+set N1910930 [stack 0]
+Dot {
+name Dot11
+xpos 134
+ypos -566
+}
+Expression {
+temp_name0 length
+temp_expr0 sqrt((r*r)+(g*g)+(b*b))
+expr3 length
+name Expression13_get_length3
+xpos 100
+ypos -410
+}
+Laplacian {
+channels alpha
+size 2
+crop false
+name Laplacian3
+xpos 100
+ypos -336
+}
+FilterErode {
+channels alpha
+size -1
+name FilterErode1
+xpos 100
+ypos -271
+}
+Blur {
+channels alpha
+size 2
+name Blur2
+xpos 100
+ypos -203
+}
+Clamp {
+channels alpha
+name Clamp1
+xpos 100
+ypos -151
+}
+Reformat {
+type scale
+scale {{pow(2,parent.quality)}}
+filter Notch
+pbb true
+name Reformat4
+xpos 100
+ypos -89
+}
+Dot {
+name Dot16
+xpos 134
+ypos 74
+}
+set N182c780 [stack 0]
+Dot {
+name Dot20
+xpos 134
+ypos 1274
+}
+push $N182c780
+push $N1910930
+Premult {
+name Premult2
+xpos 240
+ypos -410
+}
+Reformat {
+type scale
+scale {{pow(2,parent.quality)}}
+filter Impulse
+pbb true
+name Reformat6
+xpos 240
+ypos -330
+}
+Unpremult {
+name Unpremult2
+xpos 240
+ypos -250
+}
+Dot {
+name Dot14
+xpos 274
+ypos -6
+}
+push $N190c3e0
+Premult {
+name Premult1
+xpos 380
+ypos -415
+}
+Reformat {
+type scale
+scale {{pow(2,parent.quality)}}
+pbb true
+name Reformat1
+xpos 380
+ypos -333
+}
+Unpremult {
+name Unpremult3
+xpos 380
+ypos -250
+}
+Keymix {
+inputs 3
+channels rgba
+name Keymix_fixEdges
+xpos 380
+ypos 70
+}
+Expression {
+temp_name1 seed
+temp_expr1 parent.swirl_seed*1871
+temp_name2 nukenoise
+temp_expr2 noise(r/parent.swirl_scale,g/parent.swirl_scale,(b+seed)/parent.swirl_scale)
+temp_name3 input_noise
+temp_expr3 noise3d.alpha
+expr0 r+(parent.swirlsrc?input_noise:nukenoise)*parent.swirl
+expr1 g+(parent.swirlsrc?input_noise:nukenoise)*parent.swirl
+expr2 b+(parent.swirlsrc?input_noise:nukenoise)*parent.swirl
+name Expression11
+label swirl
+xpos 380
+ypos 224
+}
+Expression {
+expr0 rint(r*trunc_scale)/trunc_scale
+expr1 rint(g*trunc_scale)/trunc_scale
+expr2 rint(b*trunc_scale)/trunc_scale
+channel3 {none none none -rgba.alpha}
+mix {{parent.pixelate_amount}}
+name Expression12
+label block
+xpos 380
+ypos 304
+addUserKnob {20 User}
+addUserKnob {7 trunc_scale R 0.001 4}
+trunc_scale {{(parent.pixelate_detail+0.00001)}}
+}
+Group {
+name Rotation
+help "Use this for rotating xyz vector data such as P and N."
+label "manual env rotate"
+xpos 380
+ypos 384
+addUserKnob {20 RotationMatrix}
+addUserKnob {13 rot l rotation t "Yaw = y axis.\nPitch = x axis.\nRoll = z axis."}
+}
+Input {
+inputs 0
+name Input
+xpos -304
+ypos -17
+}
+ColorMatrix {
+matrix {
+    {{cos(radians(yrot))} 0 {-sin(radians(yrot))}}
+    {0 1 0}
+    {{sin(radians(yrot))} 0 {cos(radians(yrot))}}
+  }
+name ColorMatrix14
+label "yrot (yaw)"
+xpos -304
+ypos 89
+addUserKnob {20 "" l User}
+addUserKnob {7 yrot l "y rotation" R -90 90}
+yrot {{parent.rot.y}}
+}
+ColorMatrix {
+matrix {
+    {1 0 0}
+    {0 {cos(radians(xrot))} {sin(radians(xrot))}}
+    {0 {-sin(radians(xrot))} {cos(radians(xrot))}}
+  }
+name ColorMatrix15
+label "xrot (pitch)\n"
+selected true
+xpos -304
+ypos 127
+addUserKnob {20 "" l User}
+addUserKnob {7 xrot l "x rotation" R -90 90}
+xrot {{parent.rot.x}}
+}
+ColorMatrix {
+matrix {
+    {{cos(radians(zrot))} {sin(radians(zrot))} 0}
+    {{-sin(radians(zrot))} {cos(radians(zrot))} 0}
+    {0 0 1}
+  }
+name ColorMatrix13
+label "zrot (roll)"
+xpos -304
+ypos 165
+addUserKnob {20 "" l User}
+addUserKnob {7 zrot l "z rotation" R -90 90}
+zrot {{parent.rot.z}}
+}
+Output {
+name Output1
+xpos -304
+ypos 280
+}
+end_group
+Add {
+channels rgb
+value {{parent.offset.x} {parent.offset.y} {parent.offset.z} {curve}}
+name Offset
+xpos 380
+ypos 470
+}
+Multiply {
+channels rgb
+value {{1/parent.size.x} {1/parent.size.y} {1/parent.size.z} {curve}}
+name Size
+xpos 380
+ypos 507
+}
+Dot {
+name Dot19
+xpos 414
+ypos 634
+}
+set N160f350 [stack 0]
+Dot {
+name Dot15
+xpos 554
+ypos 634
+}
+set N13f5100 [stack 0]
+Dot {
+name Dot12
+xpos 694
+ypos 634
+}
+set N13fa080 [stack 0]
+Dot {
+name Dot22
+xpos 834
+ypos 634
+}
+set N13feb50 [stack 0]
+Dot {
+name Dot17
+xpos 1254
+ypos 634
+}
+BlinkScript {
+ProgramGroup 1
+KernelDescription "1 \"Noise4D\" iterate pixelWise 6752f1b5993a387ea0d82fec10d191470cbd2c8493ee73ede687c94d9fe52ff5 2 \"src\" Read Point \"dst\" Write Point 3 \"octaves\" Int 1 CAAAAA== \"persistence\" Float 1 AAAAPw== \"scale\" Float 1 bxKDOg=="
+kernelSource "//Based on https://github.com/Draradech/csworldgen/blob/master/simplexnoise.cpp\n//Ported by Mads Hagbarth Lund 2014\n\n/* Copyright (c) 2007-2012 Eliot Eshelman\n *\n * This program is free software: you can redistribute it and/or modify\n * it under the terms of the GNU General Public License as published by\n * the Free Software Foundation, either version 3 of the License, or\n * (at your option) any later version.\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n * GNU General Public License for more details.\n *\n * You should have received a copy of the GNU General Public License\n * along with this program. If not, see <http://www.gnu.org/licenses/>.\n *\n */\n\n\nint fastfloor( const float x ) \{ return x > 0 ? (int) x : (int) x - 1; \}\ninline float raw_noise_4d( const float x, const float y, const float z, const float w ) \n\{\nint simplex\[64]\[4] = \{\n    \{0,1,2,3\},\{0,1,3,2\},\{0,0,0,0\},\{0,2,3,1\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{1,2,3,0\},\n    \{0,2,1,3\},\{0,0,0,0\},\{0,3,1,2\},\{0,3,2,1\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{1,3,2,0\},\n    \{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\n    \{1,2,0,3\},\{0,0,0,0\},\{1,3,0,2\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{2,3,0,1\},\{2,3,1,0\},\n    \{1,0,2,3\},\{1,0,3,2\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{2,0,3,1\},\{0,0,0,0\},\{2,1,3,0\},\n    \{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\n    \{2,0,1,3\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{3,0,1,2\},\{3,0,2,1\},\{0,0,0,0\},\{3,1,2,0\},\n    \{2,1,0,3\},\{0,0,0,0\},\{0,0,0,0\},\{0,0,0,0\},\{3,1,0,2\},\{0,0,0,0\},\{3,2,0,1\},\{3,2,1,0\}\n\};\n    int perm\[512] = \{\n        151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,\n        8,99,37,240,21,10,23,190,6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,\n        35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168,68,175,74,165,71,\n        134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,\n        55,46,245,40,244,102,143,54,65,25,63,161,1,216,80,73,209,76,132,187,208, 89,\n        18,169,200,196,135,130,116,188,159,86,164,100,109,198,173,186,3,64,52,217,226,\n        250,124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,\n        189,28,42,223,183,170,213,119,248,152,2,44,154,163,70,221,153,101,155,167,43,\n        172,9,129,22,39,253,19,98,108,110,79,113,224,232,178,185,112,104,218,246,97,\n        228,251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,\n        107,49,192,214,31,181,199,106,157,184,84,204,176,115,121,50,45,127,4,150,254,\n        138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180,\n\n        151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,\n        8,99,37,240,21,10,23,190,6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,\n        35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168,68,175,74,165,71,\n        134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,\n        55,46,245,40,244,102,143,54,65,25,63,161,1,216,80,73,209,76,132,187,208, 89,\n        18,169,200,196,135,130,116,188,159,86,164,100,109,198,173,186,3,64,52,217,226,\n        250,124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,\n        189,28,42,223,183,170,213,119,248,152,2,44,154,163,70,221,153,101,155,167,43,\n        172,9,129,22,39,253,19,98,108,110,79,113,224,232,178,185,112,104,218,246,97,\n        228,251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,\n        107,49,192,214,31,181,199,106,157,184,84,204,176,115,121,50,45,127,4,150,254,\n        138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180\n    \};\n   int grad4\[32]\[4]= \{\n    \{0,1,1,1\},  \{0,1,1,-1\},  \{0,1,-1,1\},  \{0,1,-1,-1\},\n    \{0,-1,1,1\}, \{0,-1,1,-1\}, \{0,-1,-1,1\}, \{0,-1,-1,-1\},\n    \{1,0,1,1\},  \{1,0,1,-1\},  \{1,0,-1,1\},  \{1,0,-1,-1\},\n    \{-1,0,1,1\}, \{-1,0,1,-1\}, \{-1,0,-1,1\}, \{-1,0,-1,-1\},\n    \{1,1,0,1\},  \{1,1,0,-1\},  \{1,-1,0,1\},  \{1,-1,0,-1\},\n    \{-1,1,0,1\}, \{-1,1,0,-1\}, \{-1,-1,0,1\}, \{-1,-1,0,-1\},\n    \{1,1,1,0\},  \{1,1,-1,0\},  \{1,-1,1,0\},  \{1,-1,-1,0\},\n    \{-1,1,1,0\}, \{-1,1,-1,0\}, \{-1,-1,1,0\}, \{-1,-1,-1,0\}\n   \};\n    float F4 = (sqrt(5.0f)-1.0)/4.0;\n    float G4 = (5.0-sqrt(5.0f))/20.0;\n    float n0, n1, n2, n3, n4;\n    float s = (x + y + z + w) * F4;\n    int i = fastfloor(x + s);\n    int j = fastfloor(y + s);\n    int k = fastfloor(z + s);\n    int l = fastfloor(w + s);\n    float t = (i + j + k + l) * G4;\n    float X0 = i - t;\n    float Y0 = j - t;\n    float Z0 = k - t;\n    float W0 = l - t;\n\n    float x0 = x - X0;\n    float y0 = y - Y0;\n    float z0 = z - Z0;\n    float w0 = w - W0;\n    int c1 = (x0 > y0) ? 32 : 0;\n    int c2 = (x0 > z0) ? 16 : 0;\n    int c3 = (y0 > z0) ? 8 : 0;\n    int c4 = (x0 > w0) ? 4 : 0;\n    int c5 = (y0 > w0) ? 2 : 0;\n    int c6 = (z0 > w0) ? 1 : 0;\n    int c = c1 + c2 + c3 + c4 + c5 + c6;\n\n    int i1, j1, k1, l1;\n    int i2, j2, k2, l2;\n    int i3, j3, k3, l3;\n    i1 = simplex\[c]\[0]>=3 ? 1 : 0;\n    j1 = simplex\[c]\[1]>=3 ? 1 : 0;\n    k1 = simplex\[c]\[2]>=3 ? 1 : 0;\n    l1 = simplex\[c]\[3]>=3 ? 1 : 0;\n    i2 = simplex\[c]\[0]>=2 ? 1 : 0;\n    j2 = simplex\[c]\[1]>=2 ? 1 : 0;\n    k2 = simplex\[c]\[2]>=2 ? 1 : 0;\n    l2 = simplex\[c]\[3]>=2 ? 1 : 0;\n    i3 = simplex\[c]\[0]>=1 ? 1 : 0;\n    j3 = simplex\[c]\[1]>=1 ? 1 : 0;\n    k3 = simplex\[c]\[2]>=1 ? 1 : 0;\n    l3 = simplex\[c]\[3]>=1 ? 1 : 0;\n    float x1 = x0 - i1 + G4;\n    float y1 = y0 - j1 + G4;\n    float z1 = z0 - k1 + G4;\n    float w1 = w0 - l1 + G4;\n    float x2 = x0 - i2 + 2.0*G4;\n    float y2 = y0 - j2 + 2.0*G4;\n    float z2 = z0 - k2 + 2.0*G4;\n    float w2 = w0 - l2 + 2.0*G4;\n    float x3 = x0 - i3 + 3.0*G4;\n    float y3 = y0 - j3 + 3.0*G4;\n    float z3 = z0 - k3 + 3.0*G4;\n    float w3 = w0 - l3 + 3.0*G4;\n    float x4 = x0 - 1.0 + 4.0*G4;\n    float y4 = y0 - 1.0 + 4.0*G4;\n    float z4 = z0 - 1.0 + 4.0*G4;\n    float w4 = w0 - 1.0 + 4.0*G4;\n    int ii = i & 255;\n    int jj = j & 255;\n    int kk = k & 255;\n    int ll = l & 255;\n    int gi0 = perm\[ii+perm\[jj+perm\[kk+perm\[ll]]]] % 32;\n    int gi1 = perm\[ii+i1+perm\[jj+j1+perm\[kk+k1+perm\[ll+l1]]]] % 32;\n    int gi2 = perm\[ii+i2+perm\[jj+j2+perm\[kk+k2+perm\[ll+l2]]]] % 32;\n    int gi3 = perm\[ii+i3+perm\[jj+j3+perm\[kk+k3+perm\[ll+l3]]]] % 32;\n    int gi4 = perm\[ii+1+perm\[jj+1+perm\[kk+1+perm\[ll+1]]]] % 32;\n    float t0 = 0.6 - x0*x0 - y0*y0 - z0*z0 - w0*w0;\n    if(t0<0) n0 = 0.0;\n    else \{\n        t0 *= t0;\n        n0 = t0 * t0 * dot(float4(grad4\[gi0]\[0],grad4\[gi0]\[2],grad4\[gi0]\[3],grad4\[gi0]\[3]), float4(x0, y0, z0, w0));\n    \}\n    float t1 = 0.6 - x1*x1 - y1*y1 - z1*z1 - w1*w1;\n    if(t1<0) n1 = 0.0;\n    else \{\n        t1 *= t1;\n        n1 = t1 * t1 * dot(float4(grad4\[gi1]\[0],grad4\[gi1]\[2],grad4\[gi1]\[3],grad4\[gi1]\[3]), float4(x1, y1, z1, w1));\n    \}\n    float t2 = 0.6 - x2*x2 - y2*y2 - z2*z2 - w2*w2;\n    if(t2<0) n2 = 0.0;\n    else \{\n        t2 *= t2;\n        n2 = t2 * t2 * dot(float4(grad4\[gi2]\[0],grad4\[gi2]\[2],grad4\[gi2]\[3],grad4\[gi2]\[3]), float4(x2, y2, z2, w2));\n    \}\n    float t3 = 0.6 - x3*x3 - y3*y3 - z3*z3 - w3*w3;\n    if(t3<0) n3 = 0.0;\n    else \{\n        t3 *= t3;\n        n3 = t3 * t3 * dot(float4(grad4\[gi3]\[0],grad4\[gi3]\[2],grad4\[gi3]\[3],grad4\[gi3]\[3]), float4(x3, y3, z3, w3));\n    \}\n    float t4 = 0.6 - x4*x4 - y4*y4 - z4*z4 - w4*w4;\n    if(t4<0) n4 = 0.0;\n    else \{\n        t4 *= t4;\n        n4 = t4 * t4 * dot(float4(grad4\[gi4]\[0],grad4\[gi4]\[2],grad4\[gi4]\[3],grad4\[gi4]\[3]), float4(x4, y4, z4, w4));\n    \}\n    return 27.0 * (n0 + n1 + n2 + n3 + n4);\n\}\ninline float octave_noise_4d( const float octaves, const float persistence, const float scale, const float x, const float y, const float z, const float w ) \n\{\n    float total = 0;\n    float frequency = scale;\n    float amplitude = 1;\n    float maxAmplitude = 0;\n    for( int i=0; i < octaves; i++ ) \{\n        total += (float)raw_noise_4d( x * frequency, y * frequency, z * frequency, w * frequency ) * amplitude;\n\n        frequency *= 2;\n        maxAmplitude += amplitude;\n        amplitude *= persistence;\n    \}\n    return float(total / maxAmplitude);\n\}\n\nkernel Noise4D : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessPoint, eEdgeClamped> src;\n  Image<eWrite, eAccessPoint> dst;\nparam:\n  int octaves;\n  float persistence;\n  float scale;\n  void define() \{\n    defineParam(octaves,      \"octaves\", 8);\n    defineParam(persistence, \"persistence\",  0.5f);\n    defineParam(scale, \"scale\", 0.001f);\n  \}\n  void process() \{\n    float sample = (float)octave_noise_4d(float(octaves),persistence,scale,src(0),src(1),src(2),src(3));\n    dst() = float4(sample,sample,sample,sample);\n\}\n\};"
+useGPUIfAvailable {{parent.useGPU}}
+rebuild ""
+Noise4D_octaves {{parent.octaves}}
+Noise4D_persistence {{parent.lacunarity/5}}
+Noise4D_scale 1
+name Noise4D1
+xpos 1220
+ypos 704
+}
+Dot {
+name Dot37
+xpos 1254
+ypos 794
+}
+set N142b510 [stack 0]
+Dot {
+name Dot24
+xpos 1394
+ypos 794
+}
+Expression {
+expr3 abs(a)
+name Expression2
+label crater
+xpos 1360
+ypos 870
+}
+Dot {
+name Dot35
+xpos 1394
+ypos 1034
+}
+push $N142b510
+Group {
+name FitRange7
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 1220
+ypos 858
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin -1
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin {0 0 0 0}
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax 1
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+name Clamp2
+selected true
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Dot {
+name Dot36
+xpos 1255
+ypos 999
+}
+push $N13feb50
+Expression {
+temp_name3 nukesin
+temp_expr3 sin(r)*sin(g)*sin(b)
+expr3 "parent.useAlpha && a == 0 ? 0 : nukesin"
+name Expression16
+label "sin\n"
+xpos 800
+ypos 700
+}
+Dot {
+name Dot23
+xpos 834
+ypos 794
+}
+set N1010d90 [stack 0]
+Dot {
+name Dot26
+xpos 974
+ypos 794
+}
+set N10156f0 [stack 0]
+Dot {
+name Dot25
+xpos 1114
+ypos 794
+}
+Expression {
+expr3 abs(a)
+name Expression20
+label grid
+xpos 1080
+ypos 864
+}
+Dot {
+name Dot31
+xpos 1114
+ypos 954
+}
+push $N10156f0
+Expression {
+expr3 a>0
+name Expression19
+label "checkerboard\n"
+xpos 940
+ypos 864
+}
+Dot {
+name Dot34
+xpos 974
+ypos 954
+}
+push $N1010d90
+Group {
+name FitRange5
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 800
+ypos 858
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin -1
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin {0 0 0 0}
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax 1
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+minimum_enable false
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+maximum_enable false
+name Clamp2
+selected true
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Dot {
+name Dot18
+xpos 834
+ypos 954
+}
+push $N13fa080
+Expression {
+temp_name3 nukerand
+temp_expr3 random(r,g,b)
+channel0 alpha
+expr0 "parent.useAlpha && a == 0 ? 0 : nukerand"
+name Expression14
+label "random\n"
+xpos 660
+ypos 704
+}
+Dot {
+name Dot7
+xpos 694
+ypos 954
+}
+push $N13f5100
+Expression {
+temp_name3 nukenoise
+temp_expr3 noise(r,g,b)
+channel0 alpha
+expr0 "parent.useAlpha && a == 0 ? 0 : nukenoise"
+name Expression1
+label noise
+xpos 520
+ypos 704
+}
+Group {
+name FitRange3
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 520
+ypos 858
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin -1
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin {0 0 0 0}
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax 1
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+selected true
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+minimum_enable false
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+maximum_enable false
+name Clamp2
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Dot {
+name Dot30
+xpos 554
+ypos 954
+}
+push $N160f350
+Expression {
+temp_name0 lacunarity
+temp_expr0 "\[exists parent.input1]?noise3d.red:parent.lacunarity"
+temp_name1 octaves
+temp_expr1 "\[exists parent.input2]?noise3d.green:parent.octaves"
+temp_name2 gain
+temp_expr2 "\[exists parent.input3]?noise3d.blue:parent.gain"
+temp_name3 turbNoise
+temp_expr3 turbulence(r,g,b,octaves,lacunarity,gain)
+channel0 alpha
+expr0 "parent.useAlpha && a == 0 ? 0 : turbNoise"
+name Expression8
+label "turbulence\n"
+xpos 380
+ypos 708
+}
+ColorLookup {
+channels alpha
+use_precomputed false
+lut {master {}
+  red {}
+  green {}
+  blue {}
+  alpha {curve L l x-2 0 S x0 0.03500000015 x0.1000000015 0.1 L x0.200000003 0.2 0.3 0.4 0.5 0.6 x0.6999999881 0.7 x0.8000000119 0.8 S x0.8999999762 0.9 x1 0.9650000334 L l x3 1}}
+mix {{parent.compress}}
+name ColorLookup2
+xpos 380
+ypos 784
+}
+push $N160f350
+Dot {
+name Dot13
+xpos 274
+ypos 634
+}
+Expression {
+temp_name0 lacunarity
+temp_expr0 "\[exists parent.input1]?noise3d.red:parent.lacunarity"
+temp_name1 octaves
+temp_expr1 "\[exists parent.input2]?noise3d.green:parent.octaves"
+temp_name2 gain
+temp_expr2 "\[exists parent.input3]?noise3d.blue:parent.gain"
+temp_name3 fBmNoise
+temp_expr3 fBm(r,g,b,octaves,lacunarity,gain)*.5+0.5
+channel0 alpha
+expr0 "parent.useAlpha && a == 0 ? 0 : fBmNoise"
+name Expression3
+label fBm
+xpos 240
+ypos 708
+}
+ColorLookup {
+channels alpha
+use_precomputed false
+lut {master {}
+  red {}
+  green {}
+  blue {}
+  alpha {curve L l x-2 0 S x0 0.03500000015 x0.1000000015 0.1 L x0.200000003 0.2 0.3 0.4 0.5 0.6 x0.6999999881 0.7 x0.8000000119 0.8 S x0.8999999762 0.9 x1 0.9650000334 L l x3 1}}
+mix {{parent.compress}}
+name ColorLookup1
+xpos 240
+ypos 780
+}
+Dot {
+name Dot21
+xpos 274
+ypos 954
+}
+Switch {
+inputs 9
+which {{noisetype}}
+name Switch1
+xpos 380
+ypos 1182
+}
+Blur {
+inputs 1+1
+channels alpha
+size {{parent.quality>0?pow(2,parent.quality):0}}
+name Blur1
+xpos 380
+ypos 1264
+}
+Remove {
+operation keep
+channels alpha
+name Remove1
+xpos 380
+ypos 1378
+}
+Group {
+name FitRange
+label "\[value inMin]:\[value inMax] to \[value outMin]:\[value outMax]"
+xpos 380
+ypos 1498
+addUserKnob {20 User l FitRange}
+addUserKnob {41 channels T Grade3.channels}
+addUserKnob {26 ""}
+addUserKnob {26 from}
+addUserKnob {19 inMin R -1 1}
+inMin {0 0 0 0}
+addUserKnob {6 inMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 inMax R 0 10}
+inMax 1
+addUserKnob {6 inMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {26 ""}
+addUserKnob {26 to}
+addUserKnob {19 outMin R -1 1}
+outMin {{parent.output_min_value}}
+addUserKnob {6 outMin_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 minimum_enable l "clamp to min" -STARTLINE T Clamp2.minimum_enable}
+addUserKnob {19 outMax R 0 10}
+outMax {{parent.output_max_value}}
+addUserKnob {6 outMax_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {41 maximum_enable l "clamp to max" -STARTLINE T Clamp2.maximum_enable}
+}
+Input {
+inputs 0
+name Input1
+xpos -540
+ypos 294
+}
+Grade {
+channels alpha
+blackpoint {{parent.inMin.r} {parent.inMin.g} {parent.inMin.b} {parent.inMin.a}}
+whitepoint {{parent.inMax.r} {parent.inMax.g} {parent.inMax.b} {parent.inMax.a}}
+black {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+white {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+black_clamp false
+name Grade3
+xpos -540
+ypos 334
+}
+Clamp {
+channels {{{Grade3.channels}}}
+minimum {{parent.outMin.r} {parent.outMin.g} {parent.outMin.b} {parent.outMin.a}}
+minimum_enable false
+maximum {{parent.outMax.r} {parent.outMax.g} {parent.outMax.b} {parent.outMax.a}}
+maximum_enable false
+name Clamp2
+selected true
+xpos -540
+ypos 375
+}
+Output {
+name Output1
+xpos -540
+ypos 477
+}
+end_group
+Reformat {
+type scale
+scale {{1/Reformat1.scale}}
+black_outside true
+pbb true
+name Reformat2
+xpos 380
+ypos 1565
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.useAlpha}}
+name Merge1
+xpos 380
+ypos 1670
+}
+CopyBBox {
+inputs 2
+name CopyBBox5
+xpos 380
+ypos 1750
+}
+BlackOutside {
+name BlackOutside1
+xpos 380
+ypos 1830
+}
+push $N2226940
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy1
+xpos 380
+ypos 1904
+}
+Output {
+name Output1
+xpos 380
+ypos 2061
+}
+push $N1b2a730
+Viewer {
+frame_range 1-100
+fps 25
+name Viewer1
+xpos 520
+ypos -1206
+}
+end_group

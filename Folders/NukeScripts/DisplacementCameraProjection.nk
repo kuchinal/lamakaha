@@ -1,0 +1,240 @@
+set cut_paste_input [stack 0]
+version 8.0 v5
+Axis {
+ inputs 0
+ rotate {{curve x101 0 x145 0} {curve x101 54.74381593 x145 0} {curve x101 0 x145 0}}
+ name Axis1
+ selected true
+ xpos -696
+ ypos 433
+}
+Camera2 {
+ translate {{curve x101 -0.473377198 x145 -0.7117338181} {curve x101 0 x145 0} {curve x101 1.302857876 x145 2.007560492}}
+ rotate {0 -18.68745221 0}
+ name Camera2
+ selected true
+ xpos -600
+ ypos 433
+ addUserKnob {20 User}
+ addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = n\['xpos'].value()\ny = n\['ypos'].value()\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+Camera2 {
+ inputs 0
+ translate {0 0 1.457999945}
+ name Camera1
+ selected true
+ xpos -579
+ ypos -40
+ addUserKnob {20 User}
+ addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = n\['xpos'].value()\ny = n\['ypos'].value()\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $cut_paste_input
+Roto {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 0}
+    {t x44700000 x44070000}
+    {a}
+    {curvegroup Bezier1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {}
+        {x43003333 x43400000}
+        {}
+        {x3ecccc00}
+        {x43403333 x43403333}
+        {xbecccc00}
+        {x3f4ccd00 xbe4ccc00}
+        {x433fcccd x43000000}
+        {xbf4ccd00 x3e4ccc00}
+        {xbf4ccc80 xbeccce00}
+        {x43004370 x430071a4}
+        {x3f4ccc80 x3eccce00}}}
+      {cc
+       {f 8192}
+       {p
+        {}
+        {}
+        {}
+        {x3ecccc00}
+        {}
+        {xbecccc00}
+        {x3f4ccd00 xbe4ccc00}
+        {}
+        {xbf4ccd00 x3e4ccc00}
+        {xbf4ccc80 xbeccce00}
+        {}
+        {x3f4ccc80 x3eccce00}}}}
+     {t x431fc000 x4320199a}
+     {a r x40400000 g x40400000 b x40400000 a x40400000 osw x41200000 osf 0 str 1 spx x44700000 spy x44070000 sb 1 ltn x42e60000 ltm x42e60000 tt x40800000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {960 540}
+ color 3
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 115
+ lifetime_end 115
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+ name Roto1
+ selected true
+ xpos -767
+ ypos -230
+ hide_input true
+}
+CheckerBoard2 {
+ inputs 0
+ format "256 256 0 0 256 256 1 square_256"
+ centerlinewidth 0
+ name CheckerBoard2
+ selected true
+ xpos -486
+ ypos -306
+ postage_stamp false
+}
+set N4ed36cb0 [stack 0]
+Dot {
+ name Dot4
+ selected true
+ xpos -615
+ ypos -303
+}
+Merge2 {
+ inputs 2
+ name Merge1
+ selected true
+ xpos -649
+ ypos -215
+ disable true
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -615
+ ypos -146
+}
+push $N4ed36cb0
+ShuffleCopy {
+ inputs 2
+ alpha alpha2
+ black red
+ out2 rotopaint_mask
+ name ShuffleCopy1
+ selected true
+ xpos -486
+ ypos -149
+}
+Project3D {
+ inputs 2
+ name Project3D1
+ selected true
+ xpos -490
+ ypos -19
+}
+Card2 {
+ rows 100
+ columns 100
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ selected true
+ xpos -490
+ ypos 96
+}
+set N30763d20 [stack 0]
+Dot {
+ name Dot2
+ selected true
+ xpos -738
+ ypos 99
+}
+push 0
+ScanlineRender {
+ inputs 2
+ projection_mode uv
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos -772
+ ypos 153
+}
+Shuffle {
+ in rotopaint_mask
+ name Shuffle2
+ selected true
+ xpos -772
+ ypos 207
+}
+Dot {
+ name Dot3
+ selected true
+ xpos -738
+ ypos 290
+}
+push $N30763d20
+DisplaceGeo {
+ inputs 2
+ name DisplaceGeo1
+ selected true
+ xpos -490
+ ypos 287
+}
+push 0
+ScanlineRender {
+ inputs 3
+ samples 10
+ motion_vectors_type distance
+ name ScanlineRender2
+ selected true
+ xpos -490
+ ypos 454
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "create displ map"
+ selected true
+ xpos -741
+ ypos -272
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "apply displ map"
+ selected true
+ xpos -689
+ ypos 179
+}

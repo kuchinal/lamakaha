@@ -1,0 +1,23 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Multiply {
+ channels rgba
+ value {{Distance/multiplier*-1+1}}
+ name fader3D
+ selected true
+ xpos -236
+ ypos -150
+ addUserKnob {20 User}
+ addUserKnob {1 Camera}
+ Camera Camera6
+ addUserKnob {7 multiplier R 1 100}
+ multiplier 1000
+ addUserKnob {13 ca}
+ ca {{"\[value Camera].translate.x"} {"\[value Camera].translate.y"} {"\[value Camera].translate.z"}}
+ addUserKnob {13 po}
+ po {{"\[python nuke.thisNode().dependent()\\\[0\\]\\\['translate'\\].value()\\\[0\\]]"} {"\[python nuke.thisNode().dependent()\\\[0\\]\\\['translate'\\].value()\\\[1\\]]"} {"\[python nuke.thisNode().dependent()\\\[0\\]\\\['translate'\\].value()\\\[2\\]]"}}
+ addUserKnob {7 Distance}
+ Distance {{sqrt(pow((ca.x-po.x),2)+pow((ca.y-po.y),2)+pow((ca.z-po.z),2))}}
+ addUserKnob {26 help_1 l "" +STARTLINE T "Set your camera\nin multiplier field set the distance where you want the fade to start\nconnect node right above your card"}
+}

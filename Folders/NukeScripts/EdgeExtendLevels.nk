@@ -1,0 +1,77 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name EdgeExtendLevels
+ tile_color 0x3000ff
+ note_font "Verdana Bold"
+ selected true
+ xpos 12720
+ ypos 97
+ addUserKnob {20 User l EdgeExtend2}
+ addUserKnob {41 threshold T LevelSet1.threshold}
+ addUserKnob {7 Size R 0 50}
+ Size 16
+ addUserKnob {41 size l PreBlur T EdgeBlur1.size}
+ addUserKnob {41 gradient_extrapolate l "gradient extrapolate" T LevelSet1.gradient_extrapolate}
+ addUserKnob {41 disable_1 l unpremul T Premult1.disable}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -223
+  ypos -359
+ }
+add_layer {rgba rgba.water}
+ EdgeBlur {
+  channels rgba
+  edge_mult 4
+  name EdgeBlur1
+  xpos -223
+  ypos -322
+ }
+ Unpremult {
+  name Unpremult2
+  xpos -223
+  ypos -279
+ }
+ AdjBBox {
+  numpixels {{parent.LevelSet1.matte_limit i}}
+  name AdjBBox1
+  xpos -223
+  ypos -214
+ }
+ LevelSet {
+  output none
+  gradient none
+  create_matte true
+  matte_limit {{parent.Size i}}
+  extrapolated rgba
+  name LevelSet1
+  xpos -223
+  ypos -166
+ }
+ Premult {
+  name Premult1
+  selected true
+  xpos -223
+  ypos -114
+ }
+set Neaec2680 [stack 0]
+ Viewer {
+  gain 4.7
+  useGPUForViewer false
+  viewerProcess None
+  input_process false
+  name Viewer1
+  xpos -370
+  ypos -514
+  hide_input true
+ }
+push $Neaec2680
+ Output {
+  name Output1
+  xpos -223
+  ypos -25
+ }
+end_group

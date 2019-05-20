@@ -1,0 +1,84 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+name Dmatte
+note_font "Bitstream Vera Sans Bold"
+selected true
+xpos -27801
+ypos -28508
+addUserKnob {20 User}
+addUserKnob {41 uniform_scale l INVISIBLE +INVISIBLE T Axis1.uniform_scale}
+addUserKnob {41 translate T scale.translate}
+addUserKnob {41 rotate T scale.rotate}
+addUserKnob {41 scaling l scale T scale.scaling}
+addUserKnob {41 samples T ScanlineRender1.samples}
+addUserKnob {41 shutter T ScanlineRender1.shutter}
+}
+Input {
+inputs 0
+name Camera
+xpos -923
+ypos -485
+}
+Axis {
+inputs 0
+translate {58.15000153 13.0340004 97.58999634}
+name scale
+xpos -862
+ypos -695
+}
+Axis {
+uniform_scale {{curve(((frame-1022.5)%(1022.5-1022.5+1))+1022.5) L x1022.500244 0.9609248931 x1023.001892 1.039478719 x1023.50354 0.9609248931}}
+name Axis1
+xpos -862
+ypos -621
+}
+Constant {
+inputs 0
+color 1
+name Constant3
+tile_color 0xffffffff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+xpos -752
+ypos -851
+postage_stamp false
+}
+Sphere {
+name Sphere1
+xpos -752
+ypos -807
+addUserKnob {20 User}
+addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,1,0])\nn\['pivot'].setValue(\[0,-1,0])"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,1,0])\nn\['pivot'].setValue(\[0,-1,0])"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+TransformGeo {
+inputs 2
+name TransformGeo1
+xpos -752
+ypos -601
+}
+Reformat {
+inputs 0
+format "3225 1701 0 0 3225 1701 1 "
+name Reformat53
+xpos -571
+ypos -491
+}
+ScanlineRender {
+inputs 3
+conservative_shader_sampling false
+samples 10
+motion_vectors_type distance
+name ScanlineRender1
+xpos -752
+ypos -485
+}
+Output {
+name Output1
+xpos -752
+ypos -385
+}
+end_group

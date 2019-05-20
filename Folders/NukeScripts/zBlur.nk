@@ -1,0 +1,79 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Group {
+ name zBlur
+ tile_color 0xa96400ff
+ note_font "Verdana Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -417
+ ypos 35
+ addUserKnob {20 User}
+ addUserKnob {41 channels T ZBlur4.channels}
+ addUserKnob {41 Zchan l Z T ZBlur4.Zchan}
+ addUserKnob {41 math T ZBlur4.math}
+ addUserKnob {41 occlusion T ZBlur4.occlusion}
+ addUserKnob {41 setup_mode l "focal-plane setup" T ZBlur4.setup_mode}
+ addUserKnob {41 center l "focus plane (C)" T ZBlur4.center}
+ addUserKnob {41 dof l depth-of-field T ZBlur4.dof}
+ addUserKnob {41 size T ZBlur4.size}
+ addUserKnob {41 max_size l maximum T ZBlur4.max_size}
+ addUserKnob {41 shape l "filter shape" T ZBlur4.shape}
+ addUserKnob {26 "" l mask}
+ addUserKnob {41 maskChannelMask l "" -STARTLINE T ZBlur4.maskChannelMask}
+ addUserKnob {41 maskChannelInput l "" -STARTLINE T ZBlur4.maskChannelInput}
+ addUserKnob {41 inject -STARTLINE T ZBlur4.inject}
+ addUserKnob {41 invert_mask l invert -STARTLINE T ZBlur4.invert_mask}
+ addUserKnob {41 fringe -STARTLINE T ZBlur4.fringe}
+ addUserKnob {41 mix T ZBlur4.mix}
+}
+ Input {
+  inputs 0
+  name zDepth
+  xpos -1238
+  ypos 565
+  number 1
+ }
+ Dot {
+  name Dot1
+  xpos -1204
+  ypos 671
+ }
+ Input {
+  inputs 0
+  name Source
+  xpos -1148
+  ypos 568
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove3
+  xpos -1148
+  ypos 631
+ }
+ ShuffleCopy {
+  inputs 2
+  in2 depth
+  red red
+  out depth
+  name ShuffleCopy1
+  xpos -1148
+  ypos 667
+ }
+ ZBlur {
+  channels rgba
+  math -linear
+  center 1
+  name ZBlur4
+  selected true
+  xpos -1148
+  ypos 704
+ }
+ Output {
+  name Output1
+  xpos -1148
+  ypos 782
+ }
+end_group

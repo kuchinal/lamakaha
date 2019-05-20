@@ -1,0 +1,107 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Group {
+name SoftClamp1
+tile_color 0x8ea8c9ff
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+note_font_size 14
+selected true
+xpos -4052
+ypos 1781
+addUserKnob {20 User}
+addUserKnob {22 toggle l Clamp t "toggle between soft clip and hard clamp" T "n = nuke.thisNode()\nt = n\['toggle']\nlT = t.label()\ns= nuke.toNode(\"S\")\nif lT == (\"Clamp\"):\n    n\['group'].setVisible(False)\n    n\['group_1'].setVisible(True)\n    t.setLabel(\"SoftClip\")\n    s\['which'].setValue(0)\nif lT == (\"SoftClip\"):\n    s\['which'].setValue(1)\n    t.setLabel(\"Clamp\")\n    n\['group'].setVisible(True)\n    n\['group_1'].setVisible(False)\nhelp(n\['group'])" +STARTLINE}
+addUserKnob {26 text l "" -STARTLINE T "toggle between hard clamp and soft clip"}
+addUserKnob {20 group l clamp n 1}
+addUserKnob {41 minimum T Clamp1.minimum}
+addUserKnob {41 MinClampTo -STARTLINE T Clamp1.MinClampTo}
+addUserKnob {41 minimum_enable l enable -STARTLINE T Clamp1.minimum_enable}
+addUserKnob {41 maximum T Clamp1.maximum}
+addUserKnob {41 MaxClampTo -STARTLINE T Clamp1.MaxClampTo}
+addUserKnob {41 maximum_enable l enable -STARTLINE T Clamp1.maximum_enable}
+addUserKnob {20 endGroup n -1}
+addUserKnob {20 group_1 l softClip +HIDDEN n 1}
+addUserKnob {41 softclip_min l "softclip min" T SoftClip1.softclip_min}
+addUserKnob {41 softclip_max l "softclip max" -STARTLINE T SoftClip1.softclip_max}
+addUserKnob {41 conversion -STARTLINE T SoftClip1.conversion}
+addUserKnob {20 endGroup_1 l endGroup n -1}
+}
+Input {
+inputs 0
+name mask
+xpos -966
+ypos 385
+number 1
+}
+set Nb58085b0 [stack 0]
+Input {
+inputs 0
+name input
+xpos -644
+ypos 392
+}
+set N9a222320 [stack 0]
+Clamp {
+inputs 1+1
+channels rgba
+MinClampTo_enable {{minimum_enable}}
+MaxClampTo_enable {{maximum_enable}}
+name Clamp1
+selected true
+xpos -772
+ypos 552
+}
+push $Nb58085b0
+push $N9a222320
+Grade {
+channels rgba
+white 0
+add 1
+name Grade1
+label rgba
+xpos -336
+ypos 518
+addUserKnob {20 User}
+addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+}
+Merge2 {
+inputs 2
+operation copy
+bbox A
+mix {{parent.input1.name?0:1}}
+name Merge2
+xpos -336
+ypos 589
+}
+push $N9a222320
+SoftClip {
+conversion "preserve hue and saturation"
+softclip_min 10
+softclip_max 40
+name SoftClip1
+xpos -644
+ypos 575
+}
+push $N9a222320
+Merge2 {
+inputs 2+1
+operation copy
+bbox A
+name Merge1
+xpos -546
+ypos 649
+}
+Switch {
+inputs 2
+which 1
+name S
+xpos -631
+ypos 850
+}
+Output {
+name Output1
+xpos -631
+ypos 958
+}
+end_group

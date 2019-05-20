@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+TransformMasked {
+ center {1024 778}
+ name Transform1
+ autolabel 'Transform'
+ selected true
+ xpos -298
+ ypos -126
+ addUserKnob {20 User}
+ addUserKnob {14 user R 0 100}
+}

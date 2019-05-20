@@ -121,6 +121,15 @@ def animatedSnapFunc(nodeToSnap, vertexSelection, knobsToAnimate, knobsToVerify,
       nuke.delete(temp)
   
 
+def menuEntry():
+  try:
+      m = nuke.menu('Axis').findItem('Snap')
+      m.addSeparator()
+      m.addCommand('Match position - ANIMATED', 'animatedSnap3D.translateThisNodeToPointsAnimated()')
+      m.addCommand('Match position, orientation - ANIMATED', 'animatedSnap3D.translateRotateThisNodeToPointsAnimated()')
+      m.addCommand('Match position, orientation, scale - ANIMATED', 'animatedSnap3D.translateRotateScaleThisNodeToPointsAnimated()')
 
+  except:
+      pass
 
   

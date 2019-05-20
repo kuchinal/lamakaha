@@ -1,0 +1,21 @@
+def cropTracked():
+    import nuke
+    n = nuke.selectedNode()
+    x = n['translate'].value(0)
+    y = n['translate'].value(1)
+    xp = n['xpos'].value()
+    yp = n['ypos'].value()
+    name = n['name'].value()
+    name = "parent."+name
+    crop = nuke.nodes.Crop()
+    knob = nuke.XY_Knob("extend","extend")
+    extend=crop.addKnob(knob)
+    offset = nuke.XY_Knob("offset","offset")
+    extend=crop.addKnob(offset)
+    crop['extend'].setValue(100)
+    crop['xpos'].setValue(xp+100)
+    crop['ypos'].setValue(yp)
+    crop['box'].setExpression(name + '.translate.x-extend.x+root.format.r/2+offset.x',0)
+    crop['box'].setExpression(name + '.translate.y-extend.y+root.format.t/2+offset.y',1)
+    crop['box'].setExpression(name + '.translate.x+extend.x+root.format.r/2+offset.x',2)
+    crop['box'].setExpression(name + '.translate.y+extend.y+root.format.t/2+offset.y',3)

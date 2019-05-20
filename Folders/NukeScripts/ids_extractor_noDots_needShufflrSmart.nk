@@ -1,0 +1,68 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+add_layer {MM_mID_001_002_003 MM_mID_001_002_003.red MM_mID_001_002_003.green MM_mID_001_002_003.blue}
+Group {
+ name ID
+ tile_color 0x3d3d3dff
+ label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nfr \[value postage_stamp_frame_1]"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_color 0xffffffff
+ selected true
+ xpos -493
+ ypos 207
+ addUserKnob {20 User}
+ addUserKnob {41 Achannels l "ID channel" T ID2.Achannels}
+ addUserKnob {1 Red}
+ Red red
+ addUserKnob {1 Green}
+ Green green
+ addUserKnob {1 Blue}
+ Blue blue
+ addUserKnob {22 Set T "n = nuke.thisNode()\nred = n\['Red'].value()\ngreen = n\['Green'].value()\nblue = n\['Blue'].value()\n\nnodes = n.dependent()\nfor t in nodes:\n    if t.Class()==\"Dot\":\n        col = t\['name'].value()\n        if \"red\" in col:\n            t\['channel'].setValue(red)\n        if \"green\" in col:\n            t\['channel'].setValue(green)\n        if \"blue\" in col:\n            t\['channel'].setValue(blue)\n\n" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 postage_stamp_frame_1 l "postage frame" T ID2.postage_stamp_frame}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -576
+  ypos -367
+ }
+ Dot {
+  name Dot1
+  xpos -542
+  ypos -303
+ }
+set N2819b870 [stack 0]
+push $N2819b870
+ Dot {
+  name Dot2
+  xpos -667
+  ypos -303
+ }
+ Remove {
+  name Remove1
+  xpos -701
+  ypos -209
+ }
+ Merge2 {
+  inputs 2
+  Achannels MM_mID_001_002_003
+  Bchannels none
+  output rgb
+  name ID2
+  tile_color 0xffffffff
+  label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+  note_font_size 15
+  selected true
+  xpos -576
+  ypos -236
+  postage_stamp_frame 1001
+ }
+ Output {
+  name Output1
+  xpos -576
+  ypos -124
+ }
+end_group

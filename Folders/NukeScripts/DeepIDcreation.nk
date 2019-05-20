@@ -1,0 +1,3104 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+BackdropNode {
+ inputs 0
+ name BackdropNode367
+ tile_color 0x544b7c01
+ label "add ID chan"
+ note_font "Bold Bold Bold"
+ note_font_size 50
+ selected true
+ xpos -51413
+ ypos 47692
+ bdwidth 948
+ bdheight 312
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode368
+ tile_color 0x8b615901
+ label "Set ID"
+ note_font "Bold Bold Bold"
+ note_font_size 50
+ selected true
+ xpos -51317
+ ypos 48022
+ bdwidth 691
+ bdheight 180
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode369
+ tile_color 0x4e4f8501
+ label "remove objects with ID"
+ note_font "Bold Bold Bold"
+ note_font_size 50
+ selected true
+ xpos -51303
+ ypos 48695
+ bdwidth 637
+ bdheight 193
+}
+Group {
+ inputs 0
+ name Render_Input_CG23
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nkname = k.name()\npublished = n.knob('published').value()\n\nif kname in \['cacheLocal', 'first', 'last', 'before', 'after', 'on_error']:\n    val = k.value()\n    if kname in \['first', 'last']:\n        val = int(val)\n    readnodes = nuke.allNodes('Read', n)\n    for rn in readnodes:\n        rn.knob(kname).setValue(val)\n\nelif kname == 'primary_only':\n    val = k.value()\n    cpnodes = nuke.allNodes('Copy', n)\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n        \nelif kname == 'versions':\n    version = k.value()\n    from tx.path import Path\n    from tx_nuke.layers import NukeCGVersion\n    cgv = NukeCGVersion(Path(n.knob('render_folder').evaluate()) / version)\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)\n    else:\n        n.knob('element').setValue(elements\[0])"
+ tile_color 0x72a8c3ff
+ label "\[value versions]\n\[value element]"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 17
+ note_font_color 0xffffffff
+ selected true
+ xpos -51331
+ ypos 48379
+ addUserKnob {20 tab1 l CG}
+ addUserKnob {1 Sequence}
+ Sequence "\[value TrixterShotData.sequence]"
+ addUserKnob {1 Shot -STARTLINE}
+ Shot "\[value TrixterShotData.shot]"
+ addUserKnob {1 render_folder l INVISIBLE +INVISIBLE}
+ render_folder "\[value TrixterShotData.projectpath]/seq/\[value Sequence]/\[value Shot]/rendering/images/versions"
+ addUserKnob {26 ""}
+ addUserKnob {6 published l "published only" t "show only versions with published elements" -STARTLINE}
+ addUserKnob {4 versions l version M {fx_v002 fx_v003 fx_v004 fx_v005 fx_v006 fx_v007 fx_v008 fx_v009 fx_v010 fx_v011 fx_v012 fx_v013 fx_v015 fx_v016 fx_v017 fx_v018 fx_v019 fx_v020 fx_v021 fx_v022 release_v002}}
+ versions release_v002
+ addUserKnob {22 update_versions l update -STARTLINE T "import os\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\npublished = n.knob('published').value()\nversions = \[]\n\nrender_folder = n.knob('render_folder').evaluate()\nfiles = os.listdir(render_folder)\nfor f in files:\n    if os.path.isdir(os.path.join(render_folder, f)):\n        if os.path.exists(os.path.join(render_folder, f, 'primary')):\n            cgv = NukeCGVersion(os.path.join(render_folder, f))\n            if not published or cgv.has_publishes():\n                versions.append(f)\n\nversions.sort()\nn.knob('versions').setValues(versions)\nif len(versions) == 0:\n    n.knob('element').setValues(\[])\n\nelse:\n    maxversion = max(versions)\n    n.knob('versions').setValue(maxversion)\n    \n    cgv = NukeCGVersion(os.path.join(render_folder, maxversion))\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)\n    else:\n        n.knob('element').setValue(elements\[0])"}
+ addUserKnob {4 element M {BG_Forest_Pass FG_Forest_Pass}}
+ addUserKnob {22 load_layers l "        L O A D   L A Y E R S        " T "from tx.path import Path\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\n\nvfolder = Path(n.knob('render_folder').evaluate()) / n.knob('versions').value()\ncgv = NukeCGVersion(vfolder)\n\nelement = n.knob('element').value()\nwith n:\n    outp = nuke.toNode('Output1')\n    nodes = nuke.allNodes()\n    nodes.pop(nodes.index(outp))\n    for node in nodes: nuke.delete(node)\n\n    ln = cgv.create_nodes(element)\n    outp.setInput(0, ln)\n    outp.setXYpos(ln.xpos(), ln.ypos()+100)\n\n    readnodes = nuke.allNodes('Read')\n    for k in \['cacheLocal', 'before', 'after', 'on_error']:\n        val = n.knob(k).value()\n        for rn in readnodes:\n            rn.knob(k).setValue(val)\n\n    cpnodes = nuke.allNodes('Copy')\n    val = n.knob('primary_only').value()\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n\ncgv.create_deep_nodes(element)\n\nfor k in \['first', 'last']:\n    n.knob(k).setValue(rn.knob(k).value())\n\nn.knob('file').setValue(cgv.elements\[element]\['layers']\[0].seq_string().rsplit(' ', 1)\[0])" +STARTLINE}
+ addUserKnob {26 line1 l "" +STARTLINE}
+ addUserKnob {1 file l INVISIBLE +INVISIBLE}
+ file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/primary/primary_BG_Forest_Pass.#.exr
+ addUserKnob {6 primary_only l "primary only" t "disable all other layers to increase performance" +STARTLINE}
+ addUserKnob {4 cacheLocal l "cache locally" M {always auto never}}
+ cacheLocal auto
+ addUserKnob {3 first l "frame range"}
+ first 1002
+ addUserKnob {4 before l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {3 last l "" -STARTLINE}
+ last 1002
+ addUserKnob {4 after l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {4 on_error l "missing frames" M {error black checkerboard "nearest frame" ""}}
+ addUserKnob {22 reload l "reload all" t "press the reload button on all read nodes in the group" -STARTLINE T "n = nuke.thisNode()\n\nreadnodes = nuke.allNodes('Read', n)\nfor rn in readnodes:\n    rn.knob('reload').execute()"}
+}
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/crypto_asset/crypto_asset_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read39
+  xpos -190
+  ypos 4887
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CA_FixOverscan
+  xpos -190
+  ypos 4987
+ }
+set N1dcf8f20 [stack 0]
+push $N1dcf8f20
+push $N1dcf8f20
+push $N1dcf8f20
+push $N1dcf8f20
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/crypto_material/crypto_material_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read38
+  xpos -190
+  ypos 4387
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CM_FixOverscan
+  xpos -190
+  ypos 4487
+ }
+set Nec69f4b0 [stack 0]
+push $Nec69f4b0
+push $Nec69f4b0
+push $Nec69f4b0
+push $Nec69f4b0
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/crypto_object/crypto_object_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read37
+  xpos -190
+  ypos 3887
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CO_FixOverscan
+  xpos -190
+  ypos 3987
+ }
+set Nef9afd70 [stack 0]
+push $Nef9afd70
+push $Nef9afd70
+push $Nef9afd70
+push $Nef9afd70
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_8/light_group_8_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read36
+  xpos -190
+  ypos 3487
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_7/light_group_7_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read35
+  xpos -190
+  ypos 3387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_6/light_group_6_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read34
+  xpos -190
+  ypos 3287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_5/light_group_5_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read33
+  xpos -190
+  ypos 3187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_4/light_group_4_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read32
+  xpos -190
+  ypos 3087
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_3/light_group_3_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read31
+  xpos -190
+  ypos 2987
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_2/light_group_2_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read30
+  xpos -190
+  ypos 2887
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_1/light_group_1_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read29
+  xpos -190
+  ypos 2787
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_9/id_9_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read28
+  xpos -190
+  ypos 2687
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_8/id_8_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read27
+  xpos -190
+  ypos 2587
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_7/id_7_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read26
+  xpos -190
+  ypos 2487
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_6/id_6_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read25
+  xpos -190
+  ypos 2387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_5/id_5_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read24
+  xpos -190
+  ypos 2287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_4/id_4_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read23
+  xpos -190
+  ypos 2187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_3/id_3_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read22
+  xpos -190
+  ypos 2087
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_2/id_2_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read21
+  xpos -190
+  ypos 1987
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_1/id_1_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read20
+  xpos -190
+  ypos 1887
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/Z/Z_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read18
+  xpos -190
+  ypos 1687
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/sss/sss_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read15
+  xpos -190
+  ypos 1387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/emission/emission_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read14
+  xpos -190
+  ypos 1287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/refraction/refraction_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read13
+  xpos -190
+  ypos 1187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/skin_sheen/skin_sheen_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read12
+  xpos -190
+  ypos 1087
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/skin_specular/skin_specular_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read11
+  xpos -190
+  ypos 987
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/indirect_specular_2/indirect_specular_2_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read10
+  xpos -190
+  ypos 887
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/direct_specular_2/direct_specular_2_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read9
+  xpos -190
+  ypos 787
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/specular_color_2/specular_color_2_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read8
+  xpos -190
+  ypos 687
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/indirect_specular/indirect_specular_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read7
+  xpos -190
+  ypos 587
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/direct_specular/direct_specular_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read6
+  xpos -190
+  ypos 487
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/specular_color/specular_color_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read5
+  xpos -190
+  ypos 387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/indirect_diffuse/indirect_diffuse_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read4
+  xpos -190
+  ypos 287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/direct_diffuse/direct_diffuse_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read3
+  xpos -190
+  ypos 187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/diffuse_color/diffuse_color_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read2
+  xpos -190
+  ypos 87
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/primary/primary_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read1
+  xpos -190
+  ypos -13
+  postage_stamp false
+ }
+set Nd40b2b0 [stack 0]
+push $Nd40b2b0
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  from1 rgba.green
+  to1 rgba.green
+  from2 rgba.blue
+  to2 rgba.blue
+  from3 rgba.alpha
+  to3 rgba.alpha
+  bbox B
+  name Copy1
+  xpos -40
+  ypos 62
+ }
+add_layer {diffuse_color diffuse_color.red diffuse_color.green diffuse_color.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_color.red
+  from1 rgba.green
+  to1 diffuse_color.green
+  from2 rgba.blue
+  to2 diffuse_color.blue
+  bbox B
+  name Copy2
+  xpos -40
+  ypos 162
+ }
+add_layer {diffuse_direct diffuse_direct.red diffuse_direct.green diffuse_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_direct.red
+  from1 rgba.green
+  to1 diffuse_direct.green
+  from2 rgba.blue
+  to2 diffuse_direct.blue
+  bbox B
+  name Copy3
+  xpos -40
+  ypos 262
+ }
+add_layer {diffuse_indirect diffuse_indirect.red diffuse_indirect.green diffuse_indirect.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_indirect.red
+  from1 rgba.green
+  to1 diffuse_indirect.green
+  from2 rgba.blue
+  to2 diffuse_indirect.blue
+  bbox B
+  name Copy4
+  xpos -40
+  ypos 362
+ }
+add_layer {specular_color specular_color.red specular_color.green specular_color.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color.red
+  from1 rgba.green
+  to1 specular_color.green
+  from2 rgba.blue
+  to2 specular_color.blue
+  bbox B
+  name Copy5
+  xpos -40
+  ypos 462
+ }
+add_layer {specular_direct specular_direct.red specular_direct.green specular_direct.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct.red
+  from1 rgba.green
+  to1 specular_direct.green
+  from2 rgba.blue
+  to2 specular_direct.blue
+  bbox B
+  name Copy6
+  xpos -40
+  ypos 562
+ }
+add_layer {specular_indirect specular_indirect.red specular_indirect.green specular_indirect.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect.red
+  from1 rgba.green
+  to1 specular_indirect.green
+  from2 rgba.blue
+  to2 specular_indirect.blue
+  bbox B
+  name Copy7
+  xpos -40
+  ypos 662
+ }
+add_layer {specular_color_2 specular_color_2.red specular_color_2.green specular_color_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color_2.red
+  from1 rgba.green
+  to1 specular_color_2.green
+  from2 rgba.blue
+  to2 specular_color_2.blue
+  bbox B
+  name Copy8
+  xpos -40
+  ypos 762
+ }
+add_layer {specular_direct2 specular_direct2.red specular_direct2.green specular_direct2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct2.red
+  from1 rgba.green
+  to1 specular_direct2.green
+  from2 rgba.blue
+  to2 specular_direct2.blue
+  bbox B
+  name Copy9
+  xpos -40
+  ypos 862
+ }
+add_layer {specular_indirect2 specular_indirect2.red specular_indirect2.green specular_indirect2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect2.red
+  from1 rgba.green
+  to1 specular_indirect2.green
+  from2 rgba.blue
+  to2 specular_indirect2.blue
+  bbox B
+  name Copy10
+  xpos -40
+  ypos 962
+ }
+add_layer {skin_specular skin_specular.red skin_specular.green skin_specular.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 skin_specular.red
+  from1 rgba.green
+  to1 skin_specular.green
+  from2 rgba.blue
+  to2 skin_specular.blue
+  bbox B
+  name Copy11
+  xpos -40
+  ypos 1062
+ }
+add_layer {skin_sheen skin_sheen.red skin_sheen.green skin_sheen.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 skin_sheen.red
+  from1 rgba.green
+  to1 skin_sheen.green
+  from2 rgba.blue
+  to2 skin_sheen.blue
+  bbox B
+  name Copy12
+  xpos -40
+  ypos 1162
+ }
+add_layer {refraction refraction.red refraction.green refraction.blue refraction.alpha}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 refraction.red
+  from1 rgba.green
+  to1 refraction.green
+  from2 rgba.blue
+  to2 refraction.blue
+  bbox B
+  name Copy13
+  xpos -40
+  ypos 1262
+ }
+add_layer {emission emission.red emission.green emission.blue emission.alpha}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 emission.red
+  from1 rgba.green
+  to1 emission.green
+  from2 rgba.blue
+  to2 emission.blue
+  bbox B
+  name Copy14
+  xpos -40
+  ypos 1362
+ }
+add_layer {subsurface subsurface.red subsurface.green subsurface.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 subsurface.red
+  from1 rgba.green
+  to1 subsurface.green
+  from2 rgba.blue
+  to2 subsurface.blue
+  bbox B
+  name Copy15
+  xpos -40
+  ypos 1462
+ }
+set Neebc3a00 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/P/P_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read16
+  xpos -190
+  ypos 1487
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult1
+  xpos -190
+  ypos 1559
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge1
+  xpos -190
+  ypos 1584
+ }
+push $Neebc3a00
+add_layer {P P.red P.green P.blue P.alpha none P.blue P.alpha P.x P.y P.z}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 P.red
+  from1 rgba.green
+  to1 P.green
+  from2 rgba.blue
+  to2 P.blue
+  bbox B
+  name Copy16
+  xpos -40
+  ypos 1562
+ }
+set Needdeb40 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/N/N_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read17
+  xpos -190
+  ypos 1587
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult2
+  xpos -190
+  ypos 1659
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge2
+  xpos -190
+  ypos 1684
+ }
+push $Needdeb40
+add_layer {N N.red N.green N.blue N.alpha N.x N.y N.z N.r N.g N.b}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 N.red
+  from1 rgba.green
+  to1 N.green
+  from2 rgba.blue
+  to2 N.blue
+  bbox B
+  name Copy17
+  xpos -40
+  ypos 1662
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 depth.Z
+  bbox B
+  name Copy18
+  xpos -40
+  ypos 1762
+ }
+set Nc1110a70 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/pref/pref_BG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read19
+  xpos -190
+  ypos 1787
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult3
+  xpos -190
+  ypos 1859
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge3
+  xpos -190
+  ypos 1884
+ }
+push $Nc1110a70
+add_layer {pref pref.red pref.green pref.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 pref.red
+  from1 rgba.green
+  to1 pref.green
+  from2 rgba.blue
+  to2 pref.blue
+  bbox B
+  name Copy19
+  xpos -40
+  ypos 1862
+ }
+add_layer {id_1 id_1.red id_1.green id_1.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_1.red
+  from1 rgba.green
+  to1 id_1.green
+  from2 rgba.blue
+  to2 id_1.blue
+  bbox B
+  name Copy20
+  xpos -40
+  ypos 1962
+ }
+add_layer {id_2 id_2.red id_2.green id_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_2.red
+  from1 rgba.green
+  to1 id_2.green
+  from2 rgba.blue
+  to2 id_2.blue
+  bbox B
+  name Copy21
+  xpos -40
+  ypos 2062
+ }
+add_layer {id_3 id_3.red id_3.green id_3.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_3.red
+  from1 rgba.green
+  to1 id_3.green
+  from2 rgba.blue
+  to2 id_3.blue
+  bbox B
+  name Copy22
+  xpos -40
+  ypos 2162
+ }
+add_layer {id_4 id_4.red id_4.green id_4.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_4.red
+  from1 rgba.green
+  to1 id_4.green
+  from2 rgba.blue
+  to2 id_4.blue
+  bbox B
+  name Copy23
+  xpos -40
+  ypos 2262
+ }
+add_layer {id_5 id_5.red id_5.green id_5.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_5.red
+  from1 rgba.green
+  to1 id_5.green
+  from2 rgba.blue
+  to2 id_5.blue
+  bbox B
+  name Copy24
+  xpos -40
+  ypos 2362
+ }
+add_layer {id_6 id_6.red id_6.green id_6.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_6.red
+  from1 rgba.green
+  to1 id_6.green
+  from2 rgba.blue
+  to2 id_6.blue
+  bbox B
+  name Copy25
+  xpos -40
+  ypos 2462
+ }
+add_layer {id_7 id_7.red id_7.green id_7.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_7.red
+  from1 rgba.green
+  to1 id_7.green
+  from2 rgba.blue
+  to2 id_7.blue
+  bbox B
+  name Copy26
+  xpos -40
+  ypos 2562
+ }
+add_layer {id_8 id_8.red id_8.green id_8.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_8.red
+  from1 rgba.green
+  to1 id_8.green
+  from2 rgba.blue
+  to2 id_8.blue
+  bbox B
+  name Copy27
+  xpos -40
+  ypos 2662
+ }
+add_layer {id_9 id_9.red id_9.green id_9.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_9.red
+  from1 rgba.green
+  to1 id_9.green
+  from2 rgba.blue
+  to2 id_9.blue
+  bbox B
+  name Copy28
+  xpos -40
+  ypos 2762
+ }
+add_layer {light_group_1 light_group_1.red light_group_1.green light_group_1.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_1.red
+  from1 rgba.green
+  to1 light_group_1.green
+  from2 rgba.blue
+  to2 light_group_1.blue
+  bbox B
+  name Copy29
+  xpos -40
+  ypos 2862
+ }
+add_layer {light_group_2 light_group_2.red light_group_2.green light_group_2.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_2.red
+  from1 rgba.green
+  to1 light_group_2.green
+  from2 rgba.blue
+  to2 light_group_2.blue
+  bbox B
+  name Copy30
+  xpos -40
+  ypos 2962
+ }
+add_layer {light_group_3 light_group_3.red light_group_3.green light_group_3.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_3.red
+  from1 rgba.green
+  to1 light_group_3.green
+  from2 rgba.blue
+  to2 light_group_3.blue
+  bbox B
+  name Copy31
+  xpos -40
+  ypos 3062
+ }
+add_layer {light_group_4 light_group_4.red light_group_4.green light_group_4.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_4.red
+  from1 rgba.green
+  to1 light_group_4.green
+  from2 rgba.blue
+  to2 light_group_4.blue
+  bbox B
+  name Copy32
+  xpos -40
+  ypos 3162
+ }
+add_layer {light_group_5 light_group_5.red light_group_5.green light_group_5.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_5.red
+  from1 rgba.green
+  to1 light_group_5.green
+  from2 rgba.blue
+  to2 light_group_5.blue
+  bbox B
+  name Copy33
+  xpos -40
+  ypos 3262
+ }
+add_layer {light_group_6 light_group_6.red light_group_6.green light_group_6.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_6.red
+  from1 rgba.green
+  to1 light_group_6.green
+  from2 rgba.blue
+  to2 light_group_6.blue
+  bbox B
+  name Copy34
+  xpos -40
+  ypos 3362
+ }
+add_layer {light_group_7 light_group_7.red light_group_7.green light_group_7.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_7.red
+  from1 rgba.green
+  to1 light_group_7.green
+  from2 rgba.blue
+  to2 light_group_7.blue
+  bbox B
+  name Copy35
+  xpos -40
+  ypos 3462
+ }
+add_layer {light_group_8 light_group_8.red light_group_8.green light_group_8.blue}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_8.red
+  from1 rgba.green
+  to1 light_group_8.green
+  from2 rgba.blue
+  to2 light_group_8.blue
+  bbox B
+  name Copy36
+  xpos -40
+  ypos 3562
+ }
+add_layer {crypto_object crypto_object.red crypto_object.green crypto_object.blue}
+add_layer {crypto_object00 crypto_object00.red crypto_object00.green crypto_object00.blue crypto_object00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object.red
+  to0 crypto_object.red
+  from1 crypto_object.green
+  to1 crypto_object.green
+  from2 crypto_object.blue
+  to2 crypto_object.blue
+  from3 crypto_object00.alpha
+  to3 crypto_object00.alpha
+  bbox B
+  name Copy37
+  xpos -40
+  ypos 3662
+ }
+add_layer {crypto_object01 crypto_object01.red crypto_object01.green crypto_object01.blue crypto_object01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object00.blue
+  to0 crypto_object00.blue
+  from1 crypto_object00.green
+  to1 crypto_object00.green
+  from2 crypto_object00.red
+  to2 crypto_object00.red
+  from3 crypto_object01.alpha
+  to3 crypto_object01.alpha
+  bbox B
+  name Copy38
+  xpos -40
+  ypos 3762
+ }
+add_layer {crypto_object02 crypto_object02.red crypto_object02.green crypto_object02.blue crypto_object02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_object01.blue
+  to0 crypto_object01.blue
+  from1 crypto_object01.green
+  to1 crypto_object01.green
+  from2 crypto_object01.red
+  to2 crypto_object01.red
+  from3 crypto_object02.alpha
+  to3 crypto_object02.alpha
+  bbox B
+  name Copy39
+  xpos -40
+  ypos 3862
+ }
+ Copy {
+  inputs 2
+  from0 crypto_object02.blue
+  to0 crypto_object02.blue
+  from1 crypto_object02.green
+  to1 crypto_object02.green
+  from2 crypto_object02.red
+  to2 crypto_object02.red
+  bbox B
+  name Copy40
+  xpos -40
+  ypos 3962
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData1
+  xpos -40
+  ypos 4062
+ }
+add_layer {crypto_material crypto_material.red crypto_material.green crypto_material.blue}
+add_layer {crypto_material00 crypto_material00.red crypto_material00.green crypto_material00.blue crypto_material00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material.red
+  to0 crypto_material.red
+  from1 crypto_material.green
+  to1 crypto_material.green
+  from2 crypto_material.blue
+  to2 crypto_material.blue
+  from3 crypto_material00.alpha
+  to3 crypto_material00.alpha
+  bbox B
+  name Copy41
+  xpos -40
+  ypos 4162
+ }
+add_layer {crypto_material01 crypto_material01.red crypto_material01.green crypto_material01.blue crypto_material01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material00.blue
+  to0 crypto_material00.blue
+  from1 crypto_material00.green
+  to1 crypto_material00.green
+  from2 crypto_material00.red
+  to2 crypto_material00.red
+  from3 crypto_material01.alpha
+  to3 crypto_material01.alpha
+  bbox B
+  name Copy42
+  xpos -40
+  ypos 4262
+ }
+add_layer {crypto_material02 crypto_material02.red crypto_material02.green crypto_material02.blue crypto_material02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_material01.blue
+  to0 crypto_material01.blue
+  from1 crypto_material01.green
+  to1 crypto_material01.green
+  from2 crypto_material01.red
+  to2 crypto_material01.red
+  from3 crypto_material02.alpha
+  to3 crypto_material02.alpha
+  bbox B
+  name Copy43
+  xpos -40
+  ypos 4362
+ }
+ Copy {
+  inputs 2
+  from0 crypto_material02.blue
+  to0 crypto_material02.blue
+  from1 crypto_material02.green
+  to1 crypto_material02.green
+  from2 crypto_material02.red
+  to2 crypto_material02.red
+  bbox B
+  name Copy44
+  xpos -40
+  ypos 4462
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData2
+  xpos -40
+  ypos 4562
+ }
+add_layer {crypto_asset crypto_asset.red crypto_asset.green crypto_asset.blue}
+add_layer {crypto_asset00 crypto_asset00.red crypto_asset00.green crypto_asset00.blue crypto_asset00.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset.red
+  to0 crypto_asset.red
+  from1 crypto_asset.green
+  to1 crypto_asset.green
+  from2 crypto_asset.blue
+  to2 crypto_asset.blue
+  from3 crypto_asset00.alpha
+  to3 crypto_asset00.alpha
+  bbox B
+  name Copy45
+  xpos -40
+  ypos 4662
+ }
+add_layer {crypto_asset01 crypto_asset01.red crypto_asset01.green crypto_asset01.blue crypto_asset01.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset00.blue
+  to0 crypto_asset00.blue
+  from1 crypto_asset00.green
+  to1 crypto_asset00.green
+  from2 crypto_asset00.red
+  to2 crypto_asset00.red
+  from3 crypto_asset01.alpha
+  to3 crypto_asset01.alpha
+  bbox B
+  name Copy46
+  xpos -40
+  ypos 4762
+ }
+add_layer {crypto_asset02 crypto_asset02.red crypto_asset02.green crypto_asset02.blue crypto_asset02.alpha}
+ Copy {
+  inputs 2
+  from0 crypto_asset01.blue
+  to0 crypto_asset01.blue
+  from1 crypto_asset01.green
+  to1 crypto_asset01.green
+  from2 crypto_asset01.red
+  to2 crypto_asset01.red
+  from3 crypto_asset02.alpha
+  to3 crypto_asset02.alpha
+  bbox B
+  name Copy47
+  xpos -40
+  ypos 4862
+ }
+ Copy {
+  inputs 2
+  from0 crypto_asset02.blue
+  to0 crypto_asset02.blue
+  from1 crypto_asset02.green
+  to1 crypto_asset02.green
+  from2 crypto_asset02.red
+  to2 crypto_asset02.red
+  bbox B
+  name Copy48
+  xpos -40
+  ypos 4962
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData3
+  xpos -40
+  ypos 5062
+ }
+ Output {
+  name Output1
+  xpos -40
+  ypos 5162
+ }
+end_group
+add_layer {id id.red}
+Constant {
+ inputs 0
+ channels id
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ name Constant1
+ selected true
+ xpos -51216
+ ypos 47803
+}
+DeepFromImage {
+ name DeepFromImage1
+ selected true
+ xpos -51216
+ ypos 47904
+}
+DeepRead {
+ inputs 0
+ file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/deep/deep_BG_Forest_Pass.#.exr
+ format "2150 1134 0 0 2150 1134 1 LU"
+ first 1002
+ last 1002
+ origfirst 1001
+ origlast 1038
+ origset true
+ name DeepRead6
+ label "release_v002 BG_Forest_Pass"
+ selected true
+ xpos -51126
+ ypos 47617
+}
+DeepMerge {
+ inputs 2
+ name DeepMerge110
+ selected true
+ xpos -51126
+ ypos 47933
+}
+DeepExpression {
+ chans0 none
+ chans1 id
+ id.red 1
+ name DeepExpressionShuffle
+ selected true
+ xpos -51126
+ ypos 48141
+}
+DeepRecolor {
+ inputs 2
+ name DeepRecolor21
+ selected true
+ xpos -51126
+ ypos 48401
+}
+Group {
+ inputs 0
+ name Render_Input_CG1
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nkname = k.name()\npublished = n.knob('published').value()\n\nif kname in \['cacheLocal', 'first', 'last', 'before', 'after', 'on_error']:\n    val = k.value()\n    if kname in \['first', 'last']:\n        val = int(val)\n    readnodes = nuke.allNodes('Read', n)\n    for rn in readnodes:\n        rn.knob(kname).setValue(val)\n\nelif kname == 'primary_only':\n    val = k.value()\n    cpnodes = nuke.allNodes('Copy', n)\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n        \nelif kname == 'versions':\n    version = k.value()\n    from tx.path import Path\n    from tx_nuke.layers import NukeCGVersion\n    cgv = NukeCGVersion(Path(n.knob('render_folder').evaluate()) / version)\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)\n    else:\n        n.knob('element').setValue(elements\[0])"
+ tile_color 0x72a8c3ff
+ label "\[value versions]\n\[value element]"
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 17
+ note_font_color 0xffffffff
+ selected true
+ xpos -50648
+ ypos 48440
+ addUserKnob {20 tab1 l CG}
+ addUserKnob {1 Sequence}
+ Sequence "\[value TrixterShotData.sequence]"
+ addUserKnob {1 Shot -STARTLINE}
+ Shot "\[value TrixterShotData.shot]"
+ addUserKnob {1 render_folder l INVISIBLE +INVISIBLE}
+ render_folder "\[value TrixterShotData.projectpath]/seq/\[value Sequence]/\[value Shot]/rendering/images/versions"
+ addUserKnob {26 ""}
+ addUserKnob {6 published l "published only" t "show only versions with published elements" -STARTLINE}
+ addUserKnob {4 versions l version M {fx_v002 fx_v003 fx_v004 fx_v005 fx_v006 fx_v007 fx_v008 fx_v009 fx_v010 fx_v011 fx_v012 fx_v013 fx_v015 fx_v016 fx_v017 fx_v018 fx_v019 fx_v020 fx_v021 fx_v022 release_v002}}
+ versions release_v002
+ addUserKnob {22 update_versions l update -STARTLINE T "import os\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\npublished = n.knob('published').value()\nversions = \[]\n\nrender_folder = n.knob('render_folder').evaluate()\nfiles = os.listdir(render_folder)\nfor f in files:\n    if os.path.isdir(os.path.join(render_folder, f)):\n        if os.path.exists(os.path.join(render_folder, f, 'primary')):\n            cgv = NukeCGVersion(os.path.join(render_folder, f))\n            if not published or cgv.has_publishes():\n                versions.append(f)\n\nversions.sort()\nn.knob('versions').setValues(versions)\nif len(versions) == 0:\n    n.knob('element').setValues(\[])\n\nelse:\n    maxversion = max(versions)\n    n.knob('versions').setValue(maxversion)\n    \n    cgv = NukeCGVersion(os.path.join(render_folder, maxversion))\n    element = n.knob('element').value()\n    if published:\n        elements = cgv.published_elements()\n    else:\n        elements = cgv.elements.keys()\n    elements.sort()\n    n.knob('element').setValues(elements)\n    if element in elements:\n        n.knob('element').setValue(element)\n    else:\n        n.knob('element').setValue(elements\[0])"}
+ addUserKnob {4 element M {BG_Forest_Pass FG_Forest_Pass}}
+ element FG_Forest_Pass
+ addUserKnob {22 load_layers l "        L O A D   L A Y E R S        " T "from tx.path import Path\nfrom tx_nuke.layers import NukeCGVersion\n\nn = nuke.thisNode()\n\nvfolder = Path(n.knob('render_folder').evaluate()) / n.knob('versions').value()\ncgv = NukeCGVersion(vfolder)\n\nelement = n.knob('element').value()\nwith n:\n    outp = nuke.toNode('Output1')\n    nodes = nuke.allNodes()\n    nodes.pop(nodes.index(outp))\n    for node in nodes: nuke.delete(node)\n\n    ln = cgv.create_nodes(element)\n    outp.setInput(0, ln)\n    outp.setXYpos(ln.xpos(), ln.ypos()+100)\n\n    readnodes = nuke.allNodes('Read')\n    for k in \['cacheLocal', 'before', 'after', 'on_error']:\n        val = n.knob(k).value()\n        for rn in readnodes:\n            rn.knob(k).setValue(val)\n\n    cpnodes = nuke.allNodes('Copy')\n    val = n.knob('primary_only').value()\n    for cpn in cpnodes:\n        cpn.knob('disable').setValue(val)\n\ncgv.create_deep_nodes(element)\n\nfor k in \['first', 'last']:\n    n.knob(k).setValue(rn.knob(k).value())\n\nn.knob('file').setValue(cgv.elements\[element]\['layers']\[0].seq_string().rsplit(' ', 1)\[0])" +STARTLINE}
+ addUserKnob {26 line1 l "" +STARTLINE}
+ addUserKnob {1 file l INVISIBLE +INVISIBLE}
+ file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/primary/primary_FG_Forest_Pass.#.exr
+ addUserKnob {6 primary_only l "primary only" t "disable all other layers to increase performance" +STARTLINE}
+ addUserKnob {4 cacheLocal l "cache locally" M {always auto never}}
+ cacheLocal auto
+ addUserKnob {3 first l "frame range"}
+ first 1002
+ addUserKnob {4 before l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {3 last l "" -STARTLINE}
+ last 1002
+ addUserKnob {4 after l "" -STARTLINE M {hold loop bounce black}}
+ addUserKnob {4 on_error l "missing frames" M {error black checkerboard "nearest frame" ""}}
+ addUserKnob {22 reload l "reload all" t "press the reload button on all read nodes in the group" -STARTLINE T "n = nuke.thisNode()\n\nreadnodes = nuke.allNodes('Read', n)\nfor rn in readnodes:\n    rn.knob('reload').execute()"}
+}
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/crypto_asset/crypto_asset_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read39
+  xpos -190
+  ypos 4887
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CA_FixOverscan
+  xpos -190
+  ypos 4987
+ }
+set Nc9a301c0 [stack 0]
+push $Nc9a301c0
+push $Nc9a301c0
+push $Nc9a301c0
+push $Nc9a301c0
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/crypto_material/crypto_material_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read38
+  xpos -190
+  ypos 4387
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CM_FixOverscan
+  xpos -190
+  ypos 4487
+ }
+set Nec110010 [stack 0]
+push $Nec110010
+push $Nec110010
+push $Nec110010
+push $Nec110010
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/crypto_object/crypto_object_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read37
+  xpos -190
+  ypos 3887
+  postage_stamp false
+ }
+ Reformat {
+  type "to box"
+  box_width {{Read1.width}}
+  box_height {{Read1.height}}
+  box_fixed true
+  box_pixel_aspect {{Read1.pixel_aspect}}
+  resize none
+  pbb true
+  name CO_FixOverscan
+  xpos -190
+  ypos 3987
+ }
+set N7e5b50 [stack 0]
+push $N7e5b50
+push $N7e5b50
+push $N7e5b50
+push $N7e5b50
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_8/light_group_8_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read36
+  xpos -190
+  ypos 3487
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_7/light_group_7_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read35
+  xpos -190
+  ypos 3387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_6/light_group_6_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read34
+  xpos -190
+  ypos 3287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_5/light_group_5_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read33
+  xpos -190
+  ypos 3187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_4/light_group_4_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read32
+  xpos -190
+  ypos 3087
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_3/light_group_3_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read31
+  xpos -190
+  ypos 2987
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_2/light_group_2_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read30
+  xpos -190
+  ypos 2887
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/light_group_1/light_group_1_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read29
+  xpos -190
+  ypos 2787
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_9/id_9_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read28
+  xpos -190
+  ypos 2687
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_8/id_8_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read27
+  xpos -190
+  ypos 2587
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_7/id_7_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read26
+  xpos -190
+  ypos 2487
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_6/id_6_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read25
+  xpos -190
+  ypos 2387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_5/id_5_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read24
+  xpos -190
+  ypos 2287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_4/id_4_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read23
+  xpos -190
+  ypos 2187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_3/id_3_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read22
+  xpos -190
+  ypos 2087
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_2/id_2_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read21
+  xpos -190
+  ypos 1987
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/id_1/id_1_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read20
+  xpos -190
+  ypos 1887
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/Z/Z_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read18
+  xpos -190
+  ypos 1687
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/sss/sss_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read15
+  xpos -190
+  ypos 1387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/emission/emission_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read14
+  xpos -190
+  ypos 1287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/refraction/refraction_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read13
+  xpos -190
+  ypos 1187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/skin_sheen/skin_sheen_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read12
+  xpos -190
+  ypos 1087
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/skin_specular/skin_specular_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read11
+  xpos -190
+  ypos 987
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/indirect_specular_2/indirect_specular_2_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read10
+  xpos -190
+  ypos 887
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/direct_specular_2/direct_specular_2_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read9
+  xpos -190
+  ypos 787
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/specular_color_2/specular_color_2_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read8
+  xpos -190
+  ypos 687
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/indirect_specular/indirect_specular_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read7
+  xpos -190
+  ypos 587
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/direct_specular/direct_specular_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read6
+  xpos -190
+  ypos 487
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/specular_color/specular_color_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read5
+  xpos -190
+  ypos 387
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/indirect_diffuse/indirect_diffuse_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read4
+  xpos -190
+  ypos 287
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/direct_diffuse/direct_diffuse_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read3
+  xpos -190
+  ypos 187
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/diffuse_color/diffuse_color_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read2
+  xpos -190
+  ypos 87
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/primary/primary_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read1
+  selected true
+  xpos -187
+  ypos -14
+  postage_stamp false
+ }
+set N34b1a80 [stack 0]
+push $N34b1a80
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  from1 rgba.green
+  to1 rgba.green
+  from2 rgba.blue
+  to2 rgba.blue
+  from3 rgba.alpha
+  to3 rgba.alpha
+  bbox B
+  name Copy1
+  xpos -40
+  ypos 62
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_color.red
+  from1 rgba.green
+  to1 diffuse_color.green
+  from2 rgba.blue
+  to2 diffuse_color.blue
+  bbox B
+  name Copy2
+  xpos -40
+  ypos 162
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_direct.red
+  from1 rgba.green
+  to1 diffuse_direct.green
+  from2 rgba.blue
+  to2 diffuse_direct.blue
+  bbox B
+  name Copy3
+  xpos -40
+  ypos 262
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 diffuse_indirect.red
+  from1 rgba.green
+  to1 diffuse_indirect.green
+  from2 rgba.blue
+  to2 diffuse_indirect.blue
+  bbox B
+  name Copy4
+  xpos -40
+  ypos 362
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color.red
+  from1 rgba.green
+  to1 specular_color.green
+  from2 rgba.blue
+  to2 specular_color.blue
+  bbox B
+  name Copy5
+  xpos -40
+  ypos 462
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct.red
+  from1 rgba.green
+  to1 specular_direct.green
+  from2 rgba.blue
+  to2 specular_direct.blue
+  bbox B
+  name Copy6
+  xpos -40
+  ypos 562
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect.red
+  from1 rgba.green
+  to1 specular_indirect.green
+  from2 rgba.blue
+  to2 specular_indirect.blue
+  bbox B
+  name Copy7
+  xpos -40
+  ypos 662
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_color_2.red
+  from1 rgba.green
+  to1 specular_color_2.green
+  from2 rgba.blue
+  to2 specular_color_2.blue
+  bbox B
+  name Copy8
+  xpos -40
+  ypos 762
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_direct2.red
+  from1 rgba.green
+  to1 specular_direct2.green
+  from2 rgba.blue
+  to2 specular_direct2.blue
+  bbox B
+  name Copy9
+  xpos -40
+  ypos 862
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 specular_indirect2.red
+  from1 rgba.green
+  to1 specular_indirect2.green
+  from2 rgba.blue
+  to2 specular_indirect2.blue
+  bbox B
+  name Copy10
+  xpos -40
+  ypos 962
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 skin_specular.red
+  from1 rgba.green
+  to1 skin_specular.green
+  from2 rgba.blue
+  to2 skin_specular.blue
+  bbox B
+  name Copy11
+  xpos -40
+  ypos 1062
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 skin_sheen.red
+  from1 rgba.green
+  to1 skin_sheen.green
+  from2 rgba.blue
+  to2 skin_sheen.blue
+  bbox B
+  name Copy12
+  xpos -40
+  ypos 1162
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 refraction.red
+  from1 rgba.green
+  to1 refraction.green
+  from2 rgba.blue
+  to2 refraction.blue
+  bbox B
+  name Copy13
+  xpos -40
+  ypos 1262
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 emission.red
+  from1 rgba.green
+  to1 emission.green
+  from2 rgba.blue
+  to2 emission.blue
+  bbox B
+  name Copy14
+  xpos -40
+  ypos 1362
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 subsurface.red
+  from1 rgba.green
+  to1 subsurface.green
+  from2 rgba.blue
+  to2 subsurface.blue
+  bbox B
+  name Copy15
+  xpos -40
+  ypos 1462
+ }
+set Nefe9f320 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/P/P_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read16
+  xpos -190
+  ypos 1487
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult1
+  xpos -190
+  ypos 1559
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge1
+  xpos -190
+  ypos 1584
+ }
+push $Nefe9f320
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 P.red
+  from1 rgba.green
+  to1 P.green
+  from2 rgba.blue
+  to2 P.blue
+  bbox B
+  name Copy16
+  xpos -40
+  ypos 1562
+ }
+set N80dc1600 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/N/N_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read17
+  xpos -190
+  ypos 1587
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult2
+  xpos -190
+  ypos 1659
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge2
+  xpos -190
+  ypos 1684
+ }
+push $N80dc1600
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 N.red
+  from1 rgba.green
+  to1 N.green
+  from2 rgba.blue
+  to2 N.blue
+  bbox B
+  name Copy17
+  xpos -40
+  ypos 1662
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 depth.Z
+  bbox B
+  name Copy18
+  xpos -40
+  ypos 1762
+ }
+set Nee4942c0 [stack 0]
+ Read {
+  inputs 0
+  file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/pref/pref_FG_Forest_Pass.#.exr
+  format "2150 1134 0 0 2150 1134 1 LU"
+  first 1002
+  last 1002
+  origfirst 1001
+  origlast 1038
+  origset true
+  colorspace linear
+  raw true
+  name Read19
+  xpos -190
+  ypos 1787
+  postage_stamp false
+ }
+ Unpremult {
+  channels all
+  name Unpremult3
+  xpos -190
+  ypos 1859
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  also_merge all
+  name Merge3
+  xpos -190
+  ypos 1884
+ }
+push $Nee4942c0
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 pref.red
+  from1 rgba.green
+  to1 pref.green
+  from2 rgba.blue
+  to2 pref.blue
+  bbox B
+  name Copy19
+  xpos -40
+  ypos 1862
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_1.red
+  from1 rgba.green
+  to1 id_1.green
+  from2 rgba.blue
+  to2 id_1.blue
+  bbox B
+  name Copy20
+  xpos -40
+  ypos 1962
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_2.red
+  from1 rgba.green
+  to1 id_2.green
+  from2 rgba.blue
+  to2 id_2.blue
+  bbox B
+  name Copy21
+  xpos -40
+  ypos 2062
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_3.red
+  from1 rgba.green
+  to1 id_3.green
+  from2 rgba.blue
+  to2 id_3.blue
+  bbox B
+  name Copy22
+  xpos -40
+  ypos 2162
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_4.red
+  from1 rgba.green
+  to1 id_4.green
+  from2 rgba.blue
+  to2 id_4.blue
+  bbox B
+  name Copy23
+  xpos -40
+  ypos 2262
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_5.red
+  from1 rgba.green
+  to1 id_5.green
+  from2 rgba.blue
+  to2 id_5.blue
+  bbox B
+  name Copy24
+  xpos -40
+  ypos 2362
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_6.red
+  from1 rgba.green
+  to1 id_6.green
+  from2 rgba.blue
+  to2 id_6.blue
+  bbox B
+  name Copy25
+  xpos -40
+  ypos 2462
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_7.red
+  from1 rgba.green
+  to1 id_7.green
+  from2 rgba.blue
+  to2 id_7.blue
+  bbox B
+  name Copy26
+  xpos -40
+  ypos 2562
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_8.red
+  from1 rgba.green
+  to1 id_8.green
+  from2 rgba.blue
+  to2 id_8.blue
+  bbox B
+  name Copy27
+  xpos -40
+  ypos 2662
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 id_9.red
+  from1 rgba.green
+  to1 id_9.green
+  from2 rgba.blue
+  to2 id_9.blue
+  bbox B
+  name Copy28
+  xpos -40
+  ypos 2762
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_1.red
+  from1 rgba.green
+  to1 light_group_1.green
+  from2 rgba.blue
+  to2 light_group_1.blue
+  bbox B
+  name Copy29
+  xpos -40
+  ypos 2862
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_2.red
+  from1 rgba.green
+  to1 light_group_2.green
+  from2 rgba.blue
+  to2 light_group_2.blue
+  bbox B
+  name Copy30
+  xpos -40
+  ypos 2962
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_3.red
+  from1 rgba.green
+  to1 light_group_3.green
+  from2 rgba.blue
+  to2 light_group_3.blue
+  bbox B
+  name Copy31
+  xpos -40
+  ypos 3062
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_4.red
+  from1 rgba.green
+  to1 light_group_4.green
+  from2 rgba.blue
+  to2 light_group_4.blue
+  bbox B
+  name Copy32
+  xpos -40
+  ypos 3162
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_5.red
+  from1 rgba.green
+  to1 light_group_5.green
+  from2 rgba.blue
+  to2 light_group_5.blue
+  bbox B
+  name Copy33
+  xpos -40
+  ypos 3262
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_6.red
+  from1 rgba.green
+  to1 light_group_6.green
+  from2 rgba.blue
+  to2 light_group_6.blue
+  bbox B
+  name Copy34
+  xpos -40
+  ypos 3362
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_7.red
+  from1 rgba.green
+  to1 light_group_7.green
+  from2 rgba.blue
+  to2 light_group_7.blue
+  bbox B
+  name Copy35
+  xpos -40
+  ypos 3462
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 light_group_8.red
+  from1 rgba.green
+  to1 light_group_8.green
+  from2 rgba.blue
+  to2 light_group_8.blue
+  bbox B
+  name Copy36
+  xpos -40
+  ypos 3562
+ }
+ Copy {
+  inputs 2
+  from0 crypto_object.red
+  to0 crypto_object.red
+  from1 crypto_object.green
+  to1 crypto_object.green
+  from2 crypto_object.blue
+  to2 crypto_object.blue
+  from3 crypto_object00.alpha
+  to3 crypto_object00.alpha
+  bbox B
+  name Copy37
+  xpos -40
+  ypos 3662
+ }
+ Copy {
+  inputs 2
+  from0 crypto_object00.blue
+  to0 crypto_object00.blue
+  from1 crypto_object00.green
+  to1 crypto_object00.green
+  from2 crypto_object00.red
+  to2 crypto_object00.red
+  from3 crypto_object01.alpha
+  to3 crypto_object01.alpha
+  bbox B
+  name Copy38
+  xpos -40
+  ypos 3762
+ }
+ Copy {
+  inputs 2
+  from0 crypto_object01.blue
+  to0 crypto_object01.blue
+  from1 crypto_object01.green
+  to1 crypto_object01.green
+  from2 crypto_object01.red
+  to2 crypto_object01.red
+  from3 crypto_object02.alpha
+  to3 crypto_object02.alpha
+  bbox B
+  name Copy39
+  xpos -40
+  ypos 3862
+ }
+ Copy {
+  inputs 2
+  from0 crypto_object02.blue
+  to0 crypto_object02.blue
+  from1 crypto_object02.green
+  to1 crypto_object02.green
+  from2 crypto_object02.red
+  to2 crypto_object02.red
+  bbox B
+  name Copy40
+  xpos -40
+  ypos 3962
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData1
+  xpos -40
+  ypos 4062
+ }
+ Copy {
+  inputs 2
+  from0 crypto_material.red
+  to0 crypto_material.red
+  from1 crypto_material.green
+  to1 crypto_material.green
+  from2 crypto_material.blue
+  to2 crypto_material.blue
+  from3 crypto_material00.alpha
+  to3 crypto_material00.alpha
+  bbox B
+  name Copy41
+  xpos -40
+  ypos 4162
+ }
+ Copy {
+  inputs 2
+  from0 crypto_material00.blue
+  to0 crypto_material00.blue
+  from1 crypto_material00.green
+  to1 crypto_material00.green
+  from2 crypto_material00.red
+  to2 crypto_material00.red
+  from3 crypto_material01.alpha
+  to3 crypto_material01.alpha
+  bbox B
+  name Copy42
+  xpos -40
+  ypos 4262
+ }
+ Copy {
+  inputs 2
+  from0 crypto_material01.blue
+  to0 crypto_material01.blue
+  from1 crypto_material01.green
+  to1 crypto_material01.green
+  from2 crypto_material01.red
+  to2 crypto_material01.red
+  from3 crypto_material02.alpha
+  to3 crypto_material02.alpha
+  bbox B
+  name Copy43
+  xpos -40
+  ypos 4362
+ }
+ Copy {
+  inputs 2
+  from0 crypto_material02.blue
+  to0 crypto_material02.blue
+  from1 crypto_material02.green
+  to1 crypto_material02.green
+  from2 crypto_material02.red
+  to2 crypto_material02.red
+  bbox B
+  name Copy44
+  xpos -40
+  ypos 4462
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData2
+  xpos -40
+  ypos 4562
+ }
+ Copy {
+  inputs 2
+  from0 crypto_asset.red
+  to0 crypto_asset.red
+  from1 crypto_asset.green
+  to1 crypto_asset.green
+  from2 crypto_asset.blue
+  to2 crypto_asset.blue
+  from3 crypto_asset00.alpha
+  to3 crypto_asset00.alpha
+  bbox B
+  name Copy45
+  xpos -40
+  ypos 4662
+ }
+ Copy {
+  inputs 2
+  from0 crypto_asset00.blue
+  to0 crypto_asset00.blue
+  from1 crypto_asset00.green
+  to1 crypto_asset00.green
+  from2 crypto_asset00.red
+  to2 crypto_asset00.red
+  from3 crypto_asset01.alpha
+  to3 crypto_asset01.alpha
+  bbox B
+  name Copy46
+  xpos -40
+  ypos 4762
+ }
+ Copy {
+  inputs 2
+  from0 crypto_asset01.blue
+  to0 crypto_asset01.blue
+  from1 crypto_asset01.green
+  to1 crypto_asset01.green
+  from2 crypto_asset01.red
+  to2 crypto_asset01.red
+  from3 crypto_asset02.alpha
+  to3 crypto_asset02.alpha
+  bbox B
+  name Copy47
+  xpos -40
+  ypos 4862
+ }
+ Copy {
+  inputs 2
+  from0 crypto_asset02.blue
+  to0 crypto_asset02.blue
+  from1 crypto_asset02.green
+  to1 crypto_asset02.green
+  from2 crypto_asset02.red
+  to2 crypto_asset02.red
+  bbox B
+  name Copy48
+  xpos -40
+  ypos 4962
+ }
+ CopyMetaData {
+  inputs 2
+  metadatafilter crypto
+  metadatafilterMode "keys only"
+  name CopyMetaData3
+  xpos -40
+  ypos 5062
+ }
+ Output {
+  name Output1
+  xpos -40
+  ypos 5162
+ }
+push $N34b1a80
+ Viewer {
+  frame_range 1001-1038
+  viewerProcess "None (default)"
+  name Viewer1
+  xpos 90
+  ypos 83
+ }
+end_group
+Constant {
+ inputs 0
+ channels id
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ name Constant2
+ selected true
+ xpos -50700
+ ypos 47809
+}
+DeepFromImage {
+ name DeepFromImage2
+ selected true
+ xpos -50700
+ ypos 47910
+}
+DeepRead {
+ inputs 0
+ file /corky/projects/LevelUp_343202/seq/fgb/0110/rendering/images/versions/release_v002/deep/deep_FG_Forest_Pass.#.exr
+ format "2150 1134 0 0 2150 1134 1 LU"
+ first 1002
+ last 1002
+ origfirst 1001
+ origlast 1038
+ origset true
+ name DeepRead13
+ label "release_v002 FG_Forest_Pass"
+ selected true
+ xpos -50812
+ ypos 47628
+}
+DeepMerge {
+ inputs 2
+ name DeepMerge111
+ selected true
+ xpos -50812
+ ypos 47910
+}
+DeepExpression {
+ chans0 none
+ chans1 id
+ id.red 2
+ name DeepExpressionShuffle1
+ selected true
+ xpos -50812
+ ypos 48142
+}
+DeepRecolor {
+ inputs 2
+ name DeepRecolor22
+ selected true
+ xpos -50812
+ ypos 48462
+}
+DeepMerge {
+ inputs 2
+ name DeepMerge112
+ selected true
+ xpos -51126
+ ypos 48563
+}
+DeepExpression {
+ temp_name0 id_val
+ temp_expr0 1
+ chans1 deep
+ rgba.red id.red==id_val?0:rgba.red
+ rgba.green id.red==id_val?0:rgba.green
+ rgba.blue id.red==id_val?0:rgba.blue
+ rgba.alpha id.red==id_val?0:rgba.alpha
+ deep.front id.red==id_val?0:deep.front
+ deep.back id.red==id_val?0:deep.back
+ name DeepExpression1
+ selected true
+ xpos -51126
+ ypos 48824
+}
+Dot {
+ name Dot1773
+ selected true
+ xpos -51094
+ ypos 49071
+}

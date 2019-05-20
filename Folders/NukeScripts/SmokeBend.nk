@@ -1,0 +1,307 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+Constant {
+inputs 0
+format "1920 1080 0 0 1920 1080 1 HD"
+name Constant46
+selected true
+xpos -13525
+ypos -14229
+postage_stamp false
+}
+Ramp {
+p0 {975 60}
+p1 {975 {p0.y+SMOKE_CONTROLS.ysteps}}
+name Ramp12
+selected true
+xpos -13525
+ypos -14179
+}
+set Nbd80eef0 [stack 0]
+Transform {
+translate {0 {SMOKE_CONTROLS.ysteps}}
+center {1138 733}
+shutteroffset centred
+name Transform41
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13525
+ypos -14125
+}
+set Nbd81a850 [stack 0]
+Transform {
+translate {0 {SMOKE_CONTROLS.ysteps}}
+center {1138 733}
+shutteroffset centred
+name Transform52
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13525
+ypos -14075
+}
+set Nbd826eb0 [stack 0]
+Transform {
+translate {0 {SMOKE_CONTROLS.ysteps}}
+center {1138 733}
+shutteroffset centred
+name Transform40
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13525
+ypos -14025
+}
+set Nbd8f3480 [stack 0]
+Transform {
+translate {0 {SMOKE_CONTROLS.ysteps}}
+center {1138 733}
+shutteroffset centred
+name Transform54
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13525
+ypos -13965
+}
+set Nbd8ffad0 [stack 0]
+Transform {
+translate {0 {SMOKE_CONTROLS.ysteps}}
+center {1138 733}
+shutteroffset centred
+name Transform55
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13525
+ypos -13905
+}
+set Nbd90c090 [stack 0]
+Transform {
+translate {0 {SMOKE_CONTROLS.ysteps}}
+center {1138 733}
+shutteroffset centred
+name Transform56
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13525
+ypos -13845
+}
+push $Nbd90c090
+push $Nbd8ffad0
+push $Nbd8f3480
+push $Nbd826eb0
+push $Nbd81a850
+push $Nbd80eef0
+push $cut_paste_input
+TransformMasked {
+inputs 1+1
+channels rgba
+rotate {{parent.SMOKE_CONTROLS.smokerotation}}
+center {983 {parent.Ramp12.p1.y}}
+shutteroffset centred
+name Transform42
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13665
+ypos -14185
+}
+TransformMasked {
+inputs 1+1
+channels rgba
+rotate {{parent.SMOKE_CONTROLS.smokerotation}}
+center {1005 {parent.Transform42.center.y+SMOKE_CONTROLS.ysteps}}
+shutteroffset centred
+name Transform43
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13665
+ypos -14125
+}
+TransformMasked {
+inputs 1+1
+channels rgba
+rotate {{parent.SMOKE_CONTROLS.smokerotation}}
+center {1025 {parent.Transform43.center.y+SMOKE_CONTROLS.ysteps}}
+shutteroffset centred
+name Transform44
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13665
+ypos -14075
+}
+TransformMasked {
+inputs 1+1
+channels rgba
+rotate -5
+center {1030 {parent.Transform44.center.y+SMOKE_CONTROLS.ysteps}}
+shutteroffset centred
+name Transform45
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13665
+ypos -14025
+}
+TransformMasked {
+inputs 1+1
+channels rgba
+rotate -5
+center {1079 {parent.Transform45.center.y+SMOKE_CONTROLS.ysteps}}
+shutteroffset centred
+name Transform46
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13665
+ypos -13965
+}
+TransformMasked {
+inputs 1+1
+channels rgba
+rotate -5
+center {1125 {parent.Transform46.center.y+SMOKE_CONTROLS.ysteps}}
+shutteroffset centred
+name Transform48
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13665
+ypos -13905
+}
+TransformMasked {
+inputs 1+1
+channels rgba
+rotate -5
+center {1175 {parent.Transform48.center.y+SMOKE_CONTROLS.ysteps}}
+shutteroffset centred
+name Transform51
+label "x: \[value translate.x] y: \[value translate.y]"
+selected true
+xpos -13665
+ypos -13845
+}
+NoOp {
+name SMOKE_CONTROLS
+selected true
+xpos -13665
+ypos -13789
+addUserKnob {20 User}
+addUserKnob {7 ysteps l Iterations R 0 100}
+ysteps 50
+addUserKnob {7 smokerotation l "Smoke Rotation" R -10 0}
+smokerotation -10
+}
+Reformat {
+format "1920 1080 0 0 1920 1080 1 HD"
+name Reformat14
+selected true
+xpos -13665
+ypos -13745
+}
+Dot {
+name Dot335
+selected true
+xpos -13631
+ypos -13595
+}
+Log2Lin {
+operation lin2log
+name Log2Lin1
+selected true
+xpos -13665
+ypos -13560
+}
+Keyer {
+operation "luminance key"
+range {0.11638696 0.9068015959 1 1}
+name Keyer5
+selected true
+xpos -13665
+ypos -13505
+}
+set N9199c4f0 [stack 0]
+Dot {
+name Dot336
+selected true
+xpos -13731
+ypos -13495
+}
+set N919a4e50 [stack 0]
+Dot {
+name Dot337
+selected true
+xpos -13821
+ypos -13495
+}
+Grade {
+channels alpha
+blackpoint 0.43
+whitepoint 0.53
+name Grade148
+selected true
+xpos -13855
+ypos -13285
+}
+push $N919a4e50
+Grade {
+channels alpha
+blackpoint 0.4
+whitepoint 0.65
+name Grade162
+selected true
+xpos -13765
+ypos -13365
+}
+push $N9199c4f0
+Grade {
+channels alpha
+blackpoint 0.2
+whitepoint 0.55
+name Grade163
+selected true
+xpos -13665
+ypos -13435
+}
+push $N9199c4f0
+Constant {
+inputs 0
+color {0.2682499886 0.2681955993 0.2682499886 0}
+format "1920 1080 0 0 1920 1080 1 HD"
+name Constant47
+selected true
+xpos -13515
+ypos -13613
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy11
+selected true
+xpos -13515
+ypos -13505
+}
+Multiply {
+inputs 1+1
+channels rgb
+value 1.2
+name Multiply25
+label "Value: \[value value]"
+selected true
+xpos -13515
+ypos -13435
+}
+Multiply {
+inputs 1+1
+channels rgb
+value 1.2
+name Multiply26
+label "Value: \[value value]"
+selected true
+xpos -13515
+ypos -13365
+}
+Multiply {
+inputs 1+1
+channels rgb
+value 1.2
+name Multiply27
+label "Value: \[value value]"
+selected true
+xpos -13515
+ypos -13285
+}

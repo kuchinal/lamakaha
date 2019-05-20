@@ -1,0 +1,266 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x4f704c01
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos 3080
+ ypos 30050
+ bookmark false
+ bdwidth 320
+ bdheight 364
+}
+push $cut_paste_input
+Reformat {
+ type "to box"
+ box_width 1000
+ box_height 1000
+ box_fixed true
+ name Reformat3
+ selected true
+ xpos 3212
+ ypos 30135
+}
+set Nc25ab600 [stack 0]
+RotoPaint {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x43f8e666 x43f9a28f 0 0 0 0 0 0 0
+     {=parent.RotoPaint1.scale+180/pi/RingWidth-1 1}
+     {=parent.RotoPaint1.scale+180/pi/RingWidth-1 1}}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc309eee0}
+        {x43f94000 xbf800000}
+        {x4309eee0}
+        {xc2b4c890 xc2b4c890}
+        {x4454f333 x4311199a}
+        {x42b4c890 x42b4c890}
+        {0 xc309eee0}
+        {x44798000 x43f94000}
+        {0 x4309eee0}
+        {x42b4c890 xc2b4c890}
+        {x4454ee66 x4454ec29}
+        {xc2b4c890 x42b4c890}
+        {x4309eee0}
+        {x43f94000 x44798000}
+        {xc309eee0}
+        {x42b4c890 x42b4c890}
+        {x431147ae x4454ea3d}
+        {xc2b4c890 xc2b4c890}
+        {0 x4309eee0}
+        {xbf800000 x43f94000}
+        {0 xc309eee0}
+        {xc2b4c890 x42b4c890}
+        {x43117333 x4311599a}
+        {x42b4c890 xc2b4c890}}}
+      {cc
+       {f 8192}
+       {p
+        {xc309eee0}
+        {}
+        {x4309eee0}
+        {xc2b4c890 xc2b4c890}
+        {}
+        {x42b4c890 x42b4c890}
+        {0 xc309eee0}
+        {}
+        {0 x4309eee0}
+        {x42b4c890 xc2b4c890}
+        {}
+        {xc2b4c890 x42b4c890}
+        {x4309eee0}
+        {}
+        {xc309eee0}
+        {x42b4c890 x42b4c890}
+        {}
+        {xc2b4c890 xc2b4c890}
+        {0 x4309eee0}
+        {}
+        {0 xc309eee0}
+        {xc2b4c890 x42b4c890}
+        {}
+        {x42b4c890 xc2b4c890}}}}
+     {t x43f94000 x43f94000}
+     {a osw x40000000 osf 0 str 1 spx x44866000 spy x440dc000 sb 1 ltn x44842000 ltm x44842000 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 2
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1075 567}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1057
+ lifetime_end 1057
+ view {}
+ motionblur_on true
+ motionblur_shutter_offset_type centred
+ openspline_width 2
+ source_black_outside true
+ name RotoPaint2
+ label width
+ note_font_size 14
+ selected true
+ xpos 3090
+ ypos 30207
+ addUserKnob {20 User}
+ addUserKnob {7 RingWidth l "Ring Width" R 0 100}
+ RingWidth 70
+}
+Dot {
+ name Dot1
+ selected true
+ xpos 3124
+ ypos 30314
+}
+push $Nc25ab600
+RotoPaint {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097664}
+    {t x43f8ec4a x43f9a625}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc309eee0}
+        {x43f94000 xbf800000}
+        {x4309eee0}
+        {xc2b4c890 xc2b4c890}
+        {x4454f333 x4311199a}
+        {x42b4c890 x42b4c890}
+        {0 xc309eee0}
+        {x44798000 x43f94000}
+        {0 x4309eee0}
+        {x42b4c890 xc2b4c890}
+        {x4454ee66 x4454ec29}
+        {xc2b4c890 x42b4c890}
+        {x4309eee0}
+        {x43f94000 x44798000}
+        {xc309eee0}
+        {x42b4c890 x42b4c890}
+        {x431147ae x4454ea3d}
+        {xc2b4c890 xc2b4c890}
+        {0 x4309eee0}
+        {xbf800000 x43f94000}
+        {0 xc309eee0}
+        {xc2b4c890 x42b4c890}
+        {x43117333 x4311599a}
+        {x42b4c890 xc2b4c890}}}
+      {cc
+       {f 8192}
+       {p
+        {xc309eee0}
+        {}
+        {x4309eee0}
+        {xc2b4c890 xc2b4c890}
+        {}
+        {x42b4c890 x42b4c890}
+        {0 xc309eee0}
+        {}
+        {0 x4309eee0}
+        {x42b4c890 xc2b4c890}
+        {}
+        {xc2b4c890 x42b4c890}
+        {x4309eee0}
+        {}
+        {xc309eee0}
+        {x42b4c890 x42b4c890}
+        {}
+        {xc2b4c890 xc2b4c890}
+        {0 x4309eee0}
+        {}
+        {0 xc309eee0}
+        {xc2b4c890 x42b4c890}
+        {}
+        {x42b4c890 xc2b4c890}}}}
+     {t x43f94000 x43f94000}
+     {a osw x40000000 osf 0 str 1 spx x44866000 spy x440dc000 sb 1 ltn x44842000 ltm x44842000 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 2
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1075 567}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1057
+ lifetime_end 1057
+ view {}
+ motionblur_on true
+ motionblur_shutter_offset_type centred
+ openspline_width 2
+ source_black_outside true
+ name RotoPaint1
+ label scale
+ note_font_size 14
+ selected true
+ xpos 3212
+ ypos 30205
+}
+Merge2 {
+ inputs 2
+ operation stencil
+ name Merge1
+ selected true
+ xpos 3212
+ ypos 30310
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ tile_color 0xffffffff
+ label "<b>Ring                ."
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos 3080
+ ypos 29925
+}

@@ -1,0 +1,150 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Camera2 {
+ inputs 0
+ translate {{curve x1001 18442.10352 x1036 18829.48242 x1074 19897.38281 x1147 20727.44531} {curve x1001 -199.6287384 x1036 -270.3913879 x1074 -272.7832336 x1147 -267.9204102} {curve x1001 -4061.381592 x1012 -2798.167957 x1021 -2398.167957 x1036 -2463.062988 x1074 -2733.87793 x1147 -3811.313965}}
+ rotate {{curve x1001 -0.2616475517 x1147 1.080293668} {curve x1001 -89.9572182 x1147 80.41341536} {curve x1001 -4.904766527 x1147 4.791732873}}
+ focal 30
+ name Camera2
+ selected true
+ xpos -3998
+ ypos 787
+ addUserKnob {20 User}
+ addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+set Nb1094e0 [stack 0]
+push $cut_paste_input
+Dot {
+ name Dot4
+ label environment3D
+ note_font_size 30
+ selected true
+ xpos -3866
+ ypos 545
+}
+set N1b53d1f0 [stack 0]
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos -3900
+ ypos 1066
+}
+set Nabe4e00 [stack 0]
+Camera2 {
+ inputs 0
+ translate {{curve x1001 18442.10352 x1036 18829.48242 x1074 19897.38281 x1147 20727.44531} {curve x1001 -199.6287384 x1036 -270.3913879 x1074 -272.7832336 x1147 -267.9204102} {curve x1001 -4061.381592 x1036 -2463.062988 x1074 -2733.87793 x1147 -3811.313965}}
+ rotate {{curve x1001 -0.2616475517 x1147 1.080293668} {curve x1001 -89.9572182 x1147 80.41341536} {curve x1001 -4.904766527 x1147 4.791732873}}
+ focal 30
+ name Camera4
+ selected true
+ xpos -4411
+ ypos 1051
+ addUserKnob {20 User}
+ addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $Nb1094e0
+push 0
+Camera2 {
+ inputs 2
+ translate {{parent.Sphere5.translate} {parent.Sphere5.translate} {parent.Sphere5.translate}}
+ projection_mode spherical
+ near 1
+ far 100000
+ look_axis +Z
+ name Camera_env_map1
+ selected true
+ xpos -4559
+ ypos 923
+}
+set Nbb401f0 [stack 0]
+push $N1b53d1f0
+Constant {
+ inputs 0
+ channels rgb
+ format "512 256 0 0 512 256 1 latlong"
+ name Constant_lat_long1
+ selected true
+ xpos -4402
+ ypos 345
+}
+ScanlineRender {
+ inputs 3
+ motion_vectors_type velocity
+ name Render_env_map1
+ selected true
+ xpos -4402
+ ypos 541
+}
+push $Nbb401f0
+Environment {
+ inputs 2
+ mirror true
+ name Environment1
+ selected true
+ xpos -4418
+ ypos 923
+}
+BasicMaterial {
+ inputs 0
+ min_shininess 0
+ max_shininess 0
+ name BasicMaterial1
+ selected true
+ xpos -4291
+ ypos 807
+}
+Sphere {
+ rows 20
+ columns 20
+ translate {{curve x1001 20738 x1066 20073.99805 x1150 19982.03125} {curve x1001 -302 x1066 -302 x1150 -302} {curve x1001 -3930.003906 x1066 -3500 x1150 -3878.000244}}
+ uniform_scale 100
+ name Sphere5
+ label Object
+ note_font_size 14
+ selected true
+ xpos -4291
+ ypos 833
+}
+MergeGeo {
+ inputs 2
+ selectable false
+ name MergeGeo3
+ selected true
+ xpos -4291
+ ypos 943
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ motion_vectors_type distance
+ name ScanlineRender2
+ selected true
+ xpos -4291
+ ypos 1071
+}
+DeepHoldout2 {
+ inputs 2
+ name DeepHoldout1
+ selected true
+ xpos -4031
+ ypos 1158
+}
+Dot {
+ name Dot5
+ selected true
+ xpos -3997
+ ypos 1306
+}
+push $Nabe4e00
+Merge2 {
+ inputs 2
+ name Merge1
+ selected true
+ xpos -3900
+ ypos 1302
+}

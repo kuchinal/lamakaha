@@ -1,0 +1,42 @@
+#! /usr/local/Nuke7.0v8/Nuke7.0 -nx
+version 7.0 v8
+Gizmo {
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -562
+  ypos 431
+ }
+ Text {
+  opacity 0.1
+  message "     RippleEdit                  RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit            RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit             RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit             RippleEdit                RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit             RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit          RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit          RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit            RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit           RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit               RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit               RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit                   RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit                   RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit          RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit                RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit                    RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit        RippleEdit     RippleEdit     "
+  font /usr/share/fonts/truetype/impact.ttf
+  size 400
+  kerning 0.092
+  leading -0.029
+  yjustify top
+  Transform 1
+  box {0 0 {width} {height}}
+  center {960 540}
+  ramp linear
+  color {1 0.01899999939 0.400000006 1}
+  p1 {0 0}
+  color0 {0.1400000006 0.95500001 0 1}
+  p0 {{width} {height x992 100}}
+  name Text1
+  xpos -562
+  ypos 473
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace1
+  xpos -562
+  ypos 507
+ }
+ Output {
+  name Output1
+  xpos -562
+  ypos 571
+ }
+end_group

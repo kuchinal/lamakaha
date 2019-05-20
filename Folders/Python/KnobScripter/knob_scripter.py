@@ -1,9 +1,9 @@
 #-------------------------------------------------
 # Knob Scripter by Adrian Pueyo
-# Script editor for python and callback knobs
+# Complete sript editor for Nuke
 # adrianpueyo.com, 2017-2019
-version = "1.3BETA"
-date = "April 22 2019"
+version = "2.0 BETA 1"
+date = "May 8 2019"
 #-------------------------------------------------
 
 import nuke
@@ -395,10 +395,13 @@ class KnobScripter(QtWidgets.QWidget):
 
         # Set default values based on mode
         if self.nodeMode:
+            self.current_knob_dropdown.blockSignals(True)
             self.node_mode_bar.setVisible(True)
             self.script_mode_bar.setVisible(False)
             self.setCurrentKnob(self.knob)
             self.loadKnobValue(check = False)
+            self.setKnobModified(False)
+            self.current_knob_dropdown.blockSignals(False)
             self.splitter.setSizes([0,1])
         else:
             self.exitNodeMode()
@@ -409,6 +412,8 @@ class KnobScripter(QtWidgets.QWidget):
 
         # Actions
         self.echoAct = QtWidgets.QAction("Echo python commands", self, checkable=True, statusTip="Toggle nuke's 'Echo all python commands to ScriptEditor'", triggered=self.toggleEcho)
+        if nuke.toNode("preferences").knob("echoAllCommands").value():
+            self.echoAct.toggle()
         self.pinAct = QtWidgets.QAction("Always on top", self, checkable=True, statusTip="Keeps the KnobScripter window always on top or not.", triggered=self.togglePin)
         if self.pinned:
             self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
@@ -635,10 +640,12 @@ class KnobScripter(QtWidgets.QWidget):
             index = KnobDropdownItems.index(knobToSet)
             self.current_knob_dropdown.setCurrentIndex(index)
         return
-        #TODO IMPORTANT on changing node, reload the contents of scripteditor!!!!!!
 
     def updateUnsavedKnobs(self, first_time=False):
         ''' Clear unchanged knobs from the dict and return the number of unsaved knobs '''
+        if not self.node:
+            # Node has been deleted, so simply return 0. Who cares.
+            return 0
         edited_knobValue = self.script_editor.toPlainText()
         self.unsavedKnobs[self.knob] = edited_knobValue
         if len(self.unsavedKnobs) > 0:
@@ -757,6 +764,8 @@ class KnobScripter(QtWidgets.QWidget):
             for s in defaultScripts:
                 if s+".autosave" in found_temp_scripts:
                     self.current_script_dropdown.addItem(s+"(*)",s)
+                elif s in found_scripts:
+                    self.current_script_dropdown.addItem(s,s)
             for s in found_scripts:
                 if s in defaultScripts:
                     continue
@@ -1140,8 +1149,6 @@ class KnobScripter(QtWidgets.QWidget):
 
             self.current_script_dropdown.blockSignals(False)
 
-        #TODO add "Rename" option?
-
         elif sd_data == "open in browser":
             current_script_path = os.path.join(self.scripts_dir, self.current_folder, self.current_script)
             self.openInFileBrowser(current_script_path)
@@ -1307,10 +1314,20 @@ class KnobScripter(QtWidgets.QWidget):
 
     def changeClicked(self, newNode=""):
         ''' Change node '''
+        try:
+            print self.node
+        except:
+            self.node = None
+            if not len(nuke.selectedNodes()):
+                self.exitNodeMode()
+                return
         nuke.menu("Nuke").findItem("Edit/Node/Update KnobScripter Context").invoke()
         selection = knobScripterSelectedNodes
         if self.nodeMode: # Only update the number of unsaved knobs if we were already in node mode
-            updatedCount = self.updateUnsavedKnobs()
+            if self.node is not None:
+                updatedCount = self.updateUnsavedKnobs()
+            else:
+                updatedCount = 0
         else:
             updatedCount = 0
             self.autosave()
@@ -1333,9 +1350,13 @@ class KnobScripter(QtWidgets.QWidget):
             self.saveScriptState()
             self.splitter.setSizes([0,1])
         self.nodeMode = True
+        print "self.node:"
+        print self.node
+        print "selection 0 fullname:"
+        print selection[0].fullName()
 
         # If already selected, pass
-        if selection[0].fullName() == self.node.fullName():
+        if self.node is not None and selection[0].fullName() == self.node.fullName():
             self.messageBox("Please select a different node first!")
             return
         elif updatedCount > 0:
@@ -1354,7 +1375,10 @@ class KnobScripter(QtWidgets.QWidget):
             self.messageBox("More than one node selected.\nChanging knobChanged editor to %s" % selection[0].fullName())
         # Reinitialise everything, wooo!
         self.current_knob_dropdown.blockSignals(True)
+        print "selection:"
+        print selection
         self.node = selection[0]
+
         self.script_editor.setPlainText("")
         self.unsavedKnobs = {}
         self.scrollPos = {}
@@ -1420,6 +1444,7 @@ class KnobScripter(QtWidgets.QWidget):
         '''
         Load prefs recursive. When maximum recursion depth, ignores paths.
         '''
+        #TODO IMPORTANT: ALWAYS KEEP CURSOR POSITION VISIBLE ON THE SCROLL! Even if we're simply selecting the text upwards
         max_depth = maxDepth
         cur_depth = depth
         if path == "":
@@ -1608,13 +1633,11 @@ class KnobScripterPane(KnobScripter):
         except:
             pass
         return KnobScripter.showEvent(self,the_event)
-    #TODO: catch ctrl+s etc if possible
 
     def hideEvent(self, the_event):
         self.autosave()
         return KnobScripter.hideEvent(self,the_event)
 
-#TODO VERTICAL SEPARATOR NEXT TO SAVE BUTTON
 
 def consoleChanged(self, ks):
     ''' This will be called every time the ScriptEditor Output text is changed '''
@@ -1855,10 +1878,10 @@ class ChooseNodeDialog(QtWidgets.QDialog):
 #------------------------------------------------------------------------------------------------------
 # Script Editor Widget
 # Wouter Gilsing built an incredibly useful python script editor for his Hotbox Manager, so I had it
-# really easy for this part! I made it a bit simpler, leaving just the part non associated to his tool
-# and tweaking the style a bit to be compatible with font size changing and stuff.
+# really easy for this part!
+# Starting from his script editor, I changed the style and added the sublime-like functionality.
 # I think this bit of code has the potential to get used in many nuke tools.
-# All credit to him: http://www.woutergilsing.com/
+# Credit to him: http://www.woutergilsing.com/
 # Originally used on W_Hotbox v1.5: http://www.nukepedia.com/python/ui/w_hotbox
 #------------------------------------------------------------------------------------------------------
 class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
@@ -1884,7 +1907,8 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
         self.cursorPositionChanged.connect(self.highlightCurrentLine)
 
     #--------------------------------------------------------------------------------------------------
-    # Line Numbers (extract from original comment by Wouter Gilsing)
+    # This is adapted from an original version by Wouter Gilsing.
+    # Extract from his original comments:
     # While researching the implementation of line number, I had a look at Nuke's Blinkscript node. [..]
     # thefoundry.co.uk/products/nuke/developers/100/pythonreference/nukescripts.blinkscripteditor-pysrc.html
     # I stripped and modified the useful bits of the line number related parts of the code [..]
@@ -2022,7 +2046,9 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
                 selection = cursor.selection().toPlainText()
             else:
                 selection = ""
-            if key == Qt.Key_ParenLeft: # (
+            if key == Qt.Key_ParenLeft and (len(selection)>0 or re.match(r"[\s]+", text_after_cursor)): # (
+                # Only if len(selection) or the text after the cursor is not a non-space character...
+                #TODO link to the proper documentation, about me etc.
                 cursor.insertText("("+selection+")")
                 cursor.setPosition(apos+1, QtGui.QTextCursor.MoveAnchor)
                 cursor.setPosition(cpos+1, QtGui.QTextCursor.KeepAnchor)
@@ -2030,12 +2056,20 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
             elif key == Qt.Key_ParenRight and text_after_cursor.startswith(")"): # )
                 cursor.movePosition(QtGui.QTextCursor.NextCharacter)
                 self.setTextCursor(cursor)
-            elif key == 91: #[
+            elif key == Qt.Key_BracketLeft and (len(selection) or re.match(r"[\s]+", text_after_cursor)): #[
                 cursor.insertText("["+selection+"]")
                 cursor.setPosition(apos+1, QtGui.QTextCursor.MoveAnchor)
                 cursor.setPosition(cpos+1, QtGui.QTextCursor.KeepAnchor)
                 self.setTextCursor(cursor)
-            elif key == 93 and text_after_cursor.startswith("]"): # ]
+            elif key == Qt.Key_BracketRight and text_after_cursor.startswith("]"): # ]
+                cursor.movePosition(QtGui.QTextCursor.NextCharacter)
+                self.setTextCursor(cursor)
+            elif key == Qt.Key_BraceLeft and (len(selection) or re.match(r"[\s]+", text_after_cursor)): #{
+                cursor.insertText("{"+selection+"}")
+                cursor.setPosition(apos+1, QtGui.QTextCursor.MoveAnchor)
+                cursor.setPosition(cpos+1, QtGui.QTextCursor.KeepAnchor)
+                self.setTextCursor(cursor)
+            elif key == Qt.Key_BraceRight and text_after_cursor.startswith("}"): # }
                 cursor.movePosition(QtGui.QTextCursor.NextCharacter)
                 self.setTextCursor(cursor)
             elif key == 34: # "
@@ -2065,7 +2099,6 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
             elif key == 35 and len(selection): # # (yes, a hash)
                 # If there's a selection, insert a hash at the start of each line.. how the fuck?
                 if selection != "":
-                    #TODO Implement an "iscommented" function somewhere? or better, find a way to differentiate the line from the newline character. not sure how but whatever
                     selection_split = selection.split("\n")
                     if all(i.startswith("#") for i in selection_split):
                         selection_commented = "\n".join([s[1:] for s in selection_split]) # Uncommented
@@ -2159,12 +2192,6 @@ class KnobScripterTextEdit(QtWidgets.QPlainTextEdit):
             else:
                 QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
 
-            #TODO IMPORTANT: click on new script when on Untitled, create the new script with the current text instead of blank
-            #TODO IMPORTANT: If state txt has scripts that don't exist, don't crash (lol)
-            #TODO: Change node + selection panel -> GRAB THE PROPER NAME!!!! Fot nuke.root for example it's not working properly.
-
-
-            
         self.scrollToCursor()
 
     def scrollToCursor(self):
@@ -2362,6 +2389,8 @@ class KSLineNumberArea(QtWidgets.QWidget):
 
 class KSScriptEditorHighlighter(QtGui.QSyntaxHighlighter):
     '''
+    This is also adapted from an original version by Wouter Gilsing. His comments:
+
     Modified, simplified version of some code found I found when researching:
     wiki.python.org/moin/PyQt/Python%20syntax%20highlighting
     They did an awesome job, so credits to them. I only needed to make some
@@ -2534,8 +2563,8 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
         super(KnobScripterTextEditMain,self).__init__(knobScripter)
         self.knobScripter = knobScripter
         self.script_output = output
-        self._completer = None
-        self._currentCompletion = None
+        self.nukeCompleter = None
+        self.currentNukeCompletion = None
 
         ########
         # FROM NUKE's SCRIPT EDITOR START
@@ -2543,14 +2572,14 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 
         #Setup completer
-        self._completer = QtWidgets.QCompleter(self)
-        self._completer.setWidget(self)
-        self._completer.setCompletionMode(QtWidgets.QCompleter.UnfilteredPopupCompletion)
-        self._completer.setCaseSensitivity(Qt.CaseSensitive)
-        self._completer.setModel(QtGui.QStringListModel())
+        self.nukeCompleter = QtWidgets.QCompleter(self)
+        self.nukeCompleter.setWidget(self)
+        self.nukeCompleter.setCompletionMode(QtWidgets.QCompleter.UnfilteredPopupCompletion)
+        self.nukeCompleter.setCaseSensitivity(Qt.CaseSensitive)
+        self.nukeCompleter.setModel(QtGui.QStringListModel())
 
-        self._completer.activated.connect(self.insertCompletion)
-        self._completer.highlighted.connect(self.completerHighlightChanged)
+        self.nukeCompleter.activated.connect(self.insertNukeCompletion)
+        self.nukeCompleter.highlighted.connect(self.completerHighlightChanged)
         ########
         # FROM NUKE's SCRIPT EDITOR END
         ########
@@ -2565,7 +2594,8 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
         match_key = None
         match_snippet = ""
         for key, val in dic.items():
-            match = re.search(r"[\s.({\[,;]"+key+r"(?:[\s)\]\"]+|$)",text)
+            #match = re.search(r"[\s\.({\[,;=+-]"+key+r"(?:[\s)\]\"]+|$)",text)
+            match = re.search(r"[\s\.({\[,;=+-]"+key+r"$",text)
             if match or text == key:
                 if len(key) > longest:
                     longest = len(key)
@@ -2590,7 +2620,6 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
 
     def addSnippetText(self, snippet_text):
         ''' Adds the selected text as a snippet (taking care of $$, $name$ etc) to the script editor '''
-        
         cursor_placeholder_find = r"(?<=[^\\])(\$\$)" # Matches $$
         variables_placeholder_find = r"[^\\](\$[\w]*[^\t\n\r\f\v\$\\]+\$)" # Matches $thing$
         text = snippet_text
@@ -2627,36 +2656,36 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
 
 
         #Get completer state
-        self._completerShowing = self._completer.popup().isVisible()
+        self.nukeCompleterShowing = self.nukeCompleter.popup().isVisible()
 
         #BEFORE ANYTHING ELSE, IF SPECIAL MODIFIERS SIMPLY IGNORE THE REST
-        if not self._completerShowing and (ctrl or shift or alt):
+        if not self.nukeCompleterShowing and (ctrl or shift or alt):
             #Bypassed!
             if key not in [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Tab]:
                 KnobScripterTextEdit.keyPressEvent(self,event)
                 return
         
         #If the completer is showing
-        if self._completerShowing :
+        if self.nukeCompleterShowing :
             tc = self.textCursor()
             #If we're hitting enter, do completion
             if key in [Qt.Key_Return, Qt.Key_Enter, Qt.Key_Tab]:
-                if not self._currentCompletion:
-                    self._completer.setCurrentRow(0)
-                    self._currentCompletion = self._completer.currentCompletion()
-                #print str(self._completer.completionModel[0])
-                self.insertCompletion(self._currentCompletion)
-                self._completer.popup().hide()
-                self._completerShowing = False
+                if not self.currentNukeCompletion:
+                    self.nukeCompleter.setCurrentRow(0)
+                    self.currentNukeCompletion = self.nukeCompleter.currentCompletion()
+                #print str(self.nukeCompleter.completionModel[0])
+                self.insertNukeCompletion(self.currentNukeCompletion)
+                self.nukeCompleter.popup().hide()
+                self.nukeCompleterShowing = False
             #If you're hitting right or escape, hide the popup
             elif key == Qt.Key_Right or key == Qt.Key_Escape:
-                self._completer.popup().hide()
-                self._completerShowing = False
+                self.nukeCompleter.popup().hide()
+                self.nukeCompleterShowing = False
             #If you hit tab, escape or ctrl-space, hide the completer
             elif key == Qt.Key_Tab or key == Qt.Key_Escape or (ctrl and key == Qt.Key_Space) :
-                self._currentCompletion = ""
-                self._completer.popup().hide()
-                self._completerShowing = False
+                self.currentNukeCompletion = ""
+                self.nukeCompleter.popup().hide()
+                self.nukeCompleterShowing = False
             #If none of the above, update the completion model
             else :
                 QtWidgets.QPlainTextEdit.keyPressEvent(self, event)
@@ -2675,10 +2704,10 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
                         break
                     runningLength += 1
                 if currentLine : 
-                    token = currentLine.split(" ")[-1]
-                    if "(" in token :
-                        token = token.split("(")[-1]
-                    self.completeTokenUnderCursor(token)
+                    completionPart = currentLine.split(" ")[-1]
+                    if "(" in completionPart :
+                        completionPart = completionPart.split("(")[-1]
+                    self.completeNukePartUnderCursor(completionPart)
             return
 
         if type(event) == QtGui.QKeyEvent:
@@ -2721,11 +2750,11 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
                                 return
                             #Else show the completer
                             else: 
-                                token = currentLine[:colNum].split(" ")[-1]
-                                if "(" in token :
-                                    token = token.split("(")[-1]
+                                completionPart = currentLine[:colNum].split(" ")[-1]
+                                if "(" in completionPart :
+                                    completionPart = completionPart.split("(")[-1]
 
-                                self.completeTokenUnderCursor(token)
+                                self.completeNukePartUnderCursor(completionPart)
 
                                 return
 
@@ -2735,12 +2764,12 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
                             if currentLine[colNum-1:] == "" or currentLine.endswith(" "):
                                 KnobScripterTextEdit.keyPressEvent(self,event)
                                 return
-                            #Else update token and show the completer
-                            token = currentLine.split(" ")[-1]
-                            if "(" in token :
-                                token = token.split("(")[-1]
+                            #Else update completionPart and show the completer
+                            completionPart = currentLine.split(" ")[-1]
+                            if "(" in completionPart :
+                                completionPart = completionPart.split("(")[-1]
 
-                            self.completeTokenUnderCursor(token)
+                            self.completeNukePartUnderCursor(completionPart)
                             return
 
                     KnobScripterTextEdit.keyPressEvent(self,event)
@@ -2753,8 +2782,8 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
             else:
                 KnobScripterTextEdit.keyPressEvent(self,event)
 
-    # ADAPTED FROM NUKE's SCRIPT EDITOR
-    def completionsForToken(self, token):
+    # Nuke script editor's modules completer
+    def completionsForcompletionPart(self, completionPart):
         #TODO: refactor all the snippets part
         def findModules(searchString):
             sysModules =  sys.modules
@@ -2769,8 +2798,8 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
                     if x.startswith(searchString) :
                         matching.append(x)
                 return matching
-            else : 
-                try : 
+            else:
+                try:
                     if sys.modules.has_key(searchString) :
                         return dir(sys.modules['%s' % searchString])
                     elif globals().has_key(searchString): 
@@ -2780,7 +2809,7 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
                 except :
                     return None
 
-        completerText = token
+        completerText = completionPart
 
         #Get text before last dot
         moduleSearchString = '.'.join(completerText.split('.')[:-1])
@@ -2806,53 +2835,46 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
 
         return matchedModules
 
-    def completeTokenUnderCursor(self, token) :
+    def completeNukePartUnderCursor(self, completionPart) :
 
-        #Clean token
-        token = token.lstrip().rstrip()
-
-        completionList = self.completionsForToken(token)
+        completionPart = completionPart.lstrip().rstrip()
+        completionList = self.completionsForcompletionPart(completionPart)
         if len(completionList) == 0 :
             return
+        self.nukeCompleter.model().setStringList(completionList)
+        self.nukeCompleter.setCompletionPrefix(completionPart)
 
-        #Set model for _completer to completion list
-        self._completer.model().setStringList(completionList)
-
-        #Set the prefix
-        self._completer.setCompletionPrefix(token)
-
-        #Check if we need to make it visible
-        if self._completer.popup().isVisible():
+        if self.nukeCompleter.popup().isVisible():
             rect = self.cursorRect()
-            rect.setWidth(self._completer.popup().sizeHintForColumn(0) + self._completer.popup().verticalScrollBar().sizeHint().width())
-            self._completer.complete(rect)
+            rect.setWidth(self.nukeCompleter.popup().sizeHintForColumn(0) + self.nukeCompleter.popup().verticalScrollBar().sizeHint().width())
+            self.nukeCompleter.complete(rect)
             return
 
         #Make it visible
         if len(completionList) == 1 :
-            self.insertCompletion(completionList[0])
+            self.insertNukeCompletion(completionList[0])
         else :
             rect = self.cursorRect()
-            rect.setWidth(self._completer.popup().sizeHintForColumn(0) + self._completer.popup().verticalScrollBar().sizeHint().width())
-            self._completer.complete(rect)
+            rect.setWidth(self.nukeCompleter.popup().sizeHintForColumn(0) + self.nukeCompleter.popup().verticalScrollBar().sizeHint().width())
+            self.nukeCompleter.complete(rect)
 
         return 
 
-    def insertCompletion(self, completion):
+    def insertNukeCompletion(self, completion):
         if completion:
-            token = self._completer.completionPrefix()
-            if len(token.split('.')) == 0 : 
-                tokenFragment = token
-            else :
-                tokenFragment = token.split('.')[-1]
+            completionPart = self.nukeCompleter.completionPrefix()
+            if len(completionPart.split('.')) == 0 : 
+                completionPartFragment = completionPart
+            else:
+                completionPartFragment = completionPart.split('.')[-1]
 
-            textToInsert = completion[len(tokenFragment):]
+            textToInsert = completion[len(completionPartFragment):]
             tc = self.textCursor()
             tc.insertText(textToInsert)
         return
         
     def completerHighlightChanged(self, highlighted):
-        self._currentCompletion = highlighted
+        self.currentNukeCompletion = highlighted
 
     def runScript(self):
         cursor = self.textCursor()
@@ -2872,7 +2894,6 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
         oldPosition = nukeSECursor.position()
 
         # Add the code to be executed and select it
-        ##nukeSEInput.setFocus()
         nukeSEInput.insertPlainText(code)
 
         if oldAnchor < oldPosition:
@@ -2894,7 +2915,6 @@ class KnobScripterTextEditMain(KnobScripterTextEdit):
         nukeSECursor.setPosition(oldAnchor, QtGui.QTextCursor.MoveAnchor)
         nukeSECursor.setPosition(oldPosition, QtGui.QTextCursor.KeepAnchor)
         nukeSEInput.setTextCursor(nukeSECursor)
-        #self.setFocus()
 
 #---------------------------------------------------------------------
 # Preferences Panel
@@ -3379,7 +3399,7 @@ class SnippetsPanel(QtWidgets.QDialog):
         self.apply_btn = QtWidgets.QPushButton('Apply')
         self.apply_btn.setToolTip("Save the snippets into a json file.")
         self.apply_btn.setShortcut('Ctrl+S')
-        self.apply_btn.clicked.connect(self.saveSnippets)
+        self.apply_btn.clicked.connect(self.applySnippets)
         self.bottom_layout.addWidget(self.apply_btn)
 
         self.help_btn = QtWidgets.QPushButton('Help')
@@ -3449,10 +3469,13 @@ class SnippetsPanel(QtWidgets.QDialog):
             prefs = json.dump(snippets, f, sort_keys=True, indent=4)
         return prefs
 
-    def okPressed(self):
+    def applySnippets(self):
         self.saveSnippets()
         self.mainWidget.snippets = self.mainWidget.loadSnippets(maxDepth=5)
         self.mainWidget.loadSnippets()
+
+    def okPressed(self):
+        self.applySnippets()
         self.accept()
 
     def addSnippet(self, key="", val=""):

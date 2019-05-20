@@ -1,0 +1,293 @@
+#! /mnt/repository/software/install/nuke/11.3v1/centos-6_x86-64/libnuke-11.3.1.so -nx
+version 11.3 v1
+Group {
+ name LensKernel
+ tile_color 0xff7f28ff
+ addUserKnob {20 User}
+ addUserKnob {4 output M {"convolution result" "input kernel" "" ""}}
+ addUserKnob {4 c l channels M {RGB RGBA ""}}
+ addUserKnob {4 kernel M {"35mm f1.4" "35mm f2.8" "35mm f5.6"}}
+ addUserKnob {3 pad l "pad frame" t "If bright areas of the convolved image 'wrap around' to the other side of the image, padding the frame will alleviate this problem. Also, if the bounding extends beyond the image, setting this to a larger size than 0 will allow you to reserve it. value is in pixels.\n"}
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {26 ""}
+ addUserKnob {41 rotate T Transform1.rotate}
+ addUserKnob {41 scale T Transform1.scale}
+ addUserKnob {41 translate T Transform1.translate}
+ addUserKnob {41 skewX l "skew X" T Transform1.skewX}
+ addUserKnob {41 skewY l "skew Y" T Transform1.skewY}
+ addUserKnob {20 Kernels l INVISIBLE +INVISIBLE}
+ addUserKnob {41 kernel14 l INVISIBLE +INVISIBLE T Read1.file}
+ addUserKnob {41 kernel28 l INVISIBLE +INVISIBLE T Read2.file}
+ addUserKnob {41 kernel56 l INVISIBLE +INVISIBLE T Read3.file}
+}
+ Read {
+  inputs 0
+  file_type exr
+  file /corky/projects/Library/2D_Footage/lens_kernels/35mmf14_normalized_v01.exr
+  localizationPolicy on
+  format "3908 2602 0 0 3908 2602 1 "
+  origset true
+  on_error checkerboard
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read6
+  xpos -170
+  ypos -233
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file_type exr
+  file /corky/projects/Library/2D_Footage/lens_kernels/35mmf28_normalized_v01.exr
+  localizationPolicy on
+  format "3908 2602 0 0 3908 2602 1 "
+  origset true
+  on_error checkerboard
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read5
+  xpos -382
+  ypos -263
+  postage_stamp false
+ }
+ Read {
+  inputs 0
+  file_type exr
+  file /corky/projects/Library/2D_Footage/lens_kernels/35mmf56_normalized_v01.exr
+  localizationPolicy on
+  format "3908 2602 0 0 3908 2602 1 "
+  origset true
+  on_error checkerboard
+  colorspace linear
+  raw true
+  auto_alpha true
+  name Read4
+  xpos -538
+  ypos -219
+  postage_stamp false
+ }
+ Switch {
+  inputs 3
+  which {{parent.kernel}}
+  name Switch1
+  xpos -382
+  ypos -36
+ }
+ Transform {
+  translate {0.2 0.2}
+  scale 0.3
+  center {1954 1301}
+  shutteroffset centred
+  name Transform1
+  selected true
+  xpos -382
+  ypos 55
+ }
+ Dot {
+  name Dot1
+  xpos -348
+  ypos 170
+ }
+set N3d2d5470 [stack 0]
+ Dot {
+  name Dot2
+  xpos -238
+  ypos 170
+ }
+ Saturation {
+  saturation 0
+  name Saturation
+  label luminance
+  xpos -272
+  ypos 224
+ }
+push $N3d2d5470
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.alpha
+  name Copy
+  label luminance->alpha
+  xpos -382
+  ypos 218
+ }
+ Dot {
+  name Dot10
+  xpos -348
+  ypos 272
+ }
+set N19119130 [stack 0]
+ Dot {
+  name Dot9
+  xpos -458
+  ypos 272
+ }
+ Dot {
+  name Dot11
+  xpos -458
+  ypos 745
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -76
+  ypos 9
+ }
+ NoOp {
+  name ImgIn
+  xpos -76
+  ypos 55
+ }
+ Dot {
+  name Dot12
+  xpos 34
+  ypos 59
+ }
+set N3b1e4df0 [stack 0]
+ Reformat {
+  resize none
+  name Reformat2
+  xpos 0
+  ypos 292
+ }
+ FFT {
+  channels rgba
+  name FFT2
+  xpos 0
+  ypos 375
+ }
+ Dot {
+  name Dot3
+  xpos 34
+  ypos 451
+ }
+push $N19119130
+ Reformat {
+  resize none
+  name Reformat1
+  xpos -382
+  ypos 303
+ }
+ FFT {
+  channels rgba
+  normalize_input true
+  center_kernel true
+  name FFT1
+  xpos -382
+  ypos 395
+ }
+ FFTMultiply {
+  inputs 2
+  name FFTMultiply1
+  xpos -382
+  ypos 442
+ }
+ InvFFT {
+  name InvFFT1
+  xpos -382
+  ypos 480
+ }
+ Dot {
+  name Dot4
+  xpos -348
+  ypos 548
+ }
+ Dot {
+  name Dot6
+  xpos -138
+  ypos 548
+ }
+set N3bb79f40 [stack 0]
+ Dot {
+  name Dot7
+  xpos 15
+  ypos 548
+ }
+push $N3b1e4df0
+ Dot {
+  name Dot13
+  xpos 170
+  ypos 59
+ }
+ Dot {
+  name Dot15
+  xpos 170
+  ypos 415
+ }
+set N3bb880e0 [stack 0]
+ Dot {
+  name Dot5
+  xpos 34
+  ypos 501
+ }
+set N3bb8cc60 [stack 0]
+ Copy {
+  inputs 2
+  channels rgba
+  name Copy3
+  xpos 0
+  ypos 578
+ }
+push $N3bb79f40
+push $N3bb8cc60
+ Dot {
+  name Dot8
+  xpos -68
+  ypos 501
+ }
+ Copy {
+  inputs 2
+  channels rgb
+  name Copy2
+  xpos -102
+  ypos 581
+ }
+ Switch {
+  inputs 2
+  which {{parent.c i}}
+  name Switch2
+  xpos 0
+  ypos 668
+ }
+ Reformat {
+  type "to box"
+  box_width {{ImgIn.width}}
+  box_height {{ImgIn.height}}
+  box_pixel_aspect 2
+  resize none
+  filter Impulse
+  name ReformatOutput
+  xpos 0
+  ypos 694
+  disable true
+ }
+ Switch {
+  inputs 2
+  which {{parent.output i}}
+  name Switch3
+  xpos 0
+  ypos 741
+ }
+push $N3bb880e0
+ Dot {
+  name Dot14
+  xpos 170
+  ypos 804
+ }
+ Dissolve {
+  inputs 2
+  channels rgba
+  which {{parent.mix i}}
+  name Dissolve1
+  xpos 0
+  ypos 800
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 871
+ }
+end_group

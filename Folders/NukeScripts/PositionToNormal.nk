@@ -1,0 +1,225 @@
+#! C:/Program Files/Nuke9.0v4/nuke-9.0.4.dll -nx
+version 9.0 v4
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-8" y="-8" w="1456" h="876" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="777" stretch="1"/>
+            <splitter orientation="2">
+                <split size="476"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="335"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name X:/Blog/PositionToNormal.nk
+ project_directory "\[python \{nuke.script_directory()\}]"
+ frame 0
+ first_frame 0
+ last_frame 47
+ lock_range true
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x5460ffff
+ label "PositionToNormal\nCross Product Expression"
+ note_font_size 42
+ xpos -858
+ ypos -1420
+ bdwidth 522
+ bdheight 575
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x8e8e38ff
+ label DepthToPosition
+ note_font_size 42
+ xpos -1505
+ ypos -1645
+ bdwidth 524
+ bdheight 548
+}
+Read {
+ inputs 0
+ file "\[python \{nuke.script_directory()\}]/Assets/PG-_VRayZDepth.exr"
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read8
+ xpos -1297
+ ypos -1485
+}
+Shuffle {
+ out depth
+ name Shuffle10
+ xpos -1297
+ ypos -1363
+}
+DepthToPosition {
+ name DepthToPosition1
+ xpos -1297
+ ypos -1283
+}
+Dot {
+ name Dot6
+ xpos -601
+ ypos -1279
+}
+set N15231000 [stack 0]
+Expression {
+ temp_name0 r
+ temp_expr0 r(x-1,y)
+ temp_name1 g
+ temp_expr1 g(x-1,y)
+ temp_name2 b
+ temp_expr2 b(x-1,y)
+ expr0 r
+ expr1 g
+ expr2 b
+ name Expression4
+ label "X - 1"
+ xpos -825
+ ypos -1175
+}
+push $N15231000
+Expression {
+ temp_name0 r
+ temp_expr0 r(x+1,y)
+ temp_name1 g
+ temp_expr1 g(x+1,y)
+ temp_name2 b
+ temp_expr2 b(x+1,y)
+ expr0 r
+ expr1 g
+ expr2 b
+ name Expression5
+ label "X + 1"
+ xpos -718
+ ypos -1174
+}
+MergeExpression {
+ inputs 2
+ temp_name0 x
+ temp_expr0 Br-Ar
+ temp_name1 y
+ temp_expr1 Bg-Ag
+ temp_name2 z
+ temp_expr2 Bb-Ab
+ temp_name3 Len
+ temp_expr3 "sqrt((x*x) + (y*y) + (z*z))"
+ expr0 x/Len
+ expr1 y/Len
+ expr2 z/Len
+ name Vector_X1
+ label "Vector from (x-1) to (x+1)"
+ xpos -718
+ ypos -1089
+}
+push $N15231000
+Expression {
+ temp_name0 r
+ temp_expr0 r(x,y-1)
+ temp_name1 g
+ temp_expr1 g(x,y-1)
+ temp_name2 b
+ temp_expr2 b(x,y-1)
+ expr0 r
+ expr1 g
+ expr2 b
+ name Expression6
+ label "Y- 1"
+ xpos -451
+ ypos -1177
+}
+push $N15231000
+Expression {
+ temp_name0 r
+ temp_expr0 r(x,y+1)
+ temp_name1 g
+ temp_expr1 g(x,y+1)
+ temp_name2 b
+ temp_expr2 b(x,y+1)
+ expr0 r
+ expr1 g
+ expr2 b
+ name Expression7
+ label "Y + 1"
+ xpos -561
+ ypos -1178
+}
+MergeExpression {
+ inputs 2
+ temp_name0 x
+ temp_expr0 Br-Ar
+ temp_name1 y
+ temp_expr1 Bg-Ag
+ temp_name2 z
+ temp_expr2 Bb-Ab
+ temp_name3 Len
+ temp_expr3 "sqrt((x*x) + (y*y) + (z*z))"
+ expr0 x/Len
+ expr1 y/Len
+ expr2 z/Len
+ name Vector_Y1
+ label "Vector from (y-1) to (y+1)"
+ xpos -561
+ ypos -1089
+}
+MergeExpression {
+ inputs 2
+ temp_name0 x
+ temp_expr0 "Ag*Bb - Ab*Bg"
+ temp_name1 y
+ temp_expr1 "Ab*Br - Ar*Bb"
+ temp_name2 z
+ temp_expr2 "Ar*Bg - Ag*Br"
+ expr0 x
+ expr1 y
+ expr2 z
+ name Normal1
+ label "Cross Product of \nVector X and\nVector Y"
+ xpos -642
+ ypos -1022
+}
+Median {
+ ignore_top_line false
+ name Median1
+ xpos -642
+ ypos -938
+}
+Viewer {
+ frame_range 0-47
+ name Viewer1
+ xpos -642
+ ypos -827
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ label "note:boundary issues -- \nThe normal calculated\nis derived from vectors \nwhich can often 'bridge'\ntwo different surfaces."
+ xpos -830
+ ypos -972
+}

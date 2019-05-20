@@ -1,0 +1,133 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+NoOp {
+ inputs 0
+ name HardKey
+ selected true
+ xpos -451
+ ypos -256
+}
+Dot {
+ name Dot4
+ selected true
+ xpos -417
+ ypos -199
+}
+push $cut_paste_input
+NoOp {
+ name FG
+ selected true
+ xpos -67
+ ypos -576
+}
+set N2ba3c3b0 [stack 0]
+Dot {
+ name Dot3
+ selected true
+ xpos 43
+ ypos -572
+}
+Dot {
+ name Dot5
+ selected true
+ xpos 43
+ ypos -440
+}
+push $N2ba3c3b0
+Expression {
+ expr1 g>(r+b)/2?(r+b)/2:g
+ name Expression1
+ label "Despiller of choice"
+ selected true
+ xpos -67
+ ypos -524
+}
+set N2ba3cd40 [stack 0]
+Merge2 {
+ inputs 2
+ operation difference
+ name Merge7
+ selected true
+ xpos -67
+ ypos -444
+}
+Colorspace {
+ colorspace_out sRGB
+ name Colorspace1
+ label toSRGB
+ selected true
+ xpos -67
+ ypos -418
+}
+Dot {
+ name Dot2
+ selected true
+ xpos -33
+ ypos -291
+}
+NoOp {
+ inputs 0
+ name BG
+ selected true
+ xpos -273
+ ypos -576
+}
+Colorspace {
+ colorspace_out sRGB
+ name Colorspace3
+ label toSRGB
+ selected true
+ xpos -273
+ ypos -418
+}
+Grade {
+ black -0.25
+ white 0.6
+ multiply 2.1
+ add {0.418599993 0.4351600111 0.4600000083 0}
+ gamma 0.5
+ black_clamp false
+ name Grade8
+ label "Adjust BG to match original plate"
+ selected true
+ xpos -273
+ ypos -361
+}
+push $N2ba3cd40
+Dot {
+ name Dot1
+ selected true
+ xpos -130
+ ypos -514
+}
+Colorspace {
+ colorspace_out sRGB
+ name Colorspace2
+ label toSRGB
+ selected true
+ xpos -164
+ ypos -418
+}
+Merge2 {
+ inputs 2+1
+ maskChannelMask rgba.green
+ name Merge10
+ selected true
+ xpos -273
+ ypos -295
+}
+Colorspace {
+ colorspace_in sRGB
+ name Colorspace4
+ label toLinear
+ selected true
+ xpos -273
+ ypos -256
+}
+Merge2 {
+ inputs 2
+ name Merge1
+ selected true
+ xpos -273
+ ypos -203
+}

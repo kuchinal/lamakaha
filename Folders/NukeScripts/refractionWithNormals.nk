@@ -1,0 +1,638 @@
+#! C:/Program Files/Nuke7.0v8/Nuke7.0.exe -nx
+version 7.0 v8
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="2560" h="1570" screen="0">
+        <splitter orientation="1">
+            <split size="1703"/>
+            <splitter orientation="2">
+                <split size="1252"/>
+                <dock id="" hideTitles="1" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                    <page id="Viewer.2"/>
+                </dock>
+                <split size="250"/>
+                <splitter orientation="1">
+                    <split size="850"/>
+                    <dock id="" activePageId="Script Editor.1">
+                        <page id="Curve Editor.1"/>
+                        <page id="DopeSheet.1"/>
+                        <page id="Script Editor.1"/>
+                    </dock>
+                    <split size="849"/>
+                    <splitter orientation="2">
+                        <split size="220"/>
+                        <dock id="" hideTitles="1" activePageId="com.ohufx.MassivePanel">
+                            <page id="com.ohufx.MassivePanel"/>
+                        </dock>
+                        <split size="26"/>
+                        <dock id="" hideTitles="1" activePageId="Progress.1">
+                            <page id="Progress.1"/>
+                        </dock>
+                    </splitter>
+                </splitter>
+            </splitter>
+            <split size="837"/>
+            <splitter orientation="2">
+                <split size="512"/>
+                <dock id="" hideTitles="1" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="990"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name C:/Users/lamakaha/.nuke/user/GeneralSetups/refractionWithNormals.nk
+ frame 100
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ addUserKnob {20 User}
+ addUserKnob {1 viewer_process l "viewer process"}
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x59778401
+ label drops
+ note_font "Helvetica bold"
+ note_font_size 50
+ xpos -2453
+ ypos 620
+ bookmark false
+ bdwidth 429
+ bdheight 536
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x3d239101
+ label Defocus
+ note_font "Helvetica bold"
+ note_font_size 50
+ xpos -1807
+ ypos 1990
+ bookmark false
+ bdwidth 391
+ bdheight 192
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x4c1c2d01
+ label Fresnel
+ note_font "Helvetica bold"
+ note_font_size 50
+ xpos -1807
+ ypos 2197
+ bookmark false
+ bdwidth 436
+ bdheight 202
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x54496301
+ label "Black in the glass"
+ note_font "Helvetica bold"
+ note_font_size 50
+ xpos -1807
+ ypos 2479
+ bookmark false
+ bdwidth 481
+ bdheight 160
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x387f6b01
+ label "trying to extract some \noverbend areas for darkening later"
+ note_font "Helvetica bold"
+ note_font_size 20
+ xpos -2283
+ ypos 1422
+ bookmark false
+ bdwidth 420
+ bdheight 253
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x54218401
+ label "defocus fresnel"
+ note_font "Helvetica bold"
+ note_font_size 50
+ xpos -1807
+ ypos 1716
+ bookmark false
+ bdwidth 427
+ bdheight 217
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x54199101
+ label BG
+ note_font "Helvetica bold"
+ note_font_size 50
+ xpos -1290
+ ypos 896
+ bookmark false
+ bdwidth 110
+ bdheight 232
+}
+Noise {
+ inputs 0
+ size 20
+ center {1024 778}
+ name Noise4
+ xpos -2443
+ ypos 1056
+}
+Camera2 {
+ inputs 0
+ translate {0 0 13.17500019}
+ name Camera2
+ xpos -2418
+ ypos 979
+}
+Constant {
+ inputs 0
+ color 1
+ name Constant2
+ xpos -2273
+ ypos 705
+ postage_stamp false
+}
+Sphere {
+ rows 20
+ columns 20
+ translate {-1.600000024 -2.049999952 0}
+ name Sphere4
+ xpos -2273
+ ypos 758
+}
+push 0
+push 0
+ParticleEmitter {
+ inputs 3
+ rate 20
+ rate_variation 1
+ size_variation 2
+ spread 3
+ translate {0 -0.7049999833 0}
+ name ParticleEmitter1
+ xpos -2273
+ ypos 833
+}
+ParticleTurbulence {
+ strength {2 1.1 0.1}
+ scale {1 0.1 1}
+ name ParticleTurbulence1
+ xpos -2273
+ ypos 857
+}
+Reformat {
+ inputs 0
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Reformat3
+ xpos -2124
+ ypos 994
+}
+ScanlineRender {
+ inputs 3
+ samples 0
+ motion_vectors_type distance
+ output_shader_vectors true
+ N_channel rgb
+ name ScanlineRender2
+ xpos -2273
+ ypos 1000
+}
+Group {
+ inputs 2
+ name Itransform
+ tile_color 0x81275aff
+ note_font "Verdana Bold Bold Bold Bold"
+ note_font_size 12
+ note_font_color 0xffffffff
+ xpos -2273
+ ypos 1055
+ addUserKnob {20 "" l Transform}
+ addUserKnob {41 matrix T Transform1.matrix}
+ addUserKnob {41 translate T Transform1.translate}
+ addUserKnob {41 rotate T Transform1.rotate}
+ addUserKnob {41 scale T Transform1.scale}
+ addUserKnob {41 skewX l "skew X" T Transform1.skewX}
+ addUserKnob {41 skewY l "skew Y" T Transform1.skewY}
+ addUserKnob {41 skew +INVISIBLE T Transform1.skew}
+ addUserKnob {41 center T Transform1.center}
+ addUserKnob {22 setCenter -STARTLINE T "n = nuke.thisGroup()\nw= n.width()\nh=n.height()\nprint w,h\nn\['center'].setValue(\[w/2,h/2])"}
+ addUserKnob {41 filter T Transform1.filter}
+ addUserKnob {41 clamp T Transform1.clamp}
+ addUserKnob {6 crop_1 l crop -STARTLINE}
+ crop_1 true
+ addUserKnob {41 crop l "black outside" +INVISIBLE T Transform1.crop}
+ addUserKnob {41 clip l "knob crop \$value" +INVISIBLE T Transform1.clip}
+ addUserKnob {14 AdjBBox1_numpixels l "Add Pixels" R 0 100}
+ AdjBBox1_numpixels 50
+}
+ Transform {
+  inputs 0
+  rotate 3.9
+  center {1024 584}
+  black_outside false
+  name Transform1
+  label "expresison link this\nto avoid st map overlay"
+  xpos -72
+  ypos -136
+ }
+ Input {
+  inputs 0
+  name ctrlMask
+  xpos -40
+  ypos -51
+  number 1
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  alpha black
+  name Shuffle1
+  xpos -40
+  ypos -24
+ }
+ Input {
+  inputs 0
+  name img
+  xpos -385
+  ypos -227
+ }
+set N2c971610 [stack 0]
+ Remove {
+  name Remove1
+  xpos -210
+  ypos -232
+ }
+ AdjBBox {
+  numpixels {{parent.AdjBBox1_numpixels.w} {parent.AdjBBox1_numpixels.h}}
+  name AdjBBox1
+  xpos -210
+  ypos -196
+ }
+ Expression {
+  expr0 x
+  expr1 y
+  name Expression1
+  xpos -210
+  ypos -140
+ }
+set N2c972060 [stack 0]
+ Dot {
+  name Dot2
+  xpos -286
+  ypos -136
+ }
+ Transform {
+  translate {{parent.Transform1.translate.main} {parent.Transform1.translate.main}}
+  rotate {{parent.Transform1.rotate.main}}
+  scale {{parent.Transform1.scale.main}}
+  center {{parent.Transform1.center.main} {parent.Transform1.center.main}}
+  filter {{Transform1.filter}}
+  clamp {{parent.Transform1.clamp.main}}
+  black_outside {{parent.Transform1.black_outside.main}}
+  motionblur {{parent.Transform1.motionblur.main}}
+  shutter {{parent.Transform1.shutter.main}}
+  shutteroffset {{Transform1.shutteroffset}}
+  shuttercustomoffset {{parent.Transform1.shuttercustomoffset.main}}
+  name Transform2
+  selected true
+  xpos -320
+  ypos -72
+ }
+push $N2c972060
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge1
+  xpos -210
+  ypos -72
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge2
+  xpos -210
+  ypos -24
+ }
+set N2c972e20 [stack 0]
+ Dot {
+  name Dot1
+  xpos -270
+  ypos -21
+ }
+ Dot {
+  name Dot3
+  xpos -270
+  ypos 159
+ }
+push $N2c971610
+ Dot {
+  name Dot4
+  xpos -351
+  ypos 48
+ }
+set N2c973870 [stack 0]
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.red
+  from1 rgba.green
+  to1 rgba.green
+  name Copy2
+  xpos -385
+  ypos 144
+ }
+ IDistort {
+  channels none
+  name IDistort1
+  xpos -385
+  ypos 192
+ }
+push $N2c972e20
+push $N2c973870
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 forward.u
+  from1 rgba.green
+  to1 forward.v
+  name Copy1
+  xpos -210
+  ypos 33
+ }
+ IDistort {
+  uv forward
+  name IDistort2
+  xpos -210
+  ypos 88
+ }
+set N2c974630 [stack 0]
+ Remove {
+  channels none
+  name Remove2
+  xpos -210
+  ypos 124
+ }
+ Copy {
+  inputs 2
+  from0 -rgba.alpha
+  to0 -rgba.alpha
+  name Copy3
+  xpos -210
+  ypos 192
+ }
+set N2c974d10 [stack 0]
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  name Crop1
+  xpos -340
+  ypos 270
+ }
+push $N2c974d10
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -210
+  ypos 346
+  disable {{!parent.crop_1}}
+ }
+ Output {
+  name Output1
+  xpos -210
+  ypos 418
+ }
+push $N2c974630
+ Viewer {
+  input_process false
+  name Viewer1
+  xpos 70
+  ypos -9
+  hide_input true
+ }
+end_group
+Blur {
+ channels rgba
+ size 1
+ name Blur3
+ xpos -2273
+ ypos 1081
+}
+Dot {
+ name Dot3
+ xpos -2239
+ ypos 1330
+}
+set N2c975e40 [stack 0]
+Dot {
+ name Dot1
+ xpos -2239
+ ypos 1507
+}
+set N4ca14780 [stack 0]
+Expression {
+ expr3 (abs(((r-ov.r)+(g-ov.g)*((1-b)*ov.b)))-3)*10
+ name Expression3
+ xpos -2273
+ ypos 1563
+ addUserKnob {20 User}
+ addUserKnob {18 ov l overbend}
+ ov {0.9 0.9 1.9}
+}
+Clamp {
+ channels rgba
+ name Clamp1
+ xpos -2273
+ ypos 1588
+}
+push $N4ca14780
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.red
+ name Copy5
+ xpos -2136
+ ypos 1596
+}
+push $N2c975e40
+ColorBars {
+ inputs 0
+ name ColorBars1
+ xpos -1280
+ ypos 981
+}
+Reformat {
+ format "1024 1024 0 0 1024 1024 1 square_1K"
+ name Reformat2
+ xpos -1280
+ ypos 1053
+}
+Dot {
+ name Dot2
+ xpos -1246
+ ypos 1173
+}
+set N4ca16670 [stack 0]
+Dot {
+ name Dot4
+ xpos -1763
+ ypos 1173
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ from3 rgba.alpha
+ to3 rgba.alpha
+ name Copy3
+ xpos -1797
+ ypos 1309
+}
+Grade {
+ channels forward
+ name Grade1
+ label "play with refraction"
+ note_font_size 14
+ xpos -1797
+ ypos 1392
+}
+add_layer {fresnel fresnel.red fresnel.green fresnel.blue}
+Expression {
+ temp_name0 X
+ temp_expr0 (1-((forward.u+1)/2))*width
+ temp_name1 Y
+ temp_expr1 (1-((forward.v+1)/2))*height
+ expr0 r(X*abb.r,Y)
+ expr1 g(X*abb.g,Y)
+ expr2 b(X*abb.b,Y)
+ channel3 {fresnel.red -fresnel.green -fresnel.blue}
+ expr3 1-fresnel.z
+ name Expression2
+ label refraction
+ note_font_size 14
+ xpos -1797
+ ypos 1484
+ addUserKnob {20 User}
+ addUserKnob {18 abb l abberation R 0 10}
+ abb {1 1 1}
+}
+ShuffleCopy {
+ inputs 2
+ red blue
+ green blue
+ blue red
+ alpha blue
+ out fresnel
+ name ShuffleCopy3
+ xpos -1797
+ ypos 1602
+}
+Invert {
+ channels {fresnel.red fresnel.green -fresnel.blue}
+ name Invert2
+ xpos -1797
+ ypos 1654
+}
+Grade {
+ channels {-fresnel.red fresnel.green -fresnel.blue}
+ white 2
+ gamma 1.07
+ name "Defocus mask"
+ xpos -1797
+ ypos 1801
+}
+Defocus {
+ channels rgb
+ maskChannelInput fresnel.green
+ name Defocus1
+ xpos -1797
+ ypos 1843
+}
+Defocus {
+ defocus 0.2
+ name Defocus2
+ xpos -1797
+ ypos 2075
+}
+Grade {
+ channels {fresnel.red -fresnel.green -fresnel.blue}
+ multiply 1.8
+ gamma 0.354
+ black_clamp false
+ name "fresnel ammount"
+ xpos -1797
+ ypos 2282
+}
+Grade {
+ add 0.305
+ black_clamp false
+ maskChannelInput fresnel.red
+ name Grade6
+ xpos -1797
+ ypos 2318
+}
+Grade {
+ multiply 0
+ black_clamp false
+ maskChannelInput fresnel.blue
+ name overbend
+ xpos -1797
+ ypos 2564
+}
+Crop {
+ box {0 0 1024 1024}
+ name Crop1
+ xpos -1797
+ ypos 2745
+}
+Premult {
+ name Premult3
+ xpos -1797
+ ypos 2793
+}
+Dot {
+ name Dot5
+ xpos -1763
+ ypos 2827
+}
+push $N4ca16670
+Merge2 {
+ inputs 2
+ name Merge3
+ xpos -1280
+ ypos 2824
+}
+FrameHold {
+ first_frame 100
+ name FrameHold1
+ xpos -1280
+ ypos 2848
+}
+Viewer {
+ freezeGuiWhenPlayBack true
+ input_process false
+ name Viewer1
+ xpos 1170
+ ypos -9
+ hide_input true
+}

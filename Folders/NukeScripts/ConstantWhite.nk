@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Constant {
+ inputs 0
+ color 1
+ name Constant2
+ tile_color 0xffffffff
+ note_font "Bitstream Vera Sans Bold"
+ selected true
+ xpos -563
+ ypos 215
+ postage_stamp false
+}

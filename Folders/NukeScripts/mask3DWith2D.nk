@@ -1,0 +1,460 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+Camera2 {
+ inputs 0
+ translate {-1.375 0 2.890000105}
+ rotate {0 -28.94169034 0}
+ name Camera1
+ selected true
+ xpos -1100
+ ypos 110
+}
+set N1c8afc60 [stack 0]
+Dot {
+ name Dot1
+ selected true
+ xpos -1076
+ ypos 263
+}
+push $N1c8afc60
+push $cut_paste_input
+Roto {
+ curves {{{v x3f99999a} 
+  {f 0} 
+  {n 
+   {layer Root 
+    {f 512} 
+    {t x44800000 x44428000} 
+    {a} 
+    {curvegroup RectangleCusped2 512 bezier 
+     {{cc 
+       {f 8192} 
+       {p 
+        {} 
+        {x445b9ccb x43e3867d} 
+        {} 
+        {} 
+        {x4453e5f0 x43f873ed} 
+        {} 
+        {} 
+        {x4481b19a x441f3cc5} 
+        {} 
+        {} 
+        {x44858d07 x4414c60d} 
+        {}}} 
+      {cc 
+       {f 8192} 
+       {p 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {}}}} 
+     {t x44558000 x43ff0000} 
+     {a str 1 spx x44800000 spy x44428000 sb 1 tt x41100000}} 
+    {curvegroup RectangleCusped1 512 bezier 
+     {{cc 
+       {f 8192} 
+       {p 
+        {} 
+        {x4453474b x440e45c0} 
+        {} 
+        {} 
+        {x445a6b55 x441922bc} 
+        {} 
+        {} 
+        {x4485dc5b x43f1747f} 
+        {} 
+        {} 
+        {x44824a56 x43dbba89} 
+        {}}} 
+      {cc 
+       {f 8192} 
+       {p 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {} 
+        {}}}} 
+     {t x44558000 x43ff0000} 
+     {a str 1 spx x44800000 spy x44428000 sb 1 tt x41100000}} 
+    {curvegroup Ellipse4 512 bezier 
+     {{cc 
+       {f 8192} 
+       {p 
+        {xc1ee9640} 
+        {x448d4000 x44540000} 
+        {x41ee9640} 
+        {0 xc2002150} 
+        {x44940000 x44628000} 
+        {0 x42002150} 
+        {x41ee9640} 
+        {x448d4000 x44710000} 
+        {xc1ee9640} 
+        {0 x42002150} 
+        {x44868000 x44628000} 
+        {0 xc2002150}}} 
+      {cc 
+       {f 8192} 
+       {p 
+        {xc1ee9640} 
+        {} 
+        {x41ee9640} 
+        {0 xc2002150} 
+        {} 
+        {0 x42002150} 
+        {x41ee9640} 
+        {} 
+        {xc1ee9640} 
+        {0 x42002150} 
+        {} 
+        {0 xc2002150}}}} 
+     {t x448d4000 x44628000} 
+     {a str 1 spx x44800000 spy x44428000 sb 1 tt x40e00000}} 
+    {curvegroup Ellipse3 512 bezier 
+     {{cc 
+       {f 8192} 
+       {p 
+        {xc21f0ee0} 
+        {x44420000 x44540000} 
+        {x421f0ee0} 
+        {0 xc1f76c60} 
+        {x44540000 x44620000} 
+        {0 x41f76c60} 
+        {x421f0ee0} 
+        {x44420000 x44700000} 
+        {xc21f0ee0} 
+        {0 x41f76c60} 
+        {x44300000 x44620000} 
+        {0 xc1f76c60}}} 
+      {cc 
+       {f 8192} 
+       {p 
+        {xc21f0ee0} 
+        {} 
+        {x421f0ee0} 
+        {0 xc1f76c60} 
+        {} 
+        {0 x41f76c60} 
+        {x421f0ee0} 
+        {} 
+        {xc21f0ee0} 
+        {0 x41f76c60} 
+        {} 
+        {0 xc1f76c60}}}} 
+     {t x44420000 x44620000} 
+     {a str 1 spx x44800000 spy x44428000 sb 1 tt x40e00000}} 
+    {curvegroup Ellipse2 512 bezier 
+     {{cc 
+       {f 8192} 
+       {p 
+        {xc3947d06} 
+        {x44740002 x439cd996} 
+        {x43947d04} 
+        {0 xc36fdb78} 
+        {x44bd372b x443affff} 
+        {0 x436fdb74} 
+        {x43947d04} 
+        {x44740002 x4493c999} 
+        {xc3947d06} 
+        {0 x436fdb74} 
+        {x43db2358 x443affff} 
+        {0 xc36fdb78}}} 
+      {cc 
+       {f 8192} 
+       {p 
+        {xc3947d06} 
+        {} 
+        {x43947d04} 
+        {0 xc36fdb78} 
+        {} 
+        {0 x436fdb74} 
+        {x43947d04} 
+        {} 
+        {xc3947d06} 
+        {0 x436fdb74} 
+        {} 
+        {0 xc36fdb78}}}} 
+     {t x448b8000 x441c0000} 
+     {a r 0 g 0 b 0 a 0 str 1 spx x44800000 spy x44428000 sb 1 tt x40e00000}} 
+    {curvegroup Ellipse1 512 bezier 
+     {{cc 
+       {f 8192} 
+       {p 
+        {xc3a1d1c6} 
+        {x44738000 x436c0000} 
+        {x43a1d1c8} 
+        {0 xc38a1239} 
+        {x44c30000 x44380000} 
+        {0 x438a1238} 
+        {x43a1d1c8} 
+        {x44738000 x449a8000} 
+        {xc3a1d1c6} 
+        {0 x438a1238} 
+        {x43c20000 x44380000} 
+        {0 xc38a1239}}} 
+      {cc 
+       {f 8192} 
+       {p 
+        {xc3a1d1c6} 
+        {} 
+        {x43a1d1c8} 
+        {0 xc38a1239} 
+        {} 
+        {0 x438a1238} 
+        {x43a1d1c8} 
+        {} 
+        {xc3a1d1c6} 
+        {0 x438a1238} 
+        {} 
+        {0 xc38a1239}}}} 
+     {t x44738000 x44380000} 
+     {a str 1 spx x44800000 spy x44428000 sb 1 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 5 }
+  { createBSpline ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 6 }
+  { createEllipse ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped ro 0 go 0 bo 0 ao 0 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 9 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1024 778}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ view {}
+ motionblur_on true
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ createNewTrack {{-1} "-1\t(none)\t-1" "1000\tNew Track Layer\t1000"}
+ name Roto1
+ selected true
+ xpos -991
+ ypos -16
+ hide_input true
+}
+Shuffle {
+ red black
+ green black
+ blue black
+ name Shuffle2
+ tile_color 0xff000000
+ label "Black Alpha"
+ selected true
+ xpos -991
+ ypos 10
+}
+set N28799050 [stack 0]
+push $N28799050
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 mask.a
+ name Copy4
+ selected true
+ xpos -991
+ ypos 48
+}
+Grade {
+ channels mask
+ multiply 0
+ name Grade3
+ selected true
+ xpos -991
+ ypos 86
+}
+Project3D {
+ inputs 2
+ name Project3D1
+ selected true
+ xpos -991
+ ypos 130
+}
+Card2 {
+ rows 1
+ columns 1
+ translate {-0.150000006 0 0.5199999809}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card3
+ selected true
+ xpos -991
+ ypos 165
+}
+Dot {
+ name Dot2
+ selected true
+ xpos -957
+ ypos 203
+}
+CheckerBoard2 {
+ inputs 0
+ color1 0.5
+ color2 0.5
+ name CheckerBoard3
+ selected true
+ xpos -955
+ ypos -253
+ postage_stamp false
+}
+set N2879a4f0 [stack 0]
+push $N2879a4f0
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 mask.a
+ name Copy2
+ selected true
+ xpos -955
+ ypos -161
+}
+Card2 {
+ rows 1
+ columns 1
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ selected true
+ xpos -955
+ ypos -95
+}
+CheckerBoard2 {
+ inputs 0
+ color1 1
+ color2 1
+ name CheckerBoard1
+ selected true
+ xpos -818
+ ypos -252
+ postage_stamp false
+}
+set N2879c3e0 [stack 0]
+push $N2879c3e0
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 mask.a
+ name Copy3
+ selected true
+ xpos -818
+ ypos -206
+}
+Card2 {
+ rows 1
+ columns 1
+ translate {-0.1299999952 -0.01300000027 1}
+ uniform_scale 0.5
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card2
+ tile_color 0xffff00
+ selected true
+ xpos -818
+ ypos -149
+}
+MergeGeo {
+ inputs 2
+ name MergeGeo1
+ selected true
+ xpos -818
+ ypos -95
+}
+MergeGeo {
+ inputs 2
+ name MergeGeo2
+ selected true
+ xpos -818
+ ypos 199
+}
+push 0
+ScanlineRender {
+ inputs 3
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos -818
+ ypos 259
+}
+set N28ad5db0 [stack 0]
+push $N28ad5db0
+Copy {
+ inputs 2
+ from0 mask.a
+ to0 rgba.alpha
+ name Copy1
+ selected true
+ xpos -818
+ ypos 314
+}
+Dot {
+ name Dot8
+ selected true
+ xpos -784
+ ypos 405
+}
+ColorBars {
+ inputs 0
+ name ColorBars1
+ selected true
+ xpos -674
+ ypos 305
+}
+Merge2 {
+ inputs 2
+ name Merge1
+ selected true
+ xpos -674
+ ypos 401
+}

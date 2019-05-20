@@ -6,14 +6,10 @@ Updated on 2 april 2016
 mail - satheesrev@gmail.com
 modified by Alexey Kuchinski
 '''
-try:
-    from PySide import QtCore, QtGui
-except:
-    from PySide2 import QtCore, QtGui
 
-import nuke, nukescripts 
+import nuke, nukescripts
+from PySide2 import QtCore, QtGui 
 import getpass
-
 def saveImage ():
     user = getpass.getuser()
     defaultPath = "/mnt/user/share/"+user+"/"

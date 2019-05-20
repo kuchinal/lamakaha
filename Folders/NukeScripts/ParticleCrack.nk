@@ -1,0 +1,62 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+NoOp {
+ name ParticleCrack4
+ note_font_size 14
+ selected true
+ xpos 3424
+ ypos -45151
+ addUserKnob {20 Emitter}
+ addUserKnob {7 start_frame R 1000 2000}
+ addUserKnob {22 set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"start_frame\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n\n\n\n"}
+ addUserKnob {7 rate R 0 100}
+ addUserKnob {22 set_1 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"rate\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 selection_threshhold R 0 100}
+ addUserKnob {22 set_2 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"selection_threshhold\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 vertex_rate}
+ addUserKnob {22 set_3 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"vertex_rate\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 rate_variation}
+ addUserKnob {22 set_4 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"rate_variation\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 lifetime}
+ addUserKnob {22 set_5 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"lifetime\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 lifetime_variation}
+ addUserKnob {22 set_6 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"lifetime_variation\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 halflife}
+ addUserKnob {22 set_7 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"halflife\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 velocity}
+ velocity 10
+ addUserKnob {22 set_8 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"velocity\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 velocity_variation}
+ addUserKnob {22 set_9 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"velocity_variation\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 rotation_velocity}
+ addUserKnob {22 set_10 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"rotation_velocity\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 rotation_velocity_variation}
+ addUserKnob {22 set_11 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"rotation_velocity_variation\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 size}
+ addUserKnob {22 set_12 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"size\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 size_variation}
+ addUserKnob {22 set_13 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"size_variation\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 mass}
+ addUserKnob {22 set_18 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"mass\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 mass_variation}
+ addUserKnob {22 set_19 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"mass_variation\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 transfer_velocity}
+ addUserKnob {22 set_14 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"transfer_velocity\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 transfer_velocity_window}
+ addUserKnob {22 set_15 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"transfer_velocity_window\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 spread}
+ addUserKnob {22 set_16 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"spread\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {7 seed}
+ addUserKnob {22 set_17 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"seed\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {11 channels}
+ addUserKnob {20 Turbulence}
+ addUserKnob {13 strength}
+ strength {1 1 1}
+ addUserKnob {22 set_20 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"strength\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {13 scale}
+ scale {10 10 10}
+ addUserKnob {22 set_21 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"scale\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+ addUserKnob {13 offset}
+ addUserKnob {22 set_22 l set -STARTLINE T "n = nuke.thisNode()\nnode = n.dependencies()\[0]\n\nknob = \"offset\"\n\nv = n\[knob].value()\nnode\[knob].setValue(v)\n"}
+}
