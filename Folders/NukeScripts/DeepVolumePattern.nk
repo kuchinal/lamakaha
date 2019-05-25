@@ -1,0 +1,314 @@
+Group {
+ name DeepVolumePattern
+ tile_color 0x597fff
+ label "<font color=cyan>Deep Output</font>"
+ addUserKnob {20 tab_general l General}
+ addUserKnob {26 title_pattern l <b>PATTERN</b>}
+ addUserKnob {41 pattern_type l "pattern type" t "Select parttern type on world space position.\n\nfBm : octaves, lacunarity, gain, gamma setting available.\nturbulence : octaves, lacunarity, gain, gamma setting available.\nnoise : gain, gamma setting available.\nrandom : gain, gamma setting available.\nstripes : xyz can be enable separate. gain, gamma setting available.\nripple : gain, gamma setting available.\nrays : gain, gamma, number of rays setting available." T menu.pattern_type}
+ addUserKnob {13 n_translate l translate}
+ addUserKnob {13 n_scale l scale}
+ n_scale {1 1 1}
+ addUserKnob {7 n_uniform_scale l "uniform scale" R 0.01 10}
+ n_uniform_scale 1
+ addUserKnob {6 invert l "invert pattern" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {6 stripes_x l x +HIDDEN +STARTLINE}
+ stripes_x true
+ addUserKnob {6 stripes_y l y -STARTLINE +HIDDEN}
+ addUserKnob {6 stripes_z l z -STARTLINE +HIDDEN}
+ addUserKnob {3 octaves}
+ octaves 4
+ addUserKnob {7 lacunarity R 1 10}
+ lacunarity 2
+ addUserKnob {7 gain R 0.1 2}
+ gain 1
+ addUserKnob {7 gamma R 0 2}
+ gamma 1
+ addUserKnob {3 rays l "numbers of rays" +HIDDEN}
+ rays 10
+ addUserKnob {26 ""}
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {20 t_VERSION l Version}
+ addUserKnob {26 l_VERSION l <b>Version</b> T 1.9}
+ addUserKnob {26 l_DATE l "<b>Date Modified</b>" T 2019-05-14}
+ addUserKnob {26 l_CHANGELOG l <b>Changelog</b> T "1.9\n- 'DeepVolumeMatte'\n  fix when gizmo render on farm\n\n1.8\n- 'DeepVolumeMatte'\n  colorpicker mode will show the matte in\n  alpha channel.\n- 'DeepVolumeMatte'\n  when colorpicker mode is on,\n  output will switch to 2D image. Able to use\n  the matte on downstream without any\n  deep to 2D image convertion.\n  Label on the node will show the output\n  format."}
+ addUserKnob {26 l_DEV l "<b>Developed by</b>" T "<a href='https://facebook.com/MJTLab'><font color='orange'>Mark Joey Tang</font></a>"}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0xff
+  label "Dont touch"
+  note_font_size 42
+  xpos -724
+  ypos 105
+  bdwidth 254
+  bdheight 181
+ }
+ Input {
+  inputs 0
+  name deep
+  xpos 1
+  ypos 1
+ }
+ Dot {
+  name Dot1
+  xpos 35
+  ypos 81
+ }
+set N63db6a40 [stack 0]
+ DeepToImage {
+  name DeepToImage1
+  xpos -141
+  ypos 78
+ }
+add_layer {deepRawColor deepRawColor.red deepRawColor.green deepRawColor.blue deepRawColor.alpha}
+ AddChannels {
+  channels deepRawColor
+  name AddChannels1
+  xpos -141
+  ypos 135
+ }
+push $N63db6a40
+ DeepRecolor {
+  inputs 2
+  channels {{{parent.AddChannels1.channels}}}
+  name DeepRecolor1
+  xpos 1
+  ypos 135
+ }
+ DeepExpression {
+  chans0 deepRawColor
+  chans1 none
+  deepRawColor.red red
+  deepRawColor.green green
+  deepRawColor.blue blue
+  deepRawColor.alpha alpha
+  name DeepExpression4
+  label "store color"
+  xpos 1
+  ypos 212
+ }
+ Dot {
+  name Dot2
+  xpos 35
+  ypos 300
+ }
+set N63dc7210 [stack 0]
+ DeepExpression {
+  temp_name0 pnx
+  temp_expr0 "deepPosition.red * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.x])) + -\[value parent.n_translate.x]"
+  temp_name1 pny
+  temp_expr1 "deepPosition.green * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.y])) + -\[value parent.n_translate.y]"
+  temp_name2 pnz
+  temp_expr2 "deepPosition.blue * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.z])) + -\[value parent.n_translate.z]"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp( ( ( sin( atan(pnx, pnz) * \[value parent.rays] + atan(pnx, pny) * \[value parent.rays] + atan(pny, pnz) * \[value parent.rays] ) +1) /2 ) * \[value gain])"
+  name DeepExpression12
+  label rays
+  xpos 368
+  ypos 379
+ }
+push $N63dc7210
+ DeepExpression {
+  temp_name0 pnx
+  temp_expr0 "deepPosition.red * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.x])) + \[value parent.n_translate.x]"
+  temp_name1 pny
+  temp_expr1 "deepPosition.green * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.y])) + \[value parent.n_translate.y]"
+  temp_name2 pnz
+  temp_expr2 "deepPosition.blue * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.z])) + \[value parent.n_translate.z]"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp ( ( ( sin( sqrt( pow2(pnx) + pow2(pny) + pow2(pnz) ) ) +1) /2 ) * \[value gain] )"
+  name DeepExpression11
+  label ripple
+  xpos 246
+  ypos 382
+ }
+push $N63dc7210
+ DeepExpression {
+  temp_name0 pnx
+  temp_expr0 "\[value status_x] == 0 ? 0 : ( sin( deepPosition.red * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.x])) + \[value parent.n_translate.x] ) +1)/2"
+  temp_name1 pny
+  temp_expr1 "\[value status_y] == 0 ? 0 : ( sin( deepPosition.green * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.y])) + \[value parent.n_translate.y] ) +1) /2"
+  temp_name2 pnz
+  temp_expr2 "\[value status_z] == 0 ? 0 : ( sin( deepPosition.blue * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.z])) + \[value parent.n_translate.z] ) +1) /2"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "max( clamp( pnx * \[value gain] ), clamp( pny * \[value gain] ), clamp( pnz * \[value gain] ) )"
+  name DeepExpression9
+  label strip
+  xpos 122
+  ypos 383
+  addUserKnob {20 User}
+  addUserKnob {7 status_x}
+  status_x {{parent.stripes_x}}
+  addUserKnob {7 status_y}
+  status_y {{parent.stripes_y}}
+  addUserKnob {7 status_z}
+  status_z {{parent.stripes_z}}
+ }
+push $N63dc7210
+ DeepExpression {
+  temp_name0 pnx
+  temp_expr0 "deepPosition.red * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.x])) + \[value parent.n_translate.x]"
+  temp_name1 pny
+  temp_expr1 "deepPosition.green * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.y])) + \[value parent.n_translate.y]"
+  temp_name2 pnz
+  temp_expr2 "deepPosition.blue * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.z])) + \[value parent.n_translate.z]"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp( random(pnx, pny, pnz) * \[value gain] )"
+  name DeepExpression1
+  label random
+  xpos 1
+  ypos 386
+ }
+push $N63dc7210
+ DeepExpression {
+  temp_name0 pnx
+  temp_expr0 "deepPosition.red * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.x])) + \[value parent.n_translate.x]"
+  temp_name1 pny
+  temp_expr1 "deepPosition.green * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.y])) + \[value parent.n_translate.y]"
+  temp_name2 pnz
+  temp_expr2 "deepPosition.blue * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.z])) + \[value parent.n_translate.z]"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp( (noise(pnx, pny, pnz)+0.5) * \[value gain] )"
+  name DeepExpression2
+  label noise
+  xpos -125
+  ypos 385
+ }
+push $N63dc7210
+ DeepExpression {
+  temp_name0 pnx
+  temp_expr0 "deepPosition.red * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.x])) + \[value parent.n_translate.x]"
+  temp_name1 pny
+  temp_expr1 "deepPosition.green * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.y])) + \[value parent.n_translate.y]"
+  temp_name2 pnz
+  temp_expr2 "deepPosition.blue * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.z])) + \[value parent.n_translate.z]"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp( turbulence(pnx, pny, pnz, \[value octaves], \[value lacunarity], \[value gain]/2) )"
+  name DeepExpression6
+  label turbulence
+  xpos -239
+  ypos 384
+ }
+push $N63dc7210
+ DeepExpression {
+  temp_name0 pnx
+  temp_expr0 "deepPosition.red * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.x])) + \[value parent.n_translate.x]"
+  temp_name1 pny
+  temp_expr1 "deepPosition.green * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.y])) + \[value parent.n_translate.y]"
+  temp_name2 pnz
+  temp_expr2 "deepPosition.blue * (1/(\[value parent.n_uniform_scale]*\[value parent.n_scale.z])) + \[value parent.n_translate.z]"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp( fBm(pnx, pny, pnz, \[value octaves], \[value lacunarity], \[value gain]/2) )"
+  name DeepExpression8
+  label fBm
+  xpos -388
+  ypos 383
+ }
+ Switch {
+  inputs 7
+  which {{pattern_type}}
+  name Switch1
+  xpos 1
+  ypos 501
+ }
+ DeepExpression {
+  chans0 {rgba.red rgba.green rgba.blue -rgba.alpha}
+  chans1 none
+  rgba.red 1-red
+  rgba.green 1-green
+  rgba.blue 1-blue
+  name DeepExpression5
+  label invert
+  xpos 1
+  ypos 581
+  disable {{!invert}}
+ }
+ DeepColorCorrect2 {
+  gamma {{parent.gamma}}
+  name DeepColorCorrect1
+  xpos 1
+  ypos 669
+ }
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  chans1 none
+  rgba.red clamp(r)
+  name DeepExpression7
+  label clamp
+  xpos 1
+  ypos 749
+ }
+ DeepExpression {
+  chans0 alpha
+  chans1 none
+  rgba.alpha "( \[value mix] < 1 ? clamp(1-(((1-red)+0.001) * \[value mix])) : red ) * deepRawColor.alpha"
+  name DeepExpression3
+  label "shuffle to alpha"
+  selected true
+  xpos 1
+  ypos 837
+ }
+set N68e61f80 [stack 0]
+ DeepExpression {
+  chans0 rgb
+  chans1 none
+  rgba.red "deepRawColor.red * alpha"
+  rgba.green "deepRawColor.green * alpha"
+  rgba.blue "deepRawColor.blue * alpha"
+  name DeepExpression10
+  label "restore color"
+  xpos 1
+  ypos 925
+ }
+ DeepExpression {
+  chans0 deep
+  chans1 none
+  deep.front "alpha <= 0 ? -1 : deep.front"
+  deep.back "alpha <= 0 ? -1 : deep.back"
+  name DeepExpression14
+  label "alpha check"
+  xpos 1
+  ypos 1013
+ }
+ DeepCrop {
+  use_znear false
+  zfar 0
+  outside_zrange true
+  bbox {0 0 {input.width} {input.height}}
+  name DeepCrop1
+  label "remove garbage"
+  xpos 1
+  ypos 1101
+ }
+ Output {
+  name Output1
+  xpos 1
+  ypos 1189
+ }
+ NoOp {
+  inputs 0
+  name menu
+  knobChanged "\nthisGRP = nuke.thisGroup()\nif thisGRP\['pattern_type'].getValue() == 0 or thisGRP\['pattern_type'].getValue() == 1  :\n    thisGRP\['octaves'].setVisible(True)\n    thisGRP\['lacunarity'].setVisible(True)\nelse :\n    thisGRP\['octaves'].setVisible(False)\n    thisGRP\['lacunarity'].setVisible(False)\n\nif thisGRP\['pattern_type'].getValue() == 4 :\n    thisGRP\['stripes_x'].setVisible(True)\n    thisGRP\['stripes_y'].setVisible(True)\n    thisGRP\['stripes_z'].setVisible(True)\nelse :\n    thisGRP\['stripes_x'].setVisible(False)\n    thisGRP\['stripes_y'].setVisible(False)\n    thisGRP\['stripes_z'].setVisible(False)\n\nif thisGRP\['pattern_type'].getValue() == 6 :\n    thisGRP\['rays'].setVisible(True)\nelse :\n    thisGRP\['rays'].setVisible(False)\n"
+  xpos -643
+  ypos 201
+  addUserKnob {20 User}
+  addUserKnob {4 pattern_type l "pattern type" M {fBm turbulence noise random stripes ripple rays ""}}
+ }
+push $N68e61f80
+ Viewer {
+  frame_range 1-100
+  name Viewer1
+  xpos 143
+  ypos 814
+ }
+end_group
