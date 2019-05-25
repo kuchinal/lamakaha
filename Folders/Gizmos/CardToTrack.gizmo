@@ -62,6 +62,18 @@ Gizmo {
  addUserKnob {26 hhelp l "" +STARTLINE T "---------------------------------------------------\nStep 1\n\nplease find some feature on the screen, feature you can see on the other frames as well.\nnow position the picker on this feature and press \"Set\" button\n\nthe reference frame is set, yo should see now the grid centering on the \"picker\"\n\nthere is a chance that \"grid\" will be very small or very big depends on the size of your scene, feel free to adjust it's size with the u_scale knob.\n\nnow you ready for the next step\n\n---------------------------------------------------\nStep 2\n\nLet's find exact position in 3d space\n\nstart advance few frames, you should see that a grid is not fixed anymore to your reference feature, from the moment you noticing it is happening adjust \"Z\" knob to bring the \"grid\" back to the place it was. already after first adjustment you will see that grid is sticking well to the feature. Now you can go to some other frame and refine the position again if needed\n\nTipp:\nit is possible that already after one or two frames of advancement your grid will disappear it can happen because of the size of your scene. just play with \"Z\" slider till you will bring the \"grid\" back to the screen. it is possible that you will have to go to negative \nvalues as well.\n\n---------------------------------------------------\nStep 3\n\nthis will create an axis in exact 3D position you found\nplease adjust (if needed)\nrotation of the card to match exact perspective you want\n\nTipp :\nadjusting \"scale\" and \"u_scale\":\nbe carefull when scaling up the card!!! from the moment one of the corners of the \"grid\" is passing the origin of the Camera the calculation will fail. So as a good practice leave your \"grid\" not too big it will not matter for final calculation since it still will lay on the same plane.\n\n\n---------------------------------------------------\nStep 4\n\nButton \"Go\"  will create for you few nodes\n\n1. CProject - basically it is a cornerPin node with steroids it allowes to you very easy set Reference point for your \"projection\", stabilize, crop. all in one\n2. CornerPin with a transformation baked in the \"matrix\" knob - usually i am using it to copy to GridWarp or SplineWarp\n3. Roto - the node i am using the most.\nthe transformation is baked into the root matrix.\nso just pick the frame create the rotoshape and enjoy!\n"}
  addUserKnob {26 credits l "" +STARTLINE T "CardToTrack  v4.0  ||  by Alexey Kuchinski  |  lamakaha@gmail.com  |  7/2017"}
 }
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x546b3d01
+  note_font "Helvetica bold"
+  note_font_size 100
+  xpos -1719
+  ypos 497
+  bookmark false
+  bdwidth 287
+  bdheight 334
+ }
  Input {
   inputs 0
   name Extra
@@ -77,7 +89,7 @@ Gizmo {
 set N771aac0 [stack 0]
  Dot {
   name Dot25
-  xpos -1648
+  xpos -1675
   ypos 65
  }
  DeepExpression {
@@ -88,8 +100,8 @@ set N771aac0 [stack 0]
   rgba.blue -deep.front
   name DeepExpression6
   label "initial setup"
-  xpos -1682
-  ypos 597
+  xpos -1709
+  ypos 607
   addUserKnob {20 User}
   addUserKnob {7 hratio}
   hratio {{"\[value cam_data.haperture] / \[value cam_data.focal]"}}
@@ -102,18 +114,18 @@ set N771aac0 [stack 0]
   rgba.blue "(r * \[value cam_data.world_matrix.8] + g * \[value cam_data.world_matrix.9] + b * \[value cam_data.world_matrix.10]) + \[value cam_data.world_matrix.11]"
   name deepCT_00
   label camera
-  xpos -1682
-  ypos 668
+  xpos -1709
+  ypos 694
   addUserKnob {20 User}
  }
  DeepToImage {
   name DeepToImage3
-  xpos -1682
-  ypos 704
+  xpos -1709
+  ypos 756
  }
  Dot {
   name Dot26
-  xpos -1648
+  xpos -1675
   ypos 1840
  }
 push $N771aac0
@@ -124,14 +136,9 @@ push $N771aac0
  }
 set Nea7ed10 [stack 0]
  Dot {
-  name Dot13
-  xpos -1415
-  ypos 644
- }
- Dot {
   name Dot12
   xpos -1415
-  ypos 692
+  ypos 725
  }
 set Nd2100f0 [stack 0]
  Dot {
@@ -399,11 +406,6 @@ push $N8df67f0
   ypos 983
  }
 push $Nd2100f0
- Dot {
-  name Dot23
-  xpos -1064
-  ypos 745
- }
  Constant {
   inputs 0
   format "512 512 0 0 512 512 1 square_512"
@@ -999,7 +1001,6 @@ push 0
   display off
   selectable false
   name Perspective
-  selected true
   xpos -613
   ypos 32
  }
@@ -1251,6 +1252,25 @@ push $Na6f0550
   xpos 113
   ypos 2523
  }
+push $N8e63a40
+ Viewer {
+  frame 40
+  frame_range 1-100
+  name Viewer1
+  xpos -260
+  ypos -9
+  hide_input true
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  tile_color 0xffffffff
+  label "<b>Mark Joey Tang Deep2VP                ."
+  note_font "Helvetica bold"
+  note_font_size 20
+  xpos -1719
+  ypos 459
+ }
  Camera {
   inputs 0
   display off
@@ -1267,17 +1287,8 @@ push $Na6f0550
   focal {{"\[topnode input1].focal"}}
   haperture {{"\[topnode input1].haperture"}}
   name cam_data
-  xpos -1531
-  ypos 583
- }
-push $N8e63a40
- Viewer {
-  frame 40
-  frame_range 1-100
-  name Viewer1
   selected true
-  xpos -260
-  ypos -9
-  hide_input true
+  xpos -1565
+  ypos 593
  }
 end_group
