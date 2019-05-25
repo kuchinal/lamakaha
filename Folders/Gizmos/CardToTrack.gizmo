@@ -1,6 +1,7 @@
 #! /usr/local/Nuke11.3v4/libnuke-11.3.4.so -nx
 version 11.3 v4
-Gizmo {
+Group {
+ name CardToTrack
  inputs 3
  onCreate "nuke.thisNode()\['picker'].setValue(\[nuke.toNode(\"root\")\['format'].value().width()/2,nuke.toNode(\"root\")\['format'].value().height()/2])"
  knobChanged "nn = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\n\nif kn == \"extraStuff\":\n    \n    if nn\['extraHelper'].value() in \[0,1,2,]:\n        nn\[\"setGroup\"].clearFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].setFlag(1)\n        #nn\[\"Zfind\"].setValue(100)\n    elif nn\['extraHelper'].value() in \[3,4]:\n        nn\[\"setGroup\"].setFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].clearFlag(1)\n    \n    \n    \n"
