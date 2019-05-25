@@ -1,11 +1,11 @@
 #! /usr/local/Nuke11.3v4/libnuke-11.3.4.so -nx
-Group {
- name CardToTrack
+version 11.3 v4
+Gizmo {
  inputs 3
  knobChanged "nn = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\n\nif kn == \"extraStuff\":\n    \n    if nn\['extraHelper'].value() in \[0,1,2,]:\n        nn\[\"setGroup\"].clearFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].setFlag(1)\n        nn\[\"Zfind\"].setValue(100)\n    elif nn\['extraHelper'].value() in \[3,4]:\n        nn\[\"setGroup\"].setFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].clearFlag(1)\n    \n    \n    \n"
  tile_color 0x5236ff
  gl_color 0xff0000ff
- note_font "DejaVu Sans Bold Bold Bold Bold"
+ note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold"
  note_font_size 14
  note_font_color 0xff
  addUserKnob {20 User l CardToTrack}
@@ -34,6 +34,7 @@ Group {
  findZ 0
  addUserKnob {26 d l "<b>2. " t "Second step help us to find exact position in 3d space\n\nstart advance few frames, you should see that a grid is not fixed anymore to your reference feature, from the moment you noticing it is happening adjust \"Z\" knob to bring the \"grid\" back to the place it was. already after first adjustment you will see that grid is sticking well to the feature. Now you can go to some other frame and refine the position again if needed\n\nTipp:\nit is possible that already after one or two frames of advancement your grid will disappear it can happen because of the size of your scene. just play with \"Z\" slider till you will bring the \"grid\" back to the screen. it is possible that you will have to go to negative values as well." T "go to some other frame and adjust Z."}
  addUserKnob {7 Zfind l Z t "Second step help us to find exact position in 3d space\n\nstart advance few frames, you should see that a grid is not fixed anymore to your reference feature, from the moment you noticing it is happening adjust \"Z\" knob to bring the \"grid\" back to the place it was. already after first adjustment you will see that grid is sticking well to the feature. Now you can go to some other frame and refine the position again if needed.\nonce you happy with the result\npress \"Happy\" button!!!\n\nTipp:\nit is possible that already after one or two frames of advancement your grid will disappear it can happen because of the size of your scene. just play with \"Z\" slider till you will bring the \"grid\" back to the screen. it is possible that you will have to go to negative values as well." R -100 100}
+ Zfind 100
  addUserKnob {22 Stabilize -STARTLINE T "\n\n\nnode = nuke.thisNode() \nt = node\['S']\n\nif t.value() == 0:\n   nuke.thisKnob().setLabel('<font color=\"Red\"><b>Stabilized')\n   t.setValue(1)\n   nuke.toNode(\"StabFrameHold\")\['disable'].setValue(0)\n   nuke.toNode(\"StabFrameHold\")\['first_frame'].setValue(node\['refFrame'].value())\n   nuke.toNode(\"StabSwitch\")\['disable'].setValue(0)\nelse:\n   nuke.thisKnob().setLabel('Stabilize')\n   t.setValue(0)\n   nuke.toNode(\"StabFrameHold\")\['disable'].setValue(1)\n   nuke.toNode(\"StabSwitch\")\['disable'].setValue(1)"}
  addUserKnob {26 s l <b>3. t "this will create an axis in exact 3D position you found\nplease adjust (if needed)\nrotation of the card to match exact perspective you want\n\nTipp :\nadjusting \"scale\" and \"u_scale\":\nbe carefull when scaling up the card!!! from the moment one of the corners of the \"grid\" is passing the origin of the Camera the calculation will fail. So as a good practice leave your \"grid\" not too big it will not matter for final calculation since it still will lay on the same plane.\n\n" T "Happy with Z? Press \"Happy\" button and adjust perspective."}
  addUserKnob {22 Adjust l Happy!!! t "this will create an axis in exact 3D position you found\nplease adjust (if needed)\nrotation of the card to match exact perspective you want\n\nTipp :\nadjusting \"scale\" and \"u_scale\":\nbe carefull when scaling up the card!!! from the moment one of the corners of the \"grid\" is passing the origin of the Camera the calculation will fail. So as a good practice leave your \"grid\" not too big it will not matter for final calculation since it still will lay on the same plane.\n\n" T "\n\ndef consolidateAnimatedNodeTransforms():\n    # This is based on Ivan B's consolidateNodeTransforms().\n    # Added support for animated Axis/Camera nodes. Also, if it's\n    # a Camera being concatenated, then projection settings get copied.\n    # -Ean C 24/Feb/2011\n    import math\n    import nuke\n    axisNode = nuke.toNode('Z_finder')\n    m = nuke.math.Matrix4()\n\n    nuke.toNode(\"Switch\")\['which'].setValue(1)\n    n = nuke.toNode('Perspective')\n    n\['scaling'].setExpression('curve')\n    n\['rotate'].setExpression('curve')\n    n\['translate'].setExpression('curve')\n\n    first_frame_v = nuke.root()\['first_frame'].value()\n    last_frame_v = nuke.root()\['last_frame'].value()\n    scale_anim = n\['scaling'].animations()\n    rotate_anim = n\['rotate'].animations()\n    translate_anim = n\['translate'].animations()\n\n    for i in range(int(first_frame_v), int(last_frame_v+1)):\n        k = axisNode\['world_matrix']\n        k_time_aware = axisNode\['world_matrix'].getValueAt(i)\n        for y in range(k.height()):\n            for x in range(k.width()):\n                m\[x+(y*k.width())] = k_time_aware\[y + k.width()*x]\n            transM =nuke.math.Matrix4(m)\n            transM.translationOnly()\n            rotM = nuke.math.Matrix4(m)\n            rotM.rotationOnly()\n            scaleM = nuke.math.Matrix4(m)\n            scaleM.scaleOnly()\n            scale = (scaleM.xAxis().x, scaleM.yAxis().y, scaleM.zAxis().z)\n            rot = rotM.rotationsZXY()\n            rotDegrees = ( math.degrees(rot\[0]), math.degrees(rot\[1]), math.degrees(rot\[2]) )\n            trans = (transM\[12], transM\[13], transM\[14])\n\n            for s in range(3):\n                scale_anim\[s].setKey(i, scale\[s])\n                rotate_anim\[s].setKey(i, rotDegrees\[s])\n                translate_anim\[s].setKey(i, trans\[s])\n    n\['translate'].clearAnimated()\n    n\['rotate'].clearAnimated()\n    n\['scaling'].clearAnimated()\n    n\['uniform_scale'].setValue(nuke.toNode(\"Card1\")\['uniform_scale'].value())\n    #nuke.show((n), True)\n    n.setSelected(True)\n    r=nuke.toNode(\"look_at_Axis\")\n    r.setSelected(False)\n    r.hideControlPanel()\t\t\t\nconsolidateAnimatedNodeTransforms()\n\na=nuke.thisNode()\nif a\['S'].value() == 1:\n    a\['Stabilize'].execute()\n\nn=a\nif n\['extraHelper'].value() in \[0,1,2]:\n    n\['findZ'].setFlag(1)\n    n\['happyGroup'].clearFlag(1)\n    n\['goGroup'].clearFlag(1)" +STARTLINE}
@@ -50,7 +51,7 @@ Group {
  addUserKnob {20 goGroup l "Create Nodes" n 1}
  goGroup 0
  addUserKnob {26 r l <b>4. t "this little fellow will create for you three nodes\n\n1. CProject - basically it is a cornerPin node with steroids it allowes to you very easy set Reference point for your \"projection\", stabilize, crop. all in one\n2. CornerPin with a transformation baked in the \"matrix\" knob - usually i am using it to copy to GridWarp or SplineWarp\n3. Roto - the node i am using the most.\nthe transformation is baked into the root matrix.\nso just pick the frame create the rotoshape and enjoy!" T "Time to create our Nodes!"}
- addUserKnob {22 C2T l <b>-----------------------GO!----------------------- t "this little fellow will create for you three nodes\n\n1. CProject - basically it is a cornerPin node with steroids it allowes to you very easy set Reference point for your \"projection\", stabilize, crop. all in one\n2. CornerPin with a transformation baked in the \"matrix\" knob - usually i am using it to copy to GridWarp or SplineWarp\n3. Roto - the node i am using the most.\nthe transformation is baked into the root matrix.\nso just pick the frame create the rotoshape and enjoy!" T "\n\na=nuke.thisNode()\n\nif a\['S'].value() == 1:\n    a\['Stabilize'].execute()\n\na.begin()\nx=int(a\['xpos'].value())\ny=int(a\['ypos'].value())\np = nuke.toNode(\"Perspective\")\nt=p\['translate'].value()\nr=p\['rotate'].value()\ns=p\['scaling'].value()\nus=p\['uniform_scale'].value()\nnuke.toNode(\"Switch\")\['which'].setValue(1)\na.end()\n\n\nfor node in nuke.allNodes():\n    node.setSelected(False)\na.input(1).setSelected(True)\na.input(0).setSelected(True)\n\nif a\['extraHelper'].value()==3:\n    a.input(2).setSelected(True)\n    \n#Axises case\nif a\['extraHelper'].value()==4:\n    #a.input(2).setSelected(True)\n\n\n    import math\n    import nuke\n    \n    axisNode = a.input(2)\n    nuke.thisGroup().end()\n    m = nuke.math.Matrix4()\n    \n    n = nuke.nodes.Card2()\n    n\['scaling'].setExpression('curve')\n    n\['rotate'].setExpression('curve')\n    n\['translate'].setExpression('curve')\n    n\['name'].setValue(\"consolidate of \"+axisNode.name())\n    n\['xpos'].setValue(int(axisNode\['xpos'].value()))\n    n\['ypos'].setValue(int(axisNode\['ypos'].value()+50))\n    \n    first_frame_v = nuke.root()\['first_frame'].value()\n    last_frame_v = nuke.root()\['last_frame'].value()\n    \n    scale_anim = n\['scaling'].animations()\n    rotate_anim = n\['rotate'].animations()\n    translate_anim = n\['translate'].animations()\n    \n    for i in range(int(first_frame_v), int(last_frame_v+1)):\n    \n        k = axisNode\['world_matrix']\n        k_time_aware = axisNode\['world_matrix'].getValueAt(i)\n    \n    \n        for y in range(k.height()):\n            for x in range(k.width()):\n                m\[x+(y*k.width())] = k_time_aware\[y + k.width()*x]\n    \n    \n            transM =nuke.math.Matrix4(m)\n            transM.translationOnly()\n            rotM = nuke.math.Matrix4(m)\n            rotM.rotationOnly()\n            scaleM = nuke.math.Matrix4(m)\n            scaleM.scaleOnly()\n    \n            scale = (scaleM.xAxis().x, scaleM.yAxis().y, scaleM.zAxis().z)\n    \n            rot = rotM.rotationsZXY()\n            rotDegrees = ( math.degrees(rot\[0]), math.degrees(rot\[1]), math.degrees(rot\[2]) )\n    \n    \n            trans = (transM\[12], transM\[13], transM\[14])\n    \n            for s in range(3):\n                scale_anim\[s].setKey(i, scale\[s])\n                rotate_anim\[s].setKey(i, rotDegrees\[s])\n                translate_anim\[s].setKey(i, trans\[s])\n    \n    a.input(1).setSelected(True)\n    a.input(0).setSelected(True) \n    n.setSelected(True)\n    a.setInput(2,n)\n            \n            \n            \nelse:\n    n = nuke.nodes.Card2()\n    n.setXYpos(x,y+100)\n    n\['translate'].setValue(t)\n    n\['rotate'].setValue(r)\n    n\['scaling'].setValue(s)\n    n\['uniform_scale'].setValue(us)\n    n.setSelected(True)\n\nwith nuke.Root():\n    #C2T new\n    import thread, threading, time, nuke, math, nukescripts\n\n    def execRC(first,last):\n        runMe = True\n        while runMe == True:\n            nuke.execute('r1',first,last)  \n            nuke.execute('r2',first,last) \n            nuke.execute('r3',first,last) \n            nuke.execute('r4',first,last) \n            stop_event.set()\n            runMe = False\n            print 'reconcile done'\n            break\n\n    def getCamera():\n        n = a.input(1) \n        topnode_name = nuke.tcl(\"full_name \[topnode %s]\" % n.name()) \n        topnode = nuke.toNode(topnode_name)\n        print topnode\['name'].value()\n        cam = topnode\n        #cam = a.input(1)\n        return cam\n\n\n\n    def BGdetect():\n        for n in nuke.selectedNodes():\n            #if 'format' in n.knobs():\n            if 'xform_order' not in n.knobs():\n                Name = n.name()\n                Width = n.width()\n                Height = n.height()\n                Aspect = n.pixelAspect()\n                form = str(Width)+\" \"+str(Height)+\" \"+str(Aspect)\n                print 'format selected:'+\" \"+form\n                \n                bg = nuke.nodes.Constant(postage_stamp = False)\n                bg\['format'].setValue(nuke.addFormat(form))\n                return bg\n        #no format found ...\n        \n        #bg = nuke.createNode('Constant')\n        #bg = nuke.nodes.Constant(postage_stamp = False)\n        #return bg\n            \n    def C2T(dialog):\n\n\n        #card\n        card = None\n        for n in nuke.selectedNodes():\n            if \"Card\" in n.Class() or \"Axis\" in n.Class():\n                card = n\n                break\n        if card == None:\n            nuke.message('no card selected?')\n            return\n\n\n            \n            \n        # initialize tool values for auto-creation\n        label = card\['label'].value()\n        ref = int(nuke.frame())\n        first = int(nuke.Root().knob('first_frame').getValue())\n        last = int(nuke.Root().knob('last_frame').getValue())\n        bg = BGdetect() \n        cam = getCamera()\n        rootAspect = nuke.Root()\['format'].value().pixelAspect()\n        x = card.xpos() \n        y = card.ypos()\n        \n        bg.setXYpos(x,y+50)\n        \n        if dialog == True:\n            # ask for tool values\n            \n            # all cams\n            \n\n            \n            #bg, info only. will be determined by selected node - if any ..\n\n            #formatPrint = form\n\n            #panel\n            panel = nuke.Panel(\"C2T\")\n            panel.addSingleLineInput(\"label:\", card\['label'].value())\n            panel.addSingleLineInput(\"range:\", str(first)+\"-\"+str(last))\n            panel.addSingleLineInput(\"ref frame:\", str(ref))\n            #panel.addEnumerationPulldown(\"camera:\", camListPrint)\n            #panel.addSingleLineInput(\"format:\", formatPrint)\n            if label == '':\n                panel.addBooleanCheckBox('reverse label', True)\n                \n            #panel.show()\n            \n            if panel.show():\n                first = int(panel.value(\"range:\").split(\"-\")\[0])\n                last = int(panel.value(\"range:\").split(\"-\")\[1])\n                ref = int(panel.value(\"ref frame:\"))\n                #cam = nuke.toNode(panel.value(\"camera:\"))\n                label = panel.value(\"label:\")\n                # reverse label\n                if panel.value(\"reverse label\") == True:\n                    card\['label'].setValue(panel.value(\"label:\"))\n            else:\n                nuke.message('canceled')\n                nuke.delete(bg) # clean the mess up\n                return\n        else:\n            print 'no dialog, use auto-created input values'\n        \n        # labels are usefull!!\n        if label == '':\n            panel = nuke.Panel(\"C2T label\")\n            panel.addSingleLineInput(\"label:\", '')\n            panel.addBooleanCheckBox('reverse label', True)\n            if panel.show():\n                label = panel.value(\"label:\")\n                if panel.value(\"reverse label\") == True:\n                    card\['label'].setValue(panel.value(\"label:\"))\n                else:\n                    nuke.message('no label - no roto!')\n                    nuke.delete(bg) # clean the mess up\n                    return\n            else:\n                return\n        print '########'\n        print 'first', first\n        print 'last', last\n        print 'ref', ref\n        #print 'bg', form\n        print 'cam', cam.name()\n        print 'card', card.name()\n        print 'label', label\n        print '########' \n        \n        # create master axis and corner slaves\n        \n        aM = nuke.nodes.Axis2(name = 'aM', xform_order = 3, xpos = x, ypos = y+50)\n        uscale = card\['uniform_scale'].value()\n        scalex = card\['scaling'].value(0)\n        scaley = card\['scaling'].value(1)\n        \n        if card\['translate'].isAnimated() is True:\n            aM\['translate'].copyAnimations(card\['translate'].animations())\n        else:\n            aM\['translate'].setValue(card\['translate'].value())\n        \n        if card\['rotate'].isAnimated() is True:\n            aM\['rotate'].copyAnimations(card\['rotate'].animations())\n        else:\n            aM\['rotate'].setValue(card\['rotate'].value())\n            \n            \n        # slaves\n        a1 = nuke.nodes.Axis2(name = 'a1', xform_order = 1, xpos = x, ypos = y+50)\n        a2 = nuke.nodes.Axis2(name = 'a2', xform_order = 1, xpos = x, ypos = y+50)\n        a3 = nuke.nodes.Axis2(name = 'a3', xform_order = 1, xpos = x, ypos = y+50)\n        a4 = nuke.nodes.Axis2(name = 'a4', xform_order = 1, xpos = x, ypos = y+50)\n        \n        a1\['translate'].setValue(\[-0.5*uscale*scalex,rootAspect*-0.5*uscale*scaley,0])\n        a2\['translate'].setValue(\[0.5*uscale*scalex,rootAspect*-0.5*uscale*scaley,0])\n        a3\['translate'].setValue(\[0.5*uscale*scalex,rootAspect*0.5*uscale*scaley,0])\n        a4\['translate'].setValue(\[-0.5*uscale*scalex,rootAspect*0.5*uscale*scaley,0])\n        \n        aL = \[a1,a2,a3,a4]\n        \n        for a in aL:\n            a.setInput(0,aM)\n\n        # reconcile\n        r1 = nuke.nodes.Reconcile3D(name = 'r1', xpos = x, ypos = y+50)\n        r2 = nuke.nodes.Reconcile3D(name = 'r2', xpos = x, ypos = y+50)\n        r3 = nuke.nodes.Reconcile3D(name = 'r3', xpos = x, ypos = y+50)\n        r4 = nuke.nodes.Reconcile3D(name = 'r4', xpos = x, ypos = y+50)\n        \n        rL = \[r1,r2,r3,r4]\n        \n        for r in rL:\n            r.setInput(2,aL\[rL.index(r)])\n            r.setInput(1,cam)\n            r.setInput(0,bg)\n            \n        # run with threading\n        global stop_event \n        stop_event = threading.Event()\n        threading.Thread(target=execRC, kwargs=dict(first=first,last=last)).start() \n        while not stop_event.is_set():\n            time.sleep(0.1)\n\n        problem = 0\n        import math\n        timeline = \[\"beginning\",\"end\"]#######looping to fix stuff before and after ref frame\n        for side in timeline:##########################################################################################################: Fixing the curve###############################\n            if side == \"beginning\":\n                firstT = first\n                lastT = ref\n            if side == \"end\":\n                firstT = ref\n                lastT = last\n\n            for one in rL:########fixing stuff\n                curveXUp = 0\n                curveXDown = 0\n                curveYUp = 0\n                curveYDown = 0\n                fuckedFrames = \[]\n                k = one\[\"output\"]\n                valsx = \[];valSortx =\[]\n                valsy = \[];valSorty =\[]\n                for i in range(firstT,lastT+1):\n                    valsx.append(k.valueAt(i,0))\n                    valSortx.append(k.valueAt(i,0))\n                    valsy.append(k.valueAt(i,1))\n                    valSorty.append(k.valueAt(i,1))\n                valSortx.sort()\n                valSorty.sort()\n                minX = valSortx\[0]\n                maxX = valSortx\[-1]\n                minY = valSorty\[0]\n                maxY = valSorty\[-1]\n                if math.fabs(valsx.index(maxX)-valsx.index(minX)) == 1:\n                    problem = 1\n        if problem == 1:\n            if nuke.ask(\"Perspective problem detected! would you like to fix it? \\n your card did pass the Camera center, this causes the track to break, i will try to fix the problem. if my fix will not succeed you should use a bit smaller card so corners of the card will not cross the camera so fast.\"):\n                problem = 0\n                import math\n                timeline = \[\"beginning\",\"end\"]#######looping to fix stuff before and after ref frame\n                lastB = last\n                firstB = first\n                for side in timeline:##########################################################################################################: Fixing the curve###############################\n                    if side == \"beginning\":\n                        last = ref\n                    if side == \"end\":\n                        first = ref\n                        last = lastB\n\n                    for one in rL:########fixing stuff\n                        curveXUp = 0\n                        curveXDown = 0\n                        curveYUp = 0\n                        curveYDown = 0\n                        fuckedFrames = \[]\n                        k = one\[\"output\"]\n                        valsx = \[];valSortx =\[]\n                        valsy = \[];valSorty =\[]\n                        for i in range(first,last+1):\n                            valsx.append(k.valueAt(i,0))\n                            valSortx.append(k.valueAt(i,0))\n                            valsy.append(k.valueAt(i,1))\n                            valSorty.append(k.valueAt(i,1))\n                        valSortx.sort()\n                        valSorty.sort()\n                        minX = valSortx\[0]\n                        maxX = valSortx\[-1]\n                        minY = valSorty\[0]\n                        maxY = valSorty\[-1]\n                        if math.fabs(valsx.index(maxX)-valsx.index(minX)) == 1:\n                            problem = 1\n                            #print \"minX \",minX,\"maxX\",maxX,\"minY\",minY,\"maxY \",maxY\n                            #message = \"your card did pass the Camera center, this causes the track to break, i tried to fix the problem. if my fix did not succeed you should use a bit smaller card so corners of the card will not cross the camera so fast.\"\n                            if valsx.index(maxX)-valsx.index(minX) < 0:    ###############checking if the curve going up or down\n                                curveXUp = 1\n                            else:\n                                curveXDown = 1\n                            if valsy.index(maxY)-valsy.index(minY) < 0:    ###############checking if the curve going up or down\n                                curveYUp = 1\n                            else:\n                                curveYDown = 1\n                            if valsx.index(maxX)+first > ref:                                  ##### kill tail X\n                                if curveXDown == 1: ##### curve X is going down####################################################################################FIXEDforEnd\n                                    lastGoodX= k.valueAt(valsx.index(minX)+first,0)\n                                    prelastGoodX= k.valueAt(valsx.index(minX)+first-1,0)\n                                    diffX= abs(lastGoodX) - abs(prelastGoodX)\n                                    offsetX = abs(lastGoodX)+maxX+diffX*2\n                                    for i in range(valsx.index(maxX)+first,last+1):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val-offsetX,i,0)\n                                if curveXUp == 1: ##### curve X is going up####################################################################################FIXEDforEnd\n                                    print \"up!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\"\n                                    lastGoodX = k.valueAt(valsx.index(maxX)+first,0) \n                                    prelastGoodX= k.valueAt(valsx.index(maxX)+first-1,0) \n                                    diffX= abs(lastGoodX)- abs(prelastGoodX)\n                                    offsetX= maxX+abs(minX)+diffX*2\n                                    for i in range(valsx.index(minX)+first,last+1):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val+offsetX,i,0)\n                            if valsy.index(maxY)+first > ref:                                  ##### kill tail Y\n                                if curveYDown == 1: ##### curve Y is going down#####################################################################################FIXEDforEnd\n                                    lastGoodY= k.valueAt(valsy.index(minY)+first,1)\n                                    prelastGoodY= k.valueAt(valsy.index(minY)+first-1,1)\n                                    diffY= abs(lastGoodY) - abs(prelastGoodY) \n                                    offsetY = abs(lastGoodY)+maxY+diffY*2\n                                    for i in range(valsy.index(maxY)+first,last+1):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val-offsetY,i,1)\n                                if curveYUp == 1: ##### curve Y is going up####################################################################################FIXEDforEnd\n                                    lastGoodY = k.valueAt(valsy.index(maxY)+first,1) \n                                    prelastGoodY= k.valueAt(valsy.index(maxY)+first-1,1) \n                                    diffY=abs(lastGoodY) - abs(prelastGoodY) \n                                    offsetY= maxY+abs(minY)+diffY*2\n                                    for i in range(valsy.index(minY)+first,last+1):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val+offsetY,i,1)\n                            if valsx.index(maxX)+first < ref:                                  ##### kill head X-------------------------------------------------------------------------------------\n                                print \"kill X head\"\n                                if curveXDown == 1: ##### curve X is going down#####################################################################################FIXEDforBeginning\n                                    firstGoodX= k.valueAt(valsx.index(maxX)+first,0)\n                                    prefirstGoodX= k.valueAt(valsx.index(maxX)+first+1,0)\n                                    diffX= abs(firstGoodX) - abs(prefirstGoodX) \n                                    offsetX = abs(firstGoodX)+abs(minX)+diffX*2\n                                    for i in range(first,valsx.index(maxX)+first):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val+offsetX,i,0)\n                                if curveXUp == 1: ##### curve X is going up#####################################################################################FIXEDforBeginning\n                                    firstGoodX = k.valueAt(valsx.index(minX)+first,0) \n                                    prefirstGoodX= k.valueAt(valsx.index(minX)+first+1,0) \n                                    diffX= abs(firstGoodX) - abs(prefirstGoodX) \n                                    offsetX= abs(firstGoodX)+maxX+diffX*2\n                                    for i in range(first,valsx.index(minX)+first):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val-offsetX,i,0)\n                            if valsy.index(maxY)+first < ref:                                  ##### kill head Y\n                                if curveYDown == 1: ##### curve Y is going down#####################################################################################FIXEDforBeginning\n                                    firstGoodY = k.valueAt(valsy.index(maxY)+first,1)\n                                    prefirstGoodY =  k.valueAt(valsy.index(maxY)+first+1,1)\n                                    diffY =  abs(firstGoodY) - abs(prefirstGoodY)\n                                    offsetY =  abs(firstGoodY)+abs(minY)+diffY*2\n                                    for i in range(first,valsy.index(maxY)+first):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val+offsetY,i,1)\n                                    print  \"y down\"\n                                if curveYUp == 1: ##### curve Y is going up#####################################################################################FIXEDforBeginning\n                                    firstGoodY = k.valueAt(valsy.index(minY)+first,1)\n                                    prefirstGoodY = k.valueAt(valsy.index(minY)+first+1,1)\n                                    diffY = abs(firstGoodY) - abs(prefirstGoodY)\n                                    offsetY = abs(firstGoodY)+maxY+diffY*2\n                                    for i in range(first,valsy.index(minY)+first):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val-offsetY,i,1)\n\n                last = lastB\n                first = firstB\n            else:\n                pass\n\n        # corner pin normal\n        try :\n            cp = nuke.nodes.CProject(xpos = x+110, ypos = y)\n            cp\['camera'].setValue(cam.name())\n            cp\['translate'].setValue(card\['translate'].value())\n            cp\['rotation'].setValue(card\['rotate'].value())\n            cp\['element'].setValue(label)\n            cp.setName(cp\['name'].value().replace('CProject','CP')+\"_\"+label)\n            cp\['refFrame'].setValue(str(ref))\n        except:\n            cp = nuke.nodes.CornerPin2D(label = label +' ('+str(ref)+')', xpos = x+110, ypos = y)  \n        cp\['to1'].copyAnimations(r1\['output'].animations())\n        cp\['to2'].copyAnimations(r2\['output'].animations())\n        cp\['to3'].copyAnimations(r3\['output'].animations())\n        cp\['to4'].copyAnimations(r4\['output'].animations())\n        cp\['from1'].setValue(r1\['output'].getValueAt(ref))\n        cp\['from2'].setValue(r2\['output'].getValueAt(ref))\n        cp\['from3'].setValue(r3\['output'].getValueAt(ref))\n        cp\['from4'].setValue(r4\['output'].getValueAt(ref))\n\n\n        # corner pin matrix & roto \n        cpm = nuke.nodes.CornerPin2D(label = label+' matrix ('+str(ref)+')', xpos = x+220, ypos = y)   \n        roto = nuke.nodes.Roto( xpos = x+330, ypos = y) \n        roto.setName(roto\['name'].value().replace('Roto','R')+\"_\"+label)\n        nuke.show(roto)\n        \n        roto_transform = roto\['curves'].rootLayer.getTransform() # transform of root layer in roto\n        cpm\['transform_matrix'].setAnimated()\n        projectionMatrixTo = nuke.math.Matrix4()\n        projectionMatrixFrom = nuke.math.Matrix4()\n\n        frame = first\n        while frame<last+1:\n\n            to1x = cp\['to1'].valueAt(frame)\[0]\n            to1y = cp\['to1'].valueAt(frame)\[1]\n            to2x = cp\['to2'].valueAt(frame)\[0]\n            to2y = cp\['to2'].valueAt(frame)\[1]\n            to3x = cp\['to3'].valueAt(frame)\[0]\n            to3y = cp\['to3'].valueAt(frame)\[1]\n            to4x = cp\['to4'].valueAt(frame)\[0]\n            to4y = cp\['to4'].valueAt(frame)\[1]\n\n            from1x = cp\['from1'].valueAt(frame)\[0]\n            from1y = cp\['from1'].valueAt(frame)\[1]\n            from2x = cp\['from2'].valueAt(frame)\[0]\n            from2y = cp\['from2'].valueAt(frame)\[1]\n            from3x = cp\['from3'].valueAt(frame)\[0]\n            from3y = cp\['from3'].valueAt(frame)\[1]\n            from4x = cp\['from4'].valueAt(frame)\[0]\n            from4y = cp\['from4'].valueAt(frame)\[1]\n        \n            projectionMatrixTo.mapUnitSquareToQuad(to1x,to1y,to2x,to2y,to3x,to3y,to4x,to4y)\n            projectionMatrixFrom.mapUnitSquareToQuad(from1x,from1y,from2x,from2y,from3x,from3y,from4x,from4y)\n            theCornerpinAsMatrix = projectionMatrixTo*projectionMatrixFrom.inverse()\n            theCornerpinAsMatrix.transpose()\n\n            for i in range(0,16):\n                cpm\['transform_matrix'].setValueAt(theCornerpinAsMatrix\[i],frame,i)\n                \n            for i in range(0,16):\n                roto_transform.getExtraMatrixAnimCurve(0,i).addKey(frame,cpm\['transform_matrix'].getValueAt(frame,i))  \n                \n            frame = frame + 1\n\n        roto\['curves'].changed()\n\n        # check for turnover\n        k = cp\['to1']\n        vals = \[]\n        valSort =\[]\n        for i in range(first,last+1):\n            vals.append(k.valueAt(i,0))\n            valSort.append(k.valueAt(i,0))\n        valSort.sort()\n        min = valSort\[0]\n        max = valSort\[-1]\n        # warning = ''\n        # if math.fabs(vals.index(max)-vals.index(min)) == 1:\n        #     warning = 'Warning: perspective problem detected'\n\n\n        #clean up\n        rmL = \[r1,r2,r3,r4,a1,a2,a3,a4,aM]\n        for i in rmL:\n            nuke.delete(i)\n        nuke.delete(bg)\n        \n        if dialog == False:\n            roto.setXYpos(x+100,y)\n            #remove all non roto nodes\n            nuke.delete(cp)\n            nuke.delete(cpm)\n            \n            \n        # show warning if any\n        # if warning != '':\n        #     nuke.message(warning)\n\n        print 'C2T done.!!!!!'\n        # if problem == 1:\n        #     nuke.message(message)\n\n    C2T(True)\n\n\n\n\n" +STARTLINE}
+ addUserKnob {22 C2T l <b>-----------------------GO!----------------------- t "this little fellow will create for you three nodes\n\n1. CProject - basically it is a cornerPin node with steroids it allowes to you very easy set Reference point for your \"projection\", stabilize, crop. all in one\n2. CornerPin with a transformation baked in the \"matrix\" knob - usually i am using it to copy to GridWarp or SplineWarp\n3. Roto - the node i am using the most.\nthe transformation is baked into the root matrix.\nso just pick the frame create the rotoshape and enjoy!" T "\naxisCase = 0\na=nuke.thisNode()\nC2Tgroup = nuke.thisNode()\ntry:\n    n = a.input(1)\n    f=\[]\n    l=\[]\n    tr = n\['translate'].getKeyList()\n    first_frame_v = min(tr)\n    last_frame_v = max(tr)\nexcept:\n    pass\n\n\n\nif a\['S'].value() == 1:   \n    a\['Stabilize'].execute()\n\na.begin()\nx=int(a\['xpos'].value())\ny=int(a\['ypos'].value())\np = nuke.toNode(\"Perspective\")\nt=p\['translate'].value()\nr=p\['rotate'].value()\ns=p\['scaling'].value()\nus=p\['uniform_scale'].value()\nnuke.toNode(\"Switch\")\['which'].setValue(1)\na.end()\n\n\nfor node in nuke.allNodes():\n    node.setSelected(False)\na.input(1).setSelected(True)\na.input(0).setSelected(True)\n\nif a\['extraHelper'].value()==3:\n    crd = a.input(2)\n    crd.setSelected(True)\n    crd.setXYpos(x,y+50)\n    axisCase = 2\n    \n#Axises case\nelif a\['extraHelper'].value()==4:\n    axisCase = 1\n    #a.input(2).setSelected(True)\n\n\n    import math\n    import nuke\n    \n    axisNode = a.input(2)\n\n    \n    nuke.thisGroup().end()\n    m = nuke.math.Matrix4()\n    \n    n = nuke.nodes.Card2()\n    n\['scaling'].setExpression('curve')\n    n\['rotate'].setExpression('curve')\n    n\['translate'].setExpression('curve')\n    n\['name'].setValue(\"consolidate of \"+axisNode.name())\n    n\['xpos'].setValue(int(x))\n    n\['ypos'].setValue(int(y+50))\n    \n\n    \n    scale_anim = n\['scaling'].animations()\n    rotate_anim = n\['rotate'].animations()\n    translate_anim = n\['translate'].animations()\n    \n    for i in range(int(first_frame_v), int(last_frame_v+1)):\n    \n        k = axisNode\['world_matrix']\n        k_time_aware = axisNode\['world_matrix'].getValueAt(i)\n    \n    \n        for y in range(k.height()):\n            for x in range(k.width()):\n                m\[x+(y*k.width())] = k_time_aware\[y + k.width()*x]\n    \n    \n            transM =nuke.math.Matrix4(m)\n            transM.translationOnly()\n            rotM = nuke.math.Matrix4(m)\n            rotM.rotationOnly()\n            scaleM = nuke.math.Matrix4(m)\n            scaleM.scaleOnly()\n    \n            scale = (scaleM.xAxis().x, scaleM.yAxis().y, scaleM.zAxis().z)\n    \n            rot = rotM.rotationsZXY()\n            rotDegrees = ( math.degrees(rot\[0]), math.degrees(rot\[1]), math.degrees(rot\[2]) )\n    \n    \n            trans = (transM\[12], transM\[13], transM\[14])\n    \n            for s in range(3):\n                scale_anim\[s].setKey(i, scale\[s])\n                rotate_anim\[s].setKey(i, rotDegrees\[s])\n                translate_anim\[s].setKey(i, trans\[s])\n    \n    a.input(1).setSelected(True)\n    a.input(0).setSelected(True) \n    n.setSelected(True)\n    a.setInput(2,n)\n            \n            \n            \nelse:\n    n = nuke.nodes.Card2()\n    n.setXYpos(x,y+100)\n    n\['translate'].setValue(t)\n    n\['rotate'].setValue(r)\n    n\['scaling'].setValue(s)\n    n\['uniform_scale'].setValue(us)\n    n.setSelected(True)\n\nwith nuke.Root():\n    #C2T new\n    import thread, threading, time, nuke, math, nukescripts\n\n    def execRC(first,last):\n        runMe = True\n        while runMe == True:\n            nuke.execute('r1',first,last)  \n            nuke.execute('r2',first,last) \n            nuke.execute('r3',first,last) \n            nuke.execute('r4',first,last) \n            stop_event.set()\n            runMe = False\n            #print 'reconcile done'\n            break\n\n    def getCamera():\n        n = a.input(1) \n        topnode_name = nuke.tcl(\"full_name \[topnode %s]\" % n.name()) \n        topnode = nuke.toNode(topnode_name)\n        #print topnode\['name'].value()\n        cam = topnode\n        #cam = a.input(1)\n        return cam\n\n\n\n    def BGdetect():\n        for n in nuke.selectedNodes():\n            #if 'format' in n.knobs():\n            if 'xform_order' not in n.knobs():\n                Name = n.name()\n                Width = n.width()\n                Height = n.height()\n                Aspect = n.pixelAspect()\n                form = str(Width)+\" \"+str(Height)+\" \"+str(Aspect)\n                #print 'format selected:'+\" \"+form\n                \n                bg = nuke.nodes.Constant(postage_stamp = False)\n                bg\['format'].setValue(nuke.addFormat(form))\n                return bg\n        #no format found ...\n        \n        #bg = nuke.createNode('Constant')\n        #bg = nuke.nodes.Constant(postage_stamp = False)\n        #return bg\n            \n    def C2T(dialog):\n\n\n        #card\n        card = None\n        for n in nuke.selectedNodes():\n            if \"Card\" in n.Class() or \"Axis\" in n.Class():\n                card = n\n                break\n        if card == None:\n            nuke.message('no card selected?')\n            return\n\n\n            \n            \n        # initialize tool values for auto-creation\n        label = card\['label'].value()\n        ref = int(nuke.frame())\n        first = first_frame_v\n        last = last_frame_v\n        bg = BGdetect() \n        cam = getCamera()\n        rootAspect = nuke.Root()\['format'].value().pixelAspect()\n        x = card.xpos() \n        y = card.ypos()\n        \n        bg.setXYpos(x,y+50)\n        \n        if dialog == True:\n            # ask for tool values\n            \n            # all cams\n            \n\n            \n            #bg, info only. will be determined by selected node - if any ..\n\n            #formatPrint = form\n\n            #panel\n            panel = nuke.Panel(\"C2T\")\n            panel.addSingleLineInput(\"label:\", card\['label'].value())\n            panel.addSingleLineInput(\"firstFrame:\", str(first))\n            panel.addSingleLineInput(\"lastFrame:\", str(last))\n            panel.addSingleLineInput(\"ref frame:\", str(ref))\n            #panel.addEnumerationPulldown(\"camera:\", camListPrint)\n            #panel.addSingleLineInput(\"format:\", formatPrint)\n            # if label == '':\n            #     panel.addBooleanCheckBox('reverse label', True)\n                \n            #panel.show()\n            \n            if panel.show():\n                first = int(panel.value(\"firstFrame:\"))\n                last = int(panel.value(\"lastFrame:\"))\n                ref = int(panel.value(\"ref frame:\"))\n                #cam = nuke.toNode(panel.value(\"camera:\"))\n                label = panel.value(\"label:\")\n\n            else:\n                nuke.message('canceled')\n                nuke.delete(bg) # clean the mess up\n                return\n        else:\n            print 'no dialog, use auto-created input values'\n        \n\n        # print '########'\n        # print 'first', first\n        # print 'last', last\n        # print 'ref', ref\n        # #print 'bg', form\n        # print 'cam', cam.name()\n        # print 'card', card.name()\n        # print 'label', label\n        # print '########' \n        \n        # create master axis and corner slaves\n        \n        aM = nuke.nodes.Axis2(name = 'aM', xform_order = 3, xpos = x, ypos = y+50)\n        uscale = card\['uniform_scale'].value()\n        scalex = card\['scaling'].value(0)\n        scaley = card\['scaling'].value(1)\n        \n        if card\['translate'].isAnimated() is True:\n            aM\['translate'].copyAnimations(card\['translate'].animations())\n        else:\n            aM\['translate'].setValue(card\['translate'].value())\n        \n        if card\['rotate'].isAnimated() is True:\n            aM\['rotate'].copyAnimations(card\['rotate'].animations())\n        else:\n            aM\['rotate'].setValue(card\['rotate'].value())\n            \n            \n        # slaves\n        a1 = nuke.nodes.Axis2(name = 'a1', xform_order = 1, xpos = x, ypos = y+50)\n        a2 = nuke.nodes.Axis2(name = 'a2', xform_order = 1, xpos = x, ypos = y+50)\n        a3 = nuke.nodes.Axis2(name = 'a3', xform_order = 1, xpos = x, ypos = y+50)\n        a4 = nuke.nodes.Axis2(name = 'a4', xform_order = 1, xpos = x, ypos = y+50)\n        \n        a1\['translate'].setValue(\[-0.5*uscale*scalex,rootAspect*-0.5*uscale*scaley,0])\n        a2\['translate'].setValue(\[0.5*uscale*scalex,rootAspect*-0.5*uscale*scaley,0])\n        a3\['translate'].setValue(\[0.5*uscale*scalex,rootAspect*0.5*uscale*scaley,0])\n        a4\['translate'].setValue(\[-0.5*uscale*scalex,rootAspect*0.5*uscale*scaley,0])\n        \n        aL = \[a1,a2,a3,a4]\n        \n        for a in aL:\n            a.setInput(0,aM)\n\n        # reconcile\n        r1 = nuke.nodes.Reconcile3D(name = 'r1', xpos = x, ypos = y+50)\n        r2 = nuke.nodes.Reconcile3D(name = 'r2', xpos = x, ypos = y+50)\n        r3 = nuke.nodes.Reconcile3D(name = 'r3', xpos = x, ypos = y+50)\n        r4 = nuke.nodes.Reconcile3D(name = 'r4', xpos = x, ypos = y+50)\n        \n        rL = \[r1,r2,r3,r4]\n        \n        for r in rL:\n            r.setInput(2,aL\[rL.index(r)])\n            r.setInput(1,cam)\n            r.setInput(0,bg)\n            \n        # run with threading\n        global stop_event \n        stop_event = threading.Event()\n        threading.Thread(target=execRC, kwargs=dict(first=first,last=last)).start() \n        while not stop_event.is_set():\n            time.sleep(0.1)\n\n        problem = 0\n        import math\n        timeline = \[\"beginning\",\"end\"]#######looping to fix stuff before and after ref frame\n        for side in timeline:##########################################################################################################: Fixing the curve###############################\n            if side == \"beginning\":\n                firstT = first\n                lastT = ref\n            if side == \"end\":\n                firstT = ref\n                lastT = last\n\n            for one in rL:########fixing stuff\n                curveXUp = 0\n                curveXDown = 0\n                curveYUp = 0\n                curveYDown = 0\n                fuckedFrames = \[]\n                k = one\[\"output\"]\n                valsx = \[];valSortx =\[]\n                valsy = \[];valSorty =\[]\n                for i in range(firstT,lastT+1):\n                    valsx.append(k.valueAt(i,0))\n                    valSortx.append(k.valueAt(i,0))\n                    valsy.append(k.valueAt(i,1))\n                    valSorty.append(k.valueAt(i,1))\n                valSortx.sort()\n                valSorty.sort()\n                minX = valSortx\[0]\n                maxX = valSortx\[-1]\n                minY = valSorty\[0]\n                maxY = valSorty\[-1]\n                if math.fabs(valsx.index(maxX)-valsx.index(minX)) == 1:\n                    problem = 1\n        if problem == 1:\n            if nuke.ask(\"Perspective problem detected! would you like to fix it? \\n your card did pass the Camera center, this causes the track to break, i will try to fix the problem. if my fix will not succeed you should use a bit smaller card so corners of the card will not cross the camera so fast.\"):\n                problem = 0\n                import math\n                timeline = \[\"beginning\",\"end\"]#######looping to fix stuff before and after ref frame\n                lastB = last\n                firstB = first\n                for side in timeline:##########################################################################################################: Fixing the curve###############################\n                    if side == \"beginning\":\n                        last = ref\n                    if side == \"end\":\n                        first = ref\n                        last = lastB\n\n                    for one in rL:########fixing stuff\n                        curveXUp = 0\n                        curveXDown = 0\n                        curveYUp = 0\n                        curveYDown = 0\n                        fuckedFrames = \[]\n                        k = one\[\"output\"]\n                        valsx = \[];valSortx =\[]\n                        valsy = \[];valSorty =\[]\n                        for i in range(first,last+1):\n                            valsx.append(k.valueAt(i,0))\n                            valSortx.append(k.valueAt(i,0))\n                            valsy.append(k.valueAt(i,1))\n                            valSorty.append(k.valueAt(i,1))\n                        valSortx.sort()\n                        valSorty.sort()\n                        minX = valSortx\[0]\n                        maxX = valSortx\[-1]\n                        minY = valSorty\[0]\n                        maxY = valSorty\[-1]\n                        if math.fabs(valsx.index(maxX)-valsx.index(minX)) == 1:\n                            problem = 1\n                            #print \"minX \",minX,\"maxX\",maxX,\"minY\",minY,\"maxY \",maxY\n                            #message = \"your card did pass the Camera center, this causes the track to break, i tried to fix the problem. if my fix did not succeed you should use a bit smaller card so corners of the card will not cross the camera so fast.\"\n                            if valsx.index(maxX)-valsx.index(minX) < 0:    ###############checking if the curve going up or down\n                                curveXUp = 1\n                            else:\n                                curveXDown = 1\n                            if valsy.index(maxY)-valsy.index(minY) < 0:    ###############checking if the curve going up or down\n                                curveYUp = 1\n                            else:\n                                curveYDown = 1\n                            if valsx.index(maxX)+first > ref:                                  ##### kill tail X\n                                if curveXDown == 1: ##### curve X is going down####################################################################################FIXEDforEnd\n                                    lastGoodX= k.valueAt(valsx.index(minX)+first,0)\n                                    prelastGoodX= k.valueAt(valsx.index(minX)+first-1,0)\n                                    diffX= abs(lastGoodX) - abs(prelastGoodX)\n                                    offsetX = abs(lastGoodX)+maxX+diffX*2\n                                    for i in range(valsx.index(maxX)+first,last+1):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val-offsetX,i,0)\n                                if curveXUp == 1: ##### curve X is going up####################################################################################FIXEDforEnd\n                                    #print \"up!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\"\n                                    lastGoodX = k.valueAt(valsx.index(maxX)+first,0) \n                                    prelastGoodX= k.valueAt(valsx.index(maxX)+first-1,0) \n                                    diffX= abs(lastGoodX)- abs(prelastGoodX)\n                                    offsetX= maxX+abs(minX)+diffX*2\n                                    for i in range(valsx.index(minX)+first,last+1):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val+offsetX,i,0)\n                            if valsy.index(maxY)+first > ref:                                  ##### kill tail Y\n                                if curveYDown == 1: ##### curve Y is going down#####################################################################################FIXEDforEnd\n                                    lastGoodY= k.valueAt(valsy.index(minY)+first,1)\n                                    prelastGoodY= k.valueAt(valsy.index(minY)+first-1,1)\n                                    diffY= abs(lastGoodY) - abs(prelastGoodY) \n                                    offsetY = abs(lastGoodY)+maxY+diffY*2\n                                    for i in range(valsy.index(maxY)+first,last+1):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val-offsetY,i,1)\n                                if curveYUp == 1: ##### curve Y is going up####################################################################################FIXEDforEnd\n                                    lastGoodY = k.valueAt(valsy.index(maxY)+first,1) \n                                    prelastGoodY= k.valueAt(valsy.index(maxY)+first-1,1) \n                                    diffY=abs(lastGoodY) - abs(prelastGoodY) \n                                    offsetY= maxY+abs(minY)+diffY*2\n                                    for i in range(valsy.index(minY)+first,last+1):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val+offsetY,i,1)\n                            if valsx.index(maxX)+first < ref:                                  ##### kill head X-------------------------------------------------------------------------------------\n                                #print \"kill X head\"\n                                if curveXDown == 1: ##### curve X is going down#####################################################################################FIXEDforBeginning\n                                    firstGoodX= k.valueAt(valsx.index(maxX)+first,0)\n                                    prefirstGoodX= k.valueAt(valsx.index(maxX)+first+1,0)\n                                    diffX= abs(firstGoodX) - abs(prefirstGoodX) \n                                    offsetX = abs(firstGoodX)+abs(minX)+diffX*2\n                                    for i in range(first,valsx.index(maxX)+first):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val+offsetX,i,0)\n                                if curveXUp == 1: ##### curve X is going up#####################################################################################FIXEDforBeginning\n                                    firstGoodX = k.valueAt(valsx.index(minX)+first,0) \n                                    prefirstGoodX= k.valueAt(valsx.index(minX)+first+1,0) \n                                    diffX= abs(firstGoodX) - abs(prefirstGoodX) \n                                    offsetX= abs(firstGoodX)+maxX+diffX*2\n                                    for i in range(first,valsx.index(minX)+first):\n                                        val = k.valueAt(i)\[0]\n                                        k.setValueAt(val-offsetX,i,0)\n                            if valsy.index(maxY)+first < ref:                                  ##### kill head Y\n                                if curveYDown == 1: ##### curve Y is going down#####################################################################################FIXEDforBeginning\n                                    firstGoodY = k.valueAt(valsy.index(maxY)+first,1)\n                                    prefirstGoodY =  k.valueAt(valsy.index(maxY)+first+1,1)\n                                    diffY =  abs(firstGoodY) - abs(prefirstGoodY)\n                                    offsetY =  abs(firstGoodY)+abs(minY)+diffY*2\n                                    for i in range(first,valsy.index(maxY)+first):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val+offsetY,i,1)\n                                    #print  \"y down\"\n                                if curveYUp == 1: ##### curve Y is going up#####################################################################################FIXEDforBeginning\n                                    firstGoodY = k.valueAt(valsy.index(minY)+first,1)\n                                    prefirstGoodY = k.valueAt(valsy.index(minY)+first+1,1)\n                                    diffY = abs(firstGoodY) - abs(prefirstGoodY)\n                                    offsetY = abs(firstGoodY)+maxY+diffY*2\n                                    for i in range(first,valsy.index(minY)+first):\n                                        val = k.valueAt(i)\[1]\n                                        k.setValueAt(val-offsetY,i,1)\n\n                last = lastB\n                first = firstB\n            else:\n                pass\n\n        # corner pin normal\n        try :\n            cp = nuke.nodes.CProject(xpos = x+110, ypos = y)\n            cp\['camera'].setValue(cam.name())\n            cp\['translate'].setValue(card\['translate'].value())\n            cp\['rotation'].setValue(card\['rotate'].value())\n            cp\['element'].setValue(label)\n            cp.setName(cp\['name'].value().replace('CProject','CP')+\"_\"+label)\n            cp\['refFrame'].setValue(str(ref))\n        except:\n            cp = nuke.nodes.CornerPin2D(label = label +' ('+str(ref)+')', xpos = x+110, ypos = y)  \n        cp\['to1'].copyAnimations(r1\['output'].animations())\n        cp\['to2'].copyAnimations(r2\['output'].animations())\n        cp\['to3'].copyAnimations(r3\['output'].animations())\n        cp\['to4'].copyAnimations(r4\['output'].animations())\n        cp\['from1'].setValue(r1\['output'].getValueAt(ref))\n        cp\['from2'].setValue(r2\['output'].getValueAt(ref))\n        cp\['from3'].setValue(r3\['output'].getValueAt(ref))\n        cp\['from4'].setValue(r4\['output'].getValueAt(ref))\n\n\n        # corner pin matrix & roto \n        cpm = nuke.nodes.CornerPin2D(label = label+' matrix ('+str(ref)+')', xpos = x+220, ypos = y)   \n        roto = nuke.nodes.Roto( xpos = x+330, ypos = y) \n        roto.setName(roto\['name'].value().replace('Roto','R')+\"_\"+label)\n        nuke.show(roto)\n        \n        roto_transform = roto\['curves'].rootLayer.getTransform() # transform of root layer in roto\n        cpm\['transform_matrix'].setAnimated()\n        projectionMatrixTo = nuke.math.Matrix4()\n        projectionMatrixFrom = nuke.math.Matrix4()\n\n        frame = first\n        while frame<last+1:\n\n            to1x = cp\['to1'].valueAt(frame)\[0]\n            to1y = cp\['to1'].valueAt(frame)\[1]\n            to2x = cp\['to2'].valueAt(frame)\[0]\n            to2y = cp\['to2'].valueAt(frame)\[1]\n            to3x = cp\['to3'].valueAt(frame)\[0]\n            to3y = cp\['to3'].valueAt(frame)\[1]\n            to4x = cp\['to4'].valueAt(frame)\[0]\n            to4y = cp\['to4'].valueAt(frame)\[1]\n\n            from1x = cp\['from1'].valueAt(frame)\[0]\n            from1y = cp\['from1'].valueAt(frame)\[1]\n            from2x = cp\['from2'].valueAt(frame)\[0]\n            from2y = cp\['from2'].valueAt(frame)\[1]\n            from3x = cp\['from3'].valueAt(frame)\[0]\n            from3y = cp\['from3'].valueAt(frame)\[1]\n            from4x = cp\['from4'].valueAt(frame)\[0]\n            from4y = cp\['from4'].valueAt(frame)\[1]\n        \n            projectionMatrixTo.mapUnitSquareToQuad(to1x,to1y,to2x,to2y,to3x,to3y,to4x,to4y)\n            projectionMatrixFrom.mapUnitSquareToQuad(from1x,from1y,from2x,from2y,from3x,from3y,from4x,from4y)\n            theCornerpinAsMatrix = projectionMatrixTo*projectionMatrixFrom.inverse()\n            theCornerpinAsMatrix.transpose()\n\n            for i in range(0,16):\n                cpm\['transform_matrix'].setValueAt(theCornerpinAsMatrix\[i],frame,i)\n                \n            for i in range(0,16):\n                roto_transform.getExtraMatrixAnimCurve(0,i).addKey(frame,cpm\['transform_matrix'].getValueAt(frame,i))  \n                \n            frame = frame + 1\n\n        roto\['curves'].changed()\n\n        # check for turnover\n        k = cp\['to1']\n        vals = \[]\n        valSort =\[]\n        for i in range(first,last+1):\n            vals.append(k.valueAt(i,0))\n            valSort.append(k.valueAt(i,0))\n        valSort.sort()\n        min = valSort\[0]\n        max = valSort\[-1]\n        # warning = ''\n        # if math.fabs(vals.index(max)-vals.index(min)) == 1:\n        #     warning = 'Warning: perspective problem detected'\n\n\n        #clean up\n        rmL = \[r1,r2,r3,r4,a1,a2,a3,a4,aM]\n        for i in rmL:\n            nuke.delete(i)\n        nuke.delete(bg)\n        if axisCase ==1:\n            C2Tgroup.setInput(2,axisNode)\n            card\['label'].setValue(label)\n        elif axisCase == 2:#card case\n            C2Tgroup.setInput(2,None)\n            card.setInput(0,None)\n            \n        \n        if dialog == False:\n            roto.setXYpos(x+100,y)\n            #remove all non roto nodes\n            nuke.delete(cp)\n            nuke.delete(cpm)\n            \n            \n        # show warning if any\n        # if warning != '':\n        #     nuke.message(warning)\n\n        print 'C2T done.!!!!!'\n        # if problem == 1:\n        #     nuke.message(message)\n\n    C2T(True)\n\n\n\n" +STARTLINE}
  addUserKnob {26 w l "" -STARTLINE T or}
  addUserKnob {22 Card l "Create object only" t "create 3d object in extracted position\nwithout animation" -STARTLINE T "\n\na=nuke.thisGroup()\n\nt = a\['translate'].value()\nr = a\['rotate'].value()\ns = a\['scaling'].value()\nu = a\['uniform_scale'].value()\na.end()\n\npanel = nuke.Panel(\"object\")\n\npanel.addSingleLineInput(\"Object Name:\",\"\")\npanel.addEnumerationPulldown(\"objects:\", \"Card Axis Cube Sphere Cylinder Light TransformGeo Camera\")\n\nif panel.show(): \n    ob = panel.value(\"objects:\")\n    name = panel.value(\"Object Name:\")\n    obj = nuke.createNode(ob)\n    \n    x = a\['xpos'].value()\n    y = a\['ypos'].value()\n    \n    obj.setInput(0,None)\n    obj\['xpos'].setValue(int(x))\n    obj\['ypos'].setValue(int(y+100))\n    obj\['translate'].setValue(t)\n    obj\['rotate'].setValue(r)\n    obj\['scaling'].setValue(s)\n    obj\['uniform_scale'].setValue(u)\n    obj.setName(name)\n    \n\n\n\n\n\n\n\n"}
  addUserKnob {20 endGroup_2 l endGroup n -1}
@@ -72,19 +73,18 @@ Group {
   xpos -1415
   ypos 566
  }
-set N5364e50 [stack 0]
+set N6c728f0 [stack 0]
  Dot {
   name Dot13
   xpos -1415
   ypos 644
  }
-set N5368170 [stack 0]
  Dot {
   name Dot12
   xpos -1415
   ypos 692
  }
-set N532acf0 [stack 0]
+set N6c327b0 [stack 0]
  Dot {
   name Dot9
   xpos -1415
@@ -97,16 +97,16 @@ set N532acf0 [stack 0]
   ypos 760
   number 1
  }
-set N53323e0 [stack 0]
-push $N5364e50
+set N6c43050 [stack 0]
+push $N6c728f0
  Axis {
   inputs 0
   translate {{"\[exists parent.input1]?\[topnode input1].translate:0" x1112 -519.8007202} {"\[exists parent.input1]?\[topnode input1].translate:0" x1112 197.4966736} {"\[exists parent.input1]?\[topnode input1].translate:0" x1112 -128.6857147}}
   rotate {{"\[exists parent.input1]?\[topnode input1].translate:0?\[topnode input1].rotate:0"} {"\[exists parent.input1]?\[topnode input1].translate:0?\[topnode input1].rotate:0"} {"\[exists parent.input1]?\[topnode input1].translate:0?\[topnode input1].rotate:0"}}
   name Axis1
   selected true
-  xpos -834
-  ypos 44
+  xpos -830
+  ypos 43
  }
  ColorBars {
   inputs 0
@@ -159,6 +159,12 @@ push $N5364e50
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -187,7 +193,7 @@ push $N5364e50
   xpos 834
   ypos -788
  }
-set N53cdfa0 [stack 0]
+set N6cde1b0 [stack 0]
  Dot {
   name Dot5
   xpos -1122
@@ -231,7 +237,7 @@ set N53cdfa0 [stack 0]
   xpos -125
   ypos 2323
  }
-push $N53323e0
+push $N6c43050
  FrameHold {
   first_frame 1004
   name StabFrameHold
@@ -239,8 +245,8 @@ push $N53323e0
   ypos 1121
   disable true
  }
-set N54148e0 [stack 0]
-push $N53323e0
+set N6d229b0 [stack 0]
+push $N6c43050
  Axis {
   name Axis3
   xpos -500
@@ -300,6 +306,12 @@ push $N53323e0
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -317,7 +329,7 @@ push $N53323e0
   xpos -341
   ypos 983
  }
-push $N532acf0
+push $N6c327b0
  Dot {
   name Dot23
   xpos -1064
@@ -332,7 +344,7 @@ push $N532acf0
   ypos -638
   postage_stamp false
  }
-set N54d6ab0 [stack 0]
+set N6d95850 [stack 0]
  Wireframe {
   operation "see through"
   line_width 1
@@ -341,7 +353,7 @@ set N54d6ab0 [stack 0]
   xpos -642
   ypos -416
  }
-set N54dff90 [stack 0]
+set N6d9e390 [stack 0]
  Card2 {
   display wireframe
   image_aspect false
@@ -388,6 +400,12 @@ set N54dff90 [stack 0]
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -397,7 +415,7 @@ set N54dff90 [stack 0]
   xpos -857
   ypos -260
  }
-push $N54dff90
+push $N6d9e390
  Card2 {
   display wireframe
   image_aspect false
@@ -444,6 +462,12 @@ push $N54dff90
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -453,7 +477,7 @@ push $N54dff90
   xpos -772
   ypos -286
  }
-push $N54dff90
+push $N6d9e390
  Card2 {
   display wireframe
   image_aspect false
@@ -500,6 +524,12 @@ push $N54dff90
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -509,7 +539,7 @@ push $N54dff90
   xpos -690
   ypos -312
  }
-push $N54dff90
+push $N6d9e390
  Card2 {
   display wireframe
   image_aspect false
@@ -556,6 +586,12 @@ push $N54dff90
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -586,7 +622,7 @@ push $N54dff90
   xpos -608
   ypos -187
  }
-push $N54d6ab0
+push $N6d95850
  Wireframe {
   operation "see through"
   line_width 1
@@ -642,6 +678,12 @@ push $N54d6ab0
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -651,7 +693,7 @@ push $N54d6ab0
   xpos -461
   ypos -307
  }
-push $N54d6ab0
+push $N6d95850
  Wireframe {
   operation "see through"
   line_width 1
@@ -705,6 +747,12 @@ push $N54d6ab0
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -714,7 +762,7 @@ push $N54d6ab0
   xpos -318
   ypos -333
  }
-push $N54d6ab0
+push $N6d95850
  Wireframe {
   operation "see through"
   line_width 0.1
@@ -765,6 +813,12 @@ push $N54d6ab0
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -790,7 +844,7 @@ push $N54d6ab0
   xpos -232
   ypos -191
  }
-set N56fc670 [stack 0]
+set N6fbdde0 [stack 0]
  TransformGeo {
   inputs 2
   name TransformGeo5
@@ -805,16 +859,16 @@ set N56fc670 [stack 0]
   xpos -702
   ypos 581
  }
-set N5719740 [stack 0]
-push $N532acf0
+set N6fdae10 [stack 0]
+push 0
  ApplyMaterial {
   inputs 2
   name ApplyMaterial2
   xpos -702
   ypos 676
  }
-push $N5719740
-push $N5368170
+push $N6fdae10
+push 0
  ApplyMaterial {
   inputs 2
   name ApplyMaterial1
@@ -858,6 +912,7 @@ push 0
  }
  Switch {
   inputs 2
+  which 1
   name Switch
   label "\[value which]"
   xpos -507
@@ -868,8 +923,8 @@ push 0
   xpos -473
   ypos 222
  }
-set N5775bc0 [stack 0]
-push $N56fc670
+set N7036800 [stack 0]
+push $N6fbdde0
 push 0
  Switch {
   inputs 2
@@ -906,21 +961,21 @@ push 0
   xpos -231
   ypos 979
  }
-push $N54148e0
-push $N5775bc0
+push $N6d229b0
+push $N7036800
  Dot {
   name Dot8
   xpos -470
   ypos 583
  }
-push $N53323e0
-push $N53cdfa0
+push $N6c43050
+push $N6cde1b0
  Dot {
   name Dot21
   xpos 834
   ypos 764
  }
-set N57b77b0 [stack 0]
+set N70781b0 [stack 0]
  Project3D {
   inputs 2
   crop false
@@ -972,6 +1027,12 @@ set N57b77b0 [stack 0]
   addUserKnob {22 "floor Pivot_7" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_7" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_7 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_8" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_8" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_8 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_9" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_9" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_9 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
   addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
@@ -982,13 +1043,13 @@ set N57b77b0 [stack 0]
   xpos 554
   ypos 993
  }
-push $N57b77b0
+push $N70781b0
  Dot {
   name Dot22
   xpos 834
   ypos 1035
  }
-set N5813c90 [stack 0]
+set N70d41b0 [stack 0]
  Remove {
   name Remove2
   xpos 653
@@ -1002,7 +1063,7 @@ set N5813c90 [stack 0]
   xpos 554
   ypos 1127
  }
-push $N5813c90
+push $N70d41b0
  Switch {
   inputs 2
   which 1
@@ -1022,7 +1083,7 @@ push $N5813c90
   xpos 834
   ypos 1582
  }
-set N5849d30 [stack 0]
+set N7109470 [stack 0]
  Remove {
   name Remove1
   xpos 154
@@ -1048,7 +1109,7 @@ set N5849d30 [stack 0]
   xpos -235
   ypos 1728
  }
-push $N5849d30
+push $N7109470
  Merge2 {
   inputs 2
   name Merge2
