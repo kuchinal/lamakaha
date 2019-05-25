@@ -2,7 +2,8 @@
 version 11.3 v4
 Gizmo {
  inputs 3
- knobChanged "nn = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\n\nif kn == \"extraStuff\":\n    \n    if nn\['extraHelper'].value() in \[0,1,2,]:\n        nn\[\"setGroup\"].clearFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].setFlag(1)\n        nn\[\"Zfind\"].setValue(100)\n    elif nn\['extraHelper'].value() in \[3,4]:\n        nn\[\"setGroup\"].setFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].clearFlag(1)\n    \n    \n    \n"
+ onCreate "nuke.thisNode()\['picker'].setValue(\[nuke.toNode(\"root\")\['format'].value().width()/2,nuke.toNode(\"root\")\['format'].value().height()/2])"
+ knobChanged "nn = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\n\nif kn == \"extraStuff\":\n    \n    if nn\['extraHelper'].value() in \[0,1,2,]:\n        nn\[\"setGroup\"].clearFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].setFlag(1)\n        #nn\[\"Zfind\"].setValue(100)\n    elif nn\['extraHelper'].value() in \[3,4]:\n        nn\[\"setGroup\"].setFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].clearFlag(1)\n    \n    \n    \n"
  tile_color 0x5236ff
  gl_color 0xff0000ff
  note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold"
@@ -20,10 +21,10 @@ Gizmo {
  addUserKnob {26 ""}
  addUserKnob {20 setGroup l "set Reference" n 1}
  addUserKnob {26 ds l <b>1. t "first step in finding desired position.\n\nplease find some feature on the screen, feature you can see on the other frames as well.\nnot position the picker on this feature and press \"Set\" button\n\nthe reference frame is set, yo should see now the grid centering on the \"picker\"\n\nthere is a chance that \"grid\" will be very small or very big depends on the size of your scene, feel free to adjust it's size with the u_scale knob.\n\nnow you ready for the next step" T "Set reference frame."}
- addUserKnob {22 REF l Set t "first step in finding desired position.\n\nplease find some feature on the screen, feature you can see on the other frames as well.\nnot position the picker on this feature and press \"Set\" button\n\nthe reference frame is set, yo should see now the grid centering on the \"picker\"\n\nthere is a chance that \"grid\" will be very small or very big depends on the size of your scene, feel free to adjust it's size with the u_scale knob.\n\nnow you ready for the next step" T "n = nuke.thisGroup()\nn.begin()\nnuke.toNode(\"Switch1\")\['disable'].setValue(0)\nnuke.toNode(\"ScanlineRender1\")\['disable'].setValue(0)\nnuke.toNode(\"StabFrameHold\")\['first_frame'].setValue(n\['refFrame'].value())\n\nif n\['S'].value() == 1:\n\tn\['Stabilize'].execute()\n        n = a.input(1) \nss = n.input(1)\nn.end()       \ntopnode_name = nuke.tcl(\"full_name \[topnode %s]\" % ss.name()) \ncam = nuke.toNode(topnode_name)\ncam\['near'].clearAnimated()\ncam\['far'].clearAnimated()\ncam\['near'].setValue(0.01)\ncam\['far'].setValue(10000)\n\n\nss=n\['scene'].value()\n\nn.begin()\n\nprint n\['name'].value()\nnuke.toNode(\"NoOp1\")\['pick'].execute()\nn\['refFrame'].setValue(nuke.frame())\nnuke.toNode(\"Switch\")\['which'].setValue(0)\n\nr=nuke.toNode(\"Perspective\")\nr.setSelected(False)\nr.hideControlPanel()\nr\['rotate'].setValue(0)\nr\['translate'].setValue(0)\nr\['scaling'].setValue(1)\nr\['uniform_scale'].setValue(ss)\nn.end()\n    \nif n\['extraHelper'].value() in \[0,1,2]:\n    #n\['Adjust'].execute()\n    n\['findZ'].clearFlag(1)\n    n\['setGroup'].setFlag(1)\n    n\['happyGroup'].setFlag(1)\n    n\['goGroup'].setFlag(1)\nif n\['extraHelper'].value() in \[1,2]:\n    n\['Adjust'].execute()\n    \n    \n" +STARTLINE}
+ addUserKnob {22 REF l Set t "first step in finding desired position.\n\nplease find some feature on the screen, feature you can see on the other frames as well.\nnot position the picker on this feature and press \"Set\" button\n\nthe reference frame is set, yo should see now the grid centering on the \"picker\"\n\nthere is a chance that \"grid\" will be very small or very big depends on the size of your scene, feel free to adjust it's size with the u_scale knob.\n\nnow you ready for the next step" T "n = nuke.thisGroup()\nn.begin()\nnuke.toNode(\"Switch1\")\['disable'].setValue(0)\nnuke.toNode(\"ScanlineRender1\")\['disable'].setValue(0)\nnuke.toNode(\"StabFrameHold\")\['first_frame'].setValue(n\['refFrame'].value())\n\nif n\['S'].value() == 1:\n\tn\['Stabilize'].execute()\n        n = a.input(1) \nss = n.input(1)\nn.end()       \ntopnode_name = nuke.tcl(\"full_name \[topnode %s]\" % ss.name()) \ncam = nuke.toNode(topnode_name)\ncam\['near'].clearAnimated()\ncam\['far'].clearAnimated()\ncam\['near'].setValue(0.01)\ncam\['far'].setValue(10000)\n\n\nss=n\['scene'].value()\n\nn.begin()\n\nnuke.toNode(\"NoOp1\")\['pick'].execute()\nn\['refFrame'].setValue(nuke.frame())\nnuke.toNode(\"Switch\")\['which'].setValue(0)\n\nr=nuke.toNode(\"Perspective\")\nr.setSelected(False)\nr.hideControlPanel()\nr\['rotate'].setValue(0)\nr\['translate'].setValue(0)\nr\['scaling'].setValue(1)\nr\['uniform_scale'].setValue(ss)\nn.end()\n    \nif n\['extraHelper'].value() in \[0,1,2]:\n    #n\['Adjust'].execute()\n    n\['findZ'].clearFlag(1)\n    #n\['setGroup'].setFlag(1)\n    n\['happyGroup'].setFlag(1)\n    n\['goGroup'].setFlag(1)\nif n\['extraHelper'].value() in \[1,2]:\n    n\['Adjust'].execute()\n    \n    \n" +STARTLINE}
  addUserKnob {6 S l INVISIBLE -STARTLINE +INVISIBLE}
  addUserKnob {3 refFrame l "   reference frame:" -STARTLINE}
- refFrame 1004
+ refFrame 43
  addUserKnob {41 picker l "     " -STARTLINE T NoOp1.picker}
  addUserKnob {41 hue_rotation l "hue grid" T HueShift1.hue_rotation}
  addUserKnob {7 op l "     opacity grid" -STARTLINE}
@@ -34,7 +35,6 @@ Gizmo {
  findZ 0
  addUserKnob {26 d l "<b>2. " t "Second step help us to find exact position in 3d space\n\nstart advance few frames, you should see that a grid is not fixed anymore to your reference feature, from the moment you noticing it is happening adjust \"Z\" knob to bring the \"grid\" back to the place it was. already after first adjustment you will see that grid is sticking well to the feature. Now you can go to some other frame and refine the position again if needed\n\nTipp:\nit is possible that already after one or two frames of advancement your grid will disappear it can happen because of the size of your scene. just play with \"Z\" slider till you will bring the \"grid\" back to the screen. it is possible that you will have to go to negative values as well." T "go to some other frame and adjust Z."}
  addUserKnob {7 Zfind l Z t "Second step help us to find exact position in 3d space\n\nstart advance few frames, you should see that a grid is not fixed anymore to your reference feature, from the moment you noticing it is happening adjust \"Z\" knob to bring the \"grid\" back to the place it was. already after first adjustment you will see that grid is sticking well to the feature. Now you can go to some other frame and refine the position again if needed.\nonce you happy with the result\npress \"Happy\" button!!!\n\nTipp:\nit is possible that already after one or two frames of advancement your grid will disappear it can happen because of the size of your scene. just play with \"Z\" slider till you will bring the \"grid\" back to the screen. it is possible that you will have to go to negative values as well." R -100 100}
- Zfind 100
  addUserKnob {22 Stabilize -STARTLINE T "\n\n\nnode = nuke.thisNode() \nt = node\['S']\n\nif t.value() == 0:\n   nuke.thisKnob().setLabel('<font color=\"Red\"><b>Stabilized')\n   t.setValue(1)\n   nuke.toNode(\"StabFrameHold\")\['disable'].setValue(0)\n   nuke.toNode(\"StabFrameHold\")\['first_frame'].setValue(node\['refFrame'].value())\n   nuke.toNode(\"StabSwitch\")\['disable'].setValue(0)\nelse:\n   nuke.thisKnob().setLabel('Stabilize')\n   t.setValue(0)\n   nuke.toNode(\"StabFrameHold\")\['disable'].setValue(1)\n   nuke.toNode(\"StabSwitch\")\['disable'].setValue(1)"}
  addUserKnob {26 s l <b>3. t "this will create an axis in exact 3D position you found\nplease adjust (if needed)\nrotation of the card to match exact perspective you want\n\nTipp :\nadjusting \"scale\" and \"u_scale\":\nbe carefull when scaling up the card!!! from the moment one of the corners of the \"grid\" is passing the origin of the Camera the calculation will fail. So as a good practice leave your \"grid\" not too big it will not matter for final calculation since it still will lay on the same plane.\n\n" T "Happy with Z? Press \"Happy\" button and adjust perspective."}
  addUserKnob {22 Adjust l Happy!!! t "this will create an axis in exact 3D position you found\nplease adjust (if needed)\nrotation of the card to match exact perspective you want\n\nTipp :\nadjusting \"scale\" and \"u_scale\":\nbe carefull when scaling up the card!!! from the moment one of the corners of the \"grid\" is passing the origin of the Camera the calculation will fail. So as a good practice leave your \"grid\" not too big it will not matter for final calculation since it still will lay on the same plane.\n\n" T "\n\ndef consolidateAnimatedNodeTransforms():\n    # This is based on Ivan B's consolidateNodeTransforms().\n    # Added support for animated Axis/Camera nodes. Also, if it's\n    # a Camera being concatenated, then projection settings get copied.\n    # -Ean C 24/Feb/2011\n    import math\n    import nuke\n    axisNode = nuke.toNode('Z_finder')\n    m = nuke.math.Matrix4()\n\n    nuke.toNode(\"Switch\")\['which'].setValue(1)\n    n = nuke.toNode('Perspective')\n    n\['scaling'].setExpression('curve')\n    n\['rotate'].setExpression('curve')\n    n\['translate'].setExpression('curve')\n\n    first_frame_v = nuke.root()\['first_frame'].value()\n    last_frame_v = nuke.root()\['last_frame'].value()\n    scale_anim = n\['scaling'].animations()\n    rotate_anim = n\['rotate'].animations()\n    translate_anim = n\['translate'].animations()\n\n    for i in range(int(first_frame_v), int(last_frame_v+1)):\n        k = axisNode\['world_matrix']\n        k_time_aware = axisNode\['world_matrix'].getValueAt(i)\n        for y in range(k.height()):\n            for x in range(k.width()):\n                m\[x+(y*k.width())] = k_time_aware\[y + k.width()*x]\n            transM =nuke.math.Matrix4(m)\n            transM.translationOnly()\n            rotM = nuke.math.Matrix4(m)\n            rotM.rotationOnly()\n            scaleM = nuke.math.Matrix4(m)\n            scaleM.scaleOnly()\n            scale = (scaleM.xAxis().x, scaleM.yAxis().y, scaleM.zAxis().z)\n            rot = rotM.rotationsZXY()\n            rotDegrees = ( math.degrees(rot\[0]), math.degrees(rot\[1]), math.degrees(rot\[2]) )\n            trans = (transM\[12], transM\[13], transM\[14])\n\n            for s in range(3):\n                scale_anim\[s].setKey(i, scale\[s])\n                rotate_anim\[s].setKey(i, rotDegrees\[s])\n                translate_anim\[s].setKey(i, trans\[s])\n    n\['translate'].clearAnimated()\n    n\['rotate'].clearAnimated()\n    n\['scaling'].clearAnimated()\n    n\['uniform_scale'].setValue(nuke.toNode(\"Card1\")\['uniform_scale'].value())\n    #nuke.show((n), True)\n    n.setSelected(True)\n    r=nuke.toNode(\"look_at_Axis\")\n    r.setSelected(False)\n    r.hideControlPanel()\t\t\t\nconsolidateAnimatedNodeTransforms()\n\na=nuke.thisNode()\nif a\['S'].value() == 1:\n    a\['Stabilize'].execute()\n\nn=a\nif n\['extraHelper'].value() in \[0,1,2]:\n    n\['findZ'].setFlag(1)\n    n\['happyGroup'].clearFlag(1)\n    n\['goGroup'].clearFlag(1)" +STARTLINE}
@@ -104,7 +104,6 @@ push $N6c728f0
   translate {{"\[exists parent.input1]?\[topnode input1].translate:0" x1112 -519.8007202} {"\[exists parent.input1]?\[topnode input1].translate:0" x1112 197.4966736} {"\[exists parent.input1]?\[topnode input1].translate:0" x1112 -128.6857147}}
   rotate {{"\[exists parent.input1]?\[topnode input1].translate:0?\[topnode input1].rotate:0"} {"\[exists parent.input1]?\[topnode input1].translate:0?\[topnode input1].rotate:0"} {"\[exists parent.input1]?\[topnode input1].translate:0?\[topnode input1].rotate:0"}}
   name Axis1
-  selected true
   xpos -830
   ypos 43
  }
@@ -211,14 +210,14 @@ set N6cde1b0 [stack 0]
   P_channel rgb
   name ScanlineRender2
   xpos -976
-  ypos 907
+  ypos 908
  }
  Switch {
   inputs 2
   which {{parent.extraHelper==2?1:0}}
   name WpasRender
   xpos -976
-  ypos 1727
+  ypos 1728
  }
  NoOp {
   name NoOp1
@@ -229,7 +228,7 @@ set N6cde1b0 [stack 0]
   addUserKnob {20 User}
   addUserKnob {22 pick T "a=nuke.toNode(\"NoOp1\")\nr=nuke.sample(a,\"red\",a\['picker'].value(0),a\['picker'].value(1),1,1)\ng=nuke.sample(a,\"green\",a\['picker'].value(0),a\['picker'].value(1),1,1)\nb=nuke.sample(a,\"blue\",a\['picker'].value(0),a\['picker'].value(1),1,1)\n#nuke.tprint(r)\nnuke.toNode('look_at_Axis')\['translate'].setValue(\[r,g,b])" +STARTLINE}
   addUserKnob {12 picker}
-  picker {1020 576}
+  picker {357 280}
  }
  Clamp {
   channels rgba
@@ -239,7 +238,7 @@ set N6cde1b0 [stack 0]
  }
 push $N6c43050
  FrameHold {
-  first_frame 1004
+  first_frame 36
   name StabFrameHold
   xpos -624
   ypos 1121
@@ -842,7 +841,7 @@ push $N6d95850
   selectable false
   name MergeGeo4
   xpos -232
-  ypos -191
+  ypos -190
  }
 set N6fbdde0 [stack 0]
  TransformGeo {
@@ -887,17 +886,21 @@ push 0
   inputs 0
   display off
   selectable false
+  translate {-5.898159504 2.722195625 -10.5955677}
+  rotate {6.540263435 -169.2111475 0}
+  scaling {10 10 10}
   name Perspective
-  xpos -607
-  ypos 55
+  selected true
+  xpos -613
+  ypos 33
  }
  Axis {
   inputs 0
-  translate {-251.6469116 149.1127014 144.2087708}
+  translate {-5.898159504 2.722195625 -10.5955677}
   rotate {{"\[exists parent.input1]?degrees(atan((\[topnode input1].translate.y(ref)-translate.y)/sqrt(pow2(sqrt(pow2(\[topnode input1].translate.x(ref)-translate.x)+pow2(\[topnode input1].translate.z(ref)-translate.z)))))):0"} {"\[exists parent.input1]?\[topnode input1].translate.x(ref)-translate.x >= 0 ? 270-degrees(atan((\[topnode input1].translate.z(ref)-translate.z)/(\[topnode input1].translate.x(ref)-translate.x))): -degrees(atan((\[topnode input1].translate.z(ref)-translate.z)/(\[topnode input1].translate.x(ref)-translate.x)))-270:0"} {curve}}
   name look_at_Axis
   xpos -497
-  ypos -69
+  ypos -71
   addUserKnob {20 User}
   addUserKnob {3 ref}
   ref {{parent.refFrame}}
@@ -907,8 +910,9 @@ push 0
   translate {0 0 {parent.Zfind}}
   uniform_scale {{parent.Perspective.uniform_scale}}
   name Z_finder
+  selected true
   xpos -497
-  ypos 18
+  ypos 17
  }
  Switch {
   inputs 2
@@ -916,7 +920,7 @@ push 0
   name Switch
   label "\[value which]"
   xpos -507
-  ypos 131
+  ypos 128
  }
  Dot {
   name Dot1
@@ -938,7 +942,7 @@ push 0
   inputs 2
   name TransformGeo1
   xpos -232
-  ypos 218
+  ypos 219
  }
  MergeGeo {
   inputs 2
@@ -952,7 +956,7 @@ push 0
   which {{parent.extraHelper==3?1:parent.extraHelper==4?2:0}}
   name AnimCard
   xpos -231
-  ypos 729
+  ypos 730
  }
  MergeGeo {
   inputs 2
@@ -1116,6 +1120,7 @@ push $N7109470
   xpos 113
   ypos 1809
  }
+set N714b890 [stack 0]
  Dot {
   name Dot7
   xpos 147
@@ -1132,5 +1137,14 @@ push $N7109470
   name Output1
   xpos 113
   ypos 2523
+ }
+push $N714b890
+ Viewer {
+  frame 37
+  frame_range 1-100
+  name Viewer1
+  xpos 1170
+  ypos -9
+  hide_input true
  }
 end_group
