@@ -212,8 +212,8 @@ class KnobScripter(QtWidgets.QWidget):
         self.reload_btn.setIconSize(QtCore.QSize(50,50))
         self.reload_btn.setIconSize(self.qt_icon_size)
         self.reload_btn.setFixedSize(self.qt_btn_size)
-        self.reload_btn.setToolTip("Reload the current script. Will overwrite any changes made to it.\nShortcut: Ctrl+R")
-        self.reload_btn.setShortcut('Ctrl+R')
+        #self.reload_btn.setToolTip("Reload the current script. Will overwrite any changes made to it.\nShortcut: Ctrl+R")
+        #self.reload_btn.setShortcut('Ctrl+R')
         self.reload_btn.clicked.connect(self.reloadClicked)
 
         # Save script

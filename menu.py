@@ -134,7 +134,7 @@ nodesMenu.addCommand("Filter/PolarCoordinates", "nuke.nodePaste(UserDir+'/Folder
 nodesMenu.addCommand("Sharpen", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/Sharpen.nk')")
 
 nodesMenu.addCommand('Transform/CardToTrack', "nuke.createNode(\"CardToTrack\")",icon = "Card.png")
-nodesMenu.addCommand('Transform/TrackToRoto','import TrackToRoto; TrackToRoto.RotoFromTrack()',"Shift+p",icon="Tracker.png")
+nodesMenu.addCommand('Transform/TrackToRoto','import TrackToRoto; TrackToRoto.RotoFromTrack()',"p",icon="Tracker.png")
 nodesMenu.addCommand('Transform/concatenate2Dtransforms','importconcatenate2Dtransforms; concatenate2Dtransforms.transformstoMatrix()',icon="Tracker.png")
 nodesMenu.addCommand('Transform/Smoother','import  Smoother; Smoother.Smoother()') 
 nodesMenu.addCommand("Transform/Offset", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/Offset.nk')", icon="my.png")
