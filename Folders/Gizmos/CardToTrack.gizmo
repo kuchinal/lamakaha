@@ -1,4 +1,9 @@
+set cut_paste_input [stack 0]
+version 11.3 v1
+push 0
+push $cut_paste_input
 Group {
+ inputs 2
  name CardToTrack
  onCreate "#nuke.thisNode()\['picker'].setValue(\[nuke.toNode(\"root\")\['format'].value().width()/2,nuke.toNode(\"root\")\['format'].value().height()/2])"
  knobChanged "nn = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\n\nif kn == \"extraStuff\":\n    \n    if nn\['extraHelper'].value() in \[0,1,2,5]:\n        nn\[\"setGroup\"].clearFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].setFlag(1)\n        nn\[\"Zfind\"].setValue(0)\n        nn\['translate'].setValue(0)\n        nn\['rotate'].setValue(0)\n        nn\['scaling'].setValue(0)\n    elif nn\['extraHelper'].value() in \[3,4]:\n        nn\[\"setGroup\"].setFlag(1)\n        nn\['findZ'].setFlag(1)\n        nn\[\"happyGroup\"].setFlag(1)\n        nn\[\"goGroup\"].clearFlag(1)\n        nn\[\"Zfind\"].setValue(0)\n    \n    \n    \n"
@@ -25,7 +30,7 @@ Group {
  addUserKnob {22 REF l Set t "first step in finding desired position.\n\nplease find some feature on the screen, feature you can see on the other frames as well.\nnot position the picker on this feature and press \"Set\" button\n\nthe reference frame is set, yo should see now the grid centering on the \"picker\"\n\nthere is a chance that \"grid\" will be very small or very big depends on the size of your scene, feel free to adjust it's size with the u_scale knob.\n\nnow you ready for the next step" T "n = nuke.thisGroup()\nn.begin()\nnuke.toNode(\"Switch1\")\['disable'].setValue(0)\nnuke.toNode(\"ScanlineRender1\")\['disable'].setValue(0)\nnuke.toNode(\"StabFrameHold\")\['first_frame'].setValue(n\['refFrame'].value())\n\nif n\['S'].value() == 1:\n\tn\['Stabilize'].execute()\n        n = a.input(1) \nss = n.input(1)\nn.end()       \ntopnode_name = nuke.tcl(\"full_name \[topnode %s]\" % ss.name()) \ncam = nuke.toNode(topnode_name)\ncam\['near'].clearAnimated()\ncam\['far'].clearAnimated()\ncam\['near'].setValue(0.01)\ncam\['far'].setValue(10000)\n\n\nss=n\['scene'].value()\n\nn.begin()\n\nnuke.toNode(\"NoOp1\")\['pick'].execute()\nn\['refFrame'].setValue(nuke.frame())\nnuke.toNode(\"Switch\")\['which'].setValue(0)\n\nr=nuke.toNode(\"Perspective\")\nr.setSelected(False)\nr.hideControlPanel()\nr\['rotate'].setValue(0)\nr\['translate'].setValue(0)\nr\['scaling'].setValue(1)\nr\['uniform_scale'].setValue(ss)\nn.end()\n    \nif n\['extraHelper'].value() in \[0,1,2]:\n    #n\['Adjust'].execute()\n    n\['findZ'].clearFlag(1)\n    #n\['setGroup'].setFlag(1)\n    n\['happyGroup'].setFlag(1)\n    n\['goGroup'].setFlag(1)\nif n\['extraHelper'].value() in \[1,2,5]:\n    n\['Adjust'].execute()\n\n    \n    \n" +STARTLINE}
  addUserKnob {6 S l INVISIBLE -STARTLINE +INVISIBLE}
  addUserKnob {3 refFrame l "   reference frame:" -STARTLINE +INVISIBLE}
- refFrame 1631
+ refFrame 1001
  addUserKnob {41 picker l "     " -STARTLINE T NoOp1.picker}
  addUserKnob {20 endGroup_3 l endGroup n -1}
  addUserKnob {26 ""}
@@ -63,7 +68,7 @@ Group {
   inputs 0
   name BackdropNode1
   tile_color 0x546b3d01
-  note_font "Helvetica bold Bold Bold Bold Bold Bold Bold"
+  note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold"
   note_font_size 100
   xpos -1719
   ypos 497
@@ -83,7 +88,7 @@ Group {
   xpos -1415
   ypos 65
  }
-set Nb74f2420 [stack 0]
+set Nf7ea250 [stack 0]
  Dot {
   name Dot25
   xpos -1675
@@ -125,19 +130,19 @@ set Nb74f2420 [stack 0]
   xpos -1675
   ypos 1840
  }
-push $Nb74f2420
+push $Nf7ea250
  Dot {
   name Dot11
   xpos -1415
   ypos 566
  }
-set Na67f3f20 [stack 0]
+set Nfc7bf90 [stack 0]
  Dot {
   name Dot12
   xpos -1415
   ypos 725
  }
-set Nb72f5ab0 [stack 0]
+set Nfc4baa0 [stack 0]
  Dot {
   name Dot9
   xpos -1415
@@ -150,8 +155,8 @@ set Nb72f5ab0 [stack 0]
   ypos 760
   number 1
  }
-set Na73f6560 [stack 0]
-push $Na67f3f20
+set Nf82ba00 [stack 0]
+push $Nfc7bf90
  Axis {
   inputs 0
   translate {{"\[if \{\[exists parent.input1] == 0\} \{return 0\} else \{return \[value \[topnode this.parent.input1].translate.0]\}]" x1112 -519.8007202} {"\[if \{\[exists parent.input1] == 0\} \{return 0\} else \{return \[value \[topnode this.parent.input1].translate.1]\}]" x1112 197.4966736} {"\[if \{\[exists parent.input1] == 0\} \{return 0\} else \{return \[value \[topnode this.parent.input1].translate.2]\}]" x1112 -128.6857147}}
@@ -241,9 +246,9 @@ push $Na67f3f20
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  TransformGeo {
   inputs 2
@@ -269,7 +274,7 @@ push $Na67f3f20
   xpos 834
   ypos -788
  }
-set N4ee73b00 [stack 0]
+set Nf833ba0 [stack 0]
  Dot {
   name Dot5
   xpos -1122
@@ -313,7 +318,7 @@ set N4ee73b00 [stack 0]
   addUserKnob {20 User}
   addUserKnob {22 pick T "a=nuke.toNode(\"NoOp1\")\nr=nuke.sample(a,\"red\",a\['picker'].value(0),a\['picker'].value(1),1,1)\ng=nuke.sample(a,\"green\",a\['picker'].value(0),a\['picker'].value(1),1,1)\nb=nuke.sample(a,\"blue\",a\['picker'].value(0),a\['picker'].value(1),1,1)\n#nuke.tprint(r)\nnuke.toNode('look_at_Axis')\['translate'].setValue(\[r,g,b])" +STARTLINE}
   addUserKnob {12 picker}
-  picker {976 403}
+  picker {254.8000031 754.2000122}
  }
  Clamp {
   channels rgba
@@ -321,16 +326,16 @@ set N4ee73b00 [stack 0]
   xpos -125
   ypos 2323
  }
-push $Na73f6560
+push $Nf82ba00
  FrameHold {
-  first_frame 1110
+  first_frame 1001
   name StabFrameHold
   xpos -624
   ypos 1121
   disable true
  }
-set Na57f5080 [stack 0]
-push $Na73f6560
+set Nfc8db10 [stack 0]
+push $Nf82ba00
  Axis {
   name Axis3
   xpos -500
@@ -420,9 +425,9 @@ push $Na73f6560
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  TransformGeo {
   inputs 2
@@ -437,7 +442,7 @@ push $Na73f6560
   xpos -341
   ypos 983
  }
-push $Nb72f5ab0
+push $Nfc4baa0
  Constant {
   inputs 0
   format "512 512 0 0 512 512 1 square_512"
@@ -447,7 +452,7 @@ push $Nb72f5ab0
   ypos -638
   postage_stamp false
  }
-set N52e6af90 [stack 0]
+set Nf167220 [stack 0]
  Wireframe {
   operation "see through"
   line_width 1
@@ -456,7 +461,7 @@ set N52e6af90 [stack 0]
   xpos -642
   ypos -416
  }
-set N52b70200 [stack 0]
+set Nf190d10 [stack 0]
  Card2 {
   display wireframe
   image_aspect false
@@ -533,16 +538,16 @@ set N52b70200 [stack 0]
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  Dot {
   name Dot19
   xpos -857
   ypos -260
  }
-push $N52b70200
+push $Nf190d10
  Card2 {
   display wireframe
   image_aspect false
@@ -619,16 +624,16 @@ push $N52b70200
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  Dot {
   name Dot18
   xpos -772
   ypos -286
  }
-push $N52b70200
+push $Nf190d10
  Card2 {
   display wireframe
   image_aspect false
@@ -705,16 +710,16 @@ push $N52b70200
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  Dot {
   name Dot17
   xpos -690
   ypos -312
  }
-push $N52b70200
+push $Nf190d10
  Card2 {
   display wireframe
   image_aspect false
@@ -791,9 +796,9 @@ push $N52b70200
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  MergeGeo {
   inputs 2
@@ -821,7 +826,7 @@ push $N52b70200
   xpos -608
   ypos -187
  }
-push $N52e6af90
+push $Nf167220
  Wireframe {
   operation "see through"
   line_width 1
@@ -907,16 +912,16 @@ push $N52e6af90
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  Dot {
   name Dot15
   xpos -461
   ypos -307
  }
-push $N52e6af90
+push $Nf167220
  Wireframe {
   operation "see through"
   line_width 1
@@ -1000,16 +1005,16 @@ push $N52e6af90
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  Dot {
   name Dot14
   xpos -318
   ypos -333
  }
-push $N52e6af90
+push $Nf167220
  Wireframe {
   operation "see through"
   line_width 0.1
@@ -1090,9 +1095,9 @@ push $N52e6af90
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  MergeGeo {
   inputs 2
@@ -1115,7 +1120,7 @@ push $N52e6af90
   xpos -232
   ypos -190
  }
-set N82efbb00 [stack 0]
+set Nf5ddea0 [stack 0]
  TransformGeo {
   inputs 2
   name TransformGeo5
@@ -1127,24 +1132,24 @@ set N82efbb00 [stack 0]
   operation "see through"
   line_width 2
   name Wireframe1
-  xpos -702
-  ypos 581
+  xpos -713
+  ypos 433
  }
-set N63572020 [stack 0]
-push 0
+set Nf5fb220 [stack 0]
+push $Nfc4baa0
  ApplyMaterial {
   inputs 2
   name ApplyMaterial2
-  xpos -702
-  ypos 676
+  xpos -585
+  ypos 669
  }
-push $N63572020
-push 0
+push $Nf5fb220
+push $Nfc4baa0
  ApplyMaterial {
   inputs 2
   name ApplyMaterial1
-  xpos -758
-  ypos 640
+  xpos -808
+  ypos 519
  }
 push 0
  Switch {
@@ -1159,14 +1164,14 @@ push 0
   display off
   selectable false
   scaling {0 0 0}
+  uniform_scale 10
   name Perspective
-  selected true
   xpos -611
   ypos 13
  }
  Axis {
   inputs 0
-  translate {-219.1196899 113.3302612 -261.8713379}
+  translate {118.7531357 79.11032867 144.1426086}
   rotate {{"\[if \{\[exists parent.input1] == 0\} \{return 0\} else \{return degrees(atan((\[topnode input1].translate.y(ref)-translate.y)/sqrt(pow2(sqrt(pow2(\[topnode input1].translate.x(ref)-translate.x)+pow2(\[topnode input1].translate.z(ref)-translate.z))))))\}]        "} {"\[topnode input1].translate.x(ref)-translate.x >= 0 ? 270-degrees(atan((\[topnode input1].translate.z(ref)-translate.z)/(\[topnode input1].translate.x(ref)-translate.x))): -degrees(atan((\[topnode input1].translate.z(ref)-translate.z)/(\[topnode input1].translate.x(ref)-translate.x)))-270"} {"curve  "}}
   name look_at_Axis
   xpos -500
@@ -1199,7 +1204,6 @@ push 0
  }
  Switch {
   inputs 2
-  which 1
   name Switch
   label "\[value which]"
   xpos -507
@@ -1210,8 +1214,8 @@ push 0
   xpos -473
   ypos 222
  }
-set N4e36b360 [stack 0]
-push $N82efbb00
+set Nf69df90 [stack 0]
+push $Nf5ddea0
 push 0
  Switch {
   inputs 2
@@ -1248,21 +1252,21 @@ push 0
   xpos -231
   ypos 979
  }
-push $Na57f5080
-push $N4e36b360
+push $Nfc8db10
+push $Nf69df90
  Dot {
   name Dot8
   xpos -470
   ypos 583
  }
-push $Na73f6560
-push $N4ee73b00
+push $Nf82ba00
+push $Nf833ba0
  Dot {
   name Dot21
   xpos 834
   ypos 764
  }
-set N4df6d4c0 [stack 0]
+set Nf6dfc40 [stack 0]
  Project3D {
   inputs 2
   crop false
@@ -1344,9 +1348,9 @@ set N4df6d4c0 [stack 0]
   addUserKnob {22 "floor Pivot_17" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
   addUserKnob {22 "corner Pivot_17" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
   addUserKnob {22 snapToSelected_17 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
-  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
-  addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
-  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 "floor Pivot_18" l "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+  addUserKnob {22 "corner Pivot_18" l "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+  addUserKnob {22 snapToSelected_18 l snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
  }
  TransformGeo {
   inputs 2
@@ -1354,13 +1358,13 @@ set N4df6d4c0 [stack 0]
   xpos 554
   ypos 993
  }
-push $N4df6d4c0
+push $Nf6dfc40
  Dot {
   name Dot22
   xpos 834
   ypos 1035
  }
-set N6246d770 [stack 0]
+set Nf7410e0 [stack 0]
  Remove {
   name Remove2
   xpos 653
@@ -1374,7 +1378,7 @@ set N6246d770 [stack 0]
   xpos 554
   ypos 1127
  }
-push $N6246d770
+push $Nf7410e0
  Switch {
   inputs 2
   which 1
@@ -1394,7 +1398,7 @@ push $N6246d770
   xpos 834
   ypos 1582
  }
-set N62b73650 [stack 0]
+set N100319c0 [stack 0]
  Remove {
   name Remove1
   xpos 154
@@ -1420,7 +1424,7 @@ set N62b73650 [stack 0]
   xpos -235
   ypos 1728
  }
-push $N62b73650
+push $N100319c0
  Merge2 {
   inputs 2
   name Merge2
@@ -1449,7 +1453,7 @@ push $N62b73650
   name StickyNote1
   tile_color 0xffffffff
   label "<b>Mark Joey Tang Deep2VP                ."
-  note_font "Helvetica bold Bold Bold Bold Bold Bold Bold"
+  note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold"
   note_font_size 20
   xpos -1719
   ypos 459
@@ -1470,7 +1474,6 @@ push $N62b73650
   focal {{"\[if \{\[exists parent.input1] == 0\} \{return 0\} else \{return \[value \[topnode this.parent.input1].focal]\}]"}}
   haperture {{"\[if \{\[exists parent.input1] == 0\} \{return 0\} else \{return \[value \[topnode this.parent.input1].haperture]\}]"}}
   name cam_data
-  selected true
   xpos -1558
   ypos 598
  }

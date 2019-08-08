@@ -179,7 +179,7 @@ nodesMenu.addCommand("Color/shuffle/shuffleGreen",'import shuffle_Smart;shuffle_
 nodesMenu.addCommand("Color/shuffleCreate",'import shuffle_Smart;shuffle_Smart.shuffleCreate()',"s")
 nodesMenu.addCommand("Color/shuffleDepth",'import shuffle_Smart;shuffle_Smart.shuffleDepth()',"d")
 nodesMenu.addCommand('Color/Invert', "nuke.createNode(\"Invert\")","i",icon="my.png")       
-nodesMenu.addCommand("Color/Multiply", "fademult;fademult.fademult()","f", icon="ColorMath.png")
+nodesMenu.addCommand("Color/Multiply", "import fademult;fademult.fademult()","f", icon="ColorMath.png")
 nodesMenu.addCommand("Color/HueCorrect", "nuke.createNode(\"HueCorrect\")","h", icon="HueCorrect.png")
 nodesMenu.addCommand("Color/ColorLookup", "nuke.createNode(\"ColorLookup\")","Ctrl+F4",icon="ColorLookup.png")
 nodesMenu.addCommand("Color/Clamp", "nuke.createNode(\"Clamp\")","F4", icon="Clamp.png")
