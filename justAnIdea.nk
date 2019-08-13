@@ -1,0 +1,194 @@
+set cut_paste_input [stack 0]
+version 11.3 v4
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x63725b01
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -579
+ ypos -523
+ bookmark false
+ bdwidth 423
+ bdheight 778
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x594f9301
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -1300
+ ypos -537
+ bookmark false
+ bdwidth 421
+ bdheight 569
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ tile_color 0xffffffff
+ label "<b>after                ."
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -579
+ ypos -648
+}
+ColorWheel {
+ inputs 0
+ format "512 512 0 0 512 512 1 square_512"
+ gamma 0.45
+ name ColorWheel2
+ selected true
+ xpos -1290
+ ypos -434
+}
+push $cut_paste_input
+Reformat {
+ format "512 512 0 0 512 512 1 square_512"
+ name Reformat2
+ selected true
+ xpos -1181
+ ypos -452
+}
+Grid {
+ replace true
+ name Grid2
+ selected true
+ xpos -1181
+ ypos -366
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge4
+ selected true
+ xpos -1181
+ ypos -332
+}
+PixelTwitchCore {
+ salt 200
+ radius {{parent.PixelTwitchCore2.radius}}
+ name PixelTwitchCore3
+ selected true
+ xpos -1177
+ ypos -201
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ tile_color 0xffffffff
+ label "<b>before                ."
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -1300
+ ypos -662
+}
+ColorWheel {
+ inputs 0
+ format "512 512 0 0 512 512 1 square_512"
+ gamma 0.45
+ name ColorWheel1
+ selected true
+ xpos -543
+ ypos -420
+}
+Reformat {
+ inputs 0
+ format "512 512 0 0 512 512 1 square_512"
+ name Reformat1
+ selected true
+ xpos -434
+ ypos -438
+}
+Grid {
+ replace true
+ name Grid1
+ selected true
+ xpos -434
+ ypos -352
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge3
+ selected true
+ xpos -434
+ ypos -318
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -410
+ ypos -270
+}
+set N50e4450 [stack 0]
+Transform {
+ translate {{parent.PixelTwitchCore2.radius} {-translate.x}}
+ center {640 360}
+ black_outside false
+ name Transform3
+ selected true
+ xpos -256
+ ypos 27
+}
+push $N50e4450
+Dot {
+ name Dot2
+ selected true
+ xpos -535
+ ypos -252
+}
+Transform {
+ rotate 90
+ center {256 256}
+ name Transform4
+ selected true
+ xpos -569
+ ypos -234
+}
+PixelTwitchCore {
+ salt 200
+ name PixelTwitchCore2
+ selected true
+ xpos -569
+ ypos -107
+}
+Transform {
+ rotate -90
+ center {256 256}
+ name Transform1
+ selected true
+ xpos -569
+ ypos -14
+}
+push $N50e4450
+PixelTwitchCore {
+ salt 200
+ radius {{parent.PixelTwitchCore2.radius}}
+ name PixelTwitchCore1
+ selected true
+ xpos -444
+ ypos -99
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge1
+ selected true
+ xpos -444
+ ypos 83
+}
+Merge2 {
+ inputs 2
+ operation from
+ bbox B
+ name Merge2
+ selected true
+ xpos -316
+ ypos 181
+}
