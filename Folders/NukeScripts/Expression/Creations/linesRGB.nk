@@ -1,0 +1,47 @@
+set cut_paste_input [stack 0]
+version 11.3 v4
+push $cut_paste_input
+Reformat {
+ format "512 512 0 0 512 512 1 square_512"
+ name Reformat1
+ selected true
+ xpos -1181
+ ypos -712
+}
+Expression {
+ temp_name0 thickness
+ temp_expr0 1
+ temp_name1 wide
+ temp_expr1 3
+ expr0 "( cos(y / wide ) + thickness ) / 2"
+ expr1 "( cos(y / wide ) + thickness ) / 2"
+ expr2 "( cos(y / wide ) + thickness ) / 2"
+ expr3 "( cos(y / wide ) + thickness ) / 2"
+ name Lines_Horizontal3
+ selected true
+ xpos -1181
+ ypos -676
+}
+Grade {
+ blackpoint {1.585483551e-05 1.585483551e-05 1.585483551e-05 1.585483551e-05}
+ whitepoint {0.9997172952 0.9997172952 0.9997172952 0.9997172952}
+ white 3
+ add 0.5
+ gamma 2.1
+ black_clamp false
+ name Grade4
+ selected true
+ xpos -1181
+ ypos -638
+ addUserKnob {20 User}
+ addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+}
+Expression {
+ expr0 (red>2?1:0)
+ expr1 green>1&&green<2?1:0
+ expr2 blue<1?1:0
+ name Expression3
+ selected true
+ xpos -1181
+ ypos -604
+}

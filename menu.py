@@ -238,9 +238,26 @@ nuke.tprint("_"*100);nuke.tprint("my user is loaded");nuke.tprint("_"*100)
 
 
 
+# def example():
+#     import sys
+#     from PySide2 import QtCore, QtGui, QtWidgets
+    
+#     pixmap = QtGui.QPixmap('/mnt/Hobby/projects/toe/07_Masters/toe.png')
+#     label = QtWidgets.QLabel()
+#     label.setPixmap(pixmap)
+#     label.setScaledContents(1)
+#     label.resize(1146/2, 1468/2)
+#     #label.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+#     label.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+#     label.show()
+# nuke.addOnCreate(lambda: example() , nodeClass="Toe2")
 
 
 
+def example():
+    nuke.thisNode()["icon"].setValue('/mnt/Hobby/projects/toe/07_Masters/toeST.png')
+
+nuke.addOnCreate(lambda: example() , nodeClass="Toe2")
 
 
 
