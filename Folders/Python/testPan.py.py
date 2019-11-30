@@ -56,19 +56,32 @@ class TagGroups(QWidget):
         self.ok_cancel.setObjectName("ok_cancel")
         self.ok_cancel.setAlignment(Qt.AlignBottom)
 
+        trixIco = "/home/alexey/Dropbox/users/localRepo/Folders/Icons/bb.png"
+        pixmap = QtGui.QPixmap(trixIco)
+        self.picture = QtGui.Qlabel("dfdgfd")
+        #   self.picture.setPixmap(pixmap)
+        self.picture.setText("dfdsfds")
+        self.ok_cancel.addWidget(self.picture)
+        print self.picture
+
         #create ok and cancel buttons
-        for one in ["Ok","Cancel"]:
+        for one in ["Ok","Cancel","test"]:
             self.buttonOC = QPushButton()
             self.buttonOC.setFixedSize(70, 20)
             self.buttonOC.setCheckable(True)
             self.buttonOC.setObjectName(one)
             self.buttonOC.setText(one)
+fdf
             if one == "Ok":
                 Ok = self.buttonOC
                 self.buttonOC.clicked.connect(lambda: okPressed(self.buttonOC))
             if one == "Cancel":
                 self.buttonOC.clicked.connect(lambda: cancelPressed(self.buttonOC))            
             self.ok_cancel.addWidget(self.buttonOC)
+            else:
+                self.ok_cancel.addWidget(self.picture)
+
+
 
         #tags button
         def mkButton(sizeX,sizeY,tag, pat=""):
@@ -285,12 +298,12 @@ class TagGroups(QWidget):
 
 
 
-        def mousePressEvent(self, QMouseEvent):
-            #print mouse position
-            print QMouseEvent.source()
-            print 'click!!!!'
+        # def mousePressEvent(self, QMouseEvent):
+        #     #print mouse position
+        #     #print QMouseEvent.source()
+        #     print 'click!!!!'
 
-        mousePressEvent(self, QMouseEvent)
+        # mousePressEvent(self, QMouseEvent)
 
     def run(self):
         # Show the form

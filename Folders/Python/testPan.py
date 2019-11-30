@@ -7,6 +7,10 @@ import re
 # can be used to customize the application's appearance and behavior
 #qt_app = QApplication(sys.argv)
  
+
+
+
+
 class TagGroups(QWidget):
 
     ''' An example of PySide absolute positioning; the main window
@@ -52,6 +56,15 @@ class TagGroups(QWidget):
         self.ok_cancel.setObjectName("ok_cancel")
         self.ok_cancel.setAlignment(Qt.AlignBottom)
 
+        trixIco = "/mnt/Hobby/projects/TAG/07_Masters/baby.png"
+        pixmap = QPixmap(trixIco)
+        self.picture = QLabel()
+        self.picture.setPixmap(pixmap)
+        self.picture.setScaledContents(True)
+        self.picture.setFixedSize(70, 70)
+
+        self.ok_cancel.addWidget(self.picture)
+
         #create ok and cancel buttons
         for one in ["Ok","Cancel"]:
             self.buttonOC = QPushButton()
@@ -59,12 +72,14 @@ class TagGroups(QWidget):
             self.buttonOC.setCheckable(True)
             self.buttonOC.setObjectName(one)
             self.buttonOC.setText(one)
+
             if one == "Ok":
                 Ok = self.buttonOC
                 self.buttonOC.clicked.connect(lambda: okPressed(self.buttonOC))
             if one == "Cancel":
                 self.buttonOC.clicked.connect(lambda: cancelPressed(self.buttonOC))            
             self.ok_cancel.addWidget(self.buttonOC)
+
 
         #tags button
         def mkButton(sizeX,sizeY,tag, pat=""):
@@ -279,6 +294,14 @@ class TagGroups(QWidget):
         tagButtonClick(self,shotTags,shots,self.button)
 
 
+
+
+        # def mousePressEvent(self, QMouseEvent):
+        #     #print mouse position
+        #     #print QMouseEvent.source()
+        #     print 'click!!!!'
+
+        # mousePressEvent(self, QMouseEvent)
 
     def run(self):
         # Show the form
