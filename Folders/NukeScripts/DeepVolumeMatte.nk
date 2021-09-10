@@ -1,0 +1,618 @@
+Group {
+ name DeepVolumeMatte
+ onCreate "\nthisGRP = nuke.thisGroup()\nif thisGRP\['mode'].getValue() == 0 :\n    thisGRP\['label'].setValue('<font color=#00FFBB>colorpicker mode : off</font><br><font color=cyan>Deep Output</font>')\nelse :\n    thisGRP\['label'].setValue('<font color=#00FFBB>colorpicker mode : on</font><br><font color=cyan>Image Output</font>')\n"
+ tile_color 0x597fff
+ label "<font color=#00FFBB>colorpicker mode : off</font><br><font color=cyan>Deep Output</font>"
+ addUserKnob {20 tab_general l General}
+ addUserKnob {3 mode +INVISIBLE}
+ addUserKnob {41 transform T geoShow.transform}
+ addUserKnob {26 title_matte l <b>MATTE</b>}
+ addUserKnob {22 toggle_colorpicker_mode l "toggle colorpicker mode" T "thisGRP = nuke.thisGroup()\n\ndef cpmode() :\n\tthisGRP\['mode'].setValue(2)\n\tthisGRP\['label'].setValue('<font color=#00FFBB>colorpicker mode : on</font><br><font color=cyan>Image Output</font>')\n\nif thisGRP\['mode'].getValue() == 2 :\n\tthisGRP\['mode'].setValue(0)\n\tthisGRP\['label'].setValue('<font color=#00FFBB>colorpicker mode : off</font><br><font color=cyan>Deep Output</font>')\nelse :\n\tif thisGRP\['mat_translate'].isAnimated() :\n\t\tif nuke.ask('Translate on this node has <font color=orange>expression/animated</font>.\\n\\nIf switch to colorpicker mode, animation or expression will be clear but keep the current value.\\n\\nDo you want to process?') :\n\t\t\tthisGRP\['remove_link'].execute()\n\t\t\tcpmode()\n\telse :\n\t\tcpmode()" +STARTLINE}
+ addUserKnob {41 color_sample l "color sample" T sam_px.color_sample}
+ addUserKnob {26 spacer l "" +STARTLINE T <br>}
+ addUserKnob {41 mat_shape l shape t "Select the 3D shape of the matte. 3D shape can be preview under 3D view when the panel of this node is active.\n\nSphere : only support uniform falloff.\nCube : support separate 3-axis falloff.\nCylinder : only support uniform falloff." T menu01.mat_shape}
+ addUserKnob {6 invert_matte l "invert matte" t "Invert the matte of the shape. Same as deepHoldout but with falloff support (soften matte)." -STARTLINE}
+ addUserKnob {4 mat_rot_order l "rotation order" M {XYZ XZY YXZ YZX ZXY ZYX}}
+ mat_rot_order ZXY
+ addUserKnob {13 mat_translate l translate}
+ addUserKnob {13 mat_rotate l rotate}
+ addUserKnob {13 mat_scaling l scale}
+ mat_scaling {1 1 1}
+ addUserKnob {7 mat_uniform_scale l "uniform scale"}
+ mat_uniform_scale 1
+ addUserKnob {13 mat_skew l skew}
+ addUserKnob {13 mat_pivot l pivot}
+ addUserKnob {22 set_link l "link to selected axis/geo" t "Select any 3D nodes and link the node with this button. It gives you a control in 3D for transformation." T "def getLevel() :\n    ### level define ###\n    if len(nuke.thisNode().fullName().split('.')) == 1 :\n          ggLevel = nuke.root()\n    else :\n          nodePath = nuke.thisNode().fullName().split('.')\n          nodePath.pop()\n          ggLevel = nuke.toNode('.'.join(nodePath))\n    return ggLevel\n\nroot = getLevel()\nthisGRP = nuke.thisGroup()\nmainKnobs = \['mat_rot_order','mat_translate','mat_rotate','mat_scaling','mat_uniform_scale','mat_skew','mat_pivot']\n\naxWhiteList = \['Axis','Axis2','Cube','Sphere','Cylinder','Card','Card2','ReadGeo','ReadGeo2','TransformGeo']\n\ntry :\n    with root :\n        selNode = nuke.selectedNode()\n    \n    with thisGRP :\n        if axWhiteList.count(selNode.Class()) != 0 :\n            thisGRP\[mainKnobs\[0]].setExpression( '\{0\}.rot_order'.format(selNode.name()) )\n            thisGRP\[mainKnobs\[1]].setExpression( '\{0\}.translate'.format(selNode.name()) )\n            thisGRP\[mainKnobs\[2]].setExpression( '\{0\}.rotate'.format(selNode.name()) )\n            thisGRP\[mainKnobs\[3]].setExpression( '\{0\}.scaling'.format(selNode.name()) )\n            thisGRP\[mainKnobs\[4]].setExpression( '\{0\}.uniform_scale'.format(selNode.name()) )\n            thisGRP\[mainKnobs\[5]].setExpression( '\{0\}.skew'.format(selNode.name()) )\n            thisGRP\[mainKnobs\[6]].setExpression( '\{0\}.pivot'.format(selNode.name()) )\n        else :\n            nuke.message('No support node selected.')\nexcept :\n    nuke.message('no node selected.')" +STARTLINE}
+ addUserKnob {22 remove_link l "remove linked expression" -STARTLINE T "thisGRP = nuke.thisGroup()\nmainKnobs = \['mat_rot_order','mat_translate','mat_rotate','mat_scaling','mat_uniform_scale','mat_skew','mat_pivot']\n\nfor i in range (0, len(mainKnobs), 1) :\n    thisGRP\[mainKnobs\[i]].clearAnimated()"}
+ addUserKnob {26 title_falloff l <b>FALLOFF</b>}
+ addUserKnob {41 falloff_type l "falloff type" T menu.falloff_type}
+ addUserKnob {13 cube3d_falloff l "Cube3D falloff" +DISABLED}
+ cube3d_falloff {1 1 1}
+ addUserKnob {7 uniform_falloff l "uniform falloff" t "This is a globel falloff value. Support for any shape of matte." R 0.001 1}
+ uniform_falloff 0.4
+ addUserKnob {6 test_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 falloff_exp l exponential +DISABLED R 0.1 10}
+ falloff_exp 4
+ addUserKnob {20 t_VERSION l Version}
+ addUserKnob {26 l_VERSION l <b>Version</b> T 1.9}
+ addUserKnob {26 l_DATE l "<b>Date Modified</b>" T 2019-05-14}
+ addUserKnob {26 l_CHANGELOG l <b>Changelog</b> T "1.9\n- 'DeepVolumeMatte'\n  fix when gizmo render on farm\n\n1.8\n- 'DeepVolumeMatte'\n  colorpicker mode will show the matte in\n  alpha channel.\n- 'DeepVolumeMatte'\n  when colorpicker mode is on,\n  output will switch to 2D image. Able to use\n  the matte on downstream without any\n  deep to 2D image convertion.\n  Label on the node will show the output\n  format."}
+ addUserKnob {26 l_DEV l "<b>Developed by</b>" T "<a href='https://facebook.com/MJTLab'><font color='orange'>Mark Joey Tang</font></a>"}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0xff
+  gl_color 0xff
+  label "dont touch"
+  note_font_size 42
+  xpos -648
+  ypos -22
+  bdwidth 359
+  bdheight 160
+ }
+ Input {
+  inputs 0
+  name deep
+  xpos 0
+  ypos -341
+ }
+ Dot {
+  name Dot1
+  xpos 34
+  ypos -261
+ }
+set N6d5bdd80 [stack 0]
+ DeepToImage {
+  name DeepToImage1
+  xpos -142
+  ypos -264
+ }
+add_layer {deepRawColor deepRawColor.red deepRawColor.green deepRawColor.blue deepRawColor.alpha}
+ AddChannels {
+  channels deepRawColor
+  name AddChannels1
+  xpos -142
+  ypos -207
+ }
+push $N6d5bdd80
+ DeepRecolor {
+  inputs 2
+  channels {{{parent.AddChannels1.channels}}}
+  name DeepRecolor1
+  xpos 0
+  ypos -207
+ }
+ Dot {
+  name Dot7
+  xpos 34
+  ypos -129
+ }
+set N6d55ac30 [stack 0]
+ DeepToImage {
+  name DeepToImage2
+  xpos -142
+  ypos -132
+ }
+add_layer {deep2vpBuffer deep2vpBuffer.red}
+ AddChannels {
+  channels deep2vpBuffer
+  name AddChannels2
+  xpos -142
+  ypos -75
+ }
+push $N6d55ac30
+ DeepRecolor {
+  inputs 2
+  channels {{{parent.AddChannels2.channels}}}
+  name DeepRecolor2
+  xpos 0
+  ypos -75
+ }
+ DeepExpression {
+  chans0 deepRawColor
+  chans1 none
+  deepRawColor.red red
+  deepRawColor.green green
+  deepRawColor.blue blue
+  deepRawColor.alpha alpha
+  name DeepExpression4
+  label "store color"
+  xpos 0
+  ypos 21
+ }
+ DeepExpression {
+  chans0 {rgba.red rgba.green rgba.blue none}
+  chans1 none
+  rgba.red deepPosition.red
+  rgba.green deepPosition.green
+  rgba.blue deepPosition.blue
+  name DeepExpression1
+  label "deepPosition shuffle\n"
+  xpos 0
+  ypos 84
+ }
+ DeepExpression {
+  temp_name0 x
+  temp_expr0 "r - \[value ax_data.world_matrix.3]"
+  temp_name1 y
+  temp_expr1 "g - \[value ax_data.world_matrix.7]"
+  temp_name2 z
+  temp_expr2 "b - \[value ax_data.world_matrix.11]"
+  chans0 rgb
+  chans1 none
+  rgba.red "x * \[value inverseMatrix.invMatrix.0] + y * \[value inverseMatrix.invMatrix.1] + z * \[value inverseMatrix.invMatrix.2]"
+  rgba.green "x * \[value inverseMatrix.invMatrix.3] + y * \[value inverseMatrix.invMatrix.4] + z * \[value inverseMatrix.invMatrix.5]"
+  rgba.blue "x * \[value inverseMatrix.invMatrix.6] + y * \[value inverseMatrix.invMatrix.7] + z * \[value inverseMatrix.invMatrix.8]"
+  name DeepExpression7
+  label "apply matte transformation"
+  xpos 0
+  ypos 178
+ }
+ Dot {
+  name Dot4
+  xpos 34
+  ypos 442
+ }
+set N6d574710 [stack 0]
+ DeepExpression {
+  temp_name0 circle
+  temp_expr0 "sqrt( pow2(r) + pow2(b) )"
+  temp_name1 height
+  temp_expr1 abs(g)
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp( max( sqrt( pow2(r) + pow2(b) ) , abs(g) ) )"
+  name DeepExpression3
+  label "cylinder matte"
+  xpos 130
+  ypos 548
+ }
+push $N6d574710
+ DeepExpression {
+  temp_name0 newR
+  temp_expr0 "abs(r) > 1 ? 1 : clamp( sqrt( pow2(abs(r) * \[value parent.cube3d_falloff.x]) ) )"
+  temp_name1 newG
+  temp_expr1 "abs(g) > 1 ? 1 : clamp( sqrt( pow2(abs(g) * \[value parent.cube3d_falloff.y]) ) )"
+  temp_name2 newB
+  temp_expr2 "abs(b) > 1 ? 1 : clamp( sqrt( pow2(abs(b) * \[value parent.cube3d_falloff.z]) ) )"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red clamp(max(abs(newR),abs(newG),abs(newB)))
+  name DeepExpression16
+  label "square matte"
+  xpos 0
+  ypos 546
+ }
+push $N6d574710
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "clamp( sqrt( pow2(r)+pow2(g)+pow2(b) ) )"
+  name DeepExpression2
+  label "sphere matte"
+  xpos -146
+  ypos 549
+ }
+ Switch {
+  inputs 3
+  which {{parent.mat_shape}}
+  name Switch1
+  xpos 0
+  ypos 634
+ }
+ Dot {
+  name Dot6
+  xpos 34
+  ypos 714
+ }
+set N6d59ce40 [stack 0]
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red r*a
+  name DeepExpression17
+  label "fix filter"
+  xpos 69
+  ypos 759
+ }
+push $N6d59ce40
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red (1-r)*a
+  name DeepExpression13
+  label "fix filter\ninvert"
+  xpos -60
+  ypos 757
+ }
+ Switch {
+  inputs 2
+  which {{invert_matte}}
+  name Switch5
+  xpos 0
+  ypos 821
+ }
+ DeepExpression {
+  temp_name0 falloff
+  temp_expr0 "\[value parent.uniform_falloff] == 0 ? rgba.red*(1/0.00001) : rgba.red*(1/\[value parent.uniform_falloff])"
+  temp_name1 invfalloff
+  temp_expr1 "\[value parent.uniform_falloff] == 0 ? 1- ( (1 - rgba.red)*(1/0.00001) ) : 1- ( (1 - rgba.red)*(1/\[value parent.uniform_falloff]) )"
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "\[value matte_status] == 1 ? clamp(invfalloff) : clamp(falloff)"
+  name DeepExpression15
+  label "global falloff"
+  xpos 0
+  ypos 901
+  addUserKnob {20 User}
+  addUserKnob {7 matte_status}
+  matte_status {{parent.invert_matte}}
+ }
+ Dot {
+  name Dot2
+  xpos 34
+  ypos 989
+ }
+set N6d5afe50 [stack 0]
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red "pow(rgba.red,\[value parent.falloff_exp])"
+  name DeepExpression9
+  label exponential
+  xpos 259
+  ypos 1096
+ }
+push $N6d5afe50
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red clamp((rgba.red**3),0,1)
+  name DeepExpression8
+  label cubic
+  xpos 136
+  ypos 1099
+ }
+push $N6d5afe50
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red clamp(pow2(rgba.red),0,1)
+  name DeepExpression6
+  label quadratic
+  xpos 0
+  ypos 1099
+ }
+push $N6d5afe50
+ DeepExpression {
+  chans0 {rgba.red -rgba.green -rgba.blue none}
+  chans1 none
+  rgba.red smoothstep(0,1,rgba.red)
+  name DeepExpression5
+  label smooth
+  xpos -149
+  ypos 1095
+ }
+push $N6d5afe50
+ Dot {
+  name Dot3
+  xpos -256
+  ypos 1107
+ }
+ Switch {
+  inputs 5
+  which {{parent.falloff_type}}
+  name Switch2
+  xpos 0
+  ypos 1203
+ }
+ DeepExpression {
+  chans0 deep2vpBuffer
+  chans1 none
+  deep2vpBuffer.red red
+  name DeepExpression11
+  label "shuffle red to deep2vp_buffer.red"
+  xpos 0
+  ypos 1283
+ }
+ DeepExpression {
+  chans1 none
+  rgba.red "deepRawColor.red * deep2vpBuffer.red"
+  rgba.green "deepRawColor.green * deep2vpBuffer.red"
+  rgba.blue "deepRawColor.blue * deep2vpBuffer.red"
+  rgba.alpha "deepRawColor.alpha * deep2vpBuffer.red"
+  name DeepExpression10
+  label "restore color"
+  xpos 0
+  ypos 1371
+ }
+ DeepExpression {
+  chans0 deep
+  chans1 none
+  deep.front "alpha <= 0 ? -1 : deep.front"
+  deep.back "alpha <= 0 ? -1 : deep.back"
+  name DeepExpression14
+  label "alpha check"
+  xpos 0
+  ypos 1459
+ }
+ DeepCrop {
+  use_znear false
+  zfar 0
+  outside_zrange true
+  bbox {0 0 {input.width} {input.height}}
+  use_bbox false
+  name DeepCrop1
+  label "remove garbage"
+  xpos 0
+  ypos 1547
+ }
+ Dot {
+  name Dot12
+  xpos 34
+  ypos 1640
+ }
+set N6d802db0 [stack 0]
+ DeepToImage {
+  name DeepToImage5
+  xpos 628
+  ypos 1637
+ }
+push $N6d574710
+ Dot {
+  name Dot9
+  xpos 808
+  ypos 442
+ }
+set N6d8090c0 [stack 0]
+ Dot {
+  name Dot10
+  xpos 956
+  ypos 442
+ }
+ DeepExpression {
+  chans1 none
+  rgba.red deepPosition.red
+  rgba.green deepPosition.green
+  rgba.blue deepPosition.blue
+  rgba.alpha "alpha == 0 ? 0 : 1"
+  name DeepExpression12
+  xpos 922
+  ypos 493
+ }
+ DeepToImage {
+  name DeepToImage3
+  xpos 922
+  ypos 552
+ }
+ Dot {
+  name Dot11
+  xpos 956
+  ypos 632
+ }
+push $N6d8090c0
+ DeepToImage {
+  name DeepToImage4
+  xpos 774
+  ypos 491
+ }
+add_layer {deepPosition deepPosition.red deepPosition.green deepPosition.blue deepPosition.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  alpha black
+  out deepPosition
+  name ShuffleCopy1
+  xpos 774
+  ypos 629
+ }
+ Shuffle {
+  in deepPosition
+  name Shuffle1
+  xpos 774
+  ypos 700
+ }
+ Remove {
+  operation keep
+  channels rgb
+  name Remove1
+  xpos 774
+  ypos 780
+ }
+ NoOp {
+  name sam_px
+  knobChanged "\nif nuke.toNode('mode_switch')\['which'].getValue() == 2 :\n    nuke.thisGroup()\['mat_translate'].setValue( nuke.thisGroup()\['color_sample'].getValue() )\n"
+  xpos 774
+  ypos 877
+  addUserKnob {20 User}
+  addUserKnob {18 color_sample l "color sample"}
+  color_sample {0 0 0}
+  addUserKnob {6 color_sample_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 color_sample_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos 774
+  ypos 1633
+ }
+ Dot {
+  name Dot8
+  xpos 808
+  ypos 1832
+ }
+ Axis {
+  inputs 0
+  display off
+  selectable false
+  rot_order {{parent.mat_rot_order}}
+  translate {{parent.mat_translate} {parent.mat_translate} {parent.mat_translate}}
+  rotate {{parent.mat_rotate} {parent.mat_rotate} {parent.mat_rotate}}
+  scaling {{parent.mat_scaling} {parent.mat_scaling} {parent.mat_scaling}}
+  uniform_scale {{parent.mat_uniform_scale}}
+  skew {{parent.mat_skew} {parent.mat_skew} {parent.mat_skew}}
+  pivot {{parent.mat_pivot} {parent.mat_pivot} {parent.mat_pivot}}
+  name ax_data
+  xpos 176
+  ypos 69
+ }
+ Cylinder {
+  inputs 0
+  display wireframe
+  selectable false
+  render_mode off
+  rows 1
+  columns 10
+  name Cylinder1
+  xpos 545
+  ypos -63
+ }
+ Cube {
+  inputs 0
+  display wireframe
+  selectable false
+  render_mode off
+  cast_shadow false
+  receive_shadow false
+  rows 1
+  columns 1
+  separate_faces false
+  uniform_scale 2
+  name Cube1
+  xpos 422
+  ypos -60
+ }
+ Sphere {
+  inputs 0
+  display wireframe
+  selectable false
+  render_mode off
+  cast_shadow false
+  receive_shadow false
+  rows 8
+  columns 8
+  name Sphere1
+  xpos 302
+  ypos -63
+ }
+ Switch {
+  inputs 3
+  which {{mat_shape}}
+  name Switch4
+  xpos 422
+  ypos 10
+ }
+ TransformGeo {
+  inputs 2
+  display wireframe
+  selectable false
+  render_mode off
+  name geoShow
+  xpos 422
+  ypos 90
+ }
+push 0
+ ScanlineRender {
+  inputs 2
+  conservative_shader_sampling false
+  motion_vectors_type off
+  MB_channel none
+  name ScanlineRender1
+  xpos 422
+  ypos 170
+ }
+ Dot {
+  name Dot5
+  xpos 456
+  ypos 1852
+ }
+push $N6d802db0
+ Switch {
+  inputs 3
+  which {{parent.mode}}
+  name mode_switch
+  xpos 0
+  ypos 1952
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 2074
+ }
+ Group {
+  inputs 0
+  name inverseMatrix
+  tile_color 0x337f4cff
+  xpos 165
+  ypos 178
+  addUserKnob {20 User}
+  addUserKnob {1 knob_path}
+  knob_path ax_data.world_matrix
+  addUserKnob {26 ""}
+  addUserKnob {41 id T id_assign.matrix}
+  addUserKnob {26 ""}
+  addUserKnob {7 determinant}
+  determinant {{"\[value \[value knob_path].\[value id.0]] * ((\[value \[value knob_path].\[value id.4]]*\[value \[value knob_path].\[value id.8]]) - (\[value \[value knob_path].\[value id.5]]*\[value \[value knob_path].\[value id.7]])) - \[value \[value knob_path].\[value id.1]] * ((\[value \[value knob_path].\[value id.3]]*\[value \[value knob_path].\[value id.8]]) - (\[value \[value knob_path].\[value id.5]]*\[value \[value knob_path].\[value id.6]])) + \[value \[value knob_path].\[value id.2]] * ((\[value \[value knob_path].\[value id.3]]*\[value \[value knob_path].\[value id.7]])-(\[value \[value knob_path].\[value id.4]]*\[value \[value knob_path].\[value id.6]]))"}}
+  addUserKnob {26 ""}
+  addUserKnob {41 cofactor T mtx_cofactor.matrix}
+  addUserKnob {26 ""}
+  addUserKnob {41 invMatrix T matrix_output.matrix}
+ }
+  Matrix {
+   inputs 0
+   matrix {
+       {0 1 2}
+       {4 5 6}
+       {8 9 10}
+     }
+   name id_assign
+   xpos -12
+   ypos 33
+  }
+  Matrix {
+   inputs 0
+   matrix {
+       {{"(\[value \[value knob_path].\[value id.4]]*\[value \[value knob_path].\[value id.8]]) - (\[value \[value knob_path].\[value id.5]]*\[value \[value knob_path].\[value id.7]])"} {"(\[value \[value knob_path].\[value id.7]]*\[value \[value knob_path].\[value id.2]]) - (\[value \[value knob_path].\[value id.8]]*\[value \[value knob_path].\[value id.1]])"} {"(\[value \[value knob_path].\[value id.1]]*\[value \[value knob_path].\[value id.5]]) - (\[value \[value knob_path].\[value id.2]]*\[value \[value knob_path].\[value id.4]])"}}
+       {{"(\[value \[value knob_path].\[value id.5]]*\[value \[value knob_path].\[value id.6]]) - (\[value \[value knob_path].\[value id.3]]*\[value \[value knob_path].\[value id.8]])"} {"(\[value \[value knob_path].\[value id.8]]*\[value \[value knob_path].\[value id.0]]) - (\[value \[value knob_path].\[value id.6]]*\[value \[value knob_path].\[value id.2]])"} {"(\[value \[value knob_path].\[value id.2]]*\[value \[value knob_path].\[value id.3]]) - (\[value \[value knob_path].\[value id.0]]*\[value \[value knob_path].\[value id.5]])"}}
+       {{"(\[value \[value knob_path].\[value id.3]]*\[value \[value knob_path].\[value id.7]]) - (\[value \[value knob_path].\[value id.4]]*\[value \[value knob_path].\[value id.6]])"} {"(\[value \[value knob_path].\[value id.6]]*\[value \[value knob_path].\[value id.1]]) - (\[value \[value knob_path].\[value id.7]]*\[value \[value knob_path].\[value id.0]])"} {"(\[value \[value knob_path].\[value id.0]]*\[value \[value knob_path].\[value id.4]]) - (\[value \[value knob_path].\[value id.1]]*\[value \[value knob_path].\[value id.3]])"}}
+     }
+   name mtx_cofactor
+   xpos 86
+   ypos 32
+  }
+  Matrix {
+   inputs 0
+   matrix {
+       {{"cofactor.0 == 0 || determinant == 0 ? 0 : cofactor.0/determinant"} {"cofactor.1 == 0 || determinant == 0 ? 0 : cofactor.1/determinant"} {"cofactor.2 == 0 || determinant == 0 ? 0 : cofactor.2/determinant"}}
+       {{"cofactor.3 == 0 || determinant == 0 ? 0 : cofactor.3/determinant"} {"cofactor.4 == 0 || determinant == 0 ? 0 : cofactor.4/determinant"} {"cofactor.5 == 0 || determinant == 0 ? 0 : cofactor.5/determinant"}}
+       {{"cofactor.6 == 0 || determinant == 0 ? 0 : cofactor.6/determinant"} {"cofactor.7 == 0 || determinant == 0 ? 0 : cofactor.7/determinant"} {"cofactor.8 == 0 || determinant == 0 ? 0 : cofactor.8/determinant"}}
+     }
+   name matrix_output
+   xpos 186
+   ypos 33
+  }
+ end_group
+ NoOp {
+  inputs 0
+  name menu
+  knobChanged "\nthisGRP = nuke.thisGroup()\nif thisGRP\['falloff_type'].getValue() == 4 :\n    thisGRP\['falloff_exp'].setEnabled(True)\nelse :\n    thisGRP\['falloff_exp'].setEnabled(False)\n"
+  xpos -581
+  ypos 61
+  addUserKnob {20 User}
+  addUserKnob {4 falloff_type l "falloff type" M {none/linear smooth quadratic cubic exponential}}
+ }
+ NoOp {
+  inputs 0
+  name menu01
+  knobChanged "\nthisGRP = nuke.thisGroup()\nif thisGRP\['mat_shape'].getValue() == 1 :\n    thisGRP\['cube3d_falloff'].setEnabled(True)\nelse :\n    thisGRP\['cube3d_falloff'].setEnabled(False)\n"
+  xpos -463
+  ypos 61
+  addUserKnob {20 User}
+  addUserKnob {4 mat_shape l shape M {Sphere Cube Cylinder}}
+ }
+end_group

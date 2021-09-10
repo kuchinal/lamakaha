@@ -11,7 +11,7 @@ def smMerge(nodeType):
     amm =  len(al)
     new = [None]*amm
     p = 0
-    while p< amm:   
+    while p< amm:  
         a = nuke.selectedNodes()
         for one in a:
             pos = one['xpos'].value()
@@ -22,7 +22,7 @@ def smMerge(nodeType):
     q=1
     connected = 0
     merges = []
-    for node in new[:amm]: 
+    for node in new[:amm]:
         if q==1:
             followed = node
 
@@ -59,40 +59,48 @@ def smMerge(nodeType):
 
 
 def mergeThis():
-    import nuke 
-    try: 
-        if 'shadow_override' in nuke.selectedNode().knobs() or 'Camera' in nuke.selectedNode().Class() or 'render_mode' in nuke.selectedNode().knobs() or 'Light2' in nuke.selectedNode().Class() or 'DisplaceGeo' in nuke.selectedNode().Class() or 'Axis' in nuke.selectedNode().Class():
+    import nuke
+    try:
+        nName = nuke.selectedNode()['name'].value()
+        #getting the class name and getting rid of a version
+        nClass = nuke.selectedNode().Class()
+        tail = 0
+        for one in nClass:
+            if one.isdigit():
+                tail = tail+1
+        if tail >0:
+            nClass = nClass[:-tail]
+        nKnobs = nuke.selectedNode().knobs()
+        shaders = ["AmbientOcclusion","BasicMaterial","FillMat","MergeMat","BlendMat","Project3D","Diffuse","Emission","Phong","Specular","Displacement","UVTile","Wireframe","Transmission"]
+        if 'shadow_override' in nKnobs \
+            or 'Camera' in nClass \
+            or 'render_mode' in nKnobs \
+            or 'Light' in nClass \
+            or 'DisplaceGeo' in nClass \
+            or 'Axis' in nClass:
             if len(nuke.selectedNodes())==1:
                 return nuke.createNode( "MergeGeo")
             else:
                 smMerge("MergeGeo")
 
-        elif 'MergeMat' in nuke.selectedNode().Class() or 'project_on' in nuke.selectedNode().knobs() or 'Mater' in nuke.selectedNode()['name'].value(): 
-             if len(nuke.selectedNodes())==1:
+        elif nClass in shaders:
+            if len(nuke.selectedNodes())==1:
                 return nuke.createNode( "MergeMat")
-             else:
+            else:
                 smMerge("MergeMat")
-        elif 'Deep' in nuke.selectedNode().Class() and "DeepHoldout" not in nuke.selectedNode()['name'].value() and "DeepToImage" not in nuke.selectedNode()['name'].value(): 
-             if len(nuke.selectedNodes())==1:
+        elif 'Deep' in nClass \
+            and "DeepHoldout" not in nName \
+            and "DeepToImage" not in nName \
+            or "DeepRecolorMatte" in nName:
+            if len(nuke.selectedNodes())==1:
                 return nuke.createNode( "DeepMerge")
-             else:
+            else:
                 smMerge("DeepMerge")
-        else: 
-            raise ValueError 
-    except: 
+        else:
+            raise ValueError
+    except:
          if len(nuke.selectedNodes())<=1:
             return nuke.createNode( "Merge2")
 
          else:
             smMerge("Merge2")
-
-
-
-            # a = nuke.allNodes()
-
-            # for nod in a:
-            #     print nod['name'],nod.dependencies()
-            #     if nod.dependencies() == followed:
-            #         depNode = nod
-            #         connected = 1
-            #         print nod['name']

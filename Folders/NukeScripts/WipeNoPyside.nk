@@ -1,0 +1,74 @@
+set cut_paste_input [stack 0]
+version 11.3 v4
+push $cut_paste_input
+Group {
+ name wipe
+ onCreate "import qtCustomKnobs\nreload(qtCustomKnobs)\n\nn =  nuke.thisNode()\nn\['origin'].setValue(n\['width'].value())\n"
+ knobChanged "nn = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name()\n\nif kn == \"type\":\n    if k.value() == \"wipe\":\n        nn\['gamma'].setVisible(False)\n        nn\['wipeIcon'].setVisible(True)\n        nn\['angle'].setVisible(True)\n    elif k.value() == \"radial\":\n        nn\['gamma'].setVisible(True) \n        nn\['angle'].setVisible(False)  \n        nn\['wipeIcon'].setVisible(False)\n    #setting the center  \n#elif kn == \"inputChange\":   \n    #nn\['origin'].setValue(nn\['width'].value()) \n    #nn\['pixelAspect'].setValue(nn\['width'].value())    \n        \n        "
+ selected true
+ xpos 786
+ ypos -109
+ addUserKnob {20 wipe}
+ addUserKnob {4 type l "" t "choose between wipe and radial" +STARTLINE M {wipe radial ""}}
+ addUserKnob {22 recenter -STARTLINE T "n =  nuke.thisNode()\nn\['origin'].setValue(n\['width'].value())"}
+ addUserKnob {22 python_button l "<b><h1 style=\"font-size:10vw\"><font color=\"Red\">&#8631;" t "rotate wipe 45 degrees" -STARTLINE T "node = nuke.thisNode()\n\nangle = node\['angle'].value()\nchecInt = angle/45\nif checInt.is_integer(): \n    node\['angle'].setValue(node\['angle'].value()-45)\nelse:\n    node\['angle'].setValue(90)"}
+ addUserKnob {12 origin}
+ origin {360 288}
+ addUserKnob {7 angle R 0 180}
+ addUserKnob {7 transition l softness R 1 100}
+ transition 2
+ addUserKnob {7 line R 0 10}
+ line 2
+ addUserKnob {7 gamma +HIDDEN R 0.1 1.9}
+ gamma 1.4
+ addUserKnob {7 pixelAspect +INVISIBLE R 0 2}
+ pixelAspect {{format.pixel_aspect}}
+ addUserKnob {12 width +INVISIBLE}
+ width {{width?width/2:root.format.x/2} {width?height/2:root.format.y/2}}
+ addUserKnob {20 group l "motion blur" n 1}
+ group 0
+ addUserKnob {41 divisions l samples T TimeBlur.divisions}
+ addUserKnob {41 shutter T TimeBlur.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T TimeBlur.shutteroffset}
+ addUserKnob {7 double l "" -STARTLINE R -1 1}
+ addUserKnob {20 endGroup n -1}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -595
+  ypos 191
+ }
+ BlinkScript {
+  kernelSourceFile /media/lamakaha/work/projects/Blink/03_Data/wipeKernelFoundryMe_v006.blink
+  recompileCount 154
+  ProgramGroup 1
+  KernelDescription "2 \"WipeKernelMy\" iterate pixelWise 4ee14eb7f21ed57929c2a2bfa8d30abd2d6ca91e1025f0b72b47101bf97f4964 2 \"src\" Read Point \"dst\" Write Point 7 \"Origin\" Float 2 AABIQgAASEI= \"Angle\" Float 1 AAC0Qg== \"Transition\" Float 1 AABIQg== \"Line\" Float 1 AAAAQA== \"Gamma\" Float 1 AACAPw== \"Radial\" Bool 1 AA== \"Pixel Aspect\" Float 1 AACAPw== 7 \"origin\" 2 1 \"angle\" 1 1 \"transition\" 1 1 \"line\" 1 1 \"gamma\" 1 1 \"radial\" 1 1 \"pixelAspect\" 1 1 5 \"vec\" Float 2 1 AAAAAAAAAAA= \"xt\" Float 1 1 AAAAAA== \"yt\" Float 1 1 AAAAAA== \"cx\" Float 1 1 AAAAAA== \"cy\" Float 1 1 AAAAAA=="
+  kernelSource "// Study of Blink script\n// Alexey Kuchinski\n// missing bilinear i guess.\n// circle is not round - solved\n// gamma offset\nkernel WipeKernelMy : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessPoint, eEdgeClamped> src; // the input image\n  Image<eWrite, eAccessPoint> dst;  //the output image\n\n  param:\n   float2 origin; \n   float angle;\n   float transition;\n   float line;\n   float gamma;\n   bool radial;\n   float pixelAspect;\n\n\n  local:\n   float2 vec;\n   float xt;                                               //bounds X\n   float yt;                                               //bounds y\n   float cx;                                               //Horizontal center\n   float cy;                                               //Y center from bounds\n\n  //In define(), parameters can be given labels and default values.\n  void define() \{\n    defineParam(radial, \"Radial\", false);\n    defineParam(origin, \"Origin\", float2(50.0f, 50.0f));\n    defineParam(angle, \"Angle\", 90.0f);\n    defineParam(transition, \"Transition\", 50.0f);\n    defineParam(line, \"Line\", 2.0f);\n    defineParam(gamma, \"Gamma\", 1.0f);\n    defineParam(pixelAspect, \"Pixel Aspect\", 1.0f);\n    \n\n  \}\n\n  //The init() function is run before any calls to process().\n  void init() \{\n    vec.x = cos(angle * PI / 180.0f);\n    vec.y = sin(angle * PI / 180.0f);\n\n    xt = src.bounds.x2;                                               //bounds X\n    yt = src.bounds.y2;                                               //bounds Y\n    cx = xt / 2.0f;                                                   //X center from bounds\n    cy = yt / 2.0f; \n    \n  \}\n\n  //The process function is run at every pixel to produce the output.\n  void process(int2 pos) \{\n    float2 posVec; \n    posVec.x = round(pos.x - origin.x)+0.001; //translating our origin to 0.0\n    posVec.y = round(pos.y - origin.y)+0.001; //translating our origin to 0.0\n\n    //Z value of cross product\n    float val = vec.x * posVec.y - vec.y * posVec.x;\n    // radial ramp\n    float square = pow(((sqrt( pow( ( posVec.x / (xt*transition/100) )*pixelAspect ,2) + pow( ( posVec.y / (xt*transition/100) ),2) ))*-1+1),gamma);\n    // wipe\n    float wipe = pow((sin((clamp((val+transition/2.0f)/transition,0.0f,1.0f)-0.5f)*PI)/2.0f+0.5f),gamma);\n    // coose which one to pick - radial or normal wipe\n    float out = radial == true ? square : wipe;\n    // draw straight line\n    float lineDraw = ((val)/line>=-1 && (val)/line<=1 ? 1 : 0);\n    // draw radial line\n    float lineRadialDraw = square/line*10>0 && square/line*10<1 ? 1 : 0;\n    // choose the line\n    float lineChoise = radial == true ? lineRadialDraw : lineDraw;\n\n    // wipe type\n    dst(0) = out;\n    // getting the transition area and make it smooth\n    dst(1) = out>0?sin((out ==0 || out == 1 ? 0 :  1 - out)*PI):0;\n    // getting the transition line\n    dst(2) = lineChoise;\n    dst(3) = 0.0f;\n\n\n    \n  \}\n\};\n\n"
+  rebuild ""
+  WipeKernelMy_Origin {{parent.origin} {parent.origin}}
+  WipeKernelMy_Angle {{parent.angle}}
+  WipeKernelMy_Transition {{parent.transition}}
+  WipeKernelMy_Line {{parent.line}}
+  WipeKernelMy_Gamma {{parent.gamma}}
+  WipeKernelMy_Radial {{parent.type}}
+  "WipeKernelMy_Pixel Aspect" {{parent.pixelAspect}}
+  rebuild_finalise ""
+  name wipe
+  xpos -595
+  ypos 232
+ }
+ TimeBlur {
+  divisions 1
+  shutteroffset centred
+  shuttercustomoffset {{parent.double}}
+  name TimeBlur
+  xpos -595
+  ypos 264
+ }
+ Output {
+  name Output1
+  xpos -595
+  ypos 331
+ }
+end_group

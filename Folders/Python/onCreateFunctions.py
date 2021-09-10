@@ -1,5 +1,6 @@
 import nuke
 def onCreateFunctions():
+
     def wCard():
         if nuke.NUKE_VERSION_MAJOR < 11:
             import PySide
@@ -43,5 +44,62 @@ def onCreateFunctions():
                 n['User'].setFlag(0)
             except:
                 pass
-
     nuke.addOnCreate(lambda: csMy(), nodeClass="ContactSheet")
+
+    def cubeFun():  
+        a = nuke.PyScript_Knob("floor Pivot","floor Pivot","n=nuke.thisNode()\nn['translate'].setValue([0,0.5,0])\nn['pivot'].setValue([0,-0.5,0])")
+        nuke.thisNode().addKnob(a) 
+        c = nuke.PyScript_Knob("corner Pivot","corner Pivot","n=nuke.thisNode()\nn['translate'].setValue([-.5,.5,-.5])\nn['pivot'].setValue([.5,-.5,.5])")
+        nuke.thisNode().addKnob(c)   
+        b = nuke.PyScript_Knob("freeze corners","freeze corners","n=nuke.thisNode()\nn['cube'].setExpression('-0.5',0)\nn['cube'].setExpression('-0.5',1)\nn['cube'].setExpression('-0.5',2)\nn['cube'].setExpression('0.5',3)\nn['cube'].setExpression('0.5',4)\nn['cube'].setExpression('0.5',5)")
+        nuke.thisNode().addKnob(b)   
+        d = nuke.PyScript_Knob("snapToSelected","snapToSelected","b=nuke.selectedNode()['translate'].value()\nn=nuke.thisNode()\nn['translate'].setValue(b)")
+        nuke.thisNode().addKnob(d) 
+    nuke.addOnCreate(lambda: cubeFun(), nodeClass="Cube")
+
+    def cylinderFun():  
+        a = nuke.PyScript_Knob("floor Pivot","floor Pivot","n=nuke.thisNode()\nn['translate'].setValue([0,1,0])\nn['pivot'].setValue([0,-1,0])")
+        nuke.thisNode().addKnob(a)  
+        d = nuke.PyScript_Knob("snapToSelected","snapToSelected","b=nuke.selectedNode()['translate'].value()\nn=nuke.thisNode()\nn['translate'].setValue(b)")
+        nuke.thisNode().addKnob(d) 
+    nuke.addOnCreate(lambda: cylinderFun(), nodeClass="Cylinder")
+
+    def keepLuma():
+        n = nuke.thisNode()
+        b = n['black'].value()
+        w = n['white'].value()
+        n['multiply'].setValue(1/((w[0]+w[1]+w[2])/3))
+        n['add'].setValue(-(b[0]+b[1]+b[2])/3)
+    def keepLumaGrade():  
+        a = nuke.PyScript_Knob("keep luma","keep luma","keepLuma()")
+        nuke.thisNode().addKnob(a) 
+    nuke.addOnCreate(lambda: keepLumaGrade(), nodeClass="Grade")
+
+    def sphereFun():  
+        a = nuke.PyScript_Knob("floor Pivot","floor Pivot","n=nuke.thisNode()\nn['translate'].setValue([0,1,0])\nn['pivot'].setValue([0,-1,0])")
+        nuke.thisNode().addKnob(a) 
+        d = nuke.PyScript_Knob("snapToSelected","snapToSelected","b=nuke.selectedNode()['translate'].value()\nn=nuke.thisNode()\nn['translate'].setValue(b)")
+        nuke.thisNode().addKnob(d) 
+    nuke.addOnCreate(lambda: sphereFun(), nodeClass="Sphere")
+
+    def cardFun():  
+        a = nuke.PyScript_Knob("floor Pivot","floor Pivot","n=nuke.thisNode()\nn['translate'].setValue([0,0.5,0])\nn['pivot'].setValue([0,-0.5,0])")
+        nuke.thisNode().addKnob(a) 
+        c = nuke.PyScript_Knob("corner Pivot","corner Pivot","n=nuke.thisNode()\nn['translate'].setValue([-.5,.5,0])\nn['pivot'].setValue([.5,-.5,0])")
+        nuke.thisNode().addKnob(c)     
+        d = nuke.PyScript_Knob("snapToSelected","snapToSelected","b=nuke.selectedNode()['translate'].value()\nn=nuke.thisNode()\nn['translate'].setValue(b)")
+        nuke.thisNode().addKnob(d) 
+    nuke.addOnCreate(lambda: cardFun(), nodeClass="Card2")
+
+
+
+# def function(): 
+#     import time
+#     break
+#     print "hallo bithchchc"
+#     nuke.scriptClose()
+#     time.sleep(5)
+#     nuke.scriptOpen("/mnt/Hobby/projects/bolsPlatz/01_Projects/bolsPlatz_v005.nk")
+
+# nuke.toNode("root").knob('onScriptLoad')
+# nuke.addOnScriptLoad(function)
