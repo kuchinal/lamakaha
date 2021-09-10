@@ -1,0 +1,232 @@
+set cut_paste_input [stack 0]
+version 11.3 v4
+push 0
+push 0
+push $cut_paste_input
+add_layer {reflection reflection.red reflection.green reflection.blue reflection.alpha}
+Group {
+ inputs 3
+ name RayRenderUU
+ selected true
+ xpos -588
+ ypos 309
+ addUserKnob {20 RayRender}
+ addUserKnob {6 reflOnly l "reflection only" +STARTLINE}
+ reflOnly true
+ addUserKnob {41 disable_1 l "no alpha" t "if alpha is turned on you will get an alpha for your reflection, the payof will be speed reduction" -STARTLINE T Copy1.disable}
+ addUserKnob {41 filter T RayRender2.filter}
+ addUserKnob {41 projection_mode l "projection mode" T RayRender2.projection_mode}
+ addUserKnob {41 stochastic_samples l "stochastic samples" T RayRender2.stochastic_samples}
+ addUserKnob {41 triangle_intersection_epsilon l "intersection epsilon" T RayRender2.triangle_intersection_epsilon}
+ addUserKnob {41 scale l antialiazing T Reformat5.scale}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 format T Reformat3.format}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 overscan l "" +STARTLINE T "to set overscan adjust the window scale size in your camera node, \ndo not use your main camera node but copy specific one and connect to the gizmo"}
+ addUserKnob {20 MotionNBlur l "Motion Blur"}
+ addUserKnob {41 interpolate_animation l "interpolate animation" T RayRender2.interpolate_animation}
+ addUserKnob {41 samples T RayRender2.samples}
+ addUserKnob {41 uniform_distribution l "uniform distribution" -STARTLINE T RayRender2.uniform_distribution}
+ addUserKnob {41 shutter T RayRender2.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T RayRender2.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T RayRender2.shuttercustomoffset}
+ addUserKnob {41 use_scanline_shutter l "match ScanlineRender shutter offset" T RayRender2.use_scanline_shutter}
+ addUserKnob {20 AOVs}
+ addUserKnob {41 output_shader_vectors l "output AOV" T RayRender2.output_shader_vectors}
+ addUserKnob {41 remove_from_beauty l "remove AOV from beauty pass" -STARTLINE T RayRender2.remove_from_beauty}
+ addUserKnob {41 AOV_Point l "surface point" T RayRender2.AOV_Point}
+ addUserKnob {41 AOV_Normal l "surface normal" T RayRender2.AOV_Normal}
+ addUserKnob {41 AOV_Motion l "motion vector" T RayRender2.AOV_Motion}
+ addUserKnob {41 AOV_Solid l "solid color" T RayRender2.AOV_Solid}
+ addUserKnob {41 AOV_Direct_Diffuse l "direct diffuse" T RayRender2.AOV_Direct_Diffuse}
+ addUserKnob {41 AOV_Direct_Specular l "direct specular" T RayRender2.AOV_Direct_Specular}
+ addUserKnob {41 AOV_Reflection l reflection T RayRender2.AOV_Reflection}
+ addUserKnob {41 AOV_Emissive l emissive T RayRender2.AOV_Emissive}
+}
+ Input {
+  inputs 0
+  name Camera
+  xpos -346
+  ypos 116
+  number 2
+ }
+set Na0bc4e70 [stack 0]
+ Reflection {
+  inputs 0
+  name Reflection2
+  xpos -335
+  ypos -338
+ }
+ Input {
+  inputs 0
+  name ReflectiveGeo
+  xpos -204
+  ypos -394
+ }
+ ApplyMaterial {
+  inputs 2
+  name ApplyMaterial1
+  xpos -204
+  ypos -338
+ }
+set N9bbf50e0 [stack 0]
+ Constant {
+  inputs 0
+  color 1
+  name Constant1
+  xpos -614
+  ypos -161
+  postage_stamp false
+ }
+ Input {
+  inputs 0
+  name ReflectedGeo
+  xpos -497
+  ypos -328
+  number 1
+ }
+ Dot {
+  name Dot2
+  xpos -463
+  ypos -221
+ }
+set N9b244b70 [stack 0]
+ ApplyMaterial {
+  inputs 2
+  name ApplyMaterial2
+  xpos -497
+  ypos -161
+ }
+ MergeGeo {
+  inputs 2
+  selectable false
+  name MergeGeo1
+  xpos -497
+  ypos -137
+ }
+ Reformat {
+  inputs 0
+  name Reformat3
+  xpos -344
+  ypos -165
+ }
+ Reformat {
+  type scale
+  scale {{"\[topnode input2].win_scale"}}
+  resize none
+  name Reformat1
+  xpos -344
+  ypos -141
+ }
+ Reformat {
+  type scale
+  name Reformat5
+  xpos -344
+  ypos -95
+ }
+set N66469bc0 [stack 0]
+ RayRender {
+  inputs 3
+  filter {{RayRender2.filter}}
+  projection_mode {{RayRender2.projection_mode}}
+  stochastic_samples {{parent.RayRender2.stochastic_samples}}
+  triangle_intersection_epsilon {{parent.RayRender2.triangle_intersection_epsilon}}
+  samples {{parent.RayRender2.samples}}
+  shutter {{parent.RayRender2.shutter}}
+  shutteroffset {{RayRender2.shutteroffset}}
+  use_scanline_shutter {{parent.RayRender2.use_scanline_shutter}}
+  output_shader_vectors true
+  remove_from_beauty {{reflOnly}}
+  AOV_Reflection reflection
+  name RayRender1
+  selected true
+  xpos -497
+  ypos 28
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat5.scale}}
+  name Reformat6
+  xpos -497
+  ypos 75
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat1.scale}}
+  resize none
+  pbb true
+  name Reformat4
+  xpos -497
+  ypos 147
+ }
+ Shuffle {
+  in reflection
+  name Shuffle1
+  xpos -497
+  ypos 190
+  disable {{!parent.reflOnly}}
+ }
+ Dot {
+  name Dot1
+  xpos -463
+  ypos 247
+ }
+push $Na0bc4e70
+push $N9b244b70
+push $N9bbf50e0
+ MergeGeo {
+  inputs 2
+  selectable false
+  name MergeGeo3
+  xpos -204
+  ypos -224
+ }
+push $N66469bc0
+ RayRender {
+  inputs 3
+  shutteroffset centred
+  output_shader_vectors true
+  remove_from_beauty {{reflOnly}}
+  AOV_Reflection reflection
+  name RayRender2
+  xpos -204
+  ypos 28
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat5.scale}}
+  name Reformat7
+  xpos -204
+  ypos 76
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat1.scale}}
+  resize none
+  pbb true
+  name Reformat2
+  xpos -204
+  ypos 133
+ }
+ Shuffle {
+  in reflection
+  name Shuffle2
+  xpos -204
+  ypos 178
+  disable {{!parent.reflOnly}}
+ }
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.alpha
+  name Copy1
+  xpos -204
+  ypos 238
+  disable true
+ }
+ Output {
+  name Output1
+  xpos -204
+  ypos 343
+ }
+end_group

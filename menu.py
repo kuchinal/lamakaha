@@ -53,6 +53,7 @@ viewerMenu.addCommand("saveImage", "import saveImage; saveImage.saveImage()")
 
 #######################################    ANIMATION MENU    ####################################################
 animationMenu = nuke.menu('Animation')
+import AnimationMaker
 animationMenu.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()','',icon='ParticleBounce.png')
 
 
@@ -140,7 +141,7 @@ nodesMenu.addCommand('Transform/Smoother','import  Smoother; Smoother.Smoother()
 nodesMenu.addCommand("Transform/Offset", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/Offset.nk')", icon="my.png")
 nodesMenu.addCommand("Transform/ITransform","nuke.nodePaste(UserDir+'/Folders/NukeScripts/iTransform.nk')","Alt+f3", icon="my.png")
 nodesMenu.addCommand("Transform/TransformMasked", "nuke.createNode(\"TransformMasked\")","Alt+f6", icon="TransformMasked.png")
-nodesMenu.addCommand("Transform/Cr", "cropMy.cropMy()","F6", icon="Crop.png")
+nodesMenu.addCommand("Transform/Cr", "import cropMy;cropMy.cropMy()","F6", icon="Crop.png")
 nodesMenu.addCommand("Transform/CornerPin", "nuke.createNode(\"CornerPinMy11\")", "shift+ctrl+c", icon="CornerPin.png")
 nodesMenu.addCommand('Reformat','import myReformat; myReformat.myReformat()',"ctrl+r", icon="Reformat.png")
 nodesMenu.addCommand("ReformatCrop","import ReformatCrop; ReformatCrop.ReformatCrop()",'ctrl+shift+r')

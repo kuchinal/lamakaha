@@ -1,0 +1,180 @@
+#! /usr/local/Nuke11.3v4/libnuke-11.3.4.so -nx
+version 11.3 v4
+Gizmo {
+ addUserKnob {20 User}
+ addUserKnob {3 keyNumber l "key number"}
+ keyNumber 10
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 309
+  ypos -91
+ }
+ Grade {
+  channels alpha
+  white 0
+  add {{-parent.keyNumber}}
+  black_clamp false
+  name Grade11
+  xpos 309
+  ypos -67
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_1" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_2" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_3" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_4" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_5" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_6" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_7" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_8" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_9" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_10" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Dot {
+  name Dot2
+  xpos 343
+  ypos 12
+ }
+set N28f257c0 [stack 0]
+ Dot {
+  name Dot3
+  xpos 126
+  ypos 12
+ }
+set N28f2a430 [stack 0]
+ Dot {
+  name Dot4
+  xpos 16
+  ypos 12
+ }
+set N28f2efb0 [stack 0]
+ Dot {
+  name Dot6
+  xpos -94
+  ypos 12
+ }
+set N28f33b00 [stack 0]
+ Dot {
+  name Dot5
+  xpos -200
+  ypos 12
+ }
+ Grade {
+  channels rgba
+  white 0
+  add {0.5 0.5 0.5 {parent.keyNumber}}
+  name Grade4
+  xpos -234
+  ypos 87
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_1" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_2" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_3" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_4" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_5" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Crop {
+  box {{bbox.r*(0.2/(parent.parent.pickSize+1))*3} {curve} {bbox.r*(0.2/(parent.parent.pickSize+1))*4} {bbox.t*(0.2/(parent.parent.pickSize+1))}}
+  name Crop1
+  xpos -234
+  ypos 127
+  addUserKnob {20 User}
+  addUserKnob {22 cropToBbox l "Crop to Bounding Box" -STARTLINE T codeBBox()}
+ }
+push $N28f33b00
+ Grade {
+  channels rgba
+  white 0
+  add {0 0 1 {parent.keyNumber}}
+  name Grade3
+  xpos -128
+  ypos 86
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_1" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_2" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Crop {
+  box {{bbox.r*(0.2/(parent.parent.pickSize+1))*2} 0 {bbox.r*(0.2/(parent.parent.pickSize+1))*3} {bbox.t*(0.2/(parent.parent.pickSize+1))}}
+  name Crop4
+  xpos -128
+  ypos 124
+  addUserKnob {20 User}
+  addUserKnob {22 cropToBbox l "Crop to Bounding Box" -STARTLINE T codeBBox()}
+ }
+push 0
+push $N28f2efb0
+ Grade {
+  channels rgba
+  white 0
+  add {0 1 0 {parent.keyNumber}}
+  name Grade2
+  xpos -18
+  ypos 92
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_1" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_2" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Crop {
+  box {{bbox.r*(0.2/(parent.parent.pickSize+1))} 0 {bbox.r*(0.2/(parent.parent.pickSize+1))*2} {bbox.t*(0.2/(parent.parent.pickSize+1))}}
+  name Crop3
+  xpos -18
+  ypos 130
+  addUserKnob {20 User}
+  addUserKnob {22 cropToBbox l "Crop to Bounding Box" -STARTLINE T codeBBox()}
+ }
+push $N28f2a430
+ Grade {
+  channels rgba
+  white 0
+  add {1 0 0 {parent.keyNumber}}
+  name Grade1
+  xpos 92
+  ypos 90
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_1" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma_2" l "keep luma" -STARTLINE T keepLuma()}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Crop {
+  box {0 0 {bbox.r*(0.2/(parent.parent.pickSize+1))} {bbox.t*(0.2/(parent.parent.pickSize+1))}}
+  name Crop2
+  selected true
+  xpos 92
+  ypos 118
+  addUserKnob {20 User}
+  addUserKnob {22 cropToBbox l "Crop to Bounding Box" -STARTLINE T codeBBox()}
+ }
+ Merge2 {
+  inputs 4+1
+  name Merge4
+  xpos 92
+  ypos 196
+ }
+ Dot {
+  name Dot1
+  xpos 126
+  ypos 289
+ }
+push $N28f257c0
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos 309
+  ypos 285
+ }
+ Output {
+  name Output1
+  xpos 309
+  ypos 374
+ }
+end_group
