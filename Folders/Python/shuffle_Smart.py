@@ -49,7 +49,6 @@ def shuffleCreate():
 def shuffleAlpha():
     import nuke
     import nukescripts
-    from menu import UserDir
     try:
         a = nuke.selectedNode()
         if a.Class() == "Shuffle":
@@ -84,10 +83,10 @@ def shuffleAlpha():
             a['also_merge'].setValue("all")
             a['label'].setValue("all")
         else:
-            nuke.nodePaste(UserDir+'/Folders/NukeScripts/AxisMy.nk')
+            nuke.createNode("Axis2")
             pass            
     except:
-        nuke.nodePaste(UserDir+'/Folders/NukeScripts/AxisMy.nk')
+        nuke.createNode("Axis2")
         pass
 
 ###################################################################################################################################################
