@@ -90,3 +90,16 @@ def onCreateFunctions():
         d = nuke.PyScript_Knob("snapToSelected","snapToSelected","b=nuke.selectedNode()['translate'].value()\nn=nuke.thisNode()\nn['translate'].setValue(b)")
         nuke.thisNode().addKnob(d) 
     nuke.addOnCreate(lambda: cardFun(), nodeClass="Card2")
+
+
+
+# def function(): 
+#     import time
+#     break
+#     print "hallo bithchchc"
+#     nuke.scriptClose()
+#     time.sleep(5)
+#     nuke.scriptOpen("/mnt/Hobby/projects/bolsPlatz/01_Projects/bolsPlatz_v005.nk")
+
+# nuke.toNode("root").knob('onScriptLoad')
+# nuke.addOnScriptLoad(function)

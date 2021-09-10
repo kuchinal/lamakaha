@@ -5,3 +5,5 @@
 /.hidden
 *workspace.xml
 .idea
+*tab_stats.dat
+

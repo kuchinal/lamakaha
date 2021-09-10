@@ -1,0 +1,170 @@
+Group {
+ name DeepToPosition
+ tile_color 0x2866ff
+ label "<font color=cyan>Deep Output</font>"
+ addUserKnob {20 tab_general l General}
+ addUserKnob {22 set_link l "link to selected camera" t "Deep data is related to camera. So when convert deep data to anything, it required the camera data.\n\nhow to use :\nSelect the camera, which can be link to any axis nodes. This tool will get the focal, haperture and world matrix from selected camera to generate world space position data.\n\nYou can find the world space position pass store under <b>'deepPosition'</b> channel after this node. The pass support volumatric deep data. If want to bring the position data to 2D in downstream. Please only use <b>DeepPositionToImage</b> which comes along with this toolset.\n\nAdditional note:\nThis node will also create another channel called <b>'deepColor'</b> . This channel stored the original of deep data from raw input, for any dev purposes in downstream. User not necessary to use this channel but better to keep it if this toolset occur in downstream." T "def getLevel() :\n    ### level define ###\n    if len(nuke.thisNode().fullName().split('.')) == 1 :\n          ggLevel = nuke.root()\n    else :\n          nodePath = nuke.thisNode().fullName().split('.')\n          nodePath.pop()\n          ggLevel = nuke.toNode('.'.join(nodePath))\n    return ggLevel\n\nroot = getLevel()\nthisGRP = nuke.thisGroup()\n\nmainKnobs = \['world_matrix','cam_focal','cam_haperture']\n\ntry :\n\twith root :\n\t    selNode = nuke.selectedNode()\n\t    with thisGRP :\n\t        if selNode.Class()\[0:6] == 'Camera' :\n\t            CAMnode = selNode.name()\n\t            thisGRP\[mainKnobs\[0]].setExpression('\{0\}.world_matrix'.format(CAMnode))\n\t            thisGRP\[mainKnobs\[1]].setExpression('\{0\}.focal'.format(CAMnode))\n\t            thisGRP\[mainKnobs\[2]].setExpression('\{0\}.haperture'.format(CAMnode))\n\t        else :\n\t            nuke.message('Only accept Camera.')\nexcept ValueError:\n    nuke.message('no node selected.')" +STARTLINE}
+ addUserKnob {22 remove_link l "remove linked expression" t "Remove the linked camera expression but won't reset any data. So the position data still works if input doesn't contain any camera movement." -STARTLINE T "thisGRP = nuke.thisGroup()\nmainKnobs = \['world_matrix','cam_focal','cam_haperture']\n\nfor knob in thisGRP.knobs() :\n    if mainKnobs.count(knob) != 0 :\n        thisGRP\[knob].clearAnimated()"}
+ addUserKnob {20 cam_data_grp l "CAMERA DATA" n 1}
+ cam_data_grp 0
+ addUserKnob {7 cam_focal l focal R 5 100}
+ cam_focal 50
+ addUserKnob {7 cam_haperture l "horiz aperture" R 0.1 50}
+ cam_haperture 24.576
+ addUserKnob {41 world_matrix l "world matrix" T cam_data.matrix}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 t_VERSION l Version}
+ addUserKnob {26 l_VERSION l <b>Version</b> T 1.9}
+ addUserKnob {26 l_DATE l "<b>Date Modified</b>" T 2019-05-14}
+ addUserKnob {26 l_CHANGELOG l <b>Changelog</b> T "1.9\n- 'DeepVolumeMatte'\n  fix when gizmo render on farm\n\n1.8\n- 'DeepVolumeMatte'\n  colorpicker mode will show the matte in\n  alpha channel.\n- 'DeepVolumeMatte'\n  when colorpicker mode is on,\n  output will switch to 2D image. Able to use\n  the matte on downstream without any\n  deep to 2D image convertion.\n  Label on the node will show the output\n  format."}
+ addUserKnob {26 l_DEV l "<b>Developed by</b>" T "<a href='https://facebook.com/MJTLab'><font color='orange'>Mark Joey Tang</font></a>"}
+}
+ DeepToImage {
+  inputs 0
+  name DeepToImage1
+  xpos -142
+  ypos -361
+ }
+add_layer {deepRawColor deepRawColor.red deepRawColor.green deepRawColor.blue deepRawColor.alpha}
+ AddChannels {
+  channels deepRawColor
+  name AddChannels1
+  xpos -142
+  ypos -304
+ }
+ Input {
+  inputs 0
+  name deep
+  xpos 0
+  ypos -454
+ }
+ Dot {
+  name Dot1
+  xpos 34
+  ypos -358
+ }
+ DeepRecolor {
+  inputs 2
+  channels {{{parent.AddChannels1.channels}}}
+  name DeepRecolor1
+  xpos 0
+  ypos -304
+ }
+ DeepExpression {
+  chans0 deepRawColor
+  chans1 none
+  deepRawColor.red red
+  deepRawColor.green green
+  deepRawColor.blue blue
+  deepRawColor.alpha alpha
+  name DeepExpression4
+  label "store color"
+  xpos 0
+  ypos -204
+ }
+ DeepExpression {
+  chans0 rgb
+  chans1 none
+  rgba.red "( ( x/\[value input.width] ) - 0.5 ) * \[value hratio] * deep.front )"
+  rgba.green "( ( y/\[value input.height] ) - 0.5 ) * ( ( \[value hratio]*deep.front ) / ( \[value input.width]/\[value input.height] ) )"
+  rgba.blue -deep.front
+  name DeepExpression6
+  label "initial setup"
+  selected true
+  xpos 0
+  ypos -116
+  addUserKnob {20 User}
+  addUserKnob {7 hratio}
+  hratio {{"\[value cam_data.haperture] / \[value cam_data.focal]"}}
+ }
+ DeepExpression {
+  chans0 {rgba.red rgba.green rgba.blue none}
+  chans1 none
+  rgba.red "(r * \[value cam_data.world_matrix.0] + g * \[value cam_data.world_matrix.1] + b * \[value cam_data.world_matrix.2]) + \[value cam_data.world_matrix.3]"
+  rgba.green "(r * \[value cam_data.world_matrix.4] + g * \[value cam_data.world_matrix.5] + b * \[value cam_data.world_matrix.6]) + \[value cam_data.world_matrix.7]"
+  rgba.blue "(r * \[value cam_data.world_matrix.8] + g * \[value cam_data.world_matrix.9] + b * \[value cam_data.world_matrix.10]) + \[value cam_data.world_matrix.11]"
+  name deepCT_00
+  label camera
+  xpos 0
+  ypos -28
+  addUserKnob {20 User}
+ }
+ Dot {
+  name Dot3
+  xpos 34
+  ypos 60
+ }
+set N6d777300 [stack 0]
+ DeepToImage {
+  name DeepToImage3
+  xpos -148
+  ypos 57
+ }
+add_layer {deepPosition deepPosition.red deepPosition.green deepPosition.blue deepPosition.alpha}
+ AddChannels {
+  channels deepPosition
+  name AddChannels3
+  xpos -148
+  ypos 149
+ }
+push $N6d777300
+ DeepRecolor {
+  inputs 2
+  channels {{{parent.AddChannels3.channels}}}
+  name DeepRecolor2
+  xpos 0
+  ypos 149
+ }
+ DeepExpression {
+  chans0 deepPosition
+  chans1 none
+  deepPosition.red red
+  deepPosition.green green
+  deepPosition.blue blue
+  deepPosition.alpha 1
+  name DeepExpression2
+  label "shuffle position to deepPosition channel"
+  xpos 0
+  ypos 237
+ }
+ DeepExpression {
+  chans1 none
+  rgba.red deepPosition.red
+  rgba.green deepPosition.green
+  rgba.blue deepPosition.blue
+  rgba.alpha deepPosition.alpha
+  name DeepExpression5
+  label "deep shuffle"
+  xpos 0
+  ypos 325
+ }
+ DeepExpression {
+  chans1 none
+  rgba.red deepRawColor.red
+  rgba.green deepRawColor.green
+  rgba.blue deepRawColor.blue
+  rgba.alpha deepRawColor.alpha
+  name DeepExpression3
+  label "color restore"
+  xpos 0
+  ypos 413
+ }
+ Output {
+  name Output1
+  xpos 0
+  ypos 501
+ }
+ Camera {
+  inputs 0
+  display off
+  selectable false
+  xform_order {{parent.cam_xform_order}}
+  rot_order {{parent.cam_rot_order}}
+  useMatrix true
+  focal {{parent.cam_focal}}
+  haperture {{parent.cam_haperture}}
+  name cam_data
+  xpos 136
+  ypos -134
+ }
+end_group

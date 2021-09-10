@@ -53,6 +53,7 @@ viewerMenu.addCommand("saveImage", "import saveImage; saveImage.saveImage()")
 
 #######################################    ANIMATION MENU    ####################################################
 animationMenu = nuke.menu('Animation')
+import AnimationMaker
 animationMenu.addCommand( 'Animation Maker...', 'AnimationMaker.showWindow()','',icon='ParticleBounce.png')
 
 
@@ -134,13 +135,13 @@ nodesMenu.addCommand("Filter/PolarCoordinates", "nuke.nodePaste(UserDir+'/Folder
 nodesMenu.addCommand("Sharpen", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/Sharpen.nk')")
 
 nodesMenu.addCommand('Transform/CardToTrack', "nuke.createNode(\"CardToTrack\")",icon = "Card.png")
-nodesMenu.addCommand('Transform/TrackToRoto','import TrackToRoto; TrackToRoto.RotoFromTrack()',"Shift+p",icon="Tracker.png")
+nodesMenu.addCommand('Transform/TrackToRoto','import TrackToRoto; TrackToRoto.RotoFromTrack()',"p",icon="Tracker.png")
 nodesMenu.addCommand('Transform/concatenate2Dtransforms','importconcatenate2Dtransforms; concatenate2Dtransforms.transformstoMatrix()',icon="Tracker.png")
 nodesMenu.addCommand('Transform/Smoother','import  Smoother; Smoother.Smoother()') 
 nodesMenu.addCommand("Transform/Offset", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/Offset.nk')", icon="my.png")
 nodesMenu.addCommand("Transform/ITransform","nuke.nodePaste(UserDir+'/Folders/NukeScripts/iTransform.nk')","Alt+f3", icon="my.png")
 nodesMenu.addCommand("Transform/TransformMasked", "nuke.createNode(\"TransformMasked\")","Alt+f6", icon="TransformMasked.png")
-nodesMenu.addCommand("Transform/Cr", "cropMy.cropMy()","F6", icon="Crop.png")
+nodesMenu.addCommand("Transform/Cr", "import cropMy;cropMy.cropMy()","F6", icon="Crop.png")
 nodesMenu.addCommand("Transform/CornerPin", "nuke.createNode(\"CornerPinMy11\")", "shift+ctrl+c", icon="CornerPin.png")
 nodesMenu.addCommand('Reformat','import myReformat; myReformat.myReformat()',"ctrl+r", icon="Reformat.png")
 nodesMenu.addCommand("ReformatCrop","import ReformatCrop; ReformatCrop.ReformatCrop()",'ctrl+shift+r')
@@ -179,7 +180,7 @@ nodesMenu.addCommand("Color/shuffle/shuffleGreen",'import shuffle_Smart;shuffle_
 nodesMenu.addCommand("Color/shuffleCreate",'import shuffle_Smart;shuffle_Smart.shuffleCreate()',"s")
 nodesMenu.addCommand("Color/shuffleDepth",'import shuffle_Smart;shuffle_Smart.shuffleDepth()',"d")
 nodesMenu.addCommand('Color/Invert', "nuke.createNode(\"Invert\")","i",icon="my.png")       
-nodesMenu.addCommand("Color/Multiply", "fademult;fademult.fademult()","f", icon="ColorMath.png")
+nodesMenu.addCommand("Color/Multiply", "import fademult;fademult.fademult()","f", icon="ColorMath.png")
 nodesMenu.addCommand("Color/HueCorrect", "nuke.createNode(\"HueCorrect\")","h", icon="HueCorrect.png")
 nodesMenu.addCommand("Color/ColorLookup", "nuke.createNode(\"ColorLookup\")","Ctrl+F4",icon="ColorLookup.png")
 nodesMenu.addCommand("Color/Clamp", "nuke.createNode(\"Clamp\")","F4", icon="Clamp.png")
@@ -238,9 +239,26 @@ nuke.tprint("_"*100);nuke.tprint("my user is loaded");nuke.tprint("_"*100)
 
 
 
+# def example():
+#     import sys
+#     from PySide2 import QtCore, QtGui, QtWidgets
+    
+#     pixmap = QtGui.QPixmap('/mnt/Hobby/projects/toe/07_Masters/toe.png')
+#     label = QtWidgets.QLabel()
+#     label.setPixmap(pixmap)
+#     label.setScaledContents(1)
+#     label.resize(1146/2, 1468/2)
+#     #label.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+#     label.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+#     label.show()
+# nuke.addOnCreate(lambda: example() , nodeClass="Toe2")
 
 
 
+def example():
+    nuke.thisNode()["icon"].setValue('/mnt/Hobby/projects/toe/07_Masters/toeST.png')
+
+nuke.addOnCreate(lambda: example() , nodeClass="Toe2")
 
 
 

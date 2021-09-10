@@ -1,0 +1,82 @@
+Group {
+ name DeepPositionToImage
+ tile_color 0x3d99ff
+ label "<font color=cyan>Image Output</font>"
+ addUserKnob {20 t_general l General}
+ addUserKnob {26 description l "description :" T "This node converts <b>'deepPosition'</b> data generated <br>\nby <b>DeepToPosition</b> to 2D image in downstream. <br>\nIt is because position data in volumatric format and <br>\ntransparent pixels, normal deepToImage will not opperate <br>\ncorrectly with 3D data pass."}
+ addUserKnob {20 t_VERSION l Version}
+ addUserKnob {26 l_VERSION l <b>Version</b> T 1.9}
+ addUserKnob {26 l_DATE l "<b>Date Modified</b>" T 2019-05-14}
+ addUserKnob {26 l_CHANGELOG l <b>Changelog</b> T "1.9\n- 'DeepVolumeMatte'\n  fix when gizmo render on farm\n\n1.8\n- 'DeepVolumeMatte'\n  colorpicker mode will show the matte in\n  alpha channel.\n- 'DeepVolumeMatte'\n  when colorpicker mode is on,\n  output will switch to 2D image. Able to use\n  the matte on downstream without any\n  deep to 2D image convertion.\n  Label on the node will show the output\n  format."}
+ addUserKnob {26 l_DEV l "<b>Developed by</b>" T "<a href='https://facebook.com/MJTLab'><font color='orange'>Mark Joey Tang</font></a>"}
+}
+ Input {
+  inputs 0
+  name deep
+  xpos 508
+  ypos -26
+ }
+ Dot {
+  name Dot5
+  xpos 542
+  ypos 31
+ }
+set N68cdeb90 [stack 0]
+ Dot {
+  name Dot2
+  xpos 690
+  ypos 31
+ }
+ DeepExpression {
+  chans1 none
+  rgba.red deepPosition.red
+  rgba.green deepPosition.green
+  rgba.blue deepPosition.blue
+  rgba.alpha "alpha == 0 ? 0 : 1"
+  name DeepExpression15
+  xpos 656
+  ypos 81
+ }
+ DeepToImage {
+  name DeepToImage2
+  xpos 656
+  ypos 141
+ }
+ Dot {
+  name Dot6
+  xpos 690
+  ypos 221
+ }
+push $N68cdeb90
+ DeepToImage {
+  name DeepToImage1
+  xpos 508
+  ypos 80
+ }
+add_layer {deepPosition deepPosition.red deepPosition.green deepPosition.blue deepPosition.alpha}
+ ShuffleCopy {
+  inputs 2
+  red red
+  green green
+  blue blue
+  alpha black
+  out deepPosition
+  name ShuffleCopy1
+  xpos 508
+  ypos 218
+ }
+add_layer {deepRawColor deepRawColor.red deepRawColor.green deepRawColor.blue deepRawColor.alpha}
+add_layer {deep2vpBuffer deep2vpBuffer.red}
+ Remove {
+  channels deepRawColor
+  channels2 deep2vpBuffer
+  name Remove1
+  xpos 508
+  ypos 298
+ }
+ Output {
+  name Output1
+  xpos 508
+  ypos 386
+ }
+end_group
