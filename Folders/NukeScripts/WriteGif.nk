@@ -1,0 +1,25 @@
+set cut_paste_input [stack 0]
+version 11.3 v4
+push $cut_paste_input
+Write {
+ file "/media/lamakaha/work/projects/giffs/02_Scans/\[value Gname]/\[value Gname].######.png"
+ file_type png
+ create_directories true
+ first 85
+ checkHashOnRead false
+ version 26
+ name Write4
+ label "/media/lamakaha/work/projects/giffs/02_Scans/\[value Gname]/\[value Gname]\n"
+ selected true
+ xpos 1500
+ ypos 3232
+ addUserKnob {20 User l gif}
+ addUserKnob {22 createGif T "import os\na = nuke.thisNode()\na\['Render'].execute()\ndestPath = a\['destination'].value()\nname = a\['Gname'].value()\nloop = str(a\['loop'].value())\ndelay = str(a\['delay'].value())\npath = a\['file'].evaluate().rpartition(\"/\")\[0]+\"/\"\nstring = \"convert -delay \"+delay+\" -loop \"+loop+\" \"+path+\"*.png \"+destPath+name+\".gif\"\nos.system(string)" +STARTLINE}
+ addUserKnob {1 Gname l name}
+ Gname compMeetingsmall
+ addUserKnob {1 destination}
+ destination /home/lamakaha/Pictures/gifs/mine/
+ addUserKnob {3 delay}
+ delay 4
+ addUserKnob {3 loop}
+}
