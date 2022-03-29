@@ -241,12 +241,8 @@ class MassivePanelPySide(QtWidgets.QWidget):
         self.ui.dummy1_2.setStyleSheet("Text-align:left")
         self.ui.dummy1_2.setToolTip("add selected nodes to running rv session")
 
-        #self.ui.dummy1_7.setEnabled(True)
-        #self.ui.dummy1_7.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
-        #self.ui.dummy1_3.setText("3")
-        #self.ui.dummy1_7.clicked
 
-        
+
         self.ui.dummy1_4.setEnabled(True)
         self.ui.dummy1_4.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'cmpElem.png'))))
         self.ui.dummy1_4.setText("Elem")
@@ -258,8 +254,6 @@ class MassivePanelPySide(QtWidgets.QWidget):
         self.ui.dummy1_5.setText("share")
         self.ui.dummy1_5.clicked.connect(lambda: self.shareNodes())
         self.ui.dummy1_5.setToolTip("share Nodes Instantly")
-
-
 
         self.ui.dummy1_6.setEnabled(True)
         self.ui.dummy1_6.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
@@ -277,9 +271,20 @@ class MassivePanelPySide(QtWidgets.QWidget):
         # self.ui.dummy1_8.setEnabled(True)
         # self.ui.dummy1_8.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
         # self.ui.dummy1_8.setText("8")
-        # self.ui.dummy1_10.setToolTip("render selected nodes on the render farm")
+        #self.ui.dummy1_10.setToolTip("render selected nodes on the render farm")
 
         
+################################
+        self.ui.dummy1_8.setEnabled(True)
+        self.ui.dummy1_8.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'rv.png'))))
+        self.ui.dummy1_8.pressed.connect(lambda: self.clearView())
+        self.ui.dummy1_8.released.connect(lambda: self.unClearView())
+
+##############################
+
+
+
+
         self.ui.dummy1_9.setEnabled(True)
         self.ui.dummy1_9.setIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join(dirname, 'workflow.png'))))
         self.ui.dummy1_9.setText("lSet")
@@ -397,10 +402,32 @@ class MassivePanelPySide(QtWidgets.QWidget):
         ED_AssetLoader_BetaB.makeAssetLoader(autoGather=True)
 
 
+    def clearView(self):   
+        nuke.selectConnectedNodes()
+        selected = nuke.selectedNodes()
+        nuke.invertSelection()
+        unselected = nuke.selectedNodes()
+
+        for one in unselected:
+            if one.Class() not in ["StickyNote",'BackdropNode']:
+                one['xpos'].setValue(one['xpos'].value()+10000)   
+            one.setSelected(False)
+        for one in selected:
+            one.setSelected(True)
 
 
+    def unClearView(self):   
+        nuke.selectConnectedNodes()
+        selected = nuke.selectedNodes()
+        nuke.invertSelection()
+        unselected = nuke.selectedNodes()
 
-
+        for one in unselected:
+            if one.Class() not in ["StickyNote",'BackdropNode']:
+                one['xpos'].setValue(one['xpos'].value()-10000)
+            one.setSelected(False)
+        for one in selected:
+            one.setSelected(True)
 
     #comment backdrop
     def commentLead(self):

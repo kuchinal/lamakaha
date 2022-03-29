@@ -134,7 +134,9 @@ nodesMenu.addCommand("Filter/ChromAbb",  "nuke.nodePaste(UserDir+'/Folders/NukeS
 nodesMenu.addCommand("Filter/PolarCoordinates", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/PolarCoordinates.nk')",icon="my.png")
 nodesMenu.addCommand("Sharpen", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/Sharpen.nk')")
 
-nodesMenu.addCommand('Transform/CardToTrack', "nuke.createNode(\"CardToTrack\")",icon = "Card.png")
+#nodesMenu.addCommand('Transform/CardToTrack', "nuke.createNode(\"CardToTrack\")",icon = "Card.png")
+nodesMenu.addCommand("Transform/CardToTrack", "nuke.nodePaste(UserDir+'/Folders/NukeScripts/CardToTrack.nk')", icon="Card.png")
+
 nodesMenu.addCommand('Transform/TrackToRoto','import TrackToRoto; TrackToRoto.RotoFromTrack()',"p",icon="Tracker.png")
 nodesMenu.addCommand('Transform/concatenate2Dtransforms','importconcatenate2Dtransforms; concatenate2Dtransforms.transformstoMatrix()',icon="Tracker.png")
 nodesMenu.addCommand('Transform/Smoother','import  Smoother; Smoother.Smoother()') 
@@ -163,8 +165,6 @@ nodesMenu.addCommand('Nodegraph/Align/vertically', 'import alignNodes; alignNode
 nodesMenu.addCommand("Nodegraph/Backdrops/Fix Layering", "import backdropTools; backdropTools.fixBackdropDepth()")
 nodesMenu.addCommand('Nodegraph/Paste To Selected', 'import pasteToSelected; pasteToSelected.pasteToSelected()',"Alt+f5", index=10,icon="my.png")
 nodesMenu.addCommand('Nodegraph/getColor','import getColor; getColor.getColor()',icon="my.png")
-nodesMenu.addCommand("Nodegraph/Splay First", "nuke.splayNodes(False, False)", "Down")
-nodesMenu.addCommand("Nodegraph/Connect", "nuke.connectNodes(False, False)", "Up")
 nodesMenu.addCommand('Nodegraph/Align/horizontally', 'import alignNodes; alignNodes.alignNodes( nuke.selectedNodes(), direction="y" )',"l")
 nodesMenu.addCommand("Nodegraph/scaleNodesExpand", "import scaleNodesA; scaleNodesA.scaleNodes( 1.3,1)","Shift+.")
 nodesMenu.addCommand("Nodegraph/scaleNodesContract", "import scaleNodesA; scaleNodesA.scaleNodes( .7, 1 )","Ctrl+Shift+.")
@@ -225,7 +225,8 @@ nodegraphMenu.addCommand('@;Dots ', 'import Dots; Dots.Dots()', ',',icon = "Dot.
 nodegraphMenu.addCommand('@;Transform', 'import myTransform; myTransform.transformThis()', 't')
 nodegraphMenu.addCommand('@;Merge', 'import myMerge; myMerge.mergeThis()', 'm',shortcutContext=2)
 nodegraphMenu.addCommand("@;MyCC", "import myCC; myCC.myCC()","c")
-
+nodegraphMenu.addCommand("Nodegraph/Splay First", "nuke.splayNodes(False, False)", "Down")
+nodegraphMenu.addCommand("Nodegraph/Connect", "nuke.connectNodes(False, False)", "Up")
 
 
 
