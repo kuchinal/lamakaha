@@ -1,5 +1,4 @@
 import nuke
-
 def Dots():
     dotList,dotListX= [],[]
     Dsize = int(nuke.toNode("preferences")['dot_node_scale'].value()*12)
@@ -8,20 +7,16 @@ def Dots():
     same = 1
     old = ""
     for selected in nodes:
-        selectedX = selected.xpos()
-        selectedY = selected.ypos()
-        selectedW = selected.screenWidth()
-        selectedH = selected.screenHeight()
-
-
+        selectedX,selectedY = int(selected.xpos()),int(selected.ypos())
+        selectedW,selectedH = int(selected.screenWidth()),int(selected.screenHeight())
 
         # checking inputs and assigning variables
         try:# check if input 0 is exist
             A = selected.input(0)
-            AX = A.xpos()
-            AY = A.ypos()
-            AW = A.screenWidth()
-            AH = A.screenHeight()
+            AX = int(A.xpos())
+            AY = int(A.ypos())
+            AW = int(A.screenWidth())
+            AH = int(A.screenHeight())
             AClass = A.Class()
             if count == 0:
                 old = A
@@ -29,49 +24,39 @@ def Dots():
             else:
                 if old != A:
                     same = 0
-
-
-
         except:
-            AX = selected.xpos()
-            AY = selected.ypos()
-            AW = selected.screenWidth()
-            AH = selected.screenHeight()
+            AX,AY = int(selected.xpos()),int(selected.ypos())
+            AW,AH = int(selected.screenWidth()),int(selected.screenHeight())
             AClass = "no classs"
         try:# check if input 1 is exist
             B = selected.input(1)
-            BX = B.xpos()
-            BY = B.ypos()
-            BW = B.screenWidth()
-            BH = B.screenHeight()
+            BX,BY = int(B.xpos()),int(B.ypos())
+            BW,BH = int(B.screenWidth()),int(B.screenHeight())
             BClass = B.Class()
-            print " Input 1 found   " + B['name'].value()
+            print (" Input 1 found   " + B['name'].value())
         except:
-            BX = selected.xpos()
-            BY = selected.ypos()
-            BW = selected.screenWidth()
-            BH = selected.screenHeight()
+            BX,BY = int(selected.xpos()),int(selected.ypos())
+            BW,BH = int(selected.screenWidth()),int(selected.screenHeight())
             BClass = "no classs"
-            print " no input1 found        "
+            print (" no input1 found        ")
         try:# check if input 2 is exist
             C = selected.input(2)
-            CX = C.xpos()
-            CY = C.ypos()
-            CW = C.screenWidth()
-            CH = C.screenHeight()
+            CX,CY = int(C.xpos()),int(C.ypos())
+             = 
+            CW,CH = int(C.screenWidth()),int(C.screenHeight())
             CClass = C.Class()
-            print " Input 2 found   " + C['name'].value()
+            print (" Input 2 found   " + C['name'].value())
         except:
-            print " "
+            print (" ")
 
 
 
         # setting position
         if B and not C:#two inputs found
             Dot = nuke.nodes.Dot()
-            
+           
             if BX == selectedX or BX-34 == selectedX:# above node case
-                print 'above node case'
+                print ('above node case')
                 t = nuke.selectedNode()
                 depB = t.dependencies(nuke.INPUTS)[0]
 
@@ -81,18 +66,18 @@ def Dots():
                     depA = t.dependencies(nuke.INPUTS)[0]
 
                 depA.setSelected(True)
-                x2 = depA.xpos()
-                y2 = depA.ypos()
+                x2 = int(depA.xpos())
+                y2 = int(depA.ypos())
                 w,h = depA.screenWidth(),depA.screenHeight()
 
 
                 dot = nuke.nodes.Dot()
-                dot.setXYpos(selectedX-200,selectedY+selectedH/2-Dsize/2)
+                dot.setXYpos(int(selectedX-200),int(selectedY+selectedH/2-Dsize/2))
                 dot2 = nuke.nodes.Dot()
                 if BX-34 == selectedX:
-                    dot2.setXYpos(selectedX-200,y2)
+                    dot2.setXYpos(int(selectedX-200),int(y2))
                 else:
-                    dot2.setXYpos(selectedX-200,y2+h/2-Dsize/2)
+                    dot2.setXYpos(int(selectedX-200),int(y2+h/2-Dsize/2))
                 dot2.setInput(0,depA)
                 dot.setInput(0,dot2)
                 t.setInput(1,dot)
@@ -100,16 +85,17 @@ def Dots():
             else:#normal merge case
                 Dot.setInput(0,B)
                 selected.setInput(1,Dot)
-                Dot.setXYpos(BX+BW/2-Dsize/2,selectedY+selectedH/2-Dsize/2)
+
+                Dot.setXYpos(int(BX+BW/2-Dsize/2),int(selectedY+selectedH/2-Dsize/2))
 
             if A.Class()== "Dot":
-                selected.knob("xpos").setValue(AX-selectedW/2+Dsize/2)
+                selected.knob("xpos").setValue(int(AX-selectedW/2+Dsize/2))
             else:        
-                selected.knob("xpos").setValue(AX)
+                selected.knob("xpos").setValue(int(AX))
 
 
-            print 'two inputs found'
-        
+            print ('two inputs found')
+       
         elif C:#three inputs found
              
             if "Scanline" in selected.Class():
@@ -117,9 +103,9 @@ def Dots():
                     pass
                 else:
                     if B.Class()== "Dot":
-                        selected.setXYpos(BX-selectedW/2+Dsize/2,selectedY)
+                        selected.setXYpos(int(BX-selectedW/2+Dsize/2),int(selectedY))
                     else:
-                        selected.setXYpos(BX,selectedY)
+                        selected.setXYpos(int(BX),int(selectedY))
 
                 dot = nuke.nodes.Dot(xpos=CX+CW/2-Dsize/2, ypos=selectedY+selectedH/2-Dsize/2)
                 dot.setInput(0,C)
@@ -131,13 +117,13 @@ def Dots():
                     dot = nuke.nodes.Dot(xpos=AX+AW/2-Dsize/2, ypos=selectedY+selectedH/2-Dsize/2)
                     dot.setInput(0,A)
                     selected.setInput(0,dot)
-                print "Scanline"
+                print ("Scanline")
             if "Merge" in selected.Class() or "Roto" in selected.Class()or "Keymix" in selected.Class():
 
                 if A.Class()== "Dot":
-                    selected.knob("xpos").setValue(AX-selectedW/2+Dsize/2)
+                    selected.knob("xpos").setValue(int(AX-selectedW/2+Dsize/2))
                 else:        
-                    selected.knob("xpos").setValue(AX)
+                    selected.knob("xpos").setValue(int(AX))
 
                 dot = nuke.nodes.Dot(xpos=CX+CW/2-Dsize/2, ypos=selectedY+selectedH/2-Dsize/2)
                 dot.setInput(0,C)
@@ -148,35 +134,13 @@ def Dots():
                 selected.setInput(1,dot)
 
 
-                print 'three input found'
+                print ('three input found')
 
         else:#one input found
-            print 'one input found'
-            Dot = nuke.nodes.Dot() 
+            print ('one input found')
+            Dot = nuke.nodes.Dot()
             Dot.setInput(0,A)
             selected.setInput(0,Dot)        
-            Dot.setXYpos(selectedX+selectedW/2-Dsize/2,AY+AH/2-Dsize/2) 
+            Dot.setXYpos(int(selectedX+selectedW/2-Dsize/2),int(AY+AH/2-Dsize/2) )
             dotList.append(Dot)
             dotListX.append(Dot.xpos())
-
-
-    # if len(dotList)>1 and same == 1:
-    #     dotListX.sort()
-    #     if A.xpos()>dotListX[0]:
-    #         dotListX.reverse()
-    #     d=A
-    #     for one in dotListX:
-    #         for sec in dotList:
-    #             if sec.xpos() == one:
-    #                 sec.setSelected(True)
-    #                 r = nuke.createNode("Dot")
-    #                 r.setSelected(False)
-    #                 sec.setSelected(False)
-    #                 sec.setInput(0,d)
-    #                 d=sec
-
-
-
-
-    ###################################################
-
