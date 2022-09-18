@@ -42,7 +42,6 @@ def Dots():
         try:# check if input 2 is exist
             C = selected.input(2)
             CX,CY = int(C.xpos()),int(C.ypos())
-             = 
             CW,CH = int(C.screenWidth()),int(C.screenHeight())
             CClass = C.Class()
             print (" Input 2 found   " + C['name'].value())
