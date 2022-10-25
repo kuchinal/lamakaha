@@ -9,6 +9,7 @@ nuke.pluginAddPath("Folders/MariBridge/")
 
 nuke.pluginAddPath("Folders/Python/KnobScripter/")
 nuke.pluginAddPath("Folders/Python/MassivePanel/")
+nuke.pluginAddPath("Folders/Python/nuke_nodegraph_utils/")
 nuke.pluginAddPath("Folders/Folders/Plugins/SetLoop/")
 
 
