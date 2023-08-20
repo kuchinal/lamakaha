@@ -1,0 +1,29 @@
+import nuke
+
+def decryptomatte_custom(gizmo=None):
+    if not gizmo:
+        gizmo = nuke.selectedNode()
+    def _decryptomatte_get_name(giz):
+        name = giz.knob("matteList").value()
+
+        return name
+    selection = gizmo.knob("selection").value()
+    matte_list = _decryptomatte_get_name(gizmo)
+    matte_name = nuke.getInput("Please enter name for matte\nNode name will be: {0}".format(selection))
+    expression_str = gizmo.knob("expression").value()
+
+    expr = nuke.nodes.Expression(channel0="rgba", 
+        expr0="rgba.alpha!=0?("+expression_str+")/rgba.alpha:0", label=matte_name)
+    expr.setName(selection)
+    matte_list_knob = nuke.Multiline_Eval_String_Knob("matte_list", "Matte List")
+    matte_list_knob.setValue(matte_list)
+
+    expr.addKnob(matte_list_knob)
+    expr.setInput(0, gizmo.dependencies(nuke.INPUTS)[0])
+    expr.setXYpos(gizmo.xpos(),gizmo.ypos())
+    gizmo.setXYpos(gizmo.xpos(),gizmo.ypos()-150)
+    gizmo.setSelected(False)
+    expr.setSelected(True)
+    gizmo.setInput(0, None)
+    Postage.Postage()
+#decryptomatte_custom()

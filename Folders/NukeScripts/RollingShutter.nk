@@ -1,0 +1,76 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Group {
+ name Rolling_Shutter1
+ selected true
+ xpos -140
+ ypos 351
+ addUserKnob {20 User l "Rolling Shutter"}
+ addUserKnob {12 trans l transform}
+ addUserKnob {7 delay l Delay}
+ delay 1
+ addUserKnob {41 filter T STMap1.filter}
+ addUserKnob {26 ""}
+ addUserKnob {41 motionblur T mb_trans.motionblur}
+ addUserKnob {41 shutter T mb_trans.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T mb_trans.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T mb_trans.shuttercustomoffset}
+ addUserKnob {20 about l @}
+ addUserKnob {26 author l "Author: " T "Mariusz Wesierski ( mw@fxcalibur.com )"}
+ addUserKnob {26 version l "Version: " T 1.0}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -301
+  ypos -196
+ }
+set N197ad640 [stack 0]
+ Expression {
+  temp_name0 offsetx
+  temp_expr0 "trans.x(frame)-trans.x(frame-(delay) )"
+  temp_name1 offsety
+  temp_expr1 "trans.y(frame)-trans.y(frame-(delay) )"
+  expr0 "( x-offsetx*(height-y)/height)<0?1+(( x-offsetx*(height-y)/height)/width)-int(( x-offsetx*(height-y)/height)/width):(( x-offsetx*(height-y)/height)/width)-int(( x-offsetx*(height-y)/height)/width)"
+  expr1 "( y-offsety*(height-y)/height)<0?1+(( y-offsety*(height-y)/height)/height)-int(( y-offsety*(height-y)/height)/height):(( y-offsety*(height-y)/height)/height)-int(( y-offsety*(height-y)/height)/height)"
+  expr2 0
+  channel3 {none none none -rgba.alpha}
+  name offset_xp
+  selected true
+  xpos -423
+  ypos -142
+ }
+push $N197ad640
+ STMap {
+  inputs 2
+  uv rgb
+  blur_scale 0
+  name STMap1
+  xpos -301
+  ypos -124
+ }
+ Transform {
+  translate {{trans.x} {trans.y}}
+  center {800 501.5}
+  shutteroffset centred
+  name mb_trans
+  xpos -301
+  ypos -81
+  disable {{motionblur>0?0:1}}
+ }
+ Transform {
+  translate {{-trans.x} {-trans.y}}
+  center {800 501.5}
+  black_outside false
+  name inv_trans
+  xpos -301
+  ypos -57
+  disable {{mb_trans.motionblur>0?0:1}}
+ }
+ Output {
+  name Output1
+  xpos -301
+  ypos -23
+ }
+end_group

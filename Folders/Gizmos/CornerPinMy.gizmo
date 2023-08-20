@@ -1,0 +1,73 @@
+#! /mnt/repository/software/install/nuke/10.5v5/centos-6_x86-64/libnuke-10.5.5.so -nx
+version 10.5 v5
+Group {
+name CornerPinMy
+ help "it is just cornerpin tracked\nnothing fancy at all\ncreated this gizmo only because cornerpin is creating huge BB and i had to crop it"
+ tile_color 0x7a4389ff
+ note_font Verdana
+ note_font_size 14
+ note_font_color 0x28565eff
+ addUserKnob {20 User}
+ addUserKnob {26 ""}
+ addUserKnob {22 setToToInput l " Set 'to' to input " T "n = nuke.thisGroup()\nw = n.width()\nh = n.height()\nn\['to1'].setValue(\[0,0])\nn\['to2'].setValue(\[w,0])\nn\['to3'].setValue(\[w,h])\nn\['to4'].setValue(\[0,h])\n" +STARTLINE}
+ addUserKnob {41 copy_from_to l "Copy 'from'" -STARTLINE T CornerPin2D2.copy_from_to}
+ addUserKnob {22 setToAnimated l " set 'to' animated  " -STARTLINE T "n = nuke.thisGroup()\nw = n.width()\nh = n.height()\nn\['to1'].setKeyAt(nuke.frame())\nn\['to2'].setKeyAt(nuke.frame())\nn\['to3'].setKeyAt(nuke.frame())\nn\['to4'].setKeyAt(nuke.frame())"}
+ addUserKnob {22 clearToAnim l "  clear 'to' animated  " -STARTLINE T "n = nuke.thisGroup()\nw = n.width()\nh = n.height()\nn\['to1'].clearAnimated()\nn\['to2'].clearAnimated()\nn\['to3'].clearAnimated()\nn\['to4'].clearAnimated()"}
+ addUserKnob {20 To n 1}
+ addUserKnob {41 to1 T CornerPin2D2.to1}
+ addUserKnob {41 to2 -STARTLINE T CornerPin2D2.to2}
+ addUserKnob {41 to3 T CornerPin2D2.to3}
+ addUserKnob {41 to4 -STARTLINE T CornerPin2D2.to4}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 set_to_input l "Set From to input" t "this will distort the input texture with the corner pin, it is the same as applying the texture on the card " T CornerPin2D2.set_to_input}
+ addUserKnob {22 setRefFrame l "Copy 'To'" t "setting the reference frame,\nsame as the reference frame when you are doing projection with the camera on the card.\nyou should expect that the input will be unchenged on this frame." -STARTLINE T "def cornerPinZero():\n    import nuke\n    n = nuke.thisNode()\n    n\['from1'].setValue(n\['to1'].value())\n    n\['from2'].setValue(n\['to2'].value())\n    n\['from3'].setValue(n\['to3'].value())\n    n\['from4'].setValue(n\['to4'].value())\ncornerPinZero()"}
+ addUserKnob {22 setFromAnimated l "set 'from' animated" -STARTLINE T "n = nuke.selectedNode()\nw = n.width()\nh = n.height()\nn\['from1'].setKeyAt(nuke.frame())\nn\['from2'].setKeyAt(nuke.frame())\nn\['from3'].setKeyAt(nuke.frame())\nn\['from4'].setKeyAt(nuke.frame())"}
+ addUserKnob {22 clearFromAnim l "clear 'from' animated" -STARTLINE T "n = nuke.thisGroup()\nw = n.width()\nh = n.height()\nn\['from1'].clearAnimated()\nn\['from2'].clearAnimated()\nn\['from3'].clearAnimated()\nn\['from4'].clearAnimated()"}
+ addUserKnob {20 From n 1}
+ From 0
+ addUserKnob {41 from1 T CornerPin2D2.from1}
+ addUserKnob {41 from2 -STARTLINE T CornerPin2D2.from2}
+ addUserKnob {41 from3 T CornerPin2D2.from3}
+ addUserKnob {41 from4 -STARTLINE T CornerPin2D2.from4}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 invert t "stabilize the input on the reference frame" T CornerPin2D2.invert}
+ addUserKnob {41 motionblur T CornerPin2D2.motionblur}
+ addUserKnob {41 shutter T CornerPin2D2.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" -STARTLINE T CornerPin2D2.shutteroffset}
+ addUserKnob {41 shuttercustomoffset -STARTLINE T CornerPin2D2.shuttercustomoffset}
+ addUserKnob {41 filter T CornerPin2D2.filter}
+ addUserKnob {41 clamp T CornerPin2D2.clamp}
+ addUserKnob {41 black_outside l "black outside" -STARTLINE T CornerPin2D2.black_outside}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 110
+  ypos -237
+ }
+ CornerPin2D {
+  to1 {0 0}
+  to2 {2150 0}
+  to3 {2150 1134}
+  to4 {0 1134}
+  invert false
+  shutteroffset centred
+  from1 {0 0}
+  from2 {2150 0}
+  from3 {2150 1134}
+  from4 {0 1134}
+  name CornerPin2D2
+  xpos 110
+  ypos -139
+  disable {{parent.disable}}
+  addUserKnob {20 User}
+  addUserKnob {22 "set reference frame" -STARTLINE T cornerPinZero()}
+ }
+ Output {
+  name Output1
+  xpos 110
+  ypos -85
+ }
+end_group

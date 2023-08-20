@@ -1,0 +1,12 @@
+set cut_paste_input [stack 0]
+version 7.0 v9
+push $cut_paste_input
+NoOp {
+ name Unlock
+ selected true
+ xpos 521
+ ypos 59
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {22 open l "open selected Node" T "n = nuke.selectedNode()\nfor i in n.knobs(): \n    n\[i].setEnabled(True)" +STARTLINE}
+}

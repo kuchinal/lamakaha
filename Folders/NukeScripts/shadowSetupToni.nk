@@ -1,0 +1,1152 @@
+set cut_paste_input [stack 0]
+version 11.3 v1
+BackdropNode {
+ inputs 0
+ name BackdropNode12
+ tile_color 0x475c3000
+ label "shadow shape"
+ note_font_size 60
+ note_font_color 0xffffffff
+ selected true
+ xpos 658
+ ypos 10192
+ bdwidth 281
+ bdheight 402
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode13
+ tile_color 0x6b5a5500
+ label "plate shadow color"
+ note_font_size 60
+ note_font_color 0xffffffff
+ selected true
+ xpos 321
+ ypos 9951
+ bdwidth 280
+ bdheight 627
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode14
+ tile_color 0x45613500
+ label "adding new shadow"
+ note_font_size 60
+ note_font_color 0xffffffff
+ selected true
+ xpos -221
+ ypos 10175
+ bdwidth 395
+ bdheight 405
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode15
+ tile_color 0x482f3000
+ label "blacks match"
+ note_font_size 60
+ note_font_color 0xffffffff
+ selected true
+ xpos -45
+ ypos 10599
+ bdwidth 267
+ bdheight 331
+}
+push $cut_paste_input
+NoOp {
+ name Stamp11
+ help "Redone by Adrian Pueyo.\nUpdated 29 Mar 2019\n\nFull original concept and \"Postage Stamps\" created by Alexey Kuchinski."
+ onCreate "if nuke.GUI:\n    try:\n        nuke.thisNode().knob(\"toReconnect\").setValue(1)\n    except:\n        pass\n"
+ knobChanged "import stamps; stamps.wiredKnobChanged()"
+ autolabel "nuke.thisNode().knob(\"title\").value()"
+ tile_color 0x1000001
+ note_font "Bitstream Vera Sans"
+ note_font_size 20
+ selected true
+ xpos 54
+ ypos 9905
+ hide_input true
+ addUserKnob {20 wired_tab l "Wired Stamp"}
+ addUserKnob {26 identifier -STARTLINE +HIDDEN T wired}
+ addUserKnob {6 toReconnect -STARTLINE +HIDDEN}
+ toReconnect true
+ addUserKnob {1 title l Title}
+ title "GS Plate Degrain"
+ addUserKnob {26 prev_title l "" +STARTLINE +HIDDEN T "GS Plate Degrain"}
+ addUserKnob {1 anchor l Anchor}
+ anchor Anchor3
+ addUserKnob {26 anchorLabel l "Anchor Stamp"}
+ addUserKnob {22 show -STARTLINE T "import stamps; stamps.wiredShowAnchor()"}
+ addUserKnob {22 zoomAnchor l zoom -STARTLINE T "import stamps; stamps.wiredZoomAnchor()"}
+ addUserKnob {22 reconnect -STARTLINE T "n = nuke.thisNode()\ntry:\n    n.setInput(0,nuke.toNode(n.knob(\"anchor\").value()))\nexcept:\n    nuke.message(\"Unable to reconnect.\")\n"}
+ addUserKnob {26 wiredLabel l "Wired Stamps"}
+ addUserKnob {22 selectSimilar l "select similar" T "import stamps; stamps.wiredSelectSimilar()" +STARTLINE}
+ addUserKnob {22 zoomNext l "zoom next" -STARTLINE T "import stamps; stamps.wiredZoomNext()"}
+ addUserKnob {22 reconnectSimilar l "reconnect similar" -STARTLINE T "import stamps; stamps.wiredReconnectSimilar()"}
+ addUserKnob {26 line l "" +STARTLINE}
+ addUserKnob {22 buttonHelp l Help -STARTLINE T "import stamps; stamps.showHelp()"}
+ addUserKnob {26 version l "" t "Stamps \nRedone by Adrian Pueyo.\nFull original concept and \"Postage Stamps\" created by Alexey Kuchinski." -STARTLINE T v0.2}
+}
+Dot {
+ name Dot14
+ note_font_size 41
+ selected true
+ xpos 88
+ ypos 10061
+}
+set N5b4f33f0 [stack 0]
+Dot {
+ name Dot10
+ note_font_size 41
+ selected true
+ xpos 88
+ ypos 10275
+}
+set N5b4fad00 [stack 0]
+Dot {
+ name Dot11
+ note_font_size 41
+ selected true
+ xpos -37
+ ypos 10275
+}
+set N9f5ef100 [stack 0]
+Dot {
+ name Dot12
+ note_font_size 41
+ selected true
+ xpos -320
+ ypos 10275
+}
+Dot {
+ name Dot13
+ note_font_size 41
+ selected true
+ xpos -320
+ ypos 10828
+}
+Roto {
+ inputs 0
+ output alpha
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x45000000 x44870000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Bezier1 512 bezier
+     {{cc
+       {f 8192}
+       {px x4480c000
+        {xc0b6e27f xbe8929ba}
+        {x438c4000 x448b5000}
+        {x40b6e27f x3e8929e0}
+        {xc1adcb52 x3fb69d38}
+        {x43b24000 x448c0000}
+        {x41adcb53 xbfb69d18}
+        {xc1d41d69 xbfd0d9e2}
+        {x43e00000 x4489f000}
+        {x41d41d68 x3fd0da01}
+        {xc12b32da xc0ccda60}
+        {x43e4f6da x448e4db7}
+        {x412b32d9 x40ccda61}
+        {xc043fbb1 xc0fb732b}
+        {x43ff5b6e x449226db}
+        {x4043fba9 x40fb732c}
+        {x40834431 xc0ebcb1c}
+        {x44090000 x4495e925}
+        {xc0834433 x40ebcb1b}
+        {x414fc114 x3f9de498}
+        {x44068000 x4498c000}
+        {xc14fc113 xbf9de4a8}
+        {x41762f6d x40c77eb2}
+        {x43da4924 x4497f000}
+        {xc1762f6c xc0c77eb8}
+        {x41832772 x4027631b}
+        {x43ccedb7 x449616db}
+        {xc1832772 xc0276326}
+        {x4172bd1c x3fa27866}
+        {x43aec000 x44924000}
+        {xc172bd1c xbfa27879}
+        {x4171f2a9 x3fe1ac42}
+        {x43944000 x44919000}
+        {xc171f2a9 xbfe1ac55}
+        {x40ff8b56 x412de979}
+        {x436e0000 x4490a000}
+        {xc0ff8b52 xc12de97a}
+        {xc0817605 x40817609}
+        {x43824000 x448b7000}
+        {x40817607 xc0817607}}}
+      {cc
+       {f 8192}
+       {px x4480c000
+        {xc0b6e27f xbe8929ba}
+        {0 0}
+        {x40b6e27f x3e8929e0}
+        {xc1adcb52 x3fb69d38}
+        {0 0}
+        {x41adcb53 xbfb69d18}
+        {xc1d41d69 xbfd0d9e2}
+        {x42700008 xc236db80}
+        {x41d41d68 x3fd0da01}
+        {xc12b32da xc0ccda60}
+        {x42ea4928 xc222db80}
+        {x412b32d9 x40ccda61}
+        {xc043fbb1 xc0fb732b}
+        {x42904918 x4036dc00}
+        {x4043fba9 x40fb732c}
+        {x40834431 xc0ebcb1c}
+        {x4261b6f0 x42036da0}
+        {xc0834433 x40ebcb1b}
+        {x414fc114 x3f9de498}
+        {xc1b6db80 x41fb6dc0}
+        {xc14fc113 xbf9de4a8}
+        {x41762f6d x40c77eb2}
+        {0 0}
+        {xc1762f6c xc0c77eb8}
+        {x41832772 x4027631b}
+        {0 0}
+        {xc1832772 xc0276326}
+        {x4172bd1c x3fa27866}
+        {xc19ffff0 x41a00000}
+        {xc172bd1c xbfa27879}
+        {x4171f2a9 x3fe1ac42}
+        {xc21d2490 x41c80000}
+        {xc171f2a9 xbfe1ac55}
+        {x40ff8b56 x412de979}
+        {xc298db70 x4036dc00}
+        {xc0ff8b52 xc12de97a}
+        {xc0817605 x40817609}
+        {xc2b40004 xc2092480}
+        {x40817607 xc0817607}}}}
+     {tx x4480c000 x43ce3b14 x4490989e}
+     {a osw x41200000 osf 0 str 1 spx x45000000 spy x44870000 sb 1 ltn x4480c000 ltm x4480c000 tt x40800000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {2048 1080}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1030
+ lifetime_end 1030
+ motionblur_shutter_offset_type centred
+ source_black_outside true
+ name Roto2
+ selected true
+ xpos 723
+ ypos 10283
+}
+Blur {
+ channels rgba
+ size 6.1
+ name Blur2
+ label "\[value size]"
+ selected true
+ xpos 723
+ ypos 10321
+}
+Dot {
+ name Dot16
+ note_font_size 41
+ selected true
+ xpos 757
+ ypos 10422
+}
+set N5a9f5520 [stack 0]
+Grade {
+ channels rgba
+ multiply 1.78
+ gamma 5
+ black_clamp false
+ name Grade5
+ selected true
+ xpos 723
+ ypos 10508
+ addUserKnob {20 User}
+ addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+}
+Dot {
+ name Dot17
+ note_font_size 41
+ selected true
+ xpos 757
+ ypos 10721
+}
+push $N5b4f33f0
+Keyer {
+ operation "luminance key"
+ range {0.003636271811 0.008642458524 1 1}
+ name Keyer1
+ selected true
+ xpos 393
+ ypos 10051
+}
+Invert {
+ channels alpha
+ name Invert2
+ selected true
+ xpos 393
+ ypos 10089
+}
+Premult {
+ name Premult2
+ selected true
+ xpos 393
+ ypos 10147
+}
+set N5a6f8e00 [stack 0]
+Group {
+ name BlacksExpon
+ tile_color 0x262626ff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold"
+ note_font_color 0xccccccff
+ selected true
+ xpos 364
+ ypos 10202
+ addUserKnob {20 BlacksExpon}
+ addUserKnob {41 size T Blur6.size}
+ addUserKnob {20 info l Info}
+ addUserKnob {26 creator l Creator: T "<b><big>Tony Lyons"}
+ addUserKnob {26 desc l Description: T BlacksExpon}
+ addUserKnob {1 ver l Version:}
+ ver v02
+ addUserKnob {1 operation l INVISIBLE +INVISIBLE}
+ operation "<font color=yellow><small>\[value ver]</font>"
+}
+ Input {
+  inputs 0
+  name Input
+  xpos 424
+  ypos 416
+ }
+ Dot {
+  name Dot29
+  note_font_size 41
+  xpos 458
+  ypos 484
+ }
+set N9f3f6630 [stack 0]
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size*128}}
+  maskChannelInput -rgba.alpha
+  name Blur24
+  label "\[value size]"
+  xpos 1167
+  ypos 527
+ }
+ Unpremult {
+  name Unpremult13
+  xpos 1167
+  ypos 565
+ }
+push $N9f3f6630
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size*64}}
+  maskChannelInput -rgba.alpha
+  name Blur23
+  label "\[value size]"
+  xpos 1052
+  ypos 527
+ }
+ Unpremult {
+  name Unpremult12
+  xpos 1052
+  ypos 565
+ }
+push $N9f3f6630
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size*32}}
+  maskChannelInput -rgba.alpha
+  name Blur22
+  label "\[value size]"
+  xpos 946
+  ypos 523
+ }
+ Unpremult {
+  name Unpremult11
+  xpos 946
+  ypos 561
+ }
+push $N9f3f6630
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size*16}}
+  maskChannelInput -rgba.alpha
+  name Blur21
+  label "\[value size]"
+  xpos 834
+  ypos 522
+ }
+ Unpremult {
+  name Unpremult10
+  xpos 834
+  ypos 560
+ }
+push $N9f3f6630
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size*8}}
+  maskChannelInput -rgba.alpha
+  name Blur20
+  label "\[value size]"
+  xpos 739
+  ypos 524
+ }
+ Unpremult {
+  name Unpremult3
+  xpos 739
+  ypos 562
+ }
+push $N9f3f6630
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size*4}}
+  maskChannelInput -rgba.alpha
+  name Blur14
+  label "\[value size]"
+  xpos 633
+  ypos 523
+ }
+ Unpremult {
+  name Unpremult5
+  xpos 633
+  ypos 561
+ }
+push $N9f3f6630
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size*2}}
+  maskChannelInput -rgba.alpha
+  name Blur13
+  label "\[value size]"
+  xpos 526
+  ypos 525
+ }
+ Unpremult {
+  name Unpremult4
+  xpos 526
+  ypos 563
+ }
+push $N9f3f6630
+ Blur {
+  channels rgba
+  size 2.25
+  maskChannelInput -rgba.alpha
+  name Blur6
+  label "\[value size]"
+  xpos 424
+  ypos 525
+ }
+ Unpremult {
+  name Unpremult1
+  xpos 424
+  ypos 563
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  maskChannelInput -rgba.alpha
+  name Merge17
+  xpos 424
+  ypos 589
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  maskChannelInput -rgba.alpha
+  name Merge19
+  xpos 424
+  ypos 615
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  maskChannelInput -rgba.alpha
+  name Merge23
+  xpos 424
+  ypos 641
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  maskChannelInput -rgba.alpha
+  name Merge24
+  xpos 424
+  ypos 667
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  maskChannelInput -rgba.alpha
+  name Merge26
+  xpos 424
+  ypos 693
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  maskChannelInput -rgba.alpha
+  name Merge27
+  xpos 424
+  ypos 719
+ }
+ Merge2 {
+  inputs 2
+  operation min
+  maskChannelInput -rgba.alpha
+  name Merge28
+  xpos 424
+  ypos 745
+ }
+ Expression {
+  expr3 "max(r,g,b) == 0 ? 0 : 1"
+  maskChannelInput -rgba.alpha
+  unpremult -rgba.alpha
+  name Expression2
+  xpos 424
+  ypos 840
+ }
+ Dot {
+  name Dot30
+  note_font_size 41
+  xpos 458
+  ypos 891
+ }
+set N9e9e25d0 [stack 0]
+ Blur {
+  channels rgba
+  size {{parent.Blur33.size*128}}
+  maskChannelInput -rgba.alpha
+  name Blur26
+  label "\[value size]"
+  xpos 1167
+  ypos 934
+ }
+push $N9e9e25d0
+ Blur {
+  channels rgba
+  size {{parent.Blur33.size*64}}
+  maskChannelInput -rgba.alpha
+  name Blur27
+  label "\[value size]"
+  xpos 1052
+  ypos 934
+ }
+push $N9e9e25d0
+ Blur {
+  channels rgba
+  size {{parent.Blur33.size*32}}
+  maskChannelInput -rgba.alpha
+  name Blur28
+  label "\[value size]"
+  xpos 946
+  ypos 930
+ }
+push $N9e9e25d0
+ Blur {
+  channels rgba
+  size {{parent.Blur33.size*16}}
+  maskChannelInput -rgba.alpha
+  name Blur29
+  label "\[value size]"
+  xpos 834
+  ypos 929
+ }
+push $N9e9e25d0
+ Blur {
+  channels rgba
+  size {{parent.Blur33.size*8}}
+  maskChannelInput -rgba.alpha
+  name Blur30
+  label "\[value size]"
+  xpos 739
+  ypos 931
+ }
+push $N9e9e25d0
+ Blur {
+  channels rgba
+  size {{parent.Blur33.size*4}}
+  maskChannelInput -rgba.alpha
+  name Blur31
+  label "\[value size]"
+  xpos 633
+  ypos 930
+ }
+push $N9e9e25d0
+ Blur {
+  channels rgba
+  size {{parent.Blur33.size*2}}
+  maskChannelInput -rgba.alpha
+  name Blur32
+  label "\[value size]"
+  xpos 526
+  ypos 932
+ }
+push $N9e9e25d0
+ Blur {
+  channels rgba
+  size {{parent.Blur6.size}}
+  maskChannelInput -rgba.alpha
+  name Blur33
+  label "\[value size]"
+  xpos 424
+  ypos 934
+ }
+ Merge2 {
+  inputs 2
+  maskChannelInput -rgba.alpha
+  name Merge29
+  xpos 424
+  ypos 996
+ }
+ Merge2 {
+  inputs 2
+  maskChannelInput -rgba.alpha
+  name Merge31
+  xpos 424
+  ypos 1022
+ }
+ Merge2 {
+  inputs 2
+  maskChannelInput -rgba.alpha
+  name Merge32
+  xpos 424
+  ypos 1048
+ }
+ Merge2 {
+  inputs 2
+  maskChannelInput -rgba.alpha
+  name Merge33
+  xpos 424
+  ypos 1074
+ }
+ Merge2 {
+  inputs 2
+  maskChannelInput -rgba.alpha
+  name Merge35
+  xpos 424
+  ypos 1100
+ }
+ Merge2 {
+  inputs 2
+  maskChannelInput -rgba.alpha
+  name Merge38
+  xpos 424
+  ypos 1126
+ }
+ Merge2 {
+  inputs 2
+  maskChannelInput -rgba.alpha
+  name Merge41
+  xpos 424
+  ypos 1152
+ }
+ Unpremult {
+  name Unpremult2
+  xpos 424
+  ypos 1206
+ }
+ Expression {
+  expr3 "max(r,g,b) == 0 ? 0 : 1"
+  maskChannelInput -rgba.alpha
+  unpremult -rgba.alpha
+  name Expression3
+  selected true
+  xpos 424
+  ypos 1232
+ }
+ Output {
+  name Output1
+  xpos 424
+  ypos 1296
+ }
+end_group
+push $N5a6f8e00
+Blur {
+ channels rgba
+ size 100
+ name Blur1
+ label "\[value size]"
+ selected true
+ xpos 470
+ ypos 10196
+}
+Unpremult {
+ name Unpremult2
+ selected true
+ xpos 470
+ ypos 10234
+}
+Merge2 {
+ inputs 2
+ operation min
+ name Merge6
+ label "\[ expr \{ \[value mix] == 1 ? \" \" : \[concat mix: \[value mix]] \}]"
+ selected true
+ xpos 402
+ ypos 10296
+}
+Dot {
+ name Dot15
+ note_font_size 41
+ selected true
+ xpos 436
+ ypos 10534
+}
+push $N5a9f5520
+push $N5b4fad00
+Grade {
+ inputs 1+1
+ multiply {0.1796666533 0.2356666476 0.2596666515 0.1700000018}
+ black_clamp false
+ name Grade6
+ selected true
+ xpos 54
+ ypos 10434
+ addUserKnob {20 User}
+ addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+}
+push $N5a9f5520
+Constant {
+ inputs 0
+ channels rgb
+ color {0.002149581909 0.003955841064 0.0001580715179 0}
+ name Constant2
+ selected true
+ xpos -181
+ ypos 10367
+}
+push $N9f5ef100
+Keymix {
+ inputs 3
+ channels rgba
+ name Keymix1
+ selected true
+ xpos -71
+ ypos 10390
+}
+Dissolve {
+ inputs 2
+ channels rgba
+ which 0.424
+ name Dissolve1
+ label "\[value which]"
+ selected true
+ xpos -37
+ ypos 10508
+}
+Group {
+ inputs 3
+ name BlacksMatch
+ knobChanged "n = nuke.thisNode()\nk = nuke.thisKnob()\nif k.name() == \"inputChange\":\n    nsd = nuke.toNode(\"SwitchDefault\")\n    n\[\"default_black\"].setEnabled(nsd\[\"which\"].getValue()==1)"
+ tile_color 0xff
+ label "<font color=lightgray><small>Fall Off: \[value soft]\nColor Mult: \[value aboveBase]"
+ note_font "Helvetica Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ selected true
+ xpos 58
+ ypos 10703
+ addUserKnob {20 BlacksMatch}
+ addUserKnob {6 default_black_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {4 output1 l "         output" M {Final "Preview Channel Key" "" "" "" "" "" "" ""}}
+ addUserKnob {41 output2 l operation T Settings.operation}
+ addUserKnob {41 unpremultiplication l "Unpremult before operation?" T Settings.unpremult}
+ addUserKnob {26 ""}
+ addUserKnob {18 default_black l "default black" +DISABLED}
+ default_black {0.05 0.05 0.05}
+ addUserKnob {6 default_black_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 default_black_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {6 default_black_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 ""}
+ addUserKnob {41 soft l FallOff T Settings.soft}
+ addUserKnob {41 aboveBase l "Black Color Mult" T Settings.aboveBase}
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannelMask l mask -STARTLINE T MergeKeymix.maskChannelMask}
+ addUserKnob {41 inject -STARTLINE T MergeKeymix.inject}
+ addUserKnob {41 invert_mask l invert -STARTLINE T MergeKeymix.invert_mask}
+ addUserKnob {41 fringe -STARTLINE T MergeKeymix.fringe}
+ addUserKnob {41 mix T MergeKeymix.mix}
+ addUserKnob {20 info l Info}
+ addUserKnob {26 creator l Creator: T "<b><big>Tony Lyons"}
+ addUserKnob {26 desc l Description: t "Plug an image /constant you wish to be your blackpoint into BlackColor input.\n\nControl the falloff of Toe of the blackpoint and\nchoose between a screen, plus, and hypot\noperation" T BlacksMatch}
+ addUserKnob {1 ver l Version:}
+ ver v08
+ addUserKnob {1 operation l INVISIBLE +INVISIBLE}
+ operation "\[value output2]</font>)(<font color=yellow><small>\[value ver]</font>"
+}
+ StickyNote {
+  inputs 0
+  name StickyNote2
+  tile_color 0xff
+  label green
+  note_font_size 41
+  note_font_color 0xffffffff
+  xpos 177
+  ypos 466
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  tile_color 0xff
+  label red
+  note_font_size 41
+  note_font_color 0xffffffff
+  xpos 188
+  ypos 350
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote3
+  tile_color 0xff
+  label blue
+  note_font_size 41
+  note_font_color 0xffffffff
+  xpos 186
+  ypos 570
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote4
+  tile_color 0xff
+  label "min will be \nblack color"
+  note_font_size 31
+  note_font_color 0xffffffff
+  xpos 143
+  ypos 704
+ }
+ Input {
+  inputs 0
+  name Inputimg
+  xpos 322
+  ypos -550
+ }
+ Dot {
+  name Dot17
+  xpos 356
+  ypos -418
+ }
+set N586faab0 [stack 0]
+ AddChannels {
+  channels rgba
+  color 1
+  name AddChannels1
+  xpos 322
+  ypos -365
+ }
+ Dot {
+  name Dot5
+  note_font_size 41
+  xpos 356
+  ypos -288
+ }
+set N585f90d0 [stack 0]
+ Grade {
+  white 0
+  multiply 0
+  add {{parent.default_black} {parent.default_black} {parent.default_black} {parent.default_black}}
+  black_clamp false
+  name Grade1
+  label color
+  xpos 905
+  ypos -295
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Input {
+  inputs 0
+  name InputBlackColor
+  xpos 1138
+  ypos -569
+  number 1
+ }
+ Switch {
+  inputs 2
+  which {{"!\[exists parent.input1]"}}
+  name SwitchDefault
+  xpos 1138
+  ypos -291
+ }
+ Dot {
+  name Dot26
+  label "Black Color"
+  note_font_size 41
+  xpos 1172
+  ypos -212
+ }
+ Dot {
+  name Dot4
+  note_font_size 41
+  xpos 1172
+  ypos -124
+ }
+set N582f0830 [stack 0]
+ Multiply {
+  channels rgb
+  value {{parent.Settings.aboveBase}}
+  name Multiply1
+  label "mult black color"
+  xpos 1138
+  ypos -29
+ }
+ Multiply {
+  channels rgb
+  value 4
+  name Multiply2
+  label "boosted for hypot"
+  xpos 1138
+  ypos 46
+  disable {{"Settings.operation == 3 ? 0 : 1"}}
+ }
+push $N585f90d0
+ Unpremult {
+  name Unpremult1
+  xpos 322
+  ypos -17
+  disable {{!parent.Settings.unpremult i}}
+ }
+ Dot {
+  name Dot18
+  xpos 356
+  ypos 145
+ }
+set N580f5760 [stack 0]
+ MergeExpression {
+  inputs 2
+  expr0 Br/Ar
+  expr1 Bg/Ag
+  expr2 Bb/Ab
+  name MergeDivide
+  xpos 1138
+  ypos 142
+ }
+ Invert {
+  channels rgb
+  name Invert1
+  xpos 1138
+  ypos 209
+ }
+ Gamma {
+  channels rgb
+  value {{((1/Settings.aboveBase)*Settings.soft)+(Settings.soft)}}
+  name Gamma1
+  xpos 1138
+  ypos 264
+ }
+ Dot {
+  name Dot19
+  xpos 1172
+  ypos 364
+ }
+set N53effb70 [stack 0]
+ Dot {
+  name Dot20
+  xpos 1172
+  ypos 478
+ }
+set N53df4740 [stack 0]
+ Dot {
+  name Dot21
+  xpos 1172
+  ypos 586
+ }
+set N53df92c0 [stack 0]
+ Dot {
+  name Dot1
+  xpos 1172
+  ypos 1150
+ }
+ Input {
+  inputs 0
+  name Inputmask
+  xpos 864
+  ypos 836
+  number 2
+ }
+ Dot {
+  name Dot29
+  xpos 898
+  ypos 1015
+ }
+push $N582f0830
+ Dot {
+  name Dot23
+  xpos 706
+  ypos -124
+ }
+ Dot {
+  name Dot6
+  note_font_size 41
+  xpos 706
+  ypos 293
+ }
+set N53bf0eb0 [stack 0]
+ Dot {
+  name Dot2
+  note_font_size 41
+  xpos 706
+  ypos 404
+ }
+set N53bf5a30 [stack 0]
+ Dot {
+  name Dot3
+  note_font_size 41
+  xpos 706
+  ypos 523
+ }
+set N53bfa5b0 [stack 0]
+ Dot {
+  name Dot7
+  note_font_size 41
+  xpos 706
+  ypos 731
+ }
+push $N53df92c0
+push $N53bfa5b0
+push $N53df4740
+push $N53bf5a30
+push $N53effb70
+push $N53bf0eb0
+push $N580f5760
+ Merge2 {
+  inputs 2+1
+  operation {{parent.Settings.witch}}
+  bbox B
+  Achannels {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  Bchannels {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  output {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  maskChannelMask rgba.red
+  maskChannelInput -rgba.red
+  name Merge3
+  label "\[value maskChannelMask]"
+  xpos 322
+  ypos 357
+ }
+ Merge2 {
+  inputs 2+1
+  operation {{parent.Settings.witch x1 13}}
+  bbox B
+  Achannels {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  Bchannels {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  output {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  maskChannelMask rgba.green
+  maskChannelInput -rgba.red
+  name Merge4
+  label "\[value maskChannelMask]"
+  xpos 322
+  ypos 471
+ }
+ Merge2 {
+  inputs 2+1
+  operation {{parent.Settings.witch}}
+  bbox B
+  Achannels {-rgba.red -rgba.green rgba.blue -rgba.alpha}
+  Bchannels {-rgba.red -rgba.green rgba.blue -rgba.alpha}
+  output {-rgba.red -rgba.green rgba.blue -rgba.alpha}
+  maskChannelMask rgba.blue
+  maskChannelInput -rgba.red
+  name Merge5
+  label "\[value maskChannelMask]"
+  xpos 322
+  ypos 579
+ }
+ Merge2 {
+  inputs 2
+  operation max
+  bbox B
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name Merge1
+  xpos 322
+  ypos 728
+ }
+ Premult {
+  name Premult4
+  xpos 322
+  ypos 881
+  disable {{!parent.Settings.unpremult i}}
+ }
+push $N586faab0
+ Dot {
+  name Dot28
+  xpos -146
+  ypos -418
+ }
+ Dot {
+  name Dot30
+  xpos -146
+  ypos 1015
+ }
+ Merge2 {
+  inputs 2+1
+  operation copy
+  bbox B
+  Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name MergeKeymix
+  label "\[ expr \{ \[value mix] == 1 ? \" \" : \[concat Mix: \[value mix]] \}]"
+  xpos 322
+  ypos 1012
+ }
+ Switch {
+  inputs 2
+  which {{output1 i x1067 0}}
+  name Switch1
+  xpos 322
+  ypos 1147
+ }
+ Output {
+  name Output1
+  xpos 322
+  ypos 1395
+ }
+ NoOp {
+  inputs 0
+  name Settings
+  note_font_size 51
+  xpos 43
+  ypos -286
+  addUserKnob {20 User}
+  addUserKnob {4 operation M {plus screen hypot ""}}
+  operation hypot
+  addUserKnob {7 witch}
+  witch {{"Settings.operation == 0 ? 24 : Settings.operation == 1 ? 25 : 13"}}
+  addUserKnob {7 soft}
+  soft 0.482
+  addUserKnob {7 aboveBase R 1 5}
+  aboveBase 3.08
+  addUserKnob {6 unpremult l "Unpremult before operation?" +STARTLINE}
+ }
+end_group
+Merge2 {
+ inputs 2
+ operation min
+ mix 0.706
+ name Merge7
+ label "\[ expr \{ \[value mix] == 1 ? \" \" : \[concat mix: \[value mix]] \}]"
+ selected true
+ xpos 58
+ ypos 10818
+}

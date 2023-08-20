@@ -1,0 +1,32 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Expression {
+ channel3 alpha
+ expr3 r*1.5/g*.9
+ name Expression1
+ selected true
+ xpos -313
+ ypos -145
+}
+Grade {
+ channels alpha
+ blackpoint 0.275
+ black -0.021
+ white 1.09
+ multiply 1.05
+ add -0.1
+ gamma 0.8
+ name Grade1
+ selected true
+ xpos -313
+ ypos -121
+}
+Expression {
+ expr1 "g > (r+b)/2 ? (r+b)/2 : g"
+ channel3 none
+ name Expression2
+ selected true
+ xpos -313
+ ypos -77
+}

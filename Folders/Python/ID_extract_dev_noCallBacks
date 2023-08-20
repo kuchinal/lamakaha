@@ -1,0 +1,5 @@
+a = nuke.selectedNode()
+code = "------\n"+a['Achannels'].value()+"\n------\n"+"<font color='Red'>"+a['Red'].value()+"\n"+"<font color='Green'>"+a['Green'].value()+"<font color='Blue'>"+"\n"+a['Blue'].value()
+a['label'].setValue(code)
+
+a['autolabel'].setValue("")

@@ -1,0 +1,574 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+BackdropNode {
+ inputs 0
+ name plece_for_3d_scene
+ tile_color 0x2b2b2bff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ note_font_color 0x40404ff
+ selected true
+ xpos -1767
+ ypos 1192
+ bookmark false
+ bdwidth 1283
+ bdheight 835
+ z_order -20
+}
+BackdropNode {
+ inputs 0
+ name store_here_your_card_to_track_results
+ tile_color 0x28474fff
+ note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos 797
+ ypos 1196
+ bookmark false
+ bdwidth 678
+ bdheight 837
+ z_order -20
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ selected true
+ xpos -484
+ ypos 1193
+ bookmark false
+ bdwidth 1281
+ bdheight 838
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x478888ff
+ label References
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -5422
+ ypos 5646
+ bookmark false
+ bdwidth 346
+ bdheight 266
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x93000000
+ label "File Out"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 50
+ selected true
+ xpos -5630
+ ypos 5646
+ bookmark false
+ bdwidth 208
+ bdheight 266
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name Store_here_all_elements_you_producing
+ tile_color 0x313649ff
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -10250
+ ypos 1195
+ bookmark false
+ bdwidth 2120
+ bdheight 813
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name Store_here_all_elements_you_producing1
+ tile_color 0x314949ff
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -8130
+ ypos 1193
+ bookmark false
+ bdwidth 2120
+ bdheight 813
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name Store_here_your_plates_preps_
+ tile_color 0x5b213f01
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -3890
+ ypos 1196
+ bookmark false
+ bdwidth 2120
+ bdheight 813
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name ________1
+ tile_color 0x358888ff
+ label "     Lens distort"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ selected true
+ xpos -1760
+ ypos 1218
+ bookmark false
+ bdwidth 199
+ bdheight 193
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name ________2
+ tile_color 0x358888ff
+ label "         Camera"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ selected true
+ xpos -1759
+ ypos 1418
+ bookmark false
+ bdwidth 199
+ bdheight 193
+ z_order -10
+}
+BackdropNode {
+ inputs 0
+ name store_here_everything_rendered_from_cg
+ tile_color 0x31482aff
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -6011
+ ypos 1193
+ bookmark false
+ bdwidth 2120
+ bdheight 813
+ z_order -10
+}
+Input {
+ inputs 0
+ name CPROJECTs
+ tile_color 0x713f6fff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ selected true
+ xpos 947
+ ypos 1240
+ number 1
+}
+Input {
+ inputs 0
+ name CARDs
+ tile_color 0x7d1e1eff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ selected true
+ xpos 836
+ ypos 1240
+}
+Input {
+ inputs 0
+ name CornPINs
+ tile_color 0x8d5b8bff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ selected true
+ xpos 1057
+ ypos 1241
+ number 2
+}
+Input {
+ inputs 0
+ name ROTOs
+ tile_color 0x55965aff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ selected true
+ xpos 1167
+ ypos 1241
+ number 3
+}
+StickyNote {
+ inputs 0
+ name StickyNote7
+ tile_color 0xffffffff
+ label "<b>Renders In              ."
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -6007
+ ypos 1072
+}
+StickyNote {
+ inputs 0
+ name StickyNote8
+ tile_color 0xffffffff
+ label "<b>Elements In              ."
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -10246
+ ypos 1071
+}
+StickyNote {
+ inputs 0
+ name StickyNote4
+ tile_color 0xffffffff
+ label "<b>FX In              ."
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -8127
+ ypos 1072
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ tile_color 0xffffffff
+ label "<b>Geometries  & Camera          ."
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -1767
+ ypos 1072
+}
+StickyNote {
+ inputs 0
+ name StickyNote9
+ tile_color 0xffffffff
+ label "<b>Tracks                                      ."
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -484
+ ypos 1072
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ tile_color 0xffffffff
+ label "<b>Card2Track                     ."
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos 796
+ ypos 1072
+}
+push $cut_paste_input
+NoOp {
+ name Review
+ tile_color 0x478888ff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 17
+ note_font_color 0x52887aff
+ selected true
+ xpos -5178
+ ypos 5795
+ hide_input true
+ addUserKnob {20 User l "to do"}
+ addUserKnob {26 senttorender l "sent to render" -STARTLINE}
+ addUserKnob {22 set t "Paste your \"to do\" list into 'todo' field, than press this button, every line will be put in corresponding field\nIf there are some unfinished tasks they will be put at top of the tasks list" T "n = nuke.thisNode()\ntext = n\['todo'].value()\n\n################################################\nallknobs = n.knobs()\nfor knob in allknobs:\n    if \"T\" in knob:\n        y = n\[knob].value()\n        if \"DONE\" not in y:\n            text =  y+\"\\n\"+ text\n            n\['todo'].setValue(text)\n            text = n\['todo'].value()\nfor knob in allknobs:\n    if \"T\" in knob:\n        n\[knob].setEnabled(False)\n        n\[knob].setValue(\"DONE\")\n    if \"P\" in knob:\n        n\[knob].setLabel('<font color=\"Black\">&#9786;')\n################################################\nlines = text.split(\"\\n\") # splitted lines \ncount = text.count(\"\\n\")+2 # number of lines\nlineNumber = 1\ncountNow = 1\nwhile countNow<count:\n    name = \"T\"+ str(lineNumber)       #basic name\n    nameP = \"P\"+ str(lineNumber)       #basic name\n    done = n\[name].value()\n\n    line =lines\[int(countNow)-1] #exact line to paste\n    if line != \"\":\n       n\[name].setValue(line)\n       n\[name].setEnabled(True)\n       n\[nameP].setLabel('<font color=\"Red\">&#9760;')\n\n    countNow = countNow + 1                  #increment for count\n    lineNumber = lineNumber+1 #increment for lines \nn\['todo'].setValue(\"\")\nn\['Hide'].execute()     \nn\['Hide'].execute()   \nn\['todo'].setEnabled(True)" +STARTLINE}
+ addUserKnob {22 refresh l INVISIBLE -STARTLINE +INVISIBLE T "if nuke.ask(\"You made it!!!! or just sick of it?\"):\n   m = nuke.thisNode()\n   x = m.xpos()\n   y= m.ypos()\n   nuke.delete(m)\n   nuke.nodePaste('H:/.nuke/GeneralSetups/Reviews.nk')\n   new = nuke.toNode(\"Reviews\")\n   new.setXYpos(x,y) \n   nuke.show(new)\n\n"}
+ addUserKnob {22 Hide l Unhide t "This button will  Hide/Unhide completed tasks" -STARTLINE T "n = nuke.thisNode()\nallknobs = n.knobs()\nlab = nuke.thisKnob().label()\nif lab == \"Hide\":\n    for knob in allknobs:\n        if \"T\" in knob:\n            y = n\[knob].value()\n            if \"DONE\" in y:\n                n\[knob].setVisible(False)\n                fix = knob.replace(\"T\",\"P\")\n                n\[fix].setVisible(False)\n                nuke.thisKnob().setLabel(\"Unhide\")\nelse:\n    n = nuke.thisNode()\n    allknobs = n.knobs()\n    for knob in allknobs:\n           n\[knob].setVisible(True)\n    nuke.thisKnob().setLabel(\"Hide\")"}
+ addUserKnob {22 P1 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T1'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T1 l "" -STARTLINE +HIDDEN}
+ T1 DONE
+ addUserKnob {22 P2 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T2'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T2 l "" -STARTLINE +HIDDEN}
+ T2 DONE
+ addUserKnob {22 P3 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T3'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T3 l "" -STARTLINE +HIDDEN}
+ T3 DONE
+ addUserKnob {22 P4 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T4'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T4 l "" -STARTLINE +HIDDEN}
+ T4 DONE
+ addUserKnob {22 P5 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T5'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T5 l "" -STARTLINE +HIDDEN}
+ T5 DONE
+ addUserKnob {22 P6 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T6'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T6 l "" -STARTLINE +HIDDEN}
+ T6 DONE
+ addUserKnob {22 P7 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T7'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T7 l "" -STARTLINE +HIDDEN}
+ T7 DONE
+ addUserKnob {22 P8 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T8'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T8 l "" -STARTLINE +HIDDEN}
+ T8 DONE
+ addUserKnob {22 P9 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T9'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T9 l "" -STARTLINE +HIDDEN}
+ T9 DONE
+ addUserKnob {22 P10 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T10'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T10 l "" -STARTLINE +HIDDEN}
+ T10 DONE
+ addUserKnob {22 P11 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T11'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T11 l "" -STARTLINE +HIDDEN}
+ T11 DONE
+ addUserKnob {22 P12 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T12'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T12 l "" -STARTLINE +HIDDEN}
+ T12 DONE
+ addUserKnob {22 P13 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T13'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T13 l "" -STARTLINE +HIDDEN}
+ T13 DONE
+ addUserKnob {22 P14 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T14'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T14 l "" -STARTLINE +HIDDEN}
+ T14 DONE
+ addUserKnob {22 P15 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T15'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T15 l "" -STARTLINE +HIDDEN}
+ T15 DONE
+ addUserKnob {22 P16 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T16'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T16 l "" -STARTLINE +HIDDEN}
+ T16 DONE
+ addUserKnob {22 P17 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T17'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T17 l "" -STARTLINE +HIDDEN}
+ T17 DONE
+ addUserKnob {22 P18 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T18'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T18 l "" -STARTLINE +HIDDEN}
+ T18 DONE
+ addUserKnob {22 P19 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T19'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T19 l "" -STARTLINE +HIDDEN}
+ T19 DONE
+ addUserKnob {22 P20 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T20'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T20 l "" -STARTLINE +HIDDEN}
+ T20 DONE
+ addUserKnob {22 P21 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T21'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T21 l "" -STARTLINE +HIDDEN}
+ T21 DONE
+ addUserKnob {22 P22 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T22'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T22 l "" -STARTLINE +HIDDEN}
+ T22 DONE
+ addUserKnob {22 P23 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T23'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T23 l "" -STARTLINE +HIDDEN}
+ T23 DONE
+ addUserKnob {22 P24 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T24'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T24 l "" -STARTLINE +HIDDEN}
+ T24 DONE
+ addUserKnob {22 P25 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T25'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T25 l "" -STARTLINE +HIDDEN}
+ T25 DONE
+ addUserKnob {22 P26 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T26'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T26 l "" -STARTLINE +HIDDEN}
+ T26 DONE
+ addUserKnob {22 P27 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T27'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T27 l "" -STARTLINE +HIDDEN}
+ T27 DONE
+ addUserKnob {22 P28 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T28'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T28 l "" -STARTLINE +HIDDEN}
+ T28 DONE
+ addUserKnob {22 P29 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T29'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T29 l "" -STARTLINE +HIDDEN}
+ T29 DONE
+ addUserKnob {22 P30 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T30'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T30 l "" -STARTLINE +HIDDEN}
+ T30 DONE
+ addUserKnob {22 P31 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T31'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T31 l "" -STARTLINE +HIDDEN}
+ T31 DONE
+ addUserKnob {22 P32 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T32'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T32 l "" -STARTLINE +HIDDEN}
+ T32 DONE
+ addUserKnob {22 P33 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T33'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T33 l "" -STARTLINE +HIDDEN}
+ T33 DONE
+ addUserKnob {22 P34 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T34'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T34 l "" -STARTLINE +HIDDEN}
+ T34 DONE
+ addUserKnob {22 P35 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T35'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T35 l "" -STARTLINE +HIDDEN}
+ T35 DONE
+ addUserKnob {22 P36 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T36'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T36 l "" -STARTLINE +HIDDEN}
+ T36 DONE
+ addUserKnob {22 P37 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T37'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T37 l "" -STARTLINE +HIDDEN}
+ T37 DONE
+ addUserKnob {22 P38 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T38'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T38 l "" -STARTLINE +HIDDEN}
+ T38 DONE
+ addUserKnob {22 P39 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T39'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T39 l "" -STARTLINE +HIDDEN}
+ T39 DONE
+ addUserKnob {22 P40 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T40'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T40 l "" -STARTLINE +HIDDEN}
+ T40 DONE
+ addUserKnob {22 P41 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T41'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T41 l "" -STARTLINE +HIDDEN}
+ T41 DONE
+ addUserKnob {22 P42 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T42'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T42 l "" -STARTLINE +HIDDEN}
+ T42 DONE
+ addUserKnob {22 P43 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T43'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T43 l "" -STARTLINE +HIDDEN}
+ T43 DONE
+ addUserKnob {22 P44 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T44'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T44 l "" -STARTLINE +HIDDEN}
+ T44 DONE
+ addUserKnob {22 P45 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T45'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T45 l "" -STARTLINE +HIDDEN}
+ T45 DONE
+ addUserKnob {22 P46 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T46'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T46 l "" -STARTLINE +HIDDEN}
+ T46 DONE
+ addUserKnob {22 P47 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T47'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T47 l "" -STARTLINE +HIDDEN}
+ T47 DONE
+ addUserKnob {22 P48 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T48'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T48 l "" -STARTLINE +HIDDEN}
+ T48 DONE
+ addUserKnob {22 P49 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T49'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T49 l "" -STARTLINE +HIDDEN}
+ T49 DONE
+ addUserKnob {22 P50 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T50'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T50 l "" -STARTLINE +HIDDEN}
+ T50 DONE
+ addUserKnob {22 P51 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T51'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T51 l "" -STARTLINE +HIDDEN}
+ T51 DONE
+ addUserKnob {22 P52 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T52'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T52 l "" -STARTLINE +HIDDEN}
+ T52 DONE
+ addUserKnob {22 P53 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T53'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T53 l "" -STARTLINE +HIDDEN}
+ T53 DONE
+ addUserKnob {22 P54 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T54'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T54 l "" -STARTLINE +HIDDEN}
+ T54 DONE
+ addUserKnob {22 P55 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T55'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T55 l "" -STARTLINE +HIDDEN}
+ T55 DONE
+ addUserKnob {22 P56 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T56'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T56 l "" -STARTLINE +HIDDEN}
+ T56 DONE
+ addUserKnob {22 P57 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T57'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T57 l "" -STARTLINE +HIDDEN}
+ T57 DONE
+ addUserKnob {22 P58 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T58'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T58 l "" -STARTLINE +HIDDEN}
+ T58 DONE
+ addUserKnob {22 P59 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T59'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T59 l "" -STARTLINE +HIDDEN}
+ T59 DONE
+ addUserKnob {22 P60 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T60'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T60 l "" -STARTLINE +HIDDEN}
+ T60 DONE
+ addUserKnob {22 P61 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T61'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T61 l "" -STARTLINE +HIDDEN}
+ T61 DONE
+ addUserKnob {22 P62 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T62'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T62 l "" -STARTLINE +HIDDEN}
+ T62 DONE
+ addUserKnob {22 P63 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T63'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T63 l "" -STARTLINE +HIDDEN}
+ T63 DONE
+ addUserKnob {22 P64 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T64'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T64 l "" -STARTLINE +HIDDEN}
+ T64 DONE
+ addUserKnob {22 P65 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T65'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T65 l "" -STARTLINE +HIDDEN}
+ T65 DONE
+ addUserKnob {22 P66 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T66'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T66 l "" -STARTLINE +HIDDEN}
+ T66 DONE
+ addUserKnob {22 P67 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T67'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T67 l "" -STARTLINE +HIDDEN}
+ T67 DONE
+ addUserKnob {22 P68 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T68'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T68 l "" -STARTLINE +HIDDEN}
+ T68 DONE
+ addUserKnob {22 P69 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T69'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T69 l "" -STARTLINE +HIDDEN}
+ T69 DONE
+ addUserKnob {22 P70 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T70'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T70 l "" -STARTLINE +HIDDEN}
+ T70 DONE
+ addUserKnob {22 P71 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T71'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T71 l "" -STARTLINE +HIDDEN}
+ T71 DONE
+ addUserKnob {22 P72 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T72'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T72 l "" -STARTLINE +HIDDEN}
+ T72 DONE
+ addUserKnob {22 P73 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T73'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T73 l "" -STARTLINE +HIDDEN}
+ T73 DONE
+ addUserKnob {22 P74 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T74'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T74 l "" -STARTLINE +HIDDEN}
+ T74 DONE
+ addUserKnob {22 P75 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T75'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T75 l "" -STARTLINE +HIDDEN}
+ T75 DONE
+ addUserKnob {22 P76 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T76'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T76 l "" -STARTLINE +HIDDEN}
+ T76 DONE
+ addUserKnob {22 P77 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T77'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T77 l "" -STARTLINE +HIDDEN}
+ T77 DONE
+ addUserKnob {22 P78 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T78'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T78 l "" -STARTLINE +HIDDEN}
+ T78 DONE
+ addUserKnob {22 P79 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T79'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T79 l "" -STARTLINE +HIDDEN}
+ T79 DONE
+ addUserKnob {22 P80 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T80'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T80 l "" -STARTLINE +HIDDEN}
+ T80 DONE
+ addUserKnob {22 P81 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T81'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T81 l "" -STARTLINE +HIDDEN}
+ T81 DONE
+ addUserKnob {22 P82 l "<font color=\"Red\">&#9760;" +HIDDEN T "node = nuke.thisNode() \nline ='T82'\nt = node\[line].value()\nif \"DONE\" in t:\n   node\[line].setEnabled(True)\n   t = t.replace(\"DONE \",\"\")\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Red\">&#9786;')\nelse:\n   node\[line].setEnabled(False)\n   node\['DONE'].setValue(node\['DONE'].value() + \"\\n\"+t)\t\n   t = \"DONE \"+t\n   node\[line].setValue(t)\n   nuke.thisKnob().setLabel('<font color=\"Black\">&#9786;')" +STARTLINE}
+ addUserKnob {1 T82 l "" -STARTLINE +HIDDEN}
+ T82 DONE
+ addUserKnob {43 todo l "to do"}
+ addUserKnob {43 DONE}
+ addUserKnob {43 Notes}
+}
+Reformat {
+ inputs 0
+ resize none
+ black_outside true
+ name Reformat1
+ label "root format\nOUT"
+ selected true
+ xpos -5569
+ ypos 5564
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -5535
+ ypos 5727
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ tile_color 0xffffffff
+ label "<b>File In              ."
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -3887
+ ypos 1072
+}
+NoOp {
+ inputs 0
+ name FindPigs
+ tile_color 0xff4f29ff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold"
+ selected true
+ xpos -5175
+ ypos 5861
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {22 findPigs l "Find Pigs" T "####################################\n# ShowPigsTK\n# Alexey Kuchinski\n####################################\n# Shows Bad Bounding Boxes\n# inspired by ShowPigs by Ben Pierre\n# inspired :D ShowPigs by Timur Khodzhaev\nimport nuke\nP = nuke.thisNode()\nCurKnobs = P.knobs()\nnotPigs = P\['notPigs'].value().split(\",\")\nfactor = P\['pigFactor'].value()\nch_maxWidth=nuke.root().format().width()*factor/100\nch_maxHeight=nuke.root().format().height()*factor/100\n#print ch_maxWidth,ch_maxHeight\nch_all_nodes=nuke.allNodes()\nfor ch_node in ch_all_nodes:\n    ch_width =ch_node.bbox().w()\n    ch_height=ch_node.bbox().h()\n    if ((ch_width>ch_maxWidth)or(ch_height>ch_maxHeight)):\n        try:\n            dep = ch_node.dependencies(nuke.INPUTS)\[0]\n            dep_width =dep.bbox().w()\n            dep_height=dep.bbox().h()\n            if ((dep_width<ch_maxWidth)and(dep_height<ch_maxHeight)):\n                pig = ch_node.name()\n                print pig,'-',int(ch_width),'x',int(ch_height)\n                \n                if pig not in CurKnobs and pig not in notPigs:\n                    code = \"\"\"\nn = nuke.thisKnob().label()\nnotPigs = nuke.thisNode()\['notPigs'].value()\nnuke.thisNode()\['notPigs'].setValue(notPigs+\",\"+n)\nnuke.thisNode().removeKnob(nuke.thisNode().knobs()\[nuke.thisKnob().name()])\nwith nuke.Root():\n    node = nuke.toNode(n)\n    nuke.zoom(3,\[node.xpos(),node.ypos()])\n                    \"\"\"\n                    u=nuke.PyScript_Knob(pig,pig,code)\n                    P.addKnob(u)        \n        except:\n            pass" +STARTLINE}
+ addUserKnob {3 pigFactor l "pig factor" t "define in percent how big should be the bounding box to be considered a Pig."}
+ pigFactor 200
+ addUserKnob {26 q l % -STARTLINE}
+ addUserKnob {1 notPigs l "not pigs"}
+ addUserKnob {26 ""}
+ addUserKnob {22 findErrors l "find errors" T "f = nuke.allNodes()\n\nlistOfErrors = \"Some Nodes have errors!!!! \\nI will recommend you to fix them\\n\\n\"\neExist = 0\nfor n in f:\n     if n.hasError() == True:\n        listOfErrors = listOfErrors + \"\\n\"+n.name()\n        eExist ==1\n\nif eExist ==1:\n    nuke.message(listOfErrors)\nelse:\n    nuke.message(\"All cool!!!\\nGet a coffee!!!\")" +STARTLINE}
+}

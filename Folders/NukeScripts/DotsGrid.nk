@@ -1,0 +1,77 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+ name DotsGrid
+ selected true
+ xpos -794
+ ypos 229
+ addUserKnob {20 User}
+ addUserKnob {41 format l "output format" T Reformat42.format}
+ addUserKnob {7 DotsSize l "dots size" R 1 10}
+ DotsSize 6.35
+ addUserKnob {7 dotsDist l "dots spacing" R 1 100}
+ dotsDist 100
+ addUserKnob {7 round l "dots roundness" R 0 10}
+ round 10
+ addUserKnob {41 translate T Grid2.translate}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 1158
+  ypos 615
+ }
+ Reformat {
+  format "2060 2060 0 0 2060 2060 1 2060_Square"
+  name Reformat42
+  xpos 1158
+  ypos 656
+ }
+set N88ede10 [stack 0]
+ Grid {
+  number {0 {parent.dotsDist}}
+  size {{parent.DotsSize}}
+  name Grid2
+  xpos 1096
+  ypos 710
+ }
+push $N88ede10
+ Grid {
+  number {{parent.Grid2.number.1} 0}
+  size {{parent.Grid2.size}}
+  translate {{parent.Grid2.translate} {parent.Grid2.translate}}
+  name Grid1
+  xpos 1222
+  ypos 713
+ }
+ Merge2 {
+  inputs 2
+  operation mask
+  bbox B
+  name Merge87
+  xpos 1158
+  ypos 776
+ }
+ Blur {
+  channels rgba
+  size {{parent.round}}
+  crop false
+  name Blur1
+  label "\[value size]"
+  xpos 1158
+  ypos 810
+ }
+ ColorCorrect {
+  channels rgba
+  contrast 10
+  name ColorCorrect1
+  xpos 1158
+  ypos 848
+ }
+ Output {
+  name Output1
+  xpos 1158
+  ypos 954
+ }
+end_group

@@ -1,0 +1,71 @@
+#! /mnt/repository/software/install/nuke/11.3v1/centos-6_x86-64/libnuke-11.3.1.so -nx
+version 11.3 v1
+Group {
+ name ChannelBlur
+ tile_color 0xa17742ff
+ note_font_size 20
+ addUserKnob {20 User l Blur}
+ addUserKnob {6 Blur_panelDropped l "panel dropped state" +HIDDEN +STARTLINE}
+ addUserKnob {19 Blur l Size R 0 10}
+ Blur {0 0 0 0}
+ addUserKnob {6 boolean l "Premultiply by alpha" +STARTLINE}
+ boolean true
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 19
+  ypos 585
+ }
+ Blur {
+  channels {-rgba.red -rgba.green -rgba.blue rgba.alpha}
+  size {{parent.Blur.a}}
+  name Blur6
+  label ALPHA
+  xpos 19
+  ypos 644
+ }
+ Unpremult {
+  name Unpremult1
+  xpos 19
+  ypos 701
+  disable {{!parent.boolean}}
+ }
+ Blur {
+  channels {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  size {{parent.Blur.r}}
+  name Blur3
+  label RED
+  note_font_size 14
+  xpos 19
+  ypos 753
+ }
+ Blur {
+  channels {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+  size {{parent.Blur.g}}
+  name Blur4
+  label GREEN
+  xpos 19
+  ypos 806
+ }
+ Blur {
+  channels {-rgba.red -rgba.green rgba.blue -rgba.alpha}
+  size {{parent.Blur.b}}
+  name Blur5
+  label BLUE
+  xpos 19
+  ypos 859
+ }
+ Premult {
+  name Premult1
+  xpos 19
+  ypos 897
+  disable {{!parent.boolean}}
+ }
+ Output {
+  name Output1
+  selected true
+  xpos 19
+  ypos 988
+ }
+end_group

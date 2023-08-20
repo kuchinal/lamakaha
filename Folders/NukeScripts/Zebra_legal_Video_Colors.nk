@@ -1,0 +1,128 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Group {
+name legalColours
+selected true
+xpos -1192
+ypos 19202
+addUserKnob {20 User}
+addUserKnob {7 min}
+min 0.062745098
+addUserKnob {7 max}
+max 0.921568627
+addUserKnob {6 zebra +STARTLINE}
+zebra true
+}
+Expression {
+inputs 0
+expr0 abs(sin((x/2)-y/2))
+name Stripes
+xpos 511
+ypos 157
+}
+Grade {
+channels {rgba.red -rgba.green -rgba.blue}
+blackpoint 0.006
+white 1.2
+gamma 0.16
+white_clamp true
+name Grade3
+xpos 511
+ypos 198
+}
+Constant {
+inputs 0
+channels rgb
+color {1 0 0 0}
+name Constant1
+xpos 357
+ypos 151
+}
+Switch {
+inputs 2
+which {{parent.zebra}}
+name Switch1
+xpos 408
+ypos 271
+}
+Input {
+inputs 0
+name Input1
+xpos 0
+}
+Dot {
+name Dot1
+xpos 29
+ypos 120
+}
+set N66994a90 [stack 0]
+Expression {
+expr0 max(r,g,b)>parent.max?1:0
+expr1 min(r,g,b)<parent.min?1:0
+name Expression1
+xpos 148
+ypos 156
+}
+set N66994e00 [stack 0]
+Shuffle {
+red green
+blue green
+alpha green
+name Shuffle2
+tile_color 0x3d8543ff
+label min
+xpos 224
+ypos 197
+}
+push $N66994e00
+Shuffle {
+green red
+blue red
+alpha red
+name Shuffle1
+tile_color 0x8d4141ff
+label "max\n"
+xpos 96
+ypos 199
+}
+Merge2 {
+inputs 2
+operation max
+name Merge1
+xpos 157
+ypos 265
+}
+Merge2 {
+inputs 2
+operation multiply
+name Merge2
+xpos 157
+ypos 313
+}
+set N66995bc0 [stack 0]
+push $N66994a90
+Merge2 {
+inputs 2
+operation plus
+name Merge3
+xpos -5
+ypos 379
+}
+set N66995f30 [stack 0]
+Output {
+name Output1
+xpos 3
+ypos 483
+}
+push $N66995bc0
+push $N66995f30
+Viewer {
+inputs 2
+input_process false
+name Viewer1
+selected true
+xpos 235
+ypos 431
+}
+end_group

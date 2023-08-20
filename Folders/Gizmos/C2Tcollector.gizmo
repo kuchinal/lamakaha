@@ -1,0 +1,94 @@
+Group {
+ name C2Tcollector
+ label "\n\n"
+ addUserKnob {20 cornerPin l "corner pin"}
+ addUserKnob {3 ref l "reference frame"}
+ addUserKnob {6 bake l "Please bake it" t "If selected node that is created will be baked, otherwise it will be linked to the collector" +STARTLINE}
+ addUserKnob {22 getCorner l "Corner Pin" t "Give me Corner Pin" T "tn = nuke.thisNode()\n\nref = 100\n\n\nx = tn\['xpos'].value()\ny = tn\['ypos'].value()\n\nwith nuke.Root():\n\n    try :\n        cp = nuke.nodes.CProject(xpos = x+110, ypos = y)\n        #cp\['camera'].setValue(cam.name())\n        #cp\['translate'].setValue(card\['translate'].value())\n        #cp\['rotation'].setValue(card\['rotate'].value())\n        #cp\['element'].setValue(label)\n        #cp.setName(\"CP_\"+label)\n        cp\['refFrame'].setValue(ref)\n    except:\n        pass\n        cp = nuke.nodes.CornerPin2D(label = label +' ('+str(ref)+')', xpos = x+110, ypos = y) \n    \n    \n    \n    \n    cp\['to1'].copyAnimations(tn\['to1'].animations())\n    cp\['to2'].copyAnimations(tn\['to2'].animations())\n    cp\['to3'].copyAnimations(tn\['to3'].animations())\n    cp\['to4'].copyAnimations(tn\['to4'].animations())\n    cp\['from1'].setValue(tn\['to1'].getValueAt(ref))\n    cp\['from2'].setValue(tn\['to2'].getValueAt(ref))\n    cp\['from3'].setValue(tn\['to3'].getValueAt(ref))\n    cp\['from4'].setValue(tn\['to4'].getValueAt(ref))" +STARTLINE}
+ addUserKnob {20 cornerData l "corner pin data" n 1}
+ addUserKnob {3 first l "first frame"}
+ first 1
+ addUserKnob {3 last l "last frame" -STARTLINE}
+ last 100
+ addUserKnob {12 to1}
+ to1 {{"(a1.world_matrix.3/-a1.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.width/2"} {"(a1.world_matrix.7/-a1.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.height/2"}}
+ addUserKnob {12 to2}
+ to2 {{"(a2.world_matrix.3/-a2.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.width/2"} {"(a2.world_matrix.7/-a2.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.height/2"}}
+ addUserKnob {12 to3}
+ to3 {{"(a3.world_matrix.3/-a3.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.width/2"} {"(a3.world_matrix.7/-a3.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.height/2"}}
+ addUserKnob {12 to4}
+ to4 {{"(a4.world_matrix.3/-a4.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.width/2"} {"(a4.world_matrix.7/-a4.world_matrix.11)*input0.width*input0.input1.focal / input0.input1.haperture + input0.height/2"}}
+ addUserKnob {20 endGroup n -1}
+}
+ Input {
+  inputs 0
+  name C2T
+  xpos 708
+  ypos 294
+ }
+ Output {
+  inputs 0
+  name Output1
+  xpos 712
+  ypos 693
+ }
+ Axis2 {
+  inputs 0
+  rot_order XYZ
+  useMatrix true
+  matrix {
+      {{input0.input1.matrix.0} {input0.input1.matrix.4} {input0.input1.matrix.8} {"-(matrix.0*input0.input1.matrix.3 + matrix.1*input0.input1.matrix.7 + matrix.2*input0.input1.matrix.11)"}}
+      {{input0.input1.matrix.1} {input0.input1.matrix.5} {input0.input1.matrix.9} {"-(matrix.4*input0.input1.matrix.3 + matrix.5*input0.input1.matrix.7 + matrix.6*input0.input1.matrix.11)"}}
+      {{input0.input1.matrix.2} {input0.input1.matrix.6} {input0.input1.matrix.10} {"-(matrix.8*input0.input1.matrix.3 + matrix.9*input0.input1.matrix.7 + matrix.10*input0.input1.matrix.11)"}}
+      {0 0 0 1}
+    }
+  name Inverse3
+  label "reverse camera tracking"
+  xpos 1062
+  ypos 192
+  addUserKnob {20 User}
+  addUserKnob {1 camera}
+  camera Camera10
+  addUserKnob {26 t l "" +STARTLINE T eshirazi}
+ }
+ Axis2 {
+  xform_order RTS
+  translate {0.6576600075 0.03173422813 -40.46412659}
+  rotate {2.448230295 -173.3358577 0}
+  name aM
+  xpos 1062
+  ypos 289
+ }
+set N377777e0 [stack 0]
+ Axis2 {
+  xform_order STR
+  translate {-1.999999809 -2 0}
+  name a1
+  xpos 935
+  ypos 417
+ }
+push $N377777e0
+ Axis2 {
+  xform_order STR
+  translate {1.999999809 -2 0}
+  name a2
+  xpos 1075
+  ypos 426
+ }
+push $N377777e0
+ Axis2 {
+  xform_order STR
+  translate {1.999999809 2 0}
+  name a3
+  xpos 1171
+  ypos 427
+ }
+push $N377777e0
+ Axis2 {
+  xform_order STR
+  translate {-1.999999809 2 0}
+  name a4
+  xpos 1296
+  ypos 425
+ }
+end_group

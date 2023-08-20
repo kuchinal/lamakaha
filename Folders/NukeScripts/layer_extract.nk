@@ -1,0 +1,66 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+name depth
+tile_color 0xb18b00ff
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 14
+selected true
+xpos -15169
+ypos -1512
+addUserKnob {20 User}
+addUserKnob {11 chan l Channels}
+chan depth
+addUserKnob {22 set T "n = nuke.thisNode()\nn\['name'].setValue(n\['chan'].value())\nn\['channels'].setValue(n\['chan'].value())\nn\['in'].setValue(n\['chan'].value())" +STARTLINE}
+addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+Input {
+inputs 0
+name Input1
+xpos 563
+ypos -315
+}
+Remove {
+operation keep
+channels depth
+name Remove49
+label dsadsdasdsa
+xpos 563
+ypos -270
+}
+Shuffle {
+in depth
+name shufffle
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 20
+xpos 563
+ypos -211
+addUserKnob {20 User}
+addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+}
+Remove {
+operation keep
+channels rgba
+name Remove1
+label "\[value operation] \[value channels]"
+selected true
+xpos 563
+ypos -175
+}
+set N25eee6a0 [stack 0]
+Output {
+name Output1
+xpos 563
+ypos -111
+}
+push $N25eee6a0
+Viewer {
+frame 572
+input_process false
+name Viewer1
+xpos 822
+ypos -302
+}
+end_group

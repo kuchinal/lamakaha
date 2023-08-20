@@ -1,0 +1,319 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+BackdropNode {
+inputs 0
+name BackdropNode14
+tile_color 0x646464ff
+label "UV_tiles_toolset\n\n\n\n\n 1/1 is lower left corner\n\n\n\n\n\nfix UVs here"
+note_font_size 42
+selected true
+xpos -3068
+ypos 5066
+bdwidth 1106
+bdheight 781
+}
+Camera2 {
+inputs 0
+name Camera4
+selected true
+xpos -2992
+ypos 5191
+addUserKnob {20 User}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $cut_paste_input
+Shuffle {
+alpha white
+name Shuffle36
+label "\[value in]"
+selected true
+xpos -2828
+ypos 5143
+}
+Project3D2 {
+inputs 2
+name Project3D3
+selected true
+xpos -2828
+ypos 5211
+}
+ReadGeo2 {
+inputs 0
+name ReadGeo5
+selected true
+xpos -2817
+ypos 5268
+}
+Group {
+name UVs_single_tile_output
+selected true
+xpos -2817
+ypos 5406
+addUserKnob {20 User}
+addUserKnob {41 x T tile2.x}
+addUserKnob {41 y T tile2.y}
+addUserKnob {41 scale T Reformat11.scale}
+}
+Input {
+inputs 0
+name Object
+label Object
+xpos 193
+ypos -648
+}
+Reformat {
+inputs 0
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat10
+xpos 730
+ypos -555
+}
+Reformat {
+type scale
+name Reformat11
+xpos 730
+ypos -495
+}
+NoOp {
+name tile2
+xpos 740
+ypos -440
+addUserKnob {20 User}
+addUserKnob {3 x}
+x 1
+addUserKnob {3 y}
+y 3
+}
+ScanlineRender {
+inputs 2
+conservative_shader_sampling false
+projection_mode uv
+overscan {{tile2.width*(tile2.x-1)} {tile2.height*(tile2.y-1)}}
+motion_vectors_type distance
+name ScanlineRender3
+selected true
+xpos 193
+ypos -440
+}
+Transform {
+translate {{-tile2.width*(tile2.x-1)} {-tile2.height*(tile2.y-1)}}
+center {1079 694.5}
+shutteroffset centred
+name Transform7
+xpos 193
+ypos -360
+}
+Crop {
+box {0 0 {tile2.width} {tile2.height}}
+reformat true
+name Crop9
+xpos 193
+ypos -292
+}
+Output {
+name Output1
+xpos 182
+ypos -207
+}
+end_group
+set Nbfd4fe0 [stack 0]
+push $Nbfd4fe0
+Blur {
+channels rgba
+size 2
+name Blur19
+label "\[value size]"
+selected true
+xpos -2673
+ypos 5425
+}
+Unpremult {
+name Unpremult8
+selected true
+xpos -2673
+ypos 5463
+}
+Merge2 {
+inputs 2
+name Merge45
+selected true
+xpos -2817
+ypos 5488
+}
+Grade {
+white {1 0 0 1}
+name Grade1
+selected true
+xpos -2817
+ypos 5597
+}
+Group {
+name UVs_tile_move_2_correct_position
+selected true
+xpos -2817
+ypos 5639
+addUserKnob {20 User}
+addUserKnob {41 x T tile2.x}
+addUserKnob {41 y T tile2.y}
+}
+Input {
+inputs 0
+name Input1
+xpos 730
+ypos -681
+}
+Dot {
+name Dot20
+xpos 752
+ypos -563
+}
+set N147cbd00 [stack 0]
+NoOp {
+name tile2
+xpos 866
+ypos -436
+addUserKnob {20 User}
+addUserKnob {3 x}
+x 1
+addUserKnob {3 y}
+y 3
+}
+push $N147cbd00
+Transform {
+translate {{-tile2.width*(tile2.x-1)} {-tile2.height*(tile2.y-1)}}
+center {1079 694.5}
+invert_matrix true
+shutteroffset centred
+name Transform7
+xpos 730
+ypos -438
+}
+Output {
+name Output1
+selected true
+xpos 730
+ypos -354
+}
+end_group
+ReadGeo2 {
+name ReadGeo4
+selected true
+xpos -2817
+ypos 5698
+}
+push 0
+ScanlineRender {
+inputs 2
+conservative_shader_sampling false
+motion_vectors_type distance
+name ScanlineRender5
+selected true
+xpos -2817
+ypos 5796
+}
+CheckerBoard2 {
+inputs 0
+name CheckerBoard1
+selected true
+xpos -2463
+ypos 5177
+postage_stamp false
+}
+ReadGeo2 {
+name ReadGeo6
+selected true
+xpos -2463
+ypos 5256
+}
+Group {
+name UVs_overview1
+selected true
+xpos -2463
+ypos 5381
+addUserKnob {20 User}
+addUserKnob {26 maxtiles l "" +STARTLINE T "Max amount of tiles"}
+addUserKnob {41 x T tile2.x}
+addUserKnob {41 y T tile2.y}
+addUserKnob {26 ""}
+addUserKnob {26 outputscale l "" +STARTLINE T "mult outputformat *2k"}
+addUserKnob {41 scale T Reformat11.scale}
+}
+Input {
+inputs 0
+name Object
+label object
+xpos 199
+ypos -519
+}
+Reformat {
+inputs 0
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat10
+xpos 730
+ypos -555
+}
+Reformat {
+type scale
+name Reformat11
+xpos 730
+ypos -495
+}
+NoOp {
+name tile2
+xpos 730
+ypos -434
+addUserKnob {20 User}
+addUserKnob {3 x}
+x 8
+addUserKnob {3 y}
+y 8
+}
+Reformat {
+type scale
+scale {{1/tile2.x} {1/tile2.y}}
+name Reformat12
+xpos 735
+ypos -325
+}
+ScanlineRender {
+inputs 2
+conservative_shader_sampling false
+projection_mode uv
+overscan {{tile2.width*(tile2.x-1)} {tile2.height*(tile2.y-1)}}
+motion_vectors_type distance
+name ScanlineRender3
+xpos 437
+ypos -325
+}
+Crop {
+box {0 0 {width*tile2.x} {height*tile2.y}}
+reformat true
+crop false
+name Crop9
+xpos 437
+ypos -275
+}
+Grid {
+number {{tile2.x} {tile2.y}}
+size 4
+name Grid1
+xpos 437
+ypos -227
+}
+set N122b5850 [stack 0]
+Output {
+name Output1
+xpos 437
+ypos -127
+}
+push $N122b5850
+Viewer {
+frame_range 1027-1061
+viewerProcess "None (default)"
+name Viewer1
+xpos -40
+ypos -778
+hide_input true
+}
+end_group

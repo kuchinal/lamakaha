@@ -1,0 +1,221 @@
+set cut_paste_input [stack 0]
+version 8.0 v1
+push $cut_paste_input
+Group {
+ name GeoArray
+ selected true
+ xpos -582
+ ypos 50
+ addUserKnob {20 Transform}
+ addUserKnob {22 gen_array l "Generate Array" T "n = nuke.thisNode()\nwith n:\n\twhitelist = \['geo','axis','look','RootTransformGeo','Output1']\n\tfor node in nuke.allNodes():\n\t\tif node.name() not in whitelist:\n\t\t\tnuke.delete(node)\n\t\t\t\n\tcount = int(n\['num_array'].value())\n\tn\['start'].setValue(0)\n\tn\['end'].setValue(n\['num_array'].value())\n\ttgeoNodes = \[]\n\tgeoInput = nuke.toNode('geo')\n\taxisInput = nuke.toNode('axis')\n\tlookInput = nuke.toNode('look')\n\tfor num in range(0,count):\n\t\ttgeo = nuke.nodes.TransformGeo()\n\t\ttgeo.setInput(0, geoInput)\n\t\ttgeo.setInput(1, axisInput)\n\t\ttgeo.setInput(2, lookInput)\n\t\tknobs = \['translate', 'rotate']\n\t\tfor knob in knobs:\n\t\t\ttgt = 'RootTransformGeo'\n\t\t\txExpr = tgt + '.' + knob + '.x*' + str(num+1)\n\t\t\tyExpr = tgt + '.' + knob + '.y*' + str(num+1)\n\t\t\tzExpr = tgt + '.' + knob + '.z*' + str(num+1) \t\t\n\t\t\ttgeo\[knob].fromScript(\"\{%s\} \{%s\} \{%s\}\"%(xExpr,yExpr,zExpr))\n\t\t\t\n\t\t# if doesnt = 1 \n\n\t\t# < 1 = value / index number\n\t\t# > 1 = (value - 1 * index number) + 1\n\t\t# node.scaling.x < 1? node.scaling.x / index number: node.scaling.x > 1? ((node.scaling.x -1) * index number) + 1: 1\n\t\t\t\n\t\txScaleExpr = 'pow(\{0\}.scaling.x,\{1\})'.format(tgt,str(num+1))\n\t\tyScaleExpr = 'pow(\{0\}.scaling.y,\{1\})'.format(tgt,str(num+1))\n\t\tzScaleExpr = 'pow(\{0\}.scaling.z,\{1\})'.format(tgt,str(num+1))\n\t\ttgeo\['scaling'].fromScript(\"\{%s\} \{%s\} \{%s\}\"%(xScaleExpr,yScaleExpr,zScaleExpr))\n\t\t\n\t\tuScaleExpr = 'pow(\{0\}.uniform_scale,\{1\})'.format(tgt,str(num+1))\n\t\ttgeo\['uniform_scale'].setExpression(uScaleExpr)\n\t\t\n\t\txPivotExpr = tgt + '.pivot.x'\n\t\tyPivotExpr = tgt + '.pivot.y'\n\t\tzPivotExpr = tgt + '.pivot.z'\n\t\ttgeo\['pivot'].fromScript(\"\{%s\} \{%s\} \{%s\}\"%(xPivotExpr,yPivotExpr,zPivotExpr))\n\t\tswitch = nuke.nodes.Switch()\n\t\tswitch\['which'].setExpression('%s<=parent.end&&%s>=parent.start?0:1'%(str(num+1),str(num+1)))\n\t\tswitch.setInput(0,tgeo)\n\t\ttgeoNodes.append(switch)\n\n\tscene = nuke.nodes.Scene()\n\tscene\['name'].setValue('OutputScene')\n\tfor num in range(0, len(tgeoNodes)):\n\t\tscene.setInput(num, tgeoNodes\[num])\n\t\t\n\tnuke.toNode('Output1').setInput(0,scene)\n\tnuke.Root().begin()\n" +STARTLINE}
+ addUserKnob {3 num_array l "" -STARTLINE}
+ num_array 10
+ addUserKnob {26 ""}
+ addUserKnob {3 start l head -STARTLINE}
+ addUserKnob {3 end l tail -STARTLINE}
+ end 10
+ addUserKnob {26 ""}
+ addUserKnob {41 translate T RootTransformGeo.translate}
+ addUserKnob {41 rotate T RootTransformGeo.rotate}
+ addUserKnob {41 scaling l scale T RootTransformGeo.scaling}
+ addUserKnob {41 uniform_scale l "uniform scale" T RootTransformGeo.uniform_scale}
+ addUserKnob {41 skew T RootTransformGeo.skew}
+ addUserKnob {41 pivot T RootTransformGeo.pivot}
+}
+ Input {
+  inputs 0
+  name look
+  xpos 26
+  ypos 77
+  number 1
+ }
+set N2860da30 [stack 0]
+ Input {
+  inputs 0
+  name axis
+  xpos -52
+  ypos -22
+  number 2
+ }
+set N2860dda0 [stack 0]
+ Input {
+  inputs 0
+  name geo
+  xpos -251
+  ypos 74
+ }
+set N2860e110 [stack 0]
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*10} {RootTransformGeo.translate.y*10} {RootTransformGeo.translate.z*10}}
+  rotate {{RootTransformGeo.rotate.x*10} {RootTransformGeo.rotate.y*10} {RootTransformGeo.rotate.z*10}}
+  scaling {{pow(RootTransformGeo.scaling.x,10)} {pow(RootTransformGeo.scaling.y,10)} {pow(RootTransformGeo.scaling.z,10)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,10)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo10
+ }
+ Switch {
+  which {{10<=parent.end&&10>=parent.start?0:1}}
+  name Switch10
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*9} {RootTransformGeo.translate.y*9} {RootTransformGeo.translate.z*9}}
+  rotate {{RootTransformGeo.rotate.x*9} {RootTransformGeo.rotate.y*9} {RootTransformGeo.rotate.z*9}}
+  scaling {{pow(RootTransformGeo.scaling.x,9)} {pow(RootTransformGeo.scaling.y,9)} {pow(RootTransformGeo.scaling.z,9)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,9)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo9
+ }
+ Switch {
+  which {{9<=parent.end&&9>=parent.start?0:1}}
+  name Switch9
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*8} {RootTransformGeo.translate.y*8} {RootTransformGeo.translate.z*8}}
+  rotate {{RootTransformGeo.rotate.x*8} {RootTransformGeo.rotate.y*8} {RootTransformGeo.rotate.z*8}}
+  scaling {{pow(RootTransformGeo.scaling.x,8)} {pow(RootTransformGeo.scaling.y,8)} {pow(RootTransformGeo.scaling.z,8)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,8)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo8
+ }
+ Switch {
+  which {{8<=parent.end&&8>=parent.start?0:1}}
+  name Switch8
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*7} {RootTransformGeo.translate.y*7} {RootTransformGeo.translate.z*7}}
+  rotate {{RootTransformGeo.rotate.x*7} {RootTransformGeo.rotate.y*7} {RootTransformGeo.rotate.z*7}}
+  scaling {{pow(RootTransformGeo.scaling.x,7)} {pow(RootTransformGeo.scaling.y,7)} {pow(RootTransformGeo.scaling.z,7)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,7)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo7
+ }
+ Switch {
+  which {{7<=parent.end&&7>=parent.start?0:1}}
+  name Switch7
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*6} {RootTransformGeo.translate.y*6} {RootTransformGeo.translate.z*6}}
+  rotate {{RootTransformGeo.rotate.x*6} {RootTransformGeo.rotate.y*6} {RootTransformGeo.rotate.z*6}}
+  scaling {{pow(RootTransformGeo.scaling.x,6)} {pow(RootTransformGeo.scaling.y,6)} {pow(RootTransformGeo.scaling.z,6)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,6)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo6
+ }
+ Switch {
+  which {{6<=parent.end&&6>=parent.start?0:1}}
+  name Switch6
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*5} {RootTransformGeo.translate.y*5} {RootTransformGeo.translate.z*5}}
+  rotate {{RootTransformGeo.rotate.x*5} {RootTransformGeo.rotate.y*5} {RootTransformGeo.rotate.z*5}}
+  scaling {{pow(RootTransformGeo.scaling.x,5)} {pow(RootTransformGeo.scaling.y,5)} {pow(RootTransformGeo.scaling.z,5)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,5)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo5
+ }
+ Switch {
+  which {{5<=parent.end&&5>=parent.start?0:1}}
+  name Switch5
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*4} {RootTransformGeo.translate.y*4} {RootTransformGeo.translate.z*4}}
+  rotate {{RootTransformGeo.rotate.x*4} {RootTransformGeo.rotate.y*4} {RootTransformGeo.rotate.z*4}}
+  scaling {{pow(RootTransformGeo.scaling.x,4)} {pow(RootTransformGeo.scaling.y,4)} {pow(RootTransformGeo.scaling.z,4)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,4)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo4
+ }
+ Switch {
+  which {{4<=parent.end&&4>=parent.start?0:1}}
+  name Switch4
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*3} {RootTransformGeo.translate.y*3} {RootTransformGeo.translate.z*3}}
+  rotate {{RootTransformGeo.rotate.x*3} {RootTransformGeo.rotate.y*3} {RootTransformGeo.rotate.z*3}}
+  scaling {{pow(RootTransformGeo.scaling.x,3)} {pow(RootTransformGeo.scaling.y,3)} {pow(RootTransformGeo.scaling.z,3)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,3)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo3
+ }
+ Switch {
+  which {{3<=parent.end&&3>=parent.start?0:1}}
+  name Switch3
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*2} {RootTransformGeo.translate.y*2} {RootTransformGeo.translate.z*2}}
+  rotate {{RootTransformGeo.rotate.x*2} {RootTransformGeo.rotate.y*2} {RootTransformGeo.rotate.z*2}}
+  scaling {{pow(RootTransformGeo.scaling.x,2)} {pow(RootTransformGeo.scaling.y,2)} {pow(RootTransformGeo.scaling.z,2)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,2)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo2
+ }
+ Switch {
+  which {{2<=parent.end&&2>=parent.start?0:1}}
+  name Switch2
+ }
+push $N2860da30
+push $N2860dda0
+push $N2860e110
+ TransformGeo {
+  inputs 3
+  translate {{RootTransformGeo.translate.x*1} {RootTransformGeo.translate.y*1} {RootTransformGeo.translate.z*1}}
+  rotate {{RootTransformGeo.rotate.x*1} {RootTransformGeo.rotate.y*1} {RootTransformGeo.rotate.z*1}}
+  scaling {{pow(RootTransformGeo.scaling.x,1)} {pow(RootTransformGeo.scaling.y,1)} {pow(RootTransformGeo.scaling.z,1)}}
+  uniform_scale {{pow(RootTransformGeo.uniform_scale,1)}}
+  pivot {{RootTransformGeo.pivot.x} {RootTransformGeo.pivot.y} {RootTransformGeo.pivot.z}}
+  name TransformGeo1
+ }
+ Switch {
+  which {{1<=parent.end&&1>=parent.start?0:1}}
+  name Switch1
+ }
+ Scene {
+  inputs 10
+  name OutputScene
+ }
+ Output {
+  name Output1
+  xpos -152
+  ypos 640
+ }
+ TransformGeo {
+  inputs 0
+  name RootTransformGeo
+  selected true
+  xpos -409
+  ypos 494
+ }
+end_group

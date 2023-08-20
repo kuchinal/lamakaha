@@ -1,0 +1,164 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+BackdropNode {
+inputs 0
+name BackdropNode16
+tile_color 0x5b359601
+note_font "Helvetica bold"
+note_font_size 100
+selected true
+xpos -4370
+ypos -1069
+bookmark false
+bdwidth 712
+bdheight 692
+}
+BackdropNode {
+inputs 0
+name BackdropNode17
+tile_color 0x54706b01
+note_font "Helvetica bold"
+note_font_size 100
+selected true
+xpos -4812
+ypos -975
+bookmark false
+bdwidth 110
+bdheight 160
+}
+Card2 {
+inputs 0
+image_aspect false
+rows 4
+columns 4
+control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+name Card3
+selected true
+xpos -4802
+ypos -890
+addUserKnob {20 User}
+addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push $cut_paste_input
+Reformat {
+format "2048 2048 0 0 2048 2048 1 square_2K"
+name Reformat10
+selected true
+xpos -3758
+ypos -984
+}
+Reformat {
+type scale
+scale 0.5
+name Reformat11
+selected true
+xpos -3758
+ypos -922
+}
+NoOp {
+name tile2
+selected true
+xpos -3758
+ypos -875
+addUserKnob {20 User}
+addUserKnob {3 x}
+x 5
+addUserKnob {3 y}
+y 7
+}
+ScanlineRender {
+inputs 2
+conservative_shader_sampling false
+projection_mode uv
+overscan {{tile2.width*(tile2.x-1)} {tile2.height*(tile2.y-1)}}
+motion_vectors_type distance
+name ScanlineRender5
+selected true
+xpos -4295
+ypos -875
+}
+Transform {
+translate {{-tile2.width*(tile2.x-1)} {-tile2.height*(tile2.y-1)}}
+center {1079 694.5}
+shutteroffset centred
+name Transform9
+selected true
+xpos -4295
+ypos -822
+}
+Crop {
+box {0 0 {tile2.width} {tile2.height}}
+reformat true
+name Crop8
+selected true
+xpos -4297
+ypos -771
+}
+set Nc3e51190 [stack 0]
+push $Nc3e51190
+Blur {
+channels rgba
+size 2
+name Blur17
+label "\[value size]"
+selected true
+xpos -4360
+ypos -680
+}
+Unpremult {
+name Unpremult7
+selected true
+xpos -4360
+ypos -642
+}
+Merge2 {
+inputs 2
+name Merge51
+selected true
+xpos -4297
+ypos -593
+}
+Transform {
+translate {{-tile2.width*(tile2.x-1)} {-tile2.height*(tile2.y-1)}}
+center {1079 694.5}
+invert_matrix true
+shutteroffset centred
+name Transform10
+selected true
+xpos -4289
+ypos -452
+}
+StickyNote {
+inputs 0
+name StickyNote7
+tile_color 0xffffffff
+label "<b>UV fixes                ."
+note_font "Helvetica bold"
+note_font_size 100
+selected true
+xpos -4370
+ypos -1194
+}
+StickyNote {
+inputs 0
+name StickyNote8
+tile_color 0xffffffff
+label "<b>your alembic with projected \nown texture on it from your camera                ."
+note_font "Helvetica bold"
+note_font_size 20
+selected true
+xpos -4941
+ypos -1048
+}

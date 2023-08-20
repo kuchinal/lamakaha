@@ -1,0 +1,448 @@
+#! C:/Program Files/Nuke7.0v8/Nuke7.0.exe -nx
+version 7.0 v8
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="1382" h="1570" screen="0">
+        <splitter orientation="1">
+            <split size="372"/>
+            <splitter orientation="2">
+                <split size="831"/>
+                <dock id="" hideTitles="1" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                    <page id="Viewer.2"/>
+                </dock>
+                <split size="671"/>
+                <splitter orientation="1">
+                    <split size="372"/>
+                    <dock id="" activePageId="Script Editor.1">
+                        <page id="Curve Editor.1"/>
+                        <page id="DopeSheet.1"/>
+                        <page id="Script Editor.1"/>
+                    </dock>
+                </splitter>
+            </splitter>
+            <split size="990"/>
+            <splitter orientation="2">
+                <split size="512"/>
+                <dock id="" hideTitles="1" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="990"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name C:/Users/lamakaha/.nuke/user/GeneralSetups/ExpressionNode.nk
+ format "256 256 0 0 256 256 1 square_256"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ addUserKnob {20 User}
+ addUserKnob {1 viewer_process l "viewer process"}
+}
+Expression {
+ inputs 0
+ expr0 (sin(x/5)+1)/2
+ name lines_3
+ label "wider \nvalues 0 to 1"
+ note_font_size 14
+ xpos -19
+ ypos -85
+}
+Grade {
+ blackpoint 0.84
+ name Grade1
+ label "more black"
+ note_font_size 14
+ xpos -19
+ ypos -16
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 (sin(x/5)+1)/2
+ name lines_2
+ label "wider \nvalues 0 to 1"
+ note_font_size 14
+ xpos -123
+ ypos -87
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 (sin(x)+1)/2
+ name lines_1
+ label "values 0 to 1"
+ note_font_size 14
+ xpos -239
+ ypos -74
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 "1- (x/width)"
+ name "invert gradient"
+ xpos -452
+ ypos -73
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 y/height
+ name gradient_1
+ xpos -673
+ ypos -64
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 sin(x)
+ name lines
+ label "values -1 to 1"
+ note_font_size 14
+ xpos -346
+ ypos -74
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 x/width
+ name gradient
+ xpos -569
+ ypos -63
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ temp_name0 m
+ temp_expr0 3
+ expr0 (sin(x/m)+1)/2+(sin(y/m)+1)/2
+ name lines_4
+ label "wider \nvalues 0 to 1"
+ note_font_size 14
+ xpos 102
+ ypos -70
+}
+Grade {
+ blackpoint 1.05
+ name Grade2
+ label "more black"
+ note_font_size 14
+ xpos 102
+ ypos -16
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 "(width - sqrt(x * x + y * y ))/width"
+ name Expression1
+ label "radial normalized gradient"
+ note_font_size 14
+ xpos 227
+ ypos -61
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 "sin(sqrt(x * x + y * y ))"
+ name Expression2
+ label "radial normalized gradient"
+ note_font_size 14
+ xpos 355
+ ypos -28
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ expr0 "sin(sqrt(x * x + y * y )/4)"
+ name Expression3
+ label "radial normalized gradient"
+ note_font_size 14
+ xpos 489
+ ypos -28
+ postage_stamp true
+}
+Expression {
+ inputs 0
+ temp_name0 X
+ temp_expr0 offset.x
+ temp_name1 Y
+ temp_expr1 offset.y
+ expr0 "sin(sqrt((x-X) * (x-X) + (y-Y) * (y-Y) )/size)"
+ name Expression4
+ label "radial normalized gradient"
+ note_font_size 14
+ xpos 644
+ postage_stamp true
+ addUserKnob {20 User}
+ addUserKnob {7 size R 0 50}
+ size 3
+ addUserKnob {12 offset l center}
+ offset {148.5 101}
+}
+Expression {
+ inputs 0
+ temp_name0 X
+ temp_expr0 offset.x
+ temp_name1 Y
+ temp_expr1 offset.y
+ expr0 atan(x-X,y-Y)
+ name Expression5
+ label atan
+ note_font_size 14
+ xpos 809
+ ypos -8
+ postage_stamp true
+ addUserKnob {20 User}
+ addUserKnob {7 size R 0 50}
+ size 3
+ addUserKnob {12 offset l center}
+ offset {123 126}
+}
+Expression {
+ inputs 0
+ temp_name0 X
+ temp_expr0 offset.x
+ temp_name1 Y
+ temp_expr1 offset.y
+ expr0 (atan(x-X,y-Y)+3.14)/6.28
+ name Expression6
+ label "normalized \natan"
+ note_font_size 14
+ xpos 924
+ ypos -17
+ postage_stamp true
+ addUserKnob {20 User}
+ addUserKnob {7 size R 0 50}
+ size 3
+ addUserKnob {12 offset l center}
+ offset {123 126}
+}
+Expression {
+ inputs 0
+ temp_name0 X
+ temp_expr0 offset.x
+ temp_name1 Y
+ temp_expr1 offset.y
+ temp_name2 u
+ temp_expr2 user
+ expr0 sin(atan(x-X,y-Y)*u)
+ name Expression7
+ label rays
+ note_font_size 14
+ xpos 1046
+ ypos -15
+ postage_stamp true
+ addUserKnob {20 User}
+ addUserKnob {7 size R 0 50}
+ size 3
+ addUserKnob {12 offset l center}
+ offset {145 97.5}
+ addUserKnob {7 user R 0 100}
+ user 7.5
+}
+Expression {
+ inputs 0
+ temp_name0 X
+ temp_expr0 offset.x
+ temp_name1 Y
+ temp_expr1 offset.y
+ temp_name2 u
+ temp_expr2 user
+ expr0 sin((atan(x-X,y-Y)+u)*size)
+ name Expression8
+ label "with size and rotation \nrays"
+ note_font_size 14
+ xpos 1174
+ ypos -24
+ postage_stamp true
+ addUserKnob {20 User}
+ addUserKnob {7 size R 0 50}
+ size 12
+ addUserKnob {12 offset l center}
+ offset {145 97.5}
+ addUserKnob {7 user R 0 100}
+ user 18
+}
+Camera2 {
+ inputs 0
+ translate {0 1.327157617 5.675539494}
+ rotate {-6.80818759 0 0}
+ name Camera1
+ xpos 1388
+ ypos 534
+}
+Constant {
+ inputs 0
+ color 1
+ name Constant1
+ xpos 1515
+ ypos 246
+ postage_stamp false
+}
+set N23f85f30 [stack 0]
+Cylinder {
+ translate {0 1.059999943 -3.5}
+ name Cylinder1
+ xpos 1335
+ ypos 375
+}
+push $N23f85f30
+Cube {
+ rows 1
+ columns 1
+ cube {-0.5 -0.5 -1.200000048 0.5 1.019999981 0.5}
+ translate {1 0 0}
+ name Cube1
+ xpos 1428
+ ypos 374
+}
+push $N23f85f30
+Sphere {
+ translate {-1.419999957 0.02999999933 0}
+ name Sphere1
+ xpos 1538
+ ypos 383
+}
+push $N23f85f30
+Card2 {
+ rows 4
+ columns 4
+ rotate {-90 0 0}
+ uniform_scale 100
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5059999824 0.5699999928 0.1360000074} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0.03200000152 0.5299999714 0.08600000292} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5479999781 0.5550000072 0.1439999938} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ drawPosition {-0.1475000381 -0.1475000381 0}
+ name Card1
+ xpos 1633
+ ypos 379
+}
+MergeGeo {
+ inputs 4
+ name MergeGeo1
+ xpos 1498
+ ypos 483
+}
+push 0
+ScanlineRender {
+ inputs 3
+ motion_vectors_type distance
+ output_shader_vectors true
+ P_channel rgb
+ name ScanlineRender1
+ xpos 1498
+ ypos 555
+}
+Dot {
+ name Dot1
+ label ppass
+ note_font_size 30
+ xpos 1532
+ ypos 621
+}
+set N240cef90 [stack 0]
+PostageStamp {
+ name ppass
+ help Dot1
+ tile_color 0xfa0
+ note_font_size 20
+ xpos 1270
+ ypos 770
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+Expression {
+ temp_name0 a
+ temp_expr0 1-sqrt(r*r+g*g+b*b)
+ expr0 a
+ expr1 a
+ expr2 a
+ expr3 a
+ name Expression9
+ label "we found origin"
+ note_font_size 14
+ xpos 1270
+ ypos 831
+}
+push $N240cef90
+PostageStamp {
+ name ppass1
+ help Dot1
+ tile_color 0xfa0
+ note_font_size 20
+ xpos 1422
+ ypos 768
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+Expression {
+ temp_name0 dist
+ temp_expr0 sqrt((r-center.r)*(r-center.r)+(g-center.g)*(g-center.g)+(b-center.b)*(b-center.b))
+ expr3 (1-dist)*a
+ name Expression10
+ label "p_matte ready!!! \ngot rid of bg hole \nwe found origin"
+ note_font_size 14
+ xpos 1422
+ ypos 829
+ addUserKnob {20 User}
+ addUserKnob {18 center R 0 100}
+ center {0.07443036139 2.747268546e-008 0.6285018325}
+}
+push $N240cef90
+PostageStamp {
+ name ppass2
+ help Dot1
+ tile_color 0xfa0
+ note_font_size 20
+ xpos 1593
+ ypos 768
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+Expression {
+ temp_name0 S
+ temp_expr0 1/size
+ expr1 1000
+ expr3 noise(r*S,g*S,b*S)
+ name Expression11
+ label noise
+ xpos 1593
+ ypos 853
+ addUserKnob {20 User}
+ addUserKnob {7 size}
+ size 0.222
+}
+Viewer {
+ frame 1
+ freezeGuiWhenPlayBack true
+ viewerProcess None
+ input_process false
+ gl_lighting true
+ name Viewer1
+ xpos -14
+ ypos 289
+ hide_input true
+}

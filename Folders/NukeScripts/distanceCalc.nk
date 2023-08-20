@@ -1,0 +1,64 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+BackdropNode {
+ inputs 0
+ name BackdropNode138
+ tile_color 0x633f7201
+ label "Defocus Tools"
+ note_font "Helvetica bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -29722
+ ypos -7120
+ bdwidth 370
+ bdheight 356
+}
+push $cut_paste_input
+Defocus {
+ defocus {{DCoCpx i}}
+ name Defocus1
+ help "Standard defocus node with circle of confusion calculator attached in a separate tab. Email alex.henning@pixomondo with questions. All praises to the mighty B. Roesler for the calculator math."
+ selected true
+ xpos -29620
+ ypos -6843
+ addUserKnob {20 Calculator}
+ addUserKnob {7 fbmm l "film back (mm)" R 0 100}
+ fbmm 23.749
+ addUserKnob {7 flmm l "Focal Length (mm)" t "set the focal length of the camera lens in millimeters." R 1 200}
+ flmm 35
+ addUserKnob {7 fstop l f-stop t "set the f-stop of the camera lens." R 1 22}
+ fstop 5.6
+ addUserKnob {4 dunits l "Distance Units" t "choose the unit of measure for your focus distance and object distance settings." M {inches feet millimeters centimeters meters}}
+ dunits meters
+ addUserKnob {7 fdist l "Focus Distance" t "objects at this distance would be in focus." R 1 100}
+ fdist 3
+ addUserKnob {7 odist l "Object Distance" t "set the distance of the image you're applying the defocus effect to." R 1 100}
+ odist 3
+ addUserKnob {7 unitxmm l INVISIBLE +INVISIBLE R 0 100000}
+ unitxmm {{dunits==0?25.4:dunits==1?304.8:dunits==2?1:dunits==3?10:1000}}
+ addUserKnob {7 fdistmm l INVISIBLE +INVISIBLE R 1 1e+006}
+ fdistmm {{fdist*unitxmm}}
+ addUserKnob {7 odistmm l INVISIBLE +INVISIBLE R 0 1e+006}
+ odistmm {{odist*unitxmm}}
+ addUserKnob {7 diametermm l INVISIBLE +INVISIBLE R 0 100}
+ diametermm {{"(flmm/fstop) * ((fdistmm * flmm) / (fdistmm - flmm)) * abs((1/odistmm) - (1/fdistmm))"}}
+ addUserKnob {7 diameternorm l INVISIBLE +INVISIBLE R 0 100}
+ diameternorm {{diametermm/fbmm}}
+ addUserKnob {7 iwidth l INVISIBLE +INVISIBLE R 0 10000}
+ iwidth {{width}}
+ addUserKnob {7 DCoCpx l "Circle of Confusion" t "the diameter of the defocus circle of confusion in pixels." R 0 1000}
+ DCoCpx {{diameternorm*iwidth i}}
+}
+Measure {
+ inputs 0
+ name Measure1
+ selected true
+ xpos -29623
+ ypos -7008
+ pos1 {{parent.input0.matrix.3 i x1 -27.86000061} {parent.input0.matrix.7 i x1 14.68000031} {parent.input0.matrix.11 i x1 14.64999962}}
+ pos2 {{parent.input1.matrix.3 i x1 1.719999194} {parent.input1.matrix.7 i x1 2.919999838} {parent.input1.matrix.11 i x1 29.35000038}}
+ dist {{calc_dist i}}
+ dist_x {{calc_x i}}
+ dist_y {{abs(calc_y) i}}
+ dist_z {{abs(calc_z) i}}
+}

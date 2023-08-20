@@ -1,0 +1,2788 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+BackdropNode {
+inputs 0
+name BackdropNode20
+tile_color 0x424242ff
+label "Name me!!!"
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 300
+selected true
+xpos -5868
+ypos -5472
+bdwidth 7459
+bdheight 4668
+}
+BackdropNode {
+inputs 0
+name BackdropNode41
+tile_color 0x607070ff
+label Refraction
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos -497
+ypos -5252
+bookmark false
+bdwidth 500
+bdheight 1700
+}
+BackdropNode {
+inputs 0
+name BackdropNode24
+tile_color 0x3d7188ff
+label Scatter
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos -5768
+ypos -5249
+bookmark false
+bdwidth 500
+bdheight 1700
+}
+BackdropNode {
+inputs 0
+name BackdropNode28
+tile_color 0x8a8988ff
+label Indirect
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos 4
+ypos -5251
+bookmark false
+bdwidth 500
+bdheight 1700
+}
+BackdropNode {
+inputs 0
+name BackdropNode26
+tile_color 0x7a7030ff
+label Ambient
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos 504
+ypos -5250
+bookmark false
+bdwidth 500
+bdheight 1700
+}
+BackdropNode {
+inputs 0
+name BackdropNode29
+tile_color 0x8a563f41
+label Diffuse
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos 1005
+ypos -5250
+bookmark false
+bdwidth 500
+bdheight 1700
+}
+BackdropNode {
+inputs 0
+name BackdropNode32
+tile_color 0x412f34ff
+label "premult /copy bbox"
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1078
+ypos -1993
+bookmark false
+bdwidth 408
+bdheight 267
+}
+BackdropNode {
+inputs 0
+name BackdropNode27
+tile_color 0x3d3d71ff
+label Wetnes
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos -5268
+ypos -5249
+bookmark false
+bdwidth 500
+bdheight 1700
+}
+BackdropNode {
+inputs 0
+name BackdropNode22
+tile_color 0x8a563f41
+label Specular
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos -4767
+ypos -5249
+bookmark false
+bdwidth 1530
+bdheight 1705
+}
+BackdropNode {
+inputs 0
+name BackdropNode25
+tile_color 0x4c7070ff
+label Reflections
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 80
+selected true
+xpos -3237
+ypos -5251
+bookmark false
+bdwidth 2739
+bdheight 1699
+}
+BackdropNode {
+inputs 0
+name BackdropNode42
+tile_color 0x4b4260ff
+label "Lens distort"
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1075
+ypos -1345
+bookmark false
+bdwidth 412
+bdheight 202
+}
+BackdropNode {
+inputs 0
+name BackdropNode39
+tile_color 0x47265101
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos -5768
+ypos -3549
+bookmark false
+bdwidth 7273
+bdheight 265
+}
+BackdropNode {
+inputs 0
+name BackdropNode33
+tile_color 0x2f410eff
+label "Global CC"
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1080
+ypos -3113
+bookmark false
+bdwidth 406
+bdheight 1120
+}
+BackdropNode {
+inputs 0
+name BackdropNode34
+tile_color 0x143d44ff
+label MB
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1078
+ypos -1725
+bookmark false
+bdwidth 408
+bdheight 178
+}
+BackdropNode {
+inputs 0
+name BackdropNode35
+tile_color 0x60306001
+label Defocus
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1075
+ypos -1547
+bookmark false
+bdwidth 412
+bdheight 202
+}
+BackdropNode {
+inputs 0
+name BackdropNode36
+tile_color 0x44382aff
+label "  ID's/Masks/Utilities/Deep holdouts "
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 100
+selected true
+xpos -5746
+ypos -3119
+bookmark false
+bdwidth 6649
+bdheight 2186
+}
+BackdropNode {
+inputs 0
+name BackdropNode45
+tile_color 0x4b6476ff
+label Grain
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1071
+ypos -368
+bookmark false
+bdwidth 412
+bdheight 202
+}
+BackdropNode {
+inputs 0
+name BackdropNode46
+tile_color 0x5e357701
+label "Edge blend"
+note_font "Helvetica bold Bold"
+note_font_size 50
+selected true
+xpos 1065
+ypos -708
+bookmark false
+bdwidth 419
+bdheight 255
+}
+BackdropNode {
+inputs 0
+name BackdropNode31
+tile_color 0x93000000
+label Precomp
+note_font "Helvetica bold Bold"
+note_font_size 30
+selected true
+xpos 1108
+ypos -1075
+bookmark false
+bdwidth 200
+bdheight 250
+addUserKnob {20 User}
+addUserKnob {22 onrenderfarm l "<font color='Blue'><b>on renderfarm" -STARTLINE T "nuke.thisNode()\['tile_color'].setValue(52479)"}
+addUserKnob {22 prerendered l "<font color='Red'><b>prerendered" -STARTLINE T "nuke.thisNode()\['tile_color'].setValue(2466250752L)"}
+addUserKnob {22 needprerender l "<font color='White'><b>need prerender" -STARTLINE T "nuke.thisNode()\['tile_color'].setValue(4294967295)"}
+}
+BackdropNode {
+inputs 0
+name BackdropNode2
+tile_color 0x3f685901
+label IDs
+note_font "Helvetica bold"
+note_font_size 100
+selected true
+xpos -5682
+ypos -2958
+bookmark false
+bdwidth 1811
+bdheight 761
+}
+BackdropNode {
+inputs 0
+name BackdropNode3
+tile_color 0x445e4401
+label Utiliies
+note_font "DejaVu Sans Bold"
+note_font_size 100
+selected true
+xpos -3871
+ypos -2958
+bookmark false
+bdwidth 1952
+bdheight 762
+}
+BackdropNode {
+inputs 0
+name BackdropNode1
+tile_color 0x3f5e8401
+label Deep
+note_font "DejaVu Sans Bold"
+note_font_size 100
+selected true
+xpos -1919
+ypos -2958
+bookmark false
+bdwidth 2800
+bdheight 761
+}
+push $cut_paste_input
+Dot {
+name Dot80
+label "Passes\n"
+note_font_size 30
+selected true
+xpos -237
+ypos -5373
+}
+set N8525890 [stack 0]
+PostageStamp {
+name passes1
+help Dot80
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos -3474
+ypos -2913
+hide_input true
+addUserKnob {20 User}
+addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+Dot {
+name Dot81
+selected true
+xpos -3440
+ypos -2847
+}
+set N8580b30 [stack 0]
+Group {
+name Group6
+knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0xb18b00ff
+label rgba
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+selected true
+xpos -3474
+ypos -2809
+addUserKnob {20 User}
+addUserKnob {11 chan l Channels}
+chan rgba
+addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+Input {
+inputs 0
+name Input1
+xpos 563
+ypos -315
+}
+Remove {
+operation keep
+channels rgba
+name Remove49
+label dsadsdasdsa
+xpos 563
+ypos -270
+}
+Shuffle {
+name shufffle
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 20
+selected true
+xpos 563
+ypos -211
+addUserKnob {20 User}
+addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+}
+Remove {
+operation keep
+channels rgba
+name Remove1
+label "\[value operation] \[value channels]"
+xpos 563
+ypos -168
+}
+set N85e5d90 [stack 0]
+Output {
+name Output1
+xpos 563
+ypos -111
+}
+push $N85e5d90
+Viewer {
+frame 572
+input_process false
+name Viewer1
+xpos 822
+ypos -302
+}
+end_group
+set N85c2990 [stack 0]
+PostageStamp {
+name RGBA3
+help Remove29
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos 1115
+ypos -1934
+hide_input true
+}
+set N860d820 [stack 0]
+AdjBBox {
+name AdjBBox2
+selected true
+xpos 1115
+ypos -1900
+}
+Dot {
+name Dot82
+selected true
+xpos 1149
+ypos -1868
+}
+push $N860d820
+push $N8525890
+Unpremult {
+channels all
+name Unpremult4
+selected true
+xpos -271
+ypos -5309
+}
+add_layer {refraction refraction.red refraction.green refraction.blue refraction.alpha}
+Shuffle {
+in refraction
+alpha red2
+name Refldiv2
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Refract
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -271
+ypos -5128
+}
+set N8627ef0 [stack 0]
+add_layer {reflection reflection.red reflection.green reflection.blue reflection.alpha}
+Shuffle {
+in reflection
+alpha red2
+name Refldiv1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Refl1
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -823
+ypos -5128
+}
+set N8638f20 [stack 0]
+add_layer {reflection2 reflection2.red reflection2.green reflection2.blue reflection2.alpha}
+Shuffle {
+in reflection2
+alpha red2
+name Refldiv3
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Refl2
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -1176
+ypos -5128
+}
+set N86462c0 [stack 0]
+add_layer {reflection3 reflection3.red reflection3.green reflection3.blue}
+Shuffle {
+in reflection3
+alpha red2
+name Refldiv4
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Refl3
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -1555
+ypos -5128
+}
+set N8653b50 [stack 0]
+add_layer {reflectionWet reflectionWet.red reflectionWet.green reflectionWet.blue reflectionWet.alpha}
+Shuffle {
+in reflectionWet
+alpha red2
+name Refldiv5
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Wetness
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -1892
+ypos -5128
+}
+set N8661750 [stack 0]
+add_layer {refltrace refltrace.red refltrace.green refltrace.blue refltrace.alpha}
+Shuffle {
+in refltrace
+alpha red2
+name Refldiv8
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Trace1
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -2311
+ypos -5128
+}
+set N866efe0 [stack 0]
+add_layer {refltrace2 refltrace2.red refltrace2.green refltrace2.blue refltrace2.alpha}
+Shuffle {
+in refltrace2
+alpha red2
+name Refldiv7
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Trace2
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -2690
+ypos -5128
+}
+set N867c640 [stack 0]
+add_layer {refltraceWet refltraceWet.red refltraceWet.green refltraceWet.blue}
+Shuffle {
+in refltraceWet
+alpha red2
+name Refldiv6
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label TraceWet
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -3027
+ypos -5128
+}
+set N868a0f0 [stack 0]
+add_layer {specular specular.red specular.green specular.blue specular.alpha}
+Shuffle {
+in specular
+alpha red2
+name Refldiv9
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Specular1
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -3680
+ypos -5128
+}
+set N86977a0 [stack 0]
+add_layer {specular2 specular2.red specular2.green specular2.blue specular2.alpha}
+Shuffle {
+in specular2
+alpha red2
+name Refldiv10
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Specular2
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -4072
+ypos -5128
+}
+set N86a5340 [stack 0]
+add_layer {specular3 specular3.red specular3.green specular3.blue}
+Shuffle {
+in specular3
+alpha red2
+name Refldiv11
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Specular3
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -4508
+ypos -5128
+}
+set N86b2b60 [stack 0]
+add_layer {wetness wetness.red wetness.green wetness.blue wetness.alpha}
+Shuffle {
+in wetness
+alpha red2
+name Selfdiv1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Wetnes
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -5031
+ypos -5128
+}
+set N86c0170 [stack 0]
+add_layer {scatter scatter.red scatter.green scatter.blue scatter.alpha}
+Shuffle {
+in scatter
+alpha red2
+name Shuffle19
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label scatter
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos -5599
+ypos -5128
+}
+Remove {
+operation keep
+channels rgb
+name Remove17
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -5599
+ypos -5098
+}
+Dot {
+name Dot87
+selected true
+xpos -5565
+ypos -3323
+}
+push $N86c0170
+Remove {
+operation keep
+channels rgb
+name Remove16
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -5031
+ypos -5098
+}
+Dot {
+name Dot88
+selected true
+xpos -4997
+ypos -3357
+}
+push $N86b2b60
+Remove {
+operation keep
+channels rgb
+name Remove15
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -4508
+ypos -5098
+}
+Dot {
+name Dot108
+selected true
+xpos -4473
+ypos -3413
+}
+push $N86a5340
+Remove {
+operation keep
+channels rgb
+name Remove14
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -4072
+ypos -5098
+}
+Dot {
+name Dot110
+selected true
+xpos -4037
+ypos -3439
+}
+push $N86977a0
+Remove {
+operation keep
+channels rgb
+name Remove13
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -3680
+ypos -5098
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge37
+selected true
+xpos -3679
+ypos -3443
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge38
+selected true
+xpos -3679
+ypos -3417
+}
+Dot {
+name Dot89
+selected true
+xpos -3645
+ypos -3391
+}
+push $N868a0f0
+Remove {
+operation keep
+channels rgb
+name Remove12
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -3027
+ypos -5098
+}
+Dot {
+name Dot106
+selected true
+xpos -2993
+ypos -3648
+}
+push $N867c640
+Remove {
+operation keep
+channels rgb
+name Remove11
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -2690
+ypos -5098
+}
+Dot {
+name Dot107
+selected true
+xpos -2656
+ypos -3784
+}
+push $N866efe0
+Remove {
+operation keep
+channels rgb
+name Remove10
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -2311
+ypos -5098
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge35
+selected true
+xpos -2311
+ypos -3788
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge36
+selected true
+xpos -2311
+ypos -3652
+}
+Dot {
+name Dot109
+selected true
+xpos -2277
+ypos -3447
+}
+push $N8661750
+Remove {
+operation keep
+channels rgb
+name Remove9
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -1892
+ypos -5098
+}
+Dot {
+name Dot105
+selected true
+xpos -1858
+ypos -3473
+}
+push $N8653b50
+Remove {
+operation keep
+channels rgb
+name Remove8
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -1555
+ypos -5098
+}
+Dot {
+name Dot103
+selected true
+xpos -1521
+ypos -3665
+}
+push $N86462c0
+Remove {
+operation keep
+channels rgb
+name Remove7
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -1176
+ypos -5098
+}
+Dot {
+name Dot102
+selected true
+xpos -1142
+ypos -3691
+}
+push $N8638f20
+Remove {
+operation keep
+channels rgb
+name Remove6
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -823
+ypos -5098
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge31
+selected true
+xpos -823
+ypos -3695
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge32
+selected true
+xpos -823
+ypos -3669
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge33
+selected true
+xpos -823
+ypos -3477
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge34
+selected true
+xpos -823
+ypos -3451
+}
+Dot {
+name Dot90
+selected true
+xpos -789
+ypos -3425
+}
+push $N8627ef0
+Remove {
+operation keep
+channels rgb
+name Remove5
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos -271
+ypos -5098
+}
+Dot {
+name Dot99
+selected true
+xpos -237
+ypos -3459
+}
+push $N8627ef0
+add_layer {indirect indirect.red indirect.green indirect.blue indirect.alpha}
+Shuffle {
+in indirect
+alpha red2
+name Refrdiv1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label indirect
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos 224
+ypos -5128
+}
+set N87dddd0 [stack 0]
+Remove {
+operation keep
+channels rgb
+name Remove4
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos 224
+ypos -5098
+}
+Dot {
+name Dot92
+selected true
+xpos 258
+ypos -3493
+}
+push $N87dddd0
+add_layer {ambient ambient.red ambient.green ambient.blue ambient.alpha}
+Shuffle {
+in ambient
+alpha red2
+name ambient_
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label ambient
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos 747
+ypos -5128
+}
+set N87f6a30 [stack 0]
+Remove {
+operation keep
+channels rgb
+name Remove3
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 10
+selected true
+xpos 747
+ypos -5098
+}
+Dot {
+name Dot94
+selected true
+xpos 781
+ypos -3527
+}
+push $N87f6a30
+add_layer {diffuse diffuse.red diffuse.green diffuse.blue diffuse.alpha}
+Shuffle {
+in diffuse
+alpha red2
+name Diffuse
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Diffuse
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 15
+selected true
+xpos 1234
+ypos -5128
+}
+Remove {
+operation keep
+channels rgb
+name Remove2
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold"
+note_font_size 10
+selected true
+xpos 1234
+ypos -5098
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Lighting1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x7a7030ff
+label Ambient
+note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 20
+note_font_color 0xffffffff
+selected true
+xpos 1234
+ypos -3535
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Lighting2
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x8a8988ff
+label Indirect
+note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 20
+note_font_color 0xffffffff
+selected true
+xpos 1234
+ypos -3501
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Refractions2
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x607070ff
+label Refraction
+note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 20
+note_font_color 0xffffffff
+selected true
+xpos 1234
+ypos -3467
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Reflections2
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x4c7070ff
+label Reflection
+note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 20
+note_font_color 0xffffffff
+selected true
+xpos 1234
+ypos -3433
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Specular2
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x8a563fff
+label Specular
+note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 20
+note_font_color 0xffffffff
+selected true
+xpos 1234
+ypos -3399
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name SelfIllum2
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x3d3d71ff
+label Wetness
+note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 20
+note_font_color 0xffffffff
+selected true
+xpos 1234
+ypos -3365
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+output {rgba.red rgba.green rgba.blue -rgba.alpha}
+name SSS1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x3d91a7ff
+label SSS
+note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 20
+note_font_color 0xffffffff
+selected true
+xpos 1234
+ypos -3331
+}
+Remove {
+operation keep
+channels rgb
+name Remove1
+tile_color 0xd60000ff
+selected true
+xpos 1234
+ypos -3229
+}
+push $N85c2990
+PostageStamp {
+name RGBA4
+help Remove29
+tile_color 0x99a4d3ff
+note_font_size 20
+selected true
+xpos 1079
+ypos -3181
+hide_input true
+}
+Group {
+inputs 2
+name _______2
+tile_color 0xd60000ff
+label Passes
+note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1234
+ypos -3203
+addUserKnob {20 Choose}
+addUserKnob {1 Message_1}
+Message_1 Beauty
+addUserKnob {1 Message_2 -STARTLINE}
+Message_2 Passes
+addUserKnob {22 Take_1 T "n = nuke.selectedNode()\nn\['which'].setValue(0)\n\n\ni=nuke.thisNode()\nu = i\['Message_1'].value()\ni\['label'].setValue(u)" +STARTLINE}
+addUserKnob {22 Take_2 -STARTLINE T "n = nuke.selectedNode()\nn\['which'].setValue(1)\n\n\n\n\ni=nuke.thisNode()\nu = i\['Message_2'].value()\ni\['label'].setValue(u)"}
+addUserKnob {22 Toggle T "n = nuke.selectedNode()\ncurrent = n\['which'].getValue()\nif current == 0:\n    n\['which'].setValue(1)\n    i=nuke.thisNode()\n    u = i\['Message_2'].value()\n    i\['label'].setValue(u)\n    i\['tile_color'].setValue(3590324479)\n    dep = i.dependencies(nuke.INPUTS)\[1]\n    dep\['tile_color'].setValue(3590324479)\nelse:\n    n\['which'].setValue(0)\n    i=nuke.thisNode()\n    u = i\['Message_1'].value()\n    i\['label'].setValue(u)\n    i\['tile_color'].setValue(2577716223)\n    dep = i.dependencies(nuke.INPUTS)\[0]\n    dep\['tile_color'].setValue(2577716223)" +STARTLINE}
+addUserKnob {26 ""}
+addUserKnob {41 which T Switch1.which}
+}
+Input {
+inputs 0
+name Input2
+xpos -424
+ypos 215
+number 1
+}
+Input {
+inputs 0
+name Input1
+xpos -230
+ypos 197
+}
+Switch {
+inputs 2
+which 1
+name Switch1
+selected true
+xpos -311
+ypos 280
+}
+Output {
+name Output1
+xpos -311
+ypos 356
+}
+end_group
+ShuffleCopy {
+inputs 2
+in alpha
+red red
+green green
+out alpha
+name ShuffleCopy1
+selected true
+xpos 1234
+ypos -1930
+}
+CopyBBox {
+inputs 2
+name CopyBBox2
+selected true
+xpos 1234
+ypos -1872
+}
+Premult {
+name Premultiply1
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 30
+selected true
+xpos 1234
+ypos -1802
+}
+Dot {
+name Dot84
+label IN
+selected true
+xpos 1268
+ypos -981
+}
+Dot {
+name Dot85
+label OUT
+selected true
+xpos 1268
+ypos -866
+}
+Group {
+name EGlow1
+help "This gizmo is a port of Stuart Lashley's popular Exponential Glow macro from Shake. Will glow the highs on the input and create a nice falloff. Main dependency with Viewer has been removed so should be ok in stereo/mono views."
+tile_color 0xa36100ff
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 14
+selected true
+xpos 1234
+ypos -583
+disable true
+mapsize {0.15 0.15}
+addUserKnob {20 User l "Exponential Glow"}
+addUserKnob {41 falloff l Falloff T ExpoGlow.falloff}
+addUserKnob {7 intensity l Intensity R 0 10}
+addUserKnob {41 blur_amount l Size T ExpoGlow.blur_amount}
+addUserKnob {41 numpixels l "Add Pixels" T AdjBBox1.numpixels}
+addUserKnob {4 type M {"BG spills + FG" "BG spill only" "Glow + BG" "Glow of BG only (no fg)" "" ""}}
+addUserKnob {26 help_1 l "" +STARTLINE T "Expecting premultiplied FG"}
+addUserKnob {20 range_1 l range}
+addUserKnob {6 Preview +STARTLINE}
+addUserKnob {41 range T Keyer2.range}
+}
+Input {
+inputs 0
+name FG
+xpos -1800
+ypos -1207
+}
+Dot {
+name Dot22
+xpos -1766
+ypos -1116
+}
+set N88edec0 [stack 0]
+Dot {
+name Dot23
+xpos -1766
+ypos 848
+}
+set N88f2340 [stack 0]
+Dot {
+name Dot24
+xpos -1765
+ypos 1011
+}
+set N88f66c0 [stack 0]
+AdjBBox {
+numpixels {{parent.AdjBBox1.numpixels}}
+name AdjBBox2
+selected true
+xpos -1799
+ypos 1372
+}
+Dot {
+name Dot37
+xpos -1765
+ypos 1484
+}
+Input {
+inputs 0
+name BG
+xpos -233
+ypos -1242
+number 1
+}
+set N8905920 [stack 0]
+Dot {
+name Dot27
+xpos -421
+ypos -1238
+}
+set N8909c00 [stack 0]
+Dot {
+name Dot26
+xpos -421
+ypos -858
+}
+push $N88edec0
+push $N8905920
+Merge2 {
+inputs 2
+operation stencil
+name Merge10
+xpos -233
+ypos -1120
+disable {{parent.type==2?1:0 i}}
+}
+Dot {
+name Dot21
+xpos -199
+ypos -1021
+}
+set N891f7e0 [stack 0]
+Merge2 {
+inputs 2
+operation copy
+bbox B
+name Merge13
+xpos -233
+ypos -862
+disable {{parent.type==3?0:1 i}}
+}
+NoOp {
+name ExpoGlow
+xpos -233
+ypos -600
+addUserKnob {20 User}
+addUserKnob {7 falloff l Falloff R 0 2}
+falloff 1
+addUserKnob {7 intensity l Intensity R 0 5}
+intensity {{parent.intensity*10 i}}
+addUserKnob {7 blur_amount l Size R 0 5}
+blur_amount 0.1
+addUserKnob {6 add_source l "Add Source" +STARTLINE}
+addUserKnob {6 add_bbox l "Add original bbox" +STARTLINE}
+}
+set N89310b0 [stack 0]
+Keyer {
+operation "luminance key"
+range {0.1727049822 0.5697916905 1 1}
+name Keyer2
+xpos -233
+ypos -535
+}
+Premult {
+name Premult1
+xpos -233
+ypos -413
+}
+set N893ff40 [stack 0]
+Dot {
+name Dot36
+xpos -4
+ypos -409
+}
+Dot {
+name Dot35
+xpos -4
+ypos 1361
+}
+push $N88edec0
+Dot {
+name Dot33
+xpos -2239
+ypos -1116
+}
+Dot {
+name Dot34
+xpos -2239
+ypos 1268
+}
+push $N8909c00
+Dot {
+name Dot31
+xpos -2013
+ypos -1238
+}
+Dot {
+name Dot32
+xpos -2013
+ypos 1194
+}
+push $N891f7e0
+Dot {
+name Dot20
+xpos -1598
+ypos -1021
+}
+Crop {
+box {0 0 1920 1080}
+name Crop2
+xpos -1632
+ypos -980
+}
+Crop {
+box {0 0 {width i} {height i}}
+name Crop1
+xpos -1623
+ypos 667
+}
+AdjBBox {
+numpixels 0
+name AdjBBox1
+xpos -1623
+ypos 709
+}
+Dot {
+name Dot12
+xpos -1589
+ypos 749
+}
+push $N893ff40
+Remove {
+operation keep
+channels rgb
+name Remove1
+xpos -233
+ypos -363
+}
+Grade {
+white {{ExpoGlow.intensity/100 i}}
+name Grade1
+xpos -233
+ypos -318
+}
+Dot {
+name Dot3
+xpos -199
+ypos -198
+}
+set N8996130 [stack 0]
+Dot {
+name Dot2
+xpos -450
+ypos -198
+}
+set N899a460 [stack 0]
+Dot {
+name Dot4
+xpos -560
+ypos -198
+}
+set N899e7b0 [stack 0]
+Dot {
+name Dot5
+xpos -670
+ypos -198
+}
+set N89a2930 [stack 0]
+Dot {
+name Dot6
+xpos -780
+ypos -198
+}
+set N89a6ea0 [stack 0]
+Dot {
+name Dot7
+xpos -908
+ypos -198
+}
+set N89ab400 [stack 0]
+Dot {
+name Dot8
+xpos -1034
+ypos -198
+}
+set N89af650 [stack 0]
+Dot {
+name Dot9
+xpos -1144
+ypos -198
+}
+set N89b39c0 [stack 0]
+Dot {
+name Dot10
+xpos -1276
+ypos -198
+}
+Group {
+name ShakePercentBlur8
+xpos -1310
+ypos -139
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+crop false
+name Blur120
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur7.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply8.value/ExpoGlow.falloff i}}
+name Multiply9
+xpos -1310
+ypos -113
+}
+Dot {
+name Dot1
+xpos -1276
+ypos 654
+}
+push $N89b39c0
+Group {
+name ShakePercentBlur7
+xpos -1178
+ypos -136
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+crop false
+name Blur120
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur6.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply7.value/ExpoGlow.falloff i}}
+name Multiply8
+xpos -1178
+ypos -110
+}
+Dot {
+name Dot13
+xpos -1144
+ypos 593
+}
+push $N89af650
+Group {
+name ShakePercentBlur6
+xpos -1068
+ypos -139
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+crop false
+name Blur120
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur5.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply6.value/ExpoGlow.falloff i}}
+name Multiply7
+xpos -1068
+ypos -113
+}
+Dot {
+name Dot14
+xpos -1034
+ypos 497
+}
+push $N89ab400
+Group {
+name ShakePercentBlur5
+xpos -942
+ypos -146
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+crop false
+name Blur120
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur4.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply5.value/ExpoGlow.falloff i}}
+name Multiply6
+xpos -942
+ypos -112
+}
+Dot {
+name Dot15
+xpos -908
+ypos 404
+}
+push $N89a6ea0
+Group {
+name ShakePercentBlur4
+xpos -814
+ypos -144
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+crop false
+name Blur120
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur3.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply4.value/ExpoGlow.falloff i}}
+name Multiply5
+xpos -814
+ypos -118
+}
+Dot {
+name Dot16
+xpos -780
+ypos 339
+}
+push $N89a2930
+Group {
+name ShakePercentBlur3
+xpos -704
+ypos -140
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+crop false
+name Blur120
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur2.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply3.value/ExpoGlow.falloff i}}
+name Multiply4
+xpos -704
+ypos -104
+}
+Dot {
+name Dot17
+xpos -670
+ypos 270
+}
+push $N899e7b0
+Group {
+name ShakePercentBlur2
+xpos -594
+ypos -144
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) i x1001 6.826666667e+10} {height/3*(ypercent/100) i}}
+crop false
+name Blur120
+selected true
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur1.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width i}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply2.value/ExpoGlow.falloff i}}
+name Multiply3
+xpos -594
+ypos -105
+}
+Dot {
+name Dot18
+xpos -560
+ypos 186
+}
+push $N899a460
+Group {
+name ShakePercentBlur1
+xpos -484
+ypos -151
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) x1001 6.826666667e+10} {height/3*(ypercent/100)}}
+crop false
+name Blur120
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ShakePercentBlur.xpercent*2 i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+value {{Multiply1.value/ExpoGlow.falloff i}}
+name Multiply2
+xpos -484
+ypos -110
+}
+Dot {
+name Dot19
+xpos -450
+ypos 119
+}
+push $N89310b0
+Dot {
+name Dot11
+xpos -343
+ypos -596
+}
+Dot {
+name Dot25
+xpos -343
+ypos 16
+}
+push $N8996130
+Group {
+name ShakePercentBlur
+xpos -233
+ypos -158
+addUserKnob {20 percentBlur l "Percent Blur"}
+addUserKnob {41 xpercent l xPercent T Blur120.xpercent}
+addUserKnob {41 ypercent l yPercent T Blur120.ypercent}
+}
+Input {
+inputs 0
+name Input1
+xpos 514
+ypos -229
+}
+Blur {
+size {{width/3*(xpercent/100) i x1001 6.826666667e+10} {height/3*(ypercent/100) i}}
+crop false
+name Blur120
+selected true
+xpos 514
+ypos -189
+addUserKnob {20 User}
+addUserKnob {7 xpercent l xPercent R 0 100}
+xpercent {{ExpoGlow.blur_amount i}}
+addUserKnob {7 ypercent l yPercent R 0 100}
+ypercent {{xpercent/format.pixel_aspect/height*width i}}
+}
+Output {
+name Output1
+xpos 514
+ypos -89
+}
+end_group
+Multiply {
+name Multiply1
+xpos -233
+ypos -117
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge1
+xpos -233
+ypos 12
+disable {{parent.type==2?0:1 i}}
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge2
+xpos -233
+ypos 115
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge3
+xpos -233
+ypos 182
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge4
+xpos -233
+ypos 266
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge5
+xpos -233
+ypos 335
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge6
+xpos -233
+ypos 400
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge7
+xpos -233
+ypos 493
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge8
+xpos -233
+ypos 589
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge9
+xpos -233
+ypos 650
+}
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos -232
+ypos 745
+}
+Dot {
+name Dot30
+xpos -198
+ypos 796
+}
+set N8b91030 [stack 0]
+Dot {
+name Dot28
+xpos -379
+ypos 796
+}
+Dot {
+name Dot29
+xpos -379
+ypos 1094
+}
+push $N88f66c0
+push $N88f2340
+push $N8b91030
+Merge2 {
+inputs 2
+operation mask
+name Merge11
+xpos -232
+ypos 844
+disable {{parent.type==2?1:0 x1 1}}
+}
+Merge2 {
+inputs 2
+operation plus
+bbox B
+name Merge12
+xpos -232
+ypos 1007
+disable {{parent.type i}}
+}
+Merge2 {
+inputs 2
+operation copy
+bbox B
+name Merge14
+xpos -232
+ypos 1090
+disable {{parent.type==3?0:1}}
+}
+Merge2 {
+inputs 2
+operation copy
+bbox B
+name Merge15
+xpos -232
+ypos 1190
+disable {{parent.type>1&&parent.disable==1?0:1 i}}
+}
+Merge2 {
+inputs 2
+operation copy
+bbox B
+name Merge16
+xpos -232
+ypos 1264
+disable {{parent.type<2&&parent.disable==1?0:1 i}}
+}
+Switch {
+inputs 2
+which {{"\[value Preview]" i}}
+name Switch1
+xpos -232
+ypos 1357
+}
+CopyBBox {
+inputs 2
+name CopyBBox2
+xpos -232
+ypos 1480
+disable {{parent.type==2?1:0}}
+}
+set N8c0e5a0 [stack 0]
+Viewer {
+input_process false
+name Viewer1
+xpos 3040
+ypos -10
+hide_input true
+}
+push $N8c0e5a0
+Output {
+name Output1
+xpos -232
+ypos 1558
+}
+end_group
+Dot {
+name Dot83
+label "Name Me!!!"
+note_font_size 30
+selected true
+xpos 1268
+ypos -130
+}
+push $N8580b30
+Dot {
+name Dot97
+selected true
+xpos -3356
+ypos -2847
+}
+set N8530c30 [stack 0]
+Group {
+name Group9
+knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0xb18b00ff
+label depth
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+selected true
+xpos -3390
+ypos -2809
+addUserKnob {20 User}
+addUserKnob {11 chan l Channels}
+chan depth
+addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+Input {
+inputs 0
+name Input1
+selected true
+xpos 563
+ypos -311
+}
+Remove {
+operation keep
+channels depth
+name Remove49
+label dsadsdasdsa
+xpos 563
+ypos -267
+}
+Shuffle {
+in depth
+out rgb
+name shufffle
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 20
+xpos 563
+ypos -200
+addUserKnob {20 User}
+addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+}
+Remove {
+operation keep
+channels rgb
+name Remove1
+label "\[value operation] \[value channels]"
+xpos 563
+ypos -166
+}
+Output {
+name Output1
+xpos 563
+ypos -111
+}
+Viewer {
+input_process false
+name Viewer1
+xpos 822
+ypos -302
+}
+end_group
+push $N8530c30
+Dot {
+name Dot2
+selected true
+xpos -3272
+ypos -2847
+}
+set N1571c430 [stack 0]
+add_layer {Nworld Nworld.red Nworld.green Nworld.blue}
+Group {
+name Group1
+knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0xb18b00ff
+label Nworld
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+selected true
+xpos -3306
+ypos -2809
+addUserKnob {20 User}
+addUserKnob {11 chan l Channels}
+chan Nworld
+addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+Input {
+inputs 0
+name Input1
+selected true
+xpos 563
+ypos -311
+}
+Remove {
+operation keep
+channels Nworld
+name Remove49
+label dsadsdasdsa
+xpos 563
+ypos -267
+}
+Shuffle {
+in Nworld
+out rgb
+name shufffle
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 20
+xpos 563
+ypos -200
+addUserKnob {20 User}
+addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+}
+Remove {
+operation keep
+channels rgb
+name Remove1
+label "\[value operation] \[value channels]"
+xpos 563
+ypos -166
+}
+Output {
+name Output1
+xpos 563
+ypos -111
+}
+Viewer {
+input_process false
+name Viewer1
+xpos 822
+ypos -302
+}
+end_group
+push $N1571c430
+Dot {
+name Dot3
+selected true
+xpos -3188
+ypos -2847
+}
+set Ndfd4950 [stack 0]
+add_layer {Pcolor Pcolor.red Pcolor.green Pcolor.blue Pcolor.alpha}
+Group {
+name Group2
+knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0xb18b00ff
+label Pcolor
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+selected true
+xpos -3222
+ypos -2809
+addUserKnob {20 User}
+addUserKnob {11 chan l Channels}
+chan Pcolor
+addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+Input {
+inputs 0
+name Input1
+selected true
+xpos 563
+ypos -311
+}
+Remove {
+operation keep
+channels Pcolor
+name Remove49
+label dsadsdasdsa
+xpos 563
+ypos -267
+}
+Shuffle {
+in Pcolor
+out rgb
+name shufffle
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 20
+xpos 563
+ypos -200
+addUserKnob {20 User}
+addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+}
+Remove {
+operation keep
+channels rgb
+name Remove1
+label "\[value operation] \[value channels]"
+xpos 563
+ypos -166
+}
+Output {
+name Output1
+xpos 563
+ypos -111
+}
+Viewer {
+input_process false
+name Viewer1
+xpos 822
+ypos -302
+}
+end_group
+push $Ndfd4950
+Dot {
+name Dot4
+selected true
+xpos -3104
+ypos -2847
+}
+set N17a33790 [stack 0]
+add_layer {Pworld Pworld.red Pworld.green Pworld.blue}
+Group {
+name Group3
+knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0xb18b00ff
+label Pworld
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+selected true
+xpos -3138
+ypos -2809
+addUserKnob {20 User}
+addUserKnob {11 chan l Channels}
+chan Pworld
+addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+Input {
+inputs 0
+name Input1
+selected true
+xpos 563
+ypos -311
+}
+Remove {
+operation keep
+channels Pworld
+name Remove49
+label dsadsdasdsa
+xpos 563
+ypos -267
+}
+Shuffle {
+in Pworld
+out rgb
+name shufffle
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 20
+xpos 563
+ypos -200
+addUserKnob {20 User}
+addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+}
+Remove {
+operation keep
+channels rgb
+name Remove1
+label "\[value operation] \[value channels]"
+xpos 563
+ypos -166
+}
+Output {
+name Output1
+xpos 563
+ypos -111
+}
+Viewer {
+input_process false
+name Viewer1
+xpos 822
+ypos -302
+}
+end_group
+push $N17a33790
+Dot {
+name Dot5
+selected true
+xpos -3020
+ypos -2847
+}
+add_layer {restP restP.red restP.green restP.blue restP.alpha}
+Group {
+name Group5
+knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0xb18b00ff
+label restP
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+selected true
+xpos -3054
+ypos -2809
+addUserKnob {20 User}
+addUserKnob {11 chan l Channels}
+chan restP
+addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+Input {
+inputs 0
+name Input1
+xpos 563
+ypos -315
+}
+Remove {
+operation keep
+channels restP
+name Remove49
+label dsadsdasdsa
+xpos 563
+ypos -270
+}
+Shuffle {
+in restP
+name shufffle
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 20
+selected true
+xpos 563
+ypos -211
+addUserKnob {20 User}
+addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+}
+Remove {
+operation keep
+channels rgba
+name Remove1
+label "\[value operation] \[value channels]"
+xpos 563
+ypos -168
+}
+set N19603660 [stack 0]
+Output {
+name Output1
+xpos 563
+ypos -111
+}
+push $N19603660
+Viewer {
+frame 572
+input_process false
+name Viewer1
+xpos 822
+ypos -302
+}
+end_group
+push $N8525890
+PostageStamp {
+name passes
+help Dot80
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos -5514
+ypos -2911
+hide_input true
+addUserKnob {20 User}
+addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+Dot {
+name Dot96
+selected true
+xpos -5480
+ypos -2855
+}
+set N8586b10 [stack 0]
+Group {
+name ID1
+tile_color 0x3d3d3dff
+label "<font color=\"Red\">\[value Red]\n<font color=\"Green\">\[value Green]\n<font color=\"Blue\">\[value Blue]\n"
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_color 0xffffffff
+selected true
+xpos -5514
+ypos -2801
+addUserKnob {20 User}
+addUserKnob {41 Achannels l "ID channel" T ID2.Achannels}
+addUserKnob {1 Red}
+Red red
+addUserKnob {1 Green}
+Green green
+addUserKnob {1 Blue}
+Blue blue
+}
+Input {
+inputs 0
+name Input1
+xpos -576
+ypos -367
+}
+Dot {
+name Dot1
+xpos -542
+ypos -303
+}
+set N8599a70 [stack 0]
+push $N8599a70
+Dot {
+name Dot2
+xpos -667
+ypos -303
+}
+Remove {
+name Remove1
+xpos -701
+ypos -209
+}
+Merge2 {
+inputs 2
+Achannels none
+Bchannels none
+output rgb
+name ID2
+tile_color 0xffffffff
+label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+note_font_size 15
+selected true
+xpos -576
+ypos -236
+postage_stamp_frame 1001
+}
+Output {
+name Output1
+xpos -576
+ypos -124
+}
+end_group
+push $N8586b10
+Dot {
+name Dot10
+selected true
+xpos -5370
+ypos -2855
+}
+set Nb255a40 [stack 0]
+Group {
+name ID2
+tile_color 0x3d3d3dff
+label "<font color=\"Red\">\[value Red]\n<font color=\"Green\">\[value Green]\n<font color=\"Blue\">\[value Blue]\n"
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_color 0xffffffff
+selected true
+xpos -5402
+ypos -2800
+addUserKnob {20 User}
+addUserKnob {41 Achannels l "ID channel" T ID2.Achannels}
+addUserKnob {1 Red}
+Red red
+addUserKnob {1 Green}
+Green green
+addUserKnob {1 Blue}
+Blue blue
+}
+Input {
+inputs 0
+name Input1
+xpos -576
+ypos -367
+}
+Dot {
+name Dot1
+xpos -542
+ypos -303
+}
+set Nb423700 [stack 0]
+push $Nb423700
+Dot {
+name Dot2
+xpos -667
+ypos -303
+}
+Remove {
+name Remove1
+xpos -701
+ypos -209
+}
+Merge2 {
+inputs 2
+Achannels none
+Bchannels none
+output rgb
+name ID2
+tile_color 0xffffffff
+label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+note_font_size 15
+selected true
+xpos -576
+ypos -236
+postage_stamp_frame 1001
+}
+Output {
+name Output1
+xpos -576
+ypos -124
+}
+end_group
+push $Nb255a40
+Dot {
+name Dot11
+selected true
+xpos -5259
+ypos -2855
+}
+Group {
+name ID3
+tile_color 0x3d3d3dff
+label "<font color=\"Red\">\[value Red]\n<font color=\"Green\">\[value Green]\n<font color=\"Blue\">\[value Blue]\n"
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_color 0xffffffff
+selected true
+xpos -5291
+ypos -2800
+addUserKnob {20 User}
+addUserKnob {41 Achannels l "ID channel" T ID2.Achannels}
+addUserKnob {1 Red}
+Red red
+addUserKnob {1 Green}
+Green green
+addUserKnob {1 Blue}
+Blue blue
+}
+Input {
+inputs 0
+name Input1
+xpos -576
+ypos -367
+}
+Dot {
+name Dot1
+xpos -542
+ypos -303
+}
+set N10795e40 [stack 0]
+push $N10795e40
+Dot {
+name Dot2
+xpos -667
+ypos -303
+}
+Remove {
+name Remove1
+xpos -701
+ypos -209
+}
+Merge2 {
+inputs 2
+Achannels none
+Bchannels none
+output rgb
+name ID2
+tile_color 0xffffffff
+label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+note_font_size 15
+selected true
+xpos -576
+ypos -236
+postage_stamp_frame 1001
+}
+Output {
+name Output1
+xpos -576
+ypos -124
+}
+end_group
+push $N85c2990
+PostageStamp {
+name rgba
+help Group6
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos -1625
+ypos -2874
+hide_input true
+addUserKnob {20 User}
+addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+push $cut_paste_input
+Dot {
+name Dot1
+label Deep
+note_font_size 30
+selected true
+xpos -395
+ypos -5382
+}
+DeepExpression {
+chans1 deep
+name Deep
+help Dot1
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos -1520
+ypos -2930
+hide_input true
+addUserKnob {20 User}
+addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+DeepReformat {
+black_outside true
+name DeepReformat3
+selected true
+xpos -1520
+ypos -2896
+}
+DeepRecolor {
+inputs 2
+name DeepRecolor1
+selected true
+xpos -1520
+ypos -2870
+}
+Dot {
+name Dot6
+selected true
+xpos -1486
+ypos -2834
+}
+set Nc059eb0 [stack 0]
+Dot {
+name Dot8
+selected true
+xpos -1376
+ypos -2834
+}
+add_layer {other other.id}
+DeepId_v04 {
+inIdChan other.id
+name DeepId_v04_2
+selected true
+xpos -1410
+ypos -2797
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+name Shuffle2
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 14
+selected true
+xpos -1410
+ypos -2749
+}
+push $Nc059eb0
+DeepId_v04 {
+inIdChan other.id
+name DeepId_v04_1
+selected true
+xpos -1520
+ypos -2796
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+name Shuffle1
+autolabel "nuke.thisNode()\['label'].value()"
+note_font_size 14
+selected true
+xpos -1520
+ypos -2748
+}

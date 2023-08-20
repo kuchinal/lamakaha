@@ -1,0 +1,114 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+BackdropNode {
+inputs 0
+name BackdropNode8
+tile_color 0x51384701
+label "export to show"
+note_font "Helvetica bold Bold"
+note_font_size 30
+selected true
+xpos -1066
+ypos 4753
+bookmark false
+bdwidth 302
+bdheight 492
+}
+push 0
+Dot {
+name Dot48
+selected true
+xpos -845
+ypos 5042
+hide_input true
+}
+push 0
+Dot {
+name Dot47
+selected true
+xpos -837
+ypos 4972
+hide_input true
+}
+push 0
+Dot {
+name Dot45
+selected true
+xpos -835
+ypos 4915
+hide_input true
+}
+push $cut_paste_input
+Dot {
+name Dot46
+selected true
+xpos -821
+ypos 4833
+hide_input true
+}
+Dot {
+name Dot2
+label "final comp"
+note_font_size 30
+selected true
+xpos -963
+ypos 4833
+}
+add_layer {beauty beauty.red beauty.green beauty.blue beauty.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out beauty
+name ShuffleCopy2
+label beauty
+note_font_size 14
+selected true
+xpos -997
+ypos 4905
+}
+add_layer {floor floor.red floor.green floor.blue floor.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out floor
+name ShuffleCopy1
+label floor
+note_font_size 14
+selected true
+xpos -993
+ypos 4962
+}
+add_layer {bg bg.red bg.green bg.blue bg.alpha}
+ShuffleCopy {
+inputs 2
+red red
+green green
+blue blue
+out bg
+name ShuffleCopy3
+label bg
+note_font_size 14
+selected true
+xpos -996
+ypos 5032
+}
+Crop {
+box {0 0 1920 1080}
+name Crop5
+selected true
+xpos -996
+ypos 5098
+}
+Write {
+channels all
+file /mnt/frozone/temp/AlexeyKuchinsky/100_50_comp/100_50_comp.####.exr
+file_type exr
+name Write6
+selected true
+xpos -996
+ypos 5156
+}

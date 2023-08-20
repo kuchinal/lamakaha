@@ -1,0 +1,312 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Camera2 {
+inputs 0
+focal 45
+haperture 90
+vaperture 90
+name Camera27
+selected true
+xpos 2931
+ypos -1064
+addUserKnob {20 User}
+addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $cut_paste_input
+Dot {
+name Dot42
+selected true
+xpos 3075
+ypos -1211
+}
+set Na5575fa0 [stack 0]
+SphericalTransform {
+input "Lat Long map"
+output Cube
+format "4096 4096 0 0 4096 4096 1 "
+fix true
+name SphericalTransform15
+selected true
+xpos 3041
+ypos -1181
+}
+Project3D {
+inputs 2
+name Project3D12
+selected true
+xpos 3041
+ypos -1044
+}
+Dot {
+name Dot170
+selected true
+xpos 3075
+ypos -322
+}
+Camera2 {
+inputs 0
+rotate {0 180 0}
+focal 45
+haperture 90
+vaperture 90
+name Camera28
+selected true
+xpos 3176
+ypos -1061
+addUserKnob {20 User}
+addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $Na5575fa0
+Dot {
+name Dot52
+selected true
+xpos 3320
+ypos -1211
+}
+set N69c242a0 [stack 0]
+SphericalTransform {
+input "Lat Long map"
+ry 180
+output Cube
+format {{{parent.SphericalTransform15.format}}}
+fix true
+name SphericalTransform16
+selected true
+xpos 3286
+ypos -1177
+}
+Project3D {
+inputs 2
+name Project3D13
+selected true
+xpos 3286
+ypos -1041
+}
+Dot {
+name Dot171
+selected true
+xpos 3320
+ypos -348
+}
+Camera2 {
+inputs 0
+rotate {0 90 0}
+focal 45
+haperture 90
+vaperture 90
+name Camera29
+selected true
+xpos 3468
+ypos -1068
+addUserKnob {20 User}
+addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $N69c242a0
+Dot {
+name Dot86
+selected true
+xpos 3617
+ypos -1211
+}
+set N9aca1260 [stack 0]
+SphericalTransform {
+input "Lat Long map"
+ry 90
+output Cube
+format {{{parent.SphericalTransform15.format}}}
+fix true
+name SphericalTransform14
+selected true
+xpos 3578
+ypos -1178
+}
+Project3D {
+inputs 2
+name Project3D14
+selected true
+xpos 3578
+ypos -1048
+}
+Dot {
+name Dot172
+selected true
+xpos 3612
+ypos -374
+}
+Camera2 {
+inputs 0
+rotate {0 -90 0}
+focal 45
+haperture 90
+vaperture 90
+name Camera30
+selected true
+xpos 3775
+ypos -1068
+addUserKnob {20 User}
+addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $N9aca1260
+Dot {
+name Dot167
+selected true
+xpos 3919
+ypos -1211
+}
+set N69142a90 [stack 0]
+SphericalTransform {
+input "Lat Long map"
+ry -90
+output Cube
+format {{{parent.SphericalTransform15.format}}}
+fix true
+name SphericalTransform13
+selected true
+xpos 3885
+ypos -1180
+}
+Project3D {
+inputs 2
+name Project3D15
+selected true
+xpos 3885
+ypos -1048
+}
+Dot {
+name Dot173
+selected true
+xpos 3919
+ypos -400
+}
+Camera2 {
+inputs 0
+rotate {90 0 0}
+focal 45
+haperture 90
+vaperture 90
+name Camera31
+selected true
+xpos 4069
+ypos -1071
+addUserKnob {20 User}
+addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $N69142a90
+Dot {
+name Dot168
+selected true
+xpos 4213
+ypos -1211
+}
+set N6982c3b0 [stack 0]
+SphericalTransform {
+input "Lat Long map"
+rx 90
+output Cube
+format {{{parent.SphericalTransform15.format}}}
+fix true
+name SphericalTransform17
+selected true
+xpos 4179
+ypos -1178
+}
+Project3D {
+inputs 2
+name Project3D16
+selected true
+xpos 4179
+ypos -1051
+}
+Dot {
+name Dot174
+selected true
+xpos 4213
+ypos -426
+}
+Camera2 {
+inputs 0
+rotate {-90 0 0}
+focal 45
+haperture 90
+vaperture 90
+name Camera32
+selected true
+xpos 4333
+ypos -1076
+addUserKnob {20 User}
+addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+push $N6982c3b0
+Dot {
+name Dot169
+selected true
+xpos 4483
+ypos -1211
+}
+SphericalTransform {
+input "Lat Long map"
+rx -90
+output Cube
+format {{{parent.SphericalTransform15.format}}}
+fix true
+name SphericalTransform12
+selected true
+xpos 4443
+ypos -1177
+}
+Project3D {
+inputs 2
+name Project3D17
+selected true
+xpos 4443
+ypos -1056
+}
+MergeMat {
+inputs 2
+name MergeMat2
+selected true
+xpos 4445
+ypos -430
+}
+MergeMat {
+inputs 2
+name MergeMat3
+selected true
+xpos 4445
+ypos -404
+}
+MergeMat {
+inputs 2
+name MergeMat5
+selected true
+xpos 4445
+ypos -378
+}
+MergeMat {
+inputs 2
+name MergeMat6
+selected true
+xpos 4445
+ypos -352
+}
+MergeMat {
+inputs 2
+name MergeMat7
+selected true
+xpos 4445
+ypos -326
+}
+Sphere {
+name Sphere8
+selected true
+xpos 4445
+ypos -226
+}
+push 0
+ScanlineRender {
+inputs 2
+name ScanlineRender11
+selected true
+xpos 4445
+ypos -153
+}

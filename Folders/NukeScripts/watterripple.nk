@@ -1,0 +1,234 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+add_layer {rgba rgba.water}
+Noise {
+ inputs 0
+ size 56
+ zoffset {{curve i x1001 0 x1049 5}}
+ lacunarity 1.4
+ gain 0.495
+ gamma 0.475
+ center {1024 778}
+ name Noise4
+ selected true
+ xpos -13867
+ ypos 6954
+}
+Grade {
+ channels alpha
+ white 2.6
+ gamma 0.39
+ name Grade2
+ selected true
+ xpos -13977
+ ypos 6947
+}
+push $cut_paste_input
+Radial {
+ opacity {{curve i x1001 1 x1035 0}}
+ area {{curve i x1001 1060 x1030 518} {curve i x1001 806 x1030 360} {curve i x1001 1060 x1030 1500} {curve i x1001 806 x1030 1160}}
+ softness {{curve i x991 0.55 x1001 0.27 x1020 0.28 x1030 0.07}}
+ name Radial2
+ selected true
+ xpos -14087
+ ypos 6526
+}
+Blur {
+ size 16.5
+ name Blur16
+ label "\[value size]"
+ selected true
+ xpos -14087
+ ypos 6554
+}
+set N3aa364b0 [stack 0]
+push $N3aa364b0
+Dot {
+ name Dot51
+ selected true
+ xpos -13869
+ ypos 6573
+}
+set N3aa367e0 [stack 0]
+TimeOffset {
+ time_offset 3
+ name TimeOffset6
+ selected true
+ xpos -13903
+ ypos 6623
+}
+Merge2 {
+ inputs 2
+ operation minus
+ name Merge32
+ selected true
+ xpos -14087
+ ypos 6623
+}
+push $N3aa367e0
+Dot {
+ name Dot52
+ selected true
+ xpos -13792
+ ypos 6573
+}
+set N3aa37170 [stack 0]
+TimeOffset {
+ time_offset 6
+ name TimeOffset7
+ selected true
+ xpos -13826
+ ypos 6693
+}
+Merge2 {
+ inputs 2
+ name Merge33
+ selected true
+ xpos -14087
+ ypos 6693
+}
+push $N3aa37170
+Dot {
+ name Dot53
+ selected true
+ xpos -13730
+ ypos 6573
+}
+set N3aa37b00 [stack 0]
+TimeOffset {
+ time_offset 8
+ name TimeOffset8
+ selected true
+ xpos -13764
+ ypos 6771
+}
+Merge2 {
+ inputs 2
+ operation minus
+ name Merge34
+ selected true
+ xpos -14087
+ ypos 6771
+}
+push $N3aa37b00
+Dot {
+ name Dot54
+ selected true
+ xpos -13625
+ ypos 6573
+}
+TimeOffset {
+ time_offset 10
+ name TimeOffset9
+ selected true
+ xpos -13659
+ ypos 6842
+}
+Merge2 {
+ inputs 2
+ name Merge35
+ selected true
+ xpos -14087
+ ypos 6842
+}
+Shuffle {
+ red black
+ green black
+ blue black
+ name Shuffle5
+ selected true
+ xpos -14087
+ ypos 6870
+}
+set N212ef5f0 [stack 0]
+Merge2 {
+ inputs 2
+ operation in
+ name In1
+ selected true
+ xpos -14087
+ ypos 6954
+}
+Shuffle {
+ red black
+ green black
+ blue black
+ name Shuffle6
+ selected true
+ xpos -14211
+ ypos 6954
+}
+push $N212ef5f0
+Constant {
+ inputs 0
+ channels rgb
+ color {0.1785999984 0.1785999984 0.4699999988 0}
+ name Constant5
+ selected true
+ xpos -14321
+ ypos 6713
+}
+Noise {
+ size 56
+ zoffset {{curve i x1001 0 x1049 5}}
+ lacunarity 1.4
+ gain 0.495
+ gamma 0.475
+ center {1024 778}
+ name Noise8
+ selected true
+ xpos -14321
+ ypos 6787
+}
+IDistort {
+ uv alpha
+ uv_scale 72
+ name IDistort1
+ selected true
+ xpos -14321
+ ypos 6815
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy1
+ selected true
+ xpos -14321
+ ypos 6863
+}
+IDistort {
+ uv alpha
+ uv_scale 72
+ blur_scale 30
+ name IDistort2
+ selected true
+ xpos -14321
+ ypos 6905
+}
+Copy {
+ inputs 2
+ from0 rgba.alpha
+ to0 rgba.alpha
+ name Copy3
+ selected true
+ xpos -14321
+ ypos 6947
+}
+IDistort {
+ uv alpha
+ uv_scale 59
+ blur rgba.alpha
+ blur_scale 74
+ name IDistort3
+ selected true
+ xpos -14321
+ ypos 6989
+}
+TimeOffset {
+ time_offset -1000
+ name TimeOffset10
+ selected true
+ xpos -14321
+ ypos 7027
+}

@@ -1,0 +1,28 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Expression {
+ temp_name0 rx
+ temp_expr0 Sam_area.r-Sam_area.x
+ temp_name1 ty
+ temp_expr1 Sam_area.t-Sam_area.y
+ temp_name2 lopx
+ temp_expr2 fmod(x+roll.x-Sam_area.x+(random(y)-.5)*2*Jitter,rx)
+ temp_name3 lopy
+ temp_expr3 fmod(y+roll.y-Sam_area.y+(random(x)-.5)*2*Jitter,ty)
+ expr0 r(Sam_area.x+(lopx>0?lopx:lopx+rx),Sam_area.y+(lopy>0?lopy:lopy+ty))
+ expr1 g(Sam_area.x+(lopx>0?lopx:lopx+rx),Sam_area.y+(lopy>0?lopy:lopy+ty))
+ expr2 b(Sam_area.x+(lopx>0?lopx:lopx+rx),Sam_area.y+(lopy>0?lopy:lopy+ty))
+ name Grainy_Tiles2
+ selected true
+ xpos -168
+ ypos -121
+ addUserKnob {20 User}
+ addUserKnob {3 Jitter}
+ Jitter 800
+ addUserKnob {26 ""}
+ addUserKnob {12 roll}
+ addUserKnob {26 ""}
+ addUserKnob {15 Sam_area l "Sample area"}
+ Sam_area {189.5 1656 297 1775}
+}

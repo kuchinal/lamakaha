@@ -1,0 +1,148 @@
+#! C:/Program Files/Nuke6.3v8/Nuke6.3.exe -nx
+version 6.3 v8
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="2560" h="1440" fullscreen="1" screen="0">
+        <splitter orientation="1">
+            <split size="1436"/>
+            <splitter orientation="2">
+                <split size="851"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="559"/>
+                <dock id="" activePageId="com.ohufx.MassivePanel">
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                    <page id="Script Editor.1"/>
+                    <page id="com.ohufx.MassivePanel"/>
+                    <page id="com.ohufx.SearchReplace"/>
+                </dock>
+            </splitter>
+            <split size="1120"/>
+            <splitter orientation="2">
+                <split size="478"/>
+                <dock id="" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="932"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name H:/.nuke/GeneralSetups/dust_noise.nk
+ addUserKnob {20 "PXM Shot Settings"}
+ addUserKnob {26 Text l "" +STARTLINE}
+ addUserKnob {26 headline_shotsettings l "Scriptname Details\n" T "  "}
+ addUserKnob {1 showLong l Show: +DISABLED}
+ showLong gier_gir-2657
+ addUserKnob {22 SetShow l "  select  " -STARTLINE T ShotSettingsTab.setShow(1)}
+ addUserKnob {1 show l "Show Abbrev:" +DISABLED}
+ show gir
+ addUserKnob {1 sequence l Sequence:}
+ addUserKnob {22 SetSeq l "  select  " -STARTLINE T ShotSettingsTab.setSequence(1)}
+ addUserKnob {1 shot l Shot:}
+ addUserKnob {22 SetShot l "  select  " -STARTLINE T ShotSettingsTab.setShot()}
+ addUserKnob {26 Text l " "}
+ addUserKnob {4 taskType l Type: +DISABLED M {}}
+ addUserKnob {4 status l Status: +DISABLED +HIDDEN M {}}
+ addUserKnob {1 taskName l "Task Name:"}
+ addUserKnob {1 taskDescriptionKnob l Description: +DISABLED +HIDDEN}
+ addUserKnob {26 Text l " "}
+ addUserKnob {3 version l Version:}
+ version 1
+ addUserKnob {1 artist l "Artist Initials:"}
+ addUserKnob {22 SetArtist l "  set  " -STARTLINE T ShotSettingsTab.setUserAbbreviation()}
+ addUserKnob {26 Text l " "}
+ addUserKnob {22 SaveScript l "  Save New Script  " -STARTLINE T ShotSettingsTab.saveScript()}
+ addUserKnob {22 previewName l "  Preview Script Name  " -STARTLINE T ShotSettingsTab.previewScriptName()}
+ addUserKnob {26 Text l "" +STARTLINE}
+}
+
+Noise {
+ inputs 0
+ size 30
+ zoffset 3
+ gain 0.6
+ gamma 0.018
+ translate {{curve i x101 -162 x201 318} {curve i x101 -78 x201 166}}
+ skew {{curve i x101 0 x201 0}}
+ center {960 540}
+ name Noise6
+ xpos -1163
+ ypos 312
+}
+Dot {
+ name Dot1
+ xpos -1129
+ ypos 481
+}
+Noise {
+ inputs 0
+ size 30
+ zoffset 2
+ gamma 0.018
+ translate {{curve i x76 210 x258 -52} {curve i x76 -8 x258 86}}
+ skew {{curve i x76 -0.095 x258 0.175}}
+ center {960 540}
+ name Noise5
+ xpos -722
+ ypos 270
+}
+Noise {
+ inputs 0
+ size 30
+ zoffset 3
+ gamma 0.018
+ translate {{curve i x75 0 x224 185} {curve i x75 0 x224 105}}
+ skew {{curve i x75 0}}
+ center {960 540}
+ name Noise4
+ xpos -999
+ ypos 280
+}
+push 0
+Noise {
+ inputs 0
+ size 30
+ zoffset 1
+ gamma 0.018
+ translate {{curve i x101 0 x201 185} {curve i x101 0 x201 105}}
+ skew {{curve i x101 -0.26 x201 0.48}}
+ center {960 540}
+ name Noise2
+ xpos -866
+ ypos 271
+}
+Noise {
+ inputs 0
+ size 30
+ zoffset 4
+ gamma 0.018
+ translate {{curve i x101 210 x201 -52} {curve i x101 -8 x201 86}}
+ skew {{curve i x101 -0.095 x201 0.175}}
+ center {960 540}
+ name Noise3
+ xpos -576
+ ypos 268
+}
+Merge2 {
+ inputs 4+1
+ operation plus
+ name Merge1
+ xpos -820
+ ypos 379
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge2
+ xpos -820
+ ypos 477
+}

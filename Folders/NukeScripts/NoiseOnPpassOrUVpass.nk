@@ -1,0 +1,36 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "gain = size of noise\noffset  - set blue to 1 if using UV ( no blue channel)"
+ selected true
+ xpos -78
+ ypos 13650
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ label fBm(r,g,b,lacunarity,gain,gamma)
+ selected true
+ xpos -77
+ ypos 13695
+}
+push $cut_paste_input
+Grade {
+ multiply 181.58
+ add {0 0 1 0}
+ black_clamp false
+ name Grade123
+ selected true
+ xpos -181
+ ypos 13657
+}
+Expression {
+ temp_name0 lacunarity
+ expr0 fBm(r,g,b,2,0.5,0.5)
+ name Expression3
+ selected true
+ xpos -181
+ ypos 13695
+}

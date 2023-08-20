@@ -1,0 +1,526 @@
+#! C:/2D/Nuke6.1v2/Nuke6.1.exe -nx
+version 6.1 v2
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="-4" y="-4" w="1374" h="776" screen="0">
+        <splitter orientation="1">
+            <split size="863"></split>
+            <splitter orientation="1">
+                <split size="40"></split>
+                <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                    <page id="Toolbar.1"></page>
+                </dock>
+                <split size="819"></split>
+                <splitter orientation="2">
+                    <split size="360"></split>
+                    <dock id="" activePageId="Viewer.1">
+                        <page id="Viewer.1"></page>
+                    </dock>
+                    <split size="359"></split>
+                    <dock id="" activePageId="DAG.1">
+                        <page id="DAG.1"></page>
+                        <page id="Curve Editor.1"></page>
+                    </dock>
+                </splitter>
+            </splitter>
+            <split size="499"></split>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"></page>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name "C:/Documents and Settings/Kocka/My Documents/Nuke/nuke_3d_reflection_v013.nk"
+ last_frame 20
+ format "640 480 0 0 640 480 1 PC_Video"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+}
+Camera2 {
+ inputs 0
+ translate {0 2 11}
+ name Camera_main
+ xpos 339
+ ypos -63
+}
+set N5e0cc30 [stack 0]
+ColorWheel {
+ inputs 0
+ gamma 0.45
+ name ColorWheel1
+ xpos -587
+ ypos -287
+}
+Card2 {
+ rows 3
+ columns 3
+ translate {{curve i x1 -10 x20 10} 0 20}
+ uniform_scale 10
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ xpos -587
+ ypos -137
+}
+set Neceb648 [stack 0]
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ xpos -113
+ ypos -328
+}
+set N5e7d4f8 [stack 0]
+Card2 {
+ orientation ZX
+ rows 20
+ columns 20
+ translate {0 0.2 0}
+ scaling {1 1 1.35}
+ uniform_scale 5
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 
+1 {0 0 -0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 0.5 -0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {1 0 0} 
+1 {0 -0.5 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0.5 0.5 0} 
+1 {0 0.5 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {1 0.5 0} 
+1 {0 -0.5 0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 1 0} 
+1 {0 0 0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {1 1 0} }
+ name Card_floor
+ xpos 3
+ ypos -152
+}
+push $N5e7d4f8
+ColorCorrect {
+ gain {0.2 0.2 0.2 1}
+ name CC_gray
+ xpos -113
+ ypos -199
+}
+Card2 {
+ orientation ZX
+ rows 10
+ columns 10
+ translate {0 3.8 0}
+ scaling {1 1 1.35}
+ uniform_scale 5
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 
+1 {0 0 -0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 0.5 -0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {1 0 0} 
+1 {0 -0.5 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0.5 0.5 0} 
+1 {0 0.5 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {1 0.5 0} 
+1 {0 -0.5 0.5} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 1 0} 
+1 {0 0 0.5} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {1 1 0} }
+ name Card_ceiling
+ xpos -113
+ ypos -152
+}
+push $N5e7d4f8
+ColorCorrect {
+ gain {0.2 0.2 1 1}
+ name CC_blue
+ xpos -231
+ ypos -199
+}
+Card2 {
+ rows 3
+ columns 3
+ translate {0 0 -2.5}
+ uniform_scale 5
+ pivot {0 -0.5 0}
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 -0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {0 0 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0 0 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {0 0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_b_wall
+ xpos -231
+ ypos -149
+}
+push $N5e7d4f8
+ColorCorrect {
+ gain {0.2 1 0.2 1}
+ name CC_green
+ xpos -351
+ ypos -197
+}
+Card2 {
+ orientation YZ
+ rows 3
+ columns 3
+ translate {2.5 0 0}
+ uniform_scale 5
+ pivot {0 -0.5 0}
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 -0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {0 0 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0 0 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {0 0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_r_wall
+ xpos -351
+ ypos -145
+}
+push $N5e7d4f8
+ColorCorrect {
+ gain {1 0.2 0.2 1}
+ name CC_red
+ xpos -470
+ ypos -195
+}
+Card2 {
+ orientation YZ
+ rows 3
+ columns 3
+ translate {-2.5 0 0}
+ uniform_scale 5
+ pivot {0 -0.5 0}
+ control_points {3 3 3 6 
+
+1 {0 -0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0 -0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {0 0 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0 0 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {0 0.5 -0.5} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0 0.5 0.5} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_l_wall
+ xpos -470
+ ypos -141
+}
+MergeGeo {
+ inputs 5
+ name MergeGeo1
+ xpos -231
+ ypos -109
+}
+TransformGeo {
+ name TransformGeo1
+ xpos -231
+ ypos -50
+}
+set Nedc3a70 [stack 0]
+Constant {
+ inputs 0
+ color {0 0 0 1}
+ name Constant1
+ xpos 132
+ ypos -176
+}
+Sphere {
+ rows 20
+ columns 20
+ translate {0 1.5 0}
+ name Sphere1
+ xpos 132
+ ypos -67
+}
+set Nedce030 [stack 0]
+Scene {
+ inputs 3
+ name Scene_main
+ xpos -61
+ ypos 41
+}
+push 0
+add_layer {normal normal.x normal.y normal.z}
+ScanlineRender {
+ inputs 3
+ output_motion_vectors_type accurate
+ output_shader_vectors true
+ N_channel normal
+ name Render_main
+ xpos -71
+ ypos 169
+}
+push $N5e0cc30
+push $Nedce030
+push 0
+ScanlineRender {
+ inputs 3
+ output_motion_vectors_type accurate
+ output_shader_vectors true
+ N_channel rgb
+ name Render_normals
+ xpos 132
+ ypos 170
+}
+Expression {
+ temp_name0 norm
+ temp_expr0 sqrt(r*r+g*g+b*b)
+ expr0 r/norm
+ expr1 g/norm
+ expr2 b/norm
+ name Normalize2
+ xpos 132
+ ypos 196
+}
+set Nede6ad0 [stack 0]
+push $Nede6ad0
+push $N5e0cc30
+push $N5e0cc30
+Card2 {
+ inputs 0
+ image_aspect false
+ rows 3
+ columns 3
+ translate {0 0 {-parent.Camera_main.focal i}}
+ scaling {{parent.Camera_main.haperture i} {parent.Camera_main.vaperture i} 1}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card_filmback
+ xpos 510
+ ypos -117
+}
+TransformGeo {
+ inputs 2
+ name TransformGeo2
+ xpos 510
+ ypos -43
+}
+Scene {
+ name Scene_eye_vec
+ xpos 520
+ ypos 26
+}
+Constant {
+ inputs 0
+ channels rgb
+ name Constant_bg
+ xpos 627
+ ypos 22
+}
+ScanlineRender {
+ inputs 3
+ output_motion_vectors_type accurate
+ output_shader_vectors true
+ P_channel rgb
+ name Render_filmback_coords
+ xpos 510
+ ypos 120
+}
+Constant {
+ inputs 0
+ channels rgb
+ color {{parent.Camera_main.translate.x i} {parent.Camera_main.translate.y i} {parent.Camera_main.translate.z i} 1}
+ name Constant_cam_coords
+ xpos 335
+ ypos 50
+}
+Merge2 {
+ inputs 2
+ operation minus
+ name Eye_vec
+ xpos 510
+ ypos 201
+}
+Expression {
+ temp_name0 norm
+ temp_expr0 sqrt(r*r+g*g+b*b)
+ expr0 r/norm
+ expr1 g/norm
+ expr2 b/norm
+ name Normalize1
+ xpos 510
+ ypos 227
+}
+MergeExpression {
+ inputs 2
+ temp_name0 idotn
+ temp_expr0 Ar*Br+Ag*Bg+Ab*Bb
+ temp_name1 normzero
+ temp_expr1 ((Ar==0)&&(Ag==0)&&(Ab==0))?0:1
+ expr0 (Br-2*idotn*Ar)*normzero
+ expr1 (Bg-2*idotn*Ag)*normzero
+ expr2 (Bb-2*idotn*Ab)*normzero
+ name Reflect_vec
+ xpos 510
+ ypos 280
+}
+set Nee31650 [stack 0]
+Shuffle {
+ red black
+ green black
+ alpha blue
+ name Z_to_alpha
+ xpos 705
+ ypos 329
+}
+Clamp {
+ name Clamp1
+ xpos 705
+ ypos 355
+}
+Unpremult {
+ name Unpremult1
+ xpos 705
+ ypos 393
+}
+push $Nee31650
+Multiply {
+ channels {rgba.red -rgba.green rgba.blue}
+ value -1
+ name Multiply_flipXZ
+ xpos 589
+ ypos 330
+}
+Expression {
+ temp_name0 radius
+ temp_expr0 (1/pi)*acos(-b)/sqrt(pow(r,2)+pow(g,2))
+ expr0 ((r*radius)+1)/2
+ expr1 ((g*radius)+1)/2
+ expr2 0
+ name Lightprobe_map2
+ xpos 589
+ ypos 368
+}
+Camera2 {
+ inputs 0
+ translate {{parent.Sphere1.translate.x} {parent.Sphere1.translate.y} {parent.Sphere1.translate.z}}
+ projection_mode spherical
+ name Camera_env_map
+ xpos -406
+ ypos 40
+}
+push $Neceb648
+push $Nedc3a70
+Scene {
+ inputs 2
+ name Scene_env_map
+ xpos -221
+ ypos 51
+}
+Constant {
+ inputs 0
+ channels rgb
+ format "512 256 0 0 512 256 1 latlong"
+ name Constant_lat_long
+ xpos -417
+ ypos 142
+}
+ScanlineRender {
+ inputs 3
+ output_motion_vectors_type accurate
+ name Render_env_map
+ xpos -231
+ ypos 165
+}
+set Nee631d0 [stack 0]
+SphericalTransform {
+ input "Lat Long map"
+ ry 180
+ output "Light Probe 360"
+ format "256 256 0 0 256 256 1 square_256"
+ fix true
+ name SphericalTransform_negZ
+ xpos -147
+ ypos 224
+}
+STMap {
+ inputs 2
+ channels rgb
+ uv rgb
+ name STMap2
+ xpos 589
+ ypos 420
+}
+push $Nee31650
+Expression {
+ temp_name0 radius
+ temp_expr0 (1/pi)*acos(-b)/sqrt(pow(r,2)+pow(g,2))
+ expr0 ((r*radius)+1)/2
+ expr1 ((g*radius)+1)/2
+ expr2 0
+ name Lightprobe_map1
+ xpos 441
+ ypos 332
+}
+push $Nee631d0
+SphericalTransform {
+ input "Lat Long map"
+ output "Light Probe 360"
+ format "256 256 0 0 256 256 1 square_256"
+ fix true
+ name SphericalTransform_posZ
+ xpos -293
+ ypos 222
+}
+STMap {
+ inputs 2
+ channels rgb
+ uv rgb
+ name STMap1
+ xpos 441
+ ypos 421
+}
+Keymix {
+ inputs 3
+ maskChannel rgba.blue
+ name Keymix1
+ xpos 589
+ ypos 494
+}
+ShuffleCopy {
+ inputs 2
+ name ShuffleCopy_alpha
+ xpos 132
+ ypos 500
+}
+Premult {
+ name Premult1
+ xpos 132
+ ypos 526
+}
+Merge2 {
+ inputs 2
+ operation plus
+ name Plus
+ xpos -71
+ ypos 526
+}
+Viewer {
+ input_process false
+ name Viewer1
+ xpos -71
+ ypos 571
+}

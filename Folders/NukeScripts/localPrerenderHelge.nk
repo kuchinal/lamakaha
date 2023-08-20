@@ -1,0 +1,37 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+push $cut_paste_input
+Write {
+channels rgba
+file E:/render_local/Write1_flare/TD_S001_60_AK_flare_%v_v42_%04d.exr
+proxy E:/render_local/Write1_flare/TD_S001_60_AK_flare_%v_v42_%04d.exr
+file_type exr
+autocrop true
+version 18
+name AutoWrite1_holo3
+tile_color 0xa54e0eff
+label "AT: \[value master]"
+selected true
+xpos 14307
+ypos -11948
+disable true
+addUserKnob {20 User}
+addUserKnob {1 master l "Master node"}
+master Write1_flare
+addUserKnob {2 tmpdir}
+tmpdir E:/render_local/
+addUserKnob {3 ff l first}
+ff 101
+addUserKnob {3 lf l last -STARTLINE}
+lf 391
+addUserKnob {22 run l "run range" -STARTLINE T "import nuke, os\nn = nuke.selectedNode()\nmaster = n\['master'].getValue()\ntmpdir = n\['tmpdir'].getValue()\nname = n\['name'].getValue()\nff= n\['ff'].getValue()\nlf= n\['lf'].getValue()\n\nm = nuke.toNode(master)\n\nsqFullPath = m\['file'].getValue()\n\nsqPath, sqName = os.path.split(sqFullPath)\n\noutpath = tmpdir+master+'/'+ sqName\n\nn\['file'].setValue(outpath)\n\n\nnuke.execute (name,ff,lf)"}
+addUserKnob {22 myexecute l execute -STARTLINE T "import nuke, os, nukescripts\n\nn = nuke.selectedNode()\nmaster = n\['master'].getValue()\ntmpdir = n\['tmpdir'].getValue()\nname = n\['name'].getValue()\nff= n\['ff'].getValue()\nlf= n\['lf'].getValue()\n\nm = nuke.toNode(master)\n\nsqFullPath = m\['file'].getValue()\n\nsqPath, sqName = os.path.split(sqFullPath)\n\noutpath = tmpdir+master+'/'+ sqName\n\nn\['file'].setValue(outpath)\n\n\n#nuke.execute (name,ff,lf)\n\n\nnukescripts.render_panel((n,), False)"}
+addUserKnob {26 ""}
+addUserKnob {2 localcache l "local cache" -STARTLINE}
+localcache E:/nuke_lokalise/Y_/_projects/The_Deal/precomps/
+addUserKnob {22 open l "open local" T "import os\nn = nuke.thisNode()\n\ntmpdir = n\['tmpdir'].value()\nmaster = n\['master'].value()\nmn = nuke.toNode(master)\nmasterdir = mn\['file'].value()\n\nu = os.path.normpath(tmpdir)\ncmd = 'explorer \"%s\"' % (u)\nos.system(cmd)" +STARTLINE}
+addUserKnob {22 openserver l "open server" -STARTLINE T "import os\nn = nuke.thisNode()\n\ntmpdir = n\['tmpdir'].value()\nmaster = n\['master'].value()\nmn = nuke.toNode(master)\nmasterdir = mn\['file'].value()\n\n\nu=os.path.split(masterdir)\[0]\nu = os.path.normpath(u)\ncmd = 'explorer \"%s\"' % (u)\nos.system(cmd)"}
+addUserKnob {22 opencache l "open cache" -STARTLINE T "import os\nn = nuke.thisNode()\n\ntmpdir = n\['localcache'].value()\n\nu = os.path.normpath(tmpdir)\ncmd = 'explorer \"%s\"' % (u)\nos.system(cmd)"}
+addUserKnob {26 ""}
+addUserKnob {22 openboth l "open all" T "import os\nn = nuke.thisNode()\n\ntmpdir = n\['tmpdir'].value()\nmaster = n\['master'].value()\nmn = nuke.toNode(master)\nmasterdir = mn\['file'].value()\n\nu = os.path.normpath(tmpdir)\ncmd = 'explorer \"%s\"' % (u)\nos.system(cmd)\n\nu=os.path.split(masterdir)\[0]\nu = os.path.normpath(u)\ncmd = 'explorer \"%s\"' % (u)\nos.system(cmd)\n\n\ntmpdir = n\['localcache'].value()\nu = os.path.normpath(tmpdir)\ncmd = 'explorer \"%s\"' % (u)\nos.system(cmd)" +STARTLINE}
+}

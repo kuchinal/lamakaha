@@ -1,0 +1,1404 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard1
+ selected true
+ xpos 9692
+ ypos -8462
+ postage_stamp false
+}
+push $cut_paste_input
+Reformat {
+ type "to box"
+ box_width 30
+ box_height 20
+ box_fixed true
+ name Reformat2
+ selected true
+ xpos 9006
+ ypos -8471
+}
+Text2 {
+ font_size_toolbar 15
+ font_width_toolbar 100
+ font_height_toolbar 100
+ message "\[value frame]"
+ old_message {{49 48 48 49}
+   }
+ old_expression_markers {{0 3}
+   }
+ box {-0.6499996185 1.699999809 32.35000038 17.69999981}
+ transforms {{0 2}
+   }
+ font_size_values {{0 15 1 15 2 15 3 15}
+   }
+ cursor_position 13
+ font_size 15
+ center {15 10}
+ cursor_initialised true
+ initial_cursor_position {{-0.6499996185 17.69999981}
+   }
+ group_animations {{0} imported: 0 selected: 0 items: "root transform/"}
+ animation_layers {{1 11 15 10 0 0 1 1 0 0 0 0}
+   }
+ name Text1
+ selected true
+ xpos 9006
+ ypos -8445
+}
+Camera2 {
+ inputs 0
+ translate {{curve x1001 -79.75773825 -79.75773191 -79.75774417 -79.7577421 -79.75772041 -79.75770498 -79.75767246 -79.75759989 -79.75754628 -79.75757132 -79.75763986 -79.75766944 -79.75762456 -79.75753284 -79.75744781 -79.75740039 -79.75736005 -79.75732065 -79.75732261 -79.75733937 -79.75732475 -79.75729992 -79.75729952 -79.75732507 -79.75737118 -79.75743238 -79.75747785 -79.75747186 -79.75743107 -79.75741636 -79.75741165 -79.75732427 -79.75711148 -79.75676484 -79.75622402 -79.7553706 -79.75408884 -79.75231269 -79.75003511 -79.74738542 -79.74466901 -79.74231134 -79.7406997 -79.73995237 -79.73980461 -79.73968175 -79.7389519 -79.7372221 -79.73439167 -79.7305743 -79.72609729 -79.72140833 -79.71694117 -79.71305718 -79.70989599 -79.70736838 -79.70530149 -79.70355176 -79.70212048 -79.70103247 -79.70017286 -79.69943418 -79.69879561 -79.69816091 -79.69739365 -79.69655728 -79.69584266 -79.69529303 -79.69481375 -79.69433497 -79.69385826 -79.69343267 -79.69310624 -79.69285663 -79.69261422 -79.69237918 -79.69221517 -79.6921535 -79.69216295 -79.69218266 -79.6921752 -79.69214508 -79.6921129 -79.69211908 -79.69219378 -79.69226713 -79.69224002 -79.6921274 -79.69200641 -79.6919204 -79.69188353 -79.69188576 -79.69188612 -79.691831 -79.69171948 -79.69163163 -79.69163307 -79.69166942 -79.69163423 -79.69153015 -79.6914572 -79.69143595 -79.69138318 -79.69128321 -79.69123824 -79.6912462} {curve x1001 14.11178805 14.11182607 14.11185463 14.11188146 14.11189931 14.11187769 14.11183498 14.1118207 14.11182434 14.11178113 14.11165733 14.11150482 14.11142592 14.11146461 14.11155351 14.11160512 14.11158978 14.11150879 14.11139946 14.11134548 14.11137625 14.11142585 14.11143535 14.11141758 14.11139296 14.11133665 14.11124001 14.11113858 14.11104536 14.11093477 14.11076853 14.1104637 14.10993231 14.109115 14.10793198 14.10634142 14.10440552 14.10230622 14.10019736 14.09806843 14.09586383 14.09354718 14.09104066 14.08830197 14.08547624 14.082904 14.08087512 14.07932688 14.07790693 14.076355 14.07466306 14.07302294 14.07183204 14.07134353 14.07129098 14.07129464 14.07124539 14.07124658 14.07146204 14.0718792 14.07234162 14.07279606 14.07319083 14.07338448 14.07334599 14.07316883 14.07294082 14.07274343 14.0726644 14.07277072 14.07300032 14.0731407 14.07311264 14.07304722 14.07303288 14.07304155 14.07300042 14.0728679 14.07265874 14.07239118 14.07212609 14.07200639 14.07210251 14.07227711 14.07234575 14.07230478 14.07226637 14.07228807 14.0723729 14.07249335 14.0725562 14.07251402 14.07246397 14.07247249 14.07248642 14.07246713 14.07239983 14.0722677 14.07212169 14.07204641 14.07203744 14.07199157 14.07189673 14.07188366 14.071995 14.07202089} {curve x1001 -115.5273557 -115.5274863 -115.5275413 -115.5275229 -115.5274743 -115.527431 -115.5273912 -115.5273356 -115.5272669 -115.5272006 -115.5271386 -115.5270675 -115.526979 -115.526884 -115.526802 -115.5267503 -115.5267162 -115.5266773 -115.5266406 -115.5266301 -115.5266527 -115.5266882 -115.5267145 -115.5267236 -115.5266988 -115.5266203 -115.5265095 -115.5264114 -115.5263575 -115.5263527 -115.5263538 -115.5262875 -115.5261239 -115.5258808 -115.525518 -115.5248342 -115.5234988 -115.5212985 -115.518335 -115.5149073 -115.5113617 -115.5081521 -115.5057702 -115.5043383 -115.5032938 -115.5015948 -115.4983621 -115.4934383 -115.4872419 -115.4801643 -115.4724037 -115.4640911 -115.4554218 -115.4469278 -115.4392045 -115.4324557 -115.426614 -115.4215623 -115.4172813 -115.4137157 -115.4106942 -115.4083083 -115.4067625 -115.4057675 -115.4048069 -115.4036872 -115.4024265 -115.4012063 -115.4003525 -115.3999586 -115.3998034 -115.3996402 -115.3994297 -115.3992882 -115.3991946 -115.3989906 -115.3986198 -115.3981769 -115.397768 -115.3974111 -115.3971079 -115.3969212 -115.3968933 -115.3969389 -115.3969321 -115.3968539 -115.3967525 -115.396669 -115.3966742 -115.3968285 -115.3970122 -115.3970495 -115.3970019 -115.3970161 -115.3970721 -115.3970314 -115.3968325 -115.3965973 -115.396487 -115.3965303 -115.3966089 -115.3965565 -115.3964103 -115.3964044 -115.3965741 -115.3966064}}
+ rotate {{curve x1001 -0.6319044141 -0.6328805513 -0.6344163948 -0.634985717 -0.6358524491 -0.6356612002 -0.635809242 -0.6360507046 -0.6361816609 -0.6352747832 -0.636003873 -0.6353190478 -0.6373378806 -0.6394441118 -0.6412662931 -0.6423263189 -0.6429452809 -0.6421074506 -0.642109668 -0.6411543969 -0.6418710874 -0.642041648 -0.643635692 -0.6445025568 -0.6457062957 -0.6475767988 -0.6483491606 -0.6498994896 -0.6506373637 -0.6530492548 -0.6546779774 -0.657687007 -0.6635524653 -0.6745894432 -0.6917679444 -0.719953629 -0.7683333372 -0.8356275683 -0.9074186357 -0.9860730885 -1.079764181 -1.183823742 -1.290067237 -1.403414011 -1.539124786 -1.700627778 -1.870196448 -2.03022565 -2.180830145 -2.324424649 -2.464474627 -2.604290875 -2.749401636 -2.881062058 -2.978937672 -3.050584253 -3.10740343 -3.158505785 -3.206289191 -3.23824385 -3.256881156 -3.274600497 -3.287468005 -3.292513887 -3.295954395 -3.293512731 -3.296624176 -3.299539263 -3.300555013 -3.30429593 -3.312360804 -3.312777942 -3.31390172 -3.316273677 -3.313565101 -3.313794921 -3.316858965 -3.313666403 -3.312372956 -3.31467353 -3.311953224 -3.310090017 -3.311118629 -3.31209206 -3.310153136 -3.310598795 -3.310572899 -3.310608882 -3.311800412 -3.31442781 -3.313062927 -3.31356132 -3.314957012 -3.313864667 -3.31285448 -3.313239718 -3.313113896 -3.309564577 -3.308335348 -3.310064617 -3.309202634 -3.308105007 -3.309914846 -3.309138745 -3.308053603 -3.308682993} {curve x1001 -144.870767 -144.8709869 -144.8711651 -144.870968 -144.8707856 -144.8706673 -144.8710582 -144.8709194 -144.8706878 -144.8705637 -144.8703614 -144.8701342 -144.8699732 -144.8698219 -144.8698033 -144.8696794 -144.8701337 -144.8697295 -144.8699072 -144.8697728 -144.8697622 -144.8698849 -144.8699054 -144.8698957 -144.8694206 -144.8696823 -144.8689666 -144.8689695 -144.8688185 -144.8687831 -144.8693194 -144.869281 -144.8697702 -144.8705401 -144.8721595 -144.8745232 -144.876043 -144.8793974 -144.882139 -144.8853302 -144.8890436 -144.892521 -144.8948078 -144.8966756 -144.8970493 -144.896763 -144.8944226 -144.8911311 -144.8885867 -144.8880037 -144.8876381 -144.8864017 -144.8844786 -144.880128 -144.8748487 -144.8679198 -144.8626215 -144.8569865 -144.8525611 -144.847446 -144.843053 -144.8392189 -144.8383044 -144.8383526 -144.8384184 -144.8384203 -144.8380253 -144.8355157 -144.8366125 -144.8362738 -144.8385011 -144.8397538 -144.8411584 -144.8413417 -144.842945 -144.8432157 -144.8432265 -144.8423133 -144.8411532 -144.8403491 -144.838736 -144.838448 -144.8387326 -144.8392717 -144.838646 -144.8369044 -144.8369548 -144.8369914 -144.8381491 -144.8380874 -144.8392885 -144.83993 -144.8399636 -144.8390546 -144.8412583 -144.8410246 -144.8405697 -144.8389223 -144.8391374 -144.8404085 -144.8408023 -144.8406007 -144.8409555 -144.8411613 -144.8430289 -144.8429325} {curve x1001 1.202111167 1.204988348 1.206043587 1.204113329 1.204379241 1.203988904 1.203500568 1.204899845 1.203626786 1.204440392 1.204920159 1.201011476 1.203487305 1.204055945 1.200929342 1.200600764 1.200668827 1.201921358 1.199503894 1.200230047 1.199459172 1.198939732 1.198917277 1.200185981 1.199629408 1.198313685 1.199368877 1.197994421 1.196769849 1.200501863 1.199894332 1.199485829 1.199732444 1.19932322 1.206923144 1.206848984 1.208633573 1.208974082 1.208767462 1.210132323 1.208007311 1.209180013 1.205695774 1.201341409 1.197917217 1.188523715 1.171986051 1.15392217 1.144545407 1.134382105 1.120467189 1.105760211 1.088287839 1.066063391 1.050432097 1.023248213 1.016313718 0.9991661029 0.9881361692 0.9862002904 0.977495417 0.9642657487 0.9760131375 0.9686308661 0.958353639 0.9578734696 0.9652747358 0.9440261753 0.9597990024 0.9482439503 0.9587138652 0.9624194023 0.9584094643 0.956887993 0.9611162739 0.9654435761 0.968070466 0.9603330022 0.9618491935 0.9647697603 0.9515881846 0.9561251502 0.9524489772 0.9608115261 0.9549941488 0.9499522966 0.9509654718 0.9523017283 0.9493711913 0.9500747333 0.9611998457 0.9538229266 0.9529719366 0.9492641519 0.9613456333 0.9603841085 0.9619868374 0.9479738735 0.9563163906 0.9527606533 0.9621486415 0.9603049479 0.9607598735 0.9561975381 0.963773712 0.964856011}}
+ scaling {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ uniform_scale {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ skew {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ pivot {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal {{curve x1001 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29893494 78.29061127 78.27954102 78.26580048 78.25205994 78.24074554 78.24436188 78.26290131 78.29637909 78.34477997 78.40569305 78.46661377 78.52624512 78.58153534 78.63249207 78.67910004 78.72136688 78.76057434 78.79977417 78.83728027 78.87078094 78.90029144 78.92580414 78.94732666 78.96656036 78.98578644 79.00286865 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565 79.01610565}}
+ haperture {{curve x1001 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113}}
+ vaperture {{curve x1001 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038}}
+ near {{curve x1001 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776}}
+ far {{curve x1001 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000}}
+ win_translate {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal_point {{curve x1001 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5}}
+ fstop {{curve x1001 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905 5.599999905}}
+ file /corky/projects/LevelUp_343202/seq/fda/0170/data/animation/cameras/shot_cam/versions/cache_v004.abc
+ name Camera2
+ label MainCam
+ selected true
+ xpos 9212
+ ypos -7756
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+FrameHold {
+ first_frame 1001
+ name FrameHold2
+ selected true
+ xpos 9202
+ ypos -7678
+ disable true
+}
+Dot {
+ name Dot2
+ selected true
+ xpos 9236
+ ypos -7502
+}
+Reformat {
+ inputs 0
+ type "to box"
+ box_width 30
+ box_height 20
+ box_fixed true
+ name Reformat1
+ selected true
+ xpos 9339
+ ypos -8651
+}
+RotoPaint {
+ cliptype none
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x41700000 x41200000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Bezier2 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xbf105240 xbe356500}
+        {x414e26f4 x413b0901}
+        {x3f105250 x3e356500}
+        {xbf639a70 x3ea56340}
+        {x4164e12e x413ca00f}
+        {x3f639a70 xbea56320}
+        {xbf6ce740 x3ba6e800}
+        {x417dd783 x413595f8}
+        {x3f6ce730 xbba6e000}
+        {xbf3cf120 xbdef8c80}
+        {x418f0db9 x41361605}
+        {x3f3cf0e0 x3def8c80}
+        {xbebd86c0 x3e915600}
+        {x419af535 x41330b1e}
+        {x3ebd8700 xbe915600}
+        {x3e877380 x3f0db520}
+        {x419db38a x411f69e0}
+        {xbe877380 xbf0db510}
+        {x3ec97080 x3dc48400}
+        {x4193a301 x410d19b5}
+        {xbec97080 xbdc48400}
+        {x3e9a0f00 x3e2aecc0}
+        {x41827625 x410c4bd0}
+        {xbe9a0ee0 xbe2aecc0}
+        {x3f1cad00 x3d915d00}
+        {x416aa867 x4109b85a}
+        {xbf1cad10 xbd915c80}
+        {x3ef18ec0 xbe8cf9c0}
+        {x4151e790 x410fc4fa}
+        {xbef18e80 x3e8cf980}
+        {xbe010f80 xbd3c5e00}
+        {x4149b0b1 x4136ba8e}
+        {x3e010fc0 x3d3c5f00}}}
+      {cc
+       {f 8192}
+       {p
+        {xbf105240 xbe356500}
+        {}
+        {x3f105250 x3e356500}
+        {xbf639a70 x3ea56340}
+        {}
+        {x3f639a70 xbea56320}
+        {xbf6ce740 x3ba6e800}
+        {}
+        {x3f6ce730 xbba6e000}
+        {xbf3cf120 xbdef8c80}
+        {}
+        {x3f3cf0e0 x3def8c80}
+        {xbebd86c0 x3e915600}
+        {}
+        {x3ebd8700 xbe915600}
+        {x3e877380 x3f0db520}
+        {}
+        {xbe877380 xbf0db510}
+        {x3ec97080 x3dc48400}
+        {}
+        {xbec97080 xbdc48400}
+        {x3e9a0f00 x3e2aecc0}
+        {}
+        {xbe9a0ee0 xbe2aecc0}
+        {x3f1cad00 x3d915d00}
+        {}
+        {xbf1cad10 xbd915c80}
+        {x3ef18ec0 xbe8cf9c0}
+        {}
+        {xbef18e80 x3e8cf980}
+        {xbe010f80 xbd3c5e00}
+        {}
+        {x3e010fc0 x3d3c5f00}}}}
+     {t x417ec736 x412a8077}
+     {a r x41200000 g x40400000 a x40a00000 osw x40000000 osf 0 str 1 spx x41700000 spy x41200000 sb 1 ltn x447a4000 ltm x447a4000 tt x40800000}}
+    {curvegroup Bezier1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xbe0f5c20 xbda3d700}
+        {x40cccccd x4143851f}
+        {x3e0f5c20 x3da3d700}
+        {xbf666670 x3e6147c0}
+        {x4109eb85 x4149eb85}
+        {x3f666670 xbe6147c0}
+        {xbf87ae18}
+        {x412f5c29 x413dc28f}
+        {x3f87ae18}
+        {xbeeb8520}
+        {x41523d71 x41380000}
+        {x3eeb8520}
+        {xbe0f5c40 x3e6147c0}
+        {x415c7ae1 x41323d71}
+        {x3e0f5c40 xbe6147c0}
+        {x3e0f5c40 x3ea3d700}
+        {x4152e148 x411f0a3d}
+        {xbe0f5c40 xbea3d700}
+        {x3e851ec0}
+        {x41599b82 x410d20a1}
+        {xbe851ec0}
+        {x3e0f5c40 xbed70a40}
+        {x4128a3d7 x4119999a}
+        {xbe0f5c40 x3ed70a40}
+        {x3f87ae10 x3e0f5c00}
+        {x4111eb85 x411f0a3d}
+        {xbf87ae10 xbe0f5c00}
+        {x3f333330 xbda3d700}
+        {x40df5c29 x4121999a}
+        {xbf333330 x3da3d700}
+        {xbe0f5c40 xbeae1460}
+        {x40c47ae1 x4131999a}
+        {x3e0f5c40 x3eae1460}}}
+      {cc
+       {f 8192}
+       {p
+        {xbe0f5c20 xbda3d700}
+        {}
+        {x3e0f5c20 x3da3d700}
+        {xbf666670 x3e6147c0}
+        {}
+        {x3f666670 xbe6147c0}
+        {xbf87ae18}
+        {}
+        {x3f87ae18}
+        {xbeeb8520}
+        {}
+        {x3eeb8520}
+        {xbe0f5c40 x3e6147c0}
+        {}
+        {x3e0f5c40 xbe6147c0}
+        {x3e0f5c40 x3ea3d700}
+        {}
+        {xbe0f5c40 xbea3d700}
+        {x3e851ec0}
+        {}
+        {xbe851ec0}
+        {x3e0f5c40 xbed70a40}
+        {}
+        {xbe0f5c40 x3ed70a40}
+        {x3f87ae10 x3e0f5c00}
+        {}
+        {xbf87ae10 xbe0f5c00}
+        {x3f333330 xbda3d700}
+        {}
+        {xbf333330 x3da3d700}
+        {xbe0f5c40 xbeae1460}
+        {}
+        {x3e0f5c40 x3eae1460}}}}
+     {t x41220950 x412d0fd3}
+     {a r x40800000 g x3f000000 b x3e4ccccd a x40800000 osw x40000000 osf 0 str 1 spx x41700000 spy x41200000 sb 1 ltn x447a4000 ltm x447a4000 tt x40800000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 2
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {15 10}
+ color {4 0.5 0.200000003 4}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ lifetime_start 1001
+ lifetime_end 1001
+ motionblur_shutter_offset_type centred
+ openspline_width 2
+ source_black_outside true
+ name RotoPaint1
+ selected true
+ xpos 9339
+ ypos -8625
+}
+Group {
+ name RoughEdgeMy
+ help "displacement based on noise\nv1.0 - 090321 - fs\n"
+ tile_color 0x3c773cff
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ selected true
+ xpos 9339
+ ypos -8583
+ mapsize {0.15 0.15}
+ addUserKnob {20 Settings l Edge -STARTLINE}
+ addUserKnob {4 model M {distortion(heavy) simple(light)}}
+ addUserKnob {6 BREAK l "break pattern" t "will break unwanted horizontal pattern in distortion mode(heavy)" -STARTLINE}
+ addUserKnob {6 clamp -STARTLINE}
+ clamp true
+ addUserKnob {41 amount T Transform3.scale}
+ addUserKnob {41 size_3 l size T Noise3.size}
+ addUserKnob {41 size_2 l "pre blur" T Blur2.size}
+ addUserKnob {41 size_1 l "post blur" -STARTLINE T Blur1.size}
+ addUserKnob {7 adjustBBox l INVISIBLE +INVISIBLE R 1 10}
+ adjustBBox 1
+ addUserKnob {7 mix}
+ mix 1
+ addUserKnob {26 ""}
+ addUserKnob {7 expandBB R 0 100}
+ addUserKnob {20 noise_1 l noise}
+ addUserKnob {26 noise l "noise pattern" T "(by default in use if pattern input is not connected)"}
+ addUserKnob {41 zoffset l z T Noise3.zoffset}
+ addUserKnob {41 lacunarity T Noise3.lacunarity}
+ addUserKnob {41 gain T Noise3.gain}
+ addUserKnob {41 gamma T Noise3.gamma}
+ addUserKnob {7 rotate R 0 180}
+ addUserKnob {41 scale T Noise3.scale}
+ addUserKnob {41 skewX l "skew X" T Noise3.skewX}
+ addUserKnob {41 skewY l "skew Y" T Noise3.skewY}
+ addUserKnob {41 center T Noise3.center}
+ addUserKnob {41 translate_1 l translate T Transform3.translate}
+}
+ Transform {
+  inputs 0
+  scale 7
+  center {1024 778}
+  name Transform3
+  xpos -650
+  ypos 132
+ }
+ Input {
+  inputs 0
+  name pattern
+  xpos -1000
+  ypos -109
+  number 1
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos -851
+  ypos -316
+ }
+ Reformat {
+  type "to box"
+  box_width {{Dot1.width}}
+  box_height {{Dot1.height}}
+  box_fixed true
+  name Reformat1
+  xpos -851
+  ypos -224
+ }
+ Noise {
+  size 14
+  zoffset {{frame}}
+  translate {{parent.Transform3.translate} {parent.Transform3.translate}}
+  rotate {{parent.rotate}}
+  center {960 540}
+  name Noise3
+  xpos -851
+  ypos -195
+ }
+ Grade {
+  white 2
+  add -0.5
+  black_clamp false
+  name Grade31
+  xpos -851
+  ypos -169
+ }
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input1] "}}
+  name Switch1
+  label "\[value which]"
+  xpos -851
+  ypos -109
+ }
+ Dot {
+  name Dot2
+  xpos -817
+  ypos 31
+ }
+ Input {
+  inputs 0
+  name alpha
+  xpos -60
+  ypos -386
+ }
+ Dot {
+  name Dot1
+  xpos -26
+  ypos -221
+ }
+set Nbc7ade0 [stack 0]
+add_layer {displ displ.red displ.green}
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 displ.red
+  from1 rgba.green
+  to1 displ.green
+  name Copy6
+  xpos -60
+  ypos 15
+ }
+ Blur {
+  channels rgba
+  name Blur2
+  xpos -60
+  ypos 78
+ }
+set Nbc8d4f0 [stack 0]
+ Shuffle {
+  in displ
+  alpha red
+  name Shuffle1
+  xpos -203
+  ypos 78
+ }
+ Dot {
+  name Dot6
+  xpos -817
+  ypos 81
+ }
+ Grade {
+  white 2
+  add -0.5
+  reverse true
+  white_clamp true
+  name Grade1
+  xpos -851
+  ypos 303
+ }
+ Invert {
+  channels rgba
+  name Invert1
+  xpos -851
+  ypos 367
+ }
+ Dot {
+  name Dot7
+  xpos -817
+  ypos 471
+ }
+push $Nbc7ade0
+ Dot {
+  name Dot4
+  xpos -395
+  ypos -221
+ }
+set Nbccf720 [stack 0]
+ Dot {
+  name Dot8
+  xpos -505
+  ypos -221
+ }
+ Group {
+  name ErodeMini
+  tile_color 0xe58700ff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+  note_font_size 12
+  note_font_color 0xe58700ff
+  xpos -542
+  ypos 291
+  addUserKnob {20 User}
+  addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+  addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+  addUserKnob {26 ERODE}
+  addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+  addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+  addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+  addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+  addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+  addUserKnob {26 BLUR}
+  addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+  addUserKnob {26 ""}
+  addUserKnob {7 mix}
+  mix 1
+  addUserKnob {26 ""}
+  addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+  addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+ }
+  Input {
+   inputs 0
+   name Mask
+   xpos -198
+   ypos 103
+   number 1
+  }
+  Dot {
+   name Dot15
+   xpos -164
+   ypos 218
+  }
+set Nbcea8d0 [stack 0]
+  Dot {
+   name Dot14
+   xpos -164
+   ypos 285
+  }
+set Nbcef4a0 [stack 0]
+  Blur {
+   channels rgba
+   name Blur2
+   selected true
+   xpos -198
+   ypos 584
+  }
+  Dot {
+   name Dot13
+   xpos -164
+   ypos 866
+  }
+push $Nbcef4a0
+  Shuffle {
+   red white
+   green white
+   blue white
+   alpha white
+   name Shuffle1
+   xpos -292
+   ypos 281
+  }
+push $Nbcea8d0
+  Shuffle {
+   alpha white
+   name Shuffle2
+   xpos -413
+   ypos 214
+   disable {{"\[exists parent.input1] "}}
+  }
+  Switch {
+   inputs 2
+   which {{parent.cutIn}}
+   name Switch1
+   xpos -413
+   ypos 281
+  }
+  Dot {
+   name Dot8
+   xpos -379
+   ypos 353
+  }
+set Nbd2b600 [stack 0]
+  Dot {
+   name Dot3
+   xpos -379
+   ypos 619
+  }
+set Nbd30160 [stack 0]
+  Dot {
+   name Dot9
+   xpos -379
+   ypos 702
+  }
+push $Nbd30160
+push $Nbd2b600
+  Input {
+   inputs 0
+   name Input1
+   xpos -528
+   ypos 84
+  }
+  Dot {
+   name Dot10
+   xpos -494
+   ypos 110
+  }
+set Nbd3dfe0 [stack 0]
+  Invert {
+   channels rgba
+   mix {{parent.Invertinput}}
+   name Invert4
+   xpos -528
+   ypos 171
+  }
+  Dot {
+   name Dot5
+   xpos -494
+   ypos 236
+  }
+set Nbd4e240 [stack 0]
+  Dot {
+   name Dot6
+   xpos -705
+   ypos 236
+  }
+  FilterErode {
+   channels rgba
+   size {{parent.parent.Transform3.scale}}
+   name FilterErode1
+   xpos -739
+   ypos 281
+  }
+  Dot {
+   name Dot7
+   xpos -705
+   ypos 353
+  }
+push $Nbd4e240
+  Merge2 {
+   inputs 2+1
+   operation copy
+   name Merge1
+   xpos -528
+   ypos 349
+  }
+  Dot {
+   name Dot1
+   xpos -494
+   ypos 432
+  }
+set Nbd77db0 [stack 0]
+  Dot {
+   name Dot4
+   xpos -696
+   ypos 432
+  }
+  Reformat {
+   type scale
+   scale 5
+   name Reformat11
+   xpos -730
+   ypos 468
+  }
+  FilterErode {
+   channels rgba
+   size {{parent.miniErodeSize}}
+   name FilterErode6
+   xpos -730
+   ypos 494
+  }
+  Reformat {
+   type scale
+   scale {{1/parent.Reformat11.scale}}
+   name Reformat12
+   xpos -730
+   ypos 520
+  }
+  Dot {
+   name Dot2
+   xpos -696
+   ypos 619
+  }
+push $Nbd77db0
+  Merge2 {
+   inputs 2+1
+   operation copy
+   name Merge2
+   xpos -528
+   ypos 615
+   disable {{!parent.miniErode}}
+  }
+  Blur {
+   inputs 1+1
+   channels rgba
+   size {{parent.FilterErode1.size*2}}
+   name Blur1
+   xpos -528
+   ypos 698
+  }
+push $Nbd3dfe0
+  Dot {
+   name Dot11
+   xpos -872
+   ypos 110
+  }
+  Dot {
+   name Dot12
+   xpos -872
+   ypos 804
+  }
+  Merge2 {
+   inputs 2
+   operation copy
+   mix {{parent.mix}}
+   name mix
+   xpos -528
+   ypos 800
+  }
+  Merge2 {
+   inputs 2
+   operation mask
+   mix {{parent.cutIn}}
+   name Merge3
+   xpos -528
+   ypos 862
+  }
+  Output {
+   name Output1
+   xpos -528
+   ypos 943
+  }
+ end_group
+set Nbcd8b00 [stack 0]
+ Dot {
+  name Dot11
+  xpos -618
+  ypos 295
+ }
+ Merge2 {
+  inputs 2
+  operation minus
+  bbox B
+  name Merge2
+  xpos -652
+  ypos 468
+ }
+ Invert {
+  channels rgba
+  name Invert2
+  xpos -652
+  ypos 509
+ }
+ Dot {
+  name Dot9
+  xpos -618
+  ypos 563
+ }
+push $Nbcd8b00
+ Merge2 {
+  inputs 2
+  operation multiply
+  name Merge3
+  xpos -542
+  ypos 559
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle2
+  tile_color 0xffffffff
+  xpos -542
+  ypos 585
+ }
+ Clamp {
+  channels rgba
+  name Clamp2
+  xpos -542
+  ypos 619
+ }
+ Dot {
+  name Dot10
+  xpos -508
+  ypos 827
+ }
+push $Nbccf720
+ AdjBBox {
+  numpixels {{(parent.IDistort2.uv_scale+size_1+size_2)*adjustBBox*2+expandBB x1 20}}
+  name AdjBBox1
+  xpos -429
+  ypos 221
+ }
+ Dot {
+  name Dot3
+  xpos -395
+  ypos 494
+ }
+push $Nbc8d4f0
+ Transform {
+  rotate 45
+  center {1024 778}
+  name Transform1
+  xpos -165
+  ypos 133
+ }
+ IDistort {
+  uv {displ.red -displ.green}
+  uv_scale {{parent.Transform3.scale.w} {parent.Transform3.scale.w}}
+  name IDistort3
+  xpos -165
+  ypos 172
+ }
+ IDistort {
+  uv {displ.red -displ.green}
+  uv_scale {{-parent.Transform3.scale.w} {-parent.Transform3.scale.w}}
+  name IDistort5
+  xpos -165
+  ypos 210
+ }
+ IDistort {
+  uv {-displ.red displ.green}
+  uv_scale {{parent.Transform3.scale.w} {parent.Transform3.scale.w}}
+  name IDistort4
+  xpos -165
+  ypos 283
+ }
+ IDistort {
+  uv {-displ.red displ.green}
+  uv_scale {{-parent.Transform3.scale.w} {-parent.Transform3.scale.w}}
+  name IDistort7
+  xpos -165
+  ypos 330
+ }
+ Transform {
+  rotate 45
+  center {1024 778}
+  invert_matrix true
+  name Transform2
+  xpos -165
+  ypos 402
+ }
+ Dot {
+  name Dot5
+  xpos -131
+  ypos 426
+ }
+push $Nbc8d4f0
+ IDistort {
+  uv {displ.red -displ.green}
+  uv_scale {{parent.Transform3.scale.w} {parent.Transform3.scale.w}}
+  name IDistort1
+  xpos -60
+  ypos 153
+ }
+ IDistort {
+  uv {displ.red -displ.green}
+  uv_scale {{-parent.Transform3.scale.w} {-parent.Transform3.scale.w}}
+  name IDistort6
+  xpos -60
+  ypos 212
+ }
+ IDistort {
+  uv {-displ.red displ.green}
+  uv_scale {{parent.Transform3.scale.h}}
+  name IDistort2
+  xpos -60
+  ypos 281
+ }
+ IDistort {
+  uv {-displ.red displ.green}
+  uv_scale {{-parent.Transform3.scale.w} {-parent.Transform3.scale.w}}
+  name IDistort8
+  xpos -60
+  ypos 341
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox A
+  mix 0.5
+  name Merge1
+  xpos -60
+  ypos 422
+  disable {{!parent.BREAK}}
+ }
+ Remove {
+  channels displ
+  name Remove1
+  xpos -60
+  ypos 453
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -60
+  ypos 491
+ }
+ Clamp {
+  channels rgba
+  mix {{parent.clamp}}
+  name Clamp1
+  xpos -60
+  ypos 517
+ }
+ Switch {
+  inputs 2
+  which {{model}}
+  name Switch2
+  xpos -60
+  ypos 823
+ }
+ Blur {
+  channels rgba
+  name Blur1
+  xpos -60
+  ypos 886
+ }
+ Dot {
+  name Dot12
+  xpos -26
+  ypos 1004
+ }
+push $Nbc7ade0
+ Dot {
+  name Dot13
+  xpos 287
+  ypos -221
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox A
+  mix {{parent.mix x1 0.214}}
+  name mix
+  selected true
+  xpos 243
+  ypos 1000
+ }
+ Output {
+  name Output1
+  xpos 253
+  ypos 1124
+ }
+end_group
+Mirror2 {
+ flip true
+ name Mirror2_1
+ selected true
+ xpos 9339
+ ypos -8557
+ disable {{rint(random(0,1,frame))}}
+}
+set Nbf3a460 [stack 0]
+FrameHold {
+ first_frame 1001
+ name FrameHold3
+ selected true
+ xpos 8970
+ ypos -8326
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat6
+ selected true
+ xpos 8970
+ ypos -8288
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ rotate {90 0 90}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card12
+ selected true
+ xpos 8970
+ ypos -8251
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push $Nbf3a460
+FrameHold {
+ first_frame 1006
+ name FrameHold8
+ selected true
+ xpos 8874
+ ypos -8329
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat7
+ selected true
+ xpos 8874
+ ypos -8291
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ rotate {90 0 90}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card13
+ selected true
+ xpos 8874
+ ypos -8247
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push $Nbf3a460
+FrameHold {
+ first_frame 1002
+ name FrameHold4
+ selected true
+ xpos 9064
+ ypos -8329
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat5
+ selected true
+ xpos 9064
+ ypos -8291
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ rotate {90 0 90}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card11
+ selected true
+ xpos 9064
+ ypos -8254
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push $Nbf3a460
+FrameHold {
+ first_frame 1003
+ name FrameHold5
+ selected true
+ xpos 9149
+ ypos -8331
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat4
+ selected true
+ xpos 9149
+ ypos -8293
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ rotate {90 0 90}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card10
+ selected true
+ xpos 9149
+ ypos -8256
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push $Nbf3a460
+FrameHold {
+ first_frame 1004
+ name FrameHold6
+ selected true
+ xpos 9241
+ ypos -8331
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat3
+ selected true
+ xpos 9241
+ ypos -8293
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ rotate {90 0 90}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card9
+ selected true
+ xpos 9241
+ ypos -8256
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push $Nbf3a460
+FrameHold {
+ first_frame 1005
+ name FrameHold7
+ selected true
+ xpos 9339
+ ypos -8332
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat2
+ selected true
+ xpos 9339
+ ypos -8294
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ rotate {90 0 90}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card8
+ selected true
+ xpos 9339
+ ypos -8257
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push $Nbf3a460
+FrameHold {
+ first_frame 1007
+ name FrameHold9
+ selected true
+ xpos 9433
+ ypos -8331
+}
+BlendMat {
+ surfaceblend modulate
+ name BlendMat1
+ selected true
+ xpos 9433
+ ypos -8293
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ rotate {90 0 90}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card7
+ selected true
+ xpos 9433
+ ypos -8256
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+Grid {
+ inputs 0
+ name Grid1
+ selected true
+ xpos 9572
+ ypos -8365
+}
+Card2 {
+ translate {-29.80944443 6.091003418 -44.09350586}
+ rotate {-90 0 0}
+ scaling {10 10 10}
+ uniform_scale 0.6
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card6
+ label fire
+ selected true
+ xpos 9572
+ ypos -8289
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push 0
+ParticleEmitter {
+ inputs 9
+ start_frame 800
+ rate {{"(((random((frame/a_wavelength_rate)+a_offset_rate))) * (a_maxValue_rate - a_minValue_rate)) + a_minValue_rate"}}
+ lifetime 150
+ lifetime_variation 4
+ velocity 0.1
+ velocity_variation 1
+ size 0.2
+ start_frame_animation random
+ start_wrap true
+ frame_advance constant
+ max_clip_length 20
+ name ParticleEmitter1
+ selected true
+ xpos 9572
+ ypos -8083
+ addUserKnob {20 anim_tab_rate l "rate anim"}
+ addUserKnob {26 a_easeType_display_rate l "Animation type:" +HIDDEN T Linear}
+ addUserKnob {3 a_startFrame_rate l "Start Frame:" +HIDDEN}
+ a_startFrame_rate 1
+ addUserKnob {3 a_endFrame_rate l "End Frame:" +HIDDEN}
+ a_endFrame_rate 50
+ addUserKnob {7 a_startValue_rate l "Start Value:" +HIDDEN}
+ addUserKnob {7 a_endValue_rate l "End Value:" +HIDDEN}
+ a_endValue_rate 10
+ addUserKnob {26 a_easeType_rate l "Ease type:" +HIDDEN T Linear}
+ addUserKnob {26 a_waveType_display_rate l "Animation type:" T "<h3><font color='yellow'>WAVE </font><font color='white'>Random</font></h3>"}
+ addUserKnob {7 a_minValue_rate l "Min Value:" R -0.5 2}
+ addUserKnob {7 a_maxValue_rate l "Max Value:" R 0 2.5}
+ a_maxValue_rate 1
+ addUserKnob {7 a_wavelength_rate l Wavelength: R 3.75 25}
+ a_wavelength_rate 5
+ addUserKnob {7 a_offset_rate l Offset: R -10 10}
+ addUserKnob {7 a_bcutoff_rate l "Blip cutoff:" +HIDDEN}
+ a_bcutoff_rate 0.95
+ addUserKnob {26 a_waveType_rate l "Wave type:" +HIDDEN T Random}
+ addUserKnob {22 a_edit_rate l EDIT -STARTLINE T AnimationMaker.showWindow('rate',-1)}
+ addUserKnob {26 a_animType_rate l "Anim type:" +HIDDEN T wave}
+}
+ParticleMotionAlign {
+ name ParticleMotionAlign1
+ selected true
+ xpos 9572
+ ypos -8057
+}
+ParticleLookAt {
+ name ParticleLookAt1
+ selected true
+ xpos 9572
+ ypos -8019
+}
+ParticleTurbulence {
+ strength {{"0.012 * abs(sin(frame/20)) * 3"} {"0.012 * abs(sin(frame/30)) * 3"} {"0.012 * abs(sin(frame/15)) *3"}}
+ name ParticleTurbulence1
+ selected true
+ xpos 9572
+ ypos -7974
+}
+ParticleGravity {
+ to {0 0.002 0}
+ probability 0.6
+ name ParticleGravity1
+ selected true
+ xpos 9572
+ ypos -7936
+}
+ParticleExpression {
+ velexpr vel+(v(sin(frame)*random/20,sin(frame)*random/15,sin(frame)*random/18))
+ name ParticleExpression3
+ selected true
+ xpos 9572
+ ypos -7888
+ disable true
+}
+ParticleExpression {
+ velexpr vel+(v(sin(frame)*random/20+.2,sin(frame)*random/15,sin(frame)*random/18+.1))
+ probability 0.05
+ name ParticleExpression1
+ selected true
+ xpos 9572
+ ypos -7839
+}
+ParticleVortex {
+ parallel -1e-05
+ tangential 0.01
+ radial 0.001
+ from {-29.80944443 6.091003418 -44.09350586}
+ to {-31.60000038 54.84999847 -49.40000153}
+ name ParticleVortex1
+ selected true
+ xpos 9572
+ ypos -7791
+}
+ParticleWind {
+ to {0.3 0 0}
+ probability 0.5
+ min_age 0.12
+ name ParticleWind1
+ selected true
+ xpos 9572
+ ypos -7738
+}
+ParticleDrag {
+ drag 0.3
+ rotational_drag 0.1
+ probability 0.8
+ min_age 0.2
+ name ParticleDrag1
+ selected true
+ xpos 9572
+ ypos -7682
+}
+ParticleCurve {
+ curves {r {}
+   g {}
+   b {}
+   a {curve 1 s0 x0.2666375041 0.7927860022 l x0.6533098817 0.007462739944 s-0}
+   size {}
+   mass {}}
+ name ParticleCurve1
+ selected true
+ xpos 9572
+ ypos -7635
+}
+push 0
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ overscan 30
+ samples 30
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos 9572
+ ypos -7506
+}

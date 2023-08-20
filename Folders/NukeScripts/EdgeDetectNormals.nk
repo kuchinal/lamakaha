@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Expression {
+channel0 rgba
+expr0 pow(r,2)+pow(g,2)+pow(b,2)
+name Expression2
+label EdgeDetectNormals
+note_font_size 14
+selected true
+xpos -23433
+ypos 30750
+}

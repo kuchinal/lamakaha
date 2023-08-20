@@ -1,0 +1,1309 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+BackdropNode {
+ inputs 0
+ name BackdropNode9
+ tile_color 0x424242ff
+ label "Name me!!!"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 300
+ selected true
+ xpos -9475
+ ypos -853
+ bdwidth 4180
+ bdheight 4235
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode40
+ tile_color 0x8a563f41
+ label Specular
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -8395
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode6
+ tile_color 0x3d7188ff
+ label SSS
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -9395
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode21
+ tile_color 0x4c7070ff
+ label Reflections
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -7895
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x7a7030ff
+ label Lighting
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -6895
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode23
+ tile_color 0x8a5688ff
+ label Diffuse
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -5895
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode37
+ tile_color 0x3d3d71ff
+ label "Self Illum"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -8895
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode18
+ tile_color 0x8a8988ff
+ label Refractions
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -7395
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x8a563f41
+ label GI
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -6395
+ ypos -296
+ bookmark false
+ bdwidth 500
+ bdheight 1700
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x47265101
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -9395
+ ypos 1404
+ bookmark false
+ bdwidth 4000
+ bdheight 259
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode44
+ tile_color 0x47193001
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -7895
+ ypos -745
+ bookmark false
+ bdwidth 500
+ bdheight 449
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode48
+ tile_color 0x44382aff
+ label "  ID's/Masks"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -7395
+ ypos -552
+ bookmark false
+ bdwidth 2000
+ bdheight 256
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x60776301
+ label Utilities
+ note_font "Verdana Bold Bold"
+ note_font_size 80
+ selected true
+ xpos -9395
+ ypos -552
+ bookmark false
+ bdwidth 1500
+ bdheight 256
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode43
+ tile_color 0x143d44ff
+ label MB
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -6335
+ ypos 2494
+ bookmark false
+ bdwidth 408
+ bdheight 284
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x60306001
+ label Defocus
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -6337
+ ypos 2780
+ bookmark false
+ bdwidth 409
+ bdheight 390
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode7
+ tile_color 0x412f34ff
+ label "premult /copy bbox"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -6335
+ ypos 2227
+ bookmark false
+ bdwidth 408
+ bdheight 267
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode38
+ tile_color 0x2f410eff
+ label "Global CC"
+ note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -6335
+ ypos 1817
+ bookmark false
+ bdwidth 408
+ bdheight 410
+}
+PostageStamp {
+ inputs 0
+ name Velocity
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -6323
+ ypos 2561
+ hide_input true
+}
+Grade {
+ add -0.5
+ black_clamp false
+ name Grade2
+ selected true
+ xpos -6323
+ ypos 2611
+ disable true
+}
+Dot {
+ name Dot35
+ selected true
+ xpos -6289
+ ypos 2654
+}
+set N5ff0e160 [stack 0]
+Dot {
+ name Dot7
+ selected true
+ xpos -6289
+ ypos 2961
+}
+push $cut_paste_input
+Dot {
+ name Dot8
+ label "passes \n"
+ note_font_size 30
+ selected true
+ xpos -7642
+ ypos -659
+}
+NoOp {
+ name AOVS
+ label setting
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -7676
+ ypos -593
+ addUserKnob {20 User}
+ addUserKnob {1 Diffuse}
+ Diffuse diffuse
+ addUserKnob {1 GI l Gi}
+ GI GI
+ addUserKnob {1 Lighting}
+ Lighting lighting
+ addUserKnob {1 Refraction}
+ Refraction refract
+ addUserKnob {1 Refractionfilter l "Refraction filter" -STARTLINE}
+ Refractionfilter refractFilter
+ addUserKnob {1 Reflection}
+ Reflection reflect
+ addUserKnob {1 Reflectionfilter l "Reflection filter" -STARTLINE}
+ Reflectionfilter reflectFilter
+ addUserKnob {1 Specular}
+ Specular specular
+ addUserKnob {1 SelfIllumination l "Self Illumination"}
+ SelfIllumination selfIllum
+ addUserKnob {1 SSS}
+ SSS SSS
+ addUserKnob {22 Set T "n = nuke.selectedNodes()\nfor node in n:\n    if \"Dif\" in node\['name'].value():\n        d=nuke.thisNode()\['Diffuse'].value()\n        node\['in'].setValue(d)\n\n    if \"GIdiv\" in node\['name'].value():\n        d=nuke.thisNode()\['Diffuse'].value()\n        node\['Bchannels'].setValue(d)\n        g=nuke.thisNode()\['GI'].value()\n        node\['Achannels'].setValue(g)\n\n    if \"Lightdiv\" in node\['name'].value():\n        d=nuke.thisNode()\['Diffuse'].value()\n        node\['Bchannels'].setValue(d)\n        g=nuke.thisNode()\['Lighting'].value()\n        node\['Achannels'].setValue(g)\n\n    if \"Refrdiv\" in node\['name'].value():\n        d=nuke.thisNode()\['Refractionfilter'].value()\n        node\['Bchannels'].setValue(d)\n        g=nuke.thisNode()\['Refraction'].value()\n        node\['Achannels'].setValue(g)\n\n    if \"Refldiv\" in node\['name'].value():\n        d=nuke.thisNode()\['Reflectionfilter'].value()\n        node\['Bchannels'].setValue(d)\n        g=nuke.thisNode()\['Reflection'].value()\n        node\['Achannels'].setValue(g)\n\n    if \"Specdiv\" in node\['name'].value():\n        d=nuke.thisNode()\['Specular'].value()\n        node\['in'].setValue(d)\n\n    if \"Selfdiv\" in node\['name'].value():\n        d=nuke.thisNode()\['SelfIllumination'].value()\n        node\['in'].setValue(d)\n\n    if \"SSSdiv\" in node\['name'].value():\n        d=nuke.thisNode()\['SSS'].value()\n        node\['in'].setValue(d)\n\n    if \"RefractionFilterS\" in node\['name'].value():\n        d=nuke.thisNode()\['Refractionfilter'].value()\n        node\['in'].setValue(d)\n\n    if \"ReflectFilterS\" in node\['name'].value():\n        d=nuke.thisNode()\['Reflectionfilter'].value()\n        node\['in'].setValue(d)\n\n\n" +STARTLINE}
+}
+set N5ff0a380 [stack 0]
+Dot {
+ name Dot10
+ selected true
+ xpos -7955
+ ypos -488
+}
+set N5ff0bf00 [stack 0]
+Dot {
+ name Dot12
+ selected true
+ xpos -8065
+ ypos -488
+}
+set N5ff0c270 [stack 0]
+Group {
+ name Group5
+ knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0xb18b00ff
+ label depth
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ selected true
+ xpos -8099
+ ypos -420
+ addUserKnob {20 User}
+ addUserKnob {11 chan l Channels}
+ chan depth
+ addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+ addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+ Input {
+  inputs 0
+  name Input1
+  selected true
+  xpos 563
+  ypos -311
+ }
+ Remove {
+  operation keep
+  channels depth
+  name Remove49
+  label dsadsdasdsa
+  xpos 563
+  ypos -267
+ }
+ Shuffle {
+  in depth
+  out rgb
+  name shufffle
+  autolabel "nuke.thisNode()\['label'].value()"
+  note_font_size 20
+  xpos 563
+  ypos -200
+  addUserKnob {20 User}
+  addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+ }
+ Remove {
+  operation keep
+  channels rgb
+  name Remove1
+  label "\[value operation] \[value channels]"
+  xpos 563
+  ypos -166
+ }
+ Output {
+  name Output1
+  xpos 563
+  ypos -111
+ }
+ Viewer {
+  input_process false
+  name Viewer1
+  xpos 822
+  ypos -302
+ }
+end_group
+PostageStamp {
+ name Depth
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -6247
+ ypos 2863
+ hide_input true
+}
+Grade {
+ blackpoint 628.7581787
+ whitepoint 280.9995728
+ black_clamp false
+ name Grade1
+ selected true
+ xpos -6247
+ ypos 2912
+ disable true
+}
+Copy {
+ inputs 2
+ from0 rgba.red
+ to0 forward.u
+ from1 rgba.green
+ to1 forward.v
+ name Copy2
+ autolabel "nuke.thisNode()\['label'].value()"
+ note_font_size 20
+ selected true
+ xpos -6247
+ ypos 2953
+}
+VectorBlur {
+ channels rgb
+ uv forward
+ scale 0.5
+ method forward
+ alpha -rgba.alpha
+ name VectorBlur1
+ note_font_size 20
+ selected true
+ xpos -6247
+ ypos 2992
+ disable true
+}
+Dot {
+ name Dot36
+ selected true
+ xpos -6213
+ ypos 3058
+}
+push $N5ff0e160
+push $N5ff0bf00
+Unpremult {
+ name Unpremult9
+ selected true
+ xpos -7989
+ ypos -461
+}
+Group {
+ name Group3
+ knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0xb18b00ff
+ label rgba
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ selected true
+ xpos -7989
+ ypos -420
+ addUserKnob {20 User}
+ addUserKnob {11 chan l Channels}
+ chan rgba
+ addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+ addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 563
+  ypos -315
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove49
+  label dsadsdasdsa
+  xpos 563
+  ypos -270
+ }
+ Shuffle {
+  name shufffle
+  autolabel "nuke.thisNode()\['label'].value()"
+  note_font_size 20
+  selected true
+  xpos 563
+  ypos -211
+  addUserKnob {20 User}
+  addUserKnob {22 lbc l "label by channel" T "n = nuke.thisNode()\nn\['label'].setValue(n.input(0)\[\"channels\"].value())\nn\['in'].setValue(n.input(0)\[\"channels\"].value())" +STARTLINE}
+ }
+ Remove {
+  operation keep
+  channels rgba
+  name Remove1
+  label "\[value operation] \[value channels]"
+  xpos 563
+  ypos -168
+ }
+set N5ff11860 [stack 0]
+ Output {
+  name Output1
+  xpos 563
+  ypos -111
+ }
+push $N5ff11860
+ Viewer {
+  frame 572
+  input_process false
+  name Viewer1
+  xpos 822
+  ypos -302
+ }
+end_group
+set N22a00d90 [stack 0]
+PostageStamp {
+ name RGBA1
+ help Remove29
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -6298
+ ypos 2286
+ hide_input true
+}
+set N5ff11f40 [stack 0]
+AdjBBox {
+ name AdjBBox1
+ selected true
+ xpos -6298
+ ypos 2320
+}
+Dot {
+ name Dot11
+ selected true
+ xpos -6264
+ ypos 2352
+}
+push $N5ff11f40
+push $N5ff0a380
+Dot {
+ name Dot292
+ selected true
+ xpos -7642
+ ypos -167
+}
+set N5ff12990 [stack 0]
+Dot {
+ name Dot294
+ selected true
+ xpos -8153
+ ypos -167
+}
+set N5ff12d00 [stack 0]
+Dot {
+ name Dot295
+ selected true
+ xpos -8625
+ ypos -167
+}
+set N5ff13070 [stack 0]
+Dot {
+ name Dot5
+ selected true
+ xpos -9192
+ ypos -167
+}
+add_layer {SSS SSS.red SSS.green SSS.blue SSS.alpha}
+Shuffle {
+ in SSS
+ alpha red2
+ name Shuffle5
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label SSS
+ note_font_size 20
+ selected true
+ xpos -9226
+ ypos -140
+}
+Unpremult {
+ name Unpremult1
+ selected true
+ xpos -9226
+ ypos -106
+}
+Dot {
+ name Dot6
+ selected true
+ xpos -9192
+ ypos 1596
+}
+push $N5ff13070
+add_layer {selfIllum selfIllum.red selfIllum.green selfIllum.blue selfIllum.alpha}
+Shuffle {
+ in selfIllum
+ alpha red2
+ name Selfdiv
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label "Self Illum "
+ note_font_size 20
+ selected true
+ xpos -8659
+ ypos -140
+}
+Unpremult {
+ name Unpremult2
+ selected true
+ xpos -8659
+ ypos -106
+}
+Dot {
+ name Dot301
+ selected true
+ xpos -8625
+ ypos 1562
+}
+push $N5ff12d00
+add_layer {specular specular.red specular.green specular.blue specular.alpha}
+Shuffle {
+ in specular
+ alpha red2
+ name Specdiv
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label "Specular "
+ note_font_size 20
+ selected true
+ xpos -8187
+ ypos -136
+}
+Unpremult {
+ name Unpremult3
+ selected true
+ xpos -8187
+ ypos -102
+}
+Dot {
+ name Dot302
+ selected true
+ xpos -8153
+ ypos 1528
+}
+push $N5ff12990
+add_layer {reflectFilter reflectFilter.red reflectFilter.green reflectFilter.blue reflectFilter.alpha}
+Shuffle {
+ in reflectFilter
+ alpha black
+ name ReflectFilterS
+ autolabel "nuke.thisNode()\['label'].value()"
+ label ReflectFilter
+ note_font_size 20
+ selected true
+ xpos -7760
+ ypos 1054
+ hide_input true
+}
+Unpremult {
+ name Unpremult12
+ selected true
+ xpos -7760
+ ypos 1088
+}
+Dot {
+ name Dot13
+ selected true
+ xpos -7726
+ ypos 1344
+}
+push $N5ff12990
+push $N5ff12990
+add_layer {reflect reflect.red reflect.green reflect.blue reflect.alpha}
+Merge2 {
+ inputs 2
+ operation divide
+ Achannels reflect
+ Bchannels reflectFilter
+ output rgb
+ name Refldiv
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label "Raw Reflect "
+ note_font_size 20
+ selected true
+ xpos -7676
+ ypos -149
+}
+Unpremult {
+ name Unpremult4
+ selected true
+ xpos -7676
+ ypos -115
+}
+Dot {
+ name Dot15
+ selected true
+ xpos -7642
+ ypos 1038
+}
+Dot {
+ name Dot17
+ selected true
+ xpos -7442
+ ypos 1038
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge3
+ selected true
+ xpos -7476
+ ypos 1341
+}
+Dot {
+ name Dot305
+ selected true
+ xpos -7442
+ ypos 1494
+}
+push $N5ff12990
+Dot {
+ name Dot291
+ selected true
+ xpos -7155
+ ypos -164
+}
+set N5ff17530 [stack 0]
+add_layer {refractFilter refractFilter.red refractFilter.green refractFilter.blue refractFilter.alpha}
+Shuffle {
+ in refractFilter
+ alpha black
+ name RefractionFilterS
+ autolabel "nuke.thisNode()\['label'].value()"
+ label RefractFilter
+ note_font_size 20
+ selected true
+ xpos -7266
+ ypos 1055
+ hide_input true
+}
+Unpremult {
+ name Unpremult10
+ selected true
+ xpos -7266
+ ypos 1089
+}
+Dot {
+ name Dot9
+ selected true
+ xpos -7232
+ ypos 1342
+}
+push $N5ff17530
+push $N5ff17530
+add_layer {refract refract.red refract.green refract.blue refract.alpha}
+Merge2 {
+ inputs 2
+ operation divide
+ Achannels refract
+ Bchannels refractFilter
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Refrdiv
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label "Raw Refract "
+ note_font_size 20
+ selected true
+ xpos -7189
+ ypos -146
+}
+Unpremult {
+ name Unpremult5
+ selected true
+ xpos -7189
+ ypos -112
+}
+Dot {
+ name Dot18
+ selected true
+ xpos -7155
+ ypos 1041
+}
+Dot {
+ name Dot20
+ selected true
+ xpos -6943
+ ypos 1041
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels rgb
+ output rgb
+ name Merge61
+ selected true
+ xpos -6977
+ ypos 1339
+}
+Dot {
+ name Dot307
+ selected true
+ xpos -6943
+ ypos 1457
+}
+push $N5ff17530
+Dot {
+ name Dot309
+ selected true
+ xpos -6631
+ ypos -167
+}
+set N5fa9be20 [stack 0]
+Dot {
+ name Dot14
+ selected true
+ xpos -6145
+ ypos -167
+}
+set N5fa9c190 [stack 0]
+Dot {
+ name Dot312
+ selected true
+ xpos -5640
+ ypos -167
+}
+add_layer {diffuse diffuse.red diffuse.green diffuse.blue diffuse.alpha}
+Shuffle {
+ in diffuse
+ alpha red2
+ name Dif
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label "Diffuse "
+ note_font_size 20
+ selected true
+ xpos -5674
+ ypos -149
+}
+Unpremult {
+ name Unpremult8
+ selected true
+ xpos -5674
+ ypos -115
+}
+Dot {
+ name Dot16
+ selected true
+ xpos -5640
+ ypos 1243
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -6227
+ ypos 1243
+}
+set N5fa9d2c0 [stack 0]
+Dot {
+ name Dot2
+ selected true
+ xpos -6717
+ ypos 1243
+}
+Dot {
+ name Dot4
+ selected true
+ xpos -6717
+ ypos 1270
+}
+push $N5fa9be20
+push $N5fa9be20
+add_layer {lighting lighting.red lighting.green lighting.blue lighting.alpha}
+Merge2 {
+ inputs 2
+ operation divide
+ Achannels lighting
+ Bchannels diffuse
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Lightdiv
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label "Raw Light "
+ note_font_size 20
+ selected true
+ xpos -6664
+ ypos -149
+}
+Unpremult {
+ name Unpremult6
+ selected true
+ xpos -6664
+ ypos -115
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge63
+ selected true
+ xpos -6665
+ ypos 1267
+}
+Dot {
+ name Dot318
+ selected true
+ xpos -6631
+ ypos 1334
+}
+push $N5fa9d2c0
+Dot {
+ name Dot21
+ selected true
+ xpos -6227
+ ypos 1267
+}
+push $N5fa9c190
+push $N5fa9c190
+add_layer {GI GI.red GI.green GI.blue GI.alpha}
+Merge2 {
+ inputs 2
+ operation divide
+ Achannels GI
+ Bchannels diffuse
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name GIdiv
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x700000
+ label "Raw GI"
+ note_font_size 20
+ selected true
+ xpos -6179
+ ypos -149
+}
+Unpremult {
+ name Unpremult7
+ selected true
+ xpos -6179
+ ypos -115
+}
+Merge2 {
+ inputs 2
+ operation multiply
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Merge68
+ selected true
+ xpos -6179
+ ypos 1264
+}
+Merge2 {
+ inputs 2
+ operation plus
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Lighting
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x7a7030ff
+ label Lighting
+ note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ note_font_color 0xffffffff
+ selected true
+ xpos -6179
+ ypos 1326
+}
+Remove {
+ operation keep
+ channels rgb
+ name rgb1
+ selected true
+ xpos -6179
+ ypos 1370
+}
+Merge2 {
+ inputs 2
+ operation plus
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Refractions1
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x8a8988ff
+ label Refraction
+ note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ note_font_color 0xffffffff
+ selected true
+ xpos -6179
+ ypos 1452
+}
+Merge2 {
+ inputs 2
+ operation plus
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Reflections1
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x4c7070ff
+ label Reflection
+ note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ note_font_color 0xffffffff
+ selected true
+ xpos -6179
+ ypos 1486
+}
+Merge2 {
+ inputs 2
+ operation plus
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name Specular1
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x8a563fff
+ label Specular
+ note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ note_font_color 0xffffffff
+ selected true
+ xpos -6179
+ ypos 1520
+}
+Merge2 {
+ inputs 2
+ operation plus
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name SelfIllum1
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x3d3d71ff
+ label Selfillum
+ note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ note_font_color 0xffffffff
+ selected true
+ xpos -6179
+ ypos 1554
+}
+Merge2 {
+ inputs 2
+ operation plus
+ Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+ output {rgba.red rgba.green rgba.blue -rgba.alpha}
+ name SSS
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0x3d91a7ff
+ label SSS
+ note_font "bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 20
+ note_font_color 0xffffffff
+ selected true
+ xpos -6179
+ ypos 1588
+}
+Remove {
+ operation keep
+ channels rgb
+ name Remove22
+ tile_color 0xd60000ff
+ selected true
+ xpos -6179
+ ypos 1622
+}
+push $N22a00d90
+PostageStamp {
+ name RGBA2
+ help Remove29
+ tile_color 0x99a4d3ff
+ note_font_size 20
+ selected true
+ xpos -6324
+ ypos 1713
+ hide_input true
+}
+Group {
+ inputs 2
+ name _______
+ tile_color 0xd60000ff
+ label Passes
+ note_font "DejaVu Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -6179
+ ypos 1690
+ addUserKnob {20 Choose}
+ addUserKnob {1 Message_1}
+ Message_1 Beauty
+ addUserKnob {1 Message_2 -STARTLINE}
+ Message_2 Passes
+ addUserKnob {22 Take_1 T "n = nuke.selectedNode()\nn\['which'].setValue(0)\n\n\ni=nuke.thisNode()\nu = i\['Message_1'].value()\ni\['label'].setValue(u)" +STARTLINE}
+ addUserKnob {22 Take_2 -STARTLINE T "n = nuke.selectedNode()\nn\['which'].setValue(1)\n\n\n\n\ni=nuke.thisNode()\nu = i\['Message_2'].value()\ni\['label'].setValue(u)"}
+ addUserKnob {22 Toggle T "n = nuke.selectedNode()\ncurrent = n\['which'].getValue()\nif current == 0:\n    n\['which'].setValue(1)\n    i=nuke.thisNode()\n    u = i\['Message_2'].value()\n    i\['label'].setValue(u)\n    i\['tile_color'].setValue(3590324479)\n    dep = i.dependencies(nuke.INPUTS)\[1]\n    dep\['tile_color'].setValue(3590324479)\nelse:\n    n\['which'].setValue(0)\n    i=nuke.thisNode()\n    u = i\['Message_1'].value()\n    i\['label'].setValue(u)\n    i\['tile_color'].setValue(2577716223)\n    dep = i.dependencies(nuke.INPUTS)\[0]\n    dep\['tile_color'].setValue(2577716223)" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 which T Switch1.which}
+}
+ Input {
+  inputs 0
+  name Input2
+  xpos -424
+  ypos 215
+  number 1
+ }
+ Input {
+  inputs 0
+  name Input1
+  xpos -230
+  ypos 197
+ }
+ Switch {
+  inputs 2
+  which 1
+  name Switch1
+  selected true
+  xpos -311
+  ypos 280
+ }
+ Output {
+  name Output1
+  xpos -311
+  ypos 356
+ }
+end_group
+ShuffleCopy {
+ inputs 2
+ in alpha
+ red red
+ green green
+ out alpha
+ name ShuffleCopy3
+ selected true
+ xpos -6179
+ ypos 2291
+}
+CopyBBox {
+ inputs 2
+ name CopyBBox1
+ selected true
+ xpos -6179
+ ypos 2349
+}
+Premult {
+ name Premultiply
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 30
+ selected true
+ xpos -6179
+ ypos 2396
+}
+ShuffleCopy {
+ inputs 2
+ red red
+ green green
+ out forward
+ name ShuffleCopy1
+ selected true
+ xpos -6179
+ ypos 2651
+}
+VectorBlur {
+ channels rgba
+ uv forward
+ scale 0.5
+ method forward
+ alpha rgba.alpha
+ name VectorBlur
+ note_font_size 20
+ selected true
+ xpos -6179
+ ypos 2684
+ disable true
+}
+Remove {
+ operation keep
+ channels rgba
+ name Remove24
+ selected true
+ xpos -6179
+ ypos 2718
+}
+ShuffleCopy {
+ inputs 2
+ red red
+ green green
+ out depth
+ name ShuffleCopy2
+ selected true
+ xpos -6179
+ ypos 3055
+}
+ZDefocus2 {
+ serializeKnob ""
+ center 74.4375
+ focal_point {3051.5 522.5}
+ name ZDefocus1
+ selected true
+ xpos -6179
+ ypos 3094
+ disable true
+}
+Remove {
+ operation keep
+ channels rgba
+ name Remove23
+ selected true
+ xpos -6179
+ ypos 3130
+}
+push $N5ff0a380
+Dot {
+ name Dot19
+ selected true
+ xpos -7349
+ ypos -488
+}
+Group {
+ name ID1
+ tile_color 0x3d3d3dff
+ label "<font color=\"Red\">\[value Red]\n<font color=\"Green\">\[value Green]\n<font color=\"Blue\">\[value Blue]\n"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_color 0xffffffff
+ selected true
+ xpos -7383
+ ypos -446
+ addUserKnob {20 User}
+ addUserKnob {41 Achannels l "ID channel" T ID2.Achannels}
+ addUserKnob {1 Red}
+ Red red
+ addUserKnob {1 Green}
+ Green green
+ addUserKnob {1 Blue}
+ Blue blue
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -576
+  ypos -367
+ }
+ Dot {
+  name Dot1
+  xpos -542
+  ypos -303
+ }
+set N5ff0add0 [stack 0]
+push $N5ff0add0
+ Dot {
+  name Dot2
+  xpos -667
+  ypos -303
+ }
+ Remove {
+  name Remove1
+  xpos -701
+  ypos -209
+ }
+ Merge2 {
+  inputs 2
+  Achannels none
+  Bchannels none
+  output rgb
+  name ID2
+  tile_color 0xffffffff
+  label "R=\[value Red]\nG=\[value Green]\nB=\[value Blue]\nframe \[value postage_stamp_frame]"
+  note_font_size 15
+  selected true
+  xpos -576
+  ypos -236
+  postage_stamp_frame 1001
+ }
+ Output {
+  name Output1
+  xpos -576
+  ypos -124
+ }
+end_group
+push $N5ff0c270
+Dot {
+ name Dot3
+ selected true
+ xpos -8166
+ ypos -488
+}
+add_layer {velocity velocity.red velocity.green velocity.blue velocity.alpha none velocity.blue velocity.alpha velocity.X velocity.Y velocity.Z velocity.x velocity.y velocity.z}
+Group {
+ name Group59
+ knobChanged "if nuke.thisKnob().name() == 'chan': \n    n = nuke.thisNode()\n\n    n\['label'].setValue(n\['chan'].value())\n    n\['channels'].setValue(n\['chan'].value())\n    n\['in'].setValue(n\['chan'].value())\n    print 'hallo'"
+ autolabel "nuke.thisNode()\['label'].value()"
+ tile_color 0xb18b00ff
+ label "velocity.red velocity.green velocity.blue"
+ note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 12
+ selected true
+ xpos -8200
+ ypos -416
+ addUserKnob {20 User}
+ addUserKnob {11 chan l Channels}
+ chan {velocity.red velocity.green velocity.blue -velocity.alpha}
+ addUserKnob {41 in l INVISIBLE +INVISIBLE T shufffle.in}
+ addUserKnob {41 channels l INVISIBLE +INVISIBLE T Remove49.channels}
+}
+end_group

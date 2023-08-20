@@ -1,0 +1,1340 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x44494401
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -563
+ ypos -454
+ bookmark false
+ bdwidth 708
+ bdheight 543
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x3a5b5b01
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -1628
+ ypos -401
+ bookmark false
+ bdwidth 750
+ bdheight 517
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x3a5b5b01
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ selected true
+ xpos -2670
+ ypos -406
+ bookmark false
+ bdwidth 750
+ bdheight 517
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x3a5b5b01
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -3544
+ ypos -392
+ bookmark false
+ bdwidth 750
+ bdheight 517
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ tile_color 0xffffffff
+ label "<b>Edge detect                ."
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -563
+ ypos -579
+}
+StickyNote {
+ inputs 0
+ name StickyNote2
+ tile_color 0xffffffff
+ label "<b>Blur/Defocus                ."
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos -1628
+ ypos -528
+}
+StickyNote {
+ inputs 0
+ name StickyNote3
+ tile_color 0xffffffff
+ label "<b>Blur/Defocus                ."
+ note_font "Helvetica bold Bold"
+ note_font_size 100
+ selected true
+ xpos -2670
+ ypos -533
+}
+StickyNote {
+ inputs 0
+ name StickyNote4
+ tile_color 0xffffffff
+ label "<b>Blur/Defocus                ."
+ note_font "Helvetica bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -3544
+ ypos -519
+}
+Group {
+ inputs 0
+ name ConstantMy4
+ tile_color 0xff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -553
+ ypos -369
+ addUserKnob {20 User}
+ addUserKnob {22 white l "<font color=\"White\">&#9786;" T "\nnuke.toNode(\"color\")\['black'].setValue(\[1,1,1,1])\nnuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294967040)\n" +STARTLINE}
+ addUserKnob {22 red l "<font color=\"Red\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278190335)\n"}
+ addUserKnob {22 yellow l "<font color=\"Yellow\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294902015)\n"}
+ addUserKnob {22 green l "<font color=\"Green\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16711935)\n"}
+ addUserKnob {22 gray l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[.5,.5,.5,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(2139062271)\n"}
+ addUserKnob {22 cyan l "<font color=\"Cyan\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16777215)\n"}
+ addUserKnob {22 blue l "<font color=\"Blue\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(65535)\n"}
+ addUserKnob {22 magenta l "<font color=\"Magenta\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278255615)\n"}
+ addUserKnob {22 black l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(255)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 whiteAlpha l "<font color=\"White\">&#9786;" T "nuke.toNode(\"color\")\['black'].setValue(1,3);nuke.toNode(\"color\")\['add'].setValue(0,3)" +STARTLINE}
+ addUserKnob {22 grayAlpha l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0.5,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {22 blackAlpha l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {26 ""}
+ addUserKnob {41 add l color T color.add}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Constant2.channels}
+ addUserKnob {41 format T Constant2.format}
+ addUserKnob {41 first l "frame range" T Constant2.first}
+ addUserKnob {41 last l "" -STARTLINE T Constant2.last}
+}
+ Constant {
+  inputs 0
+  format "1680 1050 0 0 1680 1050 1 "
+  name Constant2
+  tile_color 0xff
+  xpos -545
+  ypos -203
+  postage_stamp false
+ }
+ Grade {
+  channels rgba
+  black {0 0 0 1}
+  add {0 0 0 0}
+  name color
+  note_font_size 14
+  xpos -545
+  ypos -157
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -545
+  ypos -127
+ }
+ Output {
+  name Output1
+  xpos -545
+  ypos 4
+ }
+end_group
+Roto {
+ cliptype none
+ replace true
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44520000 x44034000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc227b7c0}
+        {x4451ffe8 x43e089f6}
+        {x4227b7c0}
+        {0 xc227b7c0}
+        {x4464fac9 x44033fdc}
+        {0 x4227b7c0}
+        {x4227b7c0}
+        {x4451ffe8 x44163abd}
+        {xc227b7c0}
+        {0 x4227b7c0}
+        {x443f0507 x44033fdc}
+        {0 xc227b7c0}}}
+      {cc
+       {f 8192}
+       {p
+        {xc227b7c0}
+        {}
+        {x4227b7c0}
+        {0 xc227b7c0}
+        {}
+        {0 x4227b7c0}
+        {x4227b7c0}
+        {}
+        {xc227b7c0}
+        {0 x4227b7c0}
+        {}
+        {0 xc227b7c0}}}}
+     {t x444ec000 x44064000}
+     {a osw 1 osf 0 str 1 spx x44520000 spy x44034000 sb 1 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 1
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {840 525}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ motionblur_shutter_offset_type centred
+ global_motionblur 0
+ openspline_width 1
+ source_black_outside true
+ name Roto3
+ selected true
+ xpos -553
+ ypos -330
+}
+Transform {
+ scale 9
+ center {840 525}
+ shutteroffset centred
+ name Transform3
+ selected true
+ xpos -553
+ ypos -293
+}
+Blur {
+ channels rgba
+ size 100
+ name Blur2
+ label "\[value size]"
+ selected true
+ xpos -553
+ ypos -267
+}
+Crop {
+ box {0 0 1680 1050}
+ name Crop3
+ selected true
+ xpos -553
+ ypos -149
+}
+Group {
+ inputs 0
+ name ConstantMy5
+ tile_color 0xffffff00
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -439
+ ypos -231
+ addUserKnob {20 User}
+ addUserKnob {22 white l "<font color=\"White\">&#9786;" T "\nnuke.toNode(\"color\")\['black'].setValue(\[1,1,1,1])\nnuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294967040)\n" +STARTLINE}
+ addUserKnob {22 red l "<font color=\"Red\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278190335)\n"}
+ addUserKnob {22 yellow l "<font color=\"Yellow\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294902015)\n"}
+ addUserKnob {22 green l "<font color=\"Green\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16711935)\n"}
+ addUserKnob {22 gray l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[.5,.5,.5,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(2139062271)\n"}
+ addUserKnob {22 cyan l "<font color=\"Cyan\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16777215)\n"}
+ addUserKnob {22 blue l "<font color=\"Blue\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(65535)\n"}
+ addUserKnob {22 magenta l "<font color=\"Magenta\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278255615)\n"}
+ addUserKnob {22 black l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(255)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 whiteAlpha l "<font color=\"White\">&#9786;" T "nuke.toNode(\"color\")\['black'].setValue(1,3);nuke.toNode(\"color\")\['add'].setValue(0,3)" +STARTLINE}
+ addUserKnob {22 grayAlpha l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0.5,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {22 blackAlpha l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {26 ""}
+ addUserKnob {41 add l color T color.add}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Constant2.channels}
+ addUserKnob {41 format T Constant2.format}
+ addUserKnob {41 first l "frame range" T Constant2.first}
+ addUserKnob {41 last l "" -STARTLINE T Constant2.last}
+}
+ Constant {
+  inputs 0
+  format "1680 1050 0 0 1680 1050 1 "
+  name Constant2
+  tile_color 0xff
+  xpos -545
+  ypos -203
+  postage_stamp false
+ }
+ Grade {
+  channels rgba
+  black {1 1 1 1}
+  add {0 0 0 0}
+  name color
+  note_font_size 14
+  xpos -545
+  ypos -157
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -545
+  ypos -127
+ }
+ Output {
+  name Output1
+  xpos -545
+  ypos 4
+ }
+end_group
+Grade {
+ white 3
+ black_clamp false
+ name Grade4
+ selected true
+ xpos -439
+ ypos -201
+}
+Merge2 {
+ inputs 2
+ operation mask
+ name Merge3
+ selected true
+ xpos -439
+ ypos -141
+}
+Dot {
+ name Dot4
+ selected true
+ xpos -405
+ ypos -39
+}
+Read {
+ inputs 0
+ file /home/kuchinal/Desktop/Desktop_actionPics/Robert_Downey_Jr_in_Tropic_Thunder_Wallpaper_12_1280.jpg
+ cacheLocal always
+ format "1680 1050 0 0 1680 1050 1 "
+ origset true
+ on_error black
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read3
+ selected true
+ xpos -304
+ ypos -310
+ postage_stamp false
+}
+FFT {
+ channels rgba
+ name FFT3
+ selected true
+ xpos -304
+ ypos -192
+}
+FFTMultiply {
+ inputs 2
+ channels rgba
+ name FFTMultiply3
+ selected true
+ xpos -304
+ ypos -43
+}
+InvFFT {
+ channels rgba
+ name InvFFT3
+ selected true
+ xpos -312
+ ypos 9
+}
+Group {
+ inputs 0
+ name ConstantMy2
+ tile_color 0xff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -1618
+ ypos -316
+ addUserKnob {20 User}
+ addUserKnob {22 white l "<font color=\"White\">&#9786;" T "\nnuke.toNode(\"color\")\['black'].setValue(\[1,1,1,1])\nnuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294967040)\n" +STARTLINE}
+ addUserKnob {22 red l "<font color=\"Red\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278190335)\n"}
+ addUserKnob {22 yellow l "<font color=\"Yellow\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294902015)\n"}
+ addUserKnob {22 green l "<font color=\"Green\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16711935)\n"}
+ addUserKnob {22 gray l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[.5,.5,.5,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(2139062271)\n"}
+ addUserKnob {22 cyan l "<font color=\"Cyan\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16777215)\n"}
+ addUserKnob {22 blue l "<font color=\"Blue\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(65535)\n"}
+ addUserKnob {22 magenta l "<font color=\"Magenta\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278255615)\n"}
+ addUserKnob {22 black l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(255)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 whiteAlpha l "<font color=\"White\">&#9786;" T "nuke.toNode(\"color\")\['black'].setValue(1,3);nuke.toNode(\"color\")\['add'].setValue(0,3)" +STARTLINE}
+ addUserKnob {22 grayAlpha l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0.5,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {22 blackAlpha l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {26 ""}
+ addUserKnob {41 add l color T color.add}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Constant2.channels}
+ addUserKnob {41 format T Constant2.format}
+ addUserKnob {41 first l "frame range" T Constant2.first}
+ addUserKnob {41 last l "" -STARTLINE T Constant2.last}
+}
+ Constant {
+  inputs 0
+  format "1680 1050 0 0 1680 1050 1 "
+  name Constant2
+  tile_color 0xff
+  xpos -545
+  ypos -203
+  postage_stamp false
+ }
+ Grade {
+  channels rgba
+  black {0 0 0 1}
+  add {0 0 0 0}
+  name color
+  note_font_size 14
+  xpos -545
+  ypos -157
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -545
+  ypos -127
+ }
+ Output {
+  name Output1
+  xpos -545
+  ypos 4
+ }
+end_group
+Roto {
+ cliptype none
+ replace true
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44520000 x44034000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc227b7c0}
+        {x4451ffe8 x43e089f6}
+        {x4227b7c0}
+        {0 xc227b7c0}
+        {x4464fac9 x44033fdc}
+        {0 x4227b7c0}
+        {x4227b7c0}
+        {x4451ffe8 x44163abd}
+        {xc227b7c0}
+        {0 x4227b7c0}
+        {x443f0507 x44033fdc}
+        {0 xc227b7c0}}}
+      {cc
+       {f 8192}
+       {p
+        {xc227b7c0}
+        {}
+        {x4227b7c0}
+        {0 xc227b7c0}
+        {}
+        {0 x4227b7c0}
+        {x4227b7c0}
+        {}
+        {xc227b7c0}
+        {0 x4227b7c0}
+        {}
+        {0 xc227b7c0}}}}
+     {t x444ec000 x44064000}
+     {a osw 1 osf 0 str 1 spx x44520000 spy x44034000 sb 1 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 1
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {840 525}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ motionblur_shutter_offset_type centred
+ global_motionblur 0
+ openspline_width 1
+ source_black_outside true
+ name Roto2
+ selected true
+ xpos -1618
+ ypos -270
+}
+Transform {
+ scale 10
+ center {840 525}
+ shutteroffset centred
+ name Transform2
+ selected true
+ xpos -1618
+ ypos -244
+}
+Blur {
+ channels rgba
+ size {100 100}
+ name Blur1
+ label "\[value size]"
+ selected true
+ xpos -1618
+ ypos -218
+}
+Crop {
+ box {0 0 1680 1050}
+ name Crop2
+ selected true
+ xpos -1618
+ ypos -126
+}
+Dot {
+ name Dot3
+ selected true
+ xpos -1584
+ ypos -61
+}
+Group {
+ inputs 0
+ name ConstantMy3
+ tile_color 0xffffff00
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -1504
+ ypos -227
+ addUserKnob {20 User}
+ addUserKnob {22 white l "<font color=\"White\">&#9786;" T "\nnuke.toNode(\"color\")\['black'].setValue(\[1,1,1,1])\nnuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294967040)\n" +STARTLINE}
+ addUserKnob {22 red l "<font color=\"Red\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278190335)\n"}
+ addUserKnob {22 yellow l "<font color=\"Yellow\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294902015)\n"}
+ addUserKnob {22 green l "<font color=\"Green\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16711935)\n"}
+ addUserKnob {22 gray l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[.5,.5,.5,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(2139062271)\n"}
+ addUserKnob {22 cyan l "<font color=\"Cyan\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16777215)\n"}
+ addUserKnob {22 blue l "<font color=\"Blue\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(65535)\n"}
+ addUserKnob {22 magenta l "<font color=\"Magenta\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278255615)\n"}
+ addUserKnob {22 black l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(255)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 whiteAlpha l "<font color=\"White\">&#9786;" T "nuke.toNode(\"color\")\['black'].setValue(1,3);nuke.toNode(\"color\")\['add'].setValue(0,3)" +STARTLINE}
+ addUserKnob {22 grayAlpha l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0.5,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {22 blackAlpha l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {26 ""}
+ addUserKnob {41 add l color T color.add}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Constant2.channels}
+ addUserKnob {41 format T Constant2.format}
+ addUserKnob {41 first l "frame range" T Constant2.first}
+ addUserKnob {41 last l "" -STARTLINE T Constant2.last}
+}
+ Constant {
+  inputs 0
+  format "1680 1050 0 0 1680 1050 1 "
+  name Constant2
+  tile_color 0xff
+  xpos -545
+  ypos -203
+  postage_stamp false
+ }
+ Grade {
+  channels rgba
+  black {1 1 1 1}
+  add {0 0 0 0}
+  name color
+  note_font_size 14
+  xpos -545
+  ypos -157
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -545
+  ypos -127
+ }
+ Output {
+  name Output1
+  xpos -545
+  ypos 4
+ }
+end_group
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge2
+ selected true
+ xpos -1504
+ ypos -65
+}
+Read {
+ inputs 0
+ file /home/kuchinal/Desktop/Desktop_actionPics/Robert_Downey_Jr_in_Tropic_Thunder_Wallpaper_12_1280.jpg
+ cacheLocal always
+ format "1680 1050 0 0 1680 1050 1 "
+ origset true
+ on_error black
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read2
+ selected true
+ xpos -1369
+ ypos -280
+ postage_stamp false
+}
+FFT {
+ channels rgba
+ name FFT2
+ selected true
+ xpos -1369
+ ypos -156
+}
+Grade {
+ inputs 1+1
+ white 0
+ black_clamp false
+ name Grade3
+ selected true
+ xpos -1369
+ ypos -65
+}
+InvFFT {
+ channels rgba
+ name InvFFT2
+ selected true
+ xpos -1369
+ ypos 38
+}
+Group {
+ inputs 0
+ name ConstantMy1
+ tile_color 0xff
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -2660
+ ypos -321
+ addUserKnob {20 User}
+ addUserKnob {22 white l "<font color=\"White\">&#9786;" T "\nnuke.toNode(\"color\")\['black'].setValue(\[1,1,1,1])\nnuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294967040)\n" +STARTLINE}
+ addUserKnob {22 red l "<font color=\"Red\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278190335)\n"}
+ addUserKnob {22 yellow l "<font color=\"Yellow\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294902015)\n"}
+ addUserKnob {22 green l "<font color=\"Green\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16711935)\n"}
+ addUserKnob {22 gray l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[.5,.5,.5,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(2139062271)\n"}
+ addUserKnob {22 cyan l "<font color=\"Cyan\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16777215)\n"}
+ addUserKnob {22 blue l "<font color=\"Blue\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(65535)\n"}
+ addUserKnob {22 magenta l "<font color=\"Magenta\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278255615)\n"}
+ addUserKnob {22 black l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(255)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 whiteAlpha l "<font color=\"White\">&#9786;" T "nuke.toNode(\"color\")\['black'].setValue(1,3);nuke.toNode(\"color\")\['add'].setValue(0,3)" +STARTLINE}
+ addUserKnob {22 grayAlpha l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0.5,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {22 blackAlpha l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {26 ""}
+ addUserKnob {41 add l color T color.add}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Constant2.channels}
+ addUserKnob {41 format T Constant2.format}
+ addUserKnob {41 first l "frame range" T Constant2.first}
+ addUserKnob {41 last l "" -STARTLINE T Constant2.last}
+}
+ Constant {
+  inputs 0
+  format "1680 1050 0 0 1680 1050 1 "
+  name Constant2
+  tile_color 0xff
+  xpos -545
+  ypos -203
+  postage_stamp false
+ }
+ Grade {
+  channels rgba
+  black {0 0 0 1}
+  add {0 0 0 0}
+  name color
+  note_font_size 14
+  xpos -545
+  ypos -157
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -545
+  ypos -127
+ }
+ Output {
+  name Output1
+  xpos -545
+  ypos 4
+ }
+end_group
+Roto {
+ cliptype none
+ replace true
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44520000 x44034000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {curvegroup Ellipse1 512 bezier
+     {{cc
+       {f 8192}
+       {p
+        {xc227b7c0}
+        {x4451ffe8 x43e089f6}
+        {x4227b7c0}
+        {0 xc227b7c0}
+        {x4464fac9 x44033fdc}
+        {0 x4227b7c0}
+        {x4227b7c0}
+        {x4451ffe8 x44163abd}
+        {xc227b7c0}
+        {0 x4227b7c0}
+        {x443f0507 x44033fdc}
+        {0 xc227b7c0}}}
+      {cc
+       {f 8192}
+       {p
+        {xc227b7c0}
+        {}
+        {x4227b7c0}
+        {0 xc227b7c0}
+        {}
+        {0 x4227b7c0}
+        {x4227b7c0}
+        {}
+        {xc227b7c0}
+        {0 x4227b7c0}
+        {}
+        {0 xc227b7c0}}}}
+     {t x444ec000 x44064000}
+     {a osw 1 osf 0 str 1 spx x44520000 spy x44034000 sb 1 tt x40e00000}}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 tt 7 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_openspline_width 1
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {840 525}
+ colorOverlay {0 0 0 0}
+ lifetime_type "all frames"
+ motionblur_shutter_offset_type centred
+ global_motionblur 0
+ openspline_width 1
+ source_black_outside true
+ name Roto1
+ selected true
+ xpos -2660
+ ypos -275
+}
+Transform {
+ scale 10
+ center {840 525}
+ shutteroffset centred
+ name Transform1
+ selected true
+ xpos -2660
+ ypos -249
+}
+Blur {
+ channels rgba
+ size {100 100}
+ name Blur3
+ label "\[value size]"
+ selected true
+ xpos -2660
+ ypos -223
+}
+Crop {
+ box {0 0 1680 1050}
+ name Crop1
+ selected true
+ xpos -2660
+ ypos -131
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -2626
+ ypos -66
+}
+Group {
+ inputs 0
+ name ConstantMy6
+ tile_color 0xffffff00
+ note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+ note_font_size 14
+ selected true
+ xpos -2546
+ ypos -232
+ addUserKnob {20 User}
+ addUserKnob {22 white l "<font color=\"White\">&#9786;" T "\nnuke.toNode(\"color\")\['black'].setValue(\[1,1,1,1])\nnuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294967040)\n" +STARTLINE}
+ addUserKnob {22 red l "<font color=\"Red\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278190335)\n"}
+ addUserKnob {22 yellow l "<font color=\"Yellow\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4294902015)\n"}
+ addUserKnob {22 green l "<font color=\"Green\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16711935)\n"}
+ addUserKnob {22 gray l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[.5,.5,.5,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(2139062271)\n"}
+ addUserKnob {22 cyan l "<font color=\"Cyan\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,1,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(16777215)\n"}
+ addUserKnob {22 blue l "<font color=\"Blue\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(65535)\n"}
+ addUserKnob {22 magenta l "<font color=\"Magenta\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[1,0,1,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(4278255615)\n"}
+ addUserKnob {22 black l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(\[0,0,0,1]);nuke.toNode(\"color\")\['add'].setValue(\[0,0,0,0])\n\nnuke.thisNode()\['tile_color'].setValue(255)\n"}
+ addUserKnob {26 ""}
+ addUserKnob {22 whiteAlpha l "<font color=\"White\">&#9786;" T "nuke.toNode(\"color\")\['black'].setValue(1,3);nuke.toNode(\"color\")\['add'].setValue(0,3)" +STARTLINE}
+ addUserKnob {22 grayAlpha l "<font color=\"Gray\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0.5,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {22 blackAlpha l "<font color=\"Black\">&#9786;" -STARTLINE T "nuke.toNode(\"color\")\['black'].setValue(0,3);nuke.toNode(\"color\")\['add'].setValue(0,3)"}
+ addUserKnob {26 ""}
+ addUserKnob {41 add l color T color.add}
+ addUserKnob {26 ""}
+ addUserKnob {41 channels T Constant2.channels}
+ addUserKnob {41 format T Constant2.format}
+ addUserKnob {41 first l "frame range" T Constant2.first}
+ addUserKnob {41 last l "" -STARTLINE T Constant2.last}
+}
+ Constant {
+  inputs 0
+  format "1680 1050 0 0 1680 1050 1 "
+  name Constant2
+  tile_color 0xff
+  xpos -545
+  ypos -203
+  postage_stamp false
+ }
+ Grade {
+  channels rgba
+  black {1 1 1 1}
+  add {0 0 0 0}
+  name color
+  note_font_size 14
+  xpos -545
+  ypos -157
+ }
+ Clamp {
+  channels alpha
+  name Clamp1
+  xpos -545
+  ypos -127
+ }
+ Output {
+  name Output1
+  xpos -545
+  ypos 4
+ }
+end_group
+Merge2 {
+ inputs 2
+ operation multiply
+ name Merge1
+ selected true
+ xpos -2546
+ ypos -70
+}
+Read {
+ inputs 0
+ file /home/kuchinal/Desktop/Desktop_actionPics/Robert_Downey_Jr_in_Tropic_Thunder_Wallpaper_12_1280.jpg
+ cacheLocal always
+ format "1680 1050 0 0 1680 1050 1 "
+ origset true
+ on_error black
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read1
+ selected true
+ xpos -2411
+ ypos -285
+ postage_stamp false
+}
+FFT {
+ channels rgba
+ name FFT1
+ selected true
+ xpos -2411
+ ypos -160
+}
+Grade {
+ inputs 1+1
+ white 0
+ black_clamp false
+ name Grade1
+ selected true
+ xpos -2411
+ ypos -70
+}
+InvFFT {
+ channels rgba
+ name InvFFT1
+ selected true
+ xpos -2411
+ ypos 26
+}
+StickyNote {
+ inputs 0
+ name StickyNote5
+ tile_color 0xffffffff
+ label "<b>reduce viewer  gain a lot to see the area to paint                ."
+ note_font_size 20
+ selected true
+ xpos -3522
+ ypos -212
+}
+Read {
+ inputs 0
+ file /home/kuchinal/Desktop/Desktop_actionPics/Robert_Downey_Jr_in_Tropic_Thunder_Wallpaper_12_1280.jpg
+ cacheLocal always
+ format "1680 1050 0 0 1680 1050 1 "
+ origset true
+ on_error black
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read4
+ selected true
+ xpos -3046
+ ypos -342
+ postage_stamp false
+}
+Grid {
+ opacity 0.1
+ number 430
+ name Grid1
+ selected true
+ xpos -3046
+ ypos -259
+}
+FFT {
+ channels rgb
+ name FFT4
+ selected true
+ xpos -3046
+ ypos -154
+}
+set N51858f10 [stack 0]
+RotoPaint {
+ cliptype none
+ replace true
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 2097152}
+    {t x44866000 x440dc000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}
+    {cubiccurve Brush14 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44c8e000 x42b20000 x3eea4000}
+       {x44c94000 x42b20000 x3f022000}
+       {x44cc4000 x42b80000 x3f1bc000}
+       {x44cfe000 x42c00000 x3f160000}
+       {x44d02000 x42c00000 x3f098000}
+       {x44ce8000 x42be0000 x3f21a000}
+       {x44ccc000 x42bc0000 x3f2cc000}
+       {x44ccc000 x42ba0000 x3f292000}
+       {x44cea000 x42bc0000 x3f198000}
+       {x44cf6000 x42c00000 x3f1cc000}
+       {x44cf2000 x42c00000 x3f2f6000}
+       {x44cde000 x42c00000 x3f382000}
+       {x44cda000 x42c20000 x3f2e8000}}}
+     {t x44cd7627 x42bc2762}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush13 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44cc4000 x42c40000 x3e9f4000}
+       {x44cc4000 x42c60000 x3ebcc000}
+       {x44cca000 x42bc0000 x3f1d8000}
+       {x44ccc000 x42b40000 x3f214000}
+       {x44cce000 x42ae0000 x3f22e000}
+       {x44cce000 x42b20000 x3f23c000}
+       {x44cd2000 x42cc0000 x3f210000}
+       {x44cd2000 x42de0000 x3f1ee000}
+       {x44cd2000 x42dc0000 x3f25c000}
+       {x44cd2000 x42ba0000 x3f2ca000}
+       {x44cd4000 x42aa0000 x3f3a8000}
+       {x44cd8000 x42b20000 x3f3f2000}
+       {x44cdc000 x42d60000 x3f314000}
+       {x44cd8000 x42d20000 x3f1fa000}
+       {x44cd4000 x42ca0000 x3e508000}}}
+     {t x44cd0666 x42c2aaab}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush12 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44c18000 x4403c000 x3ed54000}
+       {x44c20000 x44038000 x3f004000}
+       {x44c64000 x44038000 x3f138000}
+       {x44c6e000 x44038000}}}
+     {t x44c42800 x44039000}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush11 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x41900000 x446fc000 x3ee20000}
+       {x41700000 x446f8000 x3f170000}
+       {x40a00000 x446f4000 x3f406000}
+       {x40000000 x446f0000 x3f462000}
+       {x40e00000 x446f4000 x3f418000}
+       {x41200000 x446f4000 x3f3d6000}
+       {x41000000 x446f4000 x3f432000}
+       {x40000000 x446f0000 x3f4ac000}
+       {x40a00000 x446f4000 x3f47c000}
+       {x41200000 x446f8000 x3ea9c000}}}
+     {t x41033333 x446f4ccd}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush10 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x41900000 x42b40000 x3e94c000}
+       {x41980000 x42b40000 x3ec10000}
+       {x41900000 x42b40000 x3eecc000}
+       {x41880000 x42b60000 x3f2d8000}
+       {x41300000 x42b80000 x3f3c0000}
+       {x40e00000 x42b80000 x3f452000}
+       {x40c00000 x42b80000 x3f48a000}
+       {0 x42b80000 x3f480000}
+       {x40000000 x42ba0000 x3f488000}
+       {x41100000 x42be0000 x3f474000}
+       {x41800000 x42c00000 x3f09c000}}}
+     {t x4132e8ba x42b82e8c}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush9 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44514000 x42b80000 x3f0dc000}
+       {x4450c000 x42b80000 x3f1a4000}
+       {x44508000 x42b60000 x3f2f8000}
+       {x4453c000 x42ba0000 x3f3ea000}
+       {x445c8000 x42be0000 x3f3e6000}
+       {x445f0000 x42bc0000 x3f384000}
+       {x445dc000 x42bc0000 x3f3ac000}
+       {x44588000 x42bc0000 x3f40e000}
+       {x44578000 x42bc0000 x3f3fa000}
+       {x44530000 x42b60000 x3f3ee000}
+       {x4453c000 x42b40000 x3f3ea000}
+       {x445a8000 x42b80000 x3f406000}
+       {x445d4000 x42c00000 x3f458000}
+       {x445c4000 x42c40000 x3f1c0000}}}
+     {t x445796db x42ba9249}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush8 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44574000 x42c80000 x3ef20000}
+       {x44570000 x42cc0000 x3f0b8000}
+       {x4456c000 x42cc0000 x3f23e000}
+       {x4456c000 x42c40000 x3f29e000}
+       {x44574000 x42ae0000 x3f2e4000}
+       {x4457c000 x42c00000 x3f314000}
+       {x44578000 x42d40000 x3f27c000}
+       {x44568000 x42e60000 x3f216000}
+       {x4456c000 x42dc0000 x3f266000}
+       {x4457c000 x42ba0000 x3f2fe000}
+       {x4457c000 x42ae0000 x3f410000}
+       {x44580000 x42b80000 x3f40a000}
+       {x44588000 x42ce0000 x3f2b2000}
+       {x44588000 x42c40000 x3f290000}
+       {x44588000 x42aa0000 x3f3c6000}
+       {x4458c000 x42a60000 x3f3ea000}}}
+     {t x44579400 x42c2a000}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush7 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44ca2000 x446dc000 x3f0a2000}
+       {x44ca4000 x446dc000 x3f138000}
+       {x44cc4000 x446dc000 x3f2d6000}
+       {x44cf6000 x446e8000 x3f32e000}
+       {x44cfa000 x446e8000 x3f2e8000}
+       {x44ce0000 x446e4000 x3f342000}
+       {x44cb4000 x446e0000 x3f424000}
+       {x44cae000 x446dc000 x3f458000}
+       {x44caa000 x446dc000 x3f45c000}
+       {x44cdc000 x446e0000 x3f35a000}
+       {x44cfa000 x446e4000 x3f2bc000}
+       {x44cf4000 x446e8000 x3f300000}
+       {x44cc6000 x446e0000 x3f438000}
+       {x44cb0000 x446dc000 x3f46c000}
+       {x44cb0000 x446e0000 x3e508000}}}
+     {t x44cca000 x446e0889}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush6 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44cde000 x44728000 x3e93c000}
+       {x44cdc000 x44724000 x3f276000}
+       {x44cd8000 x44708000 x3f24e000}
+       {x44cd6000 x446f0000 x3f27a000}
+       {x44cd6000 x446b8000 x3f278000}
+       {x44cd6000 x446b4000 x3f288000}
+       {x44cd8000 x446e0000 x3f1e4000}
+       {x44cd0000 x4472c000 x3f126000}
+       {x44cca000 x44740000 x3f158000}
+       {x44cc8000 x44738000 x3f26c000}
+       {x44ccc000 x446fc000 x3f2b6000}
+       {x44cd0000 x446e8000 x3f2de000}
+       {x44cd0000 x446f4000 x3f2c8000}
+       {x44cc8000 x44718000 x3f248000}
+       {x44cc6000 x44710000 x3f29c000}
+       {x44ccc000 x446c8000 x3f312000}
+       {x44cda000 x446b0000 x3f164000}}}
+     {t x44cd1c3c x446fb0f1}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush5 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44cd6000 x44034000 x3ea10000}
+       {x44cd2000 x44034000 x3f222000}
+       {x44cca000 x44038000 x3f278000}
+       {x44cc6000 x44038000 x3f2c8000}
+       {x44ca0000 x44040000 x3f2ec000}
+       {x44c84000 x44040000 x3f38a000}
+       {x44c86000 x44040000 x3f3aa000}
+       {x44c88000 x44040000 x3f376000}
+       {x44caa000 x4403c000 x3f37a000}
+       {x44cd2000 x4403c000 x3f34e000}
+       {x44cda000 x44034000 x3f2f8000}
+       {x44cdc000 x44034000 x3f332000}
+       {x44cda000 x44038000 x3f31a000}
+       {x44cd8000 x44038000 x3f31a000}
+       {x44cd2000 x44034000 x3f31a000}
+       {x44cb2000 x44030000 x3f32e000}
+       {x44cac000 x44030000 x3f366000}
+       {x44cd0000 x44030000 x3f340000}
+       {x44cf0000 x44034000 x3f33c000}
+       {x44cf6000 x44038000 x3f360000}
+       {x44cdc000 x44040000 x3f458000}
+       {x44cba000 x44048000 x3f276000}}}
+     {t x44cc35d1 x44038ba3}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush4 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44580000 x44074000 x3e85c000}
+       {x44580000 x44078000 x3ea88000}
+       {x44580000 x44074000 x3eccc000}
+       {x44580000 x4406c000 x3f202000}
+       {x4457c000 x44044000 x3f2c2000}
+       {x4457c000 x44028000 x3f2d4000}
+       {x4457c000 x44024000 x3f2ca000}
+       {x44578000 x44034000 x3f27e000}
+       {x4457c000 x44054000 x3f23c000}
+       {x4457c000 x44058000 x3f230000}
+       {x44580000 x44058000 x3f236000}
+       {x44574000 x44040000 x3f29e000}
+       {x44568000 x44014000 x3f2e2000}
+       {x4456c000 x44010000 x3f300000}
+       {x4457c000 x44020000 x3f2ee000}
+       {x44564000 x44038000 x3f20a000}}}
+     {t x44578c00 x44045000}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush3 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x446d4000 x44704000 x3eea0000}
+       {x446d0000 x44704000 x3f030000}
+       {x446c8000 x44700000 x3f108000}
+       {x446bc000 x446fc000 x3f2da000}
+       {x446c0000 x44700000 x3f31e000}
+       {x446b4000 x446fc000 x3f346000}
+       {x446ac000 x446f8000 x3f3ee000}
+       {x446a8000 x446ec000 x3f40e000}
+       {x446d8000 x446fc000 x3f440000}
+       {x446e0000 x44704000 x3f452000}
+       {x446a4000 x446fc000 x3f3ea000}}}
+     {t x446c1174 x446fd174}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush2 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44420000 x44700000 x3f012000}
+       {x4441c000 x44700000 x3f0b0000}
+       {x44418000 x44700000 x3f178000}
+       {x4441c000 x446fc000 x3f2b6000}
+       {x4443c000 x44700000 x3f2dc000}
+       {x44440000 x44700000 x3f2d2000}
+       {x4442c000 x446f8000 x3f320000}
+       {x4441c000 x446ec000 x3f34e000}
+       {x44440000 x446f4000 x3f31e000}
+       {x44454000 x446f8000 x3f32c000}
+       {x44454000 x446fc000 x3f240000}}}
+     {t x44431174 x446fae8c}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}
+    {cubiccurve Brush1 512 catmullrom
+     {cc
+      {f 2080}
+      {p
+       {x44578000 x446f0000 x3f034000}
+       {x44574000 x446f0000 1}
+       {x44578000 x446f0000 x3f2aa000}
+       {x4457c000 x446f4000 x3f2a0000}
+       {x44574000 x446f0000 x3f2be000}
+       {x44568000 x446f0000 x3f2e2000}
+       {x4455c000 x446ec000 x3f2f6000}
+       {x44564000 x446ec000 x3f2ee000}
+       {x44574000 x446f0000 x3f2d0000}
+       {x44590000 x446f8000 x3f2c2000}
+       {x445a4000 x44700000 x3f2b0000}
+       {x445a0000 x44700000 x3f31e000}
+       {x44590000 x446fc000 x3f390000}
+       {x4457c000 x446f8000 x3f3c8000}
+       {x44574000 x446f0000 x3f3d0000}
+       {x44578000 x446f0000 x3f3ac000}
+       {x44584000 x446f8000 x3f390000}
+       {x44594000 x446fc000 x3f386000}
+       {x44598000 x44700000 x3f382000}
+       {x445a0000 x44704000 x3f388000}
+       {x4459c000 x44704000 x3f3b4000}
+       {x44584000 x446fc000 x3f400000}
+       {x44570000 x446f4000 x3f402000}
+       {x4456c000 x446f0000 x3f3f8000}
+       {x44574000 x446f0000 x3f3e4000}
+       {x44580000 x446f4000 x3f3c4000}
+       {x4458c000 x446f8000 x3f3b8000}
+       {x4458c000 x446fc000 x3f3c6000}
+       {x4457c000 x446f8000 x3f428000}
+       {x4457c000 x446f4000 x3f44a000}
+       {x44580000 x446f4000 x3f0ce000}
+       {x44588000 x446f4000 x3ebc8000}}}
+     {t x44580a00 x446f6000}
+     {a ro 0 go 0 bo 0 ao 0 opc x3f000000 bs x42100000 bu 1 str 1 spx x44866000 spy x440dc000 sb 1 ltt x40000000 tt x41880000}}}}}}
+ toolbox {brush {
+  { selectAll h 1 str 1 ssx 1 ssy 1 sf 1 ep1 5 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush opc 0.5 bs 36 str 1 ssx 1 ssy 1 sf 1 sb 1 tt 17 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_opacity 0.5
+ toolbar_brush_size 36
+ toolbar_brush_hardness 0.200000003
+ toolbar_lifetime_type single
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1075 567}
+ colorOverlay {0 0 0 0}
+ opacity 0.5
+ motionblur_on true
+ global_motionblur 0
+ openspline_width 2
+ brush_size 36
+ brush_spacing 0.05000000075
+ brush_hardness 0.200000003
+ source_black_outside true
+ name RotoPaint1
+ label paintOut
+ note_font_size 14
+ selected true
+ xpos -3386
+ ypos -164
+}
+Crop {
+ box {0 0 1680 1050}
+ name Crop4
+ selected true
+ xpos -3322
+ ypos -91
+}
+push $N51858f10
+Grade {
+ inputs 1+1
+ white 0
+ black_clamp false
+ name Grade2
+ selected true
+ xpos -3046
+ ypos -79
+}
+InvFFT {
+ channels rgb
+ name InvFFT4
+ selected true
+ xpos -3046
+ ypos 3
+}

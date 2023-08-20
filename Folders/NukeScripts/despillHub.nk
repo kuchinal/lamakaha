@@ -1,0 +1,1376 @@
+set cut_paste_input [stack 0]
+version 8.0 v1
+Dot {
+ inputs 0
+ name Dot9
+ selected true
+ xpos 307
+ ypos -86
+ hide_input true
+}
+Dot {
+ label "\nmask C"
+ note_font "Verdana Bold"
+ note_font_size 14
+ note_font_color 0x6368ff
+ selected true
+ xpos 248
+ ypos -86
+}
+Dot {
+ inputs 0
+ name Dot8
+ selected true
+ xpos 307
+ ypos -133
+ hide_input true
+}
+Dot {
+ name Dot11
+ label "\n  maskB"
+ note_font "Verdana Bold"
+ note_font_size 14
+ note_font_color 0x6368ff
+ selected true
+ xpos 235
+ ypos -133
+}
+Dot {
+ inputs 0
+ name Dot7
+ selected true
+ xpos 305
+ ypos -174
+ hide_input true
+}
+Dot {
+ name Dot10
+ label "\n  mask A"
+ note_font "Verdana Bold"
+ note_font_size 14
+ note_font_color 0x6368ff
+ selected true
+ xpos 235
+ ypos -174
+}
+push $cut_paste_input
+Dot {
+ name Dot6
+ selected true
+ xpos 200
+ ypos -174
+}
+Group {
+ inputs 4
+ name DespillHUB
+ tile_color 0x5400ff
+ note_font_color 0xffffffff
+ selected true
+ xpos 166
+ ypos -89
+ addUserKnob {20 extendA}
+ addUserKnob {41 screenType l "screen type" -STARTLINE T DespilMadness.screenType}
+ addUserKnob {6 enable -STARTLINE}
+ addUserKnob {6 fullscreen -STARTLINE}
+ fullscreen true
+ addUserKnob {41 algorithm l "despill algorithm" T DespilMadness.algorithm}
+ addUserKnob {41 LimitPercentage l "fine tune" T DespilMadness.LimitPercentage}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 sourceLuma l "restore source luminance" T DespilMadness.sourceLuma}
+ addUserKnob {41 saturation T DespilMadness.saturation}
+ addUserKnob {41 gamma T DespilMadness.gamma}
+ addUserKnob {41 offset T DespilMadness.offset}
+ addUserKnob {26 ""}
+ addUserKnob {41 which l mix T DespilMadness.which}
+ addUserKnob {20 extendB}
+ addUserKnob {41 screenType_1 l "screen type" T DespilMadness1.screenType}
+ addUserKnob {6 enable_1 l enable -STARTLINE}
+ addUserKnob {41 algorithm_1 l "despill algorithm" T DespilMadness1.algorithm}
+ addUserKnob {41 LimitPercentage_1 l "fine tune" T DespilMadness1.LimitPercentage}
+ addUserKnob {26 ""}
+ addUserKnob {41 sourceLuma_1 l "restore source luminance" T DespilMadness1.sourceLuma}
+ addUserKnob {41 saturation_1 l saturation T DespilMadness1.saturation}
+ addUserKnob {41 gamma_1 l gamma T DespilMadness1.gamma}
+ addUserKnob {41 offset_1 l offset T DespilMadness1.offset}
+ addUserKnob {26 ""}
+ addUserKnob {41 which_1 l mix T DespilMadness1.which}
+ addUserKnob {20 extendC}
+ addUserKnob {41 screenType_2 l "screen type" T DespilMadness2.screenType}
+ addUserKnob {6 enable_2 l enable -STARTLINE}
+ addUserKnob {41 algorithm_2 l "despill algorithm" T DespilMadness2.algorithm}
+ addUserKnob {41 LimitPercentage_2 l "fine tune" T DespilMadness2.LimitPercentage}
+ addUserKnob {26 spacer_1 l " "}
+ addUserKnob {41 sourceLuma_2 l "restore source luminance" T DespilMadness2.sourceLuma}
+ addUserKnob {41 saturation_2 l saturation T DespilMadness2.saturation}
+ addUserKnob {41 gamma_2 l gamma T DespilMadness2.gamma}
+ addUserKnob {41 offset_2 l offset T DespilMadness2.offset}
+ addUserKnob {26 ""}
+ addUserKnob {41 which_2 l mix T DespilMadness2.which}
+}
+ Input {
+  inputs 0
+  xpos -472
+  ypos 226
+  number 3
+ }
+ Input {
+  inputs 0
+  name FG
+  xpos -596
+  ypos -36
+ }
+ Dot {
+  name Dot11
+  xpos -562
+  ypos 20
+ }
+set N1bcbf9c0 [stack 0]
+ Dot {
+  name Dot12
+  xpos -694
+  ypos 19
+ }
+set N1bcbfd30 [stack 0]
+ Dot {
+  name Dot15
+  xpos -798
+  ypos 19
+ }
+set N1bcc00a0 [stack 0]
+ Dot {
+  name Dot19
+  xpos -908
+  ypos 19
+ }
+ Group {
+  name DespilMadness2
+  note_font "Bitstream Vera Sans"
+  xpos -942
+  ypos 94
+  mapsize {0.15 0.15}
+  addUserKnob {20 DespillMadness l "Despill Settings"}
+  addUserKnob {41 screenType l "screen type" T GizmoControl.screenType}
+  addUserKnob {41 algorithm l "despill algorithm" T GizmoControl.algorithm}
+  addUserKnob {41 LimitPercentage l "fine tune" T RedLimitsGreen.LimitPercentage}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_2 l "" +STARTLINE T "spill area correction"}
+  addUserKnob {26 spacer l " " T " "}
+  addUserKnob {6 sourceLuma l "restore source luminance" t "Restores luminance of original image." +STARTLINE}
+  sourceLuma true
+  addUserKnob {41 saturation T CC_SpillMap.saturation}
+  addUserKnob {41 gamma T CC_SpillMap.gamma}
+  addUserKnob {41 offset T CC_SpillMap.offset}
+  addUserKnob {26 ""}
+  addUserKnob {41 spillMatteOut l "output spill matte in alpha" T GizmoControl.spillMatteOut}
+  addUserKnob {26 ""}
+  addUserKnob {41 maskChannel l mask T KeymixMask.maskChannel}
+  addUserKnob {6 invmsk l invert -STARTLINE}
+  addUserKnob {41 which l mix T mix.which}
+ }
+  Input {
+   inputs 0
+   name img
+   xpos 262
+   ypos -342
+  }
+  Dot {
+   name Dot6
+   xpos 296
+   ypos -186
+  }
+set N37e77ca0 [stack 0]
+  Dot {
+   name Dot2
+   xpos 296
+   ypos -71
+  }
+set N37e78010 [stack 0]
+  Dot {
+   name Dot3
+   xpos 626
+   ypos -71
+  }
+set N37e78380 [stack 0]
+  Expression {
+   expr2 b>g*LimitPercentage?g*LimitPercentage:b
+   expr3 b-g*LimitPercentage
+   name GreenLimitsBlue1
+   xpos 728
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e78380
+  Expression {
+   expr2 b>r*LimitPercentage?r*LimitPercentage:b
+   expr3 b-r*LimitPercentage
+   name RedLimitsBlue
+   xpos 592
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e78380
+  Expression {
+   expr2 b>(g+2*r)/2*LimitPercentage?(g+2*r)/2*LimitPercentage:b
+   expr3 b-(2*r+g)*LimitPercentage/2
+   name DoubleRedAve2
+   xpos 1125
+   ypos 43
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e78380
+  Expression {
+   expr2 b>(2*g+r)/2*LimitPercentage?(2*g+r)/2*LimitPercentage:b
+   expr3 b-(r+2*g)*LimitPercentage/2
+   name DoubleGreenAve
+   xpos 998
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage}}
+  }
+push $N37e78380
+  Expression {
+   expr2 b>(g+r)/2*LimitPercentage?(g+r)/2*LimitPercentage:b
+   expr3 b-(r+g)*LimitPercentage/2
+   name RedAndGreenLimitBlue
+   xpos 862
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+  Switch {
+   inputs 5
+   which {{GizmoControl.algorithm i}}
+   name SwitchBlue
+   xpos 728
+   ypos 190
+  }
+  Dot {
+   name Dot5
+   xpos 762
+   ypos 370
+  }
+push $N37e78010
+  Dot {
+   name Dot1
+   xpos 164
+   ypos -71
+  }
+set N38372950 [stack 0]
+  Expression {
+   expr1 g>b*LimitPercentage?b*LimitPercentage:g
+   expr3 g-b*LimitPercentage
+   name BlueLimitsGreen
+   xpos -15
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N38372950
+  Expression {
+   expr1 g>r*LimitPercentage?r*LimitPercentage:g
+   expr3 g-r*LimitPercentage
+   name RedLimitsGreen
+   xpos -160
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage 0.94
+  }
+push $N38372950
+  Expression {
+   expr1 g>(b+2*r)/3*LimitPercentage?(b+2*r)/3*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name DoubleRedAve
+   xpos 370
+   ypos 42
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N38372950
+  Expression {
+   expr1 g>(2*b+r)/3*LimitPercentage?(2*b+r)/3*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name DoubleBlueAve
+   xpos 257
+   ypos 42
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N38372950
+  Expression {
+   expr1 g>(b+r)/2*LimitPercentage?(b+r)/2*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name RedAveBlueLimitsGreen
+   xpos 130
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+  Switch {
+   inputs 5
+   which {{GizmoControl.algorithm i}}
+   name SwitchGreen
+   xpos -15
+   ypos 199
+  }
+  Dot {
+   name Dot4
+   xpos 19
+   ypos 370
+  }
+  Switch {
+   inputs 2
+   which {{GizmoControl.screenType i}}
+   name SwitchMain
+   xpos 257
+   ypos 366
+  }
+  Clamp {
+   channels alpha
+   name Clamp1
+   xpos 257
+   ypos 408
+  }
+  ColorCorrect {
+   maskChannelInput rgba.alpha
+   name CC_SpillMap
+   note_font Verdana
+   xpos 257
+   ypos 468
+  }
+set N383744d0 [stack 0]
+  Dot {
+   name Dot9
+   xpos 440
+   ypos 478
+  }
+  Dot {
+   name Dot10
+   xpos 440
+   ypos 1389
+  }
+  Input {
+   inputs 0
+   name mask
+   xpos -696
+   ypos -348
+   number 1
+  }
+  Expression {
+   channel0 {-rgba.red -rgba.green -rgba.blue none}
+   expr0 0
+   channel1 {-rgba.red -rgba.green -rgba.blue none}
+   expr1 0
+   channel2 {-rgba.red -rgba.green -rgba.blue none}
+   expr2 0
+   channel3 {rgba.alpha none none rgba.alpha}
+   expr3 a==0?0:a
+   name AlphaFix1
+   label "To avid Gizmo being in state of\nerror without something plugged in input."
+   xpos -696
+   ypos 861
+  }
+set N38375290 [stack 0]
+push $N38375290
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   name CopyMask
+   xpos -296
+   ypos 867
+  }
+  Invert {
+   name Invert1
+   xpos -296
+   ypos 943
+   disable {{parent.invmsk i}}
+  }
+push $N37e77ca0
+  Dot {
+   name Dot7
+   xpos -345
+   ypos -186
+  }
+  Dot {
+   name Dot8
+   xpos -345
+   ypos 551
+  }
+  Expression {
+   channel0 {-rgba.red -rgba.green -rgba.blue none}
+   expr0 0
+   channel1 {-rgba.red -rgba.green -rgba.blue none}
+   expr1 0
+   channel2 {-rgba.red -rgba.green -rgba.blue none}
+   expr2 0
+   channel3 {rgba.alpha none none rgba.alpha}
+   expr3 a==0?0:a
+   name AlphaFix
+   label "To avid Gizmo being in state of\nerror without something plugged in input."
+   xpos -27
+   ypos 534
+  }
+set N383763c0 [stack 0]
+  Dot {
+   name Dot11
+   xpos -113
+   ypos 614
+  }
+  Dot {
+   name Dot12
+   xpos -113
+   ypos 818
+  }
+set N38376aa0 [stack 0]
+push $N383763c0
+push $N383763c0
+push $N383744d0
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   from3 rgba.alpha
+   to3 rgba.alpha
+   name CopyAlpha
+   xpos 257
+   ypos 534
+  }
+set N38376e10 [stack 0]
+  Merge2 {
+   inputs 2
+   operation minus
+   name Merge3
+   xpos -27
+   ypos 672
+  }
+  Clamp {
+   name Clamp2
+   xpos -27
+   ypos 698
+  }
+  Saturation {
+   saturation 0
+   name Saturation2
+   xpos -27
+   ypos 736
+  }
+push $N38376e10
+  Merge2 {
+   inputs 2
+   operation plus
+   name RestoreLuma
+   xpos 257
+   ypos 736
+   disable {{!parent.sourceLuma i}}
+  }
+  Keymix {
+   inputs 3
+   maskChannel -rgba.alpha
+   name KeymixMask
+   xpos 257
+   ypos 943
+  }
+push $N38376aa0
+  Dot {
+   name Dot13
+   xpos -113
+   ypos 1087
+  }
+  Dissolve {
+   inputs 2
+   which 1
+   name mix
+   xpos 257
+   ypos 1077
+  }
+  Switch {
+   inputs 2
+   which {{GizmoControl.spillMatteOut i}}
+   name SwitchSpillMap
+   xpos 257
+   ypos 1385
+  }
+  Output {
+   name Output1
+   xpos 257
+   ypos 1485
+  }
+  NoOp {
+   inputs 0
+   name GizmoControl
+   xpos 875
+   ypos 414
+   addUserKnob {20 User}
+   addUserKnob {26 version l v1.0}
+   addUserKnob {4 screenType l "screen type" M {green blue}}
+   addUserKnob {4 algorithm l "despill algorithm" M {average "double green/blue average" "double red average" "red limit" "green/blue limit" ""}}
+   addUserKnob {6 spillMatteOut l "output spill matte in alpha" +STARTLINE}
+  }
+ end_group
+ Dot {
+  name Dot18
+  xpos -908
+  ypos 228
+ }
+ Input {
+  inputs 0
+  xpos -454
+  ypos 179
+  number 2
+ }
+push $N1bcc00a0
+ Group {
+  name DespilMadness1
+  note_font "Bitstream Vera Sans"
+  xpos -832
+  ypos 96
+  mapsize {0.15 0.15}
+  addUserKnob {20 DespillMadness l "Despill Settings"}
+  addUserKnob {41 screenType l "screen type" T GizmoControl.screenType}
+  addUserKnob {41 algorithm l "despill algorithm" T GizmoControl.algorithm}
+  addUserKnob {41 LimitPercentage l "fine tune" T RedLimitsGreen.LimitPercentage}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_2 l "" +STARTLINE T "spill area correction"}
+  addUserKnob {26 spacer l " " T " "}
+  addUserKnob {6 sourceLuma l "restore source luminance" t "Restores luminance of original image." +STARTLINE}
+  sourceLuma true
+  addUserKnob {41 saturation T CC_SpillMap.saturation}
+  addUserKnob {41 gamma T CC_SpillMap.gamma}
+  addUserKnob {41 offset T CC_SpillMap.offset}
+  addUserKnob {26 ""}
+  addUserKnob {41 spillMatteOut l "output spill matte in alpha" T GizmoControl.spillMatteOut}
+  addUserKnob {26 ""}
+  addUserKnob {41 maskChannel l mask T KeymixMask.maskChannel}
+  addUserKnob {6 invmsk l invert -STARTLINE}
+  addUserKnob {41 which l mix T mix.which}
+ }
+  Input {
+   inputs 0
+   name img
+   xpos 262
+   ypos -342
+  }
+  Dot {
+   name Dot6
+   xpos 296
+   ypos -186
+  }
+set N37e6f320 [stack 0]
+  Dot {
+   name Dot2
+   xpos 296
+   ypos -71
+  }
+set N37e6f690 [stack 0]
+  Dot {
+   name Dot3
+   xpos 626
+   ypos -71
+  }
+set N37e6fa00 [stack 0]
+  Expression {
+   expr2 b>g*LimitPercentage?g*LimitPercentage:b
+   expr3 b-g*LimitPercentage
+   name GreenLimitsBlue1
+   xpos 728
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e6fa00
+  Expression {
+   expr2 b>r*LimitPercentage?r*LimitPercentage:b
+   expr3 b-r*LimitPercentage
+   name RedLimitsBlue
+   xpos 592
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e6fa00
+  Expression {
+   expr2 b>(g+2*r)/2*LimitPercentage?(g+2*r)/2*LimitPercentage:b
+   expr3 b-(2*r+g)*LimitPercentage/2
+   name DoubleRedAve2
+   xpos 1125
+   ypos 43
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e6fa00
+  Expression {
+   expr2 b>(2*g+r)/2*LimitPercentage?(2*g+r)/2*LimitPercentage:b
+   expr3 b-(r+2*g)*LimitPercentage/2
+   name DoubleGreenAve
+   xpos 998
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage}}
+  }
+push $N37e6fa00
+  Expression {
+   expr2 b>(g+r)/2*LimitPercentage?(g+r)/2*LimitPercentage:b
+   expr3 b-(r+g)*LimitPercentage/2
+   name RedAndGreenLimitBlue
+   xpos 862
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+  Switch {
+   inputs 5
+   which {{GizmoControl.algorithm i}}
+   name SwitchBlue
+   xpos 728
+   ypos 190
+  }
+  Dot {
+   name Dot5
+   xpos 762
+   ypos 370
+  }
+push $N37e6f690
+  Dot {
+   name Dot1
+   xpos 164
+   ypos -71
+  }
+set N37e71210 [stack 0]
+  Expression {
+   expr1 g>b*LimitPercentage?b*LimitPercentage:g
+   expr3 g-b*LimitPercentage
+   name BlueLimitsGreen
+   xpos -15
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e71210
+  Expression {
+   expr1 g>r*LimitPercentage?r*LimitPercentage:g
+   expr3 g-r*LimitPercentage
+   name RedLimitsGreen
+   xpos -160
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage 0.94
+  }
+push $N37e71210
+  Expression {
+   expr1 g>(b+2*r)/3*LimitPercentage?(b+2*r)/3*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name DoubleRedAve
+   xpos 370
+   ypos 42
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e71210
+  Expression {
+   expr1 g>(2*b+r)/3*LimitPercentage?(2*b+r)/3*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name DoubleBlueAve
+   xpos 257
+   ypos 42
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N37e71210
+  Expression {
+   expr1 g>(b+r)/2*LimitPercentage?(b+r)/2*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name RedAveBlueLimitsGreen
+   xpos 130
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+  Switch {
+   inputs 5
+   which {{GizmoControl.algorithm i}}
+   name SwitchGreen
+   xpos -15
+   ypos 199
+  }
+  Dot {
+   name Dot4
+   xpos 19
+   ypos 370
+  }
+  Switch {
+   inputs 2
+   which {{GizmoControl.screenType i}}
+   name SwitchMain
+   xpos 257
+   ypos 366
+  }
+  Clamp {
+   channels alpha
+   name Clamp1
+   xpos 257
+   ypos 408
+  }
+  ColorCorrect {
+   maskChannelInput rgba.alpha
+   name CC_SpillMap
+   note_font Verdana
+   xpos 257
+   ypos 468
+  }
+set N37e72d90 [stack 0]
+  Dot {
+   name Dot9
+   xpos 440
+   ypos 478
+  }
+  Dot {
+   name Dot10
+   xpos 440
+   ypos 1389
+  }
+  Input {
+   inputs 0
+   name mask
+   xpos -696
+   ypos -348
+   number 1
+  }
+  Expression {
+   channel0 {-rgba.red -rgba.green -rgba.blue none}
+   expr0 0
+   channel1 {-rgba.red -rgba.green -rgba.blue none}
+   expr1 0
+   channel2 {-rgba.red -rgba.green -rgba.blue none}
+   expr2 0
+   channel3 {rgba.alpha none none rgba.alpha}
+   expr3 a==0?0:a
+   name AlphaFix1
+   label "To avid Gizmo being in state of\nerror without something plugged in input."
+   xpos -696
+   ypos 861
+  }
+set N37e73b50 [stack 0]
+push $N37e73b50
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   name CopyMask
+   xpos -296
+   ypos 867
+  }
+  Invert {
+   name Invert1
+   xpos -296
+   ypos 943
+   disable {{parent.invmsk i}}
+  }
+push $N37e6f320
+  Dot {
+   name Dot7
+   xpos -345
+   ypos -186
+  }
+  Dot {
+   name Dot8
+   xpos -345
+   ypos 551
+  }
+  Expression {
+   channel0 {-rgba.red -rgba.green -rgba.blue none}
+   expr0 0
+   channel1 {-rgba.red -rgba.green -rgba.blue none}
+   expr1 0
+   channel2 {-rgba.red -rgba.green -rgba.blue none}
+   expr2 0
+   channel3 {rgba.alpha none none rgba.alpha}
+   expr3 a==0?0:a
+   name AlphaFix
+   label "To avid Gizmo being in state of\nerror without something plugged in input."
+   xpos -27
+   ypos 534
+  }
+set N37e74c80 [stack 0]
+  Dot {
+   name Dot11
+   xpos -113
+   ypos 614
+  }
+  Dot {
+   name Dot12
+   xpos -113
+   ypos 818
+  }
+set N37e75360 [stack 0]
+push $N37e74c80
+push $N37e74c80
+push $N37e72d90
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   from3 rgba.alpha
+   to3 rgba.alpha
+   name CopyAlpha
+   xpos 257
+   ypos 534
+  }
+set N37e756d0 [stack 0]
+  Merge2 {
+   inputs 2
+   operation minus
+   name Merge3
+   xpos -27
+   ypos 672
+  }
+  Clamp {
+   name Clamp2
+   xpos -27
+   ypos 698
+  }
+  Saturation {
+   saturation 0
+   name Saturation2
+   xpos -27
+   ypos 736
+  }
+push $N37e756d0
+  Merge2 {
+   inputs 2
+   operation plus
+   name RestoreLuma
+   xpos 257
+   ypos 736
+   disable {{!parent.sourceLuma i}}
+  }
+  Keymix {
+   inputs 3
+   maskChannel -rgba.alpha
+   name KeymixMask
+   xpos 257
+   ypos 943
+  }
+push $N37e75360
+  Dot {
+   name Dot13
+   xpos -113
+   ypos 1087
+  }
+  Dissolve {
+   inputs 2
+   which 1
+   name mix
+   xpos 257
+   ypos 1077
+  }
+  Switch {
+   inputs 2
+   which {{GizmoControl.spillMatteOut i}}
+   name SwitchSpillMap
+   xpos 257
+   ypos 1385
+  }
+  Output {
+   name Output1
+   xpos 257
+   ypos 1485
+  }
+  NoOp {
+   inputs 0
+   name GizmoControl
+   xpos 875
+   ypos 414
+   addUserKnob {20 User}
+   addUserKnob {26 version l v1.0}
+   addUserKnob {4 screenType l "screen type" M {green blue}}
+   addUserKnob {4 algorithm l "despill algorithm" M {average "double green/blue average" "double red average" "red limit" "green/blue limit" ""}}
+   addUserKnob {6 spillMatteOut l "output spill matte in alpha" +STARTLINE}
+  }
+ end_group
+ Dot {
+  name Dot17
+  xpos -798
+  ypos 182
+ }
+ Input {
+  inputs 0
+  xpos -367
+  ypos -68
+  number 1
+ }
+ Dot {
+  name Dot3
+  xpos -333
+  ypos 51
+ }
+set N3837a1a0 [stack 0]
+ Shuffle {
+  red white
+  green white
+  blue white
+  alpha white
+  name Shuffle1
+  tile_color 0xffffffff
+  label "White Alpha"
+  xpos -484
+  ypos 42
+ }
+ Dot {
+  name Dot2
+  xpos -450
+  ypos 103
+ }
+push $N3837a1a0
+ Merge2 {
+  inputs 2
+  operation copy
+  name Merge1
+  xpos -367
+  ypos 100
+  disable {{!parent.fullscreen}}
+ }
+ Dot {
+  name Dot1
+  xpos -333
+  ypos 143
+ }
+push $N1bcbfd30
+ Group {
+  name DespilMadness
+  note_font "Bitstream Vera Sans"
+  selected true
+  xpos -728
+  ypos 96
+  mapsize {0.15 0.15}
+  addUserKnob {20 DespillMadness l "Despill Settings"}
+  addUserKnob {41 screenType l "screen type" T GizmoControl.screenType}
+  addUserKnob {41 algorithm l "despill algorithm" T GizmoControl.algorithm}
+  addUserKnob {41 LimitPercentage l "fine tune" T RedLimitsGreen.LimitPercentage}
+  addUserKnob {26 ""}
+  addUserKnob {26 text_2 l "" +STARTLINE T "spill area correction"}
+  addUserKnob {26 spacer l " " T " "}
+  addUserKnob {6 sourceLuma l "restore source luminance" t "Restores luminance of original image." +STARTLINE}
+  sourceLuma true
+  addUserKnob {41 saturation T CC_SpillMap.saturation}
+  addUserKnob {41 gamma T CC_SpillMap.gamma}
+  addUserKnob {41 offset T CC_SpillMap.offset}
+  addUserKnob {26 ""}
+  addUserKnob {41 spillMatteOut l "output spill matte in alpha" T GizmoControl.spillMatteOut}
+  addUserKnob {26 ""}
+  addUserKnob {41 maskChannel l mask T KeymixMask.maskChannel}
+  addUserKnob {6 invmsk l invert -STARTLINE}
+  addUserKnob {41 which l mix T mix.which}
+ }
+  Input {
+   inputs 0
+   name img
+   xpos 262
+   ypos -342
+  }
+  Dot {
+   name Dot6
+   xpos 296
+   ypos -186
+  }
+set N366695d0 [stack 0]
+  Dot {
+   name Dot2
+   xpos 296
+   ypos -71
+  }
+set N36669940 [stack 0]
+  Dot {
+   name Dot3
+   xpos 626
+   ypos -71
+  }
+set N36669cb0 [stack 0]
+  Expression {
+   expr2 b>g*LimitPercentage?g*LimitPercentage:b
+   expr3 b-g*LimitPercentage
+   name GreenLimitsBlue1
+   xpos 728
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N36669cb0
+  Expression {
+   expr2 b>r*LimitPercentage?r*LimitPercentage:b
+   expr3 b-r*LimitPercentage
+   name RedLimitsBlue
+   xpos 592
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N36669cb0
+  Expression {
+   expr2 b>(g+2*r)/2*LimitPercentage?(g+2*r)/2*LimitPercentage:b
+   expr3 b-(2*r+g)*LimitPercentage/2
+   name DoubleRedAve2
+   xpos 1125
+   ypos 43
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N36669cb0
+  Expression {
+   expr2 b>(2*g+r)/2*LimitPercentage?(2*g+r)/2*LimitPercentage:b
+   expr3 b-(r+2*g)*LimitPercentage/2
+   name DoubleGreenAve
+   xpos 998
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage}}
+  }
+push $N36669cb0
+  Expression {
+   expr2 b>(g+r)/2*LimitPercentage?(g+r)/2*LimitPercentage:b
+   expr3 b-(r+g)*LimitPercentage/2
+   name RedAndGreenLimitBlue
+   xpos 862
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+  Switch {
+   inputs 5
+   which {{GizmoControl.algorithm i}}
+   name SwitchBlue
+   xpos 728
+   ypos 190
+  }
+  Dot {
+   name Dot5
+   xpos 762
+   ypos 370
+  }
+push $N36669940
+  Dot {
+   name Dot1
+   xpos 164
+   ypos -71
+  }
+set N3666b4c0 [stack 0]
+  Expression {
+   expr1 g>b*LimitPercentage?b*LimitPercentage:g
+   expr3 g-b*LimitPercentage
+   name BlueLimitsGreen
+   xpos -15
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N3666b4c0
+  Expression {
+   expr1 g>r*LimitPercentage?r*LimitPercentage:g
+   expr3 g-r*LimitPercentage
+   name RedLimitsGreen
+   xpos -160
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage 0.94
+  }
+push $N3666b4c0
+  Expression {
+   expr1 g>(b+2*r)/3*LimitPercentage?(b+2*r)/3*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name DoubleRedAve
+   xpos 370
+   ypos 42
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N3666b4c0
+  Expression {
+   expr1 g>(2*b+r)/3*LimitPercentage?(2*b+r)/3*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name DoubleBlueAve
+   xpos 257
+   ypos 42
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+push $N3666b4c0
+  Expression {
+   expr1 g>(b+r)/2*LimitPercentage?(b+r)/2*LimitPercentage:g
+   expr3 g-(r+b)*LimitPercentage/2
+   name RedAveBlueLimitsGreen
+   xpos 130
+   ypos 44
+   addUserKnob {20 User}
+   addUserKnob {7 LimitPercentage l "fine tune" R 0.5 1.5}
+   LimitPercentage {{RedLimitsGreen.LimitPercentage i}}
+  }
+  Switch {
+   inputs 5
+   which {{GizmoControl.algorithm i}}
+   name SwitchGreen
+   xpos -15
+   ypos 199
+  }
+  Dot {
+   name Dot4
+   xpos 19
+   ypos 370
+  }
+  Switch {
+   inputs 2
+   which {{GizmoControl.screenType i}}
+   name SwitchMain
+   xpos 257
+   ypos 366
+  }
+  Clamp {
+   channels alpha
+   name Clamp1
+   xpos 257
+   ypos 408
+  }
+  ColorCorrect {
+   maskChannelInput rgba.alpha
+   name CC_SpillMap
+   note_font Verdana
+   xpos 257
+   ypos 468
+  }
+set N37e6a410 [stack 0]
+  Dot {
+   name Dot9
+   xpos 440
+   ypos 478
+  }
+  Dot {
+   name Dot10
+   xpos 440
+   ypos 1389
+  }
+  Input {
+   inputs 0
+   name mask
+   xpos -696
+   ypos 806
+   number 1
+  }
+  Expression {
+   channel0 {-rgba.red -rgba.green -rgba.blue none}
+   expr0 0
+   channel1 {-rgba.red -rgba.green -rgba.blue none}
+   expr1 0
+   channel2 {-rgba.red -rgba.green -rgba.blue none}
+   expr2 0
+   channel3 {rgba.alpha none none rgba.alpha}
+   expr3 a==0?0:a
+   name AlphaFix1
+   label "To avid Gizmo being in state of\nerror without something plugged in input."
+   selected true
+   xpos -696
+   ypos 861
+  }
+set N37e6b1d0 [stack 0]
+push $N37e6b1d0
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   name CopyMask
+   xpos -296
+   ypos 867
+  }
+  Invert {
+   name Invert1
+   xpos -296
+   ypos 943
+   disable {{parent.invmsk i}}
+  }
+push $N366695d0
+  Dot {
+   name Dot7
+   xpos -345
+   ypos -186
+  }
+  Dot {
+   name Dot8
+   xpos -345
+   ypos 551
+  }
+  Expression {
+   channel0 {-rgba.red -rgba.green -rgba.blue none}
+   expr0 0
+   channel1 {-rgba.red -rgba.green -rgba.blue none}
+   expr1 0
+   channel2 {-rgba.red -rgba.green -rgba.blue none}
+   expr2 0
+   channel3 {rgba.alpha none none rgba.alpha}
+   expr3 a==0?0:a
+   name AlphaFix
+   label "To avid Gizmo being in state of\nerror without something plugged in input."
+   xpos -27
+   ypos 534
+  }
+set N37e6c300 [stack 0]
+  Dot {
+   name Dot11
+   xpos -113
+   ypos 614
+  }
+  Dot {
+   name Dot12
+   xpos -113
+   ypos 818
+  }
+set N37e6c9e0 [stack 0]
+push $N37e6c300
+push $N37e6c300
+push $N37e6a410
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   from3 rgba.alpha
+   to3 rgba.alpha
+   name CopyAlpha
+   xpos 257
+   ypos 534
+  }
+set N37e6cd50 [stack 0]
+  Merge2 {
+   inputs 2
+   operation minus
+   name Merge3
+   xpos -27
+   ypos 672
+  }
+  Clamp {
+   name Clamp2
+   xpos -27
+   ypos 698
+  }
+  Saturation {
+   saturation 0
+   name Saturation2
+   xpos -27
+   ypos 736
+  }
+push $N37e6cd50
+  Merge2 {
+   inputs 2
+   operation plus
+   name RestoreLuma
+   xpos 257
+   ypos 736
+   disable {{!parent.sourceLuma i}}
+  }
+  Keymix {
+   inputs 3
+   maskChannel -rgba.alpha
+   name KeymixMask
+   xpos 257
+   ypos 943
+  }
+push $N37e6c9e0
+  Dot {
+   name Dot13
+   xpos -113
+   ypos 1087
+  }
+  Dissolve {
+   inputs 2
+   which 1
+   name mix
+   xpos 257
+   ypos 1077
+  }
+  Switch {
+   inputs 2
+   which {{GizmoControl.spillMatteOut i}}
+   name SwitchSpillMap
+   xpos 257
+   ypos 1385
+  }
+  Output {
+   name Output1
+   xpos 257
+   ypos 1485
+  }
+  NoOp {
+   inputs 0
+   name GizmoControl
+   xpos 875
+   ypos 414
+   addUserKnob {20 User}
+   addUserKnob {26 version l v1.0}
+   addUserKnob {4 screenType l "screen type" M {green blue}}
+   addUserKnob {4 algorithm l "despill algorithm" M {average "double green/blue average" "double red average" "red limit" "green/blue limit" ""}}
+   addUserKnob {6 spillMatteOut l "output spill matte in alpha" +STARTLINE}
+  }
+ end_group
+ Dot {
+  name Dot13
+  xpos -694
+  ypos 142
+ }
+push $N1bcbf9c0
+ Merge2 {
+  inputs 2+1
+  operation copy
+  name Merge5
+  xpos -596
+  ypos 140
+  disable {{!parent.enable}}
+ }
+ Merge2 {
+  inputs 2+1
+  operation copy
+  name Merge6
+  xpos -596
+  ypos 179
+  disable {{!parent.enable_1}}
+ }
+ Merge2 {
+  inputs 2+1
+  operation copy
+  name Merge7
+  xpos -596
+  ypos 226
+  disable {{!parent.enable_2}}
+ }
+ Output {
+  name Output2
+  xpos -596
+  ypos 272
+ }
+end_group

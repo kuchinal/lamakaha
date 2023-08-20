@@ -1,0 +1,29 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Expression {
+ expr0 r+r1*max(b-(r*val+b*(1-val)),0)
+ expr1 g+g1*max(b-(r*val+b*(1-val)),0)
+ expr2 b-b1*max(b-(r*val+b*(1-val)),0)
+ name Unspill_chb1
+ tile_color 0xbfa5ff
+ selected true
+ xpos -1665
+ ypos 1887
+ disable true
+ addUserKnob {20 Unspillvalue}
+ addUserKnob {7 val l Value t "Standardvalue = 1.0" R -1 4}
+ val 1
+ addUserKnob {7 r1 l Red t "Standard = 0.0" R -1 4}
+ r1 0.48
+ addUserKnob {7 g1 l Green t "greenscreen stanard = 0.5\nelse = 0.0" R -1 4}
+ g1 -0.08
+ addUserKnob {7 b1 l Blue t "bluescreen standard = 0.5\nelse  = 0.0" R -1 4}
+ b1 0.52
+ addUserKnob {22 Store2 l blue_preset t "Set Value to 1.0\nred 0.0\ngree 0.0\nblue 0.5" T "nuke.thisNode().readKnobs( '''\ntemp_name0 \"\"\ntemp_expr0 \"\"\ntemp_name1 \"\"\ntemp_expr1 \"\"\ntemp_name2 \"\"\ntemp_expr2 \"\"\ntemp_name3 \"\"\ntemp_expr3 \"\"\nchannel0 \{rgba.red -rgba.green -rgba.blue none\}\nexpr0 r+r1*max(b-(r*val+b*(1-val)),0)\nchannel1 \{-rgba.red rgba.green -rgba.blue none\}\nexpr1 g+g1*max(b-(r*val+b*(1-val)),0)\nchannel2 \{-rgba.red -rgba.green rgba.blue none\}\nexpr2 b-b1*max(b-(r*val+b*(1-val)),0)\nchannel3 \{none none none rgba.alpha\}\nexpr3 \"\"\nmaskChannelMask rgba.alpha\nmaskChannelInput none\ninject false\ninvert_mask false\nfringe false\nprocess_mask false\nunpremult none\ninvert_unpremult false\nmix 1\nval 1\nr1 0\ng1 0\nb1 0.5''' )" +STARTLINE}
+ addUserKnob {22 Store1 l green_preset t "set Value to 1.0\nred 0.0\ngreen 0.5\nblue 0.0" -STARTLINE T "nuke.thisNode().readKnobs( '''\ntemp_name0 \"\"\ntemp_expr0 \"\"\ntemp_name1 \"\"\ntemp_expr1 \"\"\ntemp_name2 \"\"\ntemp_expr2 \"\"\ntemp_name3 \"\"\ntemp_expr3 \"\"\nchannel0 \{rgba.red -rgba.green -rgba.blue none\}\nexpr0 r+r1*max(g-(r*val+b*(1-val)),0)\nchannel1 \{-rgba.red rgba.green -rgba.blue none\}\nexpr1 g-g1*max(g-(r*val+b*(1-val)),0)\nchannel2 \{-rgba.red -rgba.green rgba.blue none\}\nexpr2 b+b1*max(g-(r*val+b*(1-val)),0)\nchannel3 \{none none none rgba.alpha\}\nexpr3 \"\"\nmaskChannelMask rgba.alpha\nmaskChannelInput none\ninject false\ninvert_mask false\nfringe false\nprocess_mask false\nunpremult none\ninvert_unpremult false\nmix 1\nval 1\nr1 0\ng1 0.5\nb1 0''' )"}
+ addUserKnob {22 color_picker_blue_on l colorpic_blue t "Use if bg is a bluescreen" T "nuke.thisNode().readKnobs( '''\ntemp_name0 \"\"\ntemp_expr0 \"\"\ntemp_name1 \"\"\ntemp_expr1 \"\"\ntemp_name2 \"\"\ntemp_expr2 \"\"\ntemp_name3 \"\"\ntemp_expr3 \"\"\nchannel0 \{rgba.red -rgba.green -rgba.blue none\}\nexpr0 r+r1*max(b-(r*val+b*(1-val)),0)\nchannel1 \{-rgba.red rgba.green -rgba.blue none\}\nexpr1 g+g1*max(b-(r*val+b*(1-val)),0)\nchannel2 \{-rgba.red -rgba.green rgba.blue none\}\nexpr2 b-b1*max(b-(r*val+b*(1-val)),0)\nchannel3 \{none none none rgba.alpha\}\nexpr3 \"\"\nmaskChannelMask rgba.alpha\nmaskChannelInput none\ninject false\ninvert_mask false\nfringe false\nprocess_mask false\nunpremult none\ninvert_unpremult false\nmix 1\nval 1\nr1 colorpic.r\ng1 colorpic.g\nb1 colorpic.b''' )" +STARTLINE}
+ addUserKnob {22 color_picker_on l colorpic_green T "nuke.thisNode().readKnobs( '''\ntemp_name0 \"\"\ntemp_expr0 \"\"\ntemp_name1 \"\"\ntemp_expr1 \"\"\ntemp_name2 \"\"\ntemp_expr2 \"\"\ntemp_name3 \"\"\ntemp_expr3 \"\"\nchannel0 \{rgba.red -rgba.green -rgba.blue none\}\nexpr0 r+r1*max(g-(r*val+b*(1-val)),0)\nchannel1 \{-rgba.red rgba.green -rgba.blue none\}\nexpr1 g-g1*max(g-(r*val+b*(1-val)),0)\nchannel2 \{-rgba.red -rgba.green rgba.blue none\}\nexpr2 b+b1*max(g-(r*val+b*(1-val)),0)\nchannel3 \{none none none rgba.alpha\}\nexpr3 \"\"\nmaskChannelMask rgba.alpha\nmaskChannelInput none\ninject false\ninvert_mask false\nfringe false\nprocess_mask false\nunpremult none\ninvert_unpremult false\nmix 1\nval 1\nr1 colorpic.r\ng1 colorpic.g\nb1 colorpic.b''' )" +STARTLINE}
+ addUserKnob {19 colorpic l colorpicker t "select_BG_color\ngreen + blue \nexpression"}
+ colorpic {0 0.8399999738 0.6171783805 0}
+}
