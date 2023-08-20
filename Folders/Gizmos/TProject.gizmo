@@ -51,8 +51,8 @@ Group {
   ypos -280
  }
  FrameHold {
-  firstFrame 46
   name FHold
+  selected true
   xpos 112
   ypos -229
   disable {{!parent.FreezeInput}}
@@ -77,13 +77,13 @@ Group {
   xpos 146
   ypos -96
  }
-set Na7c66c00 [stack 0]
+set N107c1d30 [stack 0]
  Dot {
   name Dot1
   xpos 14
   ypos -62
  }
-push $Na7c66c00
+push $N107c1d30
  Crop {
   box {{curve-parent.growBbox} {curve-parent.growBbox} {width+parent.growBbox} {height+parent.growBbox}}
   name Crop1
@@ -92,7 +92,7 @@ push $Na7c66c00
   addUserKnob {20 User}
   addUserKnob {22 cropToBbox l "Crop to Bounding Box" -STARTLINE T codeBBox()}
  }
-push $Na7c66c00
+push $N107c1d30
  Reformat {
   type "to box"
   format "4096 2160 0 0 4096 2160 1 4K_DCP"
