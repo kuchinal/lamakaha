@@ -151,9 +151,9 @@ nodesMenu.addCommand('Reformat','import myReformat; myReformat.myReformat()',"ct
 nodesMenu.addCommand("ReformatCrop","import ReformatCrop; ReformatCrop.ReformatCrop()",'ctrl+shift+r')
 nodesMenu.addCommand("Tracker", "nuke.createNode(\"Tracker4\")", "ctrl+t",icon="Tracker.png")
 
-nodesMenu.addCommand("Transform/CardToTrack/CardToTrack", 'nuke.createNode(\'CardToTrack\')',icon='my.png')
-nodesMenu.addCommand("Transform/CardToTrack/CProject", 'nuke.createNode(\'CProject\')',icon='CornerPin.png')
-nodesMenu.addCommand("Transform/CardToTrack/TProject", 'nuke.createNode(\'TProject\')',icon='Transform.png')
+nodesMenu.addCommand("Transform/CardToTrack/CardToTrack", 'nuke.createNode(\'CardToTrack2\')',icon='my.png')
+nodesMenu.addCommand("Transform/CardToTrack/CProject", 'nuke.createNode(\'CProject2\')',icon='CornerPin.png')
+nodesMenu.addCommand("Transform/CardToTrack/TProject", 'nuke.createNode(\'TProject2\')',icon='Transform.png')
 
 nodesMenu.addCommand('Nodegraph/Auto Backdrop', 'import autoBackdropp; autoBackdropp.autoBackdrop()', 'alt+b',icon = "Backdrop.png")
 nodesMenu.addCommand('Nodegraph/Auto Sticky', 'import autoSticky; autoSticky.autoSticky()', 'alt+n',icon = "Backdrop.png")

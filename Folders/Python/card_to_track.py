@@ -1173,7 +1173,7 @@ def corner_code():
         x = offset_nodes(x,y)
 
         try :
-            cp = nuke.nodes.CProject(xpos = x+110, ypos = y)
+            cp = nuke.nodes.CProject2(xpos = x+110, ypos = y)
             cp.setName("CP_"+label)
             cp['refFrame'].setValue(ref_frame)
             cp['label'].setValue("Matchmove\n"+str(ref_frame))
@@ -1229,7 +1229,7 @@ def transform_code():
     with nuke.Root():
         x = offset_nodes(x,y)
         try:
-            tr = nuke.nodes.TProject(xpos = x+110, ypos = y)
+            tr = nuke.nodes.TProject2(xpos = x+110, ypos = y)
             tr.setName("TP_"+label)
             tr['label'].setValue("Matchmove\n"+str(ref_frame))
             tr['card_to_track'].setValue(C2Tgroup.name()+":transform: "+label)
