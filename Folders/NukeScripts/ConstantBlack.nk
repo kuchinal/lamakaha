@@ -1,0 +1,11 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+Constant {
+ inputs 0
+ name Constant2
+ tile_color 0xff
+ selected true
+ xpos -566
+ ypos 205
+ postage_stamp false
+}

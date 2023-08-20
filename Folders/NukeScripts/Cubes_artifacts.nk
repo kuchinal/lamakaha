@@ -1,0 +1,109 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+Reformat {
+ inputs 0
+ type scale
+ scale {0.01 0.01}
+ name Reformat45
+ selected true
+ xpos -10729
+ ypos 16365
+}
+Noise {
+ replace true
+ size 5
+ zoffset {{curve x1001 0 l x1147 5}}
+ gain 1
+ gamma 0.1
+ center {1024 768}
+ name Noise24
+ selected true
+ xpos -10729
+ ypos 16399
+}
+Reformat {
+ type scale
+ scale {{1/parent.Reformat45.scale}}
+ filter Impulse
+ name Reformat46
+ selected true
+ xpos -10729
+ ypos 16423
+}
+Grade {
+ channels rgba
+ white 10
+ name Grade45
+ selected true
+ xpos -10729
+ ypos 16447
+}
+Multiply {
+ channels rgba
+ value {{curve x1117 1 x1138 0}}
+ name fade_65
+ selected true
+ xpos -10729
+ ypos 16486
+}
+push $cut_paste_input
+Reformat {
+ type scale
+ scale {0.01 0.01}
+ name Reformat29
+ selected true
+ xpos -10570
+ ypos 16393
+}
+Noise {
+ replace true
+ size 1
+ zoffset {{curve x1001 0 l x1147 5}}
+ gain 1
+ gamma 0.1
+ center {1024 768}
+ name Noise23
+ selected true
+ xpos -10570
+ ypos 16427
+}
+Reformat {
+ type scale
+ scale {{1/parent.Reformat29.scale}}
+ filter Impulse
+ name Reformat44
+ selected true
+ xpos -10570
+ ypos 16451
+}
+Grade {
+ channels rgba
+ white 10
+ name Grade44
+ selected true
+ xpos -10570
+ ypos 16475
+}
+Merge2 {
+ inputs 2
+ operation mask
+ bbox A
+ name Merge21
+ selected true
+ xpos -10570
+ ypos 16499
+}
+Multiply {
+ channels rgba
+ value 0.1
+ name fade_63
+ selected true
+ xpos -10570
+ ypos 16523
+}
+Dot {
+ name Dot181
+ selected true
+ xpos -10536
+ ypos 16583
+}

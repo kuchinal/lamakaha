@@ -1,0 +1,1436 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+push $cut_paste_input
+Group {
+name myPLO1
+knobChanged "\nif nuke.thisKnob().name() == 'lights': \n    all = nuke.allNodes()\n    PLO = nuke.thisNode()\n    channel = PLO\['lights'].value().split('_')\[1]\n    PLO\['label'].setValue(channel)\n    print channel\n    \n    for n in all:\n        if \"plo_diffuse\" in n\['name'].value():\n            n\['in'].setValue(\"plo_\"+channel+\"_diffuse\")\n        if \"plo_specular1\" in n\['name'].value():\n            n\['in'].setValue(\"plo_\"+channel+\"_specular\")\n        if \"plo_specular2\" in n\['name'].value():\n            n\['in'].setValue(\"plo_\"+channel+\"_specular2\")\n        if \"plo_specular3\" in n\['name'].value():\n            n\['in'].setValue(\"plo_\"+channel+\"_specular3\")\n        if \"plo_wetness\" in n\['name'].value():\n            n\['in'].setValue(\"plo_\"+channel+\"_wetness\")\n        if \"plo_rgb\" in n\['name'].value():\n            n\['out2'].setValue(\"plo_\"+channel+\"_rgb\")\n"
+tile_color 0x85c63bff
+label fill02
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 14
+selected true
+xpos -21975
+ypos -2353
+addUserKnob {20 User}
+addUserKnob {22 getLights l "get lights" t "collects all lights in the stream" T "n = nuke.thisNode()\nchannels = n.channels()\nlights = \[]\n\nfor one in channels:\n    if \"plo\" in one and \"rgb\" in one and \"red\" in one:\n        one = one.replace('.red','')\n        lights.append(one)\n        \ntry:\n    n.removeKnob(n\['lights'])\n    m = nuke.Enumeration_Knob(\"lights\",\"lights\",lights)\n    n.addKnob(m) \nexcept:  \n    m = nuke.Enumeration_Knob(\"lights\",\"lights\",lights)\n    n.addKnob(m) \n\n\nn = nuke.thisGroup()\nchannels = n.channels()\nlights = \[]\n\nfor one in channels:\n    if \"plo\" in one and \"rgb\" in one and \"red\" in one:\n        one = one.rpartition(\".\")\[0]\n        lights.append(one)\nprint lights\nL = 0\ntry:\n    shuffles = nuke.allNodes(\"ShuffleCopy\")\n    for shuffle in shuffles:\n        if \"lightLayer\" in shuffle\['name'].value():\n            print shuffle\['name'].value()\n            shuffle\['in'].setValue(lights\[L])\n            shuffle\['out2'].setValue(lights\[L])\n            L=L+1\nexcept:\n    print str(L) + \" lights\"\n    " +STARTLINE}
+addUserKnob {41 red l exposure T Exposure1.red}
+addUserKnob {41 multiply l gain T Grade1.multiply}
+addUserKnob {6 preview l "preview current" t "preview the current light selected in lights menu" +STARTLINE}
+addUserKnob {6 previewall l "preview all" t "preview of all available lights" -STARTLINE}
+addUserKnob {4 lights M {plo_env_rgb plo_fill01_rgb plo_fill02_rgb plo_key_rgb plo_ptl_rgb}}
+lights plo_fill02_rgb
+}
+BackdropNode {
+inputs 0
+name BackdropNode1
+tile_color 0x38263001
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 50
+xpos 1932
+ypos 330
+bookmark false
+bdwidth 584
+bdheight 469
+}
+BackdropNode {
+inputs 0
+name BackdropNode2
+tile_color 0x4f4f7701
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 50
+xpos 1930
+ypos 801
+bookmark false
+bdwidth 455
+bdheight 457
+}
+BackdropNode {
+inputs 0
+name BackdropNode3
+tile_color 0x51213001
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 50
+xpos 1935
+ypos 1255
+bookmark false
+bdwidth 450
+bdheight 412
+}
+BackdropNode {
+inputs 0
+name BackdropNode4
+tile_color 0x5b5b8e01
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 50
+xpos 1941
+ypos 1615
+bookmark false
+bdwidth 444
+bdheight 503
+}
+BackdropNode {
+inputs 0
+name BackdropNode5
+tile_color 0x49595101
+note_font "Helvetica bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 50
+xpos 1941
+ypos 2090
+bookmark false
+bdwidth 444
+bdheight 465
+}
+Input {
+inputs 0
+name AOVs
+xpos 2251
+ypos 146
+}
+Dot {
+name Dot46
+xpos 2285
+ypos 237
+}
+set N128aa970 [stack 0]
+Dot {
+name Dot20
+xpos 1476
+ypos 237
+}
+Dot {
+name DOD
+xpos 1476
+ypos 832
+}
+set N128b2f20 [stack 0]
+Dot {
+name Dot93
+xpos 1420
+ypos 832
+}
+Dot {
+name Dot95
+xpos 1420
+ypos 932
+}
+set N128bb640 [stack 0]
+Dot {
+name Dot98
+xpos 1420
+ypos 991
+}
+set N128bf960 [stack 0]
+Dot {
+name Dot100
+xpos 1420
+ypos 1053
+}
+set N128c3c80 [stack 0]
+Dot {
+name Dot101
+xpos 1420
+ypos 1123
+}
+set N128c7fa0 [stack 0]
+Dot {
+name Dot104
+xpos 1420
+ypos 1184
+}
+set N128cc2c0 [stack 0]
+Dot {
+name Dot111
+xpos 1420
+ypos 1246
+}
+set N128d05e0 [stack 0]
+Dot {
+name Dot112
+xpos 1420
+ypos 1290
+}
+set N128d4860 [stack 0]
+Dot {
+name Dot113
+xpos 1420
+ypos 1349
+}
+set N128d8c00 [stack 0]
+Dot {
+name Dot114
+xpos 1420
+ypos 1412
+}
+set N128dcf70 [stack 0]
+Dot {
+name Dot115
+xpos 1420
+ypos 1481
+}
+set N128e1290 [stack 0]
+Dot {
+name Dot116
+xpos 1420
+ypos 1542
+}
+set N128e55b0 [stack 0]
+Dot {
+name Dot117
+xpos 1420
+ypos 1606
+}
+set N128e98d0 [stack 0]
+Dot {
+name Dot118
+xpos 1420
+ypos 1661
+}
+set N128edaa0 [stack 0]
+Dot {
+name Dot119
+xpos 1420
+ypos 1721
+}
+set N128f1f40 [stack 0]
+Dot {
+name Dot120
+xpos 1420
+ypos 1783
+}
+set N128f6210 [stack 0]
+Dot {
+name Dot121
+xpos 1420
+ypos 1853
+}
+set N128fa5b0 [stack 0]
+Dot {
+name Dot122
+xpos 1420
+ypos 1913
+}
+set N128fe8d0 [stack 0]
+Dot {
+name Dot123
+xpos 1420
+ypos 1976
+}
+push $N128fe8d0
+push $N128fa5b0
+push $N128f6210
+push $N128f1f40
+push $N128edaa0
+push $N128e98d0
+push $N128e55b0
+push $N128e1290
+push $N128dcf70
+push $N128d8c00
+push $N128d4860
+push $N128d05e0
+push $N128cc2c0
+push $N128c7fa0
+push $N128c3c80
+push $N128bf960
+push $N128bb640
+push $N128b2f20
+Remove {
+name Remove
+xpos 1442
+ypos 867
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer
+xpos 1442
+ypos 928
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer40
+xpos 1442
+ypos 987
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer41
+xpos 1442
+ypos 1049
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer42
+xpos 1442
+ypos 1119
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer43
+xpos 1442
+ypos 1180
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer44
+xpos 1442
+ypos 1242
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer45
+xpos 1442
+ypos 1286
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer46
+xpos 1442
+ypos 1345
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer47
+xpos 1442
+ypos 1408
+}
+ShuffleCopy {
+inputs 2
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgba
+name lightLayer48
+xpos 1442
+ypos 1477
+}
+ShuffleCopy {
+inputs 2
+in rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgb
+name lightLayer49
+xpos 1442
+ypos 1538
+}
+ShuffleCopy {
+inputs 2
+in rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgb
+name lightLayer50
+xpos 1442
+ypos 1602
+}
+ShuffleCopy {
+inputs 2
+in rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 rgb
+name lightLayer51
+xpos 1442
+ypos 1657
+}
+add_layer {plo_ptl_rgb plo_ptl_rgb.red plo_ptl_rgb.green plo_ptl_rgb.blue}
+ShuffleCopy {
+inputs 2
+in plo_ptl_rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 plo_ptl_rgb
+name lightLayer52
+xpos 1442
+ypos 1717
+}
+add_layer {plo_key_rgb plo_key_rgb.red plo_key_rgb.green plo_key_rgb.blue}
+ShuffleCopy {
+inputs 2
+in plo_key_rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 plo_key_rgb
+name lightLayer53
+xpos 1442
+ypos 1779
+}
+add_layer {plo_fill02_rgb plo_fill02_rgb.red plo_fill02_rgb.green plo_fill02_rgb.blue}
+ShuffleCopy {
+inputs 2
+in plo_fill02_rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 plo_fill02_rgb
+name lightLayer54
+xpos 1442
+ypos 1849
+}
+add_layer {plo_fill01_rgb plo_fill01_rgb.red plo_fill01_rgb.green plo_fill01_rgb.blue}
+ShuffleCopy {
+inputs 2
+in plo_fill01_rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 plo_fill01_rgb
+name lightLayer55
+xpos 1442
+ypos 1909
+}
+add_layer {plo_env_rgb plo_env_rgb.red plo_env_rgb.green plo_env_rgb.blue}
+ShuffleCopy {
+inputs 2
+in plo_env_rgb
+alpha black
+black red
+white green
+red2 blue
+green2 black
+out2 plo_env_rgb
+name lightLayer56
+xpos 1442
+ypos 1972
+}
+LayerContactSheet {
+center true
+showLayerNames true
+name LayerContactSheet2
+xpos 1442
+ypos 2018
+}
+Dot {
+name Dot36
+xpos 1476
+ypos 2840
+}
+push $N128aa970
+Dot {
+name Dot8
+xpos 2285
+ypos 415
+}
+set N12a0d220 [stack 0]
+Dot {
+name Dot7
+xpos 2416
+ypos 415
+}
+Dot {
+name Dot37
+xpos 2416
+ypos 2620
+}
+set N12a15890 [stack 0]
+Input {
+inputs 0
+name mask
+xpos 2547
+ypos 476
+number 1
+}
+Dot {
+name Dot3
+xpos 2581
+ypos 594
+}
+set N12a1de50 [stack 0]
+Dot {
+name Dot9
+xpos 2066
+ypos 594
+}
+set N12a1daf0 [stack 0]
+Dot {
+name Dot41
+xpos 2066
+ypos 638
+}
+push $N12a1daf0
+push $N12a0d220
+Dot {
+name Dot71
+xpos 2105
+ypos 415
+}
+set N12a2a870 [stack 0]
+Dot {
+name Dot1
+xpos 1976
+ypos 415
+}
+add_layer {plo_fill02_diffuse plo_fill02_diffuse.red plo_fill02_diffuse.green plo_fill02_diffuse.blue}
+Shuffle {
+in plo_fill02_diffuse
+alpha red2
+out rgb
+name plo_diffuse
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label PLO_01
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 1942
+ypos 542
+}
+set N12a32ea0 [stack 0]
+EXPTool {
+inputs 1+1
+mode Stops
+gang false
+green {{red}}
+blue {{red}}
+name Exposure1
+label Main
+xpos 1942
+ypos 584
+}
+Grade {
+inputs 1+1
+multiply {1 1 1 1}
+name Grade1
+xpos 1942
+ypos 634
+}
+Dot {
+name Dot2
+xpos 1976
+ypos 678
+}
+set N12a5cc30 [stack 0]
+Dot {
+name Dot21
+xpos 1732
+ypos 678
+}
+Dot {
+name Dot48
+xpos 1742
+ypos 2569
+}
+push $N12a1de50
+Dot {
+name Dot4
+xpos 2581
+ypos 1059
+}
+set N12a32b00 [stack 0]
+Dot {
+name Dot42
+xpos 2063
+ypos 1059
+}
+set N12a6dab0 [stack 0]
+push $N12a6dab0
+push $N12a5cc30
+push $N12a32ea0
+push $N12a2a870
+add_layer {diffuse diffuse.red diffuse.green diffuse.blue diffuse.alpha}
+Shuffle {
+in diffuse
+alpha red2
+out rgb
+name Diffuse
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Diffuse
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 2071
+ypos 444
+}
+Remove {
+operation keep
+channels rgb
+name Remove2
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 10
+xpos 2071
+ypos 474
+}
+set N12a80890 [stack 0]
+Merge2 {
+inputs 2
+operation from
+Achannels rgb
+Bchannels rgb
+name Merge5
+xpos 2071
+ypos 544
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge7
+xpos 2071
+ypos 674
+}
+Dot {
+name Dot6
+xpos 2105
+ypos 700
+}
+set N12aa3c30 [stack 0]
+Dot {
+name Dot12
+xpos 2105
+ypos 726
+}
+set N12aa83e0 [stack 0]
+push $N12aa3c30
+push $N12a80890
+push $N12a0d220
+Merge2 {
+inputs 2
+operation from
+Achannels rgb
+Bchannels rgb
+name Merge2
+xpos 2251
+ypos 475
+}
+ShuffleCopy {
+inputs 2
+in rgb
+in2 rgb
+black red
+white green
+red2 blue
+out rgb
+out2 diffuse
+name ShuffleCopy1
+xpos 2251
+ypos 696
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge1
+xpos 2251
+ypos 722
+}
+Dot {
+name Dot13
+xpos 2285
+ypos 886
+}
+set N12aa7f30 [stack 0]
+Dot {
+name Dot64
+xpos 2103
+ypos 886
+}
+set N12ad8140 [stack 0]
+Dot {
+name Dot31
+xpos 1974
+ypos 886
+}
+add_layer {plo_fill02_specular plo_fill02_specular.red plo_fill02_specular.green plo_fill02_specular.blue}
+Shuffle {
+in plo_fill02_specular
+alpha red2
+out rgb
+name plo_specular1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label PLO_01
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 1940
+ypos 999
+}
+set N12ae0f60 [stack 0]
+EXPTool {
+inputs 1+1
+mode Stops
+red {{parent.Exposure1.red}}
+green {{parent.Exposure1.green}}
+blue {{parent.Exposure1.blue}}
+name Exposure2
+label Child
+xpos 1940
+ypos 1049
+disable {{parent.Exposure1.disable}}
+}
+Grade {
+inputs 1+1
+white {{parent.Grade1.white}}
+multiply {{parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply}}
+name Grade2
+xpos 1940
+ypos 1087
+}
+Dot {
+name Dot22
+xpos 1974
+ypos 1135
+}
+set N12b0d9f0 [stack 0]
+Dot {
+name Dot23
+xpos 1776
+ypos 1135
+}
+Dot {
+name Dot47
+xpos 1776
+ypos 2553
+}
+push $N12a32b00
+Dot {
+name Dot5
+xpos 2581
+ypos 1485
+}
+set N12b15bf0 [stack 0]
+Dot {
+name Dot43
+xpos 2058
+ypos 1485
+}
+set N12b1e750 [stack 0]
+push $N12b1e750
+push $N12b0d9f0
+push $N12ae0f60
+push $N12ad8140
+add_layer {specular specular.red specular.green specular.blue specular.alpha}
+Shuffle {
+in specular
+alpha red2
+name Refldiv9
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Specular1
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 2069
+ypos 915
+}
+Remove {
+operation keep
+channels rgb
+name Remove13
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 10
+xpos 2069
+ypos 945
+}
+set N12b1e1e0 [stack 0]
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge10
+xpos 2069
+ypos 1001
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge11
+xpos 2069
+ypos 1131
+}
+set N12b44b30 [stack 0]
+Dot {
+name Dot10
+xpos 2103
+ypos 1157
+}
+set N12b373b0 [stack 0]
+Dot {
+name Dot14
+xpos 2103
+ypos 1183
+}
+push $N12b373b0
+push $N12b1e1e0
+push $N12aa7f30
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge3
+xpos 2251
+ypos 944
+}
+ShuffleCopy {
+inputs 2
+in rgb
+in2 rgb
+black red
+white green
+red2 blue
+out rgb
+out2 specular
+name ShuffleCopy2
+xpos 2251
+ypos 1153
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge4
+xpos 2251
+ypos 1179
+}
+Dot {
+name Dot15
+xpos 2285
+ypos 1340
+}
+set N12b820e0 [stack 0]
+Dot {
+name Dot65
+xpos 2108
+ypos 1340
+}
+set N12b59f10 [stack 0]
+Dot {
+name Dot30
+xpos 1979
+ypos 1340
+}
+add_layer {plo_fill02_specular2 plo_fill02_specular2.red plo_fill02_specular2.green plo_fill02_specular2.blue}
+Shuffle {
+in plo_fill02_specular2
+alpha red2
+out rgb
+name plo_specular2
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label PLO_01
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 1945
+ypos 1436
+}
+set N12b8ed30 [stack 0]
+EXPTool {
+inputs 1+1
+mode Stops
+red {{parent.Exposure1.red}}
+green {{parent.Exposure1.green}}
+blue {{parent.Exposure1.blue}}
+name Exposure3
+label Child
+xpos 1945
+ypos 1475
+disable {{parent.Exposure1.disable}}
+}
+Grade {
+inputs 1+1
+white {{parent.Grade1.white}}
+multiply {{parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply}}
+name Grade3
+xpos 1945
+ypos 1525
+}
+Dot {
+name Dot25
+xpos 1979
+ypos 1566
+}
+set N12bb86b0 [stack 0]
+Dot {
+name Dot24
+xpos 1806
+ypos 1566
+}
+Dot {
+name Dot49
+xpos 1806
+ypos 2528
+}
+push 0
+push $N12b15bf0
+Dot {
+name Dot18
+xpos 2581
+ypos 1909
+}
+set N12bc5110 [stack 0]
+Dot {
+name Dot44
+xpos 2059
+ypos 1909
+}
+set N12bc93d0 [stack 0]
+push $N12bc93d0
+push $N12bb86b0
+push $N12b8ed30
+push $N12b59f10
+add_layer {specular2 specular2.red specular2.green specular2.blue specular2.alpha}
+Shuffle {
+in specular2
+alpha red2
+out rgb
+name Refldiv10
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Specular2
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 2074
+ypos 1369
+}
+Remove {
+operation keep
+channels rgb
+name Remove14
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 10
+xpos 2074
+ypos 1399
+}
+set N12bdb120 [stack 0]
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge12
+xpos 2074
+ypos 1438
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge13
+xpos 2074
+ypos 1562
+}
+set N12bef7b0 [stack 0]
+Dot {
+name Dot11
+xpos 2108
+ypos 1592
+}
+push $N12bef7b0
+push $N12bdb120
+push $N12b820e0
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge8
+xpos 2251
+ypos 1398
+}
+Merge2 {
+inputs 2
+operation plus
+name Merge6
+xpos 2251
+ypos 1562
+}
+ShuffleCopy {
+inputs 2
+in rgb
+in2 rgb
+black red
+white green
+red2 blue
+out rgb
+out2 specular2
+name ShuffleCopy3
+xpos 2251
+ypos 1588
+}
+Dot {
+name Dot33
+xpos 2285
+ypos 1702
+}
+set N12c1adc0 [stack 0]
+Dot {
+name Dot34
+xpos 2114
+ypos 1702
+}
+Dot {
+name Dot66
+xpos 2114
+ypos 1756
+}
+set N12c31040 [stack 0]
+Dot {
+name Dot29
+xpos 1985
+ypos 1756
+}
+add_layer {plo_fill02_specular3 plo_fill02_specular3.red plo_fill02_specular3.green plo_fill02_specular3.blue}
+Shuffle {
+in plo_fill02_specular3
+alpha red2
+out rgb
+name plo_specular3
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label PLO_01
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 1951
+ypos 1854
+}
+set N12c399a0 [stack 0]
+EXPTool {
+inputs 1+1
+mode Stops
+red {{parent.Exposure1.red}}
+green {{parent.Exposure1.green}}
+blue {{parent.Exposure1.blue}}
+name Exposure4
+label Child
+xpos 1951
+ypos 1899
+disable {{parent.Exposure1.disable}}
+}
+Grade {
+inputs 1+1
+white {{parent.Grade1.white}}
+multiply {{parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply}}
+name Grade4
+xpos 1951
+ypos 1937
+}
+Dot {
+name Dot28
+xpos 1985
+ypos 2008
+}
+set N12c65c20 [stack 0]
+Dot {
+name Dot26
+xpos 1828
+ypos 2006
+}
+push $N12bc5110
+Dot {
+name Dot19
+xpos 2581
+ypos 2344
+}
+Dot {
+name Dot45
+xpos 2073
+ypos 2344
+}
+set N12c72e20 [stack 0]
+push $N12c72e20
+push $N12c65c20
+push $N12c399a0
+push $N12c31040
+add_layer {specular3 specular3.red specular3.green specular3.blue}
+Shuffle {
+in specular3
+alpha red2
+out rgb
+name Refldiv11
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Specular3
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 2080
+ypos 1785
+}
+Remove {
+operation keep
+channels rgb
+name Remove15
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 10
+xpos 2080
+ypos 1815
+}
+set N12c69fe0 [stack 0]
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge14
+xpos 2080
+ypos 1856
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge15
+xpos 2080
+ypos 2004
+}
+set N12c991f0 [stack 0]
+Dot {
+name Dot16
+xpos 2114
+ypos 2043
+}
+push $N12c991f0
+push $N12c69fe0
+push $N12c1adc0
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge9
+xpos 2251
+ypos 1812
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge18
+xpos 2251
+ypos 2002
+}
+ShuffleCopy {
+inputs 2
+in rgb
+in2 rgb
+black red
+white green
+red2 blue
+out rgb
+out2 specular3
+name ShuffleCopy5
+xpos 2251
+ypos 2039
+}
+Dot {
+name Dot17
+xpos 2285
+ypos 2175
+}
+set N12cd28a0 [stack 0]
+Dot {
+name Dot67
+xpos 2114
+ypos 2175
+}
+set N12cd6b80 [stack 0]
+Dot {
+name Dot40
+xpos 1985
+ypos 2175
+}
+add_layer {plo_fill02_wetness plo_fill02_wetness.red plo_fill02_wetness.green plo_fill02_wetness.blue}
+Shuffle {
+in plo_fill02_wetness
+alpha red2
+out rgb
+name plo_wetness
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label PLO_01
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 1950
+ypos 2298
+}
+set N12cdebe0 [stack 0]
+EXPTool {
+inputs 1+1
+mode Stops
+red {{parent.Exposure1.red}}
+green {{parent.Exposure1.green}}
+blue {{parent.Exposure1.blue}}
+name Exposure5
+label Child
+selected true
+xpos 1950
+ypos 2334
+disable {{parent.Exposure1.disable}}
+}
+Grade {
+inputs 1+1
+white {{parent.Grade1.white}}
+multiply {{parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply} {parent.Grade1.multiply}}
+name Grade5
+xpos 1951
+ypos 2372
+}
+Dot {
+name Dot39
+xpos 1985
+ypos 2434
+}
+set N12cefa60 [stack 0]
+Dot {
+name Dot27
+xpos 1858
+ypos 2434
+}
+Merge2 {
+inputs 5+1
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge21
+xpos 1794
+ypos 2565
+}
+set N12d0fa10 [stack 0]
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy2
+xpos 1794
+ypos 2610
+}
+Dot {
+name Dot35
+xpos 1828
+ypos 2735
+}
+push $N12a15890
+Dot {
+name Dot38
+xpos 2416
+ypos 2646
+}
+push $N12d0fa10
+push $N12cefa60
+push $N12cdebe0
+push $N12cd6b80
+add_layer {wetness wetness.red wetness.green wetness.blue wetness.alpha}
+Shuffle {
+in wetness
+alpha red2
+out rgb
+name Selfdiv1
+autolabel "nuke.thisNode()\['label'].value()"
+tile_color 0x700000
+label Wetnes
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 15
+xpos 2080
+ypos 2204
+}
+Remove {
+operation keep
+channels rgb
+name Remove16
+autolabel "nuke.thisNode()\['label'].value()"
+label rgb
+note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 10
+xpos 2080
+ypos 2234
+}
+set N12d42d80 [stack 0]
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge16
+xpos 2080
+ypos 2300
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge17
+xpos 2081
+ypos 2430
+}
+set N12d57480 [stack 0]
+Dot {
+name Dot32
+xpos 2115
+ypos 2480
+}
+push $N12d57480
+push $N12d42d80
+push $N12cd28a0
+Merge2 {
+inputs 2
+operation from
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge19
+xpos 2251
+ypos 2233
+}
+Merge2 {
+inputs 2
+operation plus
+Achannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+Bchannels {rgba.red rgba.green rgba.blue -rgba.alpha}
+name Merge20
+xpos 2251
+ypos 2430
+}
+ShuffleCopy {
+inputs 2
+in rgb
+in2 rgb
+black red
+white green
+red2 blue
+out rgb
+out2 wetness
+name ShuffleCopy6
+xpos 2251
+ypos 2476
+}
+ShuffleCopy {
+inputs 2
+in rgb
+in2 rgb
+black red
+white green
+red2 blue
+out rgb
+out2 plo_fill02_rgb
+name plo_rgb
+xpos 2251
+ypos 2565
+}
+Copy {
+inputs 2
+from0 rgba.alpha
+to0 rgba.alpha
+name Copy1
+xpos 2251
+ypos 2636
+}
+Switch {
+inputs 2
+which {{parent.preview}}
+name Switch1
+xpos 2251
+ypos 2731
+}
+Switch {
+inputs 2
+which {{parent.previewall}}
+name Switch2
+xpos 2251
+ypos 2836
+}
+Output {
+name Output1
+xpos 2251
+ypos 2944
+}
+push $N12aa83e0
+push $N12b44b30
+Viewer {
+inputs 2
+frame 1020
+colour_sample_bbox {0.12890625 0.0546875 0.1298828125 0.0556640625}
+viewerProcess None
+name Viewer1
+xpos 3040
+ypos -10
+hide_input true
+}
+end_group

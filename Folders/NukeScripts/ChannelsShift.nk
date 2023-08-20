@@ -1,0 +1,142 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name CHannelsShift
+ selected true
+ xpos -715
+ ypos 667
+ addUserKnob {20 User}
+ addUserKnob {18 translate_x l "translate x" R -10 10}
+ translate_x {0 0 0}
+ addUserKnob {18 translate_y l "translate y" R -10 10}
+ translate_y {0 0 0}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {18 rotate R -10 10}
+ rotate {0 0 0}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {18 scale_x l "scale x" R -1 1}
+ scale_x {1 1 1}
+ addUserKnob {18 scale_y l "scale y" t "\t\t\t" R -1 1}
+ scale_y {1 1 1}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {18 skew R -10 10}
+ skew {0 0 0}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -485
+  ypos 219
+ }
+ Dot {
+  name Dot2
+  xpos -451
+  ypos 267
+ }
+set N11e16ca0 [stack 0]
+ Dot {
+  name Dot1
+  selected true
+  xpos -837
+  ypos 267
+ }
+set N11c65cc0 [stack 0]
+ Dot {
+  name Dot3
+  xpos -1147
+  ypos 267
+ }
+ Shuffle {
+  red black
+  green black
+  alpha blue
+  name BLUE
+  xpos -1179
+  ypos 324
+ }
+ Transform {
+  translate {{parent.translate_x.b} {parent.translate_y.b}}
+  rotate {{parent.rotate.b}}
+  scale {{parent.scale_x.b/10+.9} {parent.scale_y.b/10+.9}}
+  skew {{parent.skew.b/100}}
+  center {960 540}
+  black_outside false
+  name T_BLUE
+  xpos -1179
+  ypos 350
+ }
+ Dot {
+  name Dot5
+  xpos -1145
+  ypos 632
+ }
+push $N11c65cc0
+ Shuffle {
+  red black
+  blue black
+  alpha black
+  name GREEN
+  xpos -869
+  ypos 368
+ }
+ Transform {
+  translate {{parent.translate_x.g} {parent.translate_y.g}}
+  rotate {{parent.rotate.g}}
+  scale {{parent.scale_x.g/10+.9} {parent.scale_y.g/10+.9}}
+  skew {{parent.skew.g/100}}
+  center {960 540}
+  black_outside false
+  name T_GREEN
+  xpos -869
+  ypos 394
+ }
+ Dot {
+  name Dot4
+  xpos -835
+  ypos 573
+ }
+push $N11e16ca0
+ Shuffle {
+  green black
+  blue black
+  alpha black
+  name RED
+  xpos -485
+  ypos 306
+ }
+ Transform {
+  translate {{parent.translate_x.r} {parent.translate_y.r}}
+  rotate {{parent.rotate.r}}
+  scale {{parent.scale_x.r/10+.9} {parent.scale_y.r/10+.9}}
+  skew {{parent.skew.r/100}}
+  center {960 540}
+  black_outside false
+  name T_red
+  xpos -485
+  ypos 332
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red rgba.green -rgba.blue rgba.alpha}
+  Bchannels {rgba.red -rgba.green -rgba.blue rgba.alpha}
+  name Merge1
+  xpos -485
+  ypos 569
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  Achannels {-rgba.red -rgba.green rgba.blue rgba.alpha}
+  Bchannels {rgba.red rgba.green -rgba.blue rgba.alpha}
+  name Merge2
+  xpos -485
+  ypos 628
+ }
+ Output {
+  name Output1
+  xpos -485
+  ypos 669
+ }
+end_group

@@ -1,0 +1,513 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+push 0
+push $cut_paste_input
+Group {
+ inputs 3
+ name reflectionMy
+ selected true
+ xpos -589
+ ypos -188
+ addUserKnob {20 User}
+ addUserKnob {41 scale l "reflection quality" T Reformat2.scale}
+ addUserKnob {41 scale_1 l "edges quality" T Reformat3.scale}
+ addUserKnob {26 ""}
+ addUserKnob {41 specular T BasicMaterial1.specular}
+ addUserKnob {41 min_shininess l "min shininess" T BasicMaterial1.min_shininess}
+ addUserKnob {41 max_shininess l "max shininess" T BasicMaterial1.max_shininess}
+ addUserKnob {41 mix T Merge3.mix}
+ addUserKnob {26 ""}
+ addUserKnob {41 samples l " motion blur samples" T ScanlineRender4.samples}
+ addUserKnob {41 shutter T ScanlineRender4.shutter}
+ addUserKnob {41 shutteroffset l "shutter offset" T ScanlineRender4.shutteroffset}
+ addUserKnob {41 shuttercustomoffset l "" -STARTLINE T ScanlineRender4.shuttercustomoffset}
+ addUserKnob {26 ""}
+ addUserKnob {41 format l "output format" T Reformat1.format}
+ addUserKnob {6 q l "export object only" +STARTLINE}
+ addUserKnob {6 d l "no hold out" +STARTLINE}
+}
+ Sphere {
+  inputs 0
+  rows 5
+  columns 5
+  translate {{parent.input0.translate.x x1 19 x10 -19.39999962 x20 -18.50727463 x22 -2.45339632 x30 19} {parent.input0.translate.y x1 1.200000048 x10 1.200000048 x20 -14.89999962 x22 0.7491246462 x30 1.200000048} {parent.input0.translate.z x1 31.39999962 x10 17.39999962 x20 -18.73165512 x22 -6 x30 -26.20000076}}
+  uniform_scale 6
+  name Sphere2
+  label Object
+  note_font_size 14
+  xpos -581
+  ypos -43
+  addUserKnob {20 User}
+  addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,1,0])\nn\['pivot'].setValue(\[0,-1,0])"}
+  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ }
+ Input {
+  inputs 0
+  name cam
+  xpos -1494
+  ypos -46
+  number 2
+ }
+ Dot {
+  name Dot4
+  xpos -1460
+  ypos 627
+ }
+set Na9323f0 [stack 0]
+ Dot {
+  name Dot5
+  xpos -1460
+  ypos 883
+ }
+set Na936f10 [stack 0]
+ Input {
+  inputs 0
+  name env
+  xpos -302
+  ypos 18
+  number 1
+ }
+ Dot {
+  name Dot1
+  label environment3D
+  note_font_size 30
+  xpos -268
+  ypos 82
+ }
+ Dot {
+  name Dot9
+  xpos -268
+  ypos 161
+ }
+set Na944e30 [stack 0]
+ Reformat {
+  inputs 0
+  name Reformat1
+  xpos -46
+  ypos 557
+ }
+ Reformat {
+  type scale
+  scale 0.5
+  name Reformat3
+  xpos -46
+  ypos 593
+ }
+ Dot {
+  name Dot7
+  xpos -15
+  ypos 627
+ }
+set Na967740 [stack 0]
+ Dot {
+  name Dot8
+  xpos -15
+  ypos 874
+ }
+ ScanlineRender {
+  inputs 3
+  samples {{parent.ScanlineRender4.samples}}
+  shutter {{parent.ScanlineRender4.shutter}}
+  shutteroffset {{ScanlineRender4.shutteroffset}}
+  shuttercustomoffset {{parent.ScanlineRender4.shuttercustomoffset}}
+  motion_vectors_type distance
+  name ScanlineRender3
+  xpos -302
+  ypos 871
+ }
+set Na971710 [stack 0]
+ Dot {
+  name Dot19
+  xpos -422
+  ypos 951
+ }
+push $Na9323f0
+ Camera2 {
+  inputs 0
+  translate {{parent.Sphere2.translate} {parent.Sphere2.translate} {parent.Sphere2.translate}}
+  rotate {{(degrees(atan((TargetCamera1.translate.y-translate.y)/sqrt(pow2(sqrt(pow2(TargetCamera1.translate.x-translate.x)+pow2(TargetCamera1.translate.z-translate.z)))))))} {"(TargetCamera1.translate.x-translate.x >= 0 ? 270-degrees(atan((TargetCamera1.translate.z-translate.z)/(TargetCamera1.translate.x-translate.x))): -degrees(atan((TargetCamera1.translate.z-translate.z)/(TargetCamera1.translate.x-translate.x)))-270)"} {parent.TargetCamera1.rotate.z}}
+  projection_mode spherical
+  near 1
+  far 100000
+  name Camera_env_map2
+  xpos -1376
+  ypos 377
+  addUserKnob {20 User}
+  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ }
+push $Na944e30
+ Dot {
+  name Dot10
+  xpos -1201
+  ypos 161
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  format "512 256 0 0 512 256 1 latlong"
+  name Constant_lat_long2
+  xpos -1123
+  ypos -186
+ }
+ Reformat {
+  type scale
+  scale 0.5
+  name Reformat2
+  xpos -1123
+  ypos -88
+ }
+ Dot {
+  name Dot11
+  xpos -1089
+  ypos 401
+ }
+ ScanlineRender {
+  inputs 3
+  motion_vectors_type velocity
+  name Render_env_map2
+  xpos -1235
+  ypos 398
+ }
+push 0
+ Environment {
+  inputs 2
+  translate {{parent.Sphere2.translate} {parent.Sphere2.translate} {parent.Sphere2.translate}}
+  rotate {{(degrees(atan((TargetCamera1.translate.y-translate.y)/sqrt(pow2(sqrt(pow2(TargetCamera1.translate.x-translate.x)+pow2(TargetCamera1.translate.z-translate.z)))))))} {"(TargetCamera1.translate.x-translate.x >= 0 ? 270-degrees(atan((TargetCamera1.translate.z-translate.z)/(TargetCamera1.translate.x-translate.x))): -degrees(atan((TargetCamera1.translate.z-translate.z)/(TargetCamera1.translate.x-translate.x)))-270)"} {0 x15 1000}}
+  name Environment2
+  xpos -1225
+  ypos 475
+ }
+ Constant {
+  inputs 0
+  color {1 1 1 1}
+  name Constant5
+  tile_color 0xffffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+  xpos -971
+  ypos -161
+  postage_stamp false
+ }
+ Constant {
+  inputs 0
+  name Constant3
+  tile_color 0xffffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold"
+  xpos -897
+  ypos -189
+  postage_stamp false
+ }
+set Naa05530 [stack 0]
+push $Naa05530
+ Constant {
+  inputs 0
+  color {0 0 0 1}
+  name Constant4
+  tile_color 0xffffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+  xpos -831
+  ypos -163
+  postage_stamp false
+ }
+ Dot {
+  name Dot3
+  xpos -802
+  ypos -126
+ }
+ BasicMaterial {
+  inputs 4
+  diffuse 0.265
+  min_shininess 0
+  max_shininess 0
+  name BasicMaterial2
+  xpos -897
+  ypos -110
+ }
+ Dot {
+  name Dot12
+  xpos -863
+  ypos 373
+ }
+ Input {
+  inputs 0
+  name object
+  xpos -693
+  ypos -33
+ }
+ ApplyMaterial {
+  inputs 2
+  name ApplyMaterial1
+  xpos -693
+  ypos 370
+ }
+ MergeGeo {
+  inputs 2
+  selectable false
+  name MergeGeo6
+  xpos -693
+  ypos 496
+ }
+ Dot {
+  name Dot17
+  xpos -659
+  ypos 578
+ }
+set Naa4d0a0 [stack 0]
+push $Na967740
+add_layer {Pworld Pworld.red Pworld.green Pworld.blue Pworld.alpha}
+add_layer {normal normal.x normal.y normal.z}
+ ScanlineRender {
+  inputs 3
+  shutteroffset centred
+  motion_vectors_type distance
+  output_shader_vectors true
+  P_channel Pworld
+  N_channel normal
+  name ScanlineRender4
+  xpos -693
+  ypos 624
+ }
+ DeepHoldout2 {
+  inputs 2
+  name DeepHoldout2
+  xpos -693
+  ypos 948
+  disable {{parent.d}}
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat3.scale}}
+  name Reformat4
+  xpos -693
+  ypos 1215
+ }
+set Naa75830 [stack 0]
+ Dot {
+  name Dot23
+  xpos -780
+  ypos 1309
+ }
+ Dot {
+  name Dot24
+  xpos -780
+  ypos 1466
+ }
+push $Na971710
+ Dot {
+  name Dot6
+  xpos -381
+  ypos 1136
+ }
+push $Na936f10
+ Dot {
+  name Dot14
+  xpos -1460
+  ypos 1077
+ }
+ Constant {
+  inputs 0
+  color {1 1 1 1}
+  name Constant1
+  tile_color 0xffffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold Bold"
+  xpos -1977
+  ypos 784
+  postage_stamp false
+ }
+ Constant {
+  inputs 0
+  name Constant2
+  tile_color 0xffffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold"
+  xpos -1903
+  ypos 756
+  postage_stamp false
+ }
+set Naaa3040 [stack 0]
+push $Naaa3040
+ Constant {
+  inputs 0
+  color {0 0 0 1}
+  name Constant6
+  tile_color 0xffffffff
+  note_font "Bitstream Vera Sans Bold Bold Bold Bold Bold Bold Bold"
+  xpos -1837
+  ypos 782
+  postage_stamp false
+ }
+ Dot {
+  name Dot15
+  xpos -1808
+  ypos 819
+ }
+ BasicMaterial {
+  inputs 4
+  diffuse 0.265
+  specular 2
+  min_shininess 1
+  max_shininess 2
+  name BasicMaterial1
+  xpos -1903
+  ypos 868
+ }
+ Dot {
+  name Dot16
+  xpos -1869
+  ypos 972
+ }
+push $Naa4d0a0
+ Dot {
+  name Dot18
+  xpos -1162
+  ypos 578
+ }
+ ApplyMaterial {
+  inputs 2
+  name ApplyMaterial2
+  xpos -1196
+  ypos 969
+ }
+push $Na967740
+ ScanlineRender {
+  inputs 3
+  shutteroffset centred
+  motion_vectors_type distance
+  output_shader_vectors true
+  P_channel Pworld
+  N_channel normal
+  name ScanlineRender1
+  xpos -1196
+  ypos 1074
+ }
+ DeepHoldout2 {
+  inputs 2
+  name DeepHoldout1
+  xpos -1194
+  ypos 1133
+  disable {{parent.d}}
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat3.scale}}
+  name Reformat6
+  xpos -1196
+  ypos 1211
+ }
+ Dot {
+  name Dot22
+  selected true
+  xpos -1162
+  ypos 1268
+ }
+push $Naa75830
+ Dot {
+  name Dot21
+  xpos -873
+  ypos 1218
+ }
+ Merge2 {
+  inputs 2
+  operation from
+  bbox B
+  name Merge1
+  xpos -907
+  ypos 1265
+ }
+ Clamp {
+  channels rgba
+  maximum_enable false
+  name Clamp1
+  xpos -907
+  ypos 1289
+ }
+set Nab24050 [stack 0]
+ Dot {
+  name Dot20
+  xpos -873
+  ypos 1417
+ }
+push $Naa75830
+ Merge2 {
+  inputs 2
+  operation copy
+  bbox A
+  also_merge all
+  mix 0
+  name Merge3
+  xpos -693
+  ypos 1414
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos -692
+  ypos 1457
+ }
+ Dot {
+  name Dot2
+  xpos -659
+  ypos 1503
+ }
+set Nab54990 [stack 0]
+ Dot {
+  name Dot13
+  xpos -659
+  ypos 1593
+ }
+push $Nab54990
+push $Na971710
+ Reformat {
+  type scale
+  scale {{1/parent.Reformat3.scale}}
+  name Reformat5
+  xpos -302
+  ypos 1213
+ }
+ Merge2 {
+  inputs 2
+  also_merge all
+  name Merge2
+  xpos -302
+  ypos 1500
+ }
+ Switch {
+  inputs 2
+  which {{parent.q}}
+  name Switch1
+  xpos -302
+  ypos 1590
+ }
+ Output {
+  name Output1
+  xpos -302
+  ypos 1669
+ }
+ Camera2 {
+  inputs 0
+  translate {{parent.input2.translate.x x1 -19.13081551 x10 -11.66025162 x20 6.12830162 -10.42668247} {parent.input2.translate.y x1 2.099999905 x10 2.099999905 x20 2.099999905 2.100006819} {parent.input2.translate.z x1 4.62827301 x10 -19.25162888 x20 13.9478426 8.93324852}}
+  rotate {{parent.input2.rotate.x x1 0 x10 0 x20 0 0} {parent.input2.rotate.y x1 215.5630493 x6 202.0971222 x10 171.8755496 x20 51.10560297 -27.11569391} {parent.input2.rotate.z x1 0 x10 0 x20 0 0}}
+  focal 10
+  name TargetCamera1
+  xpos -1385
+  ypos -63
+  addUserKnob {20 User}
+  addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+  addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+  addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ }
+push $Nab24050
+ Viewer {
+  frame 7
+  colour_sample_bbox {1.020833373 0.06458333135 1.021875024 0.06562499702}
+  samplepoints {{1.020833373 0.06458333135}
+    }
+  input_process false
+  name Viewer1
+  xpos -1250
+  ypos -9
+  hide_input true
+ }
+end_group

@@ -1,0 +1,169 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Group {
+name contrast_pd_7
+selected true
+xpos -4676
+ypos 11950
+addUserKnob {20 User}
+addUserKnob {4 contrast_1 l contrast M {pivot gamma noise "" ""}}
+addUserKnob {19 contrast R 0 3}
+contrast 1.32
+addUserKnob {6 contrast_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {19 pivot}
+pivot {0.2144410163 0.277050525 0.2358653694 1}
+addUserKnob {6 pivot_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+addUserKnob {6 m l "use noise input" +STARTLINE}
+addUserKnob {6 m2 l "use mask input" +STARTLINE}
+}
+Input {
+inputs 0
+name MASK
+xpos 580
+ypos -625
+number 2
+}
+Invert {
+name Invert1
+xpos 577
+ypos -387
+}
+Dot {
+name Dot2
+xpos 608
+ypos -293
+}
+Input {
+inputs 0
+name IMAGE
+label IMAGE
+xpos 244
+ypos -629
+}
+set N9eff0810 [stack 0]
+Dot {
+name Dot4
+xpos 92
+ypos -628
+}
+Dot {
+name Dot3
+xpos 92
+ypos -293
+}
+Input {
+inputs 0
+name NOISE
+xpos 448
+ypos -627
+number 1
+}
+push $N9eff0810
+Shuffle {
+red black
+green black
+blue black
+alpha white
+name Shuffle1
+xpos 359
+ypos -615
+}
+Switch {
+inputs 2
+which {{contrast_pd_7.m}}
+name Switch2
+xpos 448
+ypos -564
+}
+set N5732d6b0 [stack 0]
+Dot {
+name Dot1
+xpos 546
+ypos -494
+}
+push $N9eff0810
+Grade {
+white {{parent.contrast x1039 2.381} {parent.contrast x1039 2.381} {parent.contrast x1039 2.381} {parent.contrast x1039 2.381}}
+black_clamp false
+name Grade2
+xpos 336
+ypos -497
+}
+push $N9eff0810
+Grade {
+white {{parent.contrast x1039 2.381} {parent.contrast x1039 2.381} {parent.contrast x1039 2.381} {parent.contrast x1039 2.381}}
+reverse true
+black_clamp false
+name Grade3
+xpos 423
+ypos -508
+}
+Keymix {
+inputs 3
+name Keymix1
+xpos 371
+ypos -426
+}
+push $N5732d6b0
+push $N9eff0810
+Grade {
+inputs 1+1
+white {{parent.contrast} {parent.contrast} {parent.contrast} {parent.contrast}}
+add {0 0 0 0}
+gamma {{1/parent.Grade1.white x1039 1.631} {1/parent.Grade1.white x1039 1.631} {1/parent.Grade1.white x1039 1.631} {1/parent.Grade1.white x1039 1.631}}
+black_clamp false
+name Grade1
+selected true
+xpos 240
+ypos -503
+}
+push $N5732d6b0
+push $N5732d6b0
+push $N5732d6b0
+push $N9eff0810
+Grade {
+inputs 1+1
+add {{parent.pivot} {parent.pivot} {parent.pivot} {parent.pivot}}
+reverse true
+black_clamp false
+name Grade32
+xpos 140
+ypos -564
+}
+Grade {
+inputs 1+1
+white {{contrast_pd_7.contrast} {contrast_pd_7.contrast} {contrast_pd_7.contrast} {contrast_pd_7.contrast}}
+black_clamp false
+name Grade31
+xpos 140
+ypos -509
+}
+Grade {
+inputs 1+1
+add {{contrast_pd_7.pivot} {contrast_pd_7.pivot} {contrast_pd_7.pivot} {contrast_pd_7.pivot}}
+black_clamp false
+name Grade33
+xpos 140
+ypos -453
+}
+Switch {
+inputs 3
+which {{contrast_1}}
+name Switch1
+xpos 240
+ypos -412
+}
+Keymix {
+inputs 3
+name Keymix2
+xpos 240
+ypos -294
+disable {{!parent.m2 x1067 0}}
+}
+Output {
+name Output1
+xpos 240
+ypos -187
+}
+end_group

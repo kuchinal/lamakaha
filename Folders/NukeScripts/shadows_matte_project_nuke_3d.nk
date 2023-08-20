@@ -1,0 +1,236 @@
+#! C:/2D/Nuke6.0v7/Nuke6.0.exe -nx
+version 6.0 v7
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="22" w="1366" h="768" screen="0">
+        <splitter orientation="1">
+            <split size="858"></split>
+            <splitter orientation="1">
+                <split size="40"></split>
+                <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                    <page id="Toolbar.1"></page>
+                </dock>
+                <split size="814"></split>
+                <splitter orientation="2">
+                    <split size="356"></split>
+                    <dock id="" activePageId="Viewer.1">
+                        <page id="Viewer.1"></page>
+                    </dock>
+                    <split size="355"></split>
+                    <dock id="" activePageId="DAG.1">
+                        <page id="DAG.1"></page>
+                        <page id="Curve Editor.1"></page>
+                    </dock>
+                </splitter>
+            </splitter>
+            <split size="496"></split>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"></page>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name "C:/Documents and Settings/Kocka/My Documents/Nuke/nuke_3d_shadows_v008.nk"
+ format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+}
+Camera2 {
+ inputs 0
+ translate {-7.000700951 5.78497982 9.811133385}
+ rotate {-25.30800056 -38.62800217 -6.660000324}
+ name Camera1
+ xpos -292
+ ypos -53
+}
+Spotlight {
+ inputs 0
+ intensity 100
+ cone_angle 15
+ cone_penumbra_angle 25
+ falloff_type Quadratic
+ translate {1.427070141 5.368009567 8.589506149}
+ rotate {-27.63899994 7.659000397 0}
+ name Spotlight1
+ xpos 268
+ ypos -189
+}
+set N4491958 [stack 0]
+Camera2 {
+ display off
+ selectable false
+ focal {{pow((haperture.main/2)/(tan((radians(parent.Spotlight1.cone_angle.main+parent.Spotlight1.cone_penumbra_angle.main))/2)),1/1.05)}}
+ name Camera2
+ xpos 162
+ ypos -567
+}
+set N437cff8 [stack 0]
+push $N437cff8
+BasicMaterial {
+ inputs 0
+ specular 0.2
+ min_shininess 30
+ max_shininess 40
+ name BasicMaterial2
+ xpos 113
+ ypos -347
+}
+Sphere {
+ display textured+lines
+ translate {0.2800000012 1 2.460000038}
+ rotate {0 180 0}
+ name Sphere1
+ xpos 113
+ ypos -279
+}
+set N58d1180 [stack 0]
+Scene {
+ name Scene3
+ xpos 420
+ ypos -528
+}
+Constant {
+ inputs 0
+ channels rgb
+ format "512 512 0 0 512 512 1 square_512"
+ name Constant1
+ xpos 334
+ ypos -808
+}
+set N58dab78 [stack 0]
+ScanlineRender {
+ inputs 3
+ name ScanlineRender3
+ xpos 410
+ ypos -694
+}
+set C58ddc88 [stack 0]
+Blur {
+ size 10
+ name Blur2
+ xpos -24
+ ypos -573
+}
+set C58e3ec0 [stack 0]
+Project3D {
+ inputs 2
+ name Project3D2
+ xpos -24
+ ypos -463
+}
+BasicMaterial {
+ inputs 0
+ name BasicMaterial3
+ xpos -154
+ ypos -405
+}
+MergeMat {
+ inputs 2
+ name MergeMat2
+ xpos -154
+ ypos -328
+}
+Cube {
+ display textured+lines
+ cube {-0.5 -0.5 -0.5 1 1 0.5}
+ translate {-0.01999999955 0.5 0}
+ name Cube1
+ xpos -154
+ ypos -274
+}
+set N58fad40 [stack 0]
+push $N4491958
+push $N437cff8
+push $N437cff8
+push $N58fad40
+push $N58d1180
+Scene {
+ inputs 2
+ name Scene2
+ xpos 285
+ ypos -522
+}
+push $N58dab78
+clone $C58ddc88 {
+ inputs 3
+ xpos 275
+ ypos -693
+ selected false
+}
+clone $C58e3ec0 {
+ xpos -370
+ ypos -583
+ selected false
+}
+Project3D {
+ inputs 2
+ name Project3D1
+ xpos -370
+ ypos -429
+}
+CheckerBoard2 {
+ inputs 0
+ boxsize 16
+ name CheckerBoard1
+ xpos -505
+ ypos -528
+}
+push 0
+BasicMaterial {
+ inputs 2
+ diffuse 0.3
+ name BasicMaterial1
+ xpos -505
+ ypos -426
+}
+MergeMat {
+ inputs 2
+ name MergeMat1
+ xpos -505
+ ypos -375
+}
+Card2 {
+ display textured+lines
+ orientation ZX
+ translate {0 0 -10}
+ uniform_scale 50
+ control_points {3 3 3 6 
+
+1 {-0.5 0 -0.5} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0 0 0} 
+1 {0 0 -0.5} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 0 -0.5} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0.1666666865} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0.1666666716} 0 {0 0 -0.1666666716} 0 {1 0.5 0} 
+1 {-0.5 0 0.5} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0 1 0} 
+1 {0 0 0.5} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {0.5 1 0} 
+1 {0.5 0 0.5} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 0 -0.1666666865} 0 {1 1 0} }
+ name Card1
+ xpos -505
+ ypos -291
+}
+push $N58d1180
+Scene {
+ inputs 4
+ name Scene1
+ xpos -144
+ ypos -189
+}
+push 0
+ScanlineRender {
+ inputs 3
+ antialiasing medium
+ name ScanlineRender1
+ xpos -154
+ ypos -33
+}
+Viewer {
+ frame 1
+ input_process false
+ name Viewer1
+ xpos -163
+ ypos 45
+}

@@ -1,0 +1,297 @@
+#! /mnt/repository/software/install/nuke/10.5v5/centos-6_x86-64/libnuke-10.5.5.so -nx
+version 10.5 v5
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="0" w="2560" h="1399" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="688"/>
+            <splitter orientation="2">
+                <split size="831"/>
+                <dock id="" hideTitles="1" activePageId="Properties.1">
+                    <page id="Properties.1"/>
+                </dock>
+                <split size="89"/>
+                <dock id="" hideTitles="1" activePageId="Progress.1">
+                    <page id="Progress.1"/>
+                </dock>
+                <split size="419"/>
+                <splitter orientation="1">
+                    <split size="688"/>
+                    <dock id="" activePageId="uk.co.thefoundry.MassivePanelPySide">
+                        <page id="Curve Editor.1"/>
+                        <page id="DopeSheet.1"/>
+                        <page id="uk.co.thefoundry.scripteditor.1"/>
+                        <page id="uk.co.thefoundry.MassivePanelPySide"/>
+                    </dock>
+                </splitter>
+            </splitter>
+            <split size="1868"/>
+            <splitter orientation="2">
+                <split size="1347"/>
+                <dock id="" activePageId="DAG.1">
+                    <page id="DAG.1"/>
+                </dock>
+            </splitter>
+        </splitter>
+    </window>
+    <window x="0" y="0" w="1920" h="1200" screen="0">
+        <splitter orientation="2">
+            <split size="1170"/>
+            <dock id="" activePageId="Viewer.1">
+                <page id="Viewer.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /home/kuchinal/.nuke/user_Alexey/GeneralSetups/LUTinverseGenerator.nk
+ frame 1001
+ first_frame 1001
+ last_frame 1092
+ lock_range true
+ format "2362 1116 0 0 2362 1116 1 OW"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ proxy_scale 1
+ proxySetting always
+ colorManagement Nuke
+ defaultViewerLUT "OCIO LUTs"
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+ free_type_system_fonts false
+ addUserKnob {20 trixter_tab l Trixter}
+ addUserKnob {6 tx_clearmemory l "clear memory before each rendered frame" -STARTLINE}
+ addUserKnob {6 tx_threadsone l "set threads to 1 before rendering" +STARTLINE}
+ addUserKnob {1 viewer_process l "viewer process"}
+ addUserKnob {20 OCIOViewerContext}
+ addUserKnob {26 ocioVCinfo l "" +STARTLINE T "set the context for OCIO in the viewers here (expressions don't work)"}
+ addUserKnob {26 ocioVCdiv l "" +STARTLINE T " "}
+ addUserKnob {1 ocioVCkey1 l key1}
+ ocioVCkey1 SEQUENCE
+ addUserKnob {1 ocioVCvalue1 l value1 -STARTLINE}
+ ocioVCvalue1 MSE
+ addUserKnob {1 ocioVCkey2 l key2}
+ ocioVCkey2 SHOT
+ addUserKnob {1 ocioVCvalue2 l value2 -STARTLINE}
+ ocioVCvalue2 sequence
+ addUserKnob {1 ocioVCkey3 l key3}
+ addUserKnob {1 ocioVCvalue3 l value3 -STARTLINE}
+ addUserKnob {1 ocioVCkey4 l key4}
+ addUserKnob {1 ocioVCvalue4 l value4 -STARTLINE}
+ addUserKnob {20 mariTab l Mari}
+ addUserKnob {26 cmdStatus l "listen status" t "The status of Nuke's command port" T <b>Disabled</b>}
+ addUserKnob {26 sendStatus l "send status" t "The status of Nuke's connection to Mari" T <b>Inactive</b>}
+ addUserKnob {3 socketPort l "nuke command port" t "Port to listen on. Make sure this matches the command port set in Mari's \"Nuke\" Palette."}
+ socketPort 50107
+ addUserKnob {6 enableSocket l enabled -STARTLINE}
+ addUserKnob {26 divider l "" +STARTLINE}
+ addUserKnob {20 advanced n 1}
+ advanced 0
+ addUserKnob {3 portRange l "port range" t "If the main specified command port is unavailable, Nuke will try using the next port number, and continue until successful or the indicated number of ports have been tried."}
+ portRange 200
+ addUserKnob {4 enablePortRange l "" t "Indicates whether to use a range of ports up to the given number, or to use only the single one specified." -STARTLINE M {"use range" "single port only"}}
+ addUserKnob {6 localhostOnly l "local host only" t "This determines whether the Mari bridge server will listen for connections from any machine, or from \"localhost\" (the local machine) only.<p>Only allowing connections from localhost is more secure, but will prevent you from using the Nuke&lt;&gt;Mari workflow across the network." +STARTLINE}
+ addUserKnob {1 hostName l "mari host" t "The machine name or IP address that Mari is running on.\nLeave empty if both Mari and Nuke are running on the same machine."}
+ hostName localhost
+ addUserKnob {3 socketPortSend l port t "Port that Mari is listening to. Make sure this matches the command port set in Mari's preferences." -STARTLINE}
+ socketPortSend 6100
+ addUserKnob {2 mariDataDir l "mari data dir" t "Path to directory that will hold transient data to be sent to Mari (exrs, objs and fbx files). If this is left empty, a \"mari\" directory will be created in the nk file's location"}
+ mariDataDir "\[getenv NUKE_TEMP_DIR]/mariData"
+ addUserKnob {2 mariLocation l "mari launch path" t "The path to launch Mari from.<br>This can also be set using the <b>MARI_INSTALL_PATH</b> environment variable."}
+ addUserKnob {20 endGroup n -1}
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0xff0000ff
+ note_font_size 42
+ xpos 328
+ ypos 292
+ bdwidth 133
+ bdheight 167
+}
+CMSTestPattern {
+ inputs 0
+ name CMSTestPattern1
+ xpos 186
+ ypos 64
+}
+OCIOColorSpace {
+ in_colorspace rec709
+ out_colorspace linear
+ name OCIOColorSpace3
+ label "\[value in_colorspace] >> \[value out_colorspace]"
+ xpos 186
+ ypos 136
+}
+OCIOColorSpace {
+ in_colorspace rec709
+ out_colorspace linear
+ name OCIOColorSpace4
+ label "\[value in_colorspace] >> \[value out_colorspace]"
+ xpos 186
+ ypos 174
+}
+OCIODisplay {
+ colorspace linear
+ display default
+ view Film
+ name OCIODisplay1
+ xpos 186
+ ypos 228
+}
+LUTInvert {
+ name LUTInvert1
+ xpos 186
+ ypos 266
+}
+set Nc24e7c0 [stack 0]
+GenerateLUT {
+ file /corky/projects/OW_343236/seq/MSE/sequence/compositing/images/footage/OW_MSE_sequence_test_v001_LUTPanels/output/OW_MSE_sequence_test_v001_LUTPanels.cube
+ file_type .cube
+ name GenerateLUT1
+ xpos 352
+ ypos 346
+}
+TXShotData_v04 {
+ inputs 0
+ name TrixterShotData
+ label "\[value projectname] - \[value sequence]_\[value shot]"
+ xpos 513
+ ypos 60
+ globals 1
+ projectname OW_343236
+ projectshort OW
+ projectpath /corky/projects/OW_343236
+ outputpath #projectpath/seq/#sequence/#shot/#department/images
+ weeklypath ""
+ shotname ""
+ rendername ""
+ FPS "24 fps"
+ edlFPS "23.976 fps"
+ sequence MSE
+ shot sequence
+ segment 01
+ department compositing
+ type test
+ version 001
+ comment -
+ artist_initials zimmerdo
+ artist_name "Dominik Zimmerle"
+ timings 1
+ MAYAin 1009
+ MAYAout 1092
+ handlesIN 8
+ SRCin 1009
+ SRCout 1092
+ ftrack_taskid 17996cc8-945a-4a4e-af84-12ceaa78e059
+}
+push $Nc24e7c0
+Read {
+ inputs 0
+ file /corky/projects/OW_343236/library/props/mindfrackControlPanel_aa/references/from_client/20181027_CAN_MindfrackingMemoryGraphics/CAN_mindfrackingmemorygraphics_right_complete/CAN_mindfrackingmemorygraphics_right_complete.####.exr
+ localizationPolicy off
+ format "1000 1000 0 0 1000 1000 1 Square_L"
+ first 1001
+ last 1421
+ origfirst 1001
+ origlast 1421
+ origset true
+ on_error checkerboard
+ colorspace linear
+ name Read2
+ xpos -64
+ ypos 118
+ postage_stamp false
+}
+set Nd352730 [stack 0]
+LUTApply {
+ inputs 2
+ name LUTApply1
+ xpos 186
+ ypos 370
+}
+Grade {
+ gamma 0.9
+ name Grade1
+ xpos 186
+ ypos 492
+ addUserKnob {20 User}
+ addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+}
+OCIODisplay {
+ colorspace linear
+ display default
+ view "Film (graded)"
+ name OCIODisplay2
+ xpos 186
+ ypos 549
+}
+push $Nd352730
+Vectorfield {
+ vfield_file /corky/projects/OW_343236/seq/MSE/sequence/compositing/images/footage/OW_MSE_sequence_test_v001_LUTPanels/output/OW_MSE_sequence_test_v001_LUTPanels.cube
+ version 2
+ file_type cube
+ name Vectorfield1
+ label "\[basename \[value vfield_file]]"
+ xpos 355
+ ypos 407
+}
+Grade {
+ gamma 0.9
+ name Grade2
+ xpos 355
+ ypos 479
+ addUserKnob {20 User}
+ addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+}
+OCIODisplay {
+ colorspace linear
+ display default
+ view "Film (graded)"
+ name OCIODisplay3
+ xpos 355
+ ypos 543
+}
+Read {
+ inputs 0
+ file /corky/projects/OW_343236/library/props/mindfrackControlPanel_aa/references/from_client/20181011_Mindfrack_Panel_Graphics_Cantina/CAN_mindfrackingmemorygraphics_002_animation_v049.mov
+ localizationPolicy off
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 441
+ origlast 441
+ origset true
+ on_error checkerboard
+ colorspace linear
+ name Read3
+ xpos 14
+ ypos 528
+ postage_stamp false
+}
+Crop {
+ box {997 318 1531 776}
+ reformat true
+ crop false
+ name Crop1
+ xpos 14
+ ypos 614
+}
+Viewer {
+ inputs 2
+ frame 1001
+ frame_range 1001-1092
+ input_number 1
+ viewerProcess "None (default)"
+ name Viewer1
+ xpos -161
+ ypos 233
+ addUserKnob {20 User}
+ addUserKnob {1 custom_masking_ratio}
+ custom_masking_ratio 1:1
+}

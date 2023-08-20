@@ -1,0 +1,39 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+NoOp {
+ name Controller
+ help "okay..\nthis node is control bunch of nodes and using setExpression() comand to link to sertain knobs in selected nodes, so to make it work you will need\n1 write in the \"knob\" field name of knob you want to link to Controller\n2 select nodes you want to link\n3 press take\n--------------------------------------\nin addition you will be able to enable/disable nodes\n--------------------------------------\nso far it up to 3 knobs, will see if it worth to do more of them :)"
+ tile_color 0x4c0000ff
+ note_font "Verdana Bold Italic Bold Italic Bold Italic Bold Italic Bold Italic"
+ note_font_size 20
+ selected true
+ xpos -663
+ ypos -59
+ hide_input true
+ addUserKnob {20 Master l "" +STARTLINE}
+ addUserKnob {22 take T "n = nuke.thisNode()\nname=n\['name'].getValue()\nknob = n\['knob'].getValue()\ndisable = n\['knob'].getValue()\n\nlabel = n\['label'].setValue(knob)\n\n\nexpression = name + \".Controller\"\nexpression2 = name + \".Disable1\"\n\nall = nuke.selectedNodes()\nfor each in all:\n   each\[knob].setExpression(expression)\n   each\['disable'].setExpression(expression2)   " +STARTLINE}
+ addUserKnob {1 knob -STARTLINE}
+ addUserKnob {7 Controller -STARTLINE R 0 10}
+ addUserKnob {6 Disable1 l Disable -STARTLINE}
+ addUserKnob {22 take2 l take T "n = nuke.thisNode()\nname=n\['name'].getValue()\nknob2 = n\['knob2'].getValue()\nknob = n\['label'].getValue()\nlabel = n\['label'].setValue(knob+\"\\n\"+knob2)\nexpression = name + \".Controller2\"\nexpression2 = name + \".Disable2\"\nall = nuke.selectedNodes()\nfor each in all:\n   each\[knob2].setExpression(expression)\n   each\['disable'].setExpression(expression2)  " +STARTLINE}
+ addUserKnob {1 knob2 l knob -STARTLINE}
+ addUserKnob {7 Controller2 l Controller -STARTLINE}
+ addUserKnob {6 Disable2 l Disable -STARTLINE}
+ addUserKnob {22 take4 l take T "n = nuke.thisNode()\nname=n\['name'].getValue()\nknob4 = n\['knob4'].getValue()\nknob = n\['label'].getValue()\nlabel = n\['label'].setValue(knob+\"\\n\"+knob4)\nexpression = name + \".Controller4\"\nexpression2 = name + \".Disable4\"\nall = nuke.selectedNodes()\nfor each in all:\n   each\[knob4].setExpression(expression)\n   each\['disable'].setExpression(expression2)  " +STARTLINE}
+ addUserKnob {1 knob4 l knob -STARTLINE}
+ addUserKnob {7 Controller4 l Controller -STARTLINE}
+ addUserKnob {6 Disable4 l Disable -STARTLINE}
+ addUserKnob {22 take5 l take T "n = nuke.thisNode()\nname=n\['name'].getValue()\nknob5 = n\['knob5'].getValue()\nknob = n\['label'].getValue()\nlabel = n\['label'].setValue(knob+\"\\n\"+knob5)\nexpression = name + \".Controller5\"\nexpression2 = name + \".Disable5\"\nall = nuke.selectedNodes()\nfor each in all:\n   each\[knob5].setExpression(expression)\n   each\['disable'].setExpression(expression2)  " +STARTLINE}
+ addUserKnob {1 knob5 l knob -STARTLINE}
+ addUserKnob {7 Controller5 l Controller -STARTLINE}
+ addUserKnob {6 Disable5 l Disable -STARTLINE}
+ addUserKnob {22 take6 l take T "n = nuke.thisNode()\nname=n\['name'].getValue()\nknob6 = n\['knob6'].getValue()\nknob = n\['label'].getValue()\nlabel = n\['label'].setValue(knob+\"\\n\"+knob6)\nexpression = name + \".Controller6\"\nexpression2 = name + \".Disable6\"\nall = nuke.selectedNodes()\nfor each in all:\n   each\[knob6].setExpression(expression)\n   each\['disable'].setExpression(expression2)  " +STARTLINE}
+ addUserKnob {1 knob6 l knob -STARTLINE}
+ addUserKnob {7 Controller6 l Controller -STARTLINE}
+ addUserKnob {6 Disable6 l Disable -STARTLINE}
+ addUserKnob {22 take3 l take T "n = nuke.thisNode()\nname=n\['name'].getValue()\nknob3 = n\['knob3'].getValue()\nknob2 = n\['knob2'].getValue()\nknob = n\['knob'].getValue()\nlabel = n\['label'].setValue(knob+\"\\n\"+knob2+\"\\n\"+knob3)\nexpression = name + \".Controller3\"\nall = nuke.selectedNodes()\nfor each in all:\n   each\[knob3].setExpression(expression)" +STARTLINE}
+ addUserKnob {1 knob3 l knob -STARTLINE}
+ knob3 0
+ addUserKnob {13 Controller3 l Controller -STARTLINE}
+}

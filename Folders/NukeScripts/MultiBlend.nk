@@ -1,0 +1,525 @@
+set cut_paste_input [stack 0]
+version 8.0 v4
+push 0
+push 0
+push $cut_paste_input
+Group {
+inputs 3
+name MultiBlend
+knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() == \"filter\":\n    filter = int( n\['filter'].getValue() )\n\n    allR = nuke.allNodes('Blur')\n\n    for i in allR:\n        i\['filter'].setValue(filter)\n\n\n#nuke.selectedNode()\['filter'].setValues( n\['filter'].values() )\n\n"
+selected true
+xpos -370
+ypos 24143
+addUserKnob {20 User}
+addUserKnob {26 info l "" t "\n" +STARTLINE T "Multi gaussian blending.\nLaplace pyramid 6 level."}
+addUserKnob {26 ""}
+addUserKnob {41 size T Blur1.size}
+addUserKnob {4 filter M {box triangle quadratic gaussian}}
+filter gaussian
+}
+Input {
+inputs 0
+name Alpha
+xpos 625
+ypos -979
+number 2
+}
+Dot {
+name Dot25
+xpos 993
+ypos -975
+}
+set N2fdc9f30 [stack 0]
+Input {
+inputs 0
+name Front
+xpos 616
+ypos -1339
+}
+Dot {
+name Dot1
+xpos 1047
+ypos -1329
+}
+set N31ea8b20 [stack 0]
+push $N31ea8b20
+Dot {
+name Dot19
+xpos 1157
+ypos -1329
+}
+set N94cfc000 [stack 0]
+Blur {
+size 0.5
+name Blur1
+xpos 1123
+ypos -1258
+}
+set N33161250 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos 1013
+ypos -1252
+}
+Input {
+inputs 0
+name Back
+xpos 589
+ypos -826
+number 1
+}
+Dot {
+name Dot33
+xpos 1047
+ypos -816
+}
+set N4c7ed020 [stack 0]
+push $N4c7ed020
+Dot {
+name Dot34
+xpos 1157
+ypos -816
+}
+set N399908b0 [stack 0]
+Blur {
+size {{parent.Blur1.size}}
+name Blur21
+xpos 1123
+ypos -770
+}
+set N33176490 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge38
+xpos 1013
+ypos -764
+}
+Keymix {
+inputs 3
+name Keymix14
+xpos 1013
+ypos -459
+}
+push $N2fdc9f30
+Dot {
+name Dot26
+xpos 1103
+ypos -975
+}
+set N34c07010 [stack 0]
+Blur {
+size {{parent.Blur1.size}}
+name Blur14
+xpos 1069
+ypos -957
+}
+push $N33161250
+push $N94cfc000
+Dot {
+name Dot2
+xpos 1267
+ypos -1329
+}
+set N32a47a50 [stack 0]
+Blur {
+size {{parent.Blur1.size*2}}
+name Blur2
+xpos 1233
+ypos -1226
+}
+set N332de5e0 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge2
+xpos 1123
+ypos -1220
+}
+push $N33176490
+push $N399908b0
+Dot {
+name Dot35
+xpos 1267
+ypos -816
+}
+set N3ece0170 [stack 0]
+Blur {
+size {{parent.Blur21.size*2}}
+name Blur20
+xpos 1233
+ypos -738
+}
+set N2fa1c590 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge37
+xpos 1123
+ypos -732
+}
+Keymix {
+inputs 3
+name Keymix13
+xpos 1123
+ypos -459
+}
+push $N34c07010
+Dot {
+name Dot27
+xpos 1213
+ypos -975
+}
+set N3b41b250 [stack 0]
+Blur {
+size {{parent.Blur14.size*2}}
+name Blur13
+xpos 1179
+ypos -957
+}
+push $N332de5e0
+push $N32a47a50
+Dot {
+name Dot20
+xpos 1377
+ypos -1329
+}
+set N1edfd380 [stack 0]
+Blur {
+size {{parent.Blur2.size*2}}
+name Blur3
+xpos 1343
+ypos -1191
+}
+set Ncd5fdf10 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge8
+xpos 1233
+ypos -1185
+}
+push $N2fa1c590
+push $N3ece0170
+Dot {
+name Dot36
+xpos 1377
+ypos -816
+}
+set N38e1adb0 [stack 0]
+Blur {
+size {{parent.Blur20.size*2}}
+name Blur19
+xpos 1343
+ypos -703
+}
+set N3aef8090 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge36
+xpos 1233
+ypos -697
+}
+Keymix {
+inputs 3
+name Keymix12
+xpos 1233
+ypos -459
+}
+push $N3b41b250
+Dot {
+name Dot28
+xpos 1323
+ypos -975
+}
+set N2e7ba290 [stack 0]
+Blur {
+size {{parent.Blur13.size*2}}
+name Blur12
+xpos 1289
+ypos -957
+}
+push $Ncd5fdf10
+push $N1edfd380
+Dot {
+name Dot21
+xpos 1487
+ypos -1329
+}
+set Na69dd060 [stack 0]
+Blur {
+size {{parent.Blur3.size*2}}
+name Blur4
+xpos 1453
+ypos -1159
+}
+set N8d115560 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge9
+xpos 1343
+ypos -1153
+}
+push $N3aef8090
+push $N38e1adb0
+Dot {
+name Dot37
+xpos 1487
+ypos -816
+}
+set Na67c1600 [stack 0]
+Blur {
+size {{parent.Blur19.size*2}}
+name Blur18
+xpos 1453
+ypos -671
+}
+set N324d19e0 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge35
+xpos 1343
+ypos -665
+}
+Keymix {
+inputs 3
+name Keymix11
+xpos 1343
+ypos -455
+}
+push $N2e7ba290
+Dot {
+name Dot29
+xpos 1433
+ypos -975
+}
+set N32a50b10 [stack 0]
+Blur {
+size {{parent.Blur12.size*2}}
+name Blur11
+xpos 1399
+ypos -957
+}
+push $N8d115560
+push $Na69dd060
+Dot {
+name Dot24
+xpos 1597
+ypos -1329
+}
+set N2fcbdc90 [stack 0]
+Blur {
+size {{parent.Blur4.size*2}}
+name Blur5
+xpos 1563
+ypos -1127
+}
+set N3eed0a20 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge10
+xpos 1453
+ypos -1121
+}
+push $N324d19e0
+push $Na67c1600
+Dot {
+name Dot38
+xpos 1597
+ypos -816
+}
+set N2e7c6650 [stack 0]
+Blur {
+size {{parent.Blur18.size*2}}
+name Blur17
+xpos 1563
+ypos -639
+}
+set N2d9c0d30 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge34
+xpos 1453
+ypos -633
+}
+Keymix {
+inputs 3
+name Keymix10
+xpos 1453
+ypos -458
+}
+push $N32a50b10
+Dot {
+name Dot30
+xpos 1543
+ypos -975
+}
+set N5e6ac660 [stack 0]
+Blur {
+size {{parent.Blur11.size*2}}
+name Blur10
+xpos 1509
+ypos -957
+}
+push $N3eed0a20
+push $N2fcbdc90
+Dot {
+name Dot23
+xpos 1707
+ypos -1329
+}
+set N37f00a70 [stack 0]
+Blur {
+size {{parent.Blur5.size*2}}
+name Blur6
+xpos 1673
+ypos -1095
+}
+set N4cda8270 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge11
+xpos 1563
+ypos -1089
+}
+push $N2d9c0d30
+push $N2e7c6650
+Dot {
+name Dot39
+xpos 1707
+ypos -816
+}
+set N3ee14e50 [stack 0]
+Blur {
+size {{parent.Blur17.size*2}}
+name Blur16
+xpos 1673
+ypos -607
+}
+set N32c3fc40 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge33
+xpos 1563
+ypos -601
+}
+Keymix {
+inputs 3
+name Keymix9
+xpos 1563
+ypos -455
+}
+push 0
+push $N5e6ac660
+Dot {
+name Dot31
+xpos 1653
+ypos -975
+}
+set N3eece2c0 [stack 0]
+Blur {
+size {{parent.Blur10.size*2}}
+name Blur9
+xpos 1619
+ypos -957
+}
+push $N4cda8270
+push $N37f00a70
+Dot {
+name Dot22
+xpos 1817
+ypos -1329
+}
+Blur {
+size {{parent.Blur6.size*2}}
+name Blur7
+xpos 1783
+ypos -1063
+}
+set N4c7e0850 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge12
+xpos 1673
+ypos -1057
+}
+push $N32c3fc40
+push $N3ee14e50
+Dot {
+name Dot40
+xpos 1817
+ypos -816
+}
+Blur {
+size {{parent.Blur16.size*2}}
+name Blur15
+xpos 1783
+ypos -575
+}
+set N3ed488d0 [stack 0]
+Merge2 {
+inputs 2
+operation minus
+name Merge32
+xpos 1673
+ypos -569
+}
+Keymix {
+inputs 3
+name Keymix8
+xpos 1673
+ypos -449
+}
+push $N3eece2c0
+Dot {
+name Dot32
+xpos 1763
+ypos -975
+}
+Blur {
+size {{parent.Blur9.size*2}}
+name Blur8
+xpos 1729
+ypos -957
+}
+push $N4c7e0850
+push $N3ed488d0
+Keymix {
+inputs 3
+name Keymix1
+xpos 1783
+ypos -448
+}
+Merge2 {
+inputs 8+1
+operation plus
+name Merge13
+xpos 1007
+ypos -349
+}
+set N3565a130 [stack 0]
+Output {
+name Output1
+xpos 1013
+ypos -293
+}
+push $N3565a130
+Viewer {
+frame 1168
+center_fstop -1
+input_process false
+name Viewer1
+xpos 72
+ypos -623
+}
+end_group

@@ -1,0 +1,97 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+push $cut_paste_input
+Group {
+inputs 2
+name Fresnel
+tile_color 0x5e8aff
+note_font "Bitstream Vera Sans Bold"
+note_font_color 0xff
+selected true
+xpos -2762
+ypos 2360
+addUserKnob {20 User}
+addUserKnob {41 disable_1 l "Camera space normals" T Merge1.disable}
+}
+Input {
+inputs 0
+name Camera
+xpos -1116
+ypos 591
+number 1
+}
+Input {
+inputs 0
+name Normal
+xpos -1240
+ypos 590
+}
+ColorMatrix {
+matrix {
+    {{parent.input1.world_matrix.0} {parent.input1.world_matrix.1} {parent.input1.world_matrix.2}}
+    {{parent.input1.world_matrix.4} {parent.input1.world_matrix.5} {parent.input1.world_matrix.6}}
+    {{parent.input1.world_matrix.8} {parent.input1.world_matrix.9} {parent.input1.world_matrix.10}}
+  }
+invert true
+name ColorMatrix4
+xpos -1240
+ypos 655
+}
+Dot {
+name Dot1
+xpos -1206
+ypos 681
+}
+set N306cccd0 [stack 0]
+Dot {
+name Dot3
+xpos -1298
+ypos 681
+}
+Shuffle {
+red blue
+green blue
+alpha blue
+name Shuffle1
+tile_color 0x3d3f8e00
+xpos -1332
+ypos 732
+}
+Invert {
+channels rgba
+name Invert1
+xpos -1332
+ypos 758
+}
+Dot {
+name Dot2
+xpos -1298
+ypos 807
+}
+push $N306cccd0
+Merge2 {
+inputs 2
+operation copy
+bbox A
+name Merge1
+xpos -1240
+ypos 803
+}
+set N367d3020 [stack 0]
+Output {
+name Output1
+xpos -1240
+ypos 857
+}
+push $N367d3020
+Viewer {
+frame_range 1001-1084
+viewerProcess "None (default)"
+input_process false
+name Viewer1
+xpos -40
+ypos -10
+hide_input true
+}
+end_group

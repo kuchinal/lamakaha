@@ -1,0 +1,61 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+push $cut_paste_input
+Group {
+ name Group2
+ help "Apply noise on your UV/Normal/WorldPosPass\nexpecting RGB"
+ autolabel "nuke.thisNode()\['label'].value()"
+ label "position noise "
+ note_font_size 20
+ selected true
+ xpos -9348
+ ypos 1439
+ addUserKnob {20 User}
+ addUserKnob {41 white l "uniform scale" T Grade231.white}
+ addUserKnob {7 ratio R -10 10}
+ ratio 1
+ addUserKnob {7 scaleX l "scale X" R 1 100}
+ scaleX 1
+ addUserKnob {7 scaleY l "scale Y" R 1 100}
+ scaleY 1
+}
+ Input {
+  inputs 0
+  name WorldP
+  xpos -918
+  ypos 449
+ }
+ Grade {
+  white 0.01
+  black_clamp false
+  name Grade231
+  xpos -918
+  ypos 489
+ }
+ Expression {
+  temp_name0 xScale
+  temp_expr0 scaleX
+  temp_name1 yScale
+  temp_expr1 scaleY
+  temp_name2 rati
+  temp_expr2 ratio
+  expr0 fBm(r*yScale,g*xScale,b*rati,2,0.5,0.5)
+  name Expression12
+  xpos -918
+  ypos 515
+ }
+ Shuffle {
+  green red
+  blue red
+  alpha red
+  name Shuffle1
+  label "\[value in] to \[value out]"
+  xpos -918
+  ypos 541
+ }
+ Output {
+  name Output1
+  xpos -918
+  ypos 641
+ }
+end_group

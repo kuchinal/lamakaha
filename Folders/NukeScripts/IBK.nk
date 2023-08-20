@@ -1,0 +1,329 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Group {
+ name IBK
+ tile_color 0x9900ff
+ note_font_size 14
+ selected true
+ xpos -1992
+ ypos -1502
+ addUserKnob {20 User}
+ addUserKnob {20 clPlate l "clean plate" n 1}
+ addUserKnob {41 screen_type l "screen type" T IBKColourV3_1.screen_type}
+ addUserKnob {6 clamp -STARTLINE}
+ addUserKnob {41 disable_1 l showColor -STARTLINE T alphaOnly.disable}
+ addUserKnob {41 Size l size T IBKColourV3_1.Size}
+ addUserKnob {41 off l darks T IBKColourV3_1.off}
+ addUserKnob {41 mult l lights T IBKColourV3_1.mult}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 rare l "IBK gizmo" n 1}
+ addUserKnob {41 multi l "patch black" T IBKColourV3_1.multi}
+ addUserKnob {4 more t "add more IBK colors in the stream\ncan be very havy" -STARTLINE M {0 1 2 3 4 5 6 7 "" "" ""}}
+ more 1
+ addUserKnob {3 multB l mult t "increase value of patch black in added IBK colors in the stream" -STARTLINE}
+ multB 1
+ addUserKnob {41 erode T IBKColourV3_1.erode}
+ addUserKnob {41 red_weight l "red weight" T IBKGizmoV3_2.red_weight}
+ addUserKnob {41 blue_green_weight l "blue/green weight" T IBKGizmoV3_2.blue_green_weight}
+ addUserKnob {26 ""}
+ addUserKnob {41 lm_enable l "luminance match          ||" T IBKGizmoV3_2.lm_enable}
+ addUserKnob {41 ll_enable l enable -STARTLINE T IBKGizmoV3_2.ll_enable}
+ addUserKnob {41 level l "screen range" T IBKGizmoV3_2.level}
+ addUserKnob {41 luma l "luminance level" -STARTLINE T IBKGizmoV3_2.luma}
+ addUserKnob {26 ""}
+ addUserKnob {7 blackpoint l "black point" R -1 1}
+ addUserKnob {7 whitepoint l "white point" R -1 1}
+ addUserKnob {7 gamma R -1 1}
+ addUserKnob {41 size l blur T Blur1.size}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {20 color n 1}
+ addUserKnob {41 autolevels l "autolevels      ||" T IBKGizmoV3_2.autolevels}
+ addUserKnob {41 yellow -STARTLINE T IBKGizmoV3_2.yellow}
+ addUserKnob {41 cyan -STARTLINE T IBKGizmoV3_2.cyan}
+ addUserKnob {41 magenta -STARTLINE T IBKGizmoV3_2.magenta}
+ addUserKnob {26 ""}
+ addUserKnob {41 ss l "screen subtraction" T IBKGizmoV3_2.ss}
+ addUserKnob {41 ublu l "use bkg luminance" -STARTLINE T IBKGizmoV3_2.ublu}
+ addUserKnob {41 ubcr l "use bkg chroma" -STARTLINE T IBKGizmoV3_2.ubcr}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {26 ""}
+ addUserKnob {6 crop +STARTLINE}
+ crop true
+}
+ Input {
+  inputs 0
+  name bg
+  xpos -397
+  ypos -225
+  number 1
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop3
+  xpos -397
+  ypos -179
+  disable {{!parent.crop}}
+ }
+ Dot {
+  name Dot5
+  xpos -363
+  ypos -120
+ }
+ Input {
+  inputs 0
+  name color
+  xpos -485
+  ypos -341
+  number 2
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop2
+  xpos -485
+  ypos -315
+  disable {{!parent.crop}}
+ }
+ Input {
+  inputs 0
+  name plate
+  xpos -336
+  ypos -862
+ }
+ Clamp {
+  channels rgba
+  name Clamp2
+  xpos -336
+  ypos -825
+  disable {{!parent.clamp}}
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  name Crop1
+  xpos -336
+  ypos -778
+  disable {{!parent.crop}}
+ }
+ Dot {
+  name Dot1
+  xpos -302
+  ypos -725
+ }
+set N5e57f280 [stack 0]
+ IBKColourV3 {
+  name IBKColourV3_1
+  xpos -336
+  ypos -707
+  Size 1
+ }
+ IBKColourV3 {
+  name IBKColourV3_6
+  xpos -336
+  ypos -655
+  disable {{more>0?0:1}}
+  screen_type {{IBKColourV3_1.screen_type}}
+  Size {{parent.IBKColourV3_1.Size}}
+  off {{parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off}}
+  mult {{parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult}}
+  multi {{(0+2)*1*(parent.multi+1)*parent.multB*(1+2)*1}}
+  addUserKnob {20 store_Sets l Sets}
+  addUserKnob {22 store_b_set1 l "Set 1" -STARTLINE T "badlist = \['channel', 'channels', 'maskChannelInput', 'unpremult', 'layer', 'maskChannel', 'maskChannelMask', 'Mask', 'mask', 'lookup', 'format']\nn = nuke.thisNode()\nak = n.knobs()\nli = \[]\nfor raus in ak:\n    if \"store\" in raus:\n        li.append(raus)\nfor raus in li:\n    del ak\[raus]\nfor badknob in badlist:\n    try:\n        del ak\[badknob]\n    except:\n        pass\nstoreme= \{\}\nfor b in ak:\n    storeme\[b] = ak\[b].getValue()\n\nstoreHere = 'store_'+str(1)        \nn\[storeHere].setValue(str(storeme))"}
+  addUserKnob {22 store_b_set2 l "Set 2" -STARTLINE T "badlist = \['channel', 'channels', 'maskChannelInput', 'unpremult', 'layer', 'maskChannel', 'maskChannelMask', 'Mask', 'mask', 'lookup', 'format']\nn = nuke.thisNode()\nak = n.knobs()\nli = \[]\nfor raus in ak:\n    if \"store\" in raus:\n        li.append(raus)\nfor raus in li:\n    del ak\[raus]\nfor badknob in badlist:\n    try:\n        del ak\[badknob]\n    except:\n        pass\nstoreme= \{\}\nfor b in ak:\n    storeme\[b] = ak\[b].getValue()\n\nstoreHere = 'store_'+str(2)        \nn\[storeHere].setValue(str(storeme))"}
+  addUserKnob {22 store_b_set3 l "Set 3" -STARTLINE T "badlist = \['channel', 'channels', 'maskChannelInput', 'unpremult', 'layer', 'maskChannel', 'maskChannelMask', 'Mask', 'mask', 'lookup', 'format']\nn = nuke.thisNode()\nak = n.knobs()\nli = \[]\nfor raus in ak:\n    if \"store\" in raus:\n        li.append(raus)\nfor raus in li:\n    del ak\[raus]\nfor badknob in badlist:\n    try:\n        del ak\[badknob]\n    except:\n        pass\nstoreme= \{\}\nfor b in ak:\n    storeme\[b] = ak\[b].getValue()\n\nstoreHere = 'store_'+str(3)        \nn\[storeHere].setValue(str(storeme))"}
+  addUserKnob {22 store_b_set4 l "Set 4" -STARTLINE T "badlist = \['channel', 'channels', 'maskChannelInput', 'unpremult', 'layer', 'maskChannel', 'maskChannelMask', 'Mask', 'mask', 'lookup', 'format']\nn = nuke.thisNode()\nak = n.knobs()\nli = \[]\nfor raus in ak:\n    if \"store\" in raus:\n        li.append(raus)\nfor raus in li:\n    del ak\[raus]\nfor badknob in badlist:\n    try:\n        del ak\[badknob]\n    except:\n        pass\nstoreme= \{\}\nfor b in ak:\n    storeme\[b] = ak\[b].getValue()\n\nstoreHere = 'store_'+str(4)        \nn\[storeHere].setValue(str(storeme))"}
+  addUserKnob {22 store_b_set5 l "Set 5" -STARTLINE T "badlist = \['channel', 'channels', 'maskChannelInput', 'unpremult', 'layer', 'maskChannel', 'maskChannelMask', 'Mask', 'mask', 'lookup', 'format']\nn = nuke.thisNode()\nak = n.knobs()\nli = \[]\nfor raus in ak:\n    if \"store\" in raus:\n        li.append(raus)\nfor raus in li:\n    del ak\[raus]\nfor badknob in badlist:\n    try:\n        del ak\[badknob]\n    except:\n        pass\nstoreme= \{\}\nfor b in ak:\n    storeme\[b] = ak\[b].getValue()\n\nstoreHere = 'store_'+str(5)        \nn\[storeHere].setValue(str(storeme))"}
+  addUserKnob {26 store_bla l "" +STARTLINE}
+  addUserKnob {22 store_b_recall1 l "Recall 1" -STARTLINE T "import ast\nn = nuke.thisNode()\nreadHere = 'store_'+str(1) \nreadme = ast.literal_eval(n\[readHere].getValue())\nprint readme\nfor knob in readme:\n    setme = readme\[knob]\n    print knob\n    try:\n        n\[knob].setValue(setme) \n    except TypeError:\n        try:\n            n\[knob].setValue(str(setme))\n        except TypeError:    \n            n\[knob].setValue(bool(setme))"}
+  addUserKnob {22 store_b_recall2 l "Recall 2" -STARTLINE T "import ast\nn = nuke.thisNode()\nreadHere = 'store_'+str(2) \nreadme = ast.literal_eval(n\[readHere].getValue())\nprint readme\nfor knob in readme:\n    setme = readme\[knob]\n    print knob\n    try:\n        n\[knob].setValue(setme) \n    except TypeError:\n        try:\n            n\[knob].setValue(str(setme))\n        except TypeError:    \n            n\[knob].setValue(bool(setme))"}
+  addUserKnob {22 store_b_recall3 l "Recall 3" -STARTLINE T "import ast\nn = nuke.thisNode()\nreadHere = 'store_'+str(3) \nreadme = ast.literal_eval(n\[readHere].getValue())\nprint readme\nfor knob in readme:\n    setme = readme\[knob]\n    print knob\n    try:\n        n\[knob].setValue(setme) \n    except TypeError:\n        try:\n            n\[knob].setValue(str(setme))\n        except TypeError:    \n            n\[knob].setValue(bool(setme))"}
+  addUserKnob {22 store_b_recall4 l "Recall 4" -STARTLINE T "import ast\nn = nuke.thisNode()\nreadHere = 'store_'+str(4) \nreadme = ast.literal_eval(n\[readHere].getValue())\nprint readme\nfor knob in readme:\n    setme = readme\[knob]\n    print knob\n    try:\n        n\[knob].setValue(setme) \n    except TypeError:\n        try:\n            n\[knob].setValue(str(setme))\n        except TypeError:    \n            n\[knob].setValue(bool(setme))"}
+  addUserKnob {22 store_b_recall5 l "Recall 5" -STARTLINE T "import ast\nn = nuke.thisNode()\nreadHere = 'store_'+str(5) \nreadme = ast.literal_eval(n\[readHere].getValue())\nprint readme\nfor knob in readme:\n    setme = readme\[knob]\n    print knob\n    try:\n        n\[knob].setValue(setme) \n    except TypeError:\n        try:\n            n\[knob].setValue(str(setme))\n        except TypeError:    \n            n\[knob].setValue(bool(setme))"}
+  addUserKnob {1 store_1 l "" +STARTLINE +INVISIBLE}
+  addUserKnob {1 store_2 l "" +STARTLINE +INVISIBLE}
+  addUserKnob {1 store_3 l "" +STARTLINE +INVISIBLE}
+  addUserKnob {1 store_4 l "" +STARTLINE +INVISIBLE}
+  addUserKnob {1 store_5 l "" +STARTLINE +INVISIBLE}
+ }
+ IBKColourV3 {
+  name IBKColourV3_7
+  xpos -336
+  ypos -609
+  disable {{more>1?0:1}}
+  screen_type {{IBKColourV3_1.screen_type}}
+  Size {{parent.IBKColourV3_1.Size}}
+  off {{parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off}}
+  mult {{parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult}}
+  multi {{(0+4.0)*1.0*(parent.multi+1)*parent.multB*(1+4.0)*1.0}}
+ }
+ IBKColourV3 {
+  name IBKColourV3_8
+  xpos -336
+  ypos -561
+  disable {{more>2?0:1}}
+  screen_type {{IBKColourV3_1.screen_type}}
+  Size {{parent.IBKColourV3_1.Size}}
+  off {{parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off}}
+  mult {{parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult}}
+  multi {{(0+6.0)*1.0*(parent.multi+1)*parent.multB*(1+6.0)*1.0}}
+ }
+ IBKColourV3 {
+  name IBKColourV3_9
+  xpos -336
+  ypos -509
+  disable {{more>3?0:1}}
+  screen_type {{IBKColourV3_1.screen_type}}
+  Size {{parent.IBKColourV3_1.Size}}
+  off {{parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off}}
+  mult {{parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult}}
+  multi {{(0+8.0)*1.0*(parent.multi+1)*parent.multB*(1+8.0)*1.0}}
+ }
+ IBKColourV3 {
+  name IBKColourV3_10
+  xpos -336
+  ypos -457
+  disable {{more>4?0:1}}
+  screen_type {{IBKColourV3_1.screen_type}}
+  Size {{parent.IBKColourV3_1.Size}}
+  off {{parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off}}
+  mult {{parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult}}
+  multi {{(0+10.0)*1.0*(parent.multi+1)*parent.multB*(1+10.0)*1.0}}
+ }
+ IBKColourV3 {
+  name IBKColourV3_11
+  xpos -336
+  ypos -405
+  disable {{more>5?0:1}}
+  screen_type {{IBKColourV3_1.screen_type}}
+  Size {{parent.IBKColourV3_1.Size}}
+  off {{parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off}}
+  mult {{parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult}}
+  multi {{(0+12.0)*1.0*(parent.multi+1)*parent.multB*(1+12.0)*1.0}}
+ }
+ IBKColourV3 {
+  name IBKColourV3_12
+  xpos -336
+  ypos -353
+  disable {{more>6?0:1}}
+  screen_type {{IBKColourV3_1.screen_type}}
+  Size {{parent.IBKColourV3_1.Size}}
+  off {{parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off} {parent.IBKColourV3_1.off}}
+  mult {{parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult} {parent.IBKColourV3_1.mult}}
+  multi {{(0+14.0)*1.0*(parent.multi+1)*parent.multB*(1+14.0)*1.0}}
+ }
+ Dot {
+  name Dot6
+  xpos -302
+  ypos -267
+ }
+set N4a646c50 [stack 0]
+ Switch {
+  inputs 2
+  which {{"\[exists parent.input2] "}}
+  name Switch1
+  xpos -485
+  ypos -271
+ }
+push $N5e57f280
+ Dot {
+  name Dot24
+  xpos -531
+  ypos -725
+ }
+ Dot {
+  name Dot34
+  xpos -534
+  ypos -120
+ }
+ IBKGizmoV3 {
+  inputs 3
+  name IBKGizmoV3_2
+  selected false
+  xpos -485
+  ypos -124
+  st {{IBKColourV3_1.screen_type==1?0:1}}
+  lm_enable true
+  yellow true
+  ss false
+ }
+ Dot {
+  name Dot3
+  xpos -451
+  ypos -72
+ }
+set N4a03ffa0 [stack 0]
+push $N4a646c50
+ Dot {
+  name Dot2
+  xpos -302
+  ypos -120
+ }
+ ShuffleCopy {
+  inputs 2
+  in alpha
+  name ShuffleCopy1
+  xpos -336
+  ypos -76
+ }
+ Grade {
+  channels alpha
+  blackpoint {{-(parent.blackpoint)}}
+  whitepoint {{(parent.whitepoint-1)*-1}}
+  gamma {{parent.gamma+1}}
+  name Grade1
+  xpos -336
+  ypos -34
+  addUserKnob {20 User}
+  addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+ }
+ Clamp {
+  channels rgba
+  name Clamp1
+  xpos -336
+  ypos 4
+ }
+ Blur {
+  channels alpha
+  name Blur1
+  xpos -336
+  ypos 30
+ }
+push $N4a03ffa0
+ Dot {
+  name Dot4
+  xpos -451
+  ypos 124
+ }
+ Switch {
+  inputs 2
+  which 1
+  name Switch3
+  xpos -336
+  ypos 120
+  disable {{"\[exists parent.input1] "}}
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  crop false
+  name Crop9
+  xpos -336
+  ypos 156
+  disable {{!parent.crop}}
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name alphaOnly
+  tile_color 0xffffffff
+  xpos -336
+  ypos 206
+  disable true
+ }
+ Output {
+  name Output1
+  xpos -336
+  ypos 241
+ }
+end_group

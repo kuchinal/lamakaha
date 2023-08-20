@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+push $cut_paste_input
+NoOp {
+name NoOp5
+tile_color 0xff
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 18
+selected true
+xpos -22712
+ypos 5372
+hide_input true
+}

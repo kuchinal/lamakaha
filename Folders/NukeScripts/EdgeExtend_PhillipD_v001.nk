@@ -1,0 +1,144 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push 0
+push $cut_paste_input
+Group {
+inputs 2
+name UV_edgeextend_matrix
+selected true
+xpos -10414
+ypos 19942
+addUserKnob {20 User}
+addUserKnob {26 a l "" +STARTLINE T "feed unpremulted with alpha"}
+addUserKnob {41 edge_thickness l "edge thickness" T Blur11.size}
+addUserKnob {41 amount T Grade48.multiply}
+}
+Input {
+inputs 0
+name Image
+xpos 718
+ypos 456
+}
+set Nb8a25350 [stack 0]
+Dot {
+name Dot26
+xpos 752
+ypos 527
+}
+set Nc0fb6ad0 [stack 0]
+Input {
+inputs 0
+name Matte
+xpos 971
+ypos 462
+number 1
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+name Shuffle27
+label "\[value in]"
+xpos 971
+ypos 530
+}
+set Nbfc96b50 [stack 0]
+Matrix {
+channels {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+matrix {
+    {0 0 0}
+    {0 -1 1}
+    {0 0 0}
+  }
+name Matrix3
+xpos 908
+ypos 618
+}
+push $Nbfc96b50
+Matrix {
+channels {-rgba.red rgba.green -rgba.blue -rgba.alpha}
+matrix {
+    {0 1 0}
+    {0 -1 0}
+    {0 0 0}
+  }
+name Matrix4
+xpos 1035
+ypos 625
+}
+Copy {
+inputs 2
+from0 rgba.red
+to0 rgba.red
+name Copy5
+xpos 972
+ypos 677
+}
+Shuffle {
+blue black
+alpha black
+name Shuffle28
+label "\[value in]"
+xpos 972
+ypos 732
+}
+Grade {
+white 20
+multiply 100
+black_clamp false
+name Grade48
+xpos 972
+ypos 788
+addUserKnob {20 User}
+addUserKnob {22 "keep luma" -STARTLINE T keepLuma()}
+}
+Blur {
+channels rgba
+size 7.2
+name Blur11
+label "\[value size]"
+xpos 972
+ypos 827
+}
+push $Nc0fb6ad0
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy6
+xpos 972
+ypos 898
+}
+IDistort {
+channels rgb
+uv motion
+name IDistort1
+xpos 972
+ypos 967
+}
+ShuffleCopy {
+inputs 2
+name ShuffleCopy2
+xpos 746
+ypos 983
+}
+Output {
+name Output1
+xpos 746
+ypos 1058
+}
+push $Nb8a25350
+Viewer {
+frame_range 1001-1048
+viewerProcess "None (default)"
+name Viewer1
+selected true
+xpos 652
+ypos 1129
+addUserKnob {20 User}
+addUserKnob {1 custom_masking_ratio}
+custom_masking_ratio 1:1
+}
+end_group

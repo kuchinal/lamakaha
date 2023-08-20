@@ -1,0 +1,37 @@
+
+PLUGIN = WhatsThePoint.so
+
+QT = WTP_QT.moc
+
+FOLDER = ~/.nuke/plugin/
+
+MYCXX ?= g++
+LINK ?= g++
+
+NDKDIR ?= /usr/local/Nuke10.5v7
+
+
+QTDR ?= /usr/local/Trolltech/Qt-4.8.5/
+MOC = $(QTDR)/bin/moc
+
+INCLUDES ?= -I$(NDKDIR)/include -I$(QTDR)/include
+CXXFLAGS ?= -g -c -DUSE_GLEW -fPIC -msse $(INCLUDES)
+LINKFLAGS ?= -L$(NDKDIR)
+LIBS ?= -lDDImage -lQtGui
+LINKFLAGS += -shared
+
+all:  $(QT) $(PLUGIN) clean move run
+
+%.moc: %.moc.h
+	$(MOC) $(DEFINES) $(INCPATH) -i $< -o $@
+%.os: %.cpp
+	$(MYCXX) $(CXXFLAGS) -o $(@) $<
+%.so: %.os
+	$(LINK) $(LINKFLAGS) $(LIBS) -o $(@) $<
+
+clean:
+	rm -rf *.os *.moc
+move:
+	mv $(PLUGIN) $(FOLDER)
+run:
+	/usr/local/Nuke10.5v7/Nuke10.5

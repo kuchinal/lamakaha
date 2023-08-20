@@ -1,0 +1,88 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+Constant {
+ inputs 0
+ color {0.04832854867 0.05079064518 0.05070939288 1.000000238}
+ name Constant1
+ selected true
+ xpos -394
+ ypos -38
+ postage_stamp false
+}
+Dot {
+ name Dot2
+ selected true
+ xpos -360
+ ypos 108
+}
+Read {
+ inputs 0
+ file Z:/refs/RED_Epic_Noise/M385_C001_1119VG.RDC/M385_C001_1119VG_001.R3D
+ cacheLocal always
+ format "3840 2160 0 0 3840 2160 1 "
+ first 0
+ last 120
+ origfirst 0
+ origlast 120
+ origset true
+ auto_alpha true
+ r3d_sdk 8
+ r3d_init 2
+ r3d_rockect_custom_scale {3840 2160}
+ color_version v2
+ r3d_gain {1 1 1}
+ r3d_lggLift {0 0 0}
+ r3d_lggGamma {1 1 1}
+ r3d_lggGain {1 1 1}
+ r3d_pdlog_gamma 0.6000000238
+ name Read4
+ selected true
+ xpos -133
+ ypos -184
+ postage_stamp false
+}
+set N1b051fd0 [stack 0]
+Dot {
+ name Dot3
+ selected true
+ xpos -216
+ ypos -175
+}
+Blur {
+ channels rgba
+ size 50
+ name Blur1
+ selected true
+ xpos -250
+ ypos -56
+}
+Merge2 {
+ inputs 2
+ operation minus
+ name Merge1
+ selected true
+ xpos -250
+ ypos 104
+}
+Dot {
+ name Dot1
+ selected true
+ xpos -216
+ ypos 206
+}
+push $N1b051fd0
+Merge2 {
+ inputs 2
+ operation plus
+ name Merge2
+ selected true
+ xpos -133
+ ypos 203
+}
+Grade {
+ add {0.00167 -0.00079 -0.00071 0}
+ name Grade1
+ selected true
+ xpos -133
+ ypos 227
+}

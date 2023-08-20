@@ -1,0 +1,21 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+NoOp {
+ name MotionBlurCrack
+ selected true
+ xpos -1427
+ ypos -2660
+ addUserKnob {20 User}
+ addUserKnob {7 samples R 1 50}
+ samples 10
+ addUserKnob {22 SamplesSet -STARTLINE T "n = nuke.thisNode()\na  =nuke.selectedNode()\ns = n\['samples'].value()\na\['shutterSamples'].setValue(s)\n"}
+ addUserKnob {7 time R 0 5}
+ time 2
+ addUserKnob {22 TimeSet -STARTLINE T "n = nuke.thisNode()\na  =nuke.selectedNode()\ns = n\['time'].value()\na\['shutterTime'].setValue(s)"}
+ addUserKnob {4 Motion M {Regularized Local ""}}
+ addUserKnob {22 MotionSet -STARTLINE T "n = nuke.thisNode()\na  =nuke.selectedNode()\ns = n\['Motion'].value()\na\['motionEstimation'].setValue(s)"}
+ addUserKnob {7 VectorDetail}
+ VectorDetail 0.5
+ addUserKnob {22 DetailSet -STARTLINE T "n = nuke.thisNode()\na  =nuke.selectedNode()\ns = n\['VectorDetail'].value()\na\['vectorDetailReg'].setValue(s)"}
+}

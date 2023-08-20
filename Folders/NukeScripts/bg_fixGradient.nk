@@ -1,0 +1,314 @@
+set cut_paste_input [stack 0]
+version 8.0 v6
+push $cut_paste_input
+Group {
+ name bg_fixGradient
+ tile_color 0xff00ff
+ gl_color 0xf700f8ff
+ selected true
+ xpos -285
+ ypos -70
+ addUserKnob {20 KillGradient}
+ addUserKnob {41 screen_type l "screen type" T IBKColourV3_2.screen_type}
+ addUserKnob {41 Size l size T IBKColourV3_2.Size}
+ addUserKnob {41 off l darks T IBKColourV3_2.off}
+ addUserKnob {41 mult l lights T IBKColourV3_2.mult}
+ addUserKnob {41 erode T IBKColourV3_2.erode}
+ addUserKnob {41 multi l "patch black" T IBKColourV3_2.multi}
+ addUserKnob {26 ""}
+ addUserKnob {41 color l "pick bg color" T Constant1.color}
+ addUserKnob {26 ""}
+ addUserKnob {26 name_1 l "" +STARTLINE T "KillGradient by Sachin Kumar Chauhan v1.0"}
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -93
+  ypos 56
+ }
+ Dot {
+  name Dot3
+  xpos -59
+  ypos 96
+ }
+set N69ca110 [stack 0]
+ Dot {
+  name Dot2
+  xpos -203
+  ypos 96
+ }
+ Dot {
+  name Dot1
+  xpos -203
+  ypos 290
+ }
+push $N69ca110
+ Group {
+  name IBKColourV3_2
+  help "This node provides IBKGizmo a colour reference in which to base its keying algorithm on a per pixel basis.\nThe idea is to remove the foreground image and only leave the shades and hues of the original blue/greenscreen.\nAttach the output of this node to the 'c' input of a default IBKGizmo. Attach the input of this node along with the 'fg' input of the IBKGizmo to the original screen.\nPick which colour your screen type is in both nodes and then while viewing the alpha output from the IBKGizmo lower the darks.b (if a bluescreen - adjust darks.g if a greenscreen) in this node \nuntil you see a change in the garbage area of the matte. Once you see a change then you have gone too far -back off a step. If you are still left with discoloured edges you can use the other colours in the lights and darks to eliminate them. Remember the idea is \nto be left with the original shades of the screen and the foreground blacked out. While swapping between viewing the matte from the IBKGizmo and the rgb output of this IBKColour adjust the other colours \nuntil you see a change in the garbage area of the matte. Simple rule of thumb - if you have a light red discoloured area increase the lights.r - if you have a dark green discoloured area increase darks.g. If your screen does not have a very saturated hue you may still be left\n with areas of discolouration after the above process. The 'erode' slider can help with this - while viewing the rgb output adjust the erode until those areas disappear.\nThe 'patch black' slider allows you to fill in the black areas with screen colour. This is not always necessary but if you see blue squares in your composite increase this value and it'll fix it.\nThe above is the only real workflow for this node - working from the top parameter to the bottom parameter- going back to tweak darks/lights with 'erode' and 'patch black' activated isn't really gonna work. "
+  tile_color 0x990000
+  xpos -93
+  ypos 137
+  addUserKnob {20 "" l Parameters}
+  addUserKnob {41 screen_type l "screen type" T IBK2.screen_type}
+  addUserKnob {16 Size l size t "size of colour expansion" R 0 100}
+  Size 1
+  addUserKnob {18 off l darks t "adjust the colour values to get the best separation between black and the screen type colour.\nYou want to be left with only shades of the screen colour and black. \nIf a green screen is selected start by bringing down darks->green\nIf a blue screen is selected start by bringing down darks->blue" R -1 1}
+  off {0 0 0}
+  addUserKnob {6 off_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {18 mult l lights t "adjust the colour values to get the best separation between black and the screen type colour.\nYou want to be left with only shades of the screen colour and black. \nIf a green screen is selected start by bringing down darks->green\nIf a blue screen is selected start by bringing down darks->blue" R 0 2}
+  mult {1 1 1}
+  addUserKnob {6 mult_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {26 "" +STARTLINE}
+  addUserKnob {7 erode t "increase this value if you still see traces of the foreground edge colour in the output" R 0 5}
+  addUserKnob {26 ""}
+  addUserKnob {7 multi l "patch black" t "increase this to optionally remove the black from the output.\nThis should only be used once the the above darks/lights have been set" R 0 5}
+  addUserKnob {6 filt l INVISIBLE -STARTLINE +INVISIBLE}
+  filt true
+  addUserKnob {26 ""}
+  addUserKnob {7 level l INVISIBLE t "multiply the rgb output. Helps remove noise from main key" +INVISIBLE}
+  level 1
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos -31
+   ypos -45
+  }
+  Dot {
+   name Dot16
+   xpos 3
+   ypos -21
+  }
+set N6da6180 [stack 0]
+  Dot {
+   name Dot1
+   tile_color 0x9597bf00
+   xpos -94
+   ypos -21
+  }
+  Grade {
+   multiply {{mult.r} {mult.g} {mult.b} {curve}}
+   add {{off.r} {off.g} {off.b} {curve}}
+   name Grade11
+   tile_color 0x7aa9ff00
+   xpos -128
+   ypos 30
+  }
+  Clamp {
+   maximum_enable false
+   name Clamp2
+   xpos -128
+   ypos 91
+  }
+set N6d1feb0 [stack 0]
+push $N6d1feb0
+push $N6d1feb0
+  IBK {
+   inputs 3
+   screen_type green
+   blue_green_weight 1
+   luma 1
+   name IBK2
+   tile_color 0xff00
+   xpos -135
+   ypos 186
+  }
+  Invert {
+   channels alpha
+   name Invert1
+   tile_color 0x7aa9ff00
+   xpos -18
+   ypos 186
+  }
+  Erode {
+   size {{erode}}
+   name Erode1
+   xpos -18
+   ypos 222
+  }
+set N6aca2c0 [stack 0]
+  Dot {
+   name Dot3
+   tile_color 0x9597bf00
+   xpos 16
+   ypos 665
+  }
+push $N6aca2c0
+push $N6da6180
+  Dot {
+   name Dot17
+   xpos 126
+   ypos -21
+  }
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   channels alpha
+   name Copy3
+   tile_color 0x9e3c6300
+   xpos 92
+   ypos 179
+  }
+  Premult {
+   name Premult3
+   xpos 92
+   ypos 238
+  }
+  Blur {
+   size {{Size}}
+   name Blur4
+   tile_color 0xcc804e00
+   xpos 92
+   ypos 262
+  }
+  Unpremult {
+   name Unpremult4
+   xpos 92
+   ypos 300
+  }
+set N6cf4550 [stack 0]
+  Clamp {
+   channels {rgba.red rgba.green rgba.blue -rgba.alpha}
+   maximum 0
+   MinClampTo_enable true
+   MaxClampTo_enable true
+   name Clamp1
+   xpos 212
+   ypos 300
+  }
+set N6d6d840 [stack 0]
+  Dot {
+   name Dot5
+   xpos 366
+   ypos 304
+  }
+push $N6d6d840
+push $N6cf4550
+  Dot {
+   name Dot4
+   xpos 126
+   ypos 349
+  }
+set N6c1b560 [stack 0]
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.alpha
+   name Copy1
+   xpos 212
+   ypos 338
+  }
+  Blur {
+   channels rgba
+   size {{Size*3*multi}}
+   name Blur1
+   xpos 212
+   ypos 390
+  }
+  Unpremult {
+   name Unpremult1
+   xpos 212
+   ypos 428
+  }
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.alpha
+   name Copy2
+   xpos 332
+   ypos 421
+  }
+  Invert {
+   channels alpha
+   name Invert2
+   xpos 334
+   ypos 473
+  }
+set N6a4ae20 [stack 0]
+  FilterErode {
+   channels alpha
+   size {{(-Size/5)}}
+   filter gaussian
+   name FilterErode2
+   xpos 334
+   ypos 571
+  }
+push $N6a4ae20
+  FilterErode {
+   channels alpha
+   size {{(-Size/5)*multi*2}}
+   filter gaussian
+   name FilterErode1
+   xpos 217
+   ypos 473
+  }
+  Switch {
+   inputs 2
+   which {{1-filt}}
+   name Switch1
+   xpos 217
+   ypos 578
+  }
+  Premult {
+   name Premult1
+   xpos 217
+   ypos 616
+  }
+push $N6c1b560
+  Merge {
+   inputs 2
+   name Merge1
+   xpos 92
+   ypos 616
+  }
+  Copy {
+   inputs 2
+   from0 rgba.alpha
+   to0 rgba.alpha
+   name ChannelCopy2
+   tile_color 0x9e3c6300
+   xpos 92
+   ypos 654
+  }
+  Grade {
+   multiply {{level}}
+   name Grade1
+   xpos 92
+   ypos 706
+  }
+  Output {
+   name Output1
+   xpos 92
+   ypos 743
+  }
+ end_group
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos 49
+  ypos 188
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge1
+  xpos -93
+  ypos 212
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  name Merge2
+  xpos -93
+  ypos 287
+ }
+ Output {
+  name Output1
+  xpos -93
+  ypos 387
+ }
+end_group

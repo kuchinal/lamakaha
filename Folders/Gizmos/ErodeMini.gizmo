@@ -1,0 +1,238 @@
+#! /mnt/repository/software/install/nuke/11.3v1/centos-6_x86-64/libnuke-11.3.1.so -nx
+version 11.3 v1
+Group {
+name ErodeMini
+inputs 2
+tile_color 0xe58700ff
+note_font "Bitstream Vera Sans Bold Bold"
+note_font_size 12
+note_font_color 0xe58700ff
+addUserKnob {20 User}
+addUserKnob {6 Invertinput l "Invert input         " +STARTLINE}
+addUserKnob {41 channels -STARTLINE T FilterErode1.channels}
+addUserKnob {26 ERODE}
+addUserKnob {41 size l "" +STARTLINE T FilterErode1.size}
+addUserKnob {41 filter -STARTLINE T FilterErode1.filter}
+addUserKnob {6 miniErode l "" +STARTLINE +STARTLINE}
+addUserKnob {26 MINIERODE l "MINI ERODE" -STARTLINE}
+addUserKnob {7 miniErodeSize l "" -STARTLINE R 0 10}
+addUserKnob {26 BLUR}
+addUserKnob {41 size_1 l "" +STARTLINE T Blur1.size}
+addUserKnob {26 ""}
+addUserKnob {7 mix}
+mix 1
+addUserKnob {26 ""}
+addUserKnob {6 cutIn l "use a mask as a cut in" +STARTLINE}
+addUserKnob {41 size_2 l "           blur cut in" -STARTLINE T Blur2.size}
+}
+Input {
+inputs 0
+name Mask
+xpos -198
+ypos 103
+number 1
+}
+Dot {
+name Dot15
+xpos -164
+ypos 218
+}
+set Nca836fb0 [stack 0]
+Dot {
+name Dot14
+xpos -164
+ypos 285
+}
+set N12de6280 [stack 0]
+Blur {
+channels rgba
+name Blur2
+xpos -198
+ypos 584
+}
+Dot {
+name Dot13
+xpos -164
+ypos 866
+}
+push $N12de6280
+Shuffle {
+red white
+green white
+blue white
+alpha white
+name Shuffle1
+xpos -292
+ypos 281
+}
+push $Nca836fb0
+Shuffle {
+alpha white
+name Shuffle2
+xpos -413
+ypos 214
+disable {{"\[exists parent.input1] "}}
+}
+Switch {
+inputs 2
+which {{parent.cutIn}}
+name Switch1
+xpos -413
+ypos 281
+}
+Dot {
+name Dot8
+xpos -379
+ypos 353
+}
+set N12cda220 [stack 0]
+Dot {
+name Dot3
+xpos -379
+ypos 619
+}
+set N12cda670 [stack 0]
+Dot {
+name Dot9
+xpos -379
+ypos 702
+}
+push $N12cda670
+push $N12cda220
+Input {
+inputs 0
+name Input1
+xpos -528
+ypos 84
+}
+Dot {
+name Dot10
+xpos -494
+ypos 110
+}
+set N1055db0 [stack 0]
+Invert {
+channels rgba
+mix {{parent.Invertinput}}
+name Invert4
+xpos -528
+ypos 171
+}
+Dot {
+name Dot5
+xpos -494
+ypos 236
+}
+set Nb5fa2f0 [stack 0]
+Dot {
+name Dot6
+xpos -705
+ypos 236
+}
+FilterErode {
+channels rgba
+size 0
+name FilterErode1
+xpos -739
+ypos 281
+}
+Dot {
+name Dot7
+xpos -705
+ypos 353
+}
+push $Nb5fa2f0
+Merge2 {
+inputs 2+1
+operation copy
+name Merge1
+xpos -528
+ypos 349
+}
+Dot {
+name Dot1
+xpos -494
+ypos 432
+}
+set N684f8920 [stack 0]
+Dot {
+name Dot4
+xpos -696
+ypos 432
+}
+Reformat {
+type scale
+scale 5
+name Reformat11
+xpos -730
+ypos 468
+}
+FilterErode {
+channels {{{FilterErode1.channels}}}
+size {{parent.miniErodeSize}}
+name FilterErode6
+selected true
+xpos -730
+ypos 494
+}
+Reformat {
+type scale
+scale {{1/parent.Reformat11.scale}}
+name Reformat12
+xpos -730
+ypos 520
+}
+Dot {
+name Dot2
+xpos -696
+ypos 619
+}
+push $N684f8920
+Merge2 {
+inputs 2+1
+operation copy
+name Merge2
+xpos -528
+ypos 615
+disable {{!parent.miniErode}}
+}
+Blur {
+inputs 1+1
+channels {{{parent.FilterErode1.channels}}}
+name Blur1
+xpos -528
+ypos 698
+}
+push $N1055db0
+Dot {
+name Dot11
+xpos -872
+ypos 110
+}
+Dot {
+name Dot12
+xpos -872
+ypos 804
+}
+Merge2 {
+inputs 2
+operation copy
+mix {{parent.mix}}
+name mix
+xpos -528
+ypos 800
+}
+Merge2 {
+inputs 2
+operation mask
+mix {{parent.cutIn}}
+name Merge3
+xpos -528
+ypos 862
+}
+Output {
+name Output1
+xpos -528
+ypos 943
+}
+end_group

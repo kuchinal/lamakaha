@@ -1,0 +1,442 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x4c567501
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos 2507
+ ypos 5038
+ bookmark false
+ bdwidth 506
+ bdheight 238
+}
+StickyNote {
+ inputs 0
+ name StickyNote7
+ tile_color 0xffffffff
+ label "<b>controls                ."
+ note_font "Helvetica bold"
+ note_font_size 100
+ selected true
+ xpos 2507
+ ypos 4913
+}
+Axis {
+ inputs 0
+ name CenterA
+ label "position\nof\nthe rig"
+ selected true
+ xpos 2588
+ ypos 5102
+}
+set Nc68f820 [stack 0]
+NoOp {
+ name CenterA-5
+ help CenterA
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 2052
+ ypos 5412
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T CenterA}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Camera2 {
+ rotate {90 0 0}
+ focal 45
+ haperture 90
+ vaperture 90
+ name Y
+ selected true
+ xpos 2062
+ ypos 5475
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+ColorBars {
+ inputs 0
+ name ColorBars1
+ selected true
+ xpos 1243
+ ypos 4905
+}
+Sphere {
+ rows 100
+ columns 100
+ name Sphere1
+ selected true
+ xpos 1243
+ ypos 4994
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,1,0])\nn\['pivot'].setValue(\[0,-1,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+set N125e7b40 [stack 0]
+push $cut_paste_input
+Reformat {
+ type "to box"
+ box_width 2000
+ box_height {{box_width}}
+ box_fixed true
+ name BGresolution
+ label "actually\ntile\nResolution"
+ selected true
+ xpos 2779
+ ypos 5104
+}
+set N53d3200 [stack 0]
+NoOp {
+ name BGresolution-5
+ help BGresolution
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 2293
+ ypos 5490
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T BGresolution}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender6
+ selected true
+ xpos 2151
+ ypos 5495
+}
+push $Nc68f820
+NoOp {
+ name CenterA-4
+ help CenterA
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 1640
+ ypos 5412
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T CenterA}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Camera2 {
+ rotate {-90 0 0}
+ focal 45
+ haperture 90
+ vaperture 90
+ name -Y
+ selected true
+ xpos 1650
+ ypos 5475
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $N125e7b40
+push $N53d3200
+NoOp {
+ name BGresolution-4
+ help BGresolution
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 1873
+ ypos 5490
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T BGresolution}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender5
+ selected true
+ xpos 1744
+ ypos 5495
+}
+push $Nc68f820
+NoOp {
+ name CenterA-1
+ help CenterA
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 288
+ ypos 5412
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T CenterA}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Camera2 {
+ rotate {0 -90 0}
+ focal 45
+ haperture 90
+ vaperture 90
+ name X
+ selected true
+ xpos 298
+ ypos 5475
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $N125e7b40
+push $N53d3200
+NoOp {
+ name BGresolution-1
+ help BGresolution
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 535
+ ypos 5490
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T BGresolution}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender2
+ selected true
+ xpos 399
+ ypos 5495
+}
+push $Nc68f820
+NoOp {
+ name CenterA-3
+ help CenterA
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 1152
+ ypos 5412
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T CenterA}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Camera2 {
+ rotate {0 -270 0}
+ focal 45
+ haperture 90
+ vaperture 90
+ name -X
+ selected true
+ xpos 1162
+ ypos 5475
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $N125e7b40
+push $N53d3200
+NoOp {
+ name BGresolution-2
+ help BGresolution
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 1404
+ ypos 5490
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T BGresolution}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender4
+ selected true
+ xpos 1272
+ ypos 5495
+}
+push $Nc68f820
+NoOp {
+ name CenterA-2
+ help CenterA
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 712
+ ypos 5412
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T CenterA}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Camera2 {
+ rotate {0 -180 0}
+ focal 45
+ haperture 90
+ vaperture 90
+ name Z
+ selected true
+ xpos 722
+ ypos 5475
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $N125e7b40
+push $N53d3200
+NoOp {
+ name BGresolution-3
+ help BGresolution
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 978
+ ypos 5490
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T BGresolution}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender3
+ selected true
+ xpos 832
+ ypos 5495
+}
+push $Nc68f820
+NoOp {
+ name CenterA-
+ help CenterA
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -93
+ ypos 5412
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T CenterA}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Camera2 {
+ focal 45
+ haperture 90
+ vaperture 90
+ name -Z
+ selected true
+ xpos -83
+ ypos 5475
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+push $N125e7b40
+push $N53d3200
+NoOp {
+ name BGresolution-
+ help BGresolution
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos 131
+ ypos 5490
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {26 connect l "connected to :" T BGresolution}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ shutteroffset centred
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos 7
+ ypos 5495
+}
+SphericalTransform {
+ inputs 6
+ input Cube
+ fix true
+ name SphericalTransform1
+ selected true
+ xpos 1272
+ ypos 6055
+}

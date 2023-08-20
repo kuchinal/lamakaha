@@ -1,0 +1,158 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+Defocus {
+channels rgba
+defocus 0.7
+ratio 0.5
+name Defocus1
+selected true
+xpos -11102
+ypos 12561
+}
+Dot {
+name Dot48
+selected true
+xpos -11068
+ypos 12701
+}
+set N1eeb9130 [stack 0]
+Dot {
+name Dot49
+selected true
+xpos -11293
+ypos 12701
+}
+Transform {
+scale 0.9995
+center {1079 694.5}
+shutteroffset centred
+name Transform7
+selected true
+xpos -11327
+ypos 12790
+}
+push $cut_paste_input
+NoOp {
+name Prep-3
+help Prep
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos -10788
+ypos 12653
+hide_input true
+addUserKnob {20 User}
+addUserKnob {26 connect l "connected to :" T Prep}
+addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+Dot {
+name Dot44
+selected true
+xpos -10754
+ypos 12762
+}
+set N2791b030 [stack 0]
+Merge2 {
+inputs 2
+name Merge32
+selected true
+xpos -11178
+ypos 12869
+}
+Dot {
+name Dot45
+selected true
+xpos -11144
+ypos 13018
+}
+push $N1eeb9130
+Transform {
+center {1079 694.5}
+shutteroffset centred
+name Transform8
+selected true
+xpos -11102
+ypos 12794
+}
+push $N2791b030
+Merge2 {
+inputs 2
+name Merge31
+selected true
+xpos -10968
+ypos 12874
+}
+Dot {
+name Dot46
+selected true
+xpos -10934
+ypos 12967
+}
+push $N1eeb9130
+Dot {
+name Dot50
+selected true
+xpos -10937
+ypos 12701
+}
+Transform {
+scale 1.0007
+center {1079 694.5}
+shutteroffset centred
+name Transform6
+selected true
+xpos -10971
+ypos 12765
+}
+push $N2791b030
+Merge2 {
+inputs 2
+name Merge16
+selected true
+xpos -10788
+ypos 12876
+}
+Dot {
+name Dot47
+selected true
+xpos -10754
+ypos 12913
+}
+Reformat {
+inputs 0
+name Reformat4
+selected true
+xpos -10676
+ypos 12791
+}
+Copy {
+inputs 2
+from0 rgba.red
+to0 rgba.red
+name Copy6
+selected true
+xpos -10676
+ypos 12909
+}
+Copy {
+inputs 2
+from0 rgba.green
+to0 rgba.green
+name Copy4
+selected true
+xpos -10676
+ypos 12963
+}
+Copy {
+inputs 2
+from0 rgba.blue
+to0 rgba.blue
+name Copy5
+selected true
+xpos -10676
+ypos 13014
+}

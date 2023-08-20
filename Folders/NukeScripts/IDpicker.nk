@@ -1,0 +1,47 @@
+set cut_paste_input [stack 0]
+version 7.0 v8
+push $cut_paste_input
+Group {
+ name IDpicker
+ tile_color 0x4500ff
+ note_font "Bitstream Vera Sans Bold"
+ note_font_size 14
+ note_font_color 0xffffffff
+ selected true
+ xpos -5329
+ ypos -11436
+ addUserKnob {20 User}
+ addUserKnob {41 srccolor T HSVTool5.srccolor}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -632
+  ypos -525
+ }
+ HSVTool {
+  huesrcs {0 0}
+  huerolloffrange {{0 x1001 50}}
+  satsrcs {0 0}
+  satrolloffrange {{0 x1001 0.3}}
+  brtsrcs {0 0}
+  brtrolloffrange {{0 x1001 0.3}}
+  name HSVTool5
+  xpos -632
+  ypos -484
+ }
+ Shuffle {
+  red alpha
+  green alpha
+  blue alpha
+  name Shuffle1
+  label alpha
+  xpos -632
+  ypos -448
+ }
+ Output {
+  name Output1
+  xpos -632
+  ypos -384
+ }
+end_group

@@ -1,0 +1,20 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Multiply {
+ value {{"(noise((frame+phase)*freq, (seed*5), 0)*amp)+offset"}}
+ maskChannelMask -rgba.alpha
+ name NoiseCurve
+ tile_color 0x51004f00
+ selected true
+ xpos -643
+ ypos -69
+ addUserKnob {20 parameters l Parameters}
+ addUserKnob {7 freq l Frequency}
+ freq 0.348
+ addUserKnob {7 amp l Amplitude}
+ amp 0.354
+ addUserKnob {7 offset l Offset}
+ addUserKnob {7 phase l Phase R 0 100}
+ addUserKnob {7 seed l Seed t " " R 0 100}
+}

@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+.hidden
+/.idea
+/.hidden
+*workspace.xml
+*tab_stats.dat
+tab_stats.dat

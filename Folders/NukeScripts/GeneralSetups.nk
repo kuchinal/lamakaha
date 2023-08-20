@@ -1,0 +1,67 @@
+set cut_paste_input [stack 0]
+version 6.3 v4
+BackdropNode {
+ inputs 0
+ name FileIn
+ tile_color 0x563456ff
+ label "File In CG"
+ note_font "Verdana Bold"
+ note_font_size 50
+ selected true
+ xpos 280
+ ypos -231
+ bdwidth 2740
+ bdheight 422
+}
+BackdropNode {
+ inputs 0
+ name Layers
+ tile_color 0x3f5656ff
+ label Mattes
+ note_font "Verdana Bold Bold"
+ note_font_size 50
+ selected true
+ xpos 276
+ ypos 198
+ bdwidth 2744
+ bdheight 452
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x842020ff
+ label "  File Out"
+ note_font "Verdana Bold"
+ note_font_size 100
+ selected true
+ xpos 276
+ ypos 661
+ bdwidth 571
+ bdheight 510
+}
+BackdropNode {
+ inputs 0
+ name FileIn2
+ tile_color 0x566a48ff
+ label Helpers
+ note_font "Verdana Bold Bold Bold"
+ note_font_size 50
+ selected true
+ xpos 3029
+ ypos -676
+ bdwidth 2482
+ bdheight 1324
+}
+BackdropNode {
+ inputs 0
+ name FileIn1
+ tile_color 0x6c6044ff
+ label "File In Plates"
+ note_font "Verdana Bold Bold"
+ note_font_size 50
+ selected true
+ xpos 281
+ ypos -676
+ bdwidth 2738
+ bdheight 438
+}

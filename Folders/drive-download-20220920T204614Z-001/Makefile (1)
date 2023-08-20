@@ -1,0 +1,23 @@
+NDKDIR ?= /usr/local/Nuke6.3v4
+MYCXX ?= g++
+LINK ?= g++
+CXXFLAGS ?= -g -c -DUSE_GLEW -I$(NDKDIR)/include -fPIC -msse 
+LINKFLAGS ?= -L$(NDKDIR) 
+LIBS ?= -lDDImage
+LINKFLAGS += -shared
+TO = ~/.nuke/plugins/
+
+FILE = Kaleidoscope.so
+
+all: $(FILE) clean move run
+.PRECIOUS : %.os
+%.os: %.cpp
+	$(MYCXX) $(CXXFLAGS) -o $(@) $<
+%.so: %.os
+	$(LINK) $(LINKFLAGS) $(LIBS) -o $(@) $<
+clean:	
+	rm -rf *.os
+move:
+	mv $(FILE) $(TO)
+run:	
+	/usr/local/Nuke6.3v4/Nuke6.3

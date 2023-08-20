@@ -1,0 +1,32 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push 0
+PostageStamp {
+ name UVnoMB
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -70586
+ ypos 14777
+ hide_input true
+}
+push $cut_paste_input
+Transform {
+ translate {{input.width*this.picker.r-input.width/2 i} {input.height*this.picker.g-input.height/2 i}}
+ center {{input.width/2 i} {input.height/2 i}}
+ name Transform15
+ selected true
+ xpos -70761
+ ypos 14719
+ addUserKnob {20 User}
+ addUserKnob {18 picker}
+ picker {0.2850587368 8.346510887 0}
+}
+STMap {
+ inputs 2
+ uv rgb
+ name STMap1
+ selected true
+ xpos -70761
+ ypos 14775
+}

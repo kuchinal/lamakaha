@@ -1,0 +1,104 @@
+set cut_paste_input [stack 0]
+version 6.3 v8
+push $cut_paste_input
+Group {
+ name AddMixSecondary
+ tile_color 0x3c00ff
+ note_font "Verdana Bold"
+ note_font_size 14
+ selected true
+ xpos -3819
+ ypos -2003
+ addUserKnob {20 User}
+ addUserKnob {41 premultiplied T AddMix2.premultiplied}
+ addUserKnob {41 nonlinear -STARTLINE T AddMix2.nonlinear}
+ addUserKnob {41 lut l "" +STARTLINE T AddMix2.lut}
+ addUserKnob {20 Secondary_1 l Secondary}
+ addUserKnob {6 Secondary l "Enable Secondary" +STARTLINE}
+ addUserKnob {41 premultiplied_1 l premultiplied -STARTLINE T AddMix3.premultiplied}
+ addUserKnob {41 nonlinear_1 l nonlinear -STARTLINE T AddMix3.nonlinear}
+ addUserKnob {41 lut_1 l "" +STARTLINE T AddMix3.lut}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos -580
+  ypos -446
+  number 2
+ }
+ Dot {
+  name Dot1
+  xpos -546
+  ypos -359
+ }
+ Input {
+  inputs 0
+  name FG
+  xpos -918
+  ypos -570
+  number 1
+ }
+ Dot {
+  name Dot164
+  xpos -884
+  ypos -505
+ }
+set N7b219d50 [stack 0]
+ Dot {
+  name Dot259
+  xpos -884
+  ypos -444
+ }
+ Input {
+  inputs 0
+  name BG
+  xpos -702
+  ypos -621
+ }
+ Dot {
+  name Dot238
+  xpos -668
+  ypos -565
+ }
+set N7b21a6e0 [stack 0]
+ Dot {
+  name Dot246
+  xpos -753
+  ypos -565
+ }
+ AddMix {
+  inputs 2
+  premultiplied true
+  name AddMix3
+  xpos -787
+  ypos -448
+ }
+ Dot {
+  name Dot260
+  xpos -753
+  ypos -359
+ }
+push $N7b219d50
+push $N7b21a6e0
+ AddMix {
+  inputs 2
+  premultiplied true
+  name AddMix2
+  xpos -702
+  ypos -509
+ }
+ Merge2 {
+  inputs 2+1
+  operation copy
+  bbox B
+  name Merge94
+  xpos -702
+  ypos -363
+  disable {{!parent.Secondary i}}
+ }
+ Output {
+  name Output1
+  xpos -702
+  ypos -186
+ }
+end_group

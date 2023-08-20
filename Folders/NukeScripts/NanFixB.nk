@@ -1,0 +1,12 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+Expression {
+expr0 isnan(r)?0:r
+expr1 isnan(g)?0:g
+expr2 isnan(b)?0:b
+name Expression4
+selected true
+xpos 21395
+ypos 19671
+}

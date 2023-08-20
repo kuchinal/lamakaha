@@ -1,0 +1,91 @@
+set cut_paste_input [stack 0]
+version 7.0 v10
+Camera2 {
+ inputs 0
+ name Camera1
+ selected true
+ xpos -610
+ ypos 3348
+ addUserKnob {20 User}
+ addUserKnob {22 Createtarget l "Create target" T "n = nuke.thisNode()\nx = n\['xpos'].value()\ny = n\['ypos'].value()\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+set N26eada10 [stack 0]
+push 0
+PostageStamp {
+ name depth5
+ help Dot13
+ tile_color 0xfa0
+ note_font_size 20
+ selected true
+ xpos -271
+ ypos 3368
+ hide_input true
+ addUserKnob {20 User}
+ addUserKnob {22 showsourse l "show source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 jumptosource l "jump to source" -STARTLINE T "a = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\nxC = dep.xpos() + dep.screenWidth()/2\nyC = dep.ypos() + dep.screenHeight()/2\nnuke.zoom( 3, \[ xC, yC ])\n"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+}
+Blur {
+ channels rgba
+ size 5
+ name Blur7
+ selected true
+ xpos -271
+ ypos 3402
+}
+Invert {
+ channels rgba
+ name Invert2
+ selected true
+ xpos -271
+ ypos 3428
+}
+push $N26eada10
+push $cut_paste_input
+Card2 {
+ rows 100
+ columns 100
+ lens_in_focal 50
+ lens_in_haperture 24.576
+ translate {0 0 -1}
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ selected true
+ xpos -417
+ ypos 3314
+}
+Normals {
+ inputs 2
+ action lookat
+ name Normals1
+ selected true
+ xpos -417
+ ypos 3369
+}
+DisplaceGeo {
+ inputs 2
+ scale 1
+ name DisplaceGeo1
+ selected true
+ xpos -417
+ ypos 3428
+}
+push 0
+ScanlineRender {
+ inputs 3
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos -417
+ ypos 3506
+}

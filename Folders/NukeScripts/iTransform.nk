@@ -1,0 +1,266 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Group {
+name Itransform
+tile_color 0x81275aff
+note_font "Verdana Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold Bold"
+note_font_size 12
+note_font_color 0xffffffff
+selected true
+xpos -9722
+ypos 7948
+addUserKnob {20 "" l Transform}
+addUserKnob {41 matrix T Transform1.matrix}
+addUserKnob {41 translate T Transform1.translate}
+addUserKnob {41 rotate T Transform1.rotate}
+addUserKnob {41 scale T Transform1.scale}
+addUserKnob {41 skewX l "skew X" T Transform1.skewX}
+addUserKnob {41 skewY l "skew Y" T Transform1.skewY}
+addUserKnob {41 skew +INVISIBLE T Transform1.skew}
+addUserKnob {41 center T Transform1.center}
+addUserKnob {22 setCenter -STARTLINE T "n = nuke.thisGroup()\nw= n.width()\nh=n.height()\nprint w,h\nn\['center'].setValue(\[w/2,h/2])"}
+addUserKnob {41 filter T Transform1.filter}
+addUserKnob {41 clamp T Transform1.clamp}
+addUserKnob {6 crop_1 l crop -STARTLINE}
+crop_1 true
+addUserKnob {41 crop l "black outside" +INVISIBLE T Transform1.crop}
+addUserKnob {41 clip l "knob crop \$value" +INVISIBLE T Transform1.clip}
+addUserKnob {41 disable_1 l "keep vectors" -STARTLINE T Remove2.disable}
+addUserKnob {26 ""}
+addUserKnob {14 AdjBBox1_numpixels l "Add Pixels" R 0 100}
+addUserKnob {7 Addbb l "Increase BB size" R 1 2}
+Addbb 1
+addUserKnob {41 mix T Merge3.mix}
+}
+Input {
+inputs 0
+name ctrlMask
+xpos -40
+ypos -431
+number 1
+}
+Reformat {
+type scale
+scale {{parent.Addbb}}
+resize none
+pbb true
+name Reformat33
+xpos -40
+ypos -310
+}
+Shuffle {
+red alpha
+green alpha
+blue alpha
+alpha black
+name Shuffle1
+xpos -40
+ypos -25
+}
+Input {
+inputs 0
+name img
+xpos -385
+ypos -440
+}
+set N8c0a5360 [stack 0]
+Reformat {
+type scale
+scale {{parent.Addbb}}
+resize none
+pbb true
+name Reformat32
+xpos -385
+ypos -313
+}
+Dot {
+name Dot5
+xpos -351
+ypos -242
+}
+set N9cacbf60 [stack 0]
+Remove {
+name Remove1
+xpos -210
+ypos -252
+}
+AdjBBox {
+numpixels {{parent.AdjBBox1_numpixels.w} {parent.AdjBBox1_numpixels.h}}
+name AdjBBox1
+xpos -210
+ypos -197
+}
+Expression {
+expr0 x
+expr1 y
+name Expression1
+xpos -210
+ypos -141
+}
+set N9ce110f0 [stack 0]
+Dot {
+name Dot2
+xpos -286
+ypos -137
+}
+Transform {
+translate {{parent.Transform1.translate.main} {parent.Transform1.translate.main}}
+rotate {{parent.Transform1.rotate.main}}
+scale {{parent.Transform1.scale.main} {parent.Transform1.scale.main}}
+skewX {{parent.Transform1.skewX}}
+skewY {{parent.Transform1.skewY}}
+center {{parent.Transform1.center.main} {parent.Transform1.center.main}}
+filter {{Transform1.filter}}
+clamp {{parent.Transform1.clamp.main}}
+black_outside {{parent.Transform1.black_outside.main}}
+motionblur {{parent.Transform1.motionblur.main}}
+shutter {{parent.Transform1.shutter.main}}
+shutteroffset {{Transform1.shutteroffset}}
+shuttercustomoffset {{parent.Transform1.shuttercustomoffset.main}}
+name Transform2
+xpos -320
+ypos -73
+}
+push $N9ce110f0
+Merge2 {
+inputs 2
+operation minus
+name Merge1
+xpos -210
+ypos -73
+}
+Merge2 {
+inputs 2
+operation multiply
+name Merge2
+xpos -210
+ypos -25
+}
+set N9cb17970 [stack 0]
+Dot {
+name Dot1
+xpos -270
+ypos -21
+}
+Dot {
+name Dot3
+xpos -270
+ypos 159
+}
+push $N9cacbf60
+Dot {
+name Dot4
+xpos -351
+ypos 47
+}
+set N9c9445b0 [stack 0]
+Copy {
+inputs 2
+from0 rgba.red
+to0 rgba.red
+from1 rgba.green
+to1 rgba.green
+name Copy2
+xpos -385
+ypos 144
+}
+IDistort {
+channels none
+name IDistort1
+xpos -385
+ypos 192
+}
+push $N9cb17970
+push $N9c9445b0
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy1
+xpos -210
+ypos 31
+}
+IDistort {
+uv forward
+name IDistort2
+xpos -210
+ypos 87
+}
+Remove {
+channels forward
+channels2 motion
+name Remove2
+xpos -210
+ypos 125
+}
+Copy {
+inputs 2
+from0 -rgba.alpha
+to0 -rgba.alpha
+name Copy3
+xpos -210
+ypos 192
+}
+set Na6ab6830 [stack 0]
+Crop {
+box {0 0 {input.width} {input.height}}
+name Crop1
+xpos -360
+ypos 300
+}
+push $Na6ab6830
+CopyBBox {
+inputs 2
+name CopyBBox1
+xpos -210
+ypos 343
+disable {{!parent.crop_1}}
+}
+Reformat {
+type scale
+scale {{1/parent.Addbb}}
+resize none
+pbb true
+name Reformat34
+xpos -210
+ypos 412
+}
+push $N8c0a5360
+Dot {
+name Dot7
+xpos -670
+ypos -436
+}
+Dot {
+name Dot6
+xpos -670
+ypos 499
+}
+Merge2 {
+inputs 2
+operation copy
+bbox A
+also_merge all
+name Merge3
+selected true
+xpos -210
+ypos 495
+}
+Output {
+name Output1
+xpos -210
+ypos 542
+}
+Transform {
+inputs 0
+center {1024 584}
+black_outside false
+name Transform1
+label "expresison link this\nto avoid st map overlay"
+xpos -102
+ypos -131
+}
+end_group

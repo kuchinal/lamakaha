@@ -1,0 +1,20 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+NoOp {
+name FindPigs1
+tile_color 0xff4f29ff
+note_font "Bitstream Vera Sans Bold Bold Bold"
+selected true
+xpos -435
+ypos 34069
+hide_input true
+addUserKnob {20 User}
+addUserKnob {22 findPigs l "Find Pigs" T "####################################\n# ShowPigsTK\n# Alexey Kuchinski\n####################################\n# Shows Bad Bounding Boxes\n# inspired by ShowPigs by Ben Pierre\n# inspired :D ShowPigs by Timur Khodzhaev\nimport nuke\nP = nuke.thisNode()\nCurKnobs = P.knobs()\nnotPigs = P\['notPigs'].value().split(\",\")\nfactor = P\['pigFactor'].value()\nch_maxWidth=nuke.root().format().width()*factor/100\nch_maxHeight=nuke.root().format().height()*factor/100\n#print ch_maxWidth,ch_maxHeight\nch_all_nodes=nuke.allNodes()\nfor ch_node in ch_all_nodes:\n    ch_width =ch_node.bbox().w()\n    ch_height=ch_node.bbox().h()\n    if ((ch_width>ch_maxWidth)or(ch_height>ch_maxHeight)):\n        try:\n            dep = ch_node.dependencies(nuke.INPUTS)\[0]\n            dep_width =dep.bbox().w()\n            dep_height=dep.bbox().h()\n            if ((dep_width<ch_maxWidth)and(dep_height<ch_maxHeight)):\n                pig = ch_node.name()\n                print pig,'-',int(ch_width),'x',int(ch_height)\n                \n                if pig not in CurKnobs and pig not in notPigs:\n                    code = \"\"\"\nn = nuke.thisKnob().label()\nnotPigs = nuke.thisNode()\['notPigs'].value()\nnuke.thisNode()\['notPigs'].setValue(notPigs+\",\"+n)\nnuke.thisNode().removeKnob(nuke.thisNode().knobs()\[nuke.thisKnob().name()])\nwith nuke.Root():\n    node = nuke.toNode(n)\n    nuke.zoom(3,\[node.xpos(),node.ypos()])\n                    \"\"\"\n                    u=nuke.PyScript_Knob(pig,pig,code)\n                    P.addKnob(u)        \n        except:\n            pass" +STARTLINE}
+addUserKnob {3 pigFactor l "pig factor" t "define in percent how big should be the bounding box to be considered a Pig."}
+pigFactor 200
+addUserKnob {26 q l % -STARTLINE}
+addUserKnob {1 notPigs l "not pigs"}
+addUserKnob {26 ""}
+addUserKnob {22 findErrors l "find errors" T "f = nuke.allNodes()\n\nlistOfErrors = \"Some Nodes have errors!!!! \\nI will recommend you to fix them\\n\\n\"\neExist = 0\nfor n in f:\n     if n.hasError() == True:\n        listOfErrors = listOfErrors + \"\\n\"+n.name()\n        eExist ==1\n\nif eExist ==1:\n    nuke.message(listOfErrors)\nelse:\n    nuke.message(\"All cool!!!\\nGet a coffee!!!\")" +STARTLINE}
+}

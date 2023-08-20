@@ -1,0 +1,32 @@
+set cut_paste_input [stack 0]
+version 10.5 v5
+push $cut_paste_input
+Camera2 {
+translate {{"(\[value cam1].translate*(1-which))+(\[value cam2].translate*(which))"} {"(\[value cam1].translate*(1-which))+(\[value cam2].translate*(which))"} {"(\[value cam1].translate*(1-which))+(\[value cam2].translate*(which))"}}
+rotate {{"(\[value cam1].rotate*(1-which))+(\[value cam2].rotate*(which))"} {"(\[value cam1].rotate*(1-which))+(\[value cam2].rotate*(which))"} {"(\[value cam1].rotate*(1-which))+(\[value cam2].rotate*(which))"}}
+scaling {{"(\[value cam1].scaling*(1-which))+(\[value cam2].scaling*(which))"} {"(\[value cam1].scaling*(1-which))+(\[value cam2].scaling*(which))"} {"(\[value cam1].scaling*(1-which))+(\[value cam2].scaling*(which))"}}
+uniform_scale {{"(\[value cam1].uniform_scale*(1-which))+(\[value cam2].uniform_scale*(which))"}}
+skew {{"(\[value cam1].skew*(1-which))+(\[value cam2].skew*(which))"} {"(\[value cam1].skew*(1-which))+(\[value cam2].skew*(which))"} {"(\[value cam1].skew*(1-which))+(\[value cam2].skew*(which))"}}
+pivot {{"(\[value cam1].pivot*(1-which))+(\[value cam2].pivot*(which))"} {"(\[value cam1].pivot*(1-which))+(\[value cam2].pivot*(which))"} {"(\[value cam1].pivot*(1-which))+(\[value cam2].pivot*(which))"}}
+focal {{"(\[value cam1].focal*(1-which))+(\[value cam2].focal*(which))"}}
+haperture {{"(\[value cam1].haperture*(1-which))+(\[value cam2].haperture*(which))"}}
+vaperture {{"(\[value cam1].vaperture*(1-which))+(\[value cam2].vaperture*(which))"}}
+near {{"(\[value cam1].near(1-which))+(\[value cam2].near*(which))"}}
+far {{"(\[value cam1].far*(1-which))+(\[value cam2].far*(which))"}}
+win_translate {{"(\[value cam1].win_translate*(1-which))+(\[value cam2].win_translate*(which))"} {"(\[value cam1].win_translate*(1-which))+(\[value cam2].win_translate*(which))"}}
+win_scale {{"(\[value cam1].win_scale*(1-which))+(\[value cam2].win_scale*(which))"} {"(\[value cam1].win_scale*(1-which))+(\[value cam2].win_scale*(which))"}}
+winroll {{"(\[value cam1].winroll*(1-which))+(\[value cam2].winroll*(which))"}}
+focal_point {{"(\[value cam1].focal_point*(1-which))+(\[value cam2].focal_point*(which))"}}
+fstop {{"(\[value cam1].fstop*(1-which))+(\[value cam2].fstop*(which))"}}
+name TRANSITION_CAMERAS1
+label "<b>\[file rootname \[file tail \[value file]]]"
+selected true
+xpos 1078
+ypos 6032
+addUserKnob {20 User}
+addUserKnob {1 cam1 l "Camera 1" t "Name of first camera node"}
+cam1 Camera1
+addUserKnob {1 cam2 l "Camera 2" t "Name of second Camera node" -STARTLINE}
+cam2 Camera2
+addUserKnob {7 which l "Which Camera" t "0 is 100% Camera 1\n1 is 100% Camera 2"}
+}

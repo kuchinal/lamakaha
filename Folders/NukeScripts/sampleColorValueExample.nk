@@ -1,0 +1,13 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push $cut_paste_input
+NoOp {
+ name NoOp1
+ selected true
+ xpos -357
+ ypos 84
+ addUserKnob {20 User}
+ addUserKnob {22 pick T "a=nuke.toNode(\"NoOp1\")\nr=nuke.sample(a,\"red\",a\['picker'].value(0),a\['picker'].value(1),1,1)\ng=nuke.sample(a,\"green\",a\['picker'].value(0),a\['picker'].value(1),1,1)\nb=nuke.sample(a,\"blue\",a\['picker'].value(0),a\['picker'].value(1),1,1)\nnuke.tprint(r)" +STARTLINE}
+ addUserKnob {12 picker}
+ picker {1630 760}
+}

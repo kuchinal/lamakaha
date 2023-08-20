@@ -1,0 +1,749 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+BackdropNode {
+ inputs 0
+ name BackdropNode5
+ tile_color 0x497c7501
+ note_font "Helvetica bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -2100
+ ypos -2037
+ bookmark false
+ bdwidth 1085
+ bdheight 1551
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ tile_color 0xffffffff
+ label "<b>leaves                ."
+ note_font "Helvetica bold Bold Bold Bold Bold"
+ note_font_size 100
+ selected true
+ xpos -2100
+ ypos -2162
+}
+StickyNote {
+ inputs 0
+ name StickyNote5
+ label "adjust material properties here!!!"
+ note_font_size 30
+ selected true
+ xpos -1491
+ ypos -1592
+}
+Camera2 {
+ inputs 0
+ translate {{curve x1001 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322 -130.8222322} {curve x1001 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502 3.377281502} {curve x1001 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055 -56.35798055}}
+ rotate {{curve x1001 3.262594119 3.265370588 3.265770231 3.263108199 3.264083012 3.263763742 3.266589448 3.267743268 3.265852424 3.264980017 3.264360895 3.263353373 3.260790177 3.255202756 3.257507257 3.265515864 3.262332916 3.263802041 3.265900483 3.263409733 3.260363334 3.260984296 3.260165556 3.256713205 3.255978517 3.260444047 3.268431875 3.267562378 3.264212704 3.266591735 3.268685878 3.269682291 3.270076169 3.274260227 3.276000998 3.280087286 3.285431976 3.286966993} {curve x1001 143.8671556 143.8677776 143.868205 143.8686227 143.8704162 143.8711119 143.8718898 143.8717617 143.8731313 143.8771743 143.8777246 143.8774137 143.8756728 143.8738876 143.8713439 143.8717934 143.8698025 143.865457 143.8622686 143.8625779 143.8600864 143.8534953 143.8513961 143.851302 143.8501963 143.8487282 143.8476965 143.8464269 143.8426011 143.8342227 143.8281054 143.8221036 143.8165866 143.8134646 143.8104431 143.8040322 143.8050482 143.8057492} {curve x1001 -0.2714576566 -0.2653277017 -0.268977845 -0.2708244985 -0.2638930081 -0.2644966433 -0.2661062279 -0.269331726 -0.2698117916 -0.2625152315 -0.2616412287 -0.2622172803 -0.2651566056 -0.2711685544 -0.2758406512 -0.2703681147 -0.2755621394 -0.2851953464 -0.2969285105 -0.2852901701 -0.2841071534 -0.3011127347 -0.3115047377 -0.315895525 -0.3081458002 -0.3076581263 -0.3098547808 -0.309374656 -0.3087624151 -0.3127482722 -0.3211068483 -0.3233829292 -0.3302707957 -0.3352968115 -0.3319098975 -0.3385835533 -0.339221505 -0.3379622507}}
+ scaling {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1} {curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ uniform_scale {{curve x1001 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1}}
+ skew {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ pivot {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal {{curve x1001 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.17327118 50.15955353 50.14043045 50.11590195 50.08945084 50.0835495}}
+ haperture {{curve x1001 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113 40.95238113}}
+ vaperture {{curve x1001 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038 21.60000038}}
+ near {{curve x1001 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776 0.009999999776}}
+ far {{curve x1001 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000 10000}}
+ win_translate {{curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0} {curve x1001 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0}}
+ focal_point 85
+ file /corky/projects/LevelUp_343202/seq/fgb/0180/data/animation/cameras/shot_cam/versions/cache_v001.abc
+ name Camera1
+ label MainCam
+ selected true
+ xpos -71
+ ypos 334
+ addUserKnob {20 User}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 createTarget -STARTLINE T "n = nuke.thisNode()\nx = int(n\['xpos'].value())\ny = int(n\['ypos'].value())\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue('Target'+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = 'degrees(atan(('+Target+'.translate.y-translate.y)/sqrt(pow2(sqrt(pow2('+Target+'.translate.x-translate.x)+pow2('+Target+'.translate.z-translate.z))))))'\nn\['rotate'].setExpression(X,0)\nY = Target+'.translate.x-translate.x >= 0 ? 270-degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x))): -degrees(atan(('+Target+'.translate.z-translate.z)/('+Target+'.translate.x-translate.x)))-270'\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode('MergeGeo')\nmerge.setInput(1,a)"}
+}
+Light2 {
+ inputs 0
+ intensity 1000
+ falloff_type Quadratic
+ translate {-148.8155975 1.600000024 8.656163216}
+ rotate {0 -10.86824823 0}
+ depthmap_slope_bias 0.01
+ name Light6
+ label Flashlight
+ note_font_size 14
+ selected true
+ xpos -411
+ ypos -188
+ addUserKnob {20 User}
+ addUserKnob {22 createtarget l "Create target" T "n = nuke.thisNode()\nx = n\['xpos'].value()\ny = n\['ypos'].value()\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+Dot {
+ name Dot56
+ selected true
+ xpos -387
+ ypos 2
+}
+Light2 {
+ inputs 0
+ intensity 50
+ translate {-149.5427094 34.20000076 -36.34390259}
+ rotate {0 -44.39296819 0}
+ depthmap_slope_bias 0.01
+ name Light5
+ label fill
+ note_font_size 14
+ selected true
+ xpos -270
+ ypos -182
+ addUserKnob {20 User}
+ addUserKnob {22 createtarget l "Create target" T "n = nuke.thisNode()\nx = n\['xpos'].value()\ny = n\['ypos'].value()\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+Dot {
+ name Dot55
+ selected true
+ xpos -246
+ ypos -52
+}
+Light2 {
+ inputs 0
+ intensity {{curve x1021 1 10}}
+ translate {-188.8354492 12.93999958 3.790354729}
+ depthmap_slope_bias 0.01
+ name Light4
+ label explosion
+ note_font_size 14
+ selected true
+ xpos -137
+ ypos -182
+ addUserKnob {20 User}
+ addUserKnob {22 createtarget l "Create target" T "n = nuke.thisNode()\nx = n\['xpos'].value()\ny = n\['ypos'].value()\nname = n\['name'].value()\nhexColour = int('%02x%02x%02x%02x' % (0,150,150,1),16)\nn\['tile_color'].setValue(hexColour)\n  \n\na = nuke.nodes.Axis()\na.setXYpos(x-100,y)\na\['name'].setValue(\"Target\"+name)\na\['tile_color'].setValue(hexColour)\nTarget = a\['name'].value()\nX = \"degrees(atan((\"+Target+\".translate.y-translate.y)/sqrt(pow2(sqrt(pow2(\"+Target+\".translate.x-translate.x)+pow2(\"+Target+\".translate.z-translate.z))))))\"\nn\['rotate'].setExpression(X,0)\n\nY = Target+\".translate.x-translate.x >= 0 ? 270-degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x))): -degrees(atan((\"+Target+\".translate.z-translate.z)/(\"+Target+\".translate.x-translate.x)))-270\"\nn\['rotate'].setExpression(Y,1)\nmerge = nuke.createNode(\"MergeGeo\")\nmerge.setInput(1,a)\n" +STARTLINE}
+}
+MergeGeo {
+ inputs 2
+ selectable false
+ name MergeGeo5
+ selected true
+ xpos -147
+ ypos -56
+}
+MergeGeo {
+ inputs 2
+ selectable false
+ name MergeGeo6
+ selected true
+ xpos -147
+ ypos -2
+}
+Dot {
+ name Dot54
+ selected true
+ xpos -113
+ ypos 145
+}
+Read {
+ inputs 0
+ file /corky/projects/LevelUp_343202/references/DMP/library/leaves/leavesWithMaps.##.exr
+ cacheLocal always
+ format "248 466 0 0 248 466 1 "
+ last 5
+ after loop
+ origlast 5
+ origset true
+ on_error checkerboard
+ version 1
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read1
+ selected true
+ xpos -1618
+ ypos -1993
+ postage_stamp false
+}
+Grade {
+ white {{curve x1 1 1 2 x5 1 x8 0.9 x10 0.8}}
+ multiply {{curve x1 2.2 2.5 x4 3.5 x5 6.5 4.5 5.5 3.5} {curve x1 1.4 0.7 x4 0.4 x5 1.4 1.2 0.5 x9 2.5} {curve x1 -0 0 0.1 x5 0 0.7} {curve x1 1 1}}
+ gamma {{curve x1 1.5 1.85 2 x6 1.7 x8 1.3 1.1}}
+ name Grade3
+ selected true
+ xpos -1618
+ ypos -1921
+}
+Saturation {
+ saturation 0.7
+ name Saturation1
+ selected true
+ xpos -1618
+ ypos -1895
+}
+Grade {
+ white 0.1
+ name Grade4
+ selected true
+ xpos -1618
+ ypos -1869
+}
+Dot {
+ name Dot4
+ selected true
+ xpos -1584
+ ypos -1689
+}
+set Nb3075e0 [stack 0]
+Dot {
+ name Dot5
+ selected true
+ xpos -1806
+ ypos -1689
+}
+add_layer {bump bump.r bump.red}
+Premult {
+ channels bump
+ name Premult1
+ selected true
+ xpos -1840
+ ypos -1642
+}
+Shuffle {
+ in bump
+ red green
+ blue green
+ alpha green
+ name Shuffle1
+ label "\[value in]"
+ selected true
+ xpos -1840
+ ypos -1562
+}
+Grade {
+ multiply {{curve x1 1 1.3 1.4 1.2}}
+ gamma {{curve x1 0.3 0.3 0.4 0.3 0.2}}
+ name Grade2
+ selected true
+ xpos -1840
+ ypos -1524
+}
+Dot {
+ name Dot6
+ selected true
+ xpos -1806
+ ypos -1386
+}
+push 0
+push $Nb3075e0
+Dot {
+ name Dot53
+ selected true
+ xpos -1686
+ ypos -1470
+}
+push $Nb3075e0
+Dot {
+ name Dot52
+ selected true
+ xpos -1463
+ ypos -1505
+}
+BasicMaterial {
+ inputs 4
+ diffuse 0.1
+ specular 0.2
+ max_shininess 50
+ name BasicMaterial2
+ selected true
+ xpos -1626
+ ypos -1390
+}
+Card2 {
+ receive_shadow false
+ rows 4
+ columns 4
+ translate {0 0.04300000146 1.879589595e-09}
+ rotate {90 0 0}
+ type bicubic
+ uv_position {0.207051456 0.4006408453}
+ control_points {3 3 3 6 
+
+1 {-0.4740000069 -0.4799999893 -0.07400000095} 0 {0.1665000021 -0.005000025034 0.02199999988} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0.002000000095 -0.5 0.008000001311} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.476000011 -0.4670000076 -0.05999999493} 0 {0 0 0} 0 {-0.1625000238 -0.01299998164 0.04199999571} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.4740000069 0.01999999955 -0.07400000095} 0 {0.1610000134 -0.001000000164 0.04900000058} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {-0.006000000052 0.01600000076 0.03999999911} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.4600000083 -0.01400000043 -0.07999999821} 0 {0 0 0} 0 {-0.150000006 -0.005999999121 0.04899999872} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.4699999988 0.4959999919 -0.09499999881} 0 {0.1680000126 0.008700013161 0.02099999785} 0 {0 0 0} 0 {0 0 0} 0 {-0.00799998641 -0.1625999808 0.02099999785} 0 {0 1 0} 
+1 {0.00800000038 0.4835000038 -0.05799999833} 0 {0.1569768488 -0.002877918305 -0.002093020827} 0 {-0.150000005 0.002750009298 0.001999996603} 0 {0 0 0} 0 {-0.007999999449 -0.1317999959 0.055999998} 0 {0.5 1 0} 
+1 {0.4560000002 0.4690000117 -0.1000000015} 0 {0 0 0} 0 {-0.1579999924 0.01499998569 0.05000000075} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ drawPosition {-0.2805423141 -0.08216268569 -0.01403256878}
+ name Card3
+ selected true
+ xpos -1626
+ ypos -1269
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+Normals {
+ invert true
+ name Normals1
+ selected true
+ xpos -1626
+ ypos -1185
+}
+Dot {
+ name Dot7
+ selected true
+ xpos -1592
+ ypos -1070
+}
+set Nb396920 [stack 0]
+Dot {
+ name Dot21
+ selected true
+ xpos -2650
+ ypos -1070
+}
+set Nb38b2e0 [stack 0]
+Dot {
+ name Dot50
+ selected true
+ xpos -3114
+ ypos -938
+}
+TransformGeo {
+ name TransformGeo15
+ selected true
+ xpos -3148
+ ypos -860
+}
+FrameHold {
+ first_frame 6
+ name FrameHold16
+ selected true
+ xpos -3148
+ ypos -781
+}
+Dot {
+ name Dot51
+ selected true
+ xpos -3114
+ ypos -561
+}
+push $Nb38b2e0
+Dot {
+ name Dot48
+ selected true
+ xpos -2871
+ ypos -938
+}
+TransformGeo {
+ rotate {0 40 0}
+ name TransformGeo14
+ selected true
+ xpos -2905
+ ypos -860
+}
+FrameHold {
+ first_frame 7
+ name FrameHold15
+ selected true
+ xpos -2905
+ ypos -781
+}
+Dot {
+ name Dot49
+ selected true
+ xpos -2871
+ ypos -561
+}
+push $Nb38b2e0
+Dot {
+ name Dot46
+ selected true
+ xpos -2688
+ ypos -938
+}
+TransformGeo {
+ rotate {0 80 0}
+ name TransformGeo13
+ selected true
+ xpos -2722
+ ypos -860
+}
+FrameHold {
+ first_frame 8
+ name FrameHold14
+ selected true
+ xpos -2722
+ ypos -782
+}
+Dot {
+ name Dot47
+ selected true
+ xpos -2688
+ ypos -561
+}
+push $Nb38b2e0
+Dot {
+ name Dot22
+ selected true
+ xpos -2173
+ ypos -938
+}
+TransformGeo {
+ rotate {0 160 0}
+ name TransformGeo11
+ selected true
+ xpos -2207
+ ypos -860
+}
+FrameHold {
+ first_frame 10
+ name FrameHold12
+ selected true
+ xpos -2207
+ ypos -782
+}
+Dot {
+ name Dot23
+ selected true
+ xpos -2173
+ ypos -561
+}
+push $Nb38b2e0
+Dot {
+ name Dot44
+ selected true
+ xpos -2425
+ ypos -938
+}
+TransformGeo {
+ rotate {0 120 0}
+ name TransformGeo12
+ selected true
+ xpos -2459
+ ypos -860
+}
+FrameHold {
+ first_frame 9
+ name FrameHold13
+ selected true
+ xpos -2459
+ ypos -780
+}
+Dot {
+ name Dot45
+ selected true
+ xpos -2425
+ ypos -561
+}
+push $Nb396920
+Dot {
+ name Dot10
+ selected true
+ xpos -2056
+ ypos -938
+}
+TransformGeo {
+ name TransformGeo6
+ selected true
+ xpos -2090
+ ypos -860
+}
+FrameHold {
+ first_frame 5
+ name FrameHold7
+ selected true
+ xpos -2090
+ ypos -781
+}
+Dot {
+ name Dot14
+ selected true
+ xpos -2056
+ ypos -561
+}
+push $Nb396920
+Dot {
+ name Dot15
+ selected true
+ xpos -1813
+ ypos -938
+}
+TransformGeo {
+ rotate {0 40 0}
+ name TransformGeo7
+ selected true
+ xpos -1847
+ ypos -860
+}
+FrameHold {
+ first_frame 4
+ name FrameHold8
+ selected true
+ xpos -1847
+ ypos -781
+}
+Dot {
+ name Dot16
+ selected true
+ xpos -1813
+ ypos -561
+}
+push $Nb396920
+Dot {
+ name Dot8
+ selected true
+ xpos -1630
+ ypos -938
+}
+TransformGeo {
+ rotate {0 80 0}
+ name TransformGeo5
+ selected true
+ xpos -1664
+ ypos -860
+}
+FrameHold {
+ first_frame 3
+ name FrameHold6
+ selected true
+ xpos -1664
+ ypos -781
+}
+Dot {
+ name Dot9
+ selected true
+ xpos -1630
+ ypos -561
+}
+push $Nb396920
+Dot {
+ name Dot17
+ selected true
+ xpos -1367
+ ypos -938
+}
+TransformGeo {
+ rotate {0 120 0}
+ name TransformGeo8
+ selected true
+ xpos -1401
+ ypos -860
+}
+FrameHold {
+ first_frame 2
+ name FrameHold9
+ selected true
+ xpos -1401
+ ypos -781
+}
+Dot {
+ name Dot18
+ selected true
+ xpos -1367
+ ypos -561
+}
+push $Nb396920
+Dot {
+ name Dot19
+ selected true
+ xpos -1115
+ ypos -938
+}
+TransformGeo {
+ rotate {0 160 0}
+ name TransformGeo9
+ selected true
+ xpos -1149
+ ypos -860
+}
+FrameHold {
+ first_frame 1
+ name FrameHold10
+ selected true
+ xpos -1149
+ ypos -781
+}
+Dot {
+ name Dot20
+ selected true
+ xpos -1115
+ ypos -561
+}
+CheckerBoard2 {
+ inputs 0
+ name CheckerBoard3
+ selected true
+ xpos 54
+ ypos -697
+ postage_stamp false
+}
+Card2 {
+ image_aspect false
+ rows 4
+ columns 4
+ translate {-188.8354492 1.656843835e-07 3.790354729}
+ rotate {-90.0000025 0 -35.43303041}
+ uniform_scale 180
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ selected true
+ xpos 54
+ ypos -633
+ addUserKnob {20 User}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+ addUserKnob {22 "floor Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[0,0.5,0])\nn\['pivot'].setValue(\[0,-0.5,0])"}
+ addUserKnob {22 "corner Pivot" -STARTLINE T "n=nuke.thisNode()\nn\['translate'].setValue(\[-.5,.5,0])\nn\['pivot'].setValue(\[.5,-.5,0])"}
+ addUserKnob {22 snapToSelected -STARTLINE T "b=nuke.selectedNode()\['translate'].value()\nn=nuke.thisNode()\nn\['translate'].setValue(b)"}
+}
+push 0
+ParticleEmitter {
+ inputs 12
+ start_frame 970
+ emit_from faces
+ rate {{curve x975 3000 0}}
+ lifetime 90
+ velocity 0.1
+ rotation_velocity 2
+ rotation_velocity_variation 1
+ size 0.5
+ size_variation 1
+ transfer_velocity 0.1
+ spread 1
+ name ParticleEmitter2
+ selected true
+ xpos 54
+ ypos -468
+}
+ParticleDrag {
+ drag 1
+ rotational_drag 1
+ min_age 0.1
+ name ParticleDrag2
+ selected true
+ xpos 54
+ ypos -402
+}
+ParticleTurbulence {
+ strength {5 5 5}
+ probability 0.9
+ min_age 0.47
+ name ParticleTurbulence1
+ selected true
+ xpos 54
+ ypos -329
+}
+ParticleVortex {
+ tangential 0.1
+ from {-188.8354492 1.656843835e-07 3.790354729}
+ to {-188.8354492 10 3.790354729}
+ probability 0.9
+ min_age 0.45
+ name ParticleVortex1
+ selected true
+ xpos 54
+ ypos -273
+}
+ParticleWind {
+ to {0 5 0}
+ probability 0.9
+ min_age 0.49
+ name ParticleWind2
+ selected true
+ xpos 54
+ ypos -183
+}
+MergeGeo {
+ inputs 2
+ selectable false
+ name MergeGeo1
+ selected true
+ xpos 54
+ ypos 141
+}
+push $cut_paste_input
+Reformat {
+ name Reformat2
+ selected true
+ xpos 320
+ ypos 210
+}
+Dot {
+ name Dot1
+ selected true
+ xpos 354
+ ypos 358
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ overscan 50
+ samples 50
+ shutteroffset centred
+ spatial_jitter 3
+ focal_jitter 0.2
+ motion_vectors_type distance
+ name ScanlineRender1
+ selected true
+ xpos 54
+ ypos 354
+}
+Read {
+ inputs 0
+ file /corky/projects/LevelUp_343202/seq/fgb/0180/compositing/images/versions/LU_fgb_0180_degrain_v001_beauty/output/LU_fgb_0180_degrain_v001_beauty.####.exr
+ cacheLocal always
+ format "2150 1134 0 0 2150 1134 1 LU"
+ first 977
+ last 1061
+ origfirst 977
+ origlast 1061
+ origset true
+ on_error checkerboard
+ colorspace linear
+ raw true
+ auto_alpha true
+ name Read3
+ selected true
+ xpos 441
+ ypos 254
+ postage_stamp false
+}
+NoOp {
+ name plateDN
+ help Read3
+ tile_color 0xffffffff
+ note_font_size 20
+ selected true
+ xpos 441
+ ypos 343
+ addUserKnob {20 User}
+ addUserKnob {26 "" -STARTLINE T "you probably wondering - why this weird white node is created? \nthe reason is that it is not healthy to creat the postage from Read node\nread node can be replaced and in this case your Postages will lose theyr parent,\nthat why you should create  your beloved Black postageStamp \nfrom this white sucker - just press F8 again :)"}
+ addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+ addUserKnob {22 selectSimilar l "select similar" -STARTLINE T "\na = nuke.thisNode()\nc=a\['connect'].value()\nb=nuke.allNodes(\"NoOp\")\nfor one in b:\n    if \"connect\" in one.knobs():\n        y=one\['connect'].value()\n        if y==c:\n            one.setSelected(True)"}
+ addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\n\n\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+ addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+ addUserKnob {6 showsource -STARTLINE +HIDDEN}
+ addUserKnob {26 "" -STARTLINE T "<font color='DimGray'><b> &copy; Alexey Kuchinski"}
+}
+Merge2 {
+ inputs 2
+ name Merge2
+ selected true
+ xpos 441
+ ypos 466
+}

@@ -1,0 +1,123 @@
+set cut_paste_input [stack 0]
+version 9.0 v7
+push 0
+NoOp {
+name MotionVector-1
+help Shuffle23
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos 58139
+ypos 1056
+hide_input true
+addUserKnob {20 User}
+addUserKnob {26 connect l "connected to :" T Shuffle23}
+addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+push $cut_paste_input
+Dot {
+name Dot141
+selected true
+xpos 58741
+ypos 907
+}
+set Nb6192660 [stack 0]
+TimeOffset {
+time_offset -1
+time ""
+name TimeOffset9
+selected true
+xpos 58278
+ypos 1000
+}
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy4
+selected true
+xpos 58278
+ypos 1049
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale 4
+name IDistort6
+selected true
+xpos 58278
+ypos 1117
+}
+Dot {
+name Dot138
+selected true
+xpos 58312
+ypos 1193
+}
+push 0
+push 0
+NoOp {
+name MotionVector-
+help Shuffle23
+tile_color 0xfa0
+note_font_size 20
+selected true
+xpos 58410
+ypos 1056
+hide_input true
+addUserKnob {20 User}
+addUserKnob {26 connect l "connected to :" T Shuffle23}
+addUserKnob {22 show l "show source" -STARTLINE T "\na = nuke.thisNode()\na\['hide_input'].setValue(0)\ndep = a.dependencies(nuke.INPUTS)\[0]\nif dep.Class()==\"Dot\":\n    dep = dep.dependencies(nuke.INPUTS)\[0]\na\['hide_input'].setValue(1)\nnuke.show(dep)\n"}
+addUserKnob {22 togglesource l "<font color='White'><b>toggle source" -STARTLINE T "\na = nuke.thisNode()\nb = a\['showsource'].value()\n\n\nif b == 1:\n    a\['hide_input'].setValue(0)\n\n    dep = a.dependencies(nuke.INPUTS)\[0]\n    if dep.Class()==\"Dot\":\n        dep = dep.dependencies(nuke.INPUTS)\[0]\n    a\['hide_input'].setValue(1)\n    xC = dep.xpos() + dep.screenWidth()/2\n    yC = dep.ypos() + dep.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(0)\n    nuke.show(a,True)\n    nuke.show(dep)\nelif b==0:\n    a = nuke.thisNode()\n    xC = a.xpos() + a.screenWidth()/2\n    yC = a.ypos() + a.screenHeight()/2\n    nuke.zoom( 1, \[ xC, yC ])\n    a\['showsource'].setValue(1)"}
+addUserKnob {22 reconnect -STARTLINE T "a = nuke.selectedNode()\nname=a\['help'].value()\nname = nuke.toNode(name)\na.setInput(0, name)"}
+addUserKnob {6 showsource -STARTLINE +HIDDEN}
+}
+push $Nb6192660
+TimeOffset {
+time_offset 1
+time ""
+name TimeOffset3
+selected true
+xpos 58551
+ypos 1002
+}
+Copy {
+inputs 2
+from0 rgba.red
+to0 forward.u
+from1 rgba.green
+to1 forward.v
+name Copy3
+selected true
+xpos 58551
+ypos 1049
+}
+IDistort {
+channels rgba
+uv forward
+uv_scale -4
+name IDistort2
+selected true
+xpos 58551
+ypos 1117
+}
+Dot {
+name Dot137
+selected true
+xpos 58585
+ypos 1151
+}
+push $Nb6192660
+Merge2 {
+inputs 3+1
+operation average
+name Merge69
+selected true
+xpos 58707
+ypos 1189
+}
